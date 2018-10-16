@@ -31,12 +31,16 @@
         background-color:#004C63;
     }
     /*사이드바 서브메뉴 숨기기*/
-    ul ul{display: none; width:200px;}
+    ul ul{display: none; width:100%;}
     ul li:hover>ul{display:block;}
     
     #side-menu ul>li{
         height:20%; padding-top:15px; padding-left:15px;padding-bottom: 15px;
-        background-color:lightblue;
+        background-color:#004C63;
+    }
+    #side-menu ul>li li{
+        background-color:#004554;
+        
     }
     #side-menu ul>li>a{
         color:white;
@@ -65,33 +69,30 @@
             <aside class="main-sidebar">
                 <div id="side-menu">
                 <ul>
-                    <li><a href="#">MENU1</a>
+                    <li><a href="#">공연관리</a>
                         <ul>
-                            <li><a href="#">subMenu1</a></li>
-                            <li><a href="#">subMenu2</a></li>
-                            <li><a href="#">subMenu3</a></li>
+                            <li><a href="#">공연등록</a></li>
+                            <li><a href="#">공연수정</a></li>
+                            <li><a href="#">공연삭제</a></li>
                         </ul>
                     </li>
                         
-                    <li><a href="#">MENU2</a>
+                    <li><a href="#">회원관리</a>
                         <ul>
-                            <li><a href="#">subMenu1</a></li>
-                            <li><a href="#">subMenu2</a></li>
-                            <li><a href="#">subMenu3</a></li>
+                            <li><a href="#">회원열람</a></li>
+                            <li><a href="#">회원수정</a></li>
+                            <li><a href="#">회원삭제</a></li>
                         </ul>
                     </li>
-                    <li><a href="#">MENU3</a>
+                    <li><a href="#">예매관리</a>
                         <ul>
-                            <li><a href="#">subMenu1</a></li>
-                            <li><a href="#">subMenu2</a></li>
-                            <li><a href="#">subMenu3</a></li>
+                            <li><a href="#">예매취소</a></li>
                         </ul>
                     </li>
-                    <li><a href="#">MENU4</a>
+                    <li><a href="#">소규모공연</a>
                         <ul>
-                            <li><a href="#">subMenu1</a></li>
+                            <li><a href="#">공연승인</a></li>
                             <li><a href="#">subMenu2</a></li>
-                            <li><a href="#">subMenu3</a></li>
                         </ul>
                     </li>
                     
