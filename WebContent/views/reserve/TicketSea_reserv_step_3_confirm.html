@@ -5,19 +5,15 @@
     <title>티켓링크 예매</title>
     
     <link rel="shortcut icon" type="image/x-icon" href="">
-    
+    <!-- 외부 스타일 시트 적용 -->
+    <link href="../../css/TicketSea_reserv_common.css" rel="stylesheet" type="text/css">
+    <link href="../../css/TicketSea_reserv_step_3.css" rel="stylesheet" type="text/css">
 </head>
     
 <body>
 
     <div id="wrap_reserve">
         <div id="header">
-            
-            
-<!-- 외부 스타일 시트 적용 -->
-<link href="./css/TicketSea_reserv_common.css" rel="stylesheet" type="text/css">
-<link href="./css/TicketSea_reserv_step_3.css" rel="stylesheet" type="text/css">
-
             <div class="reserve_title">
                 <h1>TicketSea</h1>
                 <h2>예매</h2>
@@ -47,7 +43,7 @@
                     <div class="reserve_step3">
                     <strong class="title"><span>주문자 확인</span></strong>
                     <div class="white_box">
-                        <table class="table2">
+                        <table>
                             <caption>주문자 확인</caption>
                             <colgroup>
                                 <col style="width:86px;">
@@ -57,21 +53,20 @@
                             </colgroup>
                             <tbody>
                             <tr>
-                                <th class="th fbold">이름 <span class="color_red">*<span class="blind">필수입력란</span></span></th>
-                                <td class="ng-binding">주문자 이름</td>
-                                <th class="th fbold">휴대폰 번호 <span class="color_red">*<span class="blind">필수입력란</span></span></th>
+                                <th>이름 <span class="color_red">*<span class="blind">필수입력란</span></span></th>
+                                <td>주문자 이름</td>
+                                <th>휴대폰 번호 <span class="color_red">*<span class="blind">필수입력란</span></span></th>
                                 <td>
                                     <div class="input_block">
-                                        <input type="text" class="input"  style="width:180px" maxlength="11" title="휴대폰 번호" number-text-box="">
+                                        <input type="text" class="input"  style="width:200px" maxlength="11" title="휴대폰 번호" number-text-box="">
                                     </div>
                                 </td>
                             </tr>
                             <tr>
-                                <th class="th fbold">이메일
-                                </th>
+                                <th>이메일</th>
                                 <td colspan="3">
                                     <div class="input_block">
-                                        <input type="text" name="reserveEmail" class="input" style="width:517px" title="이메일">
+                                        <input type="text" class="input" style="width:517px" title="이메일">
                                     </div>
                                 </td>
                             </tr>
@@ -83,7 +78,7 @@
                     <strong class="title"><span class="sp">예매자 확인</span></strong>
                     <ul class="input_block_lst">
                         <li>
-                            <span class="checkbox checked">
+                            <span class="checkbox">
                                 <input type="checkbox" id="agree_phone" name="agree_phone">
                             </span>
                             <label for="agree_phone">주문자 확인 및 예매처리를 위해 휴대폰번호, 이메일, (배송수령 시)주소, (입력필요 시) 생년월일을 수집하며, 이용목적 달성 이후 파기합니다.</label>
