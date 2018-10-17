@@ -9,8 +9,9 @@
 		#menu ul{padding: 0px;
 			margin: 0px;
 			}
+       
         div{ 
-			border: 1px solid red;
+		
 			}
         
         #wrap {
@@ -33,11 +34,11 @@
         }
         #header .search_area {
         width: 70%;
-		height: 64px ;
+		height: 43px;
         margin: 32px auto;
         position: relative;
         box-sizing: padding-box;
-	
+	   
         }
         
        
@@ -57,7 +58,7 @@
 	position: relative;
     
 	float: left;
-	line-height: 10px;
+	
 		box-sizing: padding-box;
 	
 			
@@ -103,7 +104,7 @@
 			color: white;
 			display: block;
 			width: 141px;
-			font-size: 12px;
+			font-size: 16px;
 			font-weight: bold;
 			box-sizing: padding-box;
 			
@@ -118,19 +119,27 @@
 			width: 400px;;
 		}
 		#searchline{
-			height: 30px;;
+			height: 35px;;
 			width: 230px;
 			padding-left: 10px;
 			font-size: 15px;
 			font-weight: 600;
 			border: 2px solid #41b40a;
-			margin-right: 30px;
+            float: left;			
 		}
 		form{
 			width: 180px;
 			height: 100%;
 		}
+		
+        #searchIcon{
+            
+        }
+       
+      
+        
     </style>
+
 </head>
 <body>
     <!--wrap div-->
@@ -142,10 +151,10 @@
                 <div class="inner">
                     <div class="login">
                         <div id="login" style="">
-							<a href="#" class="btn login" id="loginBtn">로그인</a> 
+							<a href="/views/member/login.html" class="btn login" id="loginBtn">로그인</a> 
 							
                     <a href="#" id="reserve">예매확인/취소</a><span>|</span>
-                    <a href="#" id="joinBtn">회원가입</a><span>|</span>
+                    <a href="/views/member/memberjoin.html" id="joinBtn">회원가입</a><span>|</span>
 					<a href="#" >고객센터</a>
 						</div>
                     </div>
@@ -163,11 +172,13 @@
                 <fieldset>
                     <legend>검색창</legend>
                     <input type="text" id="searchline" name="query" title="검색어 입력" value="">
-                    <a href="#" class="btn_search">검색</a>
+                    <a href="#" class="btn_search"><img id="searchIcon"  src="../WebContent/img/searchicon.PNG" width="41px"
+                    ></a>
                 </fieldset>
+                        
             		</form>
         		</div>
-				
+				  
 			</div>
             <!--menu div-->
             <div id="menu">
@@ -183,7 +194,7 @@
 			</div>
         </div>
        
-        <!--git test-->
+        
     </div>
 
     </body>

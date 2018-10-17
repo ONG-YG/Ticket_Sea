@@ -52,6 +52,7 @@
 		#container {
 			width: 420px;
 			height: 200px;
+            position: relative;
 		}
 		#idInputArea{
 			width: 330px;
@@ -99,6 +100,7 @@
 			color: white;
 			width: 100%;
 			height: 100%;
+            
 			
 		}
 		.inp_label{
@@ -113,6 +115,8 @@
 			background: #f5f5f5;
 			text-align: center;
 			border: 1px solid #f5f5f5;
+            
+            
 			
 		}
 		.menu_lst{
@@ -147,6 +151,12 @@
 			left: 0;
 			right: 0;
 		}
+        
+        #container>p {
+            text-align: center;
+            color: red;
+            font-size: 14px;
+        }
 	</style>
 </head>
 <body>
@@ -163,8 +173,7 @@
 		</div>
 		<!-- container -->
 		<div id="container">
-			<div class="error_box" style="display:none">
-				</div>
+            
 			<div id="content" class="content">
 				<form id="frameLogin" action="" method="post">
 					 <fieldset>
@@ -192,7 +201,8 @@
 							
 						<!--로그인 버튼-->
 						<div class="btn_area">
-							<button type="submit" id="loginBtn">로그인</button>
+							<button type="submit" id="loginBtn">
+                                로그인</button>
 						</div>
 
 						 </div>
@@ -208,7 +218,7 @@
 	        		<ul class="menu_lst">
 						<li class="menu_item"><a href="#">아이디 찾기</a></li>
 						<li class="menu_item"><span class="bar">|</span> <a href="#" class="menu_link">비밀번호 찾기</a></li>
-						<li class="menu_item"><span class="bar">|</span><a href="#" class="menu_link" onclick="goJoin();">회원 가입</a></li>
+						<li class="menu_item"><span class="bar">|</span><a href="#" class="menu_link" >회원 가입</a></li>
 					</ul>
               </div>
        	</div>
