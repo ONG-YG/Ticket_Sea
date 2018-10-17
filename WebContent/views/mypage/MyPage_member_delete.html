@@ -149,18 +149,28 @@
         margin-top: 50px;
         text-align: center;
     }
-    .list_btn a{
+    .list_btn button{
         background-color: skyblue;
-        width: 100%;
-        border-radius: 20px;
+        border-radius: 15px;
         color: white;
-        padding: 20px;
+        padding: 10px;
         font-size: 20px;
     }
     
     
 </style>
 </head>
+<script>
+    $(document).ready(function(){
+        $('.cancelBtn').click(function(){
+            if(confirm("정말로 탈퇴하시겠습니까?")){
+                alert("정상적으로 탈되되었습니다.")
+            }else{
+                
+            }
+        });
+    })
+</script>
 <body>
 <div id="wrapper">
     <div id="header">
@@ -229,7 +239,7 @@
                     위 내용을 모두 확인하였으며 동의합니다.
                 </div>
                 <div class="list_btn">
-                    <a href="#">회원 탈퇴</a>
+                    <button class="cancelBtn">회원 탈퇴</button>
                 </div>
             </div>
         </div>
