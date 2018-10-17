@@ -201,12 +201,13 @@
 							
 						<!--로그인 버튼-->
 						<div class="btn_area">
-							<button type="submit" id="loginBtn">
+							<button type="submit" id="loginBtn" onclick="return logError();">
                                 로그인</button>
 						</div>
 
 						 </div>
 					 </fieldset>
+					
 				
 					
 				</form>
@@ -223,5 +224,23 @@
               </div>
        	</div>
 	</div>
+	
+	<script>
+		function logError(){
+			var userId = document.getElementById("id").value;
+			var userPwd = document.getElementById("pwd").value;
+			
+			if(userId=="")
+				{
+					alert("아이디를 입력해주세요凸");
+					return false;
+				}else if(userPwd=="")
+				{
+					alert("비밀번호를 입력해주세요凸");
+					return false;
+				}else
+					{return true;}
+		}
+	</script>
 </body>
 </html>
