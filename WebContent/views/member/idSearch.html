@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+</head>
+<body>
+
 	<style>
 		div {
 			
@@ -54,27 +57,26 @@
 			height: 200px;
             position: relative;
 		}
-		#idInputArea{
+		#infoInputArea{
 			width: 330px;
 			height: 97px;
 			padding-bottom: 10px;
 		}
-		#idInput{
+		#nameInput{
 			display: block;
-			position: relative;
-			
+			float: left;
+			width: 220px;
+			height: 44px;
+			padding-bottom: 10px;
+		}
+		#emailInput{
+			display: block;
 			width: 330px;
 			height: 44px;
 			padding-bottom: 10px;
 		}
-		#pwdInput{
-			display: block;
-			width: 330px;
-			height: 44px;
-			padding-bottom: 10px;
-		}
-		#id{
-			width: 307px;
+		#name{
+			width: 180px;
 			height: 18px;
 			padding: 12px 10px;
 			padding-top: 12px;
@@ -82,7 +84,7 @@
     		padding-bottom: 12px;
 			padding-left: 10px;
 		}
-		#pwd{
+		#email{
 			width: 307px;
 			height: 18px;
 			padding: 12px 10px;
@@ -157,17 +159,41 @@
             color: red;
             font-size: 14px;
         }
+		#container>span{
+			font-size: 12px;
+			color: darkgray;
+			padding-left: 45px;
+			
+		}
+		.btn_radio{
+			background: white;
+			border: 1px solid darkgray;
+			box-sizing: padding-box;
+			display: block;
+			float: right;
+			height: 33px;
+			width: 53px;
+			text-align: center;
+			padding-top: 12px;
+			
+		}
+		.radio_area{
+			float:left;}
+		
+		.inp_label{
+			font-size: 17px;
+			text-align: center;
+		}
 	</style>
-</head>
-<body>
 
+	
 	<div id="wrap" class="wrap">
 		<!-- header -->
 		<div id="header">
 			<div id="header_logo">
 			<h1 class="logo_area">
 					<span class="logo_ticketsea">Ticket Sea</span>
-		        	<span class="txt"> 로그인하여 <em>Ticket Sea</em> 서비스를 이용합니다.</span>
+		        	<span class="txt"> 회원 정보에 등록된 정보를 입력해 주세요.</span>
 				</h1>
 			</div>
 		</div>
@@ -175,71 +201,78 @@
 		<div id="container">
             
 			<div id="content" class="content">
-				<form id="frameLogin" action="" method="post">
+				<form id="frameIdSearch" action="" method="post">
 					 <fieldset>
-						<legend>로그인</legend>
+						<legend>아이디찾기</legend>
 						 <!--id및 pw 입력란-->
-						 <div id="idInputArea">
-						 	<span class="inp_txt" id="idInput">
-							<input id="id" name="id" type="text" maxlength="45" placeholder="아이디"  value="" >
+						 <div id="infoInputArea">
+						 	<span class="inp_txt" id="nameInput">
+							<input id="name" name="name" type="text" maxlength="45" placeholder="이름"  value="" >
 							</span>
-							 <span class="inp_txt" id="pwdInput">
-							<input id="pwd" name="pwd" type="password" maxlength="15" placeholder="비밀번호"  value="" >
+							 
+							 <!--남녀선택칸-->
+							 
+							 <div class="radio_area gender_area">
+								
+						<div class="btn_radio btn_radio_female" onclick="femaleCheck();">
+							<label for="female" class="inp_label female" tabindex="0">여</label>
+							<input type="radio" value="F" id="female" name="gender" hidden="" class="inp_radio" tabindex="-1" >
+						</div>
+						<div class="btn_radio is_checked btn_radio_male" onclick="maleCheck();">
+							<label for="male" class="inp_label male" tabindex="0">남 </label>
+							<input type="radio" value="M" id="male" name="gender"  hidden="" class="inp_radio" tabindex="-1" checked>
+						</div>
+								 
+						
+							</div>
+
+							 <span class="inp_txt" id="emailInput">
+							<input id="email" name="email" type="text" maxlength="15" placeholder="이메일입력"  value="" >
 							</span>
 							 
 						 </div>
 						
 						 	
-						 
-						 <!-- 아이디 저장 체크박스-->
-						 <div class="checkbox_area login_keep">
-					
-						<span class="inp_checkbox" id="saveIdFlagSpan">
-						<input type="checkbox" id="saveIdFlag" name="saveIdFlag" class="inp_chk" tabindex="-1" value="Y">
-						<label for="saveIdFlag" class="inp_label"><span class="ico_chk" tabindex="0" id="saveIdFlagIco"></span>아이디 저장</label>
-						</span>
-							
+						
 						<!--로그인 버튼-->
 						<div class="btn_area">
 							<button type="submit" id="loginBtn" onclick="return logError();">
-                                로그인</button>
+                                아이디 찾기</button>
 						</div>
 
 						 </div>
 					 </fieldset>
-					
+					<br>
+					<span>본인 인증을 한 아이디만 찾을 수 있습니다.</span>
 				
 					
 				</form>
 			</div>
 		</div>
-		<!-- footer -->
-		<div class="footer_menu">
-	       	<div class="footer_inner">
-	        		<ul class="menu_lst">
-						<li class="menu_item"><a href="#">아이디 찾기</a></li>
-						<li class="menu_item"><span class="bar">|</span> <a href="#" class="menu_link">비밀번호 찾기</a></li>
-						<li class="menu_item"><span class="bar">|</span><a href="#" class="menu_link" >회원 가입</a></li>
-					</ul>
-              </div>
-       	</div>
+		
 	</div>
 	
 	<script>
-		function logError(){
-			var userId = document.getElementById("id").value;
-			var userPwd = document.getElementById("pwd").value;
+		function maleCheck(){
+			var male = document.getElementsByClassName("male");
+			var maleborder = document.getElementsByClassName("btn_radio_male");
+			var female = document.getElementsByClassName("female");
+			var femaleborder = document.getElementsByClassName("btn_radio_female");
+			male[0].style.color="red";
+			maleborder[0].style.border="1px solid red";
+			female[0].style.color="darkgray";
+			femaleborder[0].style.border="1px solid darkgray";
 			
-			if(userId=="")
-				{
-					alert("아이디를 입력해주세요凸");
-					return false;
-				}else if(userPwd=="")
-				{
-					alert("비밀번호를 입력해주세요凸");
-					return false;
-				}else
-					{return true;}
+		}
+		function femaleCheck(){
+			var male = document.getElementsByClassName("male");
+			var maleborder = document.getElementsByClassName("btn_radio_male");
+			var female = document.getElementsByClassName("female");
+			var femaleborder = document.getElementsByClassName("btn_radio_female");
+			female[0].style.color="red";
+			femaleborder[0].style.border="1px solid red";
+			male[0].style.color="darkgray";
+			maleborder[0].style.border="1px solid darkgray";
 		}
 	</script>
 </body>
