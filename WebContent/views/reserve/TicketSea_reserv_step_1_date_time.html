@@ -84,9 +84,18 @@
                         예매 정보 출력란
                     </div>
                     
-                    <div class="reserve_btn">
-                        <a href="#" style="cursor:pointer" class="btn"><span>이전단계</span></a>
-                        <a href="#" class="btn" style="cursor:pointer"><span>다음단계</span></a>
+                    <script>
+                        function next() {
+                            var stat = true;
+                            if(stat==false) {
+                                alert("날짜/회차를 선택하세요");
+                            }else {
+                                location.href="./TicketSea_reserv_step_2_seat.html";
+                            }
+                        }
+                    </script>
+                    <div id="reserve_btn_only">
+                        <a href="#" class="btn" onclick="next()">다음단계</a>
                     </div>
 
                 </div>
