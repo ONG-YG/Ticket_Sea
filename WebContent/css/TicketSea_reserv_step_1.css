@@ -73,6 +73,45 @@
     float: left;
     text-align: center;
 }
+
+#ct_left_date>b,
+#ct_left_cnt>b,
+#ct_left_seat>b {
+    border: 1px solid;
+    border-color: black;
+    display: block;
+    box-sizing: border-box;
+    width: 100%; height: 15%;
+}
+#date_box,
+#cnt_box,
+#seat_box {
+    border: 1px solid;
+    border-color: black;
+    box-sizing: border-box;
+    width: 90%; height: 75%;
+    margin-top: 5%;
+    margin-left: 5%;
+    background-color: white;
+}
+#ct_left_top ul{
+    list-style: none;
+    padding: 0px;
+}
+#ct_left_top li{
+    margin-bottom: 5px;
+}
+
+    /*-- ct_left_date --*/
+    /*-- /ct_left_date --*/
+
+    /*-- ct_left_cnt --*/
+    /*-- /ct_left_cnt --*/
+
+    /*-- ct_left_seat --*/
+    /*-- /ct_left_seat --*/
+
+
 /*--- /content_left ---*/
 /*--- ct_left_btm ---*/
 .notice_title{
@@ -142,8 +181,6 @@
 /*--------- /reserve_right ---------*/
 
 /*---------------------- /container ----------------------*/
-
-
 
 
 
