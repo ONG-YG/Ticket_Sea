@@ -13,16 +13,6 @@
     #h_inner{width: 990px; height: 80%; margin: 5px auto; float:left; padding-left:20px;}
     #content-wrapper{height:1500px; border:1px solid black;}
     #c_inner{width: 100%; height: 100%; margin: 0px auto; padding: 0px;}
-    #content-header{
-        
-    }
-    .content-header>h1{
-        margin:0;
-        font-size:24px;
-    }
-    #icon{
-        max-width:20%; max-height:80%; align-content: center;
-    }
     .main-sidebar{
         height:100%;
         width: 200px;
@@ -45,6 +35,20 @@
     #side-menu ul>li>a{
         color:white;
         font-weight: 600;
+    }
+    .content-header{
+        width:80%;
+        height:100%;
+        float:right;
+        padding:0px;
+        border:1px solid red;
+    }
+    .content-header>h1{
+        margin:0;
+        font-size:24px;
+    }
+    #icon{
+        max-width:20%; max-height:80%; align-content: center;
     }
 /*    #content-wrapper li ul{
         background-color: azure;
@@ -75,35 +79,23 @@
                             <li><a href="#">공연수정</a></li>
                             <li><a href="#">공연삭제</a></li>
                         </ul>
-                    </li>
-                        
-                    <li><a href="#">회원관리</a>
-                        <ul>
-                            <li><a href="#">회원열람</a></li>
-                            <li><a href="#">회원수정</a></li>
-                            <li><a href="#">회원삭제</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#">예매관리</a>
-                        <ul>
-                            <li><a href="#">예매취소</a></li>
-                        </ul>
-                    </li>
+                    </li>    
+                    <li><a href="#">회원관리</a></li>
+                    <li><a href="#">예매관리</a></li>
                     <li><a href="#">소규모공연</a>
                         <ul>
-                            <li><a href="#">공연승인</a></li>
-                            <li><a href="#">subMenu2</a></li>
+                            <li><a href="#">승인완료공연</a></li>
+                            <li><a href="#">승인대기공연</a></li>
                         </ul>
                     </li>
-                    
                 </ul>
                 </div>
             </aside>
-           <section class="content-header">
-                <h1>공연관리
-               <small>등록</small>
-                 </h1>
-            </section> 
+           <div class="content-header">
+               <div id="content">
+                    
+               </div>
+          </div> 
         </div>
         </div>
 	</div>
