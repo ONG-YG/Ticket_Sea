@@ -6,11 +6,16 @@
     
     <style>
 		
+/*<<<<<<< HEAD*/
+		#menu ul{padding: 0px; margin: 0px;}
+/*
+=======
 		#menu ul{padding: 0px;
 			margin: 0px;
 			}
+       
         div{ 
-			border: 1px solid red;
+		
 			}
         
         #wrap {
@@ -18,8 +23,10 @@
         height: 1000px;
         box-sizing: padding-box;
         }
+>>>>>>> macaron
+*/
         #header{
-            width: 100%;
+            width: 990px;
             height: 230px;
             box-sizing: padding-box;
         }
@@ -33,14 +40,12 @@
         }
         #header .search_area {
         width: 70%;
-		height: 64px ;
+		height: 43px;
         margin: 32px auto;
         position: relative;
         box-sizing: padding-box;
-	
+	   
         }
-        
-       
         
         .inner {
         width: 100%;
@@ -51,48 +56,51 @@
         }
        
 		#header .search_area .search {
+/*
+<<<<<<< HEAD
+            width: 400px;
+            height: 40px;
+            position: relative;
+            float: left;
+            line-height: 10px;
+            box-sizing: padding-box;
+=======
+*/
     
     width: 400px;
     height: 40px;
 	position: relative;
     
 	float: left;
-	line-height: 10px;
+	
 		box-sizing: padding-box;
 	
 			
+/*>>>>>>> macaron*/
 		}
-		#header>.search_area>h1>a{
-		display: inline;
+		#header .search_area>h1>a{
+            display: inline;
 			position:relative;
 			float: left;
 			padding-right: 100px;
 			text-decoration: none;
 			box-sizing: padding-box;
 			text-align: center;
-			
-		};
-		
-		#menu {
-			
 		}
-		 #menu {
+        #menu {
             width: 100%;
             height: 64px;
             box-sizing: padding-box;
-			padding: 0px;
-			
+			padding: 0px;	
         }
 		#menu ul{
 			width: 992px;
 			height: 66px;
-			
 		}
 		#menu ul li {
 			list-style: none;
 			float: left;
 			line-height: 60px;
-			
 			vertical-align: middle;
 			text-align: center;
 			background: #41b40a;
@@ -103,14 +111,12 @@
 			color: white;
 			display: block;
 			width: 141px;
-			font-size: 12px;
+			font-size: 16px;
 			font-weight: bold;
 			box-sizing: padding-box;
 			
 		}
-		legend{
-			display: none;
-		}
+		legend{display: none;}
 		fieldset{
 			border: 0;
 			padding: 0px;
@@ -118,19 +124,27 @@
 			width: 400px;;
 		}
 		#searchline{
-			height: 30px;;
+			height: 35px;;
 			width: 230px;
 			padding-left: 10px;
 			font-size: 15px;
 			font-weight: 600;
 			border: 2px solid #41b40a;
-			margin-right: 30px;
+            float: left;			
 		}
 		form{
 			width: 180px;
 			height: 100%;
 		}
+		
+        #searchIcon{
+            
+        }
+       
+      
+        
     </style>
+
 </head>
 <body>
     <!--wrap div-->
@@ -142,10 +156,10 @@
                 <div class="inner">
                     <div class="login">
                         <div id="login" style="">
-							<a href="#" class="btn login" id="loginBtn">로그인</a> 
+							<a href="/views/member/login.html" class="btn login" id="loginBtn">로그인</a> 
 							
                     <a href="#" id="reserve">예매확인/취소</a><span>|</span>
-                    <a href="#" id="joinBtn">회원가입</a><span>|</span>
+                    <a href="/views/member/memberjoin.html" id="joinBtn">회원가입</a><span>|</span>
 					<a href="#" >고객센터</a>
 						</div>
                     </div>
@@ -155,7 +169,7 @@
             <div class="search_area">
 				<!--logo div-->
 				<h1>
-					<a href="#" class="logo">Ticket Sea</a>
+					<a href="/TicketSea_MainPage" class="logo">Ticket Sea</a>
 				</h1>
 				<div class="search">
 					
@@ -163,11 +177,13 @@
                 <fieldset>
                     <legend>검색창</legend>
                     <input type="text" id="searchline" name="query" title="검색어 입력" value="">
-                    <a href="#" class="btn_search">검색</a>
+                    <a href="#" class="btn_search"><img id="searchIcon"  src="../WebContent/img/searchicon.PNG" width="41px"
+                    ></a>
                 </fieldset>
+                        
             		</form>
         		</div>
-				
+				  
 			</div>
             <!--menu div-->
             <div id="menu">
@@ -183,7 +199,7 @@
 			</div>
         </div>
        
-        
+        <!--git test-->
     </div>
 
     </body>

@@ -10,6 +10,11 @@
     <link href="../../css/TicketSea_reserv_common.css" rel="stylesheet" type="text/css">
     <link href="../../css/TicketSea_reserv_step_1.css" rel="stylesheet" type="text/css">
     
+    <script
+      type="text/javascript"
+        src="../../resources/jquery-3.3.1.js">
+    </script>
+    
 </head>
     
 <body>
@@ -48,11 +53,39 @@
                     <div id="content_left">
                         <div id="ct_left_top">
                             <div id="ct_left_date">
-                                <b>날짜선택</b></div>
+                                <b>날짜선택</b>
+                                <div id="date_box">
+                                </div>
+                            </div>
                             <div id="ct_left_cnt">
-                                <b>회차선택</b></div>
+                                <b>회차선택</b>
+                                <div id="cnt_box">
+                                    <ul>
+                                        <li>1회 10:00 ~ 11:30</li>
+                                        <li>2회 12:30 ~ 13:00</li>
+                                    </ul>
+                                </div>
+                                
+                                <script>
+                                    ////////////////////////////////
+                                    var date_sel = "2018.10.19";
+                                    var cnt_sel = null;
+                                    $(document).ready(function(){
+                                        $('#cnt_box li').click(function(){
+                                            $('#cnt_box li').css('background-color','white');
+                                            $(this).css('background-color','red');
+                                            cnt_sel = $(this).text;
+                                        })
+                                    })
+                                    ////////////////////////////////    
+                                </script>
+                                
+                            </div>
                             <div id="ct_left_seat">
-                                <b>잔여석</b></div>
+                                <b>잔여석</b>
+                                <div id="seat_box">
+                                </div>
+                            </div>
                         </div>
                         <div id="ct_left_btm">
                             <strong class="notice_title"><em></em>티켓예매시 참고사항</strong>
@@ -80,9 +113,19 @@
                         예매 정보 출력란
                     </div>
                     
-                    <div class="reserve_btn">
-                        <a href="#" style="cursor:pointer" class="btn"><span>이전단계</span></a>
-                        <a href="#" class="btn" style="cursor:pointer"><span>다음단계</span></a>
+                    <script>
+                        function next() {
+                            var stat = false;
+                            if(date_sel!=null && cnt_sel!=null) stat = true;
+                            if(stat==false) {
+                                alert("날짜/회차를 선택하세요");
+                            }else {
+                                location.href="./TicketSea_reserv_step_2_seat.html";
+                            }
+                        }
+                    </script>
+                    <div id="reserve_btn_only">
+                        <a href="#" class="btn" onclick="next()">다음단계</a>
                     </div>
 
                 </div>
