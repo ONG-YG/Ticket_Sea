@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>마이페이지 예매확인/취소</title>
+<title>회원 정보 수정</title>
 <script
   src="https://code.jquery.com/jquery-3.3.1.js"
   integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
@@ -165,46 +165,19 @@
         font-size: 12px;
         text-align: left;
     }
-    .border_box{
-        display: block;
-        width: 90px;
-        padding: 3px 0 1px;
-        border: 1px solid #d4d4d4;
-        text-align: center;
-        line-height: 21px;
-    }
     
     /* right_view 하단 버튼관리 */
     .list_btn{
-        display: block;
-        text-align: center;
-        background: skyblue;
-        width: 50px;
-    }
-    
-    
-    /* 하단 회원 약관 */
-    .note{
-        background: #f4f4f4;
-        padding: 26px 22px 20px;
         margin-top: 50px;
-        line-height: 20px;
+        text-align: center;
     }
-    .note h6{
-        font-size: 12px;
-        color: #767676;
-        margin: 0;
-        padding: 6px;
-    }
-    .note ol{
-        margin: 0;
-        padding: 0;
-    }
-    .note ol li {
-    padding-left: 6px;
-    color: #999;
-    font-size: 11px;
-    letter-spacing: -1px;
+    .list_btn a{
+        background-color: skyblue;
+        width: 100%;
+        border-radius: 20px;
+        color: white;
+        padding: 20px;
+        font-size: 20px;
     }
     
     
@@ -231,22 +204,22 @@
                 <li class="has_sub">
                     <span>예매 관리</span>
                     <ul>
-                        <li><a href="#"><strong>예매확인/취소</strong></a></li>
+                        <li><a href="MyPage_reserve_list.html">예매확인/취소</a></li>
                     </ul>
                 </li>
                 <li class="has_sub">
                     <span>활동 관리</span>
                     <ul>
-                        <li><a href="#">참여 이벤트</a></li>
-                        <li><a href="#">후기 관리</a></li>
-                        <li><a href="#">상품 문의 내역</a></li>
+                        <li><a href="MyPage_review_mgr.html">후기 관리</a></li>
+                        <li><a href="MyPage_faq_mgr.html">나의 문의 내역</a></li>
+                        <li><a href="#">소규모 공연 등록관리</a></li>
                     </ul>
                 </li>
                 <li class="has_sub1">
                     <span>회원정보관리</span>
                     <ul>
-                        <li><a href="#">회원정보수정</a></li>
-                        <li><a href="#">회원 탈퇴</a></li>
+                        <li><a href="MyPage_member_update.html">회원 정보 수정</a>
+                        <li><a href="MyPage_member_delete.html">회원 탈퇴</a></li>
                     </ul>
                 </li>
             </ul>    
@@ -262,14 +235,6 @@
                                 <td>cho******@naver.com</td>
                             </tr>
                             <tr>
-                                <th>비밀번호</th>
-                                <td>
-                                    <div class="border_box">
-                                        <a href="#">비밀번호 변경</a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
                                 <th>연락처</th>
                                 <td>010******78</td>
                             </tr>
@@ -281,7 +246,7 @@
                     </table>
                 </div>
                 <div class="list_btn">
-                    <a href="#">회원정보 수정</a>
+                    <a href="#">회원 정보 수정</a>
                 </div>
             </div>
         </div>

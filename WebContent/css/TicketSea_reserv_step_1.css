@@ -47,7 +47,7 @@
     box-sizing: border-box;
 }
 /*--- content_left ---*/
-#ct_left_1{
+#ct_left_date{
     width:30%;
     height:90%;
     display: block;
@@ -58,7 +58,7 @@
     margin-right: 2.5%;
     text-align: center;
 }
-#ct_left_2{
+#ct_left_cnt{
     width:30%;
     height:90%;
     background-color:#F3F3F3;
@@ -66,16 +66,55 @@
     margin-right: 2.5%;
     text-align: center;
 }
-#ct_left_3{
+#ct_left_seat{
     width:30%;
     height:90%;
     background-color:#F3F3F3;
     float: left;
     text-align: center;
 }
+
+#ct_left_date>b,
+#ct_left_cnt>b,
+#ct_left_seat>b {
+    border: 1px solid;
+    border-color: black;
+    display: block;
+    box-sizing: border-box;
+    width: 100%; height: 15%;
+}
+#date_box,
+#cnt_box,
+#seat_box {
+    border: 1px solid;
+    border-color: black;
+    box-sizing: border-box;
+    width: 90%; height: 75%;
+    margin-top: 5%;
+    margin-left: 5%;
+    background-color: white;
+}
+#ct_left_top ul{
+    list-style: none;
+    padding: 0px;
+}
+#ct_left_top li{
+    margin-bottom: 5px;
+}
+
+    /*-- ct_left_date --*/
+    /*-- /ct_left_date --*/
+
+    /*-- ct_left_cnt --*/
+    /*-- /ct_left_cnt --*/
+
+    /*-- ct_left_seat --*/
+    /*-- /ct_left_seat --*/
+
+
 /*--- /content_left ---*/
 /*--- ct_left_btm ---*/
-.title_notice{
+.notice_title{
     display: inline-block;
     font-size:11px;
     height:14px;
@@ -104,13 +143,13 @@
     box-sizing: border-box;
 }
 /*--- /top_info_area ---*/
-/*--- reserve_artbx ---*/
-.reserve_artbx{
+/*--- reserve_result ---*/
+.reserve_result{
     border: 2px dashed; border-color: grey;
     width: 100%; height: 73%;
     box-sizing: border-box;
 }
-/*--- /reserve_artbx ---*/
+/*--- /reserve_result ---*/
 
 
 .reserve_btn{}
@@ -119,11 +158,29 @@
 .reserve_btn>a>span{}
 /*--- /reserve_btn ---*/
 
+#reserve_btn_only{
+/*    border: 5px dashed; border-color: black;*/
+    width: 100%; height: 12%;
+    box-sizing: border-box;
+    font-size: 15px;
+    text-align: center;
+} 
+
+/*--- reserve_btn ---*/
+#reserve_btn_only>a{
+    border: 1px dashed; border-color: gray;
+    width: 100%; height: 100%;
+    display: block;
+    float: left;
+    box-sizing: border-box;
+    display: inline-grid;
+    align-items: center;
+}
+/*--- /reserve_btn ---*/
+
 /*--------- /reserve_right ---------*/
 
 /*---------------------- /container ----------------------*/
-
-
 
 
 

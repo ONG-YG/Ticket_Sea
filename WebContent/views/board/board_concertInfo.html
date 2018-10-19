@@ -194,7 +194,14 @@
 </style>
 </head>
 <body>
-    
+
+<script>
+    function reserve(){
+        //alert("예매시작");
+        location.href="../reserve/TicketSea_reserv_step_1_date_time.html";
+    }
+</script>
+
 <div id="wrapper">
     <div id="header">
         <div id="h_inner">
@@ -250,7 +257,7 @@
                         <strong><div id = "info_tit">가격</div></strong>50,000원
                         </div>
                         <br><br><br>
-                        <input type="button" value="예매하기" style="width:250px; height:80px; background-color:skyblue; color:white; float:right;">
+                        <input type="button" value="예매하기" style="width:250px; height:80px; background-color:skyblue; color:white; float:right;" onclick="return reserve()">
                         
                     </div>
                 </div>

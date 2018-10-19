@@ -11,38 +11,186 @@
 <style>
     /* 전체 사이즈 조정 */
     
-    ul li{list-style: none;}
+    ul, li{list-style: none; display: block; text-decoration-line: none;}
     
     div{box-sizing: border-box;}
     #wrapper{overflow: hidden;min-width: 990px;min-height: 100%; border: 1px solid black;}
-    #header{height: 193px; border: 1px solid black;}
+    #header{height: 210px; border: 1px solid black;}
     #container{height: 100%; border: 1px solid black;}
     #footer{height: 153px; border: 1px solid black;}
     
-    /* 전체 이외 사이즈 */
+    /* 헤더 관련 */
     #h_inner{width: 990px; height: 100%; margin: 0px auto;}
+    
+    #menu ul{padding: 0px; margin: 0px;}
+        
+    #header .topnav {
+        position: relative;
+        background: #fafafa;
+        border-bottom: 1px solid #f0f0f0;
+        height: 21px;
+        padding-top: 11px;
+        box-sizing: padding-box;
+    }
+    #header .search_area {
+        width: 70%;
+		height: 64px ;
+        margin: 32px auto;
+        position: relative;
+        box-sizing: padding-box;
+	
+        }
+        
+    .inner {
+        width: 100%;
+        margin: 0 auto;
+        position: relative;
+		text-align: right;
+		box-sizing: padding-box;
+    }
+       
+	#header .search_area .search {
+        width: 400px;
+        height: 40px;
+        position: relative;
+        float: left;
+        line-height: 10px;
+        box-sizing: padding-box;
+	}
+	#header .search_area>h1>a{
+        display: inline;
+		position:relative;
+		float: left;
+		padding-right: 100px;
+		text-decoration: none;
+		box-sizing: padding-box;
+		text-align: center;
+	}
+    #menu {
+        width: 100%;
+        height: 64px;
+        box-sizing: padding-box;
+		padding: 0px;	
+    }
+	#menu ul{
+		width: 992px;
+		height: 66px;
+	}
+	#menu ul li {
+		list-style: none;
+		float: left;
+		line-height: 60px;
+		vertical-align: middle;
+		text-align: center;
+		background: #41b40a;
+	}
+	
+	.menulink{
+		text-decoration: none;
+		color: white;
+		display: block;
+		width: 141px;
+		font-size: 12px;
+		font-weight: bold;
+		box-sizing: padding-box;
+		
+	}
+	legend{display: none;}
+	fieldset{
+		border: 0;
+		padding: 0px;
+		height: 100%;
+		width: 400px;;
+	}
+	#searchline{
+		height: 30px;;
+		width: 230px;
+		padding-left: 10px;
+		font-size: 15px;
+		font-weight: 600;
+		border: 2px solid #41b40a;
+		margin-right: 30px;
+	}
+	form{
+		width: 180px;
+		height: 100%;
+	}
+    /* 전체 이외 사이즈 */
+    
     #main_banner{width: 990px; height: 450px; margin: 0px auto;}
-    #list_center{width: 990px; height: 400px;margin: 0 auto;}
+    #list_center{width: 990px; height: 320px;margin: 0 auto;}
     #rank_list{width: 50%;height: 100%;float: left;}
     #new_list{width: 50%;height: 100%;float: left;}
     #inner{width: 990px;height: 100%; margin: 0px auto;}
     .f_inner{width: 990px;margin: 0px auto;}
     
-    /* 랭킹,최신공연 리스트 관련 사이즈*/
-    #rank_list p{border: 1px solid blue; height: 300px;}
-    #new_list p{border: 1px solid red; height: 300px;}
+    /* 랭킹 리스트 관련 사이즈*/
+    #rank_list .list{border: 1px solid blue; height: 230px;}    
+    #rank_list .list ul{
+        height: 230px;
+        padding: 0;
+        margin: 0;
+    }
+    #rank_list .list .list_img{
+        width: 180px;
+        height: 218px;
+        float: left;
+        margin-top: 3px;
+        
+        border: 1px solid grey;
+        box-sizing: border-box;
+    }
+    #rank_list .list .list_img a{height: 100%; display: block;}
+    
+    #rank_list .list .list_a{
+        height: 40px;
+        width: 230px;
+        float: left;
+        margin: 2px 0 3px 20px;
+        
+        border: 1px solid grey;
+        box-sizing: border-box;
+    }
+    #rank_list .list .list_a a{color: #767676; padding: 8px 0 8px 0; display: block; text-decoration: none;}
+    
+    /* 최신 리스트 관련 사이즈*/
+    #new_list .list{border: 1px solid red; height: 230px;}
+    
+    #new_list .list ul{
+        height: 230px;
+        padding: 0;
+        margin: 0;
+    }
+    #new_list .list .list_img{
+        width: 180px;
+        height: 218px;
+        float: left;
+        margin-top: 3px;
+        
+        border: 1px solid grey;
+        box-sizing: border-box;
+    }
+    #new_list .list .list_img a{height: 100%; display: block;}
+    #new_list .list .list_a{
+        height: 40px;
+        width: 230px;
+        float: left;
+        margin: 2px 0 3px 20px;
+        
+        border: 1px solid grey;
+        box-sizing: border-box;
+    }
+    #new_list .list .list_a a{color: #767676; padding: 8px 0 8px 0; display: block; text-decoration: none;}
+    
     
     
     
     /* 슬라이드 배너 관련 */
+
     #slide{height:450px;position:relative;overflow:hidden;}
 	#slide ul{width:400%;height:100%;transition:1s;margin: 0px; padding: 0px;}
 	#slide ul:after{content:"";display:block;clear:both;}
 	#slide li{float:left;width:25%;height:100%;list-style-type: none;}
-	#slide li:nth-child(1){background:#faa;}
-	#slide li:nth-child(2){background:#ffa;}
-	#slide li:nth-child(3){background:#faF;}
-	#slide li:nth-child(4){background:#aaf;}
     
 	#slide input{display:none;} /*인풋타입 제거*/
 	#slide label{display:inline-block;vertical-align:middle;width:10px;height:10px;border:2px solid #666;background:#fff;transition:0.3s;border-radius:50%;cursor:pointer;}
@@ -57,8 +205,6 @@
 	#bCheck2:checked~.bCheck>label:nth-child(2){background:#666;}
 	#bCheck3:checked~.bCheck>label:nth-child(3){background:#666;}
 	#bCheck4:checked~.bCheck>label:nth-child(4){background:#666;}
-    
-    
     
     /* Best 공연 및 전시 관련 */
     .best_list{
@@ -117,7 +263,50 @@
 <div id="wrapper">
     <div id="header">
         <div id="h_inner">
-            <h1>TICKET SEA</h1>
+            <!--top navi div-->
+            <div class="topnav">
+                <div class="inner">
+                    <div class="login">
+                        <div id="login" style="">
+							<a href="#" class="btn login" id="loginBtn">로그인</a> 
+							
+                    <a href="/views/mypage/MyPage_reserve_list.html" id="reserve">예매확인/취소</a><span>|</span>
+                    <a href="#" id="joinBtn">회원가입</a><span>|</span>
+					<a href="#" >고객센터</a>
+						</div>
+                    </div>
+                </div>
+            </div>
+            <!--search_area div-->
+            <div class="search_area">
+				<!--logo div-->
+				<h1>
+					<a href="#" class="logo">Ticket Sea</a>
+				</h1>
+				<div class="search">
+					
+					<form name="searchForm" action="" method="GET">
+                <fieldset>
+                    <legend>검색창</legend>
+                    <input type="text" id="searchline" name="query" title="검색어 입력" value="">
+                    <a href="#" class="btn_search">검색</a>
+                </fieldset>
+            		</form>
+        		</div>
+				
+			</div>
+            <!--menu div-->
+            <div id="menu">
+				<ul>
+					<li><a class="menulink">&nbsp;</a></li>
+					<li><a class="menulink" href="#">뮤지컬</a></li>
+					<li><a class="menulink" href="#">콘서트</a></li>
+					<li><a class="menulink" href="#">소규모공연</a>		</li>
+					<li><a class="menulink" href="#">랭킹</a></li>
+					<li><a class="menulink" href="#">고객센터</a>		</li>
+					<li><a class="menulink">&nbsp;</a></li>
+				</ul>
+			</div>
         </div>
     </div>
     
@@ -129,10 +318,26 @@
 	            <input type="radio" name="bCheck" id="bCheck3">
 	            <input type="radio" name="bCheck" id="bCheck4">
 	            <ul> 
-		           <li><h1>1번째 배너</h1></li>
-		           <li><h1>2번째 배너</h1></li>
-		           <li><h1>3번째 배너</h1></li>
-		           <li><h1>4번째 배너</h1></li>
+                    <li>
+                       <a href="#">
+                           <img src="img/ban1.jpg">
+                       </a>
+                    </li>
+                    <li>
+                       <a href="#">
+                           <img src="img/ban2.jpg">
+                       </a>
+                    </li>
+                    <li>
+                       <a href="#">
+                           <img src="img/ban3.jpg">
+                       </a>
+                    </li>
+                    <li>
+                       <a href="#">
+                           <img src="img/ban4.jpg">
+                       </a>
+                    </li>
 	            </ul>
                 
 	            <p class="bCheck">
@@ -146,12 +351,84 @@
         
         <div id="list_center">
             <div id="rank_list">
-                <h1>실시간 랭킹</h1>
-                <p></p>
+                <div class="header">
+                    <h2>실시간 랭킹</h2>
+                </div>
+                <div class="list">
+                    <ul>
+                        <li class="list_img">
+                            <a href="#">
+                                <img src="/img/178_216.jpg">
+                            </a>
+                        </li>
+                        <!-- 이미지 -->
+                        <li class="list_a">
+                            <a href="#">
+                                1. 포항 BIG K-POP FESTIVAL
+                            </a>
+                        </li>
+                        <li class="list_a">
+                            <a href="#">
+                                2. 포항 BIG K-POP FESTIVAL
+                            </a>
+                        </li>
+                        <li class="list_a">
+                            <a href="#">
+                                3. 포항 BIG K-POP FESTIVAL
+                            </a>
+                        </li>
+                        <li class="list_a">
+                            <a href="#">
+                                4. 포항 BIG K-POP FESTIVAL
+                            </a>
+                        </li>
+                        <li class="list_a">
+                            <a href="#">
+                                5. 포항 BIG K-POP FESTIVAL
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
             <div id="new_list">
-                <h1>최신 공연</h1>
-                <p></p>
+                <div class="header">
+                    <h2>최신공연</h2>
+                </div>
+                <div class="list">
+                    <ul>
+                        <li class="list_img">
+                            <a href="#">
+                                <img src="/img/178_216.jpg">
+                            </a>
+                        </li>
+                        <!-- 이미지 -->
+                        <li class="list_a">
+                            <a href="#">
+                                1. 포항 BIG K-POP FESTIVAL
+                            </a>
+                        </li>
+                        <li class="list_a">
+                            <a href="#">
+                                2. 포항 BIG K-POP FESTIVAL
+                            </a>
+                        </li>
+                        <li class="list_a">
+                            <a href="#">
+                                3. 포항 BIG K-POP FESTIVAL
+                            </a>
+                        </li>
+                        <li class="list_a">
+                            <a href="#">
+                                4. 포항 BIG K-POP FESTIVAL
+                            </a>
+                        </li>
+                        <li class="list_a">
+                            <a href="#">
+                                5. 포항 BIG K-POP FESTIVAL
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
 
@@ -161,7 +438,7 @@
                 <li>
                     <a href="#">
                         <p>
-                            <img src="#" width="234px" height="285">
+                            <img src="/img/234_285.jpg" width="234px" height="285">
                         </p>
                         <div>
                             <strong>공연제목 1</strong>
@@ -171,7 +448,7 @@
                 <li>
                     <a href="#">
                         <p>
-                            <img src="#" width="234px" height="285">
+                            <img src="/img/234_285.jpg" width="234px" height="285">
                         </p>
                         <div>
                             <strong>공연제목 2</strong>
@@ -181,7 +458,7 @@
                 <li>
                     <a href="#">
                         <p>
-                            <img src="#" width="234px" height="285">
+                            <img src="/img/234_285.jpg" width="234px" height="285">
                         </p>
                         <div>
                             <strong>공연제목 3</strong>
@@ -191,7 +468,7 @@
                 <li>
                     <a href="#">
                         <p>
-                            <img src="#" width="234px" height="285">
+                            <img src="/img/234_285.jpg" width="234px" height="285">
                         </p>
                         <div>
                             <strong>공연제목 4</strong>
@@ -201,7 +478,7 @@
                 <li>
                     <a href="#">
                         <p>
-                            <img src="#" width="234px" height="285">
+                            <img src="/img/234_285.jpg" width="234px" height="285">
                         </p>
                         <div>
                             <strong>공연제목 5</strong>
@@ -211,7 +488,7 @@
                 <li>
                     <a href="#">
                         <p>
-                            <img src="#" width="234px" height="285">
+                            <img src="/img/234_285.jpg" width="234px" height="285">
                         </p>
                         <div>
                             <strong>공연제목 6</strong>
@@ -221,7 +498,7 @@
                 <li>
                     <a href="#">
                         <p>
-                            <img src="#" width="234px" height="285">
+                            <img src="/img/234_285.jpg" width="234px" height="285">
                         </p>
                         <div>
                             <strong>공연제목 7</strong>
@@ -231,7 +508,7 @@
                 <li>
                     <a href="#">
                         <p>
-                            <img src="#" width="234px" height="285">
+                            <img src="/img/234_285.jpg" width="234px" height="285">
                         </p>
                         <div>
                             <strong>공연제목 8</strong>
@@ -241,7 +518,7 @@
                 <li>
                     <a href="#">
                         <p>
-                            <img src="#" width="234px" height="285">
+                            <img src="/img/234_285.jpg" width="234px" height="285">
                         </p>
                         <div>
                             <strong>공연제목 8</strong>
@@ -251,7 +528,7 @@
                 <li>
                     <a href="#">
                         <p>
-                            <img src="#" width="234px" height="285">
+                            <img src="/img/234_285.jpg" width="234px" height="285">
                         </p>
                         <div>
                             <strong>공연제목 8</strong>
@@ -261,7 +538,7 @@
                 <li>
                     <a href="#">
                         <p>
-                            <img src="#" width="234px" height="285">
+                            <img src="/img/234_285.jpg" width="234px" height="285">
                         </p>
                         <div>
                             <strong>공연제목 8</strong>
@@ -271,7 +548,7 @@
                 <li>
                     <a href="#">
                         <p>
-                            <img src="#" width="234px" height="285">
+                            <img src="/img/234_285.jpg" width="234px" height="285">
                         </p>
                         <div>
                             <strong>공연제목 8</strong>
@@ -285,17 +562,17 @@
             <ul>
                 <li>
                     <a href="#">
-                        <img src="#" width="98px" height="170px">
+                        <img src="/img/98_170.jpg" width="98px" height="170px">
                     </a>
                 </li>
                 <li>
                     <a href="#">
-                        <img src="#" width="98px" height="170px">
+                        <img src="/img/98_170.jpg" width="98px" height="170px">
                     </a>
                 </li>
                 <li>
                     <a href="#">
-                        <img src="#" width="98px" height="170px">
+                        <img src="/img/98_170.jpg" width="98px" height="170px">
                     </a>
                 </li>
             </ul>
@@ -305,12 +582,12 @@
             <ul>
                 <li>
                     <a href="#">
-                        <img src="#" width="98px" height="125px">
+                        <img src="/img/98_125.jpg" width="98px" height="125px">
                     </a>
                 </li>
                 <li>
                     <a href="#">
-                        <img src="#" width="98px" height="125px">
+                        <img src="/img/98_125.jpg" width="98px" height="125px">
                     </a>
                 </li>
             </ul>
@@ -325,11 +602,8 @@
         
         <div class="f_menu">
             <a href="#">사이트 소개</a><span>|</span>
-            <a href="#">개인정보 처리방침</a><span>|</span>
-            <a href="#">이용약관</a><span>|</span>
             <a href="#">고객센터</a><span>|</span>
-            <a href="#">티켓판매안내</a><span>|</span>
-            <a href="#">광고안내</a>
+            <a href="#">티켓판매안내</a><span></span>
         </div>
         
         <p class="copy">Copyright © 옹가네 Corporation. All rights reserved.</p>
@@ -337,6 +611,5 @@
     </div>
     
 </div>
-한줄추
 </body>
 </html>
