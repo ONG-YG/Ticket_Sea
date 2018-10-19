@@ -590,6 +590,17 @@
                                 <div class="s6" id="t2600037" style="LEFT: 462px; TOP: 505px" name="tk" value="2600037" title="1층 V열 020번"></div>
                             </div>
                         </div>
+                        <script>
+                            var selected_seat = [];
+                            $(document).ready(function(){
+                                        $('.s6').click(function(){
+                                            //$('#cnt_box li').css('background-color','white');
+                                            $(this).css('background-color','red');
+                                            selected_seat[0]=$(this).html();
+                                            alert(selected_seat[0]);
+                                        })
+                                    })
+                        </script>
                         <div class="select_seat_info" style="z-index: 20;;z-index: 20;">
                             <a href="#">
                                 <strong>좌석 선택 해달라는 문구 넣는 부분</strong>
