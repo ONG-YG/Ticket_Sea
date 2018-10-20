@@ -57,7 +57,7 @@
                                 <th>휴대폰 번호 <span class="color_red">*<span class="blind">필수입력란</span></span></th>
                                 <td>
                                     <div class="input_block">
-                                        <input type="text" class="input"  style="width:200px" maxlength="11" title="휴대폰 번호" number-text-box="">
+                                        <input type="text" class="input" id="phone" style="width:200px" maxlength="11" title="휴대폰 번호" number-text-box="">
                                     </div>
                                 </td>
                             </tr>
@@ -143,9 +143,32 @@
                             </p>
                         </div>
                     </div>
+                    <script>
+                        function prev() {
+                            location.href="./TicketSea_reserv_step_2_seat.html"
+                        }
+                        function next() {
+                            var phone = document.getElementById("phone").value;
+                            var userCheck = document.getElementById("agree_phone").checked;
+                            //alert(userCheck);
+                            var userInfoAgree = document.getElementById("reserve_agree2").checked;
+                            if(phone=="") {
+                                alert("휴대폰번호를 입력해주세요");
+                            }
+                            else if(!userCheck) {
+                                alert("주문자 확인 및 휴대폰 번호 수집을 확인하셔야 결제가 가능합니다.");
+                            }
+                            else if(!userInfoAgree) {
+                                alert("개인정보 제 3자 제공에 동의하셔야 결제가 가능합니다.");
+                            }
+                            else {
+                                location.href="#";
+                            }
+                        }
+                    </script>
                     <div class="reserve_btn">
-                        <a href="#" style="cursor:pointer" class="btn"><span>이전단계</span></a>
-                        <a href="#" class="btn" style="cursor:pointer"><span>다음단계</span></a>
+                        <a href="#" class="btn" onclick="prev()">이전단계</a>
+                        <a href="#" class="btn" onclick="next()">다음단계</a>
                     </div>
 
                 </div>

@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>마이페이지 예매확인/취소</title>
+<title>예매확인/취소</title>
 <script
   src="https://code.jquery.com/jquery-3.3.1.js"
   integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
@@ -111,9 +111,11 @@
         height: 12px;
         border: none;
         font-size: 13px;
+        font-weight: bold;
     }
     #left_menu .has_sub1 a{
         color: lightskyblue;
+        
     }
     #left_menu span{
         color: #444;
@@ -144,7 +146,14 @@
         border-top: 1px solid #ececec;
         color: dimgray;
         font-weight: bold;
+        font-size: 14px;
     }
+    .cancelBtn{
+        background-color: skyblue;
+        border-radius: 5px;
+        color: white;
+    }
+    
     .paginate{
         text-align: center;
         padding-top: 20px;
@@ -186,12 +195,27 @@
     
 </style>
 </head>
+    
+<script>
+    $(document).ready(function(){
+        $('.cancelBtn').click(function(){
+            if(confirm("정말로 취소하시겠습니까?")){
+                alert("예매가 취소되었습니다.");
+            } else {
+                
+            }
+        })
+    })
+    
+    
+</script>
 <body>
 <div id="wrapper">
     <div id="header">
         <div id="h_inner">
             <h1>TICKET SEA</h1>
-        </div>
+        </div>        </div>
+
     </div>
     
     
@@ -207,23 +231,23 @@
                 <li class="has_sub1">
                     <span>예매 관리</span>
                     <ul>
-                        <li><a href="#"><strong>예매확인/취소</strong></a></li>
+                        <li><a href="MyPage_reserve_list.html">예매확인/취소</a>
                     </ul>
                 </li>
                 <li class="has_sub">
                     <span>활동 관리</span>
                     <ul>
-                        <li><a href="#">참여 이벤트</a></li>
-                        <li><a href="#">후기 관리</a></li>
-                        <li><a href="#">상품 문의 내역</a></li>
+                        <li><a href="MyPage_review_mgr.html">후기 관리</a></li>
+                        <li><a href="MyPage_faq_mgr.html">나의 문의 내역</a></li>
+                        <li><a href="#">소규모 공연 등록관리</a></li>
                         
                     </ul>
                 </li>
                 <li class="has_sub">
                     <span>회원정보관리</span>
                     <ul>
-                        <li><a href="#">회원 정보 수정</a></li>
-                        <li><a href="#">회원 탈퇴</a></li>
+                        <li><a href="MyPage_member_update.html">회원 정보 수정</a></li>
+                        <li><a href="MyPage_member_delete.html">회원 탈퇴</a></li>
                         
                     </ul>
                 </li>
@@ -259,7 +283,9 @@
                                 <td>18.11.20</td>
                                 <td>3</td>
                                 <td>18.11.10 까지</td>
-                                <td>예매중</td>
+                                <td>
+                                    <button class="cancelBtn">취소</button>
+                                </td>
                             </tr>
                         </tbody>
                     </table>

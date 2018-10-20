@@ -140,7 +140,7 @@
         width : 100%;
     }
     
-    #i_C_category > #i_C_C_a {
+    #i_C_category > #i_C_Category_a {
         border : 1px solid #dedede;
         background-color: ;
         width : 33.3333%;
@@ -150,7 +150,7 @@
         font-size: 18px;
         padding : 20px;
     }
-    #i_C_category > #i_C_C_b {
+    #i_C_category > #i_C_Category_b {
         border : 1px solid #dedede;
         width : 33.3333%;
         height : 100%;
@@ -159,7 +159,7 @@
         font-size: 18px;
         padding : 20px;
     }
-    #i_C_category > #i_C_C_c {
+    #i_C_category > #i_C_Category_c {
         border : 1px solid #dedede;
         width : 33.3333%;
         height : 100%;
@@ -188,10 +188,20 @@
         color:#767676;
     }
     
+    .review_list{border-width:2px 0 1px;border-style:solid;border-color:#999}
+    
     
 </style>
 </head>
 <body>
+
+<script>
+    function reserve(){
+        //alert("예매시작");
+        location.href="../reserve/TicketSea_reserv_step_1_date_time.html";
+    }
+</script>
+
 <div id="wrapper">
     <div id="header">
         <div id="h_inner">
@@ -247,27 +257,33 @@
                         <strong><div id = "info_tit">가격</div></strong>50,000원
                         </div>
                         <br><br><br>
-                        <input type="button" value="예매하기" style="width:250px; height:80px; background-color:skyblue; color:white; float:right;">
+                        <input type="button" value="예매하기" style="width:250px; height:80px; background-color:skyblue; color:white; float:right;" onclick="return reserve()">
                         
                     </div>
                 </div>
                 
-                <div id="infoContent">
+        <div id="infoContent">
                     <div id="i_C_category">
-                        <div id="i_C_C_a" >
-                            상세정보
+                        
+                        <div id="i_C_Category_a" >
+                            <button onclick="cateAclick();">상세정보</button>
                         </div>
                         
-                        <div id="i_C_C_b">
-                            공연장 정보
+                        <div id="i_C_Category_b">
+                            <button onclick="cateBclick();">공연장 정보</button>
                         </div>
                         
-                        <div id="i_C_C_c">
-                            티켓수령 취소/환불
+                        <div id="i_C_Category_c">
+                            <button onclick="cateCclick();">공연 후기</button>
                         </div>
                     </div>
-
-                    <div id="i_C_content">
+                    
+            <style>
+            
+                
+            </style>
+                    
+                    <div id="i_C_content_a">
                         
                           <img src="../../img/poster_ex.jpg" style="width:700px; height:850px; padding : 50px;">
                         
@@ -342,8 +358,123 @@
                             </tbody>
                         </table>
                                     </div>
+                    <div id="i_C_content_b" style="display:none;">
+                        <div id="map" style="width:500px;height:400px;"></div>
+                        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b8639cd941f4df4218630f1cf5bd7d14"></script>
+                        
+                        <script>
+                            var container = document.getElementById('map');
+                            var options = {
+                                center: new daum.maps.LatLng(33.450701, 126.570667),
+                                level: 3
+                            };
 
-                                </div>
+                            var map = new daum.maps.Map(container, options);
+	                   </script>
+            
+                        
+                    </div>
+            
+            <style>
+                #c_title{
+                    height: 40px;
+                    padding : 10px;
+                    margin : 100px 0px 10px;
+                    font-family : '돋움',dotum,san-serif;
+                    color : #444;
+                    font-size : 18px;
+                    font-weight: bold;
+                }
+                
+                #c_guide{
+                    height : 80px;
+                    padding : 10px;
+                    margin : 0px 0px 0px;
+                    font-size : 12px;
+                    color:#999;
+                }
+                #c_text{
+                    border : 1px solid black;
+                    margin : 30px 0px 0px;
+                    height : 70px;
+                    background-color: #d5d5d5;
+                }
+                
+                .write_review{
+                    clear:both;
+                    height:100px;
+                    overflow:hidden;
+                    padding-top:9px
+                }
+                
+                .write_review textarea{
+                    border:px solid #d4d4d4;
+                    width:528px;
+                    height: 200px;
+                    padding:16px 18px 7px;
+                    line-height:18px;
+                    overflow-y:auto;
+                    color:#999
+                }
+                .write_review .btn{
+                    margin-left:-5px;
+                    *margin-top:1px;
+                    color:red;
+                }
+            </style>
+            
+                <div id="i_C_content_c" style="display:none;">
+                    <div id="c_title">
+                    네티즌 후기
+                    </div>
+                    
+                    <div id="c_guide">
+                    네티즌 후기 게시판에 티켓 양도와 매매성 등 글과 같이 게시판 성격에 벗어난 글을 게재할 경우 사전 통보 없이 삭제될 수 있습니다. <br>
+                    티켓 양도 및 매매의 경우 전화번호, 이메일 등의 개인정보가 악용될 소지가 있으므로 게재를 삼가 주시기 바랍니다. <br>
+                    운영 규정을 지속적으로 어기는 게시글을 게재할 경우 티켓링크 게시판 이용이 제한될 수 있습니다.
+                    </div>
+                    
+                   <div class="star_review" id="star_review">
+                       
+                            <div class="write_review">
+                                <textarea title="후기 작성하기" id="reviewContent" name="reviewContent"
+                                          style="height: 25px; resize:none;" maxlength="3000"
+                                          placeholder="주민번호, 전화번호, 이메일 등 개인정보를 남기면 타인에 의해 악용될 소지가 있습니다."></textarea>
+                                <button>후기작성</button>
+                            </div>
+
+    </div>
+
+                </div>
+
+          </div>
+                
+                <script> // 공연 컨텐츠 카테고리 클릭 함수
+                         icca = document.getElementById("i_C_content_a");
+                         iccb = document.getElementById("i_C_content_b");
+                         iccc = document.getElementById("i_C_content_c");
+                    
+                        function cateAclick(){
+                            icca.style.display="block";
+                            iccb.style.display="none";
+                            iccc.style.display="none";
+                            return false;
+                        }
+                        
+                        function cateBclick(){
+                            iccb.style.display="block";
+                            icca.style.display="none";
+                            iccc.style.display="none";
+                            return false;
+                        }
+                    
+                        function cateCclick(){
+                            iccc.style.display="block";
+                            icca.style.display="none";
+                            iccb.style.display="none";
+                            return false;
+                        }
+                    </script>
 
                             </div>
 

@@ -638,18 +638,32 @@
                     </div>
 <!--
                     <div class="reserve_artbx">
-                       <!-- <div class="bx_tit">
+                       <div class="bx_tit">
                             <h4 class="reserve_tit">좌석 선택</h4>
                             <p class="reserve_notice_ly">
                                 <span class="sp"></span>
                                 좌석선점 및 자동배정 안내
                             </p>
-                        </div>-->
+                        </div>
                     </div>
 -->
+                    <script>
+                        function prev() {
+                            location.href="./TicketSea_reserv_step_1_date_time.html"
+                            //alert("prev");
+                        }
+                        function next() {
+                            var stat = true;
+                            if(stat==false) {
+                                alert("좌석을 선택하지 않았습니다. 좌석을 선택해주세요.");
+                            }else {
+                                location.href="./TicketSea_reserv_step_3_confirm.html";
+                            }
+                        }
+                    </script>
                     <div class="reserve_btn">
-                        <a href="#" style="cursor:pointer" class="btn reserve_prev"><span>이전단계</span></a>
-                        <a href="#" class="btn" style="cursor:pointer"><span>다음단계</span></a>
+                        <a href="#" class="btn" onclick="prev()">이전단계</a>
+                        <a href="#" class="btn" onclick="next()">다음단계</a>
                     </div>
 
                 </div>
