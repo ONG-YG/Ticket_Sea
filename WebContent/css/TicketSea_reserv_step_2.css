@@ -16,6 +16,13 @@
 .reserve_step{}
 .reserve_step li{}
 .reserve_step li span{}
+
+    /*--reserve_step li--*/
+    .reserve_step li[class=step2]{
+        background-color: skyblue;
+    }
+    /*--/reserve_step li--*/
+
 /*---------------------- /header ----------------------*/
 /*---------------------- container ----------------------*/
 
@@ -126,30 +133,38 @@
 
 
 
-.s6 {
+.seat_a {
     position: absolute;
-    background: url(http://tkfile.yes24.com/images/ticket_new/ic_seat6.gif) no-repeat;
+    background: url(../img/seat_available.bmp) no-repeat;
     height: 12px;
     width: 11px;
     z-index: 10;
 }
 
-/*
-.s13 {
+
+.seat_r {
     position: absolute;
-    background: url(http://tkfile.yes24.com/images/ticket_new/ic_seat13.gif) no-repeat;
+    background: url(../img/seat_reserved.gif) no-repeat;
     height: 12px;
     width: 11px;
     z-index: 10;
 }
 
-.s8 {
+.seat_p {
     position: absolute;
-    background: url(http://tkfile.yes24.com/images/ticket_new/ic_seat6.gif) no-repeat;
+    background: url(../img/seat_reserved.gif) no-repeat;
     height: 12px;
     width: 11px;
     z-index: 10;
-}*/
+}
+
+.selected {
+    position: absolute;
+    background: url(../img/seat_selected.bmp) no-repeat;
+    height: 12px;
+    width: 11px;
+    z-index: 10;
+}
 
 
 

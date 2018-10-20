@@ -16,6 +16,13 @@
 .reserve_step{}
 .reserve_step li{}
 .reserve_step li span{}
+
+    /*--reserve_step li--*/
+    .reserve_step li[class=step1]{
+        background-color: skyblue;
+    }
+    /*--/reserve_step li--*/
+
 /*---------------------- /header ----------------------*/
 /*---------------------- container ----------------------*/
 
@@ -98,8 +105,17 @@
     list-style: none;
     padding: 0px;
 }
-#ct_left_top li{
+#ct_left_cnt li{
     margin-bottom: 5px;
+}
+#ct_left_cnt li span:nth-child(2){
+    margin-right: 20px;
+}
+#ct_left_seat li{
+    margin-bottom: 5px;
+}
+#ct_left_seat li span:nth-child(1){
+    margin-right: 45px;
 }
 
     /*-- ct_left_date --*/

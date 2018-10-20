@@ -16,6 +16,13 @@
 .reserve_step{}
 .reserve_step li{}
 .reserve_step li span{}
+
+    /*--reserve_step li--*/
+    .reserve_step li[class=step3]{
+        background-color: skyblue;
+    }
+    /*--/reserve_step li--*/
+
 /*---------------------- /header ----------------------*/
 /*---------------------- container ----------------------*/
 
@@ -48,6 +55,8 @@
             display: inline-block;
             margin-bottom: 5px;
             padding-top:20px;
+            font-size: 20px;
+            margin-top: 20px;
         }
         /*확인란 안에 테이블*/
         .reserve_left .reserve_step3 table {
@@ -87,7 +96,7 @@
             line-height: 100%;
             vertical-align: middle;
         }
-        .customer_check .input_block_lst {
+        .input_block_lst {
             margin-top: 0;
             border: 1px solid #dedede;
             padding: 0px;
@@ -98,7 +107,7 @@
             line-height: 18px;
         }
         /*예매자 확인=>아래 테이블*/
-        .customer_check .input_block_lst li {
+        .input_block_lst li {
             position: relative;
             margin-top: 0;
             padding: 13px 19px 12px 25px;
@@ -106,20 +115,58 @@
             background-color: #fff;
             list-style: none;
         }
-        .title{
-            margin-top: 20px;
-        }
        
 /*--------- /reserve_left ---------*/
 /*--------- reserve_right ---------*/
 
+.top_info_area{
+    border: 1px dashed; border-color: gray;
+    width: 100%; height: 28%;
+    box-sizing: border-box;
+}
 
+.reserve_grade{
+    border: 1px dashed; border-color: gray;
+    width: 100%; height: 60%;
+    box-sizing: border-box;
+}
 
 .reserve_btn{}
-/*--- reserve_btn ---*/
-.reserve_btn>a{}
-.reserve_btn>a>span{}
-/*--- /reserve_btn ---*/
+
+    /*-- .reserve_grade --*/
+    .reserve_grade>.bx_tit{
+        border: 3px dotted; border-color: aqua;
+        width: 100%; height: 25px;
+        box-sizing: border-box;
+    }
+    #select_seat_grade{
+/*      border: 3px solid; border-color: red;*/
+        margin: 0; padding: 10px;
+        list-style: none;
+    }
+    /*-- /.reserve_grade --*/
+
+
+    /*-- .reserve_grade --*//*공통*/
+    .reserve_grade .bx_tit h4{
+    /*        border: 3px solid; border-color: blue;*/
+        display: inline;
+        margin: 0;
+    }
+    .reserve_grade .bx_tit>a,
+    .reserve_grade .bx_tit>p{
+    /*  border: 3px dashed; border-color: red;*/
+        float: right; margin: 0;
+        display: inline;
+        font-size: 14px;
+    }
+    /*-- /.reserve_grade --*//*공통*/
+
+
+    /*--- reserve_btn ---*/
+    .reserve_btn>a{}
+    .reserve_btn>a>span{}
+    /*--- /reserve_btn ---*/
 
 /*--------- /reserve_right ---------*/
 
@@ -127,63 +174,4 @@
 
 
 
-/*---reserve_prdt_info---*/
 
-.title{
-    border: 1px dashed; border-color: gray;
-    width: 100%; height: 100%;
-    box-sizing: border-box;
-    font-size: 22px;
-    line-height: 230%;
-    padding: 0;
-}
-
-/*---/reserve_prdt_info---*/
-
-
-
-    .top_info_area{
-        border: 1px dashed; border-color: gray;
-        width: 100%; height: 28%;
-        box-sizing: border-box;
-    }
-    
-    .reserve_right>div:nth-child(2){
-        border: 1px dashed; border-color: gray;
-        width: 100%; height: 55%;
-        box-sizing: border-box;
-    }
-    .reserve_right>div:nth-child(3){
-        border: 1px dashed; border-color: gray;
-        width: 100%; height: 5%;
-        box-sizing: border-box;
-    }
-
-    
-    
-    .reserve_right>div:nth-child(2)>.bx_tit{
-        border: 3px dotted; border-color: aqua;
-        box-sizing: border-box;
-        width: 100%; height: 25px;
-    }
-    .reserve_right .bx_tit h4{
-/*        border: 3px solid; border-color: blue;*/
-        display: inline;
-        margin: 0;
-    }
-    .reserve_right .bx_tit>a,
-    .reserve_right .bx_tit>p{
-/*        border: 3px dashed; border-color: red;*/
-        float: right; margin: 0;
-        display: inline;
-        font-size: 14px;
-    }
-    #select_seat_grade{
-/*        border: 3px solid; border-color: blue;*/
-        margin: 0; padding: 10px;
-        list-style: none;
-    }
-    
-    
-    
-    

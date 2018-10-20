@@ -14,6 +14,46 @@
       type="text/javascript"
         src="../../resources/jquery-3.3.1.js">
     </script>
+    <script>
+        var date_sel = null;
+        var cnt_sel = null;
+        $(document).ready(function(){
+            
+            $('.calendar-date').click(function(){
+                $('.calendar-date').css('background-color','white');
+                $(this).css('background-color','skyblue');
+
+                date_sel = $('.year-month').text()+"."+$(this).text();
+                //alert(date_sel);
+            })
+
+
+            $('#cnt_box li').click(function(){
+                $('#cnt_box li').removeAttr('style');
+                $('#cnt_box li span').removeAttr('style');
+
+                $(this).css('background-color','skyblue');
+                $(this).children('.cnt_time').css('color','blue');
+                $(this).children('.cnt_time').css('font-weight','550');
+
+                cnt_sel = $(this).children('.cnt').html();
+                //alert(cnt_sel);
+            })
+            
+        })
+        
+        function next() {
+            var stat = false;
+            if(date_sel!=null && cnt_sel!=null) stat = true;
+            if(stat==false) {
+                alert("날짜/회차를 선택하세요");
+            }else {
+                alert("선택한 날짜 : "+date_sel+"  /  선택한 회차 : "+cnt_sel);
+                location.href="./TicketSea_reserv_step_2_seat.html";
+            }
+        }
+        
+    </script>
     
 </head>
     
@@ -35,11 +75,11 @@
                     <span>등급/좌석선택</span>  
                 </li>
                 
-                <li class="step4">    
+                <li class="step3">    
                     <span>배송선택/예매확인</span>  
                 </li>
                 
-                <li class="step5">    
+                <li class="step4">    
                     <span>결제</span>  
                 </li>
                 
@@ -55,35 +95,115 @@
                             <div id="ct_left_date">
                                 <b>날짜선택</b>
                                 <div id="date_box">
+                                    <div class="calendar">
+                                        <div class="calendar-header">
+                                            <a class="prev-mon" title="이전달"><span>이전달</span></a>
+                                            <a class="next-mon" title="다음달"><span>다음달</span></a>
+
+                                            <div class="current-mon"><span class="year-month">2018.10</span></div>
+                                        </div>
+                                        <div class="calendar-body">
+                                            <table>
+                                                <thead>
+                                                <tr>
+                                                    <th><span title="일요일">일</span></th>
+                                                    <th><span title="월요일">월</span></th>
+                                                    <th><span title="화요일">화</span></th>
+                                                    <th><span title="수요일">수</span></th>
+                                                    <th><span title="목요일">목</span></th>
+                                                    <th><span title="금요일">금</span></th>
+                                                    <th><span title="토요일">토</span></th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr class="calendar-week"> <!-- 달력의 한 주에 해당하는 엘리먼트 컨테이너 -->
+                                                        <td class="calendar-date calendar-sun">30</td>
+                                                        <!-- 날짜가 표시될 엘리먼트 -->
+                                                        <td class="calendar-date">1</td>
+                                                        <td class="calendar-date">2</td>
+                                                        <td class="calendar-date">3</td>
+                                                        <td class="calendar-date">4</td>
+                                                        <td class="calendar-date">5</td>
+                                                        <td class="calendar-date calendar-sat">6</td>
+                                                    </tr>
+                                                    <tr class="calendar-week"> <!-- 달력의 한 주에 해당하는 엘리먼트 컨테이너 -->
+                                                        <td class="calendar-date calendar-sun">7</td>
+                                                        <!-- 날짜가 표시될 엘리먼트 -->
+                                                        <td class="calendar-date">8</td>
+                                                        <td class="calendar-date">9</td>
+                                                        <td class="calendar-date">10</td>
+                                                        <td class="calendar-date">11</td>
+                                                        <td class="calendar-date">12</td>
+                                                        <td class="calendar-date calendar-sat">13</td>
+                                                    </tr>
+                                                    <tr class="calendar-week"> <!-- 달력의 한 주에 해당하는 엘리먼트 컨테이너 -->
+                                                        <td class="calendar-date calendar-sun">14</td>
+                                                        <!-- 날짜가 표시될 엘리먼트 -->
+                                                        <td class="calendar-date">15</td>
+                                                        <td class="calendar-date calendar-today">16</td>
+                                                        <td class="calendar-date">17</td>
+                                                        <td class="calendar-date"><a href="javascript:;">18</a></td>
+                                                        <td class="calendar-date"><a href="javascript:;">19</a></td>
+                                                        <td class="calendar-date calendar-sat"><a href="javascript:;">20</a></td>
+                                                    </tr>
+                                                    <tr class="calendar-week"> <!-- 달력의 한 주에 해당하는 엘리먼트 컨테이너 -->
+                                                        <td class="calendar-date calendar-sun"><a href="javascript:;">21</a></td>
+                                                        <!-- 날짜가 표시될 엘리먼트 -->
+                                                        <td class="calendar-date">22</td>
+                                                        <td class="calendar-date"><a href="javascript:;">23</a></td>
+                                                        <td class="calendar-date"><a href="javascript:;">24</a></td>
+                                                        <td class="calendar-date"><a href="javascript:;">25</a></td>
+                                                        <td class="calendar-date"><a href="javascript:;">26</a></td>
+                                                        <td class="calendar-date calendar-sat"><a href="javascript:;">27</a></td>
+                                                    </tr>
+                                                    <tr class="calendar-week"> <!-- 달력의 한 주에 해당하는 엘리먼트 컨테이너 -->
+                                                        <td class="calendar-date calendar-sun"><a href="javascript:;">28</a></td>
+                                                        <!-- 날짜가 표시될 엘리먼트 -->
+                                                        <td class="calendar-date">29</td>
+                                                        <td class="calendar-date"><a href="javascript:;">30</a></td>
+                                                        <td class="calendar-date"><a href="javascript:;">31</a></td>
+                                                        <td class="calendar-date calendar-next-mon"><a href="javascript:;">1</a></td>
+                                                        <td class="calendar-date calendar-next-mon"><a href="javascript:;">2</a></td>
+                                                        <td class="calendar-date calendar-next-mon calendar-sat"><a href="javascript:;">3</a></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div id="ct_left_cnt">
                                 <b>회차선택</b>
                                 <div id="cnt_box">
                                     <ul>
-                                        <li>1회 10:00 ~ 11:30</li>
-                                        <li>2회 12:30 ~ 13:00</li>
+                                        <li>
+                                            <span class="cnt">1</span>
+                                            <span>회</span>
+                                            <span class="cnt_time">10:00 ~ 11:30</span>
+                                        </li>
+                                        <li>
+                                            <span class="cnt">2</span>
+                                            <span>회</span>
+                                            <span class="cnt_time">12:30 ~ 14:00</span>
+                                        </li>
+                                        <li>
+                                            <span class="cnt">3</span>
+                                            <span>회</span>
+                                            <span class="cnt_time">15:00 ~ 16:30</span>
+                                        </li>
                                     </ul>
                                 </div>
-                                
-                                <script>
-                                    ////////////////////////////////
-                                    var date_sel = "2018.10.19";
-                                    var cnt_sel = null;
-                                    $(document).ready(function(){
-                                        $('#cnt_box li').click(function(){
-                                            $('#cnt_box li').css('background-color','white');
-                                            $(this).css('background-color','red');
-                                            cnt_sel = $(this).text;
-                                        })
-                                    })
-                                    ////////////////////////////////    
-                                </script>
-                                
                             </div>
                             <div id="ct_left_seat">
                                 <b>잔여석</b>
                                 <div id="seat_box">
+                                    <ul>
+                                        <li>
+                                            <span class="seat_grade">일반석</span>
+                                            <span class="available_seat">27</span>
+                                            <span>석</span>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -100,10 +220,10 @@
                             </ul>
                         </div>
                     </div>
-                    <!--------------------------------------->
-                    <!--------------------------------------->
-                    <!--------------------------------------->
                 </div>
+                <!--------------------------------------->
+                <!--------------------------------------->
+                <!--------------------------------------->
                 <div class="reserve_right">
                     <div class="top_info_area" style="text-align: left; padding-left: 18px;">
                         공연포스터 & 공연명
@@ -112,18 +232,6 @@
                     <div class="reserve_result">
                         예매 정보 출력란
                     </div>
-                    
-                    <script>
-                        function next() {
-                            var stat = false;
-                            if(date_sel!=null && cnt_sel!=null) stat = true;
-                            if(stat==false) {
-                                alert("날짜/회차를 선택하세요");
-                            }else {
-                                location.href="./TicketSea_reserv_step_2_seat.html";
-                            }
-                        }
-                    </script>
                     <div id="reserve_btn_only">
                         <a href="#" class="btn" onclick="next()">다음단계</a>
                     </div>
