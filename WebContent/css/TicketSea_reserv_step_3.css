@@ -41,22 +41,22 @@
         }
 
         .reserve_content3 .reserve_left {
-                   box-sizing: border-box;
-                    overflow-y: auto;
-                    float: left;
-                    position: relative;
-                    width: 70%; height: 100%;
-                    padding: 20px;
-                    border-right: 1px solid #dedede;
-                    background: #f4f4f4;
-                    font-size: 12px;
+            box-sizing: border-box;
+            overflow-y: auto;
+            float: left;
+            position: relative;
+            width: 70%; height: 100%;
+            padding: 20px;
+            padding-top: 0px;
+            background: #f4f4f4;
+            font-size: 12px;
         }
 
         .reserve_left .reserve_step3 .title {
             display: inline-block;
             margin-bottom: 5px;
-            padding-top:20px;
-            font-size: 20px;
+/*            padding-top:20px;*/
+            font-size: 18px;
             margin-top: 20px;
         }
         /*확인란 안에 테이블*/
@@ -121,49 +121,135 @@
 /*--------- reserve_right ---------*/
 
 .top_info_area{
-    border: 1px dashed; border-color: gray;
-    width: 100%; height: 28%;
+/*    border: 2px dashed; border-color: gainsboro;*/
+    width: 100%; height: 17%;
     box-sizing: border-box;
+/*    padding: 0px;*/
 }
 
-.reserve_grade{
-    border: 1px dashed; border-color: gray;
-    width: 100%; height: 60%;
+.reserve_result{
+/*    border: 2px dashed; border-color: gainsboro;*/
+    width: 100%; height: 71%;
     box-sizing: border-box;
 }
 
 .reserve_btn{}
-
-    /*-- .reserve_grade --*/
-    .reserve_grade>.bx_tit{
-        border: 3px dotted; border-color: aqua;
-        width: 100%; height: 25px;
+    
+    /*--- top_info_area ---*/
+    #mini_poster {
+        width: 50px;
+        float: left;
+        padding-top: 5px;
+        margin-right: 15px;
+    }
+    #mini_poster img{
+        width:50px;
+        margin-top: 10%;
+    }
+    #mini_show_title{
+/*        background-color: red;*/
+        float: left;
+        margin-top: 20px;
+    }
+    /*--- /top_info_area ---*/
+    /*--- reserve_result ---*/
+    #reserve_res_tit{
+/*        border: 1px solid; border-color: red;*/
+        width: 100%; height: 6%;
+        font-weight: 600;
+        font-size: 15px;
+        padding-left: 20px;
+        padding-top: 0px;
         box-sizing: border-box;
     }
+    .reserve_result hr{
+        border: 1px solid; border-color: gainsboro;
+        width: 90%;        
+    }
     #select_seat_grade{
-/*      border: 3px solid; border-color: red;*/
+      border: 1px solid; border-color: gainsboro;
         margin: 0; padding: 10px;
+        width: 90%; height: 30%;
+        margin-left: 5%;
+        box-sizing: border-box;
         list-style: none;
     }
-    /*-- /.reserve_grade --*/
-
-
-    /*-- .reserve_grade --*//*공통*/
-    .reserve_grade .bx_tit h4{
-    /*        border: 3px solid; border-color: blue;*/
-        display: inline;
-        margin: 0;
+    #reserve_info {
+/*        border: 2px solid; border-color: red;*/
+        width: 100%; height: 55%;
+        box-sizing: border-box;
+        padding-top: 20px;
     }
-    .reserve_grade .bx_tit>a,
-    .reserve_grade .bx_tit>p{
-    /*  border: 3px dashed; border-color: red;*/
-        float: right; margin: 0;
-        display: inline;
-        font-size: 14px;
-    }
-    /*-- /.reserve_grade --*//*공통*/
 
-
+        /*-- #select_seat_grade --*/
+        #select_seat_grade li {
+/*            border: 2px dashed; border-color: aqua;*/
+            width: 90%; height: 12px;
+            margin-left: 5%;
+            margin-bottom: 5px;
+            box-sizing: border-box;
+            font-size: 12px;
+        }
+        .seat_color,
+        .seat_detail_info{
+/*            border: 3px dashed; border-color: greenyellow;*/
+            box-sizing: border-box;
+            float: left;
+        }
+        .seat_color{
+/*            border: 3px dashed; border-color: greenyellow;*/
+            width: 12px; height: 12px;
+            margin-top: 0px;
+            margin-right: 7px;
+        }
+        .seat_detail_info{
+/*            border: 3px dashed; border-color: blue;*/
+            width: 195px; height: 100%;
+        }
+        .seat_grade{
+/*            border: 1px dotted; border-color: red;*/
+            float: left;
+            margin-right: 15px;
+        }
+        .seat_no{
+            float: right;
+        }
+        /*-- /#select_seat_grade --*/
+        /*-- #reserve_info --*/
+        #reserve_info div {
+/*            border: 1px dashed; border-color: aqua;*/
+            widows: 100%; height: 25px;
+            box-sizing: border-box;
+        }
+        #reserve_info strong {
+/*            background-color: greenyellow;*/
+            float: left;
+            margin: 0px;
+            margin-left: 20px;
+            font-size: 15px;
+        }
+        #reserve_info span {
+/*            background-color: yellow;*/
+            float: right;
+            margin: 0px;
+            margin-right: 20px;
+            font-size: 15px;
+        }
+        #reserve_info hr {
+            border: 0.5px solid; border-color: gainsboro;
+            width: 90%;
+            margin-top: 5px; margin-bottom: 7px;
+            margin-left: 5%;
+        }
+        #reserve_info hr[id=final_hr] {
+            border: 1px solid; border-color: gainsboro;
+            width: 90%;
+            margin-top: 5px; margin-bottom: 7px;
+            margin-left: 5%;
+        }
+        /*-- /#reserve_info --*/
+    
+    
     /*--- reserve_btn ---*/
     .reserve_btn>a{}
     .reserve_btn>a>span{}

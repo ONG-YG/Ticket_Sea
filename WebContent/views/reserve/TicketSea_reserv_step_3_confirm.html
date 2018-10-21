@@ -128,55 +128,77 @@
                 <!--------------------------------------->
                 </div>
                 <div class="reserve_right">
-                    <div class="top_info_area" id="minimap_view" style="text-align: left; padding-left: 18px;">
-
-                        <!-- 좌석 선택 미니맵 구현 부분 -->
-                    </div>
-                    <div class="reserve_grade">
-                        <div class="bx_tit">
-                            <h4 class="reserve_tit">등급 선택</h4>
-                            <a href="#" class="btn_refresh">새로고침</a>
+                    <div class="top_info_area" style="text-align: left; padding-left: 18px;">
+                        <div id="mini_poster">
+                            <img src="../../img/show-0619.png">
                         </div>
-                        <ul id="select_seat_grade" class="seat_lst" style="height:258px">
-                            <li>
-                                <a href="#" style="cursor:pointer" class="select">
-                                    <span class="seat_color"></span>
-                                    <div class="seat_detail_info">
-                                        <span class="seat_level">전체</span>
-                                    </div>
-                                </a>
-                            </li>
-                            
+                        <strong id="mini_show_title">공연이름 출력란</strong>
+                    </div>
+                    
+                    <div class="reserve_result">
+                        <div id="reserve_res_tit">예매 정보 출력란</div>
+                        <hr>
+                        <ul id="select_seat_grade" class="seat_lst">
                             <!--좌석등급 별 list-->
-                            <li id="seat_grade_33625" depth="1" grade="grade" zones="grade.zones" selected="selected" class="ng-scope">
-                                <!-- [D] 좌석 선택된 경우 클래스명 select 추가, 구역이 선택된 경우엔 클래스명 select2로 변경 -->
-                                <a href="#" style="cursor:pointer">
-                                    <span class="seat_color" style="background:#ffc000"></span>
-                                    <div class="seat_detail_info">
-                                        <span class="seat_grade" >VIP석</span>
-                                        <span class="seat_price">
-                                            140,000원</span>
-                                        <span class="seat">
-                                            <span class="ng-binding">22</span>
-                                            석
-                                        </span>
-                                    </div>
-                                </a>
+                            <li id="seat_grade_33625">
+                                <div class="seat_color" style="background:#ffc000"></div>
+                                <div class="seat_detail_info">
+                                    <span class="seat_grade" >VIP석</span>
+                                    <span class="seat_no">K열 21번</span>
+                                </div>
+                            </li>
+                            <li id="seat_grade_33625">
+                                <div class="seat_color" style="background:#ffc000"></div>
+                                <div class="seat_detail_info">
+                                    <span class="seat_grade" >VIP석</span>
+                                    <span class="seat_no">K열 22번</span>
+                                </div>
+                            </li>
+                            <li id="seat_grade_33625">
+                                <div class="seat_color" style="background:#ffc000"></div>
+                                <div class="seat_detail_info">
+                                    <span class="seat_grade" >VIP석</span>
+                                    <span class="seat_no">K열 23번</span>
+                                </div>
+                            </li>
+                            <li id="seat_grade_33625">
+                                <div class="seat_color" style="background:#ffc000"></div>
+                                <div class="seat_detail_info">
+                                    <span class="seat_grade" >VIP석</span>
+                                    <span class="seat_no">K열 24번</span>
+                                </div>
+                            </li>
+                            <li id="seat_grade_33625">
+                                <div class="seat_color" style="background:#ffc000"></div>
+                                <div class="seat_detail_info">
+                                    <span class="seat_grade" >VIP석</span>
+                                    <span class="seat_no">K열 25번</span>
+                                </div>
                             </li>
 
                         </ul>
-                    </div>
-<!--
-                    <div class="reserve_artbx">
-                        <div class="bx_tit">
-                            <h4 class="reserve_tit">좌석 선택</h4>
-                            <p class="reserve_notice_ly" ng-click="select.showNotice=!select.showNotice">
-                                <span class="sp"></span>
-                                좌석선점 및 자동배정 안내
-                            </p>
+                        <div id="reserve_info">
+                            <div id="date_sel_info">
+                                <strong>공연일</strong><span>2018.10.29 (월)</span>
+                            </div>
+                            <hr>
+                            <div id="cnt_sel_info">
+                                <strong>공연회차</strong><span>2회 13:00 ~14:30</span>
+                            </div>
+                            <hr>
+                            <div id="ticket_price_info">
+                                <strong>티켓금액</strong><span>140,000</span>
+                            </div>
+                            <hr>
+                            <div id="commision_info">
+                                <strong>예매수수료</strong><span>1,000</span>
+                            </div>
+                            <hr id="final_hr">
+                            <div id="total_price_info">
+                                <strong>총 결제</strong><span>141,000</span>
+                            </div>
                         </div>
                     </div>
--->
                     <div class="reserve_btn">
                         <a href="#" class="btn" onclick="prev()">이전단계</a>
                         <a href="#" class="btn" onclick="next()">다음단계</a>

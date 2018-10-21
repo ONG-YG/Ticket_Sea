@@ -669,54 +669,38 @@
                 <!--------------------------------------->
                 <div class="reserve_right">
                     <div class="top_info_area" style="text-align: left; padding-left: 18px;">
-
+                        <span style="color: red; font-size: 15px;">--------------미니맵 공간--------------- .top_info_area height 줄이면 없어짐</span>
                         <!-- 좌석 선택 미니맵 구현 부분 -->
                     </div>
                     <div class="reserve_grade">
-                        <div class="bx_tit">
-                            <h4 class="reserve_tit">등급 선택</h4>
-                            <a href="#" class="btn_refresh">새로고침</a>
+                        <div class="reserve_tit_div">
+                            <h4 class="reserve_tit">등급별 잔여석</h4>
                         </div>
-                        <ul id="select_seat_grade" class="seat_lst" style="height:258px">
-                            <li>
-                                <a href="#" style="cursor:pointer" class="select">
-                                    <span class="seat_color"></span>
-                                    <div class="seat_detail_info">
-                                        <span class="seat_level">전체</span>
-                                    </div>
-                                </a>
+                        <hr>
+                        <ul id="select_seat_grade" class="seat_lst">
+                            <li id="seat_total">
+                                <div class="seat_color" style="background: black"></div>
+                                <div class="seat_detail_info">
+                                    <span class="seat_level">전체</span>
+                                </div>
                             </li>
                             
                             <!--좌석등급 별 list-->
-                            <li id="seat_grade_33625" depth="1" grade="grade" zones="grade.zones" selected="selected" class="ng-scope">
-                                <!-- [D] 좌석 선택된 경우 클래스명 select 추가, 구역이 선택된 경우엔 클래스명 select2로 변경 -->
-                                <a href="#" style="cursor:pointer">
-                                    <span class="seat_color" style="background:#ffc000"></span>
-                                    <div class="seat_detail_info">
-                                        <span class="seat_grade" >VIP석</span>
-                                        <span class="seat_price">
-                                            140,000원</span>
-                                        <span class="seat">
-                                            <span class="ng-binding">22</span>
-                                            석
-                                        </span>
-                                    </div>
-                                </a>
+                            <li id="seat_grade_33625">
+                                <div class="seat_color" style="background:#ffc000"></div>
+                                <div class="seat_detail_info">
+                                    <span class="seat_grade" >VIP석</span>
+                                    <span class="seat_price">
+                                        140,0000원</span>
+                                    <span class="seat_avail">
+                                        <span class="seat_avail_n">232</span>
+                                        석
+                                    </span>
+                                </div>
                             </li>
 
                         </ul>
                     </div>
-<!--
-                    <div class="reserve_artbx">
-                       <div class="bx_tit">
-                            <h4 class="reserve_tit">좌석 선택</h4>
-                            <p class="reserve_notice_ly">
-                                <span class="sp"></span>
-                                좌석선점 및 자동배정 안내
-                            </p>
-                        </div>
-                    </div>
--->
                     <div class="reserve_btn">
                         <a href="#" class="btn" onclick="prev()">이전단계</a>
                         <a href="#" class="btn" onclick="next()">다음단계</a>

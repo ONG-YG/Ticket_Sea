@@ -20,22 +20,28 @@
         $(document).ready(function(){
             
             $('.calendar-date').click(function(){
+                date_sel = null;
+                cnt_sel = null;
                 $('#cnt_box li').removeClass('selected_cnt_li');
                 $('.calendar-date').removeClass('selected_date_td');
                 $(this).addClass('selected_date_td');
 
                 date_sel = $('.year-month').text()+"."+$(this).text();
                 $('#date_sel_info span').html(date_sel);
+                $('#cnt_sel_info span').html(cnt_sel);
                 //alert(date_sel);
             })
 
             $('#cnt_box li').click(function(){
-                $('#cnt_box li').removeClass('selected_cnt_li');
-                $(this).addClass('selected_cnt_li');
+                if(date_sel!=null) {
+                    $('#cnt_box li').removeClass('selected_cnt_li');
+                    $(this).addClass('selected_cnt_li');
 
-                cnt_sel = $(this).children('.cnt').html();
-                $('#cnt_sel_info span').html($(this).text());
-                //alert(cnt_sel);
+                    cnt_sel = $(this).children('.cnt').html();
+                    $('#cnt_sel_info span').html($(this).text());
+                    //alert(cnt_sel);
+                }
+                else { alert("날짜먼저선택-BackEnd작업후 alert지우기"); }
             })
             
         })
@@ -166,6 +172,7 @@
                                                     </tr>
                                                 </tbody>
                                             </table>
+                                            <span style="color: red; font-size: 10px;">전월 다음달 선택 시 변수에 반영할것</span>
                                         </div>
                                     </div>
                                 </div>
