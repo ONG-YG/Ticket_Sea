@@ -86,7 +86,7 @@
     }
     
     /*회원테이블*/
-    .memberTbl{
+    .reserveTbl{
             border:1px solid #dedede;
             border-right:0;
             font-size:15px;
@@ -97,8 +97,9 @@
             
         }
     
-    .memberTbl tr{
-        border:1px solid black;
+    .reserveTbl tr:nth-child(2n){
+        background-color: #F6F6F6;
+        
     }
     .content_wrap .searchArea{
         height:10%;
@@ -112,7 +113,7 @@
 		<div id="header">
 			<div id="h_inner">
                 <div id="icon">
-                    <img width="180" height="50" alt="Ticket Sea" src="../../img/ticket_admin.png" href="admin_page.html">
+                    <a href="../admin/admin_page.html"><img width="180" height="50" alt="Ticket Sea" src="../../img/ticket_admin.png"></a>
 
                 </div>
 			</div>
@@ -146,9 +147,9 @@
                   <h2 class="main_title">예매관리</h2>
                </div>
                <div class="main_area">
-                <div id="member_table">
-                   <table class="memberTbl">
-                    <thead style="background-color:#F6F6F6">
+                <div id="reserve_table">
+                   <table class="reserveTbl">
+                    <thead style="background-color:#E7E7E7">
                         <td width="15%">예매번호</td>
                         <td width="15%">아이디</td>
                         <td width="15%">예매일</td>
@@ -158,7 +159,7 @@
                         <td >상태</td>
                        </thead>
                        <tr>
-                           <td><a href="">123456</a></td>
+                           <td><a href="../admin/ad_reserveInfo.html">123456</a></td>
                            <td><a href="">test1</a></td>
                            <td>2018-10-15</td>
                            <td><a href="">지킬앤하이드</a></td>
@@ -167,7 +168,13 @@
                            <td>예매완료</td>
                        </tr>
                        <tr>
-                           
+                           <td><a href="../admin/ad_reserveInfo.html">987644</a></td>
+                           <td><a href="">iei321</a></td>
+                           <td>2018-09-22</td>
+                           <td><a href="">아이다</a></td>
+                           <td>2018-11-17</td>
+                           <td>2018-10-22 17:00</td>
+                           <td>예매완료</td>
                        </tr>
                        <tr>
                            

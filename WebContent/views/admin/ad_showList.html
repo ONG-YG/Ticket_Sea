@@ -66,8 +66,6 @@
         width:85%;
         height:1300px;
         display: block;
-        position:relative;
-        
     }
     .content_wrap{
         width:980px;
@@ -75,9 +73,7 @@
         margin:0 auto;
         border:1px solid black;
         box-sizing: border-box;
-        display: inline-block;
-        position:absolute;
-        left:4%;
+        
     }
     h2.main_title{
         display: inline-block;
@@ -90,7 +86,7 @@
     }
     
     /*회원테이블*/
-    .memberTbl{
+    .showTbl{
             border:1px solid #dedede;
             border-right:0;
             font-size:15px;
@@ -101,7 +97,7 @@
             
         }
     
-    .memberTbl tr:nth-child(2n){
+    .showTbl tr:nth-child(2n){
         background-color: #F6F6F6;
         
     }
@@ -117,7 +113,7 @@
 		<div id="header">
 			<div id="h_inner">
                 <div id="icon">
-                    <img width="180" height="50" alt="Ticket Sea" src="../../img/ticket_admin.png" href="admin_page.html">
+                    <a href="../admin/admin_page.html"><img width="180" height="50" alt="Ticket Sea" src="../../img/ticket_admin.png"></a>
 
                 </div>
 			</div>
@@ -148,48 +144,34 @@
                 <div id="content">
            <div class="content_wrap">
               <div class="top_area">
-                  <h2 class="main_title" >회원관리</h2>
+                  <h2 class="main_title">공연정보</h2>
                </div>
                <div class="main_area">
-                <div id="member_table">
-                   <table class="memberTbl">
+                <div id="show_table">
+                   <table class="showTbl">
                     <thead style="background-color:#E7E7E7">
-                        <td width="20%">회원번호</td>
-                        <td width="15%">아이디</td>
-                        <td width="10%">이름</td>
-                        <td width="15%">연락처</td>
-                        <td width="20%">이메일</td>
-                        <!--<td>주소</td>-->
-                        <td>성별</td>
-                        <td width="10%">가입일</td>
-                        
+                        <td width="15%">공연번호</td>
+                        <td width="20%">공연명</td>
+                        <td width="25%">츨연자</td>
+                        <td width="15%">공연시간</td>
+                        <td>시작일</td>
+                        <td>종료일</td>
                        </thead>
                        <tr>
-                           <td style = "cursor:pointer;" onclick="">1234567</td>
-                           <td>test1</td>
-                           <td>박규리</td>
-                           <td>01011112222</td>
-                           <td>test1@iei.or.kr</td>
-                           <td>여자</td>
-                           <td>2018-10-20</td>
+                           <td href="../admin/ad_showUpdate.html">S123456</td>
+                           <td>지킬앤하이드</td>
+                           <td>조승우,홍광호,윤공주,아이비</td>
+                           <td>170분</td>
+                           <td>2018.11.13</td>
+                           <td>2019.05.19</td>
                        </tr>
                        <tr>
-                           <td style = "cursor:pointer;" onclick="">3333333</td>
-                           <td>test2</td>
-                           <td>장기용</td>
-                           <td>01033223522</td>
-                           <td>test2@iei.or.kr</td>
-                           <td>남자</td>
-                           <td>2017-05-23</td>
-                       </tr>
-                       <tr>
-                           <td style = "cursor:pointer;" onclick="">1234567</td>
-                           <td>test3</td>
-                           <td>절미절미</td>
-                           <td>01059595959</td>
-                           <td>test3@iei.or.kr</td>
-                           <td>여자</td>
-                           <td>2018-07-17</td>
+                           <td href="../admin/ad_showUpdate.html">S123457</td>
+                           <td>넬 크리스마스콘서트</td>
+                           <td>넬</td>
+                           <td>120분</td>
+                           <td>2018.12.22</td>
+                           <td>2018.12.24</td>
                        </tr>
                     </table>
                     
