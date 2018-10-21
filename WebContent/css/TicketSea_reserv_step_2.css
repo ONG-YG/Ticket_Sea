@@ -20,6 +20,7 @@
     /*--reserve_step li--*/
     .reserve_step li[class=step2]{
         background-color: skyblue;
+        color: white;
     }
     /*--/reserve_step li--*/
 
@@ -72,6 +73,14 @@
         border: 1px dashed; border-color: gray;
         width: 100%; height: 10%;
         box-sizing: border-box;
+        line-height: 40px;
+        padding-left: 10px;
+    }
+    .select_seat_info img {
+        float: right;
+        width: 25px;
+        margin-top: 10px;
+        margin-right: 20px;
     }
     /*-- /main_view_top --*/
 

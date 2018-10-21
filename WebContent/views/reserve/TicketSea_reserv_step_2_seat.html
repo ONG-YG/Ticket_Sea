@@ -33,17 +33,29 @@
                 else {
                     alert("최대 5개까지 선택이 가능합니다.")
                 }
-                //alert(selected_seat);
+                
                 if(selected_seat.length>0) {
                     $('.reserve_btn>a').eq(1).css('background-color','skyblue');
+                    $('.reserve_btn>a').eq(1).css('color','white');
                 }
                 else {
                     $('.reserve_btn>a').eq(1).css('background-color','white');
+                    $('.reserve_btn>a').eq(1).css('color','dodgerblue');
                 }
+                //alert(selected_seat);
             })
             
             $('.seat_a').tooltip();
+            
+            
         })
+        
+        function seatIni() {
+            selected_seat = [];
+            $('#select_seat div').removeClass('selected');
+            $('.reserve_btn>a').eq(1).css('background-color','white');
+            $('.reserve_btn>a').eq(1).css('color','dodgerblue');
+        }
         
         function prev() {
             location.href="./TicketSea_reserv_step_1_date_time.html"
@@ -647,9 +659,8 @@
                         </div>
 
                         <div class="select_seat_info" style="z-index: 20;;z-index: 20;">
-                            <a href="#">
-                                <strong>좌석 선택 해달라는 문구 넣는 부분</strong>
-                            </a>
+                                <strong>좌석을 선택해주세요. 최대 5개까지 선택 가능합니다.</strong>
+                                <img src="../../img/selected_seat_refresh_icon.png" onclick="seatIni();">
                         </div>
                     </div>
                 </div>

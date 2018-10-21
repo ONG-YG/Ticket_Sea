@@ -20,6 +20,7 @@
     /*--reserve_step li--*/
     .reserve_step li[class=step3]{
         background-color: skyblue;
+        color: white;
     }
     /*--/reserve_step li--*/
 

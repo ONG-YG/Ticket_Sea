@@ -20,23 +20,21 @@
         $(document).ready(function(){
             
             $('.calendar-date').click(function(){
-                $('.calendar-date').css('background-color','white');
-                $(this).css('background-color','skyblue');
+                $('#cnt_box li').removeClass('selected_cnt_li');
+                $('.calendar-date').removeClass('selected_date_td');
+                $(this).addClass('selected_date_td');
 
                 date_sel = $('.year-month').text()+"."+$(this).text();
+                $('#date_sel_info span').html(date_sel);
                 //alert(date_sel);
             })
 
-
             $('#cnt_box li').click(function(){
-                $('#cnt_box li').removeAttr('style');
-                $('#cnt_box li span').removeAttr('style');
-
-                $(this).css('background-color','skyblue');
-                $(this).children('.cnt_time').css('color','blue');
-                $(this).children('.cnt_time').css('font-weight','550');
+                $('#cnt_box li').removeClass('selected_cnt_li');
+                $(this).addClass('selected_cnt_li');
 
                 cnt_sel = $(this).children('.cnt').html();
+                $('#cnt_sel_info span').html($(this).text());
                 //alert(cnt_sel);
             })
             
@@ -48,7 +46,7 @@
             if(stat==false) {
                 alert("날짜/회차를 선택하세요");
             }else {
-                alert("선택한 날짜 : "+date_sel+"  /  선택한 회차 : "+cnt_sel);
+                //alert("선택한 날짜 : "+date_sel+"  /  선택한 회차 : "+cnt_sel);
                 location.href="./TicketSea_reserv_step_2_seat.html";
             }
         }
@@ -93,7 +91,7 @@
                     <div id="content_left">
                         <div id="ct_left_top">
                             <div id="ct_left_date">
-                                <b>날짜선택</b>
+                                <b>날짜선택</b><hr>
                                 <div id="date_box">
                                     <div class="calendar">
                                         <div class="calendar-header">
@@ -173,7 +171,7 @@
                                 </div>
                             </div>
                             <div id="ct_left_cnt">
-                                <b>회차선택</b>
+                                <b>회차선택</b><hr>
                                 <div id="cnt_box">
                                     <ul>
                                         <li>
@@ -195,7 +193,7 @@
                                 </div>
                             </div>
                             <div id="ct_left_seat">
-                                <b>잔여석</b>
+                                <b>잔여석</b><hr>
                                 <div id="seat_box">
                                     <ul>
                                         <li>
@@ -226,11 +224,23 @@
                 <!--------------------------------------->
                 <div class="reserve_right">
                     <div class="top_info_area" style="text-align: left; padding-left: 18px;">
-                        공연포스터 & 공연명
+                        <div id="mini_poster">
+                            <img src="../../img/show-0619.png">
+                        </div>
+                        <strong id="mini_show_title">공연이름 출력란</strong>
                     </div>
                     
                     <div class="reserve_result">
-                        예매 정보 출력란
+                        <div id="reserve_res_tit">예매 정보 출력란</div>
+                        <hr>
+                        <div id="reserve_info">
+                            <div id="date_sel_info">
+                                <h5>공연일</h5><span></span>
+                            </div>
+                            <div id="cnt_sel_info">
+                                <h5>공연회차</h5><span></span>
+                            </div>
+                        </div>
                     </div>
                     <div id="reserve_btn_only">
                         <a href="#" class="btn" onclick="next()">다음단계</a>
