@@ -448,10 +448,15 @@
                     overflow-y:auto;
                     color:#999
                 }
-                .write_review .btn{
+                .write_review_button{
                     margin-left:-5px;
                     *margin-top:1px;
                     color:red;
+                    padding: 37px 0px 0px; 
+                    margin:10px;
+                    width:70px; height:50px; resize:none;
+                    color:white;
+                    background-color: skyblue;
                 }
                 
             </style>
@@ -471,7 +476,7 @@
                                 <textarea title="후기 작성하기" id="reviewContent" name="reviewContent"
                                           style="width:700px; height: 25px; resize:none; margin:0px; 0px; 0px;" maxlength="3000"
                                           placeholder="주민번호, 전화번호, 이메일 등 개인정보를 남기면 타인에 의해 악용될 소지가 있습니다."></textarea>
-                                <input type="button" style="width:70px; height:50px; resize:none;" value="후기작성">
+                                <input type="button" class="write_review_button"  value="후기작성">
                             </div>
 
             
