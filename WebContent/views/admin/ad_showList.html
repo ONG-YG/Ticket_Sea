@@ -125,17 +125,25 @@
                 <ul>
                     <li><a href="#">공연관리</a>
                         <ul>
-                            <li><a href="#">공연등록</a></li>
-                            <li><a href="#">공연수정</a></li>
+                            <li><a href="ad_showInsert.html">공연등록</a></li>
+                            <li><a href="ad_showList.html">공연수정</a></li>
                             <li><a href="#">공연삭제</a></li>
                         </ul>
                     </li>    
-                    <li><a href="#">회원관리</a></li>
-                    <li><a href="#">예매관리</a></li>
+                    <li><a href="#">회원관리</a>
+                        <ul>
+                            <li><a href="ad_memberList.html">회원목록</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">예매관리</a>
+                        <ul>
+                            <li><a href="ad_reserveList.html">예매목록</a></li>
+                        </ul>
+                    </li>
                     <li><a href="#">소규모공연</a>
                         <ul>
+                            <li><a href="ad_miniShowList.html">승인대기공연</a></li>
                             <li><a href="#">승인완료공연</a></li>
-                            <li><a href="#">승인대기공연</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -158,7 +166,7 @@
                         <td>종료일</td>
                        </thead>
                        <tr>
-                           <td href="../admin/ad_showUpdate.html">S123456</td>
+                           <td><a href="ad_showUpdate.html">S123456</a></td>
                            <td>지킬앤하이드</td>
                            <td>조승우,홍광호,윤공주,아이비</td>
                            <td>170분</td>
@@ -166,7 +174,7 @@
                            <td>2019.05.19</td>
                        </tr>
                        <tr>
-                           <td href="../admin/ad_showUpdate.html">S123457</td>
+                           <td><a href="ad_showUpdate.html">S123457</a></td>
                            <td>넬 크리스마스콘서트</td>
                            <td>넬</td>
                            <td>120분</td>
@@ -176,13 +184,11 @@
                     </table>
                     
                     <!--회원목록 페이지 이동-->
-                    <div class="paginate" style="text-align: center">
-                    <a href="#" class="prev_end"><span class="blind">맨처음</span></a>
+                     <div class="paginate" style="text-align: center">
                     <a class="prev"><span class="blind">이전</span></a>
                     <strong>1</strong>
                     <a href="#" class="">2</a>
                     <a href="#">다음</a>
-                    <a href="#" class="next_end"><span class="blind">맨뒤</span></a>
                     </div>
                     
                     <!--회원검색-->
