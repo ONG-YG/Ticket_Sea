@@ -135,7 +135,7 @@
     /* right_view 내용 관리 */
     #right_view>.r_line{
         border-bottom: 2px solid gray;
-        margin-bottom: 150px;
+        margin-bottom: 50px;
     }
     
     /* rigth_view table 관리 */
@@ -207,6 +207,18 @@
     letter-spacing: -1px;
     }
     
+    .boxStyle {
+            position: relative;
+            width: 780px;
+            margin: 0 auto 12px;
+            padding: 5px 15px;
+            border: 0px solid #c7c7c7;
+            border-radius: 5px;
+            background-color: #fff;
+            box-shadow: 1px 2px 6px 0px rgba(0, 0, 0, 0.1); 
+            float:right;
+        }
+   
     
 </style>
 </head>
@@ -223,66 +235,82 @@
         <div id="c_inner">
             <div id="c_inner_top">
                 <div class="title1">
-                    <h2>마이페이지</h2>
+                    <h2>소규모 공연</h2>
                 </div>
                 <div class="title2"></div>
             </div>
             <ul id="left_menu">
                 <li class="has_sub">
-                    <span>예매 관리</span>
+                    <span>소규모 공연</span>
                     <ul>
-                        <li><a href="#"><strong>예매확인/취소</strong></a></li>
-                    </ul>
-                </li>
-                <li class="has_sub">
-                    <span>활동 관리</span>
-                    <ul>
-                        <li><a href="#">참여 이벤트</a></li>
-                        <li><a href="#">후기 관리</a></li>
-                        <li><a href="#">상품 문의 내역</a></li>
-                    </ul>
-                </li>
-                <li class="has_sub1">
-                    <span>회원정보관리</span>
-                    <ul>
-                        <li><a href="#">회원정보수정</a></li>
-                        <li><a href="#">회원 탈퇴</a></li>
+                        <li><a href="board_prA.html"><strong>소규모 공연 목록</strong></a></li>
+                        <li><a href="board_prB.html"><strong>소규모 공연 홍보</strong></a></li>
                     </ul>
                 </li>
             </ul>    
             <div id="right_view">
                 <div class="r_line">
-                    <h3>회원정보수정</h3>
+                    <h3>소규모 공연 홍보</h3>
                 </div>
-                <div class="r_table">
-                    <table>
-                        <tbody>
-                            <tr>
-                                <th>아이디</th>
-                                <td>cho******@naver.com</td>
-                            </tr>
-                            <tr>
-                                <th>비밀번호</th>
-                                <td>
-                                    <div class="border_box">
-                                        <a href="#">비밀번호 변경</a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>연락처</th>
-                                <td>010******78</td>
-                            </tr>
-                            <tr>
-                                <th>주소</th>
-                                <td>서울시 특별시</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="list_btn">
-                    <a href="#">회원정보 수정</a>
-                </div>
+                
+                
+                     <table id="write-form" class="boxStyle">
+                    <tr>
+                        <td style="width : 70px; text-align : center;" >공연명</td>
+                        <td><input type="text" name="title" style="width: 300px;" /></td>
+                        
+                    </tr>
+                    
+                     <tr>
+                        <td style="width : 70px; text-align : center;" >아티스트</td>
+                        <td colspan="2" >
+                            <textarea name="content" rows="1" cols="50" style="width:300px;"></textarea>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td style="width : 70px; text-align : center;" >공연장소</td>
+                        <td colspan="2" >
+                            <textarea name="content" rows="1" cols="50" style="width:300px;"></textarea>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td style="width : 40px; text-align : center;" >장르</td>
+                        <td>
+                            <select>
+                                <option>연극</option>
+                                <option>음악</option>
+                                <option>뮤지컬</option>
+                            </select>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td style="width : 70px; text-align : center;" >공연소개</td>
+                        <td colspan="2" >
+                            <textarea name="content" rows="17" cols="50" style="width:600px;"></textarea>
+                        </td>
+                    </tr>
+                    
+                    
+                    
+                    <tr>
+                        <td>첨부파일</td>
+                        <td><input type="file" name="attachFile" /></td>
+                    </tr>
+                    
+                    <tr>
+                        <td colspan="2">
+                         <input type="submit" value="작성" style="float:right" width="70px" height="30">
+                        </td>
+                    </tr>
+                        
+                       
+                </table>
+            
+            
+                
             </div>
         </div>
     </div>

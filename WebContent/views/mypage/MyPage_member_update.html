@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>마이페이지 예매확인/취소</title>
+<title>회원 정보 수정</title>
 <script
   src="https://code.jquery.com/jquery-3.3.1.js"
   integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
@@ -101,86 +101,83 @@
         height: 12px;
         border: none;
     }
-    
     #left_menu .has_sub li a{
         color: darkgrey;
         font-size: 11px;
     }
-    #left_menu .has_sub1 li{
+    #left_menu .has_sub1 li:first-child{
         padding: 13px 0 0;
         height: 12px;
         border: none;
         font-size: 13px;
     }
-    #left_menu .has_sub1 a{
+    #left_menu .has_sub1 li:first-child a{
         color: lightskyblue;
+        font-weight: bold;
     }
+    #left_menu .has_sub1 li:last-child{
+        padding: 13px 0 0;
+        height: 12px;
+        border: none;
+    }
+    #left_menu .has_sub1 li:last-child a{
+        color: darkgrey;
+        font-size: 11px;
+    }
+    
+    
     #left_menu span{
         color: #444;
         font-weight: bold;
     }
-
     
     
     /* right_view 내용 관리 */
     #right_view>.r_line{
         border-bottom: 2px solid gray;
-        margin-bottom: 50px;
+        margin-bottom: 150px;
     }
-    .r_table thead th{
-        background: #f0f0f0;
-        padding: 15px 0 15px;
-        line-height: 11px;
-        letter-spacing: -1px;
-        color: grey;
+    
+    /* rigth_view table 관리 */
+    .r_table{
+        border-width: 1px 0;
+        border-style: solid;
+        border-color: #c7c7c7;
     }
     .r_table table{
         width: 100%;
         border-spacing: 0;
     }
-    
+    .r_table th{
+        
+        border-bottom: 1px dashed #dedede;
+        padding: 30px 0 30px 20px;
+        text-align: left;
+        line-height: 40px;
+        letter-spacing: -1px;
+        color: black;
+        font-size: 14px;
+        width: 200px;
+    }
     .r_table td{
         text-align: center;
-        border-top: 1px solid #ececec;
-        color: dimgray;
-        font-weight: bold;
-    }
-    .paginate{
-        text-align: center;
-        padding-top: 20px;
-        border-top: 1px solid #c7c7c7;
-    }
-    .pagi_num{
-        border: 1px solid skyblue;
-        color: skyblue;
-        padding: 5px 10px;
-        margin: 2px;
-        
-    }
-    
-    
-    /* 하단 회원 약관 */
-    .note{
-        background: #f4f4f4;
-        padding: 26px 22px 20px;
-        margin-top: 50px;
-        line-height: 20px;
-    }
-    .note h6{
+        border-bottom: 1px dashed #dedede;
         font-size: 12px;
-        color: #767676;
-        margin: 0;
-        padding: 6px;
+        text-align: left;
     }
-    .note ol{
-        margin: 0;
-        padding: 0;
+    
+    /* right_view 하단 버튼관리 */
+    .list_btn{
+        margin-top: 50px;
+        text-align: center;
     }
-    .note ol li {
-    padding-left: 6px;
-    color: #999;
-    font-size: 11px;
-    letter-spacing: -1px;
+    .list_btn a{
+        background-color: skyblue;
+        width: 100%;
+        border-radius: 20px;
+        color: white;
+        padding: 20px;
+        font-size: 20px;
     }
     
     
@@ -204,90 +201,52 @@
                 <div class="title2"></div>
             </div>
             <ul id="left_menu">
-                <li class="has_sub1">
+                <li class="has_sub">
                     <span>예매 관리</span>
                     <ul>
-                        <li><a href="#"><strong>예매확인/취소</strong></a></li>
+                        <li><a href="MyPage_reserve_list.html">예매확인/취소</a></li>
                     </ul>
                 </li>
                 <li class="has_sub">
                     <span>활동 관리</span>
                     <ul>
-                        <li><a href="#">참여 이벤트</a></li>
-                        <li><a href="#">후기 관리</a></li>
-                        <li><a href="#">상품 문의 내역</a></li>
-                        
+                        <li><a href="MyPage_review_mgr.html">후기 관리</a></li>
+                        <li><a href="MyPage_faq_mgr.html">나의 문의 내역</a></li>
+                        <li><a href="#">소규모 공연 등록관리</a></li>
                     </ul>
                 </li>
-                <li class="has_sub">
+                <li class="has_sub1">
                     <span>회원정보관리</span>
                     <ul>
-                        <li><a href="#">회원 정보 수정</a></li>
-                        <li><a href="#">회원 탈퇴</a></li>
-                        
+                        <li><a href="MyPage_member_update.html">회원 정보 수정</a>
+                        <li><a href="MyPage_member_delete.html">회원 탈퇴</a></li>
                     </ul>
                 </li>
             </ul>    
             <div id="right_view">
                 <div class="r_line">
-                    <h3>예매확인/취소</h3>
+                    <h3>회원정보수정</h3>
                 </div>
                 <div class="r_table">
                     <table>
-                        <thead>
-                            <tr>
-                                <th>예매번호</th>
-                                <th>티켓명</th>
-                                <th>관람일시</th>
-                                <th>매수</th>
-                                <th>취소가능일</th>
-                                <th>상태</th>
-                            </tr>
-                        </thead>
                         <tbody>
                             <tr>
-                                <td>1</td>
-                                <td>라이온킹</td>
-                                <td>18.10.11</td>
-                                <td>2</td>
-                                <td>18.10.01 까지</td>
-                                <td>사용완료</td>
+                                <th>아이디</th>
+                                <td>cho******@naver.com</td>
                             </tr>
                             <tr>
-                                <td>2</td>
-                                <td>라이온</td>
-                                <td>18.11.20</td>
-                                <td>3</td>
-                                <td>18.11.10 까지</td>
-                                <td>예매중</td>
+                                <th>연락처</th>
+                                <td>010******78</td>
+                            </tr>
+                            <tr>
+                                <th>주소</th>
+                                <td>서울시 특별시</td>
                             </tr>
                         </tbody>
                     </table>
-                    <div class="paginate">
-                        
-                        <a href="#">처음</a>
-                        
-                        <a class="pagi_num" href="#">
-                            <strong>1</strong>
-                        </a>
-                        
-                        <a class="pagi_num" href="#">
-                            <strong>2</strong>
-                        </a>
-                        
-                        <a href="#">끝</a>
-                    </div>
                 </div>
-                <div class="note">
-                    <h6>티켓취소 안내</h6>
-                    <ol>
-                            <li>예매한 티켓 전체 취소, 혹은 신용카드 결제 시 부분 취소가 가능합니다.<br>단, 일부 상품의 경우도 부분취소가 불가합니다.</li>
-                            <li>티켓이 배송된 이후에는 인터넷이나 고객센터를 통한 취소가 불가하며, 받으신 티켓을 취소일 전까지 NHN티켓링크 본사로 반송을 해주셔야 취소 가능합니다. (등기우편을 이용해주세요!)</li>
-                            <li>예매 당일 자정까지 취소하실 경우는 예매수수료도 환불되며, 취소수수료가 부과되지 않습니다. 그 이후에 취소하실 경우는 예매수수료가 환불되지 않으며, 취소수수료는 정책에 따라 부과됩니다.</li>
-                            <li>일부 경기의 경우 상황에 따라 일괄 취소 건이 발생할 수있으며, 일괄 취소 시에는 취소 수수료가 부과되지 않습니다.</li>
-                            <li>티켓의 날짜/시간/좌석 등급/좌석 위치 변경은 불가합니다. 자세한 안내가 필요할 경우 고객센터를 이용해주세요.</li>
-                            <li>구단 홈페이지에서 예매한 내역은 구단 홈페이지에서만 확인이 가능합니다.</li>
-                        </ol>
+                <div class="list_btn">
+                    <a href="#">회원 정보 수정</a>
                 </div>
             </div>
         </div>
