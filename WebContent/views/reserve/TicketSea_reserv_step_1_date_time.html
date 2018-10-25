@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>티켓링크 예매</title>
+    <title>Ticket Sea 예매</title>
     
     <link rel="shortcut icon" type="image/x-icon" href="http://ticketlink.dn.toastoven.net/web/favicon.ico">
     
@@ -28,7 +28,9 @@
 
                 date_sel = $('.year-month').text()+"."+$(this).text();
                 $('#date_sel_info span').html(date_sel);
+                //$('#date_form').val(date_sel);
                 $('#cnt_sel_info span').html(cnt_sel);
+                //$('#cnt_form').val(cnt_sel);
                 //alert(date_sel);
             })
 
@@ -39,6 +41,7 @@
 
                     cnt_sel = $(this).children('.cnt').html();
                     $('#cnt_sel_info span').html($(this).text());
+                    //$('#cnt_form').val(cnt_sel);
                     //alert(cnt_sel);
                 }
                 else { alert("날짜먼저선택-BackEnd작업후 alert지우기"); }
@@ -53,7 +56,11 @@
                 alert("날짜/회차를 선택하세요");
             }else {
                 //alert("선택한 날짜 : "+date_sel+"  /  선택한 회차 : "+cnt_sel);
-                location.href="./TicketSea_reserv_step_2_seat.html";
+                //location.href="./TicketSea_reserv_step_2_seat.html";
+                //location.href="/dateCntSelect.do"
+                $('#date_form').val(date_sel);
+                $('#cnt_form').val(cnt_sel);
+                document.getElementById("dateCntForm").submit();
             }
         }
         
@@ -247,6 +254,10 @@
                             <div id="cnt_sel_info">
                                 <h5>공연회차</h5><span></span>
                             </div>
+                            <form action="/dateCntSelect.do" method="post" id="dateCntForm">
+                            <input type="hidden" id="date_form" name="date_sel" />
+                            <input type="hidden" id="cnt_form" name="cnt_sel" />
+                            </form>
                         </div>
                     </div>
                     <div id="reserve_btn_only">
