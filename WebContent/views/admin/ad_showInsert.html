@@ -226,7 +226,7 @@
 <title>관리자페이지</title>
 </head>
 <body>
-	<div id="wrapper">
+			<div id="wrapper">
 		<div id="header">
 			<div id="h_inner">
                 <div id="icon">
@@ -268,6 +268,9 @@
             </aside>
            <div class="content-header">
               <div id="content">
+              
+              <!-- form 태그 -->
+       <form action="/showInsert.do" method="post">
         <div class="content_wrap">
             <div class="top_area">
                 <h2 class="main_title">공연등록</h2>
@@ -297,12 +300,12 @@
                         </legend>
                         <div class="edit">
                             <div class="write_wrap">
-                                <select class="category_select" name="category">
+                                <select class="category_select" name="sc_code">
                                     <option value>카테고리 선택</option>
-                                    <option value="1">뮤지컬</option>
-                                    <option value="2">콘서트</option>
+                                    <option value="MSC">뮤지컬</option>
+                                    <option value="CNT">콘서트</option>
                                 </select>
-                                <input id="title" type="text" name="title" class="title_input" placeholder="공연명을 입력해 주세요." value="" maxlength="64" autofocus="autofocus">
+                                <input id="title" type="text" name="show_name" class="title_input" placeholder="공연명을 입력해 주세요." value="" maxlength="64" autofocus="autofocus">
                             </div>
                         </div>
                     </fieldset>
@@ -314,7 +317,7 @@
                         <!--시작 일시-->
                         <div class="start_time" id="edit_date_start_time">
                             <div class="write_wrap">
-                                <input type="text" id="startEventDate" value="" placeholder="시작일"> ~ <input type="text" id="endEventDate" value="" placeholder="종료일">
+                                <input type="text" id="startEventDate" name="show_st_date" value="" placeholder="시작일"> ~ <input type="text" id="endEventDate" name="show_ed_date" value="" placeholder="종료일">
                             </div>
                         </div>
                         </div>
@@ -325,7 +328,7 @@
                         </legend>
                         <div class="edit">
                             <div class="write_wrap">
-                                <input type="text" id="grade" value="" placeholder="장소명,주소를 검색해주세요."><input type="submit" id="map" value="검색"/>
+                                <!-- <input type="text" id="grade" name="place" value="" placeholder="장소명,주소를 검색해주세요."><input type="submit" id="map" value="검색"/> -->
                             </div>
                             <div class="place_map">
                                 <div id="map" style="width:100%;height:350px;"></div>
@@ -378,7 +381,7 @@
                         </legend>
                         <div class="edit">
                             <div class="write_wrap">
-                                <input type="text" id="artist" value="" placeholder="출연자정보 (,로 구분)">
+                                <input type="text" id="artist" name="artists" value="" placeholder="출연자정보 (,로 구분)">
                             </div>
                         </div>
                     </fieldset>
@@ -388,7 +391,7 @@
                         </legend>
                         <div class="edit">
                             <div class="write_wrap">
-                                <input type="text" id="grade" value="" placeholder="">
+                                <input type="text" id="grade" name="show_grd" value="" placeholder="">
                             </div>
                         </div>
                         
@@ -399,7 +402,7 @@
                         </legend>
                         <div class="edit">
                             <div class="write_wrap">
-                                <input type="text" id="time" value="" placeholder="">
+                                <input type="text" id="time" name="show_run" value="" placeholder="">
                             </div>
                         </div>
                     </fieldset>
@@ -409,7 +412,7 @@
                         </legend>
                         <div class="edit">
                             <div class="write_wrap">
-                                <input type="text" id="price" value="" placeholder="">
+                                <input type="text" id="price" name="price" value="" placeholder="">
                             </div>
                         </div>
                     </fieldset>
@@ -431,8 +434,9 @@
             <div class="submit_area">
             <input type="submit" value="작성" style="float:right;" width="70px" height="40">
             </div>
-        </div>
-    </div>
+        	</div>
+    	</div>
+    	</form>
           </div> 
         </div>
         </div>

@@ -1,4 +1,4 @@
-package kr.or.ticketsea.admin.model.dao;
+package kr.co.ticketsea.admin.show.model.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,8 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import kr.or.iei.common.JDBCTemplate;
-import kr.or.ticketsea.admin.model.vo.Show;
+import kr.co.ticketsea.admin.show.model.vo.Show;
+import kr.co.ticketsea.common.JDBCTemplate;
 
 public class ShowDao {
 

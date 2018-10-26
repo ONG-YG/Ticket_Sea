@@ -1,13 +1,13 @@
-package kr.or.ticketsea.admin.model.service;
+package kr.co.ticketsea.admin.show.model.service;
 
 import java.sql.Connection;
 import java.util.ArrayList;
 
 import javax.servlet.jsp.tagext.PageData;
 
-import kr.or.iei.common.JDBCTemplate;
-import kr.or.ticketsea.admin.model.dao.ShowDao;
-import kr.or.ticketsea.admin.model.vo.Show;
+import kr.co.ticketsea.admin.show.model.dao.ShowDao;
+import kr.co.ticketsea.admin.show.model.vo.Show;
+import kr.co.ticketsea.common.JDBCTemplate;
 
 public class ShowService {
 

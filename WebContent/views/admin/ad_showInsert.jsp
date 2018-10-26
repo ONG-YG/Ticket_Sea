@@ -101,6 +101,7 @@
     }
     #content .submit_area{
         height:3%;
+        float : bottom;
         border:1px solid red;
         display: block;
         padding-right:20px;
@@ -222,13 +223,12 @@
             margin-right: 3px;
             font-size: 11px;
             vertical-align: middle;
-
-    }
+  }
 </style>
 </head>
 <body>
 
-		<div id="wrapper">
+	<div id="wrapper">
 		<div id="header">
 			<div id="h_inner">
                 <div id="icon">
@@ -272,7 +272,7 @@
               <div id="content">
               
               <!-- form 태그 -->
-             <form action="/showInsert.do" method="post">
+        <form action="/showInsert.do" method="post">
         <div class="content_wrap">
             <div class="top_area">
                 <h2 class="main_title">공연등록</h2>

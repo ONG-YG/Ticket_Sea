@@ -1,4 +1,4 @@
-package kr.or.ticketsea.admin.model.vo;
+package kr.co.ticketsea.admin.show.model.vo;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;

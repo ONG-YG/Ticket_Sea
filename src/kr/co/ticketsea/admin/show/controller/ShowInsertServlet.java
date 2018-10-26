@@ -1,4 +1,4 @@
-package kr.or.ticketsea.admin.controller;
+package kr.co.ticketsea.admin.show.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kr.or.ticketsea.admin.model.service.ShowService;
-import kr.or.ticketsea.admin.model.vo.Show;
+import kr.co.ticketsea.admin.show.model.service.ShowService;
+import kr.co.ticketsea.admin.show.model.vo.Show;
 
 /**
  * Servlet implementation class ShowInsertServlet

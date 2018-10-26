@@ -1,4 +1,4 @@
-package kr.or.iei.common;
+package kr.co.ticketsea.common;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
