@@ -1,4 +1,4 @@
-package kr.co.tickectsea.member.model.vo;
+package kr.co.ticketsea.member.model.vo;
 
 import java.sql.Date;
 

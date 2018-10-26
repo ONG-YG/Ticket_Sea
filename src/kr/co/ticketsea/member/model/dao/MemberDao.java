@@ -5,8 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import kr.co.tickectsea.member.model.vo.Member;
 import kr.co.ticketsea.common.JDBCTemplate;
+import kr.co.ticketsea.member.model.vo.Member;
 
 public class MemberDao {
 

@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kr.co.tickectsea.member.model.vo.Member;
+import kr.co.ticketsea.member.model.vo.Member;
 import kr.co.ticketsea.member.service.MemberService;
 
 /**

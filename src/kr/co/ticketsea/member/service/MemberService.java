@@ -2,9 +2,9 @@ package kr.co.ticketsea.member.service;
 
 import java.sql.Connection;
 
-import kr.co.tickectsea.member.model.vo.Member;
 import kr.co.ticketsea.common.JDBCTemplate;
 import kr.co.ticketsea.member.model.dao.MemberDao;
+import kr.co.ticketsea.member.model.vo.Member;
 
 public class MemberService {
 

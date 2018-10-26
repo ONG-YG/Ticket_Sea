@@ -2,7 +2,6 @@ package kr.co.ticketsea.common;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -56,19 +55,7 @@ public class JDBCTemplate {
 				e.printStackTrace();
 			}
 		}
-		public static void close(PreparedStatement pstmt) {
-			try {
-				if(pstmt != null && !pstmt.isClosed())
-				{	//pstmt이 null이 아니고
-					//pstmt이 이미 종료된 상태가 아니라면
-					//close 작업을 실
-					pstmt.close();
-				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+	
 		public static void close(ResultSet rset) {
 			try {
 				if(rset != null && !rset.isClosed())
