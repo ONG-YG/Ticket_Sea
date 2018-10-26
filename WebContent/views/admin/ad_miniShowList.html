@@ -125,17 +125,25 @@
                 <ul>
                     <li><a href="#">공연관리</a>
                         <ul>
-                            <li><a href="#">공연등록</a></li>
-                            <li><a href="#">공연수정</a></li>
+                            <li><a href="ad_showInsert.html">공연등록</a></li>
+                            <li><a href="ad_showList.html">공연수정</a></li>
                             <li><a href="#">공연삭제</a></li>
                         </ul>
                     </li>    
-                    <li><a href="#">회원관리</a></li>
-                    <li><a href="#">예매관리</a></li>
+                    <li><a href="#">회원관리</a>
+                        <ul>
+                            <li><a href="ad_memberList.html">회원목록</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">예매관리</a>
+                        <ul>
+                            <li><a href="ad_reserveList.html">예매목록</a></li>
+                        </ul>
+                    </li>
                     <li><a href="#">소규모공연</a>
                         <ul>
+                            <li><a href="ad_miniShowList.html">승인대기공연</a></li>
                             <li><a href="#">승인완료공연</a></li>
-                            <li><a href="#">승인대기공연</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -155,17 +163,13 @@
                         <td width="10%">작성자</td>
                         <td width="20%">공연장소</td>
                         <td width="15%">등록일시</td>
-                        <td >승인여부</td>
                        </thead>
                        <tr>
                            <td>뮤지컬</td>
-                           <td>이상하고아름다운</td>
+                           <td onclick="">이상하고아름다운</td>
                            <td>test11</td>
-                           <td>서울시마포구</td>
+                           <td>서울시 마포구</td>
                            <td>2018-09-27</td>
-                           <td><button>승인</button>
-                           <button>거부</button>
-                           </td>
                        </tr>
                        <tr>
                            <td>연극</td>
@@ -173,9 +177,6 @@
                            <td>test77</td>
                            <td>혜화동 로터리</td>
                            <td>2018-10-01</td>
-                           <td><button>승인</button>
-                           <button>거부</button>
-                           </td>
                        </tr>
                        <tr>
                            
@@ -184,12 +185,10 @@
                     
                     <!--회원목록 페이지 이동-->
                     <div class="paginate" style="text-align: center">
-                    <a href="#" class="prev_end"><span class="blind">맨처음</span></a>
                     <a class="prev"><span class="blind">이전</span></a>
                     <strong>1</strong>
                     <a href="#" class="">2</a>
                     <a href="#">다음</a>
-                    <a href="#" class="next_end"><span class="blind">맨뒤</span></a>
                     </div>
                     
                     <!--회원검색-->

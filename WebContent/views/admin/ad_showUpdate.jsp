@@ -1,8 +1,11 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta charset="UTF-8">
-<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>°ø¿¬ Á¤º¸ </title>
+<!-- ½ºÅ¸ÀÏ  -->
 <style>
      ul, li, a{list-style: none; margin: 0px; padding: 0px;     text-decoration: none; color: black;}
     div{
@@ -20,7 +23,7 @@
         padding:0px;
         background-color:#004C63;
     }
-    /*ì‚¬ì´ë“œë°” ì„œë¸Œë©”ë‰´ ìˆ¨ê¸°ê¸°*/
+    /*»çÀÌµå¹Ù ¼­ºê¸Ş´º ¼û±â±â*/
     ul ul{display: none; width:100%;}
     ul li:hover>ul{display:block;}
     
@@ -52,12 +55,12 @@
     }
 /*    #content-wrapper li ul{
         background-color: azure;
-        display : none; í‰ìƒì‹œì— ì„œë¸Œë©”ë‰´ ì•ˆë³´ì´ê²Œ í•˜ê¸°
+        display : none; Æò»ó½Ã¿¡ ¼­ºê¸Ş´º ¾Èº¸ÀÌ°Ô ÇÏ±â
         height: auto;
         width:200px;
     }*/
     
-    /*ê³µì—°ë“±ë¡ í˜ì´ì§€*/
+    /*°ø¿¬µî·Ï ÆäÀÌÁö*/
     div{
         box-sizing: border-box;
         display: block;
@@ -223,10 +226,9 @@
 
     }
 </style>
-<title>ê´€ë¦¬ìí˜ì´ì§€</title>
 </head>
 <body>
-			<div id="wrapper">
+	<div id="wrapper">
 		<div id="header">
 			<div id="h_inner">
                 <div id="icon">
@@ -240,27 +242,27 @@
             <aside class="main-sidebar">
                 <div id="side-menu">
                 <ul>
-                    <li><a href="#">ê³µì—°ê´€ë¦¬</a>
+                    <li><a href="#">°ø¿¬°ü¸®</a>
                         <ul>
-                            <li><a href="ad_showInsert.html">ê³µì—°ë“±ë¡</a></li>
-                            <li><a href="ad_showList.html">ê³µì—°ìˆ˜ì •</a></li>
-                            <li><a href="#">ê³µì—°ì‚­ì œ</a></li>
+                            <li><a href="ad_showInsert.html">°ø¿¬µî·Ï</a></li>
+                            <li><a href="ad_showList.html">°ø¿¬¼öÁ¤</a></li>
+                            <li><a href="#">°ø¿¬»èÁ¦</a></li>
                         </ul>
                     </li>    
-                    <li><a href="#">íšŒì›ê´€ë¦¬</a>
+                    <li><a href="#">È¸¿ø°ü¸®</a>
                         <ul>
-                            <li><a href="ad_memberList.html">íšŒì›ëª©ë¡</a></li>
+                            <li><a href="ad_memberList.html">È¸¿ø¸ñ·Ï</a></li>
                         </ul>
                     </li>
-                    <li><a href="#">ì˜ˆë§¤ê´€ë¦¬</a>
+                    <li><a href="#">¿¹¸Å°ü¸®</a>
                         <ul>
-                            <li><a href="ad_reserveList.html">ì˜ˆë§¤ëª©ë¡</a></li>
+                            <li><a href="ad_reserveList.html">¿¹¸Å¸ñ·Ï</a></li>
                         </ul>
                     </li>
-                    <li><a href="#">ì†Œê·œëª¨ê³µì—°</a>
+                    <li><a href="#">¼Ò±Ô¸ğ°ø¿¬</a>
                         <ul>
-                            <li><a href="ad_miniShowList.html">ìŠ¹ì¸ëŒ€ê¸°ê³µì—°</a></li>
-                            <li><a href="#">ìŠ¹ì¸ì™„ë£Œê³µì—°</a></li>
+                            <li><a href="ad_miniShowList.html">½ÂÀÎ´ë±â°ø¿¬</a></li>
+                            <li><a href="#">½ÂÀÎ¿Ï·á°ø¿¬</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -268,106 +270,103 @@
             </aside>
            <div class="content-header">
               <div id="content">
-              
-              <!-- form íƒœê·¸ -->
-       <form action="/showInsert.do" method="post">
         <div class="content_wrap">
             <div class="top_area">
-                <h2 class="main_title">ê³µì—°ë“±ë¡</h2>
+                <h2 class="main_title">°ø¿¬µî·Ï</h2>
             </div>
             <div class="main_area">
                 <div class="left_wrap">
                 <div class="input_area">
-                    <!--ì´ë¯¸ì§€ì˜ì—­-->
+                    <!--ÀÌ¹ÌÁö¿µ¿ª-->
                     <div class="event_img_area">
-                        <img class="show_post" src="../../img/ticketsea_poster.png" data-default-src="../../img/ticketsea_poster.png" alt="ê³µì—°í¬ìŠ¤í„°" style="width:160px; height:160px;">
-                        <!--ì´ë¯¸ì§€ ì—…ë¡œë“œ ë²„íŠ¼-->
+                        <img class="show_post" src="../../img/ticketsea_poster.png" data-default-src="../../img/ticketsea_poster.png" alt="°ø¿¬Æ÷½ºÅÍ" style="width:160px; height:160px;">
+                        <!--ÀÌ¹ÌÁö ¾÷·Îµå ¹öÆ°-->
                         <div class="upload_btn">
-                            <input type="file" class="imgupload" title="ê³µì—°í¬ìŠ¤í„°ì—…ë¡œë“œ" value="ì´ë¯¸ì§€ì—…ë¡œë“œ">
-                            <button type="button" class="btn_change_img">ì‚¬ì§„ë³€ê²½</button>
-                            <!--íŒŒì¼ ì—…ë¡œë“œ í›„ ì‚¬ì§„ ì‚­ì œí•˜ê¸° ë²„íŠ¼ ìƒê¹€-->
-                            <!--<button type="button" class="btn_delete_upload">ì‚­ì œí•˜ê¸°</button>-->
+                            <input type="file" class="imgupload" title="°ø¿¬Æ÷½ºÅÍ¾÷·Îµå" value="ÀÌ¹ÌÁö¾÷·Îµå">
+                            <button type="button" class="btn_change_img">»çÁøº¯°æ</button>
+                            <!--ÆÄÀÏ ¾÷·Îµå ÈÄ »çÁø »èÁ¦ÇÏ±â ¹öÆ° »ı±è-->
+                            <!--<button type="button" class="btn_delete_upload">»èÁ¦ÇÏ±â</button>-->
                         </div>
                     </div>
                 </div>
                 </div>
                 
                 <div class="right_wrap">
-                    <!--ì¹´í…Œê³ ë¦¬ / ê³µì—°ëª…-->
+                    <!--Ä«Å×°í¸® / °ø¿¬¸í-->
                     <fieldset class="edit_title">
                         <legend>
-                            <h3 class="title">ì¹´í…Œê³ ë¦¬/ê³µì—°ëª…</h3>
+                            <h3 class="title">Ä«Å×°í¸®/°ø¿¬¸í</h3>
                         </legend>
                         <div class="edit">
                             <div class="write_wrap">
-                                <select class="category_select" name="sc_code">
-                                    <option value>ì¹´í…Œê³ ë¦¬ ì„ íƒ</option>
-                                    <option value="MSC">ë®¤ì§€ì»¬</option>
-                                    <option value="CNT">ì½˜ì„œíŠ¸</option>
+                                <select class="category_select" value="sh_category" name="category">
+                                    <option value>Ä«Å×°í¸® ¼±ÅÃ</option>
+                                    <option value="1">¹ÂÁöÄÃ</option>
+                                    <option value="2">ÄÜ¼­Æ®</option>
                                 </select>
-                                <input id="title" type="text" name="show_name" class="title_input" placeholder="ê³µì—°ëª…ì„ ì…ë ¥í•´ ì£¼ì„¸ìš”." value="" maxlength="64" autofocus="autofocus">
+                                <input id="title" type="text" name="title" class="title_input" placeholder="°ø¿¬¸íÀ» ÀÔ·ÂÇØ ÁÖ¼¼¿ä." value="" maxlength="64" autofocus="autofocus" value="ÁöÅ³¾ØÇÏÀÌµå">
                             </div>
                         </div>
                     </fieldset>
                     <fieldset class="edit_date">
                         <legend>
-                          <h3 class="title">ê³µì—°ê¸°ê°„</h3>
+                          <h3 class="title">°ø¿¬±â°£</h3>
                         </legend>
                         <div class="edit">
-                        <!--ì‹œì‘ ì¼ì‹œ-->
+                        <!--½ÃÀÛ ÀÏ½Ã-->
                         <div class="start_time" id="edit_date_start_time">
                             <div class="write_wrap">
-                                <input type="text" id="startEventDate" name="show_st_date" value="" placeholder="ì‹œì‘ì¼"> ~ <input type="text" id="endEventDate" name="show_ed_date" value="" placeholder="ì¢…ë£Œì¼">
+                                <input type="text" id="startEventDate" value="startDate" placeholder="½ÃÀÛÀÏ"> ~ <input type="text" id="endEventDate" value="endDate" placeholder="Á¾·áÀÏ">
                             </div>
                         </div>
                         </div>
                     </fieldset>
                     <fieldset class="edit_place">
                         <legend>
-                          <h3 class="title">ê³µì—°ì¥ì†Œ</h3>
+                          <h3 class="title">°ø¿¬Àå¼Ò</h3>
                         </legend>
                         <div class="edit">
                             <div class="write_wrap">
-                                <!-- <input type="text" id="grade" name="place" value="" placeholder="ì¥ì†Œëª…,ì£¼ì†Œë¥¼ ê²€ìƒ‰í•´ì£¼ì„¸ìš”."><input type="submit" id="map" value="ê²€ìƒ‰"/> -->
+                                <input type="text" id="grade" value="»ş·Ôµ¥¾¾¾îÆ¼" placeholder="Àå¼Ò¸í,ÁÖ¼Ò¸¦ °Ë»öÇØÁÖ¼¼¿ä."><input type="submit" id="map" value="°Ë»ö"/>
                             </div>
                             <div class="place_map">
                                 <div id="map" style="width:100%;height:350px;"></div>
 
                                 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7542b9fbee3c7131e7d6e91a70c1fa75&libraries=services"></script>
                                 <script>
-                                var mapContainer = document.getElementById('map'), // ì§€ë„ë¥¼ í‘œì‹œí•  div 
+                                var mapContainer = document.getElementById('map'), // Áöµµ¸¦ Ç¥½ÃÇÒ div 
                                     mapOption = {
-                                        center: new daum.maps.LatLng(33.450701, 126.570667), // ì§€ë„ì˜ ì¤‘ì‹¬ì¢Œí‘œ
-                                        level: 3 // ì§€ë„ì˜ í™•ëŒ€ ë ˆë²¨
+                                        center: new daum.maps.LatLng(33.450701, 126.570667), // ÁöµµÀÇ Áß½ÉÁÂÇ¥
+                                        level: 3 // ÁöµµÀÇ È®´ë ·¹º§
                                     };  
 
-                                // ì§€ë„ë¥¼ ìƒì„±í•©ë‹ˆë‹¤    
+                                // Áöµµ¸¦ »ı¼ºÇÕ´Ï´Ù    
                                 var map = new daum.maps.Map(mapContainer, mapOption); 
 
-                                // ì£¼ì†Œ-ì¢Œí‘œ ë³€í™˜ ê°ì²´ë¥¼ ìƒì„±í•©ë‹ˆë‹¤
+                                // ÁÖ¼Ò-ÁÂÇ¥ º¯È¯ °´Ã¼¸¦ »ı¼ºÇÕ´Ï´Ù
                                 var geocoder = new daum.maps.services.Geocoder();
 
-                                // ì£¼ì†Œë¡œ ì¢Œí‘œë¥¼ ê²€ìƒ‰í•©ë‹ˆë‹¤
-                                geocoder.addressSearch('ì œì£¼íŠ¹ë³„ìì¹˜ë„ ì œì£¼ì‹œ ì²¨ë‹¨ë¡œ 242', function(result, status) {
+                                // ÁÖ¼Ò·Î ÁÂÇ¥¸¦ °Ë»öÇÕ´Ï´Ù
+                                geocoder.addressSearch('Á¦ÁÖÆ¯º°ÀÚÄ¡µµ Á¦ÁÖ½Ã Ã·´Ü·Î 242', function(result, status) {
 
-                                    // ì •ìƒì ìœ¼ë¡œ ê²€ìƒ‰ì´ ì™„ë£Œëìœ¼ë©´ 
+                                    // Á¤»óÀûÀ¸·Î °Ë»öÀÌ ¿Ï·áµÆÀ¸¸é 
                                      if (status === daum.maps.services.Status.OK) {
 
                                         var coords = new daum.maps.LatLng(result[0].y, result[0].x);
 
-                                        // ê²°ê³¼ê°’ìœ¼ë¡œ ë°›ì€ ìœ„ì¹˜ë¥¼ ë§ˆì»¤ë¡œ í‘œì‹œí•©ë‹ˆë‹¤
+                                        // °á°ú°ªÀ¸·Î ¹ŞÀº À§Ä¡¸¦ ¸¶Ä¿·Î Ç¥½ÃÇÕ´Ï´Ù
                                         var marker = new daum.maps.Marker({
                                             map: map,
                                             position: coords
                                         });
 
-                                        // ì¸í¬ìœˆë„ìš°ë¡œ ì¥ì†Œì— ëŒ€í•œ ì„¤ëª…ì„ í‘œì‹œí•©ë‹ˆë‹¤
+                                        // ÀÎÆ÷À©µµ¿ì·Î Àå¼Ò¿¡ ´ëÇÑ ¼³¸íÀ» Ç¥½ÃÇÕ´Ï´Ù
                                         var infowindow = new daum.maps.InfoWindow({
-                                            content: '<div style="width:150px;text-align:center;padding:6px 0;">ìš°ë¦¬íšŒì‚¬</div>'
+                                            content: '<div style="width:150px;text-align:center;padding:6px 0;">¿ì¸®È¸»ç</div>'
                                         });
                                         infowindow.open(map, marker);
 
-                                        // ì§€ë„ì˜ ì¤‘ì‹¬ì„ ê²°ê³¼ê°’ìœ¼ë¡œ ë°›ì€ ìœ„ì¹˜ë¡œ ì´ë™ì‹œí‚µë‹ˆë‹¤
+                                        // ÁöµµÀÇ Áß½ÉÀ» °á°ú°ªÀ¸·Î ¹ŞÀº À§Ä¡·Î ÀÌµ¿½ÃÅµ´Ï´Ù
                                         map.setCenter(coords);
                                     } 
                                 });    
@@ -377,48 +376,48 @@
                     </fieldset>
                     <fieldset class="edit_artist">
                         <legend>
-                          <h3 class="title">ì¶œì—°ì</h3>
+                          <h3 class="title">Ãâ¿¬ÀÚ</h3>
                         </legend>
                         <div class="edit">
                             <div class="write_wrap">
-                                <input type="text" id="artist" name="artists" value="" placeholder="ì¶œì—°ìì •ë³´ (,ë¡œ êµ¬ë¶„)">
+                                <input type="text" id="artist" value="Á¶½Â¿ì,È«±¤È£,À±°øÁÖ,¾ÆÀÌºñ" placeholder="Ãâ¿¬ÀÚÁ¤º¸ (,·Î ±¸ºĞ)">
                             </div>
                         </div>
                     </fieldset>
                     <fieldset class="edit_grade">
                         <legend>
-                          <h3 class="title">ê´€ëŒë“±ê¸‰</h3>
+                          <h3 class="title">°ü¶÷µî±Ş</h3>
                         </legend>
                         <div class="edit">
                             <div class="write_wrap">
-                                <input type="text" id="grade" name="show_grd" value="" placeholder="">
+                                <input type="text" id="grade" value="¸¸ 7¼¼ÀÌ»ó" placeholder="">
                             </div>
                         </div>
                         
                     </fieldset>
                      <fieldset class="edit_time">
                         <legend>
-                          <h3 class="title">ê´€ëŒì‹œê°„</h3>
+                          <h3 class="title">°ü¶÷½Ã°£</h3>
                         </legend>
                         <div class="edit">
                             <div class="write_wrap">
-                                <input type="text" id="time" name="show_run" value="" placeholder="">
+                                <input type="text" id="time" value="170ºĞ(ÀÎÅÍ¹Ì¼Ç:20ºĞ)" placeholder="">
                             </div>
                         </div>
                     </fieldset>
                      <fieldset class="edit_price">
                         <legend>
-                          <h3 class="title">ê°€ê²©</h3>
+                          <h3 class="title">°¡°İ</h3>
                         </legend>
                         <div class="edit">
                             <div class="write_wrap">
-                                <input type="text" id="price" name="price" value="" placeholder="">
+                                <input type="text" id="price" value="140,000¿ø" placeholder="">
                             </div>
                         </div>
                     </fieldset>
                     <fieldset class="edit_detailInfo">
                         <legend>
-                          <h3 class="title">ì„¸ë¶€ì •ë³´</h3>
+                          <h3 class="title">¼¼ºÎÁ¤º¸</h3>
                         </legend>
                         <div class="edit">
                             <div class="write_wrap">
@@ -432,11 +431,10 @@
                 </div>
             </div>
             <div class="submit_area">
-            <input type="submit" value="ì‘ì„±" style="float:right;" width="70px" height="40">
+            <input type="submit" value="°ø¿¬µî·Ï" style="float:right;" width="70px" height="40">
             </div>
-        	</div>
-    	</div>
-    	</form>
+        </div>
+    </div>
           </div> 
         </div>
         </div>

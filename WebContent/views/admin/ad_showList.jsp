@@ -1,115 +1,116 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta charset="UTF-8">
-<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-<style>
-     ul, li, a{list-style: none; margin: 0px; padding: 0px;     text-decoration: none; color: black;}
-    div{
-        box-sizing : border-box;
-    }
-    #wrapper{overflow: hidden;width:1250px; height:2000px; border:1px solid black;}
-    #header{ height:60px; background-color:;}
-    #h_inner{width: 990px; height: 80%; margin: 5px auto; float:left; padding-left:20px;}
-    #content-wrapper{height:1500px; border:1px solid black;}
-    #c_inner{width: 100%; height: 100%; margin: 0px auto; padding: 0px;}
-    .main-sidebar{
-        height:100%;
-        width: 15%;
-        float:left;
-        padding:0px;
-        background-color:#004C63;
-    }
-    /*사이드바 서브메뉴 숨기기*/
-    ul ul{display: none; width:100%;}
-    ul li:hover>ul{display:block;}
-    
-    #side-menu ul>li{
-        height:20%; padding-top:15px; padding-left:15px;padding-bottom: 15px;
-        background-color:#004C63;
-    }
-    #side-menu ul>li li{
-        background-color:#004554;
-        
-    }
-    #side-menu ul>li>a{
-        color:white;
-        font-weight: 600;
-    }
-    .main_content{
-        width:83%;
-        height:100%;
-        float:right;
-        padding:0px;
-        padding-right: 10px;
-        border:1px solid red;
-    }
-    .main_content>h1{
-        margin:0;
-    }
-    #icon{
-        max-width:20%; max-height:80%; align-content: center;
-    }
-/*    #content-wrapper li ul{
-        background-color: azure;
-        display : none; 평상시에 서브메뉴 안보이게 하기
-        height: auto;
-        width:200px;
-    }*/
-    
-    /*회원관리 페이지*/
-    #content{
-        overflow: hidden;
-        border:1px solid black;
-        border-style: dashed;
-        padding: 20px 0;
-        width:85%;
-        height:1300px;
-        display: block;
-    }
-    .content_wrap{
-        width:980px;
-        height: 100%;
-        margin:0 auto;
-        border:1px solid black;
-        box-sizing: border-box;
-        
-    }
-    h2.main_title{
-        display: inline-block;
-        font-size: 23px;
-        font-weight: normal;
-    }
-    #content .top_area{
-        height:5%;
-        border-bottom: 1px solid #d8d8d8;
-    }
-    
-    /*회원테이블*/
-    .showTbl{
-            border:1px solid #dedede;
-            border-right:0;
-            font-size:15px;
-            margin:40px auto 12px;
-            line-height:35px;
-            width:900px;
-            text-align: center;
-            
-        }
-    
-    .showTbl tr:nth-child(2n){
-        background-color: #F6F6F6;
-        
-    }
-    .content_wrap .searchArea{
-        height:10%;
-        padding: 30px;
-    }
-</style>
-<title>관리자페이지</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>공연목록</title>
+	<style>
+	     ul, li, a{list-style: none; margin: 0px; padding: 0px;     text-decoration: none; color: black;}
+	    div{
+	        box-sizing : border-box;
+	    }
+	    #wrapper{overflow: hidden;width:1250px; height:2000px; border:1px solid black;}
+	    #header{ height:60px; background-color:;}
+	    #h_inner{width: 990px; height: 80%; margin: 5px auto; float:left; padding-left:20px;}
+	    #content-wrapper{height:1500px; border:1px solid black;}
+	    #c_inner{width: 100%; height: 100%; margin: 0px auto; padding: 0px;}
+	    .main-sidebar{
+	        height:100%;
+	        width: 15%;
+	        float:left;
+	        padding:0px;
+	        background-color:#004C63;
+	    }
+	    /*사이드바 서브메뉴 숨기기*/
+	    ul ul{display: none; width:100%;}
+	    ul li:hover>ul{display:block;}
+	    
+	    #side-menu ul>li{
+	        height:20%; padding-top:15px; padding-left:15px;padding-bottom: 15px;
+	        background-color:#004C63;
+	    }
+	    #side-menu ul>li li{
+	        background-color:#004554;
+	        
+	    }
+	    #side-menu ul>li>a{
+	        color:white;
+	        font-weight: 600;
+	    }
+	    .main_content{
+	        width:83%;
+	        height:100%;
+	        float:right;
+	        padding:0px;
+	        padding-right: 10px;
+	        border:1px solid red;
+	    }
+	    .main_content>h1{
+	        margin:0;
+	    }
+	    #icon{
+	        max-width:20%; max-height:80%; align-content: center;
+	    }
+	/*    #content-wrapper li ul{
+	        background-color: azure;
+	        display : none; 평상시에 서브메뉴 안보이게 하기
+	        height: auto;
+	        width:200px;
+	    }*/
+	    
+	    /*회원관리 페이지*/
+	    #content{
+	        overflow: hidden;
+	        border:1px solid black;
+	        border-style: dashed;
+	        padding: 20px 0;
+	        width:85%;
+	        height:1300px;
+	        display: block;
+	    }
+	    .content_wrap{
+	        width:980px;
+	        height: 100%;
+	        margin:0 auto;
+	        border:1px solid black;
+	        box-sizing: border-box;
+	        
+	    }
+	    h2.main_title{
+	        display: inline-block;
+	        font-size: 23px;
+	        font-weight: normal;
+	    }
+	    #content .top_area{
+	        height:5%;
+	        border-bottom: 1px solid #d8d8d8;
+	    }
+	    
+	    /*회원테이블*/
+	    .showTbl{
+	            border:1px solid #dedede;
+	            border-right:0;
+	            font-size:15px;
+	            margin:40px auto 12px;
+	            line-height:35px;
+	            width:900px;
+	            text-align: center;
+	            
+	        }
+	    
+	    .showTbl tr:nth-child(2n){
+	        background-color: #F6F6F6;
+	        
+	    }
+	    .content_wrap .searchArea{
+	        height:10%;
+	        padding: 30px;
+	    }
+	</style>
 </head>
 <body>
-	<div id="wrapper">
+		<div id="wrapper">
 		<div id="header">
 			<div id="h_inner">
                 <div id="icon">
