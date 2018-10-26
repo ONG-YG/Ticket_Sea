@@ -1,7 +1,9 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>예매확인/취소</title>
 <script
   src="https://code.jquery.com/jquery-3.3.1.js"
@@ -231,14 +233,14 @@
                 <li class="has_sub1">
                     <span>예매 관리</span>
                     <ul>
-                        <li><a href="MyPage_reserve_list.html">예매확인/취소</a>
+                        <li><a href="reserveList.jsp">예매확인/취소</a>
                     </ul>
                 </li>
                 <li class="has_sub">
                     <span>활동 관리</span>
                     <ul>
-                        <li><a href="MyPage_review_mgr.html">후기 관리</a></li>
-                        <li><a href="MyPage_faq_mgr.html">나의 문의 내역</a></li>
+                        <li><a href="reviewMgr.jsp">후기 관리</a></li>
+                        <li><a href="faqMgr.jsp">나의 문의 내역</a></li>
                         <li><a href="#">소규모 공연 등록관리</a></li>
                         
                     </ul>
@@ -246,8 +248,8 @@
                 <li class="has_sub">
                     <span>회원정보관리</span>
                     <ul>
-                        <li><a href="MyPage_member_update.html">회원 정보 수정</a></li>
-                        <li><a href="MyPage_member_delete.html">회원 탈퇴</a></li>
+                        <li><a href="memberUpdate.jsp">회원 정보 수정</a></li>
+                        <li><a href="memberDelete.jsp">회원 탈퇴</a></li>
                         
                     </ul>
                 </li>

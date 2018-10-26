@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+    <style>
+        .content{
+            width:900px; height:1000px; border:1px solid black;margin: 0 auto;
+        }
+        #content_left{
+            width:20%; height:100%; border:1px solid black;
+            box-sizing: border-box; float:left;
+            
+        }
+        #show_img{
+            width:160px; height:160px; border:1px solid red; 
+             box-sizing: border-box;
+        }
+        #content_right{
+            width:80%; height:100%;  border:1px solid blue; float:right;
+             box-sizing: border-box;
+        }
+        #content_right p{
+            padding-left: 10px; 
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div id="content_left">
+            <div id="show_img">
+                    <!--참고 : https://www.youtube.com/watch?v=XY5G4RN_LKg-->
+                <form action="http://localhost/insert.html" method="post" enctype="multipart/form-data">
+                <input type="file">
+                <input type="submit">
+                </form>
+            </div>
+        </div>
+        <frameset cols=""></frameset>
+        <div id="content_right">
+            <div id="show_name">
+            <p>카테고리 / 공연명
+            <select name="shw_name" style="width:100px;height:25px;">
+                <option value=""></option>
+                <option value="버스킹">버스킹</option>
+                <option value="콘서트">콘서트</option>
+                <option value="연극">연극</option>
+                <option value="뮤지컬">뮤지컬</option>
+                <option value="기타">기타</option>
+            </select>
+            <input type="text" name="showName" placeholder="공연명을 입력해주세요" style="width:400px; height:18px; ">
+            </p>
+            </div>
+            <div id="show_date">
+            <p>공연 일시
+            <input type="text" name="showDate" style="width:100px; height:18px; ">
+            <select class="timebox" id="startEventTime" style="width:80px; height:25px;">
+                    <option value="00:00">00:00</option>
+                    <option value="00:30">00:30</option>
+                    <option value="01:00">01:00</option>
+                    <option value="01:30">01:30</option>
+                    <option value="02:00">02:00</option>
+                    <option value="02:30">02:30</option>
+                    <option value="03:00">03:00</option>
+                    <option value="03:30">03:30</option>
+                    <option value="04:00">04:00</option>
+                    <option value="04:30">04:30</option>
+                    <option value="05:00">05:00</option>
+                    <option value="05:30">05:30</option>
+                    <option value="06:00">06:00</option>
+                    <option value="06:30">06:30</option>
+                    <option value="07:00">07:00</option>
+                    <option value="07:30">07:30</option>
+                    <option value="08:00">08:00</option>
+                    <option value="08:30">08:30</option>
+                    <option value="09:00">09:00</option>
+                    <option value="09:30">09:30</option>
+                    <option value="10:00">10:00</option>
+                    <option value="10:30">10:30</option>
+                    <option value="11:00">11:00</option>
+                    <option value="11:30">11:30</option>
+                    <option value="12:00">12:00</option>
+                    <option value="12:30">12:30</option>
+                    <option value="13:00">13:00</option>
+                    <option value="13:30">13:30</option>
+                    <option value="14:00">14:00</option>
+                    <option value="14:30">14:30</option>
+                    <option value="15:00">15:00</option>
+                    <option value="15:30">15:30</option>
+                    <option value="16:00">16:00</option>
+                    <option value="16:30">16:30</option>
+                    <option value="17:00">17:00</option>
+                    <option value="17:30">17:30</option>
+                    <option value="18:00">18:00</option>
+                    <option value="18:30">18:30</option>
+                    <option value="19:00">19:00</option>
+                    <option value="19:30">19:30</option>
+                    <option value="20:00">20:00</option>
+                    <option value="20:30">20:30</option>
+                    <option value="21:00">21:00</option>
+                    <option value="21:30">21:30</option>
+                    <option value="22:00">22:00</option>
+                    <option value="22:30">22:30</option>
+                    <option value="23:00">23:00</option>
+                    <option value="23:30">23:30</option>
+              </select>  
+            </p>
+            </div>
+            <div id="show_position">
+            
+            </div>
+             
+        </div>
+    </div>
+    
+    
+    
+    
+</body>
+</html>
