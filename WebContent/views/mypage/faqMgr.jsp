@@ -1,8 +1,10 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta charset="UTF-8">
-<title>회원 정보 수정</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>나의 문의 내역</title>
 <script
   src="https://code.jquery.com/jquery-3.3.1.js"
   integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
@@ -95,7 +97,6 @@
         border-bottom: 1px dashed #dedede;
         
     }
-    
     #left_menu .has_sub li{
         padding: 13px 0 0;
         height: 12px;
@@ -105,79 +106,73 @@
         color: darkgrey;
         font-size: 11px;
     }
-    #left_menu .has_sub1 li:first-child{
+    #left_menu .has_sub1 li:nth-child(2n){
         padding: 13px 0 0;
         height: 12px;
         border: none;
         font-size: 13px;
     }
-    #left_menu .has_sub1 li:first-child a{
+    #left_menu .has_sub1 li:nth-child(2n) a{
         color: lightskyblue;
         font-weight: bold;
     }
-    #left_menu .has_sub1 li:last-child{
+    #left_menu .has_sub1 li:nth-child(2n+1){
         padding: 13px 0 0;
         height: 12px;
         border: none;
     }
-    #left_menu .has_sub1 li:last-child a{
+    #left_menu .has_sub1 li:nth-child(2n+1) a{
         color: darkgrey;
         font-size: 11px;
     }
-    
-    
     #left_menu span{
         color: #444;
         font-weight: bold;
     }
+
     
     
     /* right_view 내용 관리 */
-    #right_view>.r_line{
+    .r_line{
         border-bottom: 2px solid gray;
-        margin-bottom: 150px;
+        margin-bottom: 20px;
     }
-    
-    /* rigth_view table 관리 */
-    .r_table{
-        border-width: 1px 0;
-        border-style: solid;
-        border-color: #c7c7c7;
+    .r_top{
+        padding: 30px 0 10px 0;
+        margin-bottom: 20px;
+        color: #999;
+        font-size: 12px;
+    }
+    .r_table thead th{
+        background: #f0f0f0;
+        padding: 15px 0 15px;
+        line-height: 11px;
+        letter-spacing: -1px;
+        color: grey;
     }
     .r_table table{
         width: 100%;
         border-spacing: 0;
     }
-    .r_table th{
-        
-        border-bottom: 1px dashed #dedede;
-        padding: 30px 0 30px 20px;
-        text-align: left;
-        line-height: 40px;
-        letter-spacing: -1px;
-        color: black;
-        font-size: 14px;
-        width: 200px;
-    }
+    
     .r_table td{
         text-align: center;
-        border-bottom: 1px dashed #dedede;
-        font-size: 12px;
-        text-align: left;
+        border-top: 1px solid #ececec;
+        color: dimgray;
+        font-weight: bold;
+        font-size: 14px;
     }
-    
-    /* right_view 하단 버튼관리 */
-    .list_btn{
-        margin-top: 50px;
+    .paginate{
         text-align: center;
+        padding-top: 20px;
+        border-top: 1px solid #c7c7c7;
     }
-    .list_btn a{
-        background-color: skyblue;
-        width: 100%;
-        border-radius: 20px;
-        color: white;
-        padding: 20px;
-        font-size: 20px;
+    .pagi_num{
+        border: 1px solid skyblue;
+        color: skyblue;
+        padding: 5px 10px;
+        margin: 2px;
+        
     }
     
     
@@ -188,7 +183,8 @@
     <div id="header">
         <div id="h_inner">
             <h1>TICKET SEA</h1>
-        </div>
+        </div>        </div>
+
     </div>
     
     
@@ -204,49 +200,75 @@
                 <li class="has_sub">
                     <span>예매 관리</span>
                     <ul>
-                        <li><a href="MyPage_reserve_list.html">예매확인/취소</a></li>
-                    </ul>
-                </li>
-                <li class="has_sub">
-                    <span>활동 관리</span>
-                    <ul>
-                        <li><a href="MyPage_review_mgr.html">후기 관리</a></li>
-                        <li><a href="MyPage_faq_mgr.html">나의 문의 내역</a></li>
-                        <li><a href="#">소규모 공연 등록관리</a></li>
+                        <li><a href="reserveList.jsp">예매확인/취소</a>
                     </ul>
                 </li>
                 <li class="has_sub1">
+                    <span>활동 관리</span>
+                    <ul>
+                        <li><a href="reviewMgr.jsp">후기 관리</a></li>
+                        <li><a href="faqMgr.jsp">나의 문의 내역</a></li>
+                        <li><a href="#">소규모 공연 등록관리</a></li>
+                        
+                    </ul>
+                </li>
+                <li class="has_sub">
                     <span>회원정보관리</span>
                     <ul>
-                        <li><a href="MyPage_member_update.html">회원 정보 수정</a>
-                        <li><a href="MyPage_member_delete.html">회원 탈퇴</a></li>
+                        <li><a href="memberUpdate.jsp">회원 정보 수정</a></li>
+                        <li><a href="memberDelete.jsp">회원 탈퇴</a></li>
+                        
                     </ul>
                 </li>
             </ul>    
             <div id="right_view">
                 <div class="r_line">
-                    <h3>회원정보수정</h3>
+                    <h3>나의 문의 내역</h3>
+                </div>
+                <div class="r_top">
+                    고객님께서 남겨주신 문의 내역을 확인하실 수 있습니다.<br>
+                    티켓링크 운영정책에 위반되거나, 문의의 성격에 맞지 않는 글을 고객님께 사전통보 없이 삭제될 수 있습니다.
+                    
                 </div>
                 <div class="r_table">
                     <table>
+                        <thead>
+                            <tr>
+                                <th>티켓명</th>
+                                <th>문의내용</th>
+                                <th>작성일</th>
+                                <th>답변</th>
+                            </tr>
+                        </thead>
                         <tbody>
                             <tr>
-                                <th>아이디</th>
-                                <td>cho******@naver.com</td>
+                                <td>라이온킹</td>
+                                <td>환불 요청드립니다.</td>
+                                <td>18.10.11</td>
+                                <td>답변완료</td>
                             </tr>
                             <tr>
-                                <th>연락처</th>
-                                <td>010******78</td>
-                            </tr>
-                            <tr>
-                                <th>주소</th>
-                                <td>서울시 특별시</td>
+                                <td>라이온</td>
+                                <td>몇 세 부터 관람가능한가요?</td>
+                                <td>18.11.20</td>
+                                <td>미답변</td>
                             </tr>
                         </tbody>
                     </table>
-                </div>
-                <div class="list_btn">
-                    <a href="#">회원 정보 수정</a>
+                    <div class="paginate">
+                        
+                        <a href="#">처음</a>
+                        
+                        <a class="pagi_num" href="#">
+                            <strong>1</strong>
+                        </a>
+                        
+                        <a class="pagi_num" href="#">
+                            <strong>2</strong>
+                        </a>
+                        
+                        <a href="#">끝</a>
+                    </div>
                 </div>
             </div>
         </div>

@@ -1,8 +1,10 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta charset="UTF-8">
-<title>후기 관리</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>회원탈퇴</title>
 <script
   src="https://code.jquery.com/jquery-3.3.1.js"
   integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
@@ -95,6 +97,7 @@
         border-bottom: 1px dashed #dedede;
         
     }
+    
     #left_menu .has_sub li{
         padding: 13px 0 0;
         height: 12px;
@@ -104,94 +107,78 @@
         color: darkgrey;
         font-size: 11px;
     }
-    #left_menu .has_sub1 li:first-child{
+    #left_menu .has_sub1 li:last-child{
         padding: 13px 0 0;
         height: 12px;
         border: none;
         font-size: 13px;
     }
-    #left_menu .has_sub1 li:first-child a{
+    #left_menu .has_sub1 li:last-child a{
         color: lightskyblue;
         font-weight: bold;
     }
-    #left_menu .has_sub1 li:nth-child(2n+0){
+    #left_menu .has_sub1 li:first-child{
         padding: 13px 0 0;
         height: 12px;
         border: none;
     }
-    #left_menu .has_sub1 li:nth-child(2n+0) a{
+    #left_menu .has_sub1 li:first-child a{
         color: darkgrey;
         font-size: 11px;
     }
-    #left_menu .has_sub1 li:last-child{
-        padding: 13px 0 0;
-        height: 12px;
-        border: none;
-    }
-    #left_menu .has_sub1 li:last-child a{
-        color: darkgrey;
-        font-size: 11px;
-    }
+    
+    
     #left_menu span{
         color: #444;
         font-weight: bold;
     }
-
     
     
     /* right_view 내용 관리 */
-    .r_line{
+    #right_view>.r_line{
         border-bottom: 2px solid gray;
         margin-bottom: 20px;
     }
-    .r_top{
-        padding: 30px 0 10px 0;
-        margin-bottom: 20px;
-        color: #999;
-        font-size: 12px;
-    }
-    .r_table thead th{
-        background: #f0f0f0;
-        padding: 15px 0 15px;
-        line-height: 11px;
-        letter-spacing: -1px;
-        color: grey;
-    }
-    .r_table table{
-        width: 100%;
-        border-spacing: 0;
+    #right_view .r_top{
+        padding: 30px 0 30px 0;
+        background-color: #f0f0f0;
+        text-align: center;
+        font-size: 18px;
     }
     
-    .r_table td{
+    /* right_view 하단 버튼관리 */
+    .list_btn{
+        margin-top: 50px;
         text-align: center;
-        border-top: 1px solid #ececec;
-        color: dimgray;
-        font-weight: bold;
-        font-size: 14px;
     }
-    .paginate{
-        text-align: center;
-        padding-top: 20px;
-        border-top: 1px solid #c7c7c7;
-    }
-    .pagi_num{
-        border: 1px solid skyblue;
-        color: skyblue;
-        padding: 5px 10px;
-        margin: 2px;
-        
+    .list_btn button{
+        background-color: skyblue;
+        border-radius: 15px;
+        color: white;
+        padding: 10px;
+        font-size: 20px;
     }
     
     
 </style>
 </head>
+<script>
+    $(document).ready(function(){
+        $('.cancelBtn').click(function(){
+            if(confirm("정말로 탈퇴하시겠습니까?")){
+                alert("정상적으로 탈되되었습니다.")
+            }else{
+                
+            }
+        });
+    })
+</script>
 <body>
 <div id="wrapper">
     <div id="header">
         <div id="h_inner">
             <h1>TICKET SEA</h1>
-        </div>        </div>
-
+        </div>
     </div>
     
     
@@ -207,72 +194,54 @@
                 <li class="has_sub">
                     <span>예매 관리</span>
                     <ul>
-                        <li><a href="MyPage_reserve_list.html">예매확인/취소</a>
-                    </ul>
-                </li>
-                <li class="has_sub1">
-                    <span>활동 관리</span>
-                    <ul>
-                        <li><a href="MyPage_review_mgr.html">후기 관리</a></li>
-                        <li><a href="MyPage_faq_mgr.html">나의 문의 내역</a></li>
-                        <li><a href="#">소규모 공연 등록관리</a></li>
-                        
+                        <li><a href="reserveList.jsp">예매확인/취소</a></li>
                     </ul>
                 </li>
                 <li class="has_sub">
+                    <span>활동 관리</span>
+                    <ul>
+                        <li><a href="reviewMgr.jsp">후기 관리</a></li>
+                        <li><a href="faqMgr.jsp">나의 문의 내역</a></li>
+                        <li><a href="#">소규모 공연 등록관리</a></li>
+                    </ul>
+                </li>
+                <li class="has_sub1">
                     <span>회원정보관리</span>
                     <ul>
-                        <li><a href="MyPage_member_update.html">회원 정보 수정</a></li>
-                        <li><a href="MyPage_member_delete.html">회원 탈퇴</a></li>
-                        
+                        <li><a href="memberUpdate.jsp">회원 정보 수정</a>
+                        <li><a href="memberDelete.jsp">회원 탈퇴</a></li>
                     </ul>
                 </li>
             </ul>    
             <div id="right_view">
                 <div class="r_line">
-                    <h3>후기 관리</h3>
+                    <h3>회원탈퇴</h3>
                 </div>
                 <div class="r_top">
-                    고객님께서 남겨주신 후기를 확인하실 수 있습니다.<br>
-                    티켓링크 운영정책에 위반되거나, 후기의 성격에 맞지 않는 글을 고객님께 사전통보 없이 삭제될 수 있습니다.
-                    
+                    이용에 불편을 드려 죄송합니다.<br>
+                    회원 탈퇴시 정보가 복귀되지 않습니다.
                 </div>
-                <div class="r_table">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>티켓명</th>
-                                <th>후기내용</th>
-                                <th>작성일</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>라이온킹</td>
-                                <td>재미있네요!</td>
-                                <td>18.10.11</td>
-                            </tr>
-                            <tr>
-                                <td>라이온</td>
-                                <td>추천합니다.~~~~~~~~~~~~~~~~~~~~</td>
-                                <td>18.11.20</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="paginate">
-                        
-                        <a href="#">처음</a>
-                        
-                        <a class="pagi_num" href="#">
-                            <strong>1</strong>
-                        </a>
-                        
-                        <a class="pagi_num" href="#">
-                            <strong>2</strong>
-                        </a>
-                        
-                        <a href="#">끝</a>
-                    </div>
+                <h4>탈퇴 전 유의사항</h4>
+                <textarea rows="10" cols="105" style="resize:none;">
+1.회원탈퇴 시 고객님의 회원정보는 영구 삭제되며, NHN티켓링크 서비스 관련 정보 역시 삭제됩니다.
+    ① 예매권 : 등록된 모든 예매권 삭제 후 이용 불가
+    ② 마일리지 : 현재 적립/전환된 모든 현금성 마일리지 삭제 후 환원 불가
+    ③ 할인쿠폰 : 등록한 모든 할인쿠폰 삭제 후 재등록 불가
+    ④ 티켓 : 구매한 티켓 복구 및 환원 불가
+    ⑥ 기타 : 회원으로 활동하며 누적 사용한 정보
+2.전자상거래에서의 소비자 보호를 위해 고객님의 예매 관련정보는 5년간 보관하며, 이후 완전 파기됩니다.
+3.작성하신 게시물은 삭제되지 않으며, 삭제가 필요한 경우 게시물을 직접 삭제한 후 회원탈퇴를 하시기 바랍니다.
+4.회원탈퇴 후에도 다시 NHN티켓링크 회원으로 가입하실 수 있습니다. 그러나 탈퇴 전 회원 정보에 대한 이전이나 연결된 정보 저장 등은 불가능합니다.
+5.NHN티켓링크 메일은 예약발송이 되므로 회원탈퇴 후에도 약 5일 동안은 NHN티켓링크 관련 메일이 전송되니 이 점 양해 부탁 드립니다.
+                </textarea>
+                <div class="mberck">
+                    <span>
+                        <input type="checkbox">
+                    </span>
+                    위 내용을 모두 확인하였으며 동의합니다.
+                </div>
+                <div class="list_btn">
+                    <button class="cancelBtn">회원 탈퇴</button>
                 </div>
             </div>
         </div>
