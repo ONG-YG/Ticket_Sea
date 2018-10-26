@@ -8,9 +8,14 @@
 </head>
 <body>
 <script>
-alert("凸요청한 작업 성공凸");
+
 window.close();
-opener.parent.location.href ="/TicketSea_MainPage.html";
+opener.parent.location.reload(); 
+
+
+[출처] https://hooni.net/908
+
+;
 </script>
 
 </body>
