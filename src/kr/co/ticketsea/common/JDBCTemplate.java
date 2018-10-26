@@ -1,4 +1,4 @@
-package kr.or.tks.common;
+package kr.co.ticketsea.common;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -15,7 +15,7 @@ public class JDBCTemplate {
 			try {
 				Class.forName("oracle.jdbc.driver.OracleDriver");
 				conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe",
-						"kh", "1234");
+						"ticketsea", "ts");
 				conn.setAutoCommit(false); // 오토커밋 해제
 				
 				

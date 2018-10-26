@@ -1,12 +1,12 @@
-package kr.or.tks.member.model.dao;
+package kr.co.ticketsea.member.model.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import kr.or.tks.common.JDBCTemplate;
-import kr.or.tks.member.model.vo.Member;
+import kr.co.tickectsea.member.model.vo.Member;
+import kr.co.ticketsea.common.JDBCTemplate;
 
 public class MemberDao {
 

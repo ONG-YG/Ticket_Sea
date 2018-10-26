@@ -1,10 +1,10 @@
-package kr.or.tks.member.service;
+package kr.co.ticketsea.member.service;
 
 import java.sql.Connection;
 
-import kr.or.tks.common.JDBCTemplate;
-import kr.or.tks.member.model.dao.MemberDao;
-import kr.or.tks.member.model.vo.Member;
+import kr.co.tickectsea.member.model.vo.Member;
+import kr.co.ticketsea.common.JDBCTemplate;
+import kr.co.ticketsea.member.model.dao.MemberDao;
 
 public class MemberService {
 

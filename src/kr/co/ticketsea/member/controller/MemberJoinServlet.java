@@ -1,4 +1,4 @@
-package kr.or.tks.member.controller;
+package kr.co.ticketsea.member.controller;
 
 import java.io.IOException;
 
@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kr.or.tks.member.model.vo.Member;
-import kr.or.tks.member.service.MemberService;
+import kr.co.tickectsea.member.model.vo.Member;
+import kr.co.ticketsea.member.service.MemberService;
 
 /**
  * Servlet implementation class MemberJoinServlet

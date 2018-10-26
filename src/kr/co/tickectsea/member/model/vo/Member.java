@@ -1,4 +1,4 @@
-package kr.or.tks.member.model.vo;
+package kr.co.tickectsea.member.model.vo;
 
 import java.sql.Date;
 

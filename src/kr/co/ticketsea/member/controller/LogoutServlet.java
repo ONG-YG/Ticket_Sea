@@ -1,4 +1,4 @@
-package kr.or.tks.member.controller;
+package kr.co.ticketsea.member.controller;
 
 import java.io.IOException;
 
