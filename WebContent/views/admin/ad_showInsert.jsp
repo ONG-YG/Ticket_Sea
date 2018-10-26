@@ -101,7 +101,6 @@
     }
     #content .submit_area{
         height:3%;
-        float : bottom;
         border:1px solid red;
         display: block;
         padding-right:20px;
@@ -223,12 +222,13 @@
             margin-right: 3px;
             font-size: 11px;
             vertical-align: middle;
-  }
+
+    }
 </style>
 </head>
 <body>
 
-	<div id="wrapper">
+		<div id="wrapper">
 		<div id="header">
 			<div id="h_inner">
                 <div id="icon">
@@ -272,7 +272,7 @@
               <div id="content">
               
               <!-- form 태그 -->
-        <form action="/showInsert.do" method="post">
+       <form action="/showInsert.do" method="post">
         <div class="content_wrap">
             <div class="top_area">
                 <h2 class="main_title">공연등록</h2>
@@ -319,7 +319,7 @@
                         <!--시작 일시-->
                         <div class="start_time" id="edit_date_start_time">
                             <div class="write_wrap">
-                                <input type="text" id="startEventDate" name="show_st_date" value="" placeholder="시작일"> ~ <input type="text" id="show_ed_date" name="endDate" value="" placeholder="종료일">
+                                <input type="text" id="startEventDate" name="show_st_date" value="" placeholder="시작일"> ~ <input type="text" id="endEventDate" name="show_ed_date" value="" placeholder="종료일">
                             </div>
                         </div>
                         </div>
@@ -330,7 +330,7 @@
                         </legend>
                         <div class="edit">
                             <div class="write_wrap">
-                                <input type="text" id="grade" name="place" value="" placeholder="장소명,주소를 검색해주세요."><input type="submit" id="map" value="검색"/>
+                                <!-- <input type="text" id="grade" name="place" value="" placeholder="장소명,주소를 검색해주세요."><input type="submit" id="map" value="검색"/> -->
                             </div>
                             <div class="place_map">
                                 <div id="map" style="width:100%;height:350px;"></div>
