@@ -1,10 +1,12 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <%@ page import="kr.co.ticketsea.member.model.vo.*" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta charset="UTF-8">
-<title>티켓씨 | Tickect Sea</title>
-    
-    <style>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Ticket Sea || 티켓씨</title>
+  <style>
 
 		#menu ul{padding: 0px; margin: 0px;}
 
@@ -118,7 +120,7 @@
 
 </head>
 <body>
-    <!--wrap div-->
+   <!--wrap div-->
     <div id="wrap">
         <!--header div-->
         <div id="header">
@@ -127,13 +129,23 @@
                 <div class="inner">
                     <div class="login">
                         <div id="login" style="">
-							<a href="#"  class="btn login" 
-							onclick="window.open('/views/member/login.jsp','로그인','width=430,height=440'); return false;"  id="loginBtn">로그인</a> 
+                        	<% //로그인 세션
+								session = request.getSession(false);
+								Member member = (Member)session.getAttribute("member");	
+								if(member!=null){ //로그인 성공시
+							%>
+							<a href="/logout.do" id="logout">로그아웃</a>
+							<a href="#" id="myPage">마이페이지</a>
+							<a href="#" id="reserve">예매확인/취소</a><span>|</span>
 							
-                    <a href="#" id="reserve">예매확인/취소</a><span>|</span>
-                    <a href="#" id="joinBtn"
-                    onclick="window.open('/views/member/memberJoin.jsp','회원가입','width=430,height=750'); return false;">회원가입</a><span>|</span>
-					<a href="#" >고객센터</a>
+							<%}else{ %>
+							<a href="#"  class="btn login" 
+							onclick="window.open('/views/member/login.jsp','로그인','width=430,height=440'); return false;"  id="loginBtn">로그인</a>
+							 <a href="#" id="joinBtn"
+                   			 onclick="window.open('/views/member/memberJoin.jsp','회원가입','width=430,height=750'); return false;">회원가입</a><span>|</span> 
+							<% } %>
+							
+							<a href="#" >고객센터</a>
 						</div>
                     </div>
                 </div>
@@ -142,7 +154,7 @@
             <div class="search_area">
 				<!--logo div-->
 				<h1>
-					<a href="/TicketSea_MainPage" class="logo">Ticket Sea</a>
+					<a href="/TicketSea_MainPage.html" class="logo">Ticket Sea</a>
 				</h1>
 				<div class="search">
 					
@@ -175,5 +187,6 @@
         <!--git test-->
     </div>
 
-    </body>
+
+</body>
 </html>

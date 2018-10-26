@@ -1,12 +1,13 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Ticekt Sea | 회원가입</title>
-	
-	
-	
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
 </head>
+	
+
 <body>
 <style>
         div{
@@ -116,7 +117,7 @@
 			
 		</div>
 		
-		<form id="frameJoin" action="" method="post">
+		<form id="frameJoin" action="/memberJoin.do" method="post">
             
 			<input type="text" name="userId" maxlength="45"
 				   title="아이디" placeholder="아이디" id="userId">
@@ -135,14 +136,14 @@
 							 <div class="radio_area gender_area">
 								
 						<div class="btn_radio btn_radio_female" onclick="femaleCheck();">
-							<label for="female" class="inp_label female" tabindex="0">여</label>
-							<input type="radio" value="F" id="female" name="gender" hidden="" class="inp_radio" tabindex="-1" >
+							<label for="female" class="inp_label female" >여</label>
+							<input type="radio" value="F" id="female" name="gender" hidden="" class="inp_radio"  >
 						</div>
 						<div class="btn_radio is_checked btn_radio_male" onclick="maleCheck();">
-							<label for="male" class="inp_label male" tabindex="0">남 </label>
-							<input type="radio" value="M" id="male" name="gender"  hidden="" class="inp_radio" tabindex="-1" >
+							<label for="male" class="inp_label male">남 </label>
+							<input type="radio" value="M" id="male" name="gender"  hidden="" class="inp_radio"  >
 						</div>
-								 
+						
 						
 							</div>
 			<p id="name_msg" class="error_txt" style="display: none;">이름을 입력해주세요(한글)</p>
@@ -150,7 +151,7 @@
 				   title="전화번호" placeholder="전화번호('-'하이픈 제외)" id="userPhone">
 			<p id="phone_msg" class="error_txt" style="display: none;"
                maxlenth="11">전화번호를 입력해주세요('-'하이픈 제외)</p>
-			<input type="text" value="" name="userAdress" maxlength="45" id="userAddr"
+			<input type="text" value="" name="userAddress" maxlength="45" id="userAddr"
 				   title="주소" placeholder="주소">
 			<p id="addr_msg" class="error_txt" style="display: none;">주소를 입력해주세요</p>
 			<input type="text" value="" name="userEmail" maxlength="45" id="userEmail"
@@ -197,7 +198,7 @@
 			userPhone= document.getElementById("userPhone").value;
 			userAddr= document.getElementById("userAddr").value;
 			userEmail= document.getElementById("userEmail").value;
-            console.log(userName);
+            console.log(userGender);
 			if(userId=="")
             {
 			     document.getElementById("id_msg").style.display="block";
@@ -243,6 +244,7 @@
                      document.getElementById("email_msg").style.display="block";
                     return false;
                     }
+           
             else//모든 검사 만족시 true 반환
             {
                 return true;
@@ -253,6 +255,8 @@
 		
 		// 남녀 체크
 		function maleCheck(){
+			var maleRadio = document.getElementById("male");
+			var femaleRadio = document.getElementById("female");
 			var male = document.getElementsByClassName("male");
 			var maleborder = document.getElementsByClassName("btn_radio_male");
 			var female = document.getElementsByClassName("female");
@@ -261,11 +265,15 @@
 			maleborder[0].style.border="1px solid red";
 			female[0].style.color="darkgray";
 			femaleborder[0].style.border="1px solid darkgray";
-			female[0].checked="";
-			male[0].checked="checked";
+			
+			console.log(maleRadio.value);
+			console.log(femaleRadio.value);
+			
 			
 		}
 		function femaleCheck(){
+			var maleRadio = document.getElementById("male");	
+			var femaleRadio = document.getElementById("female");	
 			var male = document.getElementsByClassName("male");
 			var maleborder = document.getElementsByClassName("btn_radio_male");
 			var female = document.getElementsByClassName("female");
@@ -274,8 +282,9 @@
 			femaleborder[0].style.border="1px solid red";
 			male[0].style.color="darkgray";
 			maleborder[0].style.border="1px solid darkgray";
-			male[0].checked="";
-			female[0].checked="checked";
+			
+			console.log(maleRadio.value);
+			console.log(femaleRadio.value);
 			
 		}
 	
