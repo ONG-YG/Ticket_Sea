@@ -1,7 +1,0 @@
-INDEX VERSION 1.130
-D:\web_workspace_ONG\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2204627232.index
-\TicketSeaMVC\src
-D:\web_workspace_ONG\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\4175535926.index
-\TicketSeaMVC\src
-D:\web_workspace_ONG\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1952521992.index
-\TicketSeaMVC\src
