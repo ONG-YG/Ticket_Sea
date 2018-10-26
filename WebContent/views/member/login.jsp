@@ -1,9 +1,14 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-	<style>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Ticket Sea || 로그인</title>
+</head>
+<body>
+
+<style>
 		div {
 			
 		}
@@ -181,23 +186,17 @@
 						 <!--id및 pw 입력란-->
 						 <div id="idInputArea">
 						 	<span class="inp_txt" id="idInput">
-							<input id="id" name="id" type="text" maxlength="45" placeholder="아이디"  value="" >
+							<input id="id" name="userId" type="text" maxlength="45" placeholder="아이디"  value="" >
 							</span>
 							 <span class="inp_txt" id="pwdInput">
-							<input id="pwd" name="pwd" type="password" maxlength="15" placeholder="비밀번호"  value="" >
+							<input id="pwd" name="userPwd" type="password" maxlength="15" placeholder="비밀번호"  value="" >
 							</span>
 							 
 						 </div>
 						
 						 	
 						 
-						 <!-- 아이디 저장 체크박스-->
-						 <div class="checkbox_area login_keep">
-					
-						<span class="inp_checkbox" id="saveIdFlagSpan">
-						<input type="checkbox" id="saveIdFlag" name="saveIdFlag" class="inp_chk" tabindex="-1" value="Y">
-						<label for="saveIdFlag" class="inp_label"><span class="ico_chk" tabindex="0" id="saveIdFlagIco"></span>아이디 저장</label>
-						</span>
+						
 							
 						<!--로그인 버튼-->
 						<div class="btn_area">
@@ -217,9 +216,11 @@
 		<div class="footer_menu">
 	       	<div class="footer_inner">
 	        		<ul class="menu_lst">
-						<li class="menu_item"><a href="/views/memeber/idSearch">아이디 찾기</a></li>
+						<li class="menu_item"><a href=""  onclick="window.open('/views/member/idSearch.jsp','아이디찾기','width=430,height=430'); return false;"
+							>아이디 찾기</a></li>
 						<li class="menu_item"><span class="bar">|</span> <a href="#" class="menu_link">비밀번호 찾기</a></li>
-						<li class="menu_item"><span class="bar">|</span><a href="/views/member/memberJoin" class="menu_link" >회원 가입</a></li>
+						<li class="menu_item"><span class="bar">|</span><a href="#" onclick="window.open('/views/member/memberJoin.jsp','회원가입','width=430,height=750'); return false;" 
+												class="menu_link" >회원 가입</a></li>
 					</ul>
               </div>
        	</div>

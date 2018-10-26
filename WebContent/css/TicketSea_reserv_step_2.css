@@ -16,6 +16,14 @@
 .reserve_step{}
 .reserve_step li{}
 .reserve_step li span{}
+
+    /*--reserve_step li--*/
+    .reserve_step li[class=step2]{
+        background-color: skyblue;
+        color: white;
+    }
+    /*--/reserve_step li--*/
+
 /*---------------------- /header ----------------------*/
 /*---------------------- container ----------------------*/
 
@@ -23,24 +31,29 @@
 .reserve_left{}
 .reserve_right{}
 
+.reserve_left{background-color: #F3F3F3;}
+
 /*--------- reserve_left ---------*/
 .reserve_show_info{
-/*  border: 1px solid; border-color: cyan;*/
+/*    border: 1px solid; border-color: gainsboro;*/
+    border-bottom: 0px;
     width: 100%; height: 10%;
     box-sizing: border-box;
+    
 }
 #main_view_top{
-    border: 1px solid; border-color: gray;
+/*    border: 3px solid; border-color: red;*/
     width: 100%; height: 90%;
     box-sizing: border-box;
 }
     /*-- reserve_show_info --*/
     .show_etc_info{
-        border: 1px dotted; border-color: gray;
+/*        border: 1px dotted; border-color: gainsboro;*/
+        margin-right: 10px;
         float: right;
     }
     .show_title{
-        border: 1px dashed; border-color: gray;
+/*        border: 1px dashed; border-color: gainsboro;*/
         width: 100%; height: 100%;
         box-sizing: border-box;
         font-size: 22px;
@@ -48,7 +61,7 @@
         padding: 0;
     }
     .show_title h4{ /*공연명*/
-        border: 1px dotted; border-color: grey;
+/*        border: 1px dotted; border-color: gainsboro;*/
         margin: 0;
         width: 100%; height: 100%;
         box-sizing: border-box;
@@ -56,15 +69,24 @@
     /*-- /reserve_show_info --*/
     /*-- main_view_top --*/
     #select_seat{
-        border: 1px dashed; border-color: gray;
-        width: 100%; height: 90%;
+/*        border: 1px dashed; border-color: gainsboro;*/
+        width: auto; height: 90%;
         box-sizing: border-box;
+        margin-left: 6px;
         display: block;
     }
     .select_seat_info{
-        border: 1px dashed; border-color: gray;
+/*        border-top: 1px solid; border-color: gainsboro;*/
         width: 100%; height: 10%;
         box-sizing: border-box;
+        line-height: 40px;
+        padding-left: 10px;
+    }
+    .select_seat_info img {
+        float: right;
+        width: 25px;
+        margin-top: 10px;
+        margin-right: 20px;
     }
     /*-- /main_view_top --*/
 
@@ -72,13 +94,13 @@
 /*--------- reserve_right ---------*/
 
 .top_info_area{
-    border: 1px dashed; border-color: gray;
+    border: 1px dashed; border-color: red;
     width: 100%; height: 28%;
     box-sizing: border-box;
 }
 
 .reserve_grade{
-    border: 1px dashed; border-color: gray;
+/*    border: 1px dashed; border-color: gainsboro;*/
     width: 100%; height: 60%;
     box-sizing: border-box;
 }
@@ -86,33 +108,66 @@
 .reserve_btn{}
 
     /*-- .reserve_grade --*/
-    .reserve_grade>.bx_tit{
-        border: 3px dotted; border-color: aqua;
-        width: 100%; height: 25px;
+    .reserve_grade>.reserve_tit_div{
+/*        border: 1px solid; border-color: aqua;*/
+        width: 100%; height: 50px;
         box-sizing: border-box;
     }
-    #select_seat_grade{
+    .reserve_grade hr{
+        width: 95%;
+        margin-top: 5px; margin-bottom: 5px;
+    }
+    .reserve_grade>#select_seat_grade{
 /*      border: 3px solid; border-color: red;*/
         margin: 0; padding: 10px;
+        width: 100%; height: 75%;
+        box-sizing: border-box;
         list-style: none;
     }
+
     /*-- /.reserve_grade --*/
-
-
-    /*-- .reserve_grade --*//*공통*/
-    .reserve_grade .bx_tit h4{
-    /*        border: 3px solid; border-color: blue;*/
-        display: inline;
-        margin: 0;
-    }
-    .reserve_grade .bx_tit>a,
-    .reserve_grade .bx_tit>p{
-    /*  border: 3px dashed; border-color: red;*/
-        float: right; margin: 0;
-        display: inline;
-        font-size: 14px;
-    }
-    /*-- /.reserve_grade --*//*공통*/
+        /*-- .reserve_tit_div --*/
+        .reserve_grade .reserve_tit_div h4{
+        /*        border: 3px solid; border-color: blue;*/
+            margin: 0; margin-left: 10px;
+            line-height: 70px;
+        }
+        /*-- /.reserve_tit_div --*/
+        /*-- #select_seat_grade --*/
+        #select_seat_grade li {
+/*            border: 2px dashed; border-color: aqua;*/
+            width: 100%; height: 25px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+        .seat_color,
+        .seat_detail_info{
+/*            border: 3px dashed; border-color: greenyellow;*/
+            box-sizing: border-box;
+            float: left;
+        }
+        .seat_color{
+/*            border: 3px dashed; border-color: greenyellow;*/
+            width: 15px; height: 15px;
+            margin-top: 5px;
+            margin-right: 7px;
+        }
+        .seat_detail_info{
+/*            border: 3px dashed; border-color: blue;*/
+            width: 240px; height: 100%;
+        }
+        .seat_grade,
+        .seat_price{
+/*            border: 1px dotted; border-color: red;*/
+            float: left;
+        }
+        .seat_grade{
+            margin-right: 15px;
+        }
+        .seat_avail{
+            float: right;
+        }
+        /*-- /#select_seat_grade --*/
 
 
     /*--- reserve_btn ---*/
@@ -126,30 +181,38 @@
 
 
 
-.s6 {
+.seat_a {
     position: absolute;
-    background: url(http://tkfile.yes24.com/images/ticket_new/ic_seat6.gif) no-repeat;
+    background: url(../img/seat_available.bmp) no-repeat;
     height: 12px;
     width: 11px;
     z-index: 10;
 }
 
-/*
-.s13 {
+
+.seat_r {
     position: absolute;
-    background: url(http://tkfile.yes24.com/images/ticket_new/ic_seat13.gif) no-repeat;
+    background: url(../img/seat_reserved.gif) no-repeat;
     height: 12px;
     width: 11px;
     z-index: 10;
 }
 
-.s8 {
+.seat_p {
     position: absolute;
-    background: url(http://tkfile.yes24.com/images/ticket_new/ic_seat6.gif) no-repeat;
+    background: url(../img/seat_reserved.gif) no-repeat;
     height: 12px;
     width: 11px;
     z-index: 10;
-}*/
+}
+
+.selected {
+    position: absolute;
+    background: url(../img/seat_selected.bmp) no-repeat;
+    height: 12px;
+    width: 11px;
+    z-index: 10;
+}
 
 
 
