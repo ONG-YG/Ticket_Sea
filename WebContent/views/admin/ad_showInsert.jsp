@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title></title>
 <style>
-     ul, li, a{list-style: none; margin: 0px; padding: 0px;     text-decoration: none; color: black;}
+    ul, li, a{list-style: none; margin: 0px; padding: 0px;     text-decoration: none; color: black;}
     div{
         box-sizing : border-box;
     }
@@ -92,7 +92,7 @@
         background-color:white;
         box-sizing: border-box;
         display: block;
-        height:90%;
+        height:93%;
         
     }
     #content .top_area{
@@ -227,8 +227,13 @@
 </style>
 </head>
 <body>
-
-		<div id="wrapper">
+	
+	<script>
+		function insert(){
+			
+		}
+	</script>
+	<div id="wrapper">
 		<div id="header">
 			<div id="h_inner">
                 <div id="icon">
@@ -272,7 +277,7 @@
               <div id="content">
               
               <!-- form 태그 -->
-       <form action="/showInsert.do" method="post">
+       <!-- <form action="/showInsert.do" method="post"> -->
         <div class="content_wrap">
             <div class="top_area">
                 <h2 class="main_title">공연등록</h2>
@@ -329,52 +334,11 @@
                           <h3 class="title">공연장소</h3>
                         </legend>
                         <div class="edit">
-                            <div class="write_wrap">
-                                <!-- <input type="text" id="grade" name="place" value="" placeholder="장소명,주소를 검색해주세요."><input type="submit" id="map" value="검색"/> -->
-                            </div>
-                            <div class="place_map">
-                                <div id="map" style="width:100%;height:350px;"></div>
-
-                                <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7542b9fbee3c7131e7d6e91a70c1fa75&libraries=services"></script>
-                                <script>
-                                var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-                                    mapOption = {
-                                        center: new daum.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-                                        level: 3 // 지도의 확대 레벨
-                                    };  
-
-                                // 지도를 생성합니다    
-                                var map = new daum.maps.Map(mapContainer, mapOption); 
-
-                                // 주소-좌표 변환 객체를 생성합니다
-                                var geocoder = new daum.maps.services.Geocoder();
-
-                                // 주소로 좌표를 검색합니다
-                                geocoder.addressSearch('제주특별자치도 제주시 첨단로 242', function(result, status) {
-
-                                    // 정상적으로 검색이 완료됐으면 
-                                     if (status === daum.maps.services.Status.OK) {
-
-                                        var coords = new daum.maps.LatLng(result[0].y, result[0].x);
-
-                                        // 결과값으로 받은 위치를 마커로 표시합니다
-                                        var marker = new daum.maps.Marker({
-                                            map: map,
-                                            position: coords
-                                        });
-
-                                        // 인포윈도우로 장소에 대한 설명을 표시합니다
-                                        var infowindow = new daum.maps.InfoWindow({
-                                            content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
-                                        });
-                                        infowindow.open(map, marker);
-
-                                        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-                                        map.setCenter(coords);
-                                    } 
-                                });    
-                                </script>
-                            </div>
+                           <select class="category_select" name="">
+                                    <option value>공연장 선택</option>
+                                    <option value="">샤롯데시어티</option>
+                                    <option value=""></option>
+                           </select>
                         </div>
                     </fieldset>
                     <fieldset class="edit_artist">
@@ -432,13 +396,22 @@
                         </div>
                     </fieldset>
                 </div>
+                <form action="/showInsert.do" method="post" id="insertShow">
+                            <input type="hidden"  name="show_name" />
+                            <input type="hidden" name="show_st_date" />
+                            <input type="hidden" name="show_ed_date" />
+                            <input type="hidden"  name="artists" />
+                            <input type="hidden"  name="show_grd" />
+                            <input type="hidden"  name="show_run" />
+               </form>
             </div>
             <div class="submit_area">
-            <input type="submit" value="작성" style="float:right;" width="70px" height="40">
+           <!--  <input type="submit" value="작성" style="float:right;" width="70px" height="40"> -->
+           <button id="btn" onclick="insert()">공연등록</button>
             </div>
         	</div>
     	</div>
-    	</form>
+    	<!-- </form> -->
           </div> 
         </div>
         </div>
