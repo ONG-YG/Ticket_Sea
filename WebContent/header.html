@@ -5,26 +5,9 @@
 <title>티켓씨 | Tickect Sea</title>
     
     <style>
-		
-/*<<<<<<< HEAD*/
+
 		#menu ul{padding: 0px; margin: 0px;}
-/*
-=======
-		#menu ul{padding: 0px;
-			margin: 0px;
-			}
-       
-        div{ 
-		
-			}
-        
-        #wrap {
-        width: 990px;
-        height: 1000px;
-        box-sizing: padding-box;
-        }
->>>>>>> macaron
-*/
+
         #header{
             width: 990px;
             height: 230px;
@@ -56,16 +39,6 @@
         }
        
 		#header .search_area .search {
-/*
-<<<<<<< HEAD
-            width: 400px;
-            height: 40px;
-            position: relative;
-            float: left;
-            line-height: 10px;
-            box-sizing: padding-box;
-=======
-*/
     
     width: 400px;
     height: 40px;
@@ -75,8 +48,6 @@
 	
 		box-sizing: padding-box;
 	
-			
-/*>>>>>>> macaron*/
 		}
 		#header .search_area>h1>a{
             display: inline;
@@ -138,7 +109,7 @@
 		}
 		
         #searchIcon{
-            
+            height: 41px;
         }
        
       
@@ -156,10 +127,12 @@
                 <div class="inner">
                     <div class="login">
                         <div id="login" style="">
-							<a href="/views/member/login.html" class="btn login" id="loginBtn">로그인</a> 
+							<a href="#"  class="btn login" 
+							onclick="window.open('/views/member/login.jsp','로그인','width=430,height=440'); return false;"  id="loginBtn">로그인</a> 
 							
                     <a href="#" id="reserve">예매확인/취소</a><span>|</span>
-                    <a href="/views/member/memberjoin.html" id="joinBtn">회원가입</a><span>|</span>
+                    <a href="#" id="joinBtn"
+                    onclick="window.open('/views/member/memberJoin.jsp','회원가입','width=430,height=750'); return false;">회원가입</a><span>|</span>
 					<a href="#" >고객센터</a>
 						</div>
                     </div>
@@ -177,7 +150,7 @@
                 <fieldset>
                     <legend>검색창</legend>
                     <input type="text" id="searchline" name="query" title="검색어 입력" value="">
-                    <a href="#" class="btn_search"><img id="searchIcon"  src="../WebContent/img/searchicon.PNG" width="41px"
+                    <a href="#" class="btn_search"><img id="searchIcon"  src="/img/searchicon.PNG" width="41px"
                     ></a>
                 </fieldset>
                         

@@ -5,14 +5,17 @@
 <title>Ticekt Sea | 회원가입</title>
 	
 	
-	<style>
+	
+</head>
+<body>
+<style>
         div{
             
         }
         
 		.wrap{
 			width: 405px;
-			height: 900px;
+			
             
 		}
 		.header{
@@ -70,6 +73,31 @@
         .agree_item{
             
         }
+        .btn_radio{
+			background: white;
+			border: 1px solid darkgray;
+			box-sizing: padding-box;
+			display: block;
+			float: right;
+			height: 33px;
+			width: 53px;
+			text-align: center;
+			padding-top: 12px;
+			
+		}
+		.radio_area{
+			float:right;
+			margin-right: 37px;
+			margin-top: 7px;
+			height: 50px;}
+		
+		.inp_label{
+			font-size: 17px;
+			text-align: center;
+		}
+		#userName{
+		width: 200px;
+		}
 	</style>
 </head>
 <body>
@@ -102,6 +130,21 @@
 			<p id="pwd_re_msg" class="error_txt" style="display:none;">비밀번호를 확인해주세요</p>
 			<input type="text" value="" name="userName" maxlength="10" id="userName"
 				   title="이름" placeholder="이름">
+				   <!--남녀선택칸-->
+							 
+							 <div class="radio_area gender_area">
+								
+						<div class="btn_radio btn_radio_female" onclick="femaleCheck();">
+							<label for="female" class="inp_label female" tabindex="0">여</label>
+							<input type="radio" value="F" id="female" name="gender" hidden="" class="inp_radio" tabindex="-1" >
+						</div>
+						<div class="btn_radio is_checked btn_radio_male" onclick="maleCheck();">
+							<label for="male" class="inp_label male" tabindex="0">남 </label>
+							<input type="radio" value="M" id="male" name="gender"  hidden="" class="inp_radio" tabindex="-1" >
+						</div>
+								 
+						
+							</div>
 			<p id="name_msg" class="error_txt" style="display: none;">이름을 입력해주세요(한글)</p>
 			<input type="text" value="" name="userPhone" maxlength="11"
 				   title="전화번호" placeholder="전화번호('-'하이픈 제외)" id="userPhone">
@@ -208,7 +251,34 @@
 		}
 		
 		
-		
+		// 남녀 체크
+		function maleCheck(){
+			var male = document.getElementsByClassName("male");
+			var maleborder = document.getElementsByClassName("btn_radio_male");
+			var female = document.getElementsByClassName("female");
+			var femaleborder = document.getElementsByClassName("btn_radio_female");
+			male[0].style.color="red";
+			maleborder[0].style.border="1px solid red";
+			female[0].style.color="darkgray";
+			femaleborder[0].style.border="1px solid darkgray";
+			female[0].checked="";
+			male[0].checked="checked";
+			
+		}
+		function femaleCheck(){
+			var male = document.getElementsByClassName("male");
+			var maleborder = document.getElementsByClassName("btn_radio_male");
+			var female = document.getElementsByClassName("female");
+			var femaleborder = document.getElementsByClassName("btn_radio_female");
+			female[0].style.c="red";
+			femaleborder[0].style.border="1px solid red";
+			male[0].style.color="darkgray";
+			maleborder[0].style.border="1px solid darkgray";
+			male[0].checked="";
+			female[0].checked="checked";
+			
+		}
+	
 	</script>
 </body>
 </html>
