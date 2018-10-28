@@ -5,32 +5,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<%
-	request.setCharacterEncoding("utf-8");
-	int showNo = Integer.parseInt(request.getParameter("showNo"));
-	ReserveStepOne stOne = (ReserveStepOne)request.getAttribute("stepOne");
-	
-	String showTitle = stOne.getShowTitle();
-	String showPoster = stOne.getShowPoster();
-	ArrayList<PerformSchedule> psList =stOne.getPsList();
-%>
 
-<script>
-	var psList = [];
-<%
-	for(int i=0; i<psList.size(); i++) {
-%>
-		var psDate='<%=psList.get(i).getPerformSchDate()%>';
-		var psCnt=<%=psList.get(i).getPerformSchCnt()%>;
-		var psTime='<%=psList.get(i).getPerformTime()%>';
-		var availSeat=<%=psList.get(i).getAvailableSeat()%>;
-		var ps = [psDate, psCnt, psTime, availSeat];
-		psList.push(ps);
-<%
-	}
-%>
-	console.log(psList);
-</script>
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -46,6 +21,36 @@
       type="text/javascript"
         src="../../resources/jquery-3.3.1.js">
     </script>
+    
+    
+    
+    
+    
+    
+    <script src="./calendar/angular.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css" />
+    <link rel="stylesheet" type="text/css"  href="./calendar/calendar.css" />
+
+    <script  src="./calendar/moment.min.js"></script>
+    <script type="text/javascript">
+    moment.locale('kr', {
+        months : "1월_2월_3월_4월_5월_6월_7월_8월_9월_10월_11월_12월".split("_"),
+        monthsShort :  "1월_2월_3월_4월_5월_6월_7월_8월_9월_10월_11월_12월".split("_"),
+        weekdays : "일요일_월요일_화요일_수요일_목요일_금요일_토요일".split("_"),
+        weekdaysShort : "일._월._화._수._목._금_토.".split("_"),
+        weekdaysMin :"일._월._화._수._목._금_토.".split("_"),
+        ordinal : function (number) {
+            return number + '일'
+        }
+    });
+    </script>
+    <script  src="./calendar/calendar.js"></script>
+    
+    
+    
+    
+    
+    
     <script>
         var date_sel = null;
         var cnt_sel = null;
@@ -135,82 +140,10 @@
                             <div id="ct_left_date">
                                 <b>날짜선택</b><hr>
                                 <div id="date_box">
-                                    <div class="calendar">
-                                        <div class="calendar-header">
-                                            <a class="prev-mon" title="이전달"><span>이전달</span></a>
-                                            <a class="next-mon" title="다음달"><span>다음달</span></a>
-
-                                            <div class="current-mon"><span class="year-month">2018.11</span></div>
-                                        </div>
-                                        <div class="calendar-body">
-                                            <table>
-                                                <thead>
-                                                <tr>
-                                                    <th><span title="일요일">일</span></th>
-                                                    <th><span title="월요일">월</span></th>
-                                                    <th><span title="화요일">화</span></th>
-                                                    <th><span title="수요일">수</span></th>
-                                                    <th><span title="목요일">목</span></th>
-                                                    <th><span title="금요일">금</span></th>
-                                                    <th><span title="토요일">토</span></th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr class="calendar-week"> <!-- 달력의 한 주에 해당하는 엘리먼트 컨테이너 -->
-                                                        <td class="calendar-date calendar-sun">30</td>
-                                                        <!-- 날짜가 표시될 엘리먼트 -->
-                                                        <td class="calendar-date">1</td>
-                                                        <td class="calendar-date">2</td>
-                                                        <td class="calendar-date">3</td>
-                                                        <td class="calendar-date">4</td>
-                                                        <td class="calendar-date">5</td>
-                                                        <td class="calendar-date calendar-sat">6</td>
-                                                    </tr>
-                                                    <tr class="calendar-week"> <!-- 달력의 한 주에 해당하는 엘리먼트 컨테이너 -->
-                                                        <td class="calendar-date calendar-sun">7</td>
-                                                        <!-- 날짜가 표시될 엘리먼트 -->
-                                                        <td class="calendar-date">8</td>
-                                                        <td class="calendar-date">9</td>
-                                                        <td class="calendar-date">10</td>
-                                                        <td class="calendar-date">11</td>
-                                                        <td class="calendar-date">12</td>
-                                                        <td class="calendar-date calendar-sat available">13</td>
-                                                    </tr>
-                                                    <tr class="calendar-week"> <!-- 달력의 한 주에 해당하는 엘리먼트 컨테이너 -->
-                                                        <td class="calendar-date calendar-sun available">14</td>
-                                                        <!-- 날짜가 표시될 엘리먼트 -->
-                                                        <td class="calendar-date available">15</td>
-                                                        <td class="calendar-date calendar-today available">16</td>
-                                                        <td class="calendar-date">17</td>
-                                                        <td class="calendar-date">18</td>
-                                                        <td class="calendar-date">19</td>
-                                                        <td class="calendar-date calendar-sat">20</td>
-                                                    </tr>
-                                                    <tr class="calendar-week"> <!-- 달력의 한 주에 해당하는 엘리먼트 컨테이너 -->
-                                                        <td class="calendar-date calendar-sun">21</td>
-                                                        <!-- 날짜가 표시될 엘리먼트 -->
-                                                        <td class="calendar-date">22</td>
-                                                        <td class="calendar-date">23</td>
-                                                        <td class="calendar-date">24</td>
-                                                        <td class="calendar-date">25</td>
-                                                        <td class="calendar-date">26</td>
-                                                        <td class="calendar-date calendar-sat">27</td>
-                                                    </tr>
-                                                    <tr class="calendar-week"> <!-- 달력의 한 주에 해당하는 엘리먼트 컨테이너 -->
-                                                        <td class="calendar-date calendar-sun">28</td>
-                                                        <!-- 날짜가 표시될 엘리먼트 -->
-                                                        <td class="calendar-date">29</td>
-                                                        <td class="calendar-date">30</td>
-                                                        <td class="calendar-date">31</td>
-                                                        <td class="calendar-date calendar-next-mon">1</td>
-                                                        <td class="calendar-date calendar-next-mon">2</td>
-                                                        <td class="calendar-date calendar-next-mon calendar-sat">3</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                            <span style="color: red; font-size: 10px;">전월 다음달 선택 시 변수에 반영할것</span>
-                                        </div>
-                                    </div>
+                                	 <div ng-controller="calendarWidget" onclick="test();">
+									    <calendar selected="day" ></calendar>
+									    <input type="hidden" value="{{day.format('YYYY-MM-DD')}}"/>
+									</div>
                                 </div>
                             </div>
                             <div id="ct_left_cnt">
@@ -283,8 +216,8 @@
                             <div id="cnt_sel_info">
                                 <h5>공연회차</h5><span></span>
                             </div>
-                            <form action="/reserveSeat.do?psNo=30000" method="post" id="dateCntForm">
-                            <input type="hidden" name="showNo" value="<%= showNo %>"/>
+                            <form action="/reserveSeat.do" method="post" id="dateCntForm">
+                            <input type="hidden" name="showNo" value=""/>
                             <input type="hidden" id="date_form" name="date_sel" />
                             <input type="hidden" id="cnt_form" name="cnt_sel" />
                             </form>

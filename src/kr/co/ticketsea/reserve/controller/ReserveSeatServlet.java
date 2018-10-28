@@ -12,8 +12,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import kr.co.ticketsea.member.model.vo.Member;
 import kr.co.ticketsea.reserve.model.service.ReserveService;
+import kr.co.ticketsea.reserve.model.vo.PerformSchedule;
+import kr.co.ticketsea.reserve.model.vo.ReserveProgressing;
+import kr.co.ticketsea.reserve.model.vo.ReserveSession;
+import kr.co.ticketsea.reserve.model.vo.SeatGradeState;
+import kr.co.ticketsea.reserve.model.vo.ShowInfo;
 
 /**
  * Servlet implementation class DateCntSelectServlet
@@ -33,45 +40,103 @@ public class ReserveSeatServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		request.setCharacterEncoding("utf-8");
-		
-		int showNo = Integer.parseInt(request.getParameter("showNo"));
-		String date_sel = request.getParameter("date_sel");
-		String cnt_sel = request.getParameter("cnt_sel");
-		String [] dateCnt = {date_sel, cnt_sel};
-		
-				System.out.println("(ReserveSeatServlet)  showNo >> "+ showNo);
-				System.out.println("(ReserveSeatServlet)  " + date_sel);
-				System.out.println("(ReserveSeatServlet)  " + cnt_sel);
-		
-		int performSchNo = new ReserveService().selectOnePerformSchedule(showNo, date_sel, cnt_sel);
-		
-		if (performSchNo!=0) {
-			//response.sendRedirect("/seatCheck.do?showNo="+showNo+"&psNo="+performSchNo);
-			//RequestDispatcher view = request.getRequestDispatcher("views/reserve/seat_check.jsp?showNo="+showNo+"&psNo="+performSchNo);
-			//RequestDispatcher view = request.getRequestDispatcher("views/reserve/reserv_step_2_seat.jsp?showNo="+showNo+"&psNo="+performSchNo);
-			//request.setAttribute("dateCnt", dateCnt);
-			//view.forward(request, response);
+		try {
 			
-			//예약된 좌석 목록
-			ArrayList<Integer> reserved_seats = new ReserveService().selectReservedSeats(performSchNo);
-			
-						for(int seat : reserved_seats) {
-							System.out.println("seat val = "+seat);
+			HttpSession session = request.getSession(false);
+			//세션발급되지 않은 상태에서 접근 금지
+			if(session!=null) {
+				ReserveSession rs = (ReserveSession)session.getAttribute("reserveSession");
+				int currStat = rs.getCurrStat();
+				//비정상적 루트에서 접근 금지
+				if(currStat==1) {
+					request.setCharacterEncoding("utf-8");
+					int psNo = Integer.parseInt( request.getParameter("psNo") );
+					
+					//reserveProgressing 객체 생성
+					ReserveProgressing rp = null;
+					
+					//공연회차번호로 공연번호 조회
+					//int showNo = new ReserveService().getShowNoBypsNo(psNo);
+					
+					//공연회차번호로 공연회차정보 조회
+					PerformSchedule ps = new ReserveService().selectOnePerformSchedule(psNo);
+					
+	
+						if(ps!=null) {
+							//공연번호
+							int showNo = ps.getShowNo();
+							
+							//공연정보 받아오기
+							ShowInfo si = new ReserveService().getShowInfo(showNo);
+							
+							if(si!=null) {
+								rp = new ReserveProgressing();
+								rp.setPsNo(psNo);
+								rp.setShowNo(showNo);
+								rp.setShowTitle(si.getM_show_name());
+								rp.setShowPoster(si.getM_show_poster());
+								String thName = new ReserveService().getTheaterName(si.getTh_no());
+								if(thName!=null) {
+									rp.setTheaterName(thName);			
+								}
+								else {
+									System.out.println("error at ReserveSeatServlet-6");
+									throw new Exception();
+								}
+								rp.setPsDate(ps.getPerformSchDate());
+								rp.setShowCnt(ps.getPerformSchCnt());
+								rp.setShowTime(ps.getPerformTime());
+								ArrayList<Integer> reserved_seats = new ReserveService().selectReservedSeats(psNo);
+								rp.setReservedSeatList(reserved_seats);
+								ArrayList<Integer> prog_seats = new ReserveService().selectProgressingSeats(psNo);
+								rp.setProgSeatList(prog_seats);
+								ArrayList<SeatGradeState> seatGrdStList = new ReserveService().getSeatGradeStatus(psNo);
+								rp.setSeatGrdSt(seatGrdStList);
+								//System.out.println(rp);
+								
+								//세션에 넣을 reserveSession객체 - 진행단계 정보 update
+								rs.setCurrStat(2);
+								//세션에 넣을 reserveSession객체 - 예매 진행 번호 생성
+								int progNo = new ReserveService().getProgNo();
+								if(progNo!=0) {
+									rs.setProgNo(progNo);
+									System.out.println("progNo = "+progNo);
+								}else {
+									System.out.println("error at ReserveSeatServlet-5");
+									throw new Exception();
+								}//if(progNo!=0) END
+								
+								//세션 정보 저장
+								session.setAttribute("reserveSession", rs);
+								
+								RequestDispatcher view = request.getRequestDispatcher("views/reserve/reserv_step_2_seat.jsp");
+								request.setAttribute("stepTwo", rp);
+								view.forward(request, response);
+							}
+							else {
+								System.out.println("error at ReserveSeatServlet-5");
+								throw new Exception();
+							}//if(si!=null) END
 						}
-			
-			//예약진행 중인 좌석 목록
-			//String [] progressing_seats = new ReserveService().selectProgressingSeats(showNo,performSchNo);
-			
-			
-			RequestDispatcher view = request.getRequestDispatcher("views/reserve/reserv_step_2_seat.jsp?showNo="+showNo+"&psNo="+performSchNo);
-			request.setAttribute("dateCnt", dateCnt);
-			view.forward(request, response);
-			
-		}else {
+						else {
+							System.out.println("error at ReserveSeatServlet-4");
+							throw new Exception();
+						}//if(ps!=null) END
+						
+				}else {
+					System.out.println("error at ReserveSeatServlet-3");
+					throw new Exception();
+				}//if(currStat==1) END
+			}else {
+				System.out.println("error at ReserveSeatServlet-2");
+				throw new Exception();
+			}//if(session!=null) END
+		} catch (Exception e) {
 			response.sendRedirect("/views/reserve/reserveError.jsp");
-					System.out.println("error at DateCntSelectServlet");
+			System.out.println("error at ReserveSeatServlet-1");
 		}
+		
+		
 	}
 
 	/**

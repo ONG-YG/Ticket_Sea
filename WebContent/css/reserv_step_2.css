@@ -285,7 +285,7 @@
 
 .seat_p {
     position: absolute;
-    background: url(../img/seat_reserved.gif) no-repeat;
+    background: url(../img/seat_available.bmp) no-repeat;
     height: 12px;
     width: 11px;
     z-index: 10;

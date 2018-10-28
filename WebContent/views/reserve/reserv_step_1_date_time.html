@@ -1,5 +1,19 @@
 <!DOCTYPE html>
 <html>
+    <script>
+        var psList = [
+            ["2018-11-13", 1, "11:30-12:30", 508],
+            ["2018-11-13", 2, "13:30-14:30", 510],
+            ["2018-11-13", 3, "15:30-16:30", 510],
+            ["2018-11-14", 1, "11:30-12:30", 510],
+            ["2018-11-14", 2, "13:30-14:30", 510],
+            ["2018-11-14", 3, "15:30-16:30", 510],
+            ["2018-11-15", 1, "11:30-12:30", 510],
+            ["2018-11-15", 2, "13:30-14:30", 510],
+            ["2018-11-15", 3, "15:30-16:30", 510],
+            ["2018-11-16", 1, "11:30-12:30", 510]
+            ];
+    </script>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Ticket Sea 예매</title>
@@ -17,21 +31,34 @@
     <script>
         var date_sel = null;
         var cnt_sel = null;
+        var cnt = [];
         $(document).ready(function(){
             
-            $('.calendar-date').click(function(){
+            $('.available').click(function(){
                 date_sel = null;
                 cnt_sel = null;
                 $('#cnt_box li').removeClass('selected_cnt_li');
-                $('.calendar-date').removeClass('selected_date_td');
+                $('.available').removeClass('selected_date_td');
                 $(this).addClass('selected_date_td');
-
-                date_sel = $('.year-month').text()+"."+$(this).text();
+                
+                var yearMonth = $('.year-month').text().split('.');
+                var year = yearMonth[0];
+                var month = yearMonth[1];
+                date_sel = year+"-"+month+"-"+$(this).text();
                 $('#date_sel_info span').html(date_sel);
-                //$('#date_form').val(date_sel);
                 $('#cnt_sel_info span').html(cnt_sel);
-                //$('#cnt_form').val(cnt_sel);
                 //alert(date_sel);
+                for(var i=0; i<psList.length; i++){
+                    var ps = psList[i];
+                    //alert(ps);
+                    if(ps.includes(date_sel)) {
+                        alert("yes");
+                        var dateSp = ps[0].split('-');
+                        var date = dateSp[2];
+                        alert(date);
+                        break;
+                    }
+                }
             })
 
             $('#cnt_box li').click(function(){
@@ -55,6 +82,9 @@
                 alert("날짜/회차를 선택하세요");
             }else {
                 //alert("선택한 날짜 : "+date_sel+"  /  선택한 회차 : "+cnt_sel);
+                
+                
+                
                 $('#date_form').val(date_sel);
                 $('#cnt_form').val(cnt_sel);
                 document.getElementById("dateCntForm").submit();
@@ -149,7 +179,7 @@
                                                         <!-- 날짜가 표시될 엘리먼트 -->
                                                         <td class="calendar-date available">15</td>
                                                         <td class="calendar-date calendar-today available">16</td>
-                                                        <td class="calendar-date">17</td>
+                                                        <td class="calendar-date available">17</td>
                                                         <td class="calendar-date">18</td>
                                                         <td class="calendar-date">19</td>
                                                         <td class="calendar-date calendar-sat">20</td>
