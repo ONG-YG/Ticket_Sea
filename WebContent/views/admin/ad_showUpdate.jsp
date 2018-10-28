@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<%@ page import="kr.co.ticketsea.admin.show.model.vo.*"%>
+<% 
+	Show show = (Show)request.getAttribute("showData");
+	
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -7,7 +12,7 @@
 <title>공연 정보 </title>
 <!-- 스타일  -->
 <style>
-     ul, li, a{list-style: none; margin: 0px; padding: 0px;     text-decoration: none; color: black;}
+       ul, li, a{list-style: none; margin: 0px; padding: 0px;     text-decoration: none; color: black;}
     div{
         box-sizing : border-box;
     }
@@ -81,6 +86,12 @@
         border:1px solid black;
         box-sizing: border-box;
         
+    }
+    
+    .content_wrap form{
+    	width:980px;
+        height: 80%;
+         z-index:-10;
     }
     h2.main_title{
         display: inline-block;
@@ -244,14 +255,13 @@
                 <ul>
                     <li><a href="#">공연관리</a>
                         <ul>
-                            <li><a href="ad_showInsert.html">공연등록</a></li>
-                            <li><a href="ad_showList.html">공연수정</a></li>
-                            <li><a href="#">공연삭제</a></li>
+                             <li><a href="/views/admin/ad_showInsert.jsp">공연등록</a></li>
+                            <li><a href="/adShowList.do">공연목록</a></li>
                         </ul>
                     </li>    
                     <li><a href="#">회원관리</a>
                         <ul>
-                            <li><a href="ad_memberList.html">회원목록</a></li>
+                            <li><a href="/adMemberList.do">회원목록</a></li>
                         </ul>
                     </li>
                     <li><a href="#">예매관리</a>
@@ -299,12 +309,12 @@
                         </legend>
                         <div class="edit">
                             <div class="write_wrap">
-                                <select class="category_select" value="sh_category" name="category">
-                                    <option value>카테고리 선택</option>
-                                    <option value="1">뮤지컬</option>
-                                    <option value="2">콘서트</option>
+                                <select class="category_select" id="category" name="sc_code">
+                                    <option value="1" selected="selected" >카테고리 선택</option>
+                                    <option value="MSC">뮤지컬</option>
+                                    <option value="CNT">콘서트</option>
                                 </select>
-                                <input id="title" type="text" name="title" class="title_input" placeholder="공연명을 입력해 주세요." value="" maxlength="64" autofocus="autofocus" value="지킬앤하이드">
+                                <input id="title" type="text" name="show_name" class="title_input" placeholder="공연명을 입력해 주세요." value="<%=show.getShow_name() %>" maxlength="64" autofocus="autofocus">
                             </div>
                         </div>
                     </fieldset>
@@ -316,7 +326,7 @@
                         <!--시작 일시-->
                         <div class="start_time" id="edit_date_start_time">
                             <div class="write_wrap">
-                                <input type="text" id="startEventDate" value="startDate" placeholder="시작일"> ~ <input type="text" id="endEventDate" value="endDate" placeholder="종료일">
+                                <input type="text" id="startEventDate" name="show_st_date" value="<%=show.getShow_st_date() %>" placeholder="시작일"> ~ <input type="text" id="endEventDate" name="show_ed_date" value="<%=show.getShow_ed_date() %>" placeholder="종료일">
                             </div>
                         </div>
                         </div>
@@ -326,52 +336,11 @@
                           <h3 class="title">공연장소</h3>
                         </legend>
                         <div class="edit">
-                            <div class="write_wrap">
-                                <input type="text" id="grade" value="샤롯데씨어티" placeholder="장소명,주소를 검색해주세요."><input type="submit" id="map" value="검색"/>
-                            </div>
-                            <div class="place_map">
-                                <div id="map" style="width:100%;height:350px;"></div>
-
-                                <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7542b9fbee3c7131e7d6e91a70c1fa75&libraries=services"></script>
-                                <script>
-                                var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-                                    mapOption = {
-                                        center: new daum.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-                                        level: 3 // 지도의 확대 레벨
-                                    };  
-
-                                // 지도를 생성합니다    
-                                var map = new daum.maps.Map(mapContainer, mapOption); 
-
-                                // 주소-좌표 변환 객체를 생성합니다
-                                var geocoder = new daum.maps.services.Geocoder();
-
-                                // 주소로 좌표를 검색합니다
-                                geocoder.addressSearch('제주특별자치도 제주시 첨단로 242', function(result, status) {
-
-                                    // 정상적으로 검색이 완료됐으면 
-                                     if (status === daum.maps.services.Status.OK) {
-
-                                        var coords = new daum.maps.LatLng(result[0].y, result[0].x);
-
-                                        // 결과값으로 받은 위치를 마커로 표시합니다
-                                        var marker = new daum.maps.Marker({
-                                            map: map,
-                                            position: coords
-                                        });
-
-                                        // 인포윈도우로 장소에 대한 설명을 표시합니다
-                                        var infowindow = new daum.maps.InfoWindow({
-                                            content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
-                                        });
-                                        infowindow.open(map, marker);
-
-                                        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-                                        map.setCenter(coords);
-                                    } 
-                                });    
-                                </script>
-                            </div>
+                           <select id="place" class="place_select" name="">
+                                    <option value="1" selected="selected"><%=show.getSc_code() %></option>
+                                    <option value="10000">샤롯데시어티</option>
+                                    <option value="10001"></option>
+                          </select>
                         </div>
                     </fieldset>
                     <fieldset class="edit_artist">
@@ -380,7 +349,7 @@
                         </legend>
                         <div class="edit">
                             <div class="write_wrap">
-                                <input type="text" id="artist" value="조승우,홍광호,윤공주,아이비" placeholder="출연자정보 (,로 구분)">
+                                <input type="text" id="artist" name="artists" value="<%=show.getArtists() %>" placeholder="출연자정보 (,로 구분)">
                             </div>
                         </div>
                     </fieldset>
@@ -390,7 +359,7 @@
                         </legend>
                         <div class="edit">
                             <div class="write_wrap">
-                                <input type="text" id="grade" value="만 7세이상" placeholder="">
+                                <input type="text" id="grade" name="show_grd" value="<%=show.getShow_grd() %>" placeholder="">
                             </div>
                         </div>
                         
@@ -401,7 +370,7 @@
                         </legend>
                         <div class="edit">
                             <div class="write_wrap">
-                                <input type="text" id="time" value="170분(인터미션:20분)" placeholder="">
+                                <input type="text" id="runTime" name="show_run" value="<%=show.getShow_run() %>" placeholder="">
                             </div>
                         </div>
                     </fieldset>
@@ -411,7 +380,7 @@
                         </legend>
                         <div class="edit">
                             <div class="write_wrap">
-                                <input type="text" id="price" value="140,000원" placeholder="">
+                                <input type="text" id="price" name="price" value="" placeholder="">
                             </div>
                         </div>
                     </fieldset>
@@ -421,17 +390,19 @@
                         </legend>
                         <div class="edit">
                             <div class="write_wrap">
-                                 <form action="http://localhost/insert.html" method="post" enctype="multipart/form-data">
-                                <input type="file">
-                                <!--<input type="submit">-->
-                                </form>
+                            <!-- form 태그 안에 form   -->
+                                 <!-- <form action="http://localhost/insert.html" method="post" enctype="multipart/form-data">
+                                	<input type="file">
+                                <input type="submit">
+                                </form> -->
                             </div>
                         </div>
                     </fieldset>
                 </div>
             </div>
             <div class="submit_area">
-            <input type="submit" value="공연등록" style="float:right;" width="70px" height="40">
+            <input type="submit" value="공연수정" style="float:right;" width="70px" height="40">
+            </div>
             </div>
         </div>
     </div>

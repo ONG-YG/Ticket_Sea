@@ -4,21 +4,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>회원삭제성공</title>
 </head>
 <body>
-<h3>티켓씨 테스트 홈페이지</h3>
-<button onclick="btn();">
-접속
-</button>
-
-<script>
-	function btn(){
-		window.open("/views/admin/ad_showInsert.jsp","_blank","width=1800, height=1500");
-	}
-
-</script>
-
-
+	<script>
+		alert("회원정보 삭제 완료");
+		location.href="/adMemberList.do";
+	</script>
 </body>
 </html>

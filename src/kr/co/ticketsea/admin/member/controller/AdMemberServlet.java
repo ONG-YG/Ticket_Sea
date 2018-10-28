@@ -1,26 +1,28 @@
-package kr.co.ticketsea.admin.show.controller;
+package kr.co.ticketsea.admin.member.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.jsp.tagext.PageData;
 
-import kr.co.ticketsea.admin.show.model.service.ShowService;
+import kr.co.ticketsea.admin.member.model.service.AdMemberService;
+import kr.co.ticketsea.member.model.vo.Member;
 
 /**
- * Servlet implementation class AdShowListServlet
+ * Servlet implementation class AdMemberServlet
  */
-@WebServlet(name = "AdShowList", urlPatterns = { "/adShowList.do" })
-public class AdShowListServlet extends HttpServlet {
+@WebServlet(name = "AdMember", urlPatterns = { "/adMember.do" })
+public class AdMemberServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdShowListServlet() {
+    public AdMemberServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,16 +31,20 @@ public class AdShowListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		int currentPage;
+		request.getParameter("utf-8");
 		
-		if(request.getParameter("currentPage")==null) {
-			currentPage=1;
+		int memberNo=Integer.parseInt(request.getParameter("memberNo"));
+		
+		Member m = new AdMemberService().selectOneMember(memberNo);
+		
+		if(m!=null) {
+			RequestDispatcher view = request.getRequestDispatcher("views/admin/ad_memberInfo.jsp");
+			request.setAttribute("Member", m);
+			view.forward(request, response);
 		}else {
-			currentPage=Integer.parseInt(request.getParameter("currentPage"));
-		}
-		
-		PageData pd=new ShowService().showAllList(currentPage);
+			System.out.println("불러오기실패");
+			response.sendRedirect("/views/admin/error.jsp");
+		} 
 	}
 
 	/**

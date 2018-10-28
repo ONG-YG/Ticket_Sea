@@ -81,6 +81,12 @@
         box-sizing: border-box;
         
     }
+    
+    .content_wrap form{
+    	width:980px;
+        height: 80%;
+         z-index:-10;
+    }
     h2.main_title{
         display: inline-block;
         font-size: 23px;
@@ -92,7 +98,7 @@
         background-color:white;
         box-sizing: border-box;
         display: block;
-        height:93%;
+        height:90%;
         
     }
     #content .top_area{
@@ -227,12 +233,7 @@
 </style>
 </head>
 <body>
-	
-	<script>
-		function insert(){
-			
-		}
-	</script>
+
 	<div id="wrapper">
 		<div id="header">
 			<div id="h_inner">
@@ -249,14 +250,13 @@
                 <ul>
                     <li><a href="#">공연관리</a>
                         <ul>
-                            <li><a href="ad_showInsert.html">공연등록</a></li>
-                            <li><a href="ad_showList.html">공연수정</a></li>
-                            <li><a href="#">공연삭제</a></li>
+                             <li><a href="ad_showInsert.html">공연등록</a></li>
+                            <li><a href="/adShowList.do">공연목록</a></li>
                         </ul>
                     </li>    
                     <li><a href="#">회원관리</a>
                         <ul>
-                            <li><a href="ad_memberList.html">회원목록</a></li>
+                            <li><a href="/adMemberList.do">회원목록</a></li>
                         </ul>
                     </li>
                     <li><a href="#">예매관리</a>
@@ -276,12 +276,12 @@
            <div class="content-header">
               <div id="content">
               
-              <!-- form 태그 -->
-       <!-- <form action="/showInsert.do" method="post"> -->
         <div class="content_wrap">
             <div class="top_area">
                 <h2 class="main_title">공연등록</h2>
             </div>
+            <!-- form 태그 -->
+       	<form action="/showInsert.do" method="post">
             <div class="main_area">
                 <div class="left_wrap">
                 <div class="input_area">
@@ -307,8 +307,8 @@
                         </legend>
                         <div class="edit">
                             <div class="write_wrap">
-                                <select class="category_select" name="sc_code">
-                                    <option value>카테고리 선택</option>
+                                <select class="category_select" id="category" name="sc_code">
+                                    <option value="1" selected="selected">카테고리 선택</option>
                                     <option value="MSC">뮤지컬</option>
                                     <option value="CNT">콘서트</option>
                                 </select>
@@ -334,11 +334,11 @@
                           <h3 class="title">공연장소</h3>
                         </legend>
                         <div class="edit">
-                           <select class="category_select" name="">
-                                    <option value>공연장 선택</option>
-                                    <option value="">샤롯데시어티</option>
-                                    <option value=""></option>
-                           </select>
+                           <select id="place" class="place_select" name="">
+                                    <option value="1" selected="selected">공연장 선택</option>
+                                    <option value="10000">샤롯데시어티</option>
+                                    <option value="10001"></option>
+                          </select>
                         </div>
                     </fieldset>
                     <fieldset class="edit_artist">
@@ -368,7 +368,7 @@
                         </legend>
                         <div class="edit">
                             <div class="write_wrap">
-                                <input type="text" id="time" name="show_run" value="" placeholder="">
+                                <input type="text" id="runTime" name="show_run" value="" placeholder="">
                             </div>
                         </div>
                     </fieldset>
@@ -388,33 +388,88 @@
                         </legend>
                         <div class="edit">
                             <div class="write_wrap">
-                                 <form action="http://localhost/insert.html" method="post" enctype="multipart/form-data">
-                                <input type="file">
-                                <!--<input type="submit">-->
-                                </form>
+                            <!-- form 태그 안에 form   -->
+                                 <!-- <form action="http://localhost/insert.html" method="post" enctype="multipart/form-data">
+                                	<input type="file">
+                                <input type="submit">
+                                </form> -->
                             </div>
                         </div>
                     </fieldset>
                 </div>
-                <form action="/showInsert.do" method="post" id="insertShow">
-                            <input type="hidden"  name="show_name" />
-                            <input type="hidden" name="show_st_date" />
-                            <input type="hidden" name="show_ed_date" />
-                            <input type="hidden"  name="artists" />
-                            <input type="hidden"  name="show_grd" />
-                            <input type="hidden"  name="show_run" />
-               </form>
+                
             </div>
-            <div class="submit_area">
-           <!--  <input type="submit" value="작성" style="float:right;" width="70px" height="40"> -->
-           <button id="btn" onclick="insert()">공연등록</button>
-            </div>
+	            <div class="submit_area">
+	            <input type="submit" value="작성" style="float:right;" onclick="return showCheck();" width="70px" height="40px">
+	            </div>
+            </form>
         	</div>
     	</div>
-    	<!-- </form> -->
           </div> 
         </div>
         </div>
 	</div>
+	
+	<!-- script -->
+	
+	<script>
+	function showCheck(){
+		category= document.getElementById("category").value;
+		title= document.getElementById("title").value;
+		startEventDate=document.getElementById("startEventDate").value;
+		endEventDate= document.getElementById("endEventDate").value;
+		place= document.getElementById("place").value;
+		artist= document.getElementById("artist").value;
+		grade= document.getElementById("grade").value;
+		runTime= document.getElementById("runTime").value;
+		price= document.getElementById("price").value;
+		if(category=="")
+        {
+		     alert("공연카테고리를 선택하세요");
+				return false;
+		}else if(title="")
+			{
+				alert("공연명을 입력하세요");
+				return false;
+            }
+        else if(!(/^(19|20)\d{2}.(0[1-9]|1[012]).(0[1-9]|[12][0-9]|3[0-1])$/.test(startEventDate)))
+            //년,월,일 .으로 구분
+            {
+        		alert("시작일을 입력해주세요(yyyy.mm.dd)");
+				return false;
+            }
+        else if(!(/^(19|20)\d{2}.(0[1-9]|1[012]).(0[1-9]|[12][0-9]|3[0-1])$/.test(endEventDate)))
+        	//년,월,일 .으로 구분
+        {
+        	alert("종료일을 입력해주세요(yyyy.mm.dd)");
+			return false;
+        } 
+        else if(artist=""){
+            alert("출연자를 입력하세요");
+			return false;
+        }
+        else if(!(/^[ㄱ-ㅎ|가-힣|0-9|\s]+$/g.test(grade)))
+            {   
+                 alert("관람등급을 입력하세요")
+                return false;
+            }
+        else if(!(/^[0-9]+$/g.test(runTime))) // 주소 공백검사
+            {
+                alert("관람시간을 입력하세요(숫자만)")
+                return false;
+            }
+        else if(!(/^[0-9]+$/g.test(price)))
+		{
+               	alert("가격을 입력하세요");
+                return false;
+                }
+       
+        else//모든 검사 만족시 true 반환
+        {
+            return true;
+        }
+		
+	}
+	</script>
 </body>
 </html>

@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 public class Show {
 	private int m_show_no;
 	private int th_no;
+	private String th_name;  //정보 불러올때 공연장소 번호가 아니라 이름으로 불러오기 위해
 	private String sc_code;
 	private String show_name;
 	private String show_st_date;
@@ -32,7 +33,21 @@ public class Show {
 		this.show_st_date=show_st_date;
 		this.show_ed_date=show_ed_date;
 	}
-
+	
+	public Show(int m_show_no, String th_name, String sc_code, String show_name, String show_st_date, String show_ed_date,
+			String artists, String show_grd, int show_run) {
+		super();
+		this.m_show_no = m_show_no;
+		this.th_name = th_name;
+		this.sc_code = sc_code;
+		this.show_name = show_name;
+		this.artists = artists;
+		this.show_grd = show_grd;
+		this.show_run = show_run;
+		this.show_st_date=show_st_date;
+		this.show_ed_date=show_ed_date;
+	}
+	
 	public int getM_show_no() {
 		return m_show_no;
 	}
@@ -47,6 +62,14 @@ public class Show {
 
 	public void setTh_no(int th_no) {
 		this.th_no = th_no;
+	}
+	
+	public String getth_name() {
+		return th_name;
+	}
+
+	public void setth_name(String th_name) {
+		this.th_name = th_name;
 	}
 
 	public String getSc_code() {

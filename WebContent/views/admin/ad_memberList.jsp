@@ -1,5 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import = "kr.co.ticketsea.member.model.vo.*"
+	import = "kr.co.ticketsea.admin.member.model.vo.*"
+	import = "java.util.ArrayList"
+%>
+
+<%
+	//Controller에서 보내준 값 가져오기
+	MemberPageData pd= (MemberPageData)request.getAttribute("pageData");
+	ArrayList<Member> list = pd.getList();
+	String pageNavi = pd.getPageNavi();
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,10 +21,10 @@
     div{
         box-sizing : border-box;
     }
-    #wrapper{overflow: hidden;width:1250px; height:2000px; border:1px solid black;}
+    #wrapper{overflow: hidden;width:1650px; height:1300px; border:1px solid black;}
     #header{ height:60px; background-color:;}
     #h_inner{width: 990px; height: 80%; margin: 5px auto; float:left; padding-left:20px;}
-    #content-wrapper{height:1500px; border:1px solid black;}
+    #content-wrapper{height:1300px; border:1px solid black;}
     #c_inner{width: 100%; height: 100%; margin: 0px auto; padding: 0px;}
     .main-sidebar{
         height:100%;
@@ -111,6 +122,9 @@
         height:10%;
         padding: 30px;
     }
+    
+    /* 버튼 스타일  */
+	
 </style>
 
 </head>
@@ -131,14 +145,13 @@
                 <ul>
                     <li><a href="#">공연관리</a>
                         <ul>
-                            <li><a href="ad_showInsert.html">공연등록</a></li>
-                            <li><a href="ad_showList.html">공연수정</a></li>
-                            <li><a href="#">공연삭제</a></li>
+                             <li><a href="ad_showInsert.jsp">공연등록</a></li>
+                            <li><a href="/adShowList.do">공연목록</a></li>
                         </ul>
                     </li>    
                     <li><a href="#">회원관리</a>
                         <ul>
-                            <li><a href="ad_memberList.html">회원목록</a></li>
+                            <li><a href="/adMemberList.do">회원목록</a></li>
                         </ul>
                     </li>
                     <li><a href="#">예매관리</a>
@@ -164,51 +177,37 @@
                 <div id="member_table">
                    <table class="memberTbl">
                     <thead style="background-color:#E7E7E7">
-                        <td width="20%">회원번호</td>
+                        <td width="10%">회원번호</td>
                         <td width="15%">아이디</td>
                         <td width="10%">이름</td>
                         <td width="15%">연락처</td>
                         <td width="20%">이메일</td>
-                        <!--<td>주소</td>-->
-                        <td>성별</td>
+                        <td>활동여부</td>
                         <td width="10%">가입일</td>
+                        <td>삭제</td>
                         
                        </thead>
+                       <%for(Member m : list) {%>
                        <tr>
-                           <td style = "cursor:pointer;"><a href="ad_memberInfo.html">1234567</a></td>
-                           <td>test1</td>
-                           <td>박규리</td>
-                           <td>01011112222</td>
-                           <td>test1@iei.or.kr</td>
-                           <td>여자</td>
-                           <td>2018-10-20</td>
+                           <td><a href="adMember.do?memberNo=<%=m.getMemberNo()%>"><%=m.getMemberNo()%></a></td>
+                           <td><%=m.getMemberId() %></td>
+                           <td><%=m.getMemberName() %></td>
+                           <td><%=m.getMemberPhone() %></td>
+                           <td><%=m.getMemberEmail() %></td>
+                           <td><%=m.getMemberGender() %></td>
+                           <td><%=m.getMemberJoinDate() %></td>
+                           <td><input type="button" value="삭제" onclick="delActive('<%=m.getMemberNo()%>');"></td>
+                     <script>
+                    	function delActive(memberNo){
+                    		location.href="/adMemberDelete.do?memberNo="+memberNo; //get방식으로 삭제할 회원번호 넘김
+                    	}
+                     </script>
                        </tr>
-                       <tr>
-                           <td style = "cursor:pointer;"><a href="ad_memberInfo.html">3333333</a></td>
-                           <td>test2</td>
-                           <td>장기용</td>
-                           <td>01033223522</td>
-                           <td>test2@iei.or.kr</td>
-                           <td>남자</td>
-                           <td>2017-05-23</td>
-                       </tr>
-                       <tr>
-                           <td style = "cursor:pointer;"><a href="ad_memberInfo.html">1234567</a></td>
-                           <td>test3</td>
-                           <td>절미절미</td>
-                           <td>01059595959</td>
-                           <td>test3@iei.or.kr</td>
-                           <td>여자</td>
-                           <td>2018-07-17</td>
-                       </tr>
+                        <%} %>
                     </table>
-                    
                     <!--회원목록 페이지 이동-->
                      <div class="paginate" style="text-align: center">
-                    <a class="prev"><span class="blind">이전</span></a>
-                    <strong>1</strong>
-                    <a href="#" class="">2</a>
-                    <a href="#">다음</a>
+                    	 <label><%=pageNavi%></label>
                     </div>
                     
                     <!--회원검색-->

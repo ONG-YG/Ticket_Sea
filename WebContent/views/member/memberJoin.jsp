@@ -164,24 +164,7 @@
 		    
 		
 	</div>
-
     
-    
-    
-    
-    
-    
-                
-				
-
-    
-    
-    
-    
-    
-    
-    
-	
 	<script>
 		window.onload = function(){
 			
