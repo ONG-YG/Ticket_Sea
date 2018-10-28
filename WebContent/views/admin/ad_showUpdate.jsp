@@ -252,10 +252,10 @@
             <div id="c_inner">
             <aside class="main-sidebar">
                 <div id="side-menu">
-                <ul>
+                 <ul>
                     <li><a href="#">공연관리</a>
                         <ul>
-                             <li><a href="/views/admin/ad_showInsert.jsp">공연등록</a></li>
+                             <li><a href="ad_showInsert.jsp">공연등록</a></li>
                             <li><a href="/adShowList.do">공연목록</a></li>
                         </ul>
                     </li>    
@@ -266,12 +266,12 @@
                     </li>
                     <li><a href="#">예매관리</a>
                         <ul>
-                            <li><a href="ad_reserveList.html">예매목록</a></li>
+                            <li><a href="/adReserveList.do">예매목록</a></li>
                         </ul>
                     </li>
                     <li><a href="#">소규모공연</a>
                         <ul>
-                            <li><a href="ad_miniShowList.html">승인대기공연</a></li>
+                            <li><a href="/miniShowList.do">승인대기공연</a></li>
                             <li><a href="#">승인완료공연</a></li>
                         </ul>
                     </li>
