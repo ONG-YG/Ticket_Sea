@@ -19,11 +19,11 @@
         var cnt_sel = null;
         $(document).ready(function(){
             
-            $('.calendar-date a').click(function(){
+            $('.calendar-date').click(function(){
                 date_sel = null;
                 cnt_sel = null;
                 $('#cnt_box li').removeClass('selected_cnt_li');
-                $('.calendar-date a').removeClass('selected_date_td');
+                $('.calendar-date').removeClass('selected_date_td');
                 $(this).addClass('selected_date_td');
 
                 date_sel = $('.year-month').text()+"."+$(this).text();
@@ -142,37 +142,37 @@
                                                         <td class="calendar-date">10</td>
                                                         <td class="calendar-date">11</td>
                                                         <td class="calendar-date">12</td>
-                                                        <td class="calendar-date calendar-sat"><a>13</a></td>
+                                                        <td class="calendar-date calendar-sat available">13</td>
                                                     </tr>
                                                     <tr class="calendar-week"> <!-- 달력의 한 주에 해당하는 엘리먼트 컨테이너 -->
-                                                        <td class="calendar-date calendar-sun">14</td>
+                                                        <td class="calendar-date calendar-sun available">14</td>
                                                         <!-- 날짜가 표시될 엘리먼트 -->
-                                                        <td class="calendar-date">15</td>
-                                                        <td class="calendar-date calendar-today">16</td>
+                                                        <td class="calendar-date available">15</td>
+                                                        <td class="calendar-date calendar-today available">16</td>
                                                         <td class="calendar-date">17</td>
-                                                        <td class="calendar-date"><a>18</a></td>
-                                                        <td class="calendar-date"><a>19</a></td>
-                                                        <td class="calendar-date calendar-sat"><a>20</a></td>
+                                                        <td class="calendar-date">18</td>
+                                                        <td class="calendar-date">19</td>
+                                                        <td class="calendar-date calendar-sat">20</td>
                                                     </tr>
                                                     <tr class="calendar-week"> <!-- 달력의 한 주에 해당하는 엘리먼트 컨테이너 -->
-                                                        <td class="calendar-date calendar-sun"><a>21</a></td>
+                                                        <td class="calendar-date calendar-sun">21</td>
                                                         <!-- 날짜가 표시될 엘리먼트 -->
                                                         <td class="calendar-date">22</td>
-                                                        <td class="calendar-date"><a>23</a></td>
-                                                        <td class="calendar-date"><a>24</a></td>
-                                                        <td class="calendar-date"><a>25</a></td>
-                                                        <td class="calendar-date"><a>26</a></td>
-                                                        <td class="calendar-date calendar-sat"><a>27</a></td>
+                                                        <td class="calendar-date">23</td>
+                                                        <td class="calendar-date">24</td>
+                                                        <td class="calendar-date">25</td>
+                                                        <td class="calendar-date">26</td>
+                                                        <td class="calendar-date calendar-sat">27</td>
                                                     </tr>
                                                     <tr class="calendar-week"> <!-- 달력의 한 주에 해당하는 엘리먼트 컨테이너 -->
-                                                        <td class="calendar-date calendar-sun"><a>28</a></td>
+                                                        <td class="calendar-date calendar-sun">28</td>
                                                         <!-- 날짜가 표시될 엘리먼트 -->
                                                         <td class="calendar-date">29</td>
-                                                        <td class="calendar-date"><a>30</a></td>
-                                                        <td class="calendar-date"><a>31</a></td>
-                                                        <td class="calendar-date calendar-next-mon"><a>1</a></td>
-                                                        <td class="calendar-date calendar-next-mon"><a>2</a></td>
-                                                        <td class="calendar-date calendar-next-mon calendar-sat"><a>3</a></td>
+                                                        <td class="calendar-date">30</td>
+                                                        <td class="calendar-date">31</td>
+                                                        <td class="calendar-date calendar-next-mon">1</td>
+                                                        <td class="calendar-date calendar-next-mon">2</td>
+                                                        <td class="calendar-date calendar-next-mon calendar-sat">3</td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -236,13 +236,13 @@
                 <div class="reserve_right">
                     <div class="top_info_area" style="text-align: left; padding-left: 18px;">
                         <div id="mini_poster">
-                            <img src="../../img/show-0619.png">
+                            <img src="../../img/poster/show-0619.png">
                         </div>
                         <strong id="mini_show_title">공연이름 출력란</strong>
                     </div>
                     
                     <div class="reserve_result">
-                        <div id="reserve_res_tit">예매 정보 출력란</div>
+                        <div id="reserve_res_tit">예매 정보 출력</div>
                         <hr>
                         <div id="reserve_info">
                             <div id="date_sel_info">

@@ -268,6 +268,7 @@
     text-decoration: none;
     color: dodgerblue;
     font-weight: 600;
+    border-radius: 5px;
 }
 /*--- /reserve_btn ---*/
 
@@ -318,15 +319,22 @@
     padding-left: 0px;
 }
 th,td {
+/*    border: 2px dashed; border-color: deepskyblue;*/
     width: 50px;
+    padding: 0px;
 }
-.calendar-body a {
-    text-decoration: none;
+.calendar-body .available {
     color: cornflowerblue;
+    background-color: azure;
+    box-sizing: border-box;
+    cursor: pointer;
 }
 
 .calendar-body .selected_date_td {
     background-color: rgb(190,235,250);
+    box-sizing: border-box;
+    color: royalblue;
+    font-weight: 550;
 }
 
 
