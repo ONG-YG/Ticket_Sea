@@ -1,14 +1,15 @@
 @charset "UTF-8";
 
 #wrap_reserve{
-/*    border: 5px dotted; border-color: ;*/
+/*    border: 5px dotted; border-color: black;*/
     position:relative;
     width:990px; height:100%;
+    box-sizing: content-box;
 /*    background-color: aqua;*/
 }
 
 #header{
-/*  border: 3px solid; border-color: red;*/
+/*    border: 3px solid; border-color: red;*/
     position:fixed;
     width:990px; height: 100px;
     box-sizing: border-box;
@@ -16,7 +17,7 @@
 }
 
 #container{
-/*  border: 3px solid; border-color: blue;*/
+/*    border: 3px solid; border-color: blue;*/
     width: 100%; height: 600px;
     position: relative;
     padding-top: 100px;
@@ -39,6 +40,8 @@
 .reserve_title h1{
 /*    border: 1px dashed; border-color: red;*/
     width:85px; height:28px;
+    margin-top: 12px;
+    margin-bottom: 12px;
     margin-right:2px;
     vertical-align:middle;
     display:inline-block;
@@ -56,7 +59,7 @@
 
 
 .reserve_step{
-/*border: 1px dashed; border-color: black;*/
+/*    border: 1px dashed; border-color: black;*/
     width: 100%; height: 40%;
     box-sizing: border-box;
     display: block;
@@ -67,7 +70,7 @@
     font-weight: 600;
 }
 .reserve_step li{
-/*border: 1px dashed; border-color: black;*/
+/*    border: 1px dashed; border-color: black;*/
     width: 25%; height: 100%;
     box-sizing: border-box;
     display: inline-block;
@@ -76,7 +79,7 @@
     margin: 0
 }
 .reserve_step li span{
-/*  border: 1px dashed; border-color: black;*/
+/*    border: 1px dashed; border-color: black;*/
     width: 100%; height: 100%;
     box-sizing: border-box;
     display: inline-grid;
@@ -87,19 +90,18 @@
 /*---------------------- container ----------------------*/
 
 .reserve_content{
-/*    border: 0.5px solid; border-color: skyblue;*/
+/*    border: 4px solid; border-color: greenyellow;*/
     width: 100%; height: 100%;
     box-sizing: border-box;
 }
 .reserve_left{
-/*    border: 0.5px solid; border-color: skyblue;*/
+/*    border: 5px solid; border-color: skyblue;*/
     width: 70%; height: 100%;
     float: left;
     box-sizing: border-box;
 }
 .reserve_right{
-/*    border: 0.5px solid; border-color: skyblue;*/
-/*    border-left: 1px solid; border-color: gainsboro;*/
+/*    border: 5px solid; border-color: deeppink;*/
     width: 30%; height: 100%;
     float: left;
     box-sizing: border-box;
@@ -124,7 +126,7 @@
 
 /*--- reserve_btn ---*/
 .reserve_btn>a{
-    border: 1px solid; border-color: skyblue;
+    border: 1px solid; border-color: skyblue; /*고정*/
     width: 45%; height: 95%;
     margin-left: 2.5%; margin-right: 2.5%;
     display: block;

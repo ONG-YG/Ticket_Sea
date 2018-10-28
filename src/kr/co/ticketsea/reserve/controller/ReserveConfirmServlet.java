@@ -12,14 +12,14 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class SeatSelectServlet
  */
-@WebServlet(name = "SeatSelect", urlPatterns = { "/seatSelect.do" })
-public class SeatSelectServlet extends HttpServlet {
+@WebServlet(name = "ReserveConfirm", urlPatterns = { "/reserveConfirm.do" })
+public class ReserveConfirmServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SeatSelectServlet() {
+    public ReserveConfirmServlet() {
         super();
     }
 
@@ -33,15 +33,14 @@ public class SeatSelectServlet extends HttpServlet {
 		String seat_sel = request.getParameter("seat_sel");
 		String [] dateCntSeat = {date_sel, cnt_sel, seat_sel};
 		
-		System.out.println(date_sel +"(SeatSelectServlet)");
-		System.out.println(cnt_sel +"(SeatSelectServlet)");
-		System.out.println(seat_sel +"(SeatSelectServlet)");
+		System.out.println("(SeatSelectServlet)  " + date_sel);
+		System.out.println("(SeatSelectServlet)  " + cnt_sel);
+		System.out.println("(SeatSelectServlet)  " + seat_sel);
+		System.out.println("(SeatSelectServlet)  " + dateCntSeat[0]+"/"+dateCntSeat[1]+"/"+dateCntSeat[2]);
 		
-		//int result = new ReserveService().dbTest(date_sel);
-		
-		//RequestDispatcher view = request.getRequestDispatcher("#");
-		//request.setAttribute("dateCntSeat", dateCntSeat);
-		//view.forward(request, response);	
+		RequestDispatcher view = request.getRequestDispatcher("views/reserve/reserv_step_3_confirm.jsp");
+		request.setAttribute("dateCntSeat", dateCntSeat);
+		view.forward(request, response);
 		
 		
 	}

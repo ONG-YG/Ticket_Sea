@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <title>Ticket Sea 예매</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Ticket Sea 예매</title>
     
     <!-- 외부 스타일 시트 적용 -->
-    <link href="../../css/TicketSea_reserv_common.css" rel="stylesheet" type="text/css">
-    <link href="../../css/TicketSea_reserv_step_3.css" rel="stylesheet" type="text/css">
+    <link href="../../css/reserv_common.css" rel="stylesheet" type="text/css">
+    <link href="../../css/reserv_step_3.css" rel="stylesheet" type="text/css">
     
     <script
       type="text/javascript"
@@ -16,7 +16,7 @@
         function prev() {
             var chk = confirm("이전 단계로 돌아가면 현재의 예매 정보를 잃게 됩니다.");
             if(chk) {
-                location.href="./TicketSea_reserv_step_2_seat.html"
+                location.href="./reserv_step_2_seat.html"
             }
         }
         function next() {
@@ -62,7 +62,7 @@
                 </li>
                 
                 <li class="step4">    
-                    <span>결제</span>  
+                    <span>결제완료</span>  
                 </li>
                 
             </ul>
@@ -136,7 +136,7 @@
                     </div>
                     
                     <div class="reserve_result">
-                        <div id="reserve_res_tit">예매 정보 출력란</div>
+                        <div id="reserve_res_tit">예매 정보</div>
                         <hr>
                         <ul id="select_seat_grade" class="seat_lst">
                             <!--좌석등급 별 list-->

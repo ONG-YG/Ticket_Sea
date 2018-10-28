@@ -1,5 +1,5 @@
 @charset "UTF-8";
-/*추가*/
+
 #wrap_reserve{}
 
 #header{}
@@ -163,11 +163,11 @@
         box-sizing: border-box;
     }
     .reserve_result hr{
-        border: 1px solid; border-color: gainsboro;
+        border: 1px solid; border-color: gainsboro; /*고정*/
         width: 90%;        
     }
     #select_seat_grade{
-      border: 1px solid; border-color: gainsboro;
+      border: 1px solid; border-color: gainsboro; /*고정*/
         margin: 0; padding: 10px;
         width: 90%; height: 30%;
         margin-left: 5%;
@@ -236,13 +236,13 @@
             font-size: 15px;
         }
         #reserve_info hr {
-            border: 0.5px solid; border-color: gainsboro;
+            border: 0.5px solid; border-color: gainsboro; /*고정*/
             width: 90%;
             margin-top: 5px; margin-bottom: 7px;
             margin-left: 5%;
         }
         #reserve_info hr[id=final_hr] {
-            border: 1px solid; border-color: gainsboro;
+            border: 1px solid; border-color: gainsboro; /*고정*/
             width: 90%;
             margin-top: 5px; margin-bottom: 7px;
             margin-left: 5%;

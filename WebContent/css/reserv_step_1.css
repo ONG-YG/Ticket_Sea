@@ -212,7 +212,7 @@
         box-sizing: border-box;
     }
     .reserve_result hr{
-        border: 1px solid; border-color: gainsboro;
+        border: 1px solid; border-color: gainsboro; /*고정*/
         width: 90%;        
     }
     #reserve_info {
@@ -257,7 +257,7 @@
 
 /*--- reserve_btn ---*/
 #reserve_btn_only>a{
-    border: 1px solid; border-color: skyblue;
+    border: 1px solid; border-color: skyblue; /*고정*/
     width: 95%; height: 95%;
     margin-left: 2.5%; margin-right: 2.5%;
     display: block;

@@ -1,12 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
-<%
-	String [] dateCnt = (String [])request.getAttribute("dateCnt");
-	String date_sel = dateCnt[0];
-	String cnt_sel = dateCnt[1];
-%>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Ticket Sea 예매</title>
@@ -14,35 +7,39 @@
     <link rel="shortcut icon" type="image/x-icon" href="http://ticketlink.dn.toastoven.net/web/favicon.ico">
     
     <!-- 외부 스타일 시트 적용 -->
-    <link href="../../css/TicketSea_reserv_common.css" rel="stylesheet" type="text/css">
-    <link href="../../css/TicketSea_reserv_step_2.css" rel="stylesheet" type="text/css">
+    <link href="../../css/reserv_common.css" rel="stylesheet" type="text/css">
+    <link href="../../css/reserv_step_2.css" rel="stylesheet" type="text/css">
     
     <script
       type="text/javascript"
         src="../../resources/jquery-3.3.1.js">
     </script>
+	<!--
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script>
+    -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script>		
         var selected_seat = [];
         var selected_seat_val = [];
         $(document).ready(function(){
-            
+    		
             $('.seat_a').click(function(){
-                var selected = $(this).attr('title');
-                var selected_val = $(this).attr('value');
+            	var selected = $(this).attr('id');
                 var index = selected_seat.indexOf(selected);
-                var index_val = selected_seat_val.indexOf(selected_val);
-
+                
                 if(index>=0) {
+                    //이미 선택된 좌석 다시 클릭
                     selected_seat.splice(index,1);
-                    selected_seat_val.splice(index_val,1);
                     $(this).toggleClass("selected");
                 }
                 else if (index==-1 & selected_seat.length<5) {
+                    //선택 안된 상태의 좌석 클릭
                     selected_seat.push( selected );
-                    selected_seat_val.push( selected_val );
                     $(this).toggleClass("selected");
                 }
                 else {
@@ -57,6 +54,8 @@
                     $('.reserve_btn>a').eq(1).css('background-color','white');
                     $('.reserve_btn>a').eq(1).css('color','dodgerblue');
                 }
+                selected_seat.sort();
+                selectedSeatView();
                 //alert(selected_seat);
             });
             
@@ -67,14 +66,31 @@
         
         function seatIni() {
             selected_seat = [];
-            selected_seat_val = [];
             $('#select_seat div').removeClass('selected');
+            
+            $('li[id^=selected_seat_no_] .selected_seat_grade').text(); //좌석등급
+            $('li[id^=selected_seat_no_] .selected_seat_grade').text() //좌석위치
+            $('li[id^=selected_seat_no_]').removeClass('selected_li');
+            
             $('.reserve_btn>a').eq(1).css('background-color','white');
             $('.reserve_btn>a').eq(1).css('color','dodgerblue');
         }
-        
+        function selectedSeatView() {
+            $('li[id^=selected_seat_no_]').removeClass('selected_li');
+            for(var i=0; i<selected_seat.length; i++) {
+                var seat_grd = $('#divSeatArray').children('#'+selected_seat[i]).attr('grade');
+                var seat_loc = $('#divSeatArray').children('#'+selected_seat[i]).attr('title');
+                
+                var sel_list = $('li[id^=selected_seat_no_]').eq(i);
+                $(sel_list).addClass('selected_li');
+                $(sel_list).children().children('.selected_seat_grade').text(seat_grd); //좌석등급
+                $(sel_list).children().children('.selected_seat_no').text(seat_loc) //좌석위치
+            }
+            
+        }
         function prev() {
-            location.href="./TicketSea_reserv_step_1_date_time.html"
+        	//var showNo = <%= showNo %>;
+            location.href="/dateCntSelect.do?showNo="+showNo;
             //alert("prev");
         }
 
@@ -87,9 +103,14 @@
             if(stat==false) {
                 alert("좌석을 선택하지 않았습니다. 좌석을 선택해주세요.");
             }else {
-                $('#seatForm').val(selected_val);
-                document.getElementById("seatForm").submit();
-                //location.href="./TicketSea_reserv_step_3_confirm.html";
+            	var selected_seat_val = [];
+            	for(var i=0; i<selected_seat.length; i++){
+            		var v = $('#'+selected_seat[i]).attr('value');
+            		selected_seat_val.push( v );
+            	}
+            	$('#seat_form').val(selected_seat_val);
+                document.getElementById("seatSubmitForm").submit();
+                //location.href="./reserv_step_3_confirm.html";
             }
         }
 
@@ -106,6 +127,7 @@
                 <h2>예매</h2>
             </div>
             <ul class="reserve_step">
+                
                 <li class="step1">
                     <span>날짜/회차선택</span>  
                 </li>
@@ -113,13 +135,13 @@
                 <li class="step2">
                     <span>등급/좌석선택</span>  
                 </li>
-       
+                
                 <li class="step3">    
                     <span>배송선택/예매확인</span>  
                 </li>
                 
                 <li class="step4">    
-                    <span>결제</span>  
+                    <span>결제완료</span>  
                 </li>
                 
             </ul>
@@ -686,13 +708,53 @@
                 <!--------------------------------------->
                 <!--------------------------------------->
                 <div class="reserve_right">
-                    <div class="top_info_area" style="text-align: left; padding-left: 18px;">
-                        <span style="color: red; font-size: 15px;">--------------미니맵 공간--------------- .top_info_area height 줄이면 없어짐</span>
-                        <!-- 좌석 선택 미니맵 구현 부분 -->
+                    <div class="top_info_area">
+                        <div id="selected_seat_tit_div">
+                            <div id="selected_seat_tit">선택한 좌석</div>
+                            <!--<button onclick="selectedSeatView();">보기</button>-->
+                        </div>
+                        <hr>
+                        <ul id="selected_seat">
+                            <li id="selected_seat_no_1">
+                                <div class="selected_seat_color" style="background:#ffc000"></div>
+                                <div class="selected_seat_detail_info">
+                                    <span class="selected_seat_grade" >VIP석</span>
+                                    <span class="selected_seat_no">K열 21번</span>
+                                </div>
+                            </li>
+                            <li id="selected_seat_no_2">
+                                <div class="selected_seat_color" style="background:#ffc000"></div>
+                                <div class="selected_seat_detail_info">
+                                    <span class="selected_seat_grade" >VIP석</span>
+                                    <span class="selected_seat_no">K열 22번</span>
+                                </div>
+                            </li>
+                            <li id="selected_seat_no_3">
+                                <div class="selected_seat_color" style="background:#ffc000"></div>
+                                <div class="selected_seat_detail_info">
+                                    <span class="selected_seat_grade" >VIP석</span>
+                                    <span class="selected_seat_no">K열 23번</span>
+                                </div>
+                            </li>
+                            <li id="selected_seat_no_4">
+                                <div class="selected_seat_color" style="background:#ffc000"></div>
+                                <div class="selected_seat_detail_info">
+                                    <span class="selected_seat_grade" >VIP석</span>
+                                    <span class="selected_seat_no">K열 24번</span>
+                                </div>
+                            </li>
+                            <li id="selected_seat_no_5">
+                                <div class="selected_seat_color" style="background:#ffc000"></div>
+                                    <div class="selected_seat_detail_info">
+                                        <span class="selected_seat_grade" >VIP석</span>
+                                        <span class="selected_seat_no">K열 25번</span>
+                                    </div>
+                            </li>
+						</ul>
                     </div>
                     <div class="reserve_grade">
                         <div class="reserve_tit_div">
-                            <h4 class="reserve_tit">등급별 잔여석</h4>
+                            등급별 잔여석
                         </div>
                         <hr>
                         <ul id="select_seat_grade" class="seat_lst">
@@ -718,9 +780,9 @@
                             </li>
 
                         </ul>
-                        <form action="/seatSelect.do" method="post" id="seatForm">
-                            <input type="hidden" id="date_form" name="date_sel" />
-                            <input type="hidden" id="cnt_form" name="cnt_sel" />
+                        <form action="/reserveConfirm.do" method="post" id="seatSubmitForm">
+                            <input type="hidden" id="date_form" name="date_sel" value="<%= date_sel %>"/>
+                            <input type="hidden" id="cnt_form" name="cnt_sel" value="<%= cnt_sel %>"/>
                             <input type="hidden" id="seat_form" name="seat_sel" />
                         </form>
                     </div>
