@@ -14,7 +14,7 @@
 
 <script>
 	function btn(){
-		location.href="/views/main/mainPage.html";
+		location.href="/views/admin/ad_showInsert.jsp";
 	}
 
 </script>
