@@ -2,6 +2,7 @@ package kr.co.ticketsea.reserve.model.dao;
 
 import java.beans.Statement;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,6 +12,7 @@ import kr.co.ticketsea.common.JDBCTemplate;
 import kr.co.ticketsea.reserve.model.vo.PerformSchedule;
 import kr.co.ticketsea.reserve.model.vo.SeatGradeState;
 import kr.co.ticketsea.reserve.model.vo.ShowInfo;
+import oracle.sql.DATE;
 
 public class ReserveDao {
 	
@@ -426,6 +428,54 @@ public class ReserveDao {
 		
 		
 		return progNo;
+	}
+
+	public int insertProgData(Connection conn, int progNo, int memberNo, int psNo, int seatNo) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = "INSERT INTO PROG_S_L VALUES (?,?,?,?,SYSDATE)";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, progNo);
+			pstmt.setInt(2, memberNo);
+			pstmt.setInt(3, psNo);
+			pstmt.setInt(4, seatNo);
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public Date getSysdate(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Date progTime = null;
+		
+		String query = "SELECT SYSDATE FROM DUAL";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				progTime = rset.getDate("SYSDATE");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return progTime;
 	}
 
 	

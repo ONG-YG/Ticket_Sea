@@ -1,6 +1,7 @@
 package kr.co.ticketsea.reserve.controller;
 
 import java.io.IOException;
+import java.sql.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,6 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import kr.co.ticketsea.reserve.model.service.ReserveService;
+import kr.co.ticketsea.reserve.model.vo.ReserveSession;
 
 /**
  * Servlet implementation class SeatSelectServlet
@@ -36,10 +40,15 @@ public class ReserveConfirmServlet extends HttpServlet {
 			if(session!=null) {
 				int progNo = Integer.parseInt( request.getParameter("progNo"));
 				int psNo = Integer.parseInt( request.getParameter("psNo") );
-				String seatList = request.getParameter("seatList");
+				String[] seatList = request.getParameter("seatList").split(",");
 				
+				ReserveSession rs = (ReserveSession)session.getAttribute("reserveSession");
+				int memberNo = rs.getMemberNo();
+				int currStat = rs.getCurrStat();
 				
+				Date progTime = new ReserveService().insertProgData(progNo, memberNo, psNo, seatList);
 				
+				System.out.println(progTime);
 				
 			}else {
 				System.out.println("error at ReserveConfirmServlet-2");

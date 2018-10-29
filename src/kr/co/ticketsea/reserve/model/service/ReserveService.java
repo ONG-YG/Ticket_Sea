@@ -1,6 +1,7 @@
 package kr.co.ticketsea.reserve.model.service;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.util.ArrayList;
 
 import kr.co.ticketsea.common.JDBCTemplate;
@@ -130,6 +131,34 @@ public class ReserveService {
 		JDBCTemplate.close(conn);
 		
 		return progNo;
+	}
+
+	public Date insertProgData(int progNo, int memberNo, int psNo, String[] seatList) {
+		Connection conn = JDBCTemplate.getConnection();
+		Date progTime = null;
+		
+		try {
+			for(String seat : seatList) {
+				int seatNo = Integer.parseInt(seat);
+				int result = new ReserveDao().insertProgData(conn, progNo, memberNo, psNo, seatNo);
+				
+				if(result>0) {
+					JDBCTemplate.commit(conn);
+				}else {
+					JDBCTemplate.rollback(conn);
+					throw new Exception();
+				}
+			}
+		} catch (Exception e) {
+			return null;
+		}
+		
+		progTime = new ReserveDao().getSysdate(conn);
+		
+		
+		JDBCTemplate.close(conn);
+		
+		return progTime;
 	}
 
 	
