@@ -76,7 +76,7 @@
 			line-height: 60px;
 			vertical-align: middle;
 			text-align: center;
-			background: #41b40a;
+			background: #87ceeb;
 		}
 		
 		.menulink{
@@ -102,7 +102,7 @@
 			padding-left: 10px;
 			font-size: 15px;
 			font-weight: 600;
-			border: 2px solid #41b40a;
+			border: 2px solid #87ceeb;
             float: left;			
 		}
 		form{
