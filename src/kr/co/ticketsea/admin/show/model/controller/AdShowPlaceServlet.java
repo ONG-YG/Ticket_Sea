@@ -1,6 +1,7 @@
 package kr.co.ticketsea.admin.show.model.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,21 +9,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import kr.co.ticketsea.admin.show.model.vo.*;
 
 import kr.co.ticketsea.admin.show.model.service.ShowService;
+import kr.co.ticketsea.admin.show.model.vo.ShowCategory;
+import kr.co.ticketsea.admin.show.model.vo.ShowPlace;
 
 /**
- * Servlet implementation class AdShowListServlet
+ * Servlet implementation class AdShowPlaceServlet
  */
-@WebServlet(name = "AdShowList", urlPatterns = { "/adShowList.do" })
-public class AdShowListServlet extends HttpServlet {
+@WebServlet(name = "AdShowPlace", urlPatterns = { "/adShowPlace.do" })
+public class AdShowPlaceServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdShowListServlet() {
+    public AdShowPlaceServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,25 +33,14 @@ public class AdShowListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		int currentPage;
+		ArrayList<ShowPlace> splist = new ShowService().showPlaceList();
 		
-		if(request.getParameter("currentPage")==null) {
-			currentPage=1;
-		}else {
-			currentPage=Integer.parseInt(request.getParameter("currentPage"));
-		}
+		ArrayList<ShowCategory> sclist = new ShowService().showCategoryList();
 		
-		PageData pd=new ShowService().showAllList(currentPage);
-		
-		// 3. 결과값을 view 페이지로 리턴
-		
-			
-			RequestDispatcher view = request.getRequestDispatcher("views/admin/ad_showList.jsp"); 
-			request.setAttribute("pageData", pd);
-			view.forward(request, response);
-			
-		
+		RequestDispatcher view= request.getRequestDispatcher("/views/admin/ad_showInsert.jsp");
+		request.setAttribute("showPlaceList", splist);
+		request.setAttribute("showCTGList", sclist);
+		view.forward(request, response);
 	}
 
 	/**

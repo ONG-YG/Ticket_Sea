@@ -44,15 +44,10 @@ public class AdMemberListServlet extends HttpServlet {
 		
 		//3. 결과값 view페이지로 리턴
 		
-		if(pd!=null) {
+	
 			RequestDispatcher view = request.getRequestDispatcher("views/admin/ad_memberList.jsp"); 
 			request.setAttribute("pageData", pd);
 			view.forward(request, response);
-			
-		}else {
-			System.out.println("불러오기실패");
-			response.sendRedirect("/views/admin/error.jsp");
-		} 
 	}
 
 	/**

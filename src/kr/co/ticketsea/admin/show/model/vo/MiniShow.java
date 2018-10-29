@@ -6,6 +6,7 @@ public class MiniShow {
 	
 	private int ms_no; //소규모공연번호
 	private String ms_name; //공연명
+	private String ms_userId; //작성자 아이디
 	private String ms_artists; //출연아티스트
 	private String ms_place; //공연장소
 	private Date ms_date; //공연일시
@@ -16,11 +17,12 @@ public class MiniShow {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public MiniShow(int ms_no, String ms_name, String ms_artists, String ms_place, Date ms_date, String ms_ct,
+	public MiniShow(int ms_no, String ms_name, String ms_userId,String ms_artists, String ms_place, Date ms_date, String ms_ct,
 			String ms_intd, String ms_state) {
 		super();
 		this.ms_no = ms_no;
 		this.ms_name = ms_name;
+		this.ms_userId=ms_userId;
 		this.ms_artists = ms_artists;
 		this.ms_place = ms_place;
 		this.ms_date = ms_date;
@@ -39,6 +41,12 @@ public class MiniShow {
 	}
 	public void setMs_name(String ms_name) {
 		this.ms_name = ms_name;
+	}
+	public String getMs_userId() {
+		return ms_userId;
+	}
+	public void setMs_userId(String ms_userId) {
+		this.ms_userId = ms_userId;
 	}
 	public String getMs_artists() {
 		return ms_artists;

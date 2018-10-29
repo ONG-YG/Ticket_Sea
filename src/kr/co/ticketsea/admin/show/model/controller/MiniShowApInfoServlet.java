@@ -8,21 +8,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import kr.co.ticketsea.admin.show.model.vo.*;
 
-import kr.co.ticketsea.admin.show.model.service.ShowService;
+import kr.co.ticketsea.admin.show.model.service.MiniShowService;
+import kr.co.ticketsea.admin.show.model.vo.MiniShow;
 
 /**
- * Servlet implementation class AdShowListServlet
+ * Servlet implementation class MiniShowApInfoServlet
  */
-@WebServlet(name = "AdShowList", urlPatterns = { "/adShowList.do" })
-public class AdShowListServlet extends HttpServlet {
+@WebServlet(name = "MiniShowApInfo", urlPatterns = { "/miniShowApInfo.do" })
+public class MiniShowApInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdShowListServlet() {
+    public MiniShowApInfoServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,24 +31,14 @@ public class AdShowListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		int currentPage;
+		request.getParameter("utf-8");
 		
-		if(request.getParameter("currentPage")==null) {
-			currentPage=1;
-		}else {
-			currentPage=Integer.parseInt(request.getParameter("currentPage"));
-		}
+		int msNo=Integer.parseInt(request.getParameter("msNo"));
 		
-		PageData pd=new ShowService().showAllList(currentPage);
-		
-		// 3. 결과값을 view 페이지로 리턴
-		
-			
-			RequestDispatcher view = request.getRequestDispatcher("views/admin/ad_showList.jsp"); 
-			request.setAttribute("pageData", pd);
-			view.forward(request, response);
-			
+		MiniShow ms = new MiniShowService().selectApShow(msNo);
+		RequestDispatcher view = request.getRequestDispatcher("/views/admin/ad_miniApInfo.jsp");
+		request.setAttribute("miniShow", ms);
+		view.forward(request, response);
 		
 	}
 

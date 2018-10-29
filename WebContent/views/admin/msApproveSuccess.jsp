@@ -7,18 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h3>티켓씨 테스트 홈페이지</h3>
-<button onclick="btn();">
-접속
-</button>
-
-<script>
-	function btn(){
-		window.open("/adShowPlace.do","_blank","width=1800, height=1500");
-	}
-
-</script>
-
-
+	<script>
+		alert("승인완료");
+		location.href="/miniShowList.do";
+	</script>
 </body>
 </html>

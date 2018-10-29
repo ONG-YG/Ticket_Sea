@@ -8,21 +8,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import kr.co.ticketsea.admin.show.model.vo.*;
 
-import kr.co.ticketsea.admin.show.model.service.ShowService;
+import kr.co.ticketsea.admin.show.model.service.MiniShowService;
+import kr.co.ticketsea.admin.show.model.vo.MiniPgData;
 
 /**
- * Servlet implementation class AdShowListServlet
+ * Servlet implementation class MsApproveListServlet
  */
-@WebServlet(name = "AdShowList", urlPatterns = { "/adShowList.do" })
-public class AdShowListServlet extends HttpServlet {
+@WebServlet(name = "MsApproveList", urlPatterns = { "/msApproveList.do" })
+public class MsApproveListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdShowListServlet() {
+    public MsApproveListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,24 +31,21 @@ public class AdShowListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		int currentPage;
-		
 		if(request.getParameter("currentPage")==null) {
 			currentPage=1;
 		}else {
 			currentPage=Integer.parseInt(request.getParameter("currentPage"));
 		}
+		MiniPgData mpd=new MiniShowService().showApproveList(currentPage);
 		
-		PageData pd=new ShowService().showAllList(currentPage);
-		
-		// 3. 결과값을 view 페이지로 리턴
-		
-			
-			RequestDispatcher view = request.getRequestDispatcher("views/admin/ad_showList.jsp"); 
-			request.setAttribute("pageData", pd);
+		if(mpd!=null) {
+			RequestDispatcher view = request.getRequestDispatcher("/views/admin/ad_miniShowAp.jsp");
+			request.setAttribute("miniPgData", mpd);
 			view.forward(request, response);
-			
+		}else {
+			response.sendRedirect("/views/admin/error.jsp");
+		}
 		
 	}
 

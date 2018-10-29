@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 
 import kr.co.ticketsea.admin.show.model.dao.ShowDao;
-import kr.co.ticketsea.admin.show.model.vo.Show;
 import kr.co.ticketsea.common.JDBCTemplate;
 import kr.co.ticketsea.admin.show.model.vo.*;
 
@@ -66,6 +65,41 @@ public class ShowService {
 		JDBCTemplate.close(conn);
 		
 		return show;
+	}
+	
+	//장소정보 가져오는 리스트
+	
+	public ArrayList<ShowPlace> showPlaceList() {
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<ShowPlace> list =  new ShowDao().showPlaceList(conn);
+		
+		JDBCTemplate.close(conn);
+		
+		return list;
+	}
+
+	public ArrayList<ShowCategory> showCategoryList() {
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<ShowCategory> list = new ShowDao().showCategoryList(conn);
+		
+		JDBCTemplate.close(conn);
+		
+		return list;
+	}
+	
+	//소규모 공연 승인하는 로직
+	public int miniShowApprove(int msNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result=new ShowDao().miniShowApprove(conn,msNo);
+		
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		
+		return result;
 	}
 
 

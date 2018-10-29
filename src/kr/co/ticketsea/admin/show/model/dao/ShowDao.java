@@ -4,9 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import kr.co.ticketsea.admin.show.model.vo.Show;
+import kr.co.ticketsea.admin.show.model.vo.ShowCategory;
+import kr.co.ticketsea.admin.show.model.vo.ShowPlace;
 import kr.co.ticketsea.common.JDBCTemplate;
 
 public class ShowDao {
@@ -213,6 +216,85 @@ public class ShowDao {
 		}
 		
 		return show;
+	}
+
+	public ArrayList<ShowPlace> showPlaceList(Connection conn) {
+		
+		ArrayList<ShowPlace> list=new ArrayList<ShowPlace>();
+		Statement stmt= null;
+		ResultSet rset=null;
+		
+		String query = "select * from THEATER_L";
+		
+		try {
+			stmt=conn.createStatement();
+			rset=stmt.executeQuery(query);
+			
+			while(rset.next()) {
+				ShowPlace sp=new ShowPlace();
+				sp.setTh_no(rset.getInt("th_no"));
+				sp.setTh_name(rset.getString("th_name"));
+				sp.setTh_lct(rset.getString("th_lct"));
+				
+				list.add(sp);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(stmt);
+		}
+		
+		return list;
+	}
+
+	public ArrayList<ShowCategory> showCategoryList(Connection conn) {
+		ArrayList<ShowCategory> list=new ArrayList<ShowCategory>();
+		Statement stmt= null;
+		ResultSet rset=null;
+		
+		String query = "select * from SHOW_CTG";
+		
+		try {
+			stmt=conn.createStatement();
+			rset=stmt.executeQuery(query);
+			
+			while(rset.next()) {
+				ShowCategory sc=new ShowCategory();
+				sc.setSc_code(rset.getString("sc_code"));
+				sc.setSc_name(rset.getString("sc_name"));
+				list.add(sc);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(stmt);
+		}
+		
+		return list;
+	}
+
+	public int miniShowApprove(Connection conn, int msNo) {
+		PreparedStatement pstmt=null;
+		int result = 0;
+		String query = "update mini_show set ms_state='ap_cmt' where ms_no=?";
+		
+		try {
+			pstmt=conn.prepareStatement(query);
+			pstmt.setInt(1, msNo);
+			
+			result= pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+		
 	}
 
 }

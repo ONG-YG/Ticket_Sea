@@ -272,7 +272,7 @@
                     <li><a href="#">소규모공연</a>
                         <ul>
                             <li><a href="/miniShowList.do">승인대기공연</a></li>
-                            <li><a href="#">승인완료공연</a></li>
+                            <li><a href="/msApproveList.do">승인완료공연</a></li>
                         </ul>
                     </li>
                 </ul>

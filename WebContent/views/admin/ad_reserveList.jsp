@@ -125,7 +125,7 @@
                  <ul>
                     <li><a href="#">공연관리</a>
                         <ul>
-                             <li><a href="ad_showInsert.jsp">공연등록</a></li>
+                             <li><a href="/admin/ad_showInsert.jsp">공연등록</a></li>
                             <li><a href="/adShowList.do">공연목록</a></li>
                         </ul>
                     </li>    
@@ -142,7 +142,7 @@
                     <li><a href="#">소규모공연</a>
                         <ul>
                             <li><a href="/miniShowList.do">승인대기공연</a></li>
-                            <li><a href="#">승인완료공연</a></li>
+                            <li><a href="/msApproveList.do">승인완료공연</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -190,7 +190,7 @@
                     
                     <!--회원목록 페이지 이동-->
                      <div class="paginate" style="text-align: center">
-                    <label><%=pageNavi%></label>
+                    <label></label>
                     </div>
                     
                     <!--회원검색-->
