@@ -9,17 +9,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import kr.co.ticketsea.member.model.vo.Member;
+import kr.co.ticketsea.member.service.MemberService;
+
 /**
- * Servlet implementation class LogoutServlet
+ * Servlet implementation class MemberDeleteServlet
  */
-@WebServlet(name = "Logout", urlPatterns = { "/logout.do" })
-public class LogoutServlet extends HttpServlet {
+@WebServlet(name = "MemberDelete", urlPatterns = { "/memberDelete.do" })
+public class MemberDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LogoutServlet() {
+    public MemberDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,18 +31,25 @@ public class LogoutServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
-		
-		HttpSession session = request.getSession(false);
-		
-		if(session!=null) 
-		{
-			session.invalidate(); 
-			response.sendRedirect("/index.jsp");
-		}
-		
-		
+		//1. 세션에서 탈퇴할 아이디를 추출
+				HttpSession session = request.getSession(false);
+				String userId = ((Member)session.getAttribute("member")).getMemberId();
+				
+				
+				//2. 비즈니스 로직처리
+				int result = new MemberService().memberDelete(userId);
+				
+				//3. 결과 리턴
+				
+				if(result>0) {
+					session.invalidate();
+					response.sendRedirect("/views/member/deleteSuccess.jsp");
+				}else {
+					response.sendRedirect("/views/member/error.jsp");
+				}
+				
+				
+				
 	}
 
 	/**

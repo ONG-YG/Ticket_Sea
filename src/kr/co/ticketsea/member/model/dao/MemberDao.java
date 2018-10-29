@@ -43,6 +43,7 @@ public class MemberDao {
 			e.printStackTrace();
 		} finally {
 			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rset);
 		}
 		 return member;
 		
@@ -137,6 +138,33 @@ public class MemberDao {
 		
 		return result;
 		
+	}
+
+	public int memberDelete(Connection conn, String userId) {
+
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = "update member set member_active=? where member_id=?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setString(1, "N");
+			pstmt.setString(2, userId);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+			
+		
+		
+		return result;
 	}
 
 }

@@ -10,7 +10,7 @@
 
 
 <script>
-alert("凸 에러입니다 凸 	이거나 드셔 凸 ");
+alert("잘못된 접근입니다.");
 window.close();
 </script>
 
