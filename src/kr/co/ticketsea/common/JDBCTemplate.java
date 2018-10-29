@@ -35,6 +35,7 @@ public class JDBCTemplate {
             e.printStackTrace();
         }
 
+
     }
     public static void close(Statement stmt) {	
         try {
@@ -82,5 +83,6 @@ public class JDBCTemplate {
 
 
     }
+
 
 }
