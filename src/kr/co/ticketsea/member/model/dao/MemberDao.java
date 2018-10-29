@@ -43,6 +43,7 @@ public class MemberDao {
 			e.printStackTrace();
 		} finally {
 			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rset);
 		}
 		 return member;
 		

@@ -27,12 +27,16 @@
     #h_inner{width: 990px; height: 100%; margin: 0px auto;}
     
     #menu ul{padding: 0px; margin: 0px;}
-        
+    
+    
+    #header h5{
+    	display: block;
+    	float: left;
+    }
     #header .topnav {
-        position: relative;
         background: #fafafa;
         border-bottom: 1px solid #f0f0f0;
-        height: 21px;
+        height: 20px;
         padding-top: 11px;
         box-sizing: padding-box;
     }
@@ -277,21 +281,26 @@
                 <div class="inner">
                     <div class="login">
                         <div id="login" style="">
+                        
                         	<% //로그인 세션
 								session = request.getSession(false);
-								Member member = (Member)session.getAttribute("member");	
+								Member member = (Member)session.getAttribute("member");
+								
 								if(member!=null){ //로그인 성공시
 							%>
+
 							<a href="/logout.do" id="logout">로그아웃</a>
-							<a href="#" id="myPage">마이페이지</a>
-							<a href="#" id="reserve">예매확인/취소</a><span>|</span>
+							<a href="/reserveList.do" id="myPage">마이페이지</a><span>|</span>
 							
 							<%}else{ %>
+							
 							<a href="#"  class="btn login" 
 							onclick="window.open('/views/member/login.jsp','로그인','width=430,height=440'); return false;"  id="loginBtn">로그인</a>
 							 <a href="#" id="joinBtn"
                    			 onclick="window.open('/views/member/memberJoin.jsp','회원가입','width=430,height=750'); return false;">회원가입</a><span>|</span> 
+							
 							<% } %>
+							
 							<a href="#" >고객센터</a>
 						</div>
                     </div>

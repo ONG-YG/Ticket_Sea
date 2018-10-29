@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ page import="kr.co.ticketsea.member.model.vo.*" %>
+    <%
+    	Member m = (Member)request.getAttribute("reserveList");
+    %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -233,7 +237,7 @@
                 <li class="has_sub1">
                     <span>예매 관리</span>
                     <ul>
-                        <li><a href="reserveList.jsp">예매확인/취소</a>
+                        <li><a href="/reserveList.do">예매확인/취소</a>
                     </ul>
                 </li>
                 <li class="has_sub">
@@ -263,10 +267,9 @@
                         <thead>
                             <tr>
                                 <th>예매번호</th>
-                                <th>티켓명</th>
-                                <th>관람일시</th>
+                                <th>공연명</th>
+                                <th>공연일</th>
                                 <th>매수</th>
-                                <th>취소가능일</th>
                                 <th>상태</th>
                             </tr>
                         </thead>
@@ -276,7 +279,6 @@
                                 <td>라이온킹</td>
                                 <td>18.10.11</td>
                                 <td>2</td>
-                                <td>18.10.01 까지</td>
                                 <td>사용완료</td>
                             </tr>
                             <tr>
@@ -284,7 +286,6 @@
                                 <td>라이온</td>
                                 <td>18.11.20</td>
                                 <td>3</td>
-                                <td>18.11.10 까지</td>
                                 <td>
                                     <button class="cancelBtn">취소</button>
                                 </td>

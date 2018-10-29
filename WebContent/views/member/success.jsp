@@ -10,7 +10,7 @@
 <script>
 alert("凸요청한 작업 성공凸");
 window.close();
-opener.parent.location.href ="/TicketSea_MainPage.html";
+opener.parent.location.href ="/index.jsp";
 </script>
 
 </body>

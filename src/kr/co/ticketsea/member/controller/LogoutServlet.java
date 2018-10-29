@@ -28,13 +28,15 @@ public class LogoutServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//세션파기
+		
+		
+		
 		HttpSession session = request.getSession(false);
 		
 		if(session!=null) 
 		{
-			session.invalidate(); //세션 파기
-			response.sendRedirect("/header.jsp");
+			session.invalidate(); 
+			response.sendRedirect("/index.jsp");
 		}
 		
 		
