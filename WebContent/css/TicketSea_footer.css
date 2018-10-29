@@ -1,0 +1,9 @@
+@charset "UTF-8";
+
+    
+    ul, li{list-style: none; display: block; text-decoration-line: none;}
+    a{text-decoration: none;}
+    
+    div{box-sizing: border-box;}
+    
+    .f_inner{width: 990px;margin: 0px auto;}
