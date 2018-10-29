@@ -266,7 +266,7 @@
                     <table>
                         <thead>
                             <tr>
-                                <th>예매번호</th>
+                                <th>번호</th>
                                 <th>공연명</th>
                                 <th>공연일</th>
                                 <th>매수</th>

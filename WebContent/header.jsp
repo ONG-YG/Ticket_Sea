@@ -76,7 +76,7 @@
 			line-height: 60px;
 			vertical-align: middle;
 			text-align: center;
-			background: #41b40a;
+			background: #87ceeb;
 		}
 		
 		.menulink{
@@ -102,7 +102,7 @@
 			padding-left: 10px;
 			font-size: 15px;
 			font-weight: 600;
-			border: 2px solid #41b40a;
+			border: 2px solid #87ceeb;
             float: left;			
 		}
 		form{
@@ -135,8 +135,8 @@
 								if(member!=null){ //로그인 성공시
 							%>
 							<a href="/logout.do" id="logout">로그아웃</a>
-							<a href="#" id="myPage">마이페이지</a>
-							<a href="#" id="reserve">예매확인/취소</a><span>|</span>
+							<a href="reserveList.do" id="myPage">마이페이지</a>
+							<a href="reserveList.do" id="reserve">예매확인/취소</a><span>|</span>
 							
 							<%}else{ %>
 							<a href="#"  class="btn login" 
@@ -154,7 +154,7 @@
             <div class="search_area">
 				<!--logo div-->
 				<h1>
-					<a href="/TicketSea_MainPage.html" class="logo">Ticket Sea</a>
+					<a href="/index.jsp" class="logo">Ticket Sea</a>
 				</h1>
 				<div class="search">
 					
