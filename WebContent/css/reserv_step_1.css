@@ -212,7 +212,7 @@
         box-sizing: border-box;
     }
     .reserve_result hr{
-        border: 1px solid; border-color: gainsboro;
+        border: 1px solid; border-color: gainsboro; /*고정*/
         width: 90%;        
     }
     #reserve_info {
@@ -257,7 +257,7 @@
 
 /*--- reserve_btn ---*/
 #reserve_btn_only>a{
-    border: 1px solid; border-color: skyblue;
+    border: 1px solid; border-color: skyblue; /*고정*/
     width: 95%; height: 95%;
     margin-left: 2.5%; margin-right: 2.5%;
     display: block;
@@ -268,6 +268,7 @@
     text-decoration: none;
     color: dodgerblue;
     font-weight: 600;
+    border-radius: 5px;
 }
 /*--- /reserve_btn ---*/
 
@@ -318,15 +319,22 @@
     padding-left: 0px;
 }
 th,td {
+/*    border: 2px dashed; border-color: deepskyblue;*/
     width: 50px;
+    padding: 0px;
 }
-.calendar-body a {
-    text-decoration: none;
+.calendar-body .available {
     color: cornflowerblue;
+    background-color: azure;
+    box-sizing: border-box;
+    cursor: pointer;
 }
 
 .calendar-body .selected_date_td {
     background-color: rgb(190,235,250);
+    box-sizing: border-box;
+    color: royalblue;
+    font-weight: 550;
 }
 
 

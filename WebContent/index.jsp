@@ -142,6 +142,7 @@
             </div>
         </div>
 
+
         <div id="inner">
             <h3>Best 공연 및 전시</h3>
             <ul class="best_list">
@@ -311,7 +312,6 @@
     </div>
     
 </div>
-
 
 </body>
 </html>

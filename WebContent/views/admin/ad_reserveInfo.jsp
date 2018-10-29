@@ -1,8 +1,9 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta charset="UTF-8">
-<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <style>
      ul, li, a{list-style: none; margin: 0px; padding: 0px;     text-decoration: none; color: black;}
     div{
@@ -66,8 +67,6 @@
         width:85%;
         height:1300px;
         display: block;
-        position:relative;
-        
     }
     .content_wrap{
         width:980px;
@@ -75,9 +74,7 @@
         margin:0 auto;
         border:1px solid black;
         box-sizing: border-box;
-        display: inline-block;
-        position:absolute;
-        left:4%;
+        
     }
     h2.main_title{
         display: inline-block;
@@ -99,25 +96,89 @@
             width:900px;
             text-align: center;
             
-        }
-    
-    .memberTbl tr:nth-child(2n){
-        background-color: #F6F6F6;
-        
     }
-    .content_wrap .searchArea{
-        height:10%;
-        padding: 30px;
+    .reserveInfo_table{
+        border-width: 1px 0;
+        border-style: solid;
+        border-color: #c7c7c7;
+    }
+    .reserveInfo_table table{
+        width: 100%;
+        border-spacing: 0;
+    }
+    .reserveInfo_table th{
+        
+        border-bottom: 1px dashed #dedede;
+        padding: 30px 0 30px 20px;
+        text-align: left;
+        line-height: 40px;
+        letter-spacing: -1px;
+        color: black;
+        font-size: 16px;
+        width: 200px;
+    }
+    .reserveInfo_table td{
+        text-align: center;
+        border-bottom: 1px dashed #dedede;
+        font-size: 14px;
+        text-align: left;
+    }
+    .reserveInfo_table input[type="text"]{
+        height:25px;
+        font-size:14px;
+    }
+    
+    #reserveCancel{
+        padding-top:40px;
+        text-align: center;
+    }
+    /*버튼 스타일*/
+    button{
+      background:#4ABFD3;
+      color:#fff;
+      border:none;
+      position:relative;
+      height:60px;
+      font-size:1.6em;
+      font-weight: 600;
+      padding:0 2em;
+      cursor:pointer;
+      transition:800ms ease all;
+      outline:none;
+    }
+    button:hover{
+      background:#fff;
+      color:#4ABFD3;
+    }
+    button:before,button:after{
+      content:'';
+      position:absolute;
+      top:0;
+      right:0;
+      height:2px;
+      width:0;
+      background: #4ABFD3;
+      transition:400ms ease all;
+    }
+    button:after{
+      right:inherit;
+      top:inherit;
+      left:0;
+      bottom:0;
+    }
+    button:hover:before,button:hover:after{
+      width:100%;
+      transition:800ms ease all;
     }
 </style>
-<title>관리자페이지</title>
+<title>Insert title here</title>
 </head>
 <body>
-	<div id="wrapper">
+		<div id="wrapper">
 		<div id="header">
 			<div id="h_inner">
                 <div id="icon">
-                    <a href="../admin/admin_page.html"><img width="180" height="50" alt="Ticket Sea" src="../../img/ticket_admin.png"></a>
+                   <a href="../admin/admin_page.html"><img width="180" height="50" alt="Ticket Sea" src="../../img/ticket_admin.png"></a>
 
                 </div>
 			</div>
@@ -156,67 +217,54 @@
                 <div id="content">
            <div class="content_wrap">
               <div class="top_area">
-                  <h2 class="main_title" >회원관리</h2>
+                  <h2 class="main_title">예매정보</h2>
                </div>
                <div class="main_area">
-                <div id="member_table">
-                   <table class="memberTbl">
-                    <thead style="background-color:#E7E7E7">
-                        <td width="20%">회원번호</td>
-                        <td width="15%">아이디</td>
-                        <td width="10%">이름</td>
-                        <td width="15%">연락처</td>
-                        <td width="20%">이메일</td>
-                        <!--<td>주소</td>-->
-                        <td>성별</td>
-                        <td width="10%">가입일</td>
-                        
-                       </thead>
-                       <tr>
-                           <td style = "cursor:pointer;"><a href="ad_memberInfo.html">1234567</a></td>
-                           <td>test1</td>
-                           <td>박규리</td>
-                           <td>01011112222</td>
-                           <td>test1@iei.or.kr</td>
-                           <td>여자</td>
-                           <td>2018-10-20</td>
-                       </tr>
-                       <tr>
-                           <td style = "cursor:pointer;"><a href="ad_memberInfo.html">3333333</a></td>
-                           <td>test2</td>
-                           <td>장기용</td>
-                           <td>01033223522</td>
-                           <td>test2@iei.or.kr</td>
-                           <td>남자</td>
-                           <td>2017-05-23</td>
-                       </tr>
-                       <tr>
-                           <td style = "cursor:pointer;"><a href="ad_memberInfo.html">1234567</a></td>
-                           <td>test3</td>
-                           <td>절미절미</td>
-                           <td>01059595959</td>
-                           <td>test3@iei.or.kr</td>
-                           <td>여자</td>
-                           <td>2018-07-17</td>
-                       </tr>
+                   <div class="reserveInfo_table">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <th>예매번호</th>
+                                <td>T123456</td>
+                            </tr>
+                            <tr>
+                                <th>예매일</th>
+                                <td>2018.10.14</td>
+                            </tr>
+                            <tr>
+                                <th>관람일시</th>
+                                <td>2018.12.25(화) 19:00 1회</td>
+                            </tr>
+                            <tr>
+                                <th>아이디</th>
+                                <td>test432</td>
+                            </tr>
+                            <tr>
+                                <th>예매자명</th>
+                                <td>지창욱</td>
+                            </tr>
+                            <tr>
+                                <th>연락처</th>
+                                <td>010-1234-5678</td>
+                            </tr>
+                            <tr>
+                                <th>주소</th>
+                                <td>서울시 강남구</td>
+                            </tr>
+                            <tr>
+                                <th>결제정보</th>
+                                <td>157,500원</td>
+                            </tr>
+                            <tr>
+                                <th>예매상태</th>
+                                <td>예매완료</td>
+                            </tr>
+                        </tbody>
                     </table>
-                    
-                    <!--회원목록 페이지 이동-->
-                     <div class="paginate" style="text-align: center">
-                    <a class="prev"><span class="blind">이전</span></a>
-                    <strong>1</strong>
-                    <a href="#" class="">2</a>
-                    <a href="#">다음</a>
-                    </div>
-                    
-                    <!--회원검색-->
-                    <div class="searchArea"> 
-                    <a href="#"><img src="../../img/btn_search4.png" alt="검색" style="float: right"></a>
-                
-					<input type="text" class="textInp" name="searchValue" id="searchValue" style="float: right">
-					<a href="javascript:search();"></a>
-				</div>
                 </div>
+                   <div id="reserveCancel">
+                    <button >예매취소</button>
+                   </div>
                </div>
                </div>
           </div> 

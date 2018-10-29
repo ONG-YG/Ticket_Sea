@@ -1,8 +1,10 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta charset="UTF-8">
-<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
 <style>
      ul, li, a{list-style: none; margin: 0px; padding: 0px;     text-decoration: none; color: black;}
     div{
@@ -86,7 +88,7 @@
     }
     
     /*회원테이블*/
-    .showTbl{
+    .miniShowTbl{
             border:1px solid #dedede;
             border-right:0;
             font-size:15px;
@@ -97,7 +99,7 @@
             
         }
     
-    .showTbl tr:nth-child(2n){
+    .miniShowTbl tr:nth-child(2n){
         background-color: #F6F6F6;
         
     }
@@ -106,10 +108,9 @@
         padding: 30px;
     }
 </style>
-<title>관리자페이지</title>
 </head>
 <body>
-	<div id="wrapper">
+		<div id="wrapper">
 		<div id="header">
 			<div id="h_inner">
                 <div id="icon">
@@ -126,7 +127,7 @@
                     <li><a href="#">공연관리</a>
                         <ul>
                             <li><a href="ad_showInsert.html">공연등록</a></li>
-                            <li><a href="/adShowList.do">공연수정</a></li>
+                            <li><a href="ad_showList.html">공연수정</a></li>
                             <li><a href="#">공연삭제</a></li>
                         </ul>
                     </li>    
@@ -152,39 +153,39 @@
                 <div id="content">
            <div class="content_wrap">
               <div class="top_area">
-                  <h2 class="main_title">공연정보</h2>
+                  <h2 class="main_title">소규모공연</h2>
                </div>
                <div class="main_area">
-                <div id="show_table">
-                   <table class="showTbl">
+                <div id="member_table">
+                   <table class="miniShowTbl">
                     <thead style="background-color:#E7E7E7">
-                        <td width="15%">공연번호</td>
-                        <td width="20%">공연명</td>
-                        <td width="25%">츨연자</td>
-                        <td width="15%">공연시간</td>
-                        <td>시작일</td>
-                        <td>종료일</td>
+                        <td width="15%" >공연장르</td>
+                        <td width="20%" style="overflow:hidden;">공연명</td>
+                        <td width="10%">작성자</td>
+                        <td width="20%">공연장소</td>
+                        <td width="15%">등록일시</td>
                        </thead>
                        <tr>
-                           <td><a href="ad_showUpdate.html">S123456</a></td>
-                           <td>지킬앤하이드</td>
-                           <td>조승우,홍광호,윤공주,아이비</td>
-                           <td>170분</td>
-                           <td>2018.11.13</td>
-                           <td>2019.05.19</td>
+                           <td>뮤지컬</td>
+                           <td onclick="">이상하고아름다운</td>
+                           <td>test11</td>
+                           <td>서울시 마포구</td>
+                           <td>2018-09-27</td>
                        </tr>
                        <tr>
-                           <td><a href="ad_showUpdate.html">S123457</a></td>
-                           <td>넬 크리스마스콘서트</td>
-                           <td>넬</td>
-                           <td>120분</td>
-                           <td>2018.12.22</td>
-                           <td>2018.12.24</td>
+                           <td>연극</td>
+                           <td>도깨비나라</td>
+                           <td>test77</td>
+                           <td>혜화동 로터리</td>
+                           <td>2018-10-01</td>
+                       </tr>
+                       <tr>
+                           
                        </tr>
                     </table>
                     
                     <!--회원목록 페이지 이동-->
-                     <div class="paginate" style="text-align: center">
+                    <div class="paginate" style="text-align: center">
                     <a class="prev"><span class="blind">이전</span></a>
                     <strong>1</strong>
                     <a href="#" class="">2</a>

@@ -1,22 +1,46 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<%
+	String [] dateCntSeat = (String [])request.getAttribute("dateCntSeat");
+	String date_sel = dateCntSeat[0];
+	String cnt_sel = dateCntSeat[1];
+	String seat_sel = dateCntSeat[2];
+%>
 <head>
-    <meta charset="utf-8">
-    <title>Ticket Sea 예매</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Ticket Sea 예매</title>
     
     <!-- 외부 스타일 시트 적용 -->
-    <link href="../../css/TicketSea_reserv_common.css" rel="stylesheet" type="text/css">
-    <link href="../../css/TicketSea_reserv_step_3.css" rel="stylesheet" type="text/css">
+    <link href="../../css/reserv_common.css" rel="stylesheet" type="text/css">
+    <link href="../../css/reserv_step_3.css" rel="stylesheet" type="text/css">
     
     <script
       type="text/javascript"
         src="../../resources/jquery-3.3.1.js">
     </script>
     <script>
+	    $(document).ready(function(){
+	    	
+	    	pageInit();
+			
+	    });
+	    
+	    function pageInit() {
+	    	
+	    	//var showTitle = '';
+	    	//$('#mini_show_title').text(showTitle);	//공연명
+	    	
+	    	//var showPosterSrc = "/img/poster/";
+	    	//$('#mini_poster img').attr('src',showPosterSrc);
+	    	
+	    }
+    	
         function prev() {
             var chk = confirm("이전 단계로 돌아가면 현재의 예매 정보를 잃게 됩니다.");
             if(chk) {
-                location.href="./TicketSea_reserv_step_2_seat.html"
+                location.href="./reserv_step_2_seat.html"
             }
         }
         function next() {
@@ -62,7 +86,7 @@
                 </li>
                 
                 <li class="step4">    
-                    <span>결제</span>  
+                    <span>결제완료</span>  
                 </li>
                 
             </ul>
@@ -130,13 +154,13 @@
                 <div class="reserve_right">
                     <div class="top_info_area" style="text-align: left; padding-left: 18px;">
                         <div id="mini_poster">
-                            <img src="../../img/show-0619.png">
+                            <img src="../../img/poster/show-0619.png">
                         </div>
                         <strong id="mini_show_title">공연이름 출력란</strong>
                     </div>
                     
                     <div class="reserve_result">
-                        <div id="reserve_res_tit">예매 정보 출력란</div>
+                        <div id="reserve_res_tit">예매 정보</div>
                         <hr>
                         <ul id="select_seat_grade" class="seat_lst">
                             <!--좌석등급 별 list-->
