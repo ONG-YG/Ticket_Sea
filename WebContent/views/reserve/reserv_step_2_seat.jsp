@@ -878,8 +878,8 @@
 
                         </ul>
                         <form action="/reserveConfirm.do?progNo=<%=progNo%>" method="post" id="seatSubmitForm">
-                            <input type="hidden" id="psNo_form" name="dateCnt_sel" value="<%= psNo %>"/>
-                            <input type="hidden" id="seat_form" name="seat_sel" />
+                            <input type="hidden" id="psNo_form" name="psNo" value="<%= psNo %>"/>
+                            <input type="hidden" id="seat_form" name="seatList" />
                         </form>
                     </div>
                     <div class="reserve_btn">

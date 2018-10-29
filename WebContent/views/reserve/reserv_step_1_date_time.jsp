@@ -51,6 +51,8 @@
         var cnt_sel = null;
         $(document).ready(function(){
             
+        	pageInit();
+        	
             $('.calendar-date').click(function(){
                 date_sel = null;
                 cnt_sel = null;
@@ -79,6 +81,16 @@
             })
             
         })
+        
+        function pageInit() {
+        	
+        	var showTitle = '<%=showTitle%>';
+        	$('#mini_show_title').text(showTitle);	//공연명
+        	
+        	var showPosterSrc = "/img/poster/<%=showPoster%>";
+        	$('#mini_poster img').attr('src',showPosterSrc);
+        	
+        }
         
         function next() {
             var stat = false;
@@ -268,7 +280,7 @@
                 <div class="reserve_right">
                     <div class="top_info_area" style="text-align: left; padding-left: 18px;">
                         <div id="mini_poster">
-                            <img src="../../img/poster/show-0619.png">
+                            <img src="#">
                         </div>
                         <strong id="mini_show_title">공연이름 출력란</strong>
                     </div>

@@ -5,7 +5,7 @@ import java.sql.Date;
 public class ReserveSession {
 	
 	private int memberNo;		//회원번호
-	private int currStat;		//현재 진행단계
+	private int currStat;		//현재 진행단계 (DateCnt-1 / ReserveSeat-2 / ReserveConfirm-3)
 	private int progNo;			//예매진행번호
 	private Date progTime;		//예매시작시간(step3진입 시점)
 	

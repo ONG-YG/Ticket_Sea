@@ -21,6 +21,22 @@
         src="../../resources/jquery-3.3.1.js">
     </script>
     <script>
+	    $(document).ready(function(){
+	    	
+	    	pageInit();
+			
+	    });
+	    
+	    function pageInit() {
+	    	
+	    	//var showTitle = '';
+	    	//$('#mini_show_title').text(showTitle);	//공연명
+	    	
+	    	//var showPosterSrc = "/img/poster/";
+	    	//$('#mini_poster img').attr('src',showPosterSrc);
+	    	
+	    }
+    	
         function prev() {
             var chk = confirm("이전 단계로 돌아가면 현재의 예매 정보를 잃게 됩니다.");
             if(chk) {

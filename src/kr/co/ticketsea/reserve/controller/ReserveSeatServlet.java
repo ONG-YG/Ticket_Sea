@@ -41,7 +41,7 @@ public class ReserveSeatServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		try {
-			
+			request.setCharacterEncoding("utf-8");
 			HttpSession session = request.getSession(false);
 			//세션발급되지 않은 상태에서 접근 금지
 			if(session!=null) {
@@ -49,14 +49,11 @@ public class ReserveSeatServlet extends HttpServlet {
 				int currStat = rs.getCurrStat();
 				//비정상적 루트에서 접근 금지
 				if(currStat==1) {
-					request.setCharacterEncoding("utf-8");
+					
 					int psNo = Integer.parseInt( request.getParameter("psNo") );
 					
 					//reserveProgressing 객체 생성
 					ReserveProgressing rp = null;
-					
-					//공연회차번호로 공연번호 조회
-					//int showNo = new ReserveService().getShowNoBypsNo(psNo);
 					
 					//공연회차번호로 공연회차정보 조회
 					PerformSchedule ps = new ReserveService().selectOnePerformSchedule(psNo);
@@ -92,15 +89,17 @@ public class ReserveSeatServlet extends HttpServlet {
 								rp.setProgSeatList(prog_seats);
 								ArrayList<SeatGradeState> seatGrdStList = new ReserveService().getSeatGradeStatus(psNo);
 								rp.setSeatGrdSt(seatGrdStList);
-								//System.out.println(rp);
+								System.out.println(rp);/////////////////////////
 								
 								//세션에 넣을 reserveSession객체 - 진행단계 정보 update
 								rs.setCurrStat(2);
+								
 								//세션에 넣을 reserveSession객체 - 예매 진행 번호 생성
 								int progNo = new ReserveService().getProgNo();
+								
 								if(progNo!=0) {
 									rs.setProgNo(progNo);
-									System.out.println("progNo = "+progNo);
+									System.out.println("progNo = "+progNo);////////////////
 								}else {
 									System.out.println("error at ReserveSeatServlet-5");
 									throw new Exception();

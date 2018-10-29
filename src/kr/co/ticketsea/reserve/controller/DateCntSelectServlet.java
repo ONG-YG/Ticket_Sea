@@ -37,6 +37,7 @@ public class DateCntSelectServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		request.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession(true);//////////////////////////////
 		ReserveSession rs = new ReserveSession();
 		rs.setMemberNo(2);/////////////////////////////////////////////////////////// 세션확인부분 수정할 것
@@ -51,7 +52,6 @@ public class DateCntSelectServlet extends HttpServlet {
 			rs.setProgNo(-1);
 			session.setAttribute("reserveSession", rs);
 			
-			request.setCharacterEncoding("utf-8");
 			int showNo = Integer.parseInt(request.getParameter("showNo"));
 			
 			//step1객체 생성
@@ -72,13 +72,12 @@ public class DateCntSelectServlet extends HttpServlet {
 				
 				if(!psList.isEmpty()) {
 					//잔여좌석정보 (PS_NO확인 & BK_S_L테이블에서 예약완료인지 확인)
-					//SELECT COUNT(*) FROM BK_S_L WHERE PS_NO=30000 AND BK_NO IN (SELECT BK_NO FROM BOOK_INF WHERE BK_STAT_CD='RSV_CPL'); //예약된 좌석 수
 					for(int i=0; i<psList.size(); i++) {
 						PerformSchedule ps = psList.get(i);
-								//System.out.println("회차번호 = "+ps.getPerformSchNo());
+						//System.out.println("회차번호 = "+ps.getPerformSchNo());
 						int availableSeat = new ReserveService().availableSeatCount(ps.getPerformSchNo());
 						ps.setAvailableSeat(availableSeat);
-								//System.out.println("잔여좌석수 = "+psList.get(i).getAvailableSeat());
+						//System.out.println("잔여좌석수 = "+psList.get(i).getAvailableSeat());
 					}
 					
 					stOne = new ReserveStepOne();

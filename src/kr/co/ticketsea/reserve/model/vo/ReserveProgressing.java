@@ -165,14 +165,22 @@ public class ReserveProgressing {
 	public int getTicketPrice() {
 		return ticketPrice;
 	}
-	public void setTicketPrice(int ticketPrice) {
-		this.ticketPrice = ticketPrice;
+	public void setTicketPrice() {
+		if(!this.selecSeatList.isEmpty()) {
+			int sum=0;
+			for (SelectedSeat seat :this.selecSeatList) {
+				sum +=seat.getSeatPrice();
+			}
+			this.ticketPrice = sum;
+		}
 	}
 	public int getTotalPrice() {
 		return totalPrice;
 	}
 	public void setTotalPrice(int totalPrice) {
-		this.totalPrice = totalPrice;
+		if(this.commission!=0 && !this.selecSeatList.isEmpty()) {
+			this.totalPrice = totalPrice + commission;
+		}
 	}
 	
 	
