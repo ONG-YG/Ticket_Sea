@@ -44,11 +44,11 @@ public class SeatGradeState {
 	
 	@Override
 	public String toString() {
-		String seatGrdStat = "---------seatGrdStat-------\n"
+		String seatGrdStat = "\n---------seatGrdStat-------\n"
 				+ th1_seat_grd + "\n"
 				+ th1_seat_prc + "\n"
 				+ availableSeatCnt + "\n"
-				+ "--------------------\n";
+							+ "---------------------------\n";
 
 		return seatGrdStat;
 	}

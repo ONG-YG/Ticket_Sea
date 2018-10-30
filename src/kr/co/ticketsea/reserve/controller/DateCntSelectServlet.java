@@ -50,6 +50,7 @@ public class DateCntSelectServlet extends HttpServlet {
 //			rs.setMemberNo(memberNo);
 			rs.setCurrStat(1);
 			rs.setProgNo(-1);
+			rs.setProgTime(null);
 			session.setAttribute("reserveSession", rs);
 			
 			int showNo = Integer.parseInt(request.getParameter("showNo"));

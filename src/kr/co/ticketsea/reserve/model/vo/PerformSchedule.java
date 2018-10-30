@@ -79,7 +79,7 @@ public class PerformSchedule {
 						+ showNo + "\n"
 						+ performTime + "\n"
 						+ availableSeat + "\n"
-						+ "---------------------------------\n";
+					+ "--------------------------------\n";
 		
 		return ps;
 	}

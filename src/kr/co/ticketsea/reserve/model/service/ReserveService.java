@@ -8,6 +8,7 @@ import kr.co.ticketsea.common.JDBCTemplate;
 import kr.co.ticketsea.reserve.model.dao.ReserveDao;
 import kr.co.ticketsea.reserve.model.vo.PerformSchedule;
 import kr.co.ticketsea.reserve.model.vo.SeatGradeState;
+import kr.co.ticketsea.reserve.model.vo.SelectedSeat;
 import kr.co.ticketsea.reserve.model.vo.ShowInfo;
 
 public class ReserveService {
@@ -124,9 +125,9 @@ public class ReserveService {
 		return seatGrdStList;
 	}
 
-	public int getProgNo() {
+	public int createProgNo() {
 		Connection conn =JDBCTemplate.getConnection();
-		int progNo = new ReserveDao().getProgNo(conn);
+		int progNo = new ReserveDao().createProgNo(conn);
 		
 		JDBCTemplate.close(conn);
 		
@@ -167,6 +168,41 @@ public class ReserveService {
 		return progTime;
 	}
 
+	public String[] getPhoneMail(int memberNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		String[] contactInfo = new ReserveDao().getPhoneMail(conn, memberNo);
+		
+		JDBCTemplate.close(conn);
+		
+		return contactInfo;
+	}
+
+	public ArrayList<SelectedSeat> getSeatInfo(String[] seatList) {
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<SelectedSeat> selSeatList = new ArrayList<SelectedSeat>();
+		
+		for (String seatNo : seatList) {
+			SelectedSeat selSeat = new ReserveDao().getSeatInfo(conn, seatNo);
+			if(selSeat!=null) {
+				selSeatList.add(selSeat);
+			}else {
+				selSeatList.clear();
+				break;
+			}
+		}
+		
+		JDBCTemplate.close(conn);
+		
+		return selSeatList;
+	}
 	
+	public long createBookNo() {
+		Connection conn =JDBCTemplate.getConnection();
+		long bkNo = new ReserveDao().createBookNo(conn);
+		
+		JDBCTemplate.close(conn);
+		
+		return bkNo;
+	}
 	
 }

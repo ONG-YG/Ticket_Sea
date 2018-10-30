@@ -17,8 +17,8 @@ public class ReserveProgressing {
 	private ArrayList<Integer> progSeatList;			//예매진행 중 좌석 목록
 	private ArrayList<SeatGradeState> seatGrdStList;	//등급별 좌석가격 및 잔여석
 	private String memberName;							//예매자명
-	private int bkNo;									//예매번호
-	private ArrayList<SelectedSeat> selecSeatList;		//선택좌석 목록
+	private long bkNo;									//예매번호
+	private ArrayList<SelectedSeat> selSeatList;		//선택좌석 목록
 	private String phone;								//연락처
 	private String email;								//메일
 	private int commission;								//수수료
@@ -28,12 +28,18 @@ public class ReserveProgressing {
 	
 	
 	public ReserveProgressing() {
-		super();
+		this.psNo = -1;
+		this.showNo = -1;
+		this.showCnt = -1;
+		this.bkNo = -1;
+		this.commission = -1;
+		this.ticketPrice = -1;
+		this.totalPrice = -1;
 	}
 	public ReserveProgressing(int psNo, int showNo, String showTitle, String showPoster, String theaterName,
 			Date psDate, int showCnt, String showTime, ArrayList<Integer> reservedSeatList,
 			ArrayList<Integer> progSeatList, ArrayList<SeatGradeState> seatGrdSt, String memberName, int bkNo,
-			ArrayList<SelectedSeat> selecSeatList, String phone, String email, int commission, int ticketPrice,
+			ArrayList<SelectedSeat> selSeatList, String phone, String email, int commission, int ticketPrice,
 			int totalPrice) {
 		super();
 		this.psNo = psNo;
@@ -49,7 +55,7 @@ public class ReserveProgressing {
 		this.seatGrdStList = seatGrdSt;
 		this.memberName = memberName;
 		this.bkNo = bkNo;
-		this.selecSeatList = selecSeatList;
+		this.selSeatList = selSeatList;
 		this.phone = phone;
 		this.email = email;
 		this.commission = commission;
@@ -132,17 +138,17 @@ public class ReserveProgressing {
 	public void setMemberName(String memberName) {
 		this.memberName = memberName;
 	}
-	public int getBkNo() {
+	public long getBkNo() {
 		return bkNo;
 	}
-	public void setBkNo(int bkNo) {
+	public void setBkNo(long bkNo) {
 		this.bkNo = bkNo;
 	}
-	public ArrayList<SelectedSeat> getSelecSeatList() {
-		return selecSeatList;
+	public ArrayList<SelectedSeat> getSelSeatList() {
+		return selSeatList;
 	}
-	public void setSelecSeatList(ArrayList<SelectedSeat> selecSeatList) {
-		this.selecSeatList = selecSeatList;
+	public void setSelecSeatList(ArrayList<SelectedSeat> selSeatList) {
+		this.selSeatList = selSeatList;
 	}
 	public String getPhone() {
 		return phone;
@@ -166,9 +172,9 @@ public class ReserveProgressing {
 		return ticketPrice;
 	}
 	public void setTicketPrice() {
-		if(!this.selecSeatList.isEmpty()) {
+		if(!this.selSeatList.isEmpty()) {
 			int sum=0;
-			for (SelectedSeat seat :this.selecSeatList) {
+			for (SelectedSeat seat :this.selSeatList) {
 				sum +=seat.getSeatPrice();
 			}
 			this.ticketPrice = sum;
@@ -177,9 +183,9 @@ public class ReserveProgressing {
 	public int getTotalPrice() {
 		return totalPrice;
 	}
-	public void setTotalPrice(int totalPrice) {
-		if(this.commission!=0 && !this.selecSeatList.isEmpty()) {
-			this.totalPrice = totalPrice + commission;
+	public void setTotalPrice() {
+		if(this.commission!=-1 && this.ticketPrice!=-1) {
+			this.totalPrice = this.ticketPrice + commission;
 		}
 	}
 	
@@ -199,18 +205,18 @@ public class ReserveProgressing {
 							+ psDate + "\n"
 							+ showCnt + "\n"
 							+ showTime + "\n"
-							+ "reservSeats" + reservedSeatList + "\n"
-							+ "progSeats" + progSeatList + "\n"
+							+ "---reservSeats---\n" + reservedSeatList + "\n---\n"
+							+ "---progSeats---\n" + progSeatList + "\n---\n"
 							+ seatGrdStList + "\n"
 							+ memberName + "\n"
 							+ bkNo + "\n"
-							+ selecSeatList + "\n"
+							+ selSeatList + "\n"
 							+ phone + "\n"
 							+ email + "\n"
 							+ commission + "\n"
 							+ ticketPrice + "\n"
 							+ totalPrice + "\n"
-							+ "--------------------\n";
+							+ "-------------------------\n";
 		
 		
 		return reservProg;

@@ -1,12 +1,39 @@
+<%@page import="kr.co.ticketsea.reserve.model.vo.SelectedSeat"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="kr.co.ticketsea.reserve.model.vo.ReserveSession"%>
+<%@page import="kr.co.ticketsea.reserve.model.vo.SeatGradeState"%>
+<%@page import="java.sql.Date"%>
+<%@page import="kr.co.ticketsea.reserve.model.vo.ReserveProgressing"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <%
-	String [] dateCntSeat = (String [])request.getAttribute("dateCntSeat");
-	String date_sel = dateCntSeat[0];
-	String cnt_sel = dateCntSeat[1];
-	String seat_sel = dateCntSeat[2];
+	request.setCharacterEncoding("utf-8");
+	
+	ReserveProgressing rp = (ReserveProgressing)request.getAttribute("stepThree");
+	
+	int psNo = rp.getPsNo();										//공연회차번호
+	int showNo = rp.getShowNo();									//공연번호
+	String showTitle = rp.getShowTitle();							//공연명
+	String showPoster = rp.getShowPoster();							//공연 포스터 파일명
+	String theaterName = rp.getTheaterName();						//공연장명
+	Date psDate = rp.getPsDate();									//공연일
+	int showCnt = rp.getShowCnt();									//공연회차
+	String showTime = rp.getShowTime();								//공연시간
+	
+	String memberName = rp.getMemberName();							//예매자명
+	long bkNo = rp.getBkNo();										//예매번호
+	ArrayList<SelectedSeat> selSeatList = rp.getSelSeatList();		//선택좌석 목록
+	String phone = rp.getPhone();									//연락처
+	String email = rp.getEmail();									//메일
+	int commission = rp.getCommission();							//수수료
+	int ticketPrice = rp.getTicketPrice();							//티켓가격 총합
+	int totalPrice = rp.getTotalPrice();							//총 결제 금액
+	
+	
+	ReserveSession rs = (ReserveSession)session.getAttribute("reserveSession");
+	int progNo = rs.getProgNo();
 %>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -40,7 +67,13 @@
         function prev() {
             var chk = confirm("이전 단계로 돌아가면 현재의 예매 정보를 잃게 됩니다.");
             if(chk) {
-                location.href="./reserv_step_2_seat.html"
+            	<%
+	        	//세션에 담긴 reserveSession객체 - 진행단계 정보 update
+				rs.setCurrStat(1);
+        		session.setAttribute("reserveSession", rs);
+        		//예매중정보지우는 코드 추가할것////////////////////////////////////////////////////////////////////////////////  ※※※※※※※※※※※※※※※
+        		%>
+                location.href="/reserveSeat.do?psNo="+<%=psNo%>;
             }
         }
         function next() {
@@ -113,7 +146,7 @@
                                 <th>휴대폰 번호 <span class="color_red">*<span class="blind">필수입력란</span></span></th>
                                 <td>
                                     <div class="input_block">
-                                        <input type="text" class="input" id="phone" style="width:235px" maxlength="11" title="휴대폰 번호" number-text-box="">
+                                        <input type="text" class="input" id="phone" style="width:235px" maxlength="11" title="휴대폰 번호" value="">
                                     </div>
                                 </td>
                             </tr>

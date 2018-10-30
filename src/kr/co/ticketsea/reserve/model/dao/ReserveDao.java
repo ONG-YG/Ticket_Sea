@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import kr.co.ticketsea.common.JDBCTemplate;
 import kr.co.ticketsea.reserve.model.vo.PerformSchedule;
 import kr.co.ticketsea.reserve.model.vo.SeatGradeState;
+import kr.co.ticketsea.reserve.model.vo.SelectedSeat;
 import kr.co.ticketsea.reserve.model.vo.ShowInfo;
 import oracle.sql.DATE;
 
@@ -267,6 +268,7 @@ public class ReserveDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
+			JDBCTemplate.close(rset);
 			JDBCTemplate.close(pstmt);
 		}
 		
@@ -292,6 +294,7 @@ public class ReserveDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
+			JDBCTemplate.close(rset);
 			JDBCTemplate.close(pstmt);
 		}
 		
@@ -317,6 +320,7 @@ public class ReserveDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
+			JDBCTemplate.close(rset);
 			JDBCTemplate.close(pstmt);
 		}
 		
@@ -345,6 +349,7 @@ public class ReserveDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
+			JDBCTemplate.close(rset);
 			JDBCTemplate.close(pstmt);
 		}
 		
@@ -370,6 +375,7 @@ public class ReserveDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
+			JDBCTemplate.close(rset);
 			JDBCTemplate.close(pstmt);
 		}
 		
@@ -399,16 +405,17 @@ public class ReserveDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
+			JDBCTemplate.close(rset);
 			JDBCTemplate.close(pstmt);
 		}
 		
 		return reservedSeat;
 	}
 
-	public int getProgNo(Connection conn) {
+	public int createProgNo(Connection conn) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		int progNo = 0;
+		int progNo = -1;
 		
 		String query = "SELECT SEQ_PROGNO.NEXTVAL AS PROGNO FROM DUAL";
 		
@@ -426,7 +433,6 @@ public class ReserveDao {
 			JDBCTemplate.close(rset);
 			JDBCTemplate.close(pstmt);
 		}
-		
 		
 		return progNo;
 	}
@@ -480,6 +486,91 @@ public class ReserveDao {
 		}
 		
 		return progTime;
+	}
+
+	public String[] getPhoneMail(Connection conn, int memberNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String[] contactInfo = null;
+		
+		String query = "SELECT * FROM MEMBER WHERE MEMBER_NO=?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, memberNo);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				String memberName = rset.getString("MEMBER_NAME");
+				String memberPhone = rset.getString("MEMBER_PHONE");
+				String memberEmail = rset.getString("MEMBER_EMAIL");
+				
+				contactInfo = new String[] {memberName, memberPhone, memberEmail};
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return contactInfo;
+	}
+
+	public SelectedSeat getSeatInfo(Connection conn, String seatNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		SelectedSeat selSeat = null;
+		
+		String query = "SELECT * FROM TH1_SEAT_L WHERE TH1_SEAT_NO=?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, seatNo);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				selSeat = new SelectedSeat();
+				selSeat.setSeatNo(rset.getInt("TH1_SEAT_NO"));
+				selSeat.setSeatGrd(rset.getString("TH1_SEAT_GRD"));
+				//selSeat.setSeatPrice();
+				selSeat.setSeatTitle(rset.getString("SEAT_TITLE"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return selSeat;
+	}
+
+	public long createBookNo(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		long bkNo = -1;
+		
+		String query = "SELECT TO_NUMBER(TO_CHAR(SYSDATE, 'YYMMDD'))*100000000+SEQ_BKNO.NEXTVAL AS BKNO FROM DUAL";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				bkNo=rset.getLong("BKNO");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return bkNo;
 	}
 
 	

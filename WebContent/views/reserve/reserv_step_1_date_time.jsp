@@ -314,9 +314,11 @@
                                 <h5>공연회차</h5><span></span>
                             </div>
                             <form action="/reserveSeat.do?psNo=" method="post" id="dateCntForm">
-                            <input type="hidden" name="showNo" value="<%= showNo %>"/>
+                            <%--<input type="hidden" name="showNo" value="<%= showNo %>"/>--%>
+                            <!-- 
                             <input type="hidden" id="date_form" name="date_sel" />
                             <input type="hidden" id="cnt_form" name="cnt_sel" />
+                             -->
                             </form>
                         </div>
                     </div>
