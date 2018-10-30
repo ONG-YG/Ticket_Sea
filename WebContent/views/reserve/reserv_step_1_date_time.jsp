@@ -20,23 +20,24 @@
 <%
 	for(int i=0; i<psList.size(); i++) {
 %>
+		var psNo=<%=psList.get(i).getPerformSchNo()%>;
 		var psDate='<%=psList.get(i).getPerformSchDate()%>';
 		var psCnt=<%=psList.get(i).getPerformSchCnt()%>;
 		var psTime='<%=psList.get(i).getPerformTime()%>';
 		var availSeat=<%=psList.get(i).getAvailableSeat()%>;
-		var ps = [psDate, psCnt, psTime, availSeat];
+		var ps = [psNo, psDate, psCnt, psTime, availSeat];
 		psList.push(ps);
 <%
 	}
 %>
-	console.log(psList);
+	//console.log(psList); ///////////////////////////////
 </script>
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Ticket Sea 예매</title>
     
-    <link rel="shortcut icon" type="image/x-icon" href="http://ticketlink.dn.toastoven.net/web/favicon.ico">
+    <!-- <link rel="shortcut icon" type="image/x-icon" href="http://ticketlink.dn.toastoven.net/web/favicon.ico"> -->
     
     <!-- 외부 스타일 시트 적용 -->
     <link href="../../css/reserv_common.css" rel="stylesheet" type="text/css">
@@ -49,6 +50,7 @@
     <script>
         var date_sel = null;
         var cnt_sel = null;
+        var psNo = null;
         $(document).ready(function(){
             
         	pageInit();
@@ -59,9 +61,14 @@
                 $('#cnt_box li').removeClass('selected_cnt_li');
                 $('.calendar-date').removeClass('selected_date_td');
                 $(this).addClass('selected_date_td');
-
-                date_sel = $('.year-month').text()+"."+$(this).text();
-                $('#date_sel_info span').html(date_sel);
+                
+                var yearMonth = $('.year-month').text().split('.');
+                var year = yearMonth[0];
+                var month = yearMonth[1];
+                var day = $(this).text();
+                //date_sel = $('.year-month').text()+"."+$(this).text();
+                date_sel = year+"-"+month+"-"+day;
+                $('#date_sel_info span').html(year+"."+month+"."+day);
                 //$('#date_form').val(date_sel);
                 $('#cnt_sel_info span').html(cnt_sel);
                 //$('#cnt_form').val(cnt_sel);
@@ -98,9 +105,20 @@
             if(stat==false) {
                 alert("날짜/회차를 선택하세요");
             }else {
-                //alert("선택한 날짜 : "+date_sel+"  /  선택한 회차 : "+cnt_sel);
+                //console.log("선택한 날짜 : "+date_sel+"  /  선택한 회차 : "+cnt_sel);/////////
                 $('#date_form').val(date_sel);
                 $('#cnt_form').val(cnt_sel);
+                
+                for(var i=0; i<psList.length; i++) {
+                	//console.log(psList[i][1] +" / "+ psList[i][2]);////////////////
+                	if(psList[i][1]==date_sel && psList[i][2]==cnt_sel) {
+                		//console.log("match!");///////////////////////////
+                		psNo = psList[i][0];
+                		//console.log(psNo);///////////////////
+                		break;
+                	}
+				}
+                $('#dateCntForm').attr('action',"/reserveSeat.do?psNo="+psNo);
                 document.getElementById("dateCntForm").submit();
             }
         }
@@ -295,7 +313,7 @@
                             <div id="cnt_sel_info">
                                 <h5>공연회차</h5><span></span>
                             </div>
-                            <form action="/reserveSeat.do?psNo=30000" method="post" id="dateCntForm">
+                            <form action="/reserveSeat.do?psNo=" method="post" id="dateCntForm">
                             <input type="hidden" name="showNo" value="<%= showNo %>"/>
                             <input type="hidden" id="date_form" name="date_sel" />
                             <input type="hidden" id="cnt_form" name="cnt_sel" />
