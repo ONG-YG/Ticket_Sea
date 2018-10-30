@@ -7,14 +7,14 @@ public class ReserveSession {
 	private int memberNo;		//회원번호
 	private int currStat;		//현재 진행단계 (DateCnt-1 / ReserveSeat-2 / ReserveConfirm-3)
 	private int progNo;			//예매진행번호
-	private Date progTime;		//예매시작시간(step3진입 시점)
+	private String progTime;	//예매시작시간(step3진입 시점)
 	
 	
 	
 	public ReserveSession() {
 		this.progTime = null;
 	}
-	public ReserveSession(int memberNo, int currStat, int progNo, Date progTime) {
+	public ReserveSession(int memberNo, int currStat, int progNo, String progTime) {
 		super();
 		this.memberNo = memberNo;
 		this.currStat = currStat;
@@ -41,10 +41,10 @@ public class ReserveSession {
 	public void setProgNo(int progNo) {
 		this.progNo = progNo;
 	}
-	public Date getProgTime() {
+	public String getProgTime() {
 		return progTime;
 	}
-	public void setProgTime(Date progTime) {
+	public void setProgTime(String progTime) {
 		this.progTime = progTime;
 	}
 	

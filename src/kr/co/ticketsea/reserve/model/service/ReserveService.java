@@ -133,28 +133,34 @@ public class ReserveService {
 		return progNo;
 	}
 
-	public Date insertProgData(int progNo, int memberNo, int psNo, String[] seatList) {
+	public String insertProgData(int progNo, int memberNo, int psNo, String[] seatList) {
 		Connection conn = JDBCTemplate.getConnection();
-		Date progTime = null;
+		String progTime = null;
 		
 		try {
-			for(String seat : seatList) {
-				int seatNo = Integer.parseInt(seat);
-				int result = new ReserveDao().insertProgData(conn, progNo, memberNo, psNo, seatNo);
+			progTime = new ReserveDao().getSysdate(conn);
+			
+			if(progTime!=null) {
 				
-				if(result>0) {
-					JDBCTemplate.commit(conn);
-				}else {
-					JDBCTemplate.rollback(conn);
-					throw new Exception();
+				for(String seat : seatList) {
+					int seatNo = Integer.parseInt(seat);
+					int result = new ReserveDao().insertProgData(conn, progNo, memberNo, psNo, seatNo, progTime);
+					
+					if(result>0) {
+						JDBCTemplate.commit(conn);
+					}else {
+						JDBCTemplate.rollback(conn);
+						throw new Exception();
+					}
 				}
+				
+			}else {
+				throw new Exception();
 			}
+			
 		} catch (Exception e) {
 			return null;
 		}
-		
-		progTime = new ReserveDao().getSysdate(conn);
-		
 		
 		JDBCTemplate.close(conn);
 		

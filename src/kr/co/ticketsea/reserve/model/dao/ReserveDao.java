@@ -6,6 +6,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import kr.co.ticketsea.common.JDBCTemplate;
@@ -430,12 +431,13 @@ public class ReserveDao {
 		return progNo;
 	}
 
-	public int insertProgData(Connection conn, int progNo, int memberNo, int psNo, int seatNo) {
+	public int insertProgData(Connection conn, int progNo, int memberNo, int psNo, int seatNo, String progTime) {
 		
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
-		String query = "INSERT INTO PROG_S_L VALUES (?,?,?,?,SYSDATE)";
+		String query = "INSERT INTO PROG_S_L VALUES (?,?,?,?,"
+							+ "TO_DATE(?,'YYYY-MM-DD HH24:MI:SS'))";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -443,6 +445,7 @@ public class ReserveDao {
 			pstmt.setInt(2, memberNo);
 			pstmt.setInt(3, psNo);
 			pstmt.setInt(4, seatNo);
+			pstmt.setString(5, progTime);
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
@@ -454,10 +457,10 @@ public class ReserveDao {
 		return result;
 	}
 
-	public Date getSysdate(Connection conn) {
+	public String getSysdate(Connection conn) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		Date progTime = null;
+		String progTime = null;
 		
 		String query = "SELECT SYSDATE FROM DUAL";
 		
@@ -465,7 +468,8 @@ public class ReserveDao {
 			pstmt = conn.prepareStatement(query);
 			rset = pstmt.executeQuery();
 			if(rset.next()) {
-				progTime = rset.getDate("SYSDATE");
+				String timestamp = rset.getTimestamp("SYSDATE").toString();
+				progTime = timestamp.substring(0,timestamp.length()-2);
 			}
 			
 		} catch (SQLException e) {

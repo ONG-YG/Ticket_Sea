@@ -45,10 +45,26 @@ public class ReserveConfirmServlet extends HttpServlet {
 				ReserveSession rs = (ReserveSession)session.getAttribute("reserveSession");
 				int memberNo = rs.getMemberNo();
 				int currStat = rs.getCurrStat();
-				
-				Date progTime = new ReserveService().insertProgData(progNo, memberNo, psNo, seatList);
-				
-				System.out.println(progTime);
+				if(currStat==2) {
+					//세션에 넣을 객체에 현재 진행단계를 3으로 바꿔줌
+					rs.setCurrStat(3);
+					
+					//예매진행정보 INSERT
+					String progTime = new ReserveService().insertProgData(progNo, memberNo, psNo, seatList);
+					
+					if(progTime!=null) {
+						//세션에 넣을 객체 생성 및 예매시작시간 세팅
+						rs.setProgTime(progTime);
+						
+						
+						
+						
+						
+					}else {
+						System.out.println("error at ReserveConfirmServlet-3");
+						throw new Exception();
+					}//if(progTime!=null) END
+				}
 				
 			}else {
 				System.out.println("error at ReserveConfirmServlet-2");
@@ -62,7 +78,7 @@ public class ReserveConfirmServlet extends HttpServlet {
 		
 		
 		
-		request.setCharacterEncoding("utf-8");
+		
 //		String date_sel = request.getParameter("date_sel");
 //		String cnt_sel = request.getParameter("cnt_sel");
 //		String seat_sel = request.getParameter("seat_sel");
