@@ -56,13 +56,40 @@
 	    
 	    function pageInit() {
 	    	
-	    	//var showTitle = '';
-	    	//$('#mini_show_title').text(showTitle);	//공연명
+	    	alert("hello");
 	    	
-	    	//var showPosterSrc = "/img/poster/";
-	    	//$('#mini_poster img').attr('src',showPosterSrc);
+	    	var memberName = '<%=memberName%>';
+	    	$('#bookMemName').text(memberName);
 	    	
+	    	var showTitle = '<%=showTitle%>';
+	    	$('#mini_show_title').text(showTitle);	//공연명
+	    	
+	    	var showPosterSrc = "/img/poster/<%=showPoster%>";
+	    	$('#mini_poster img').attr('src',showPosterSrc);
+	    	
+	    	$('#inputPhoneNo').val(<%=phone%>);
+	    	$('#inputEmail').val('<%=email%>');
+	    	
+	    	var psDate = '<%=psDate%>'.split('-');
+	    	var year = psDate[0];
+	    	var month = psDate[1];
+	    	var day = psDate[2];
+	    	$('#rInfo_Date').text(year+'년 '+month+'월 '+day+'일');
+	    	$('#rInfo_CntTime').text('<%=showCnt%>'+'회 '+'<%=showTime%>');
+	    	
+	    	var ticketPrice = Number(<%=ticketPrice%>).toLocaleString();
+	    	$('#rInfo_TicketP').text(ticketPrice);
+	    	
+	    	var commission = Number(<%=commission%>).toLocaleString();
+	    	$('#rInfo_Comm').text(commission);
+	    	
+	    	var totalPrice = Number(<%=totalPrice%>).toLocaleString();
+	    	$('#rInfo_TotP').text(totalPrice);
+	    	
+	    	//selectedSeatView();
 	    }
+	    
+	    
     	
         function prev() {
             var chk = confirm("이전 단계로 돌아가면 현재의 예매 정보를 잃게 됩니다.");
@@ -77,7 +104,7 @@
             }
         }
         function next() {
-            var phone = document.getElementById("phone").value;
+            var phone = document.getElementById("inputPhoneNo").value;
             var userCheck = document.getElementById("agree_phone").checked;
             //alert(userCheck);
             var userInfoAgree = document.getElementById("reserve_agree2").checked;
@@ -142,11 +169,11 @@
                             <tbody>
                             <tr>
                                 <th>이름 <span class="color_red">*<span class="blind">필수입력란</span></span></th>
-                                <td>주문자 이름</td>
+                                <td id="bookMemName">주문자 이름</td>
                                 <th>휴대폰 번호 <span class="color_red">*<span class="blind">필수입력란</span></span></th>
                                 <td>
                                     <div class="input_block">
-                                        <input type="text" class="input" id="phone" style="width:235px" maxlength="11" title="휴대폰 번호" value="">
+                                        <input type="text" class="input" id="inputPhoneNo" style="width:235px" maxlength="11" title="휴대폰 번호" value="">
                                     </div>
                                 </td>
                             </tr>
@@ -154,7 +181,7 @@
                                 <th>이메일</th>
                                 <td colspan="3">
                                     <div class="input_block">
-                                        <input type="text" class="input" style="width:450px" title="이메일">
+                                        <input type="text" class="input" id="inputEmail" style="width:450px" title="이메일" value="">
                                     </div>
                                 </td>
                             </tr>
@@ -187,7 +214,7 @@
                 <div class="reserve_right">
                     <div class="top_info_area" style="text-align: left; padding-left: 18px;">
                         <div id="mini_poster">
-                            <img src="../../img/poster/show-0619.png">
+                            <img src="#">
                         </div>
                         <strong id="mini_show_title">공연이름 출력란</strong>
                     </div>
@@ -236,23 +263,23 @@
                         </ul>
                         <div id="reserve_info">
                             <div id="date_sel_info">
-                                <strong>공연일</strong><span>2018.10.29 (월)</span>
+                                <strong>공연일</strong><span id="rInfo_Date">2018.10.29 (월)</span>
                             </div>
                             <hr>
                             <div id="cnt_sel_info">
-                                <strong>공연회차</strong><span>2회 13:00 ~14:30</span>
+                                <strong>공연회차</strong><span id="rInfo_CntTime">2회 13:00 ~14:30</span>
                             </div>
                             <hr>
                             <div id="ticket_price_info">
-                                <strong>티켓금액</strong><span>140,000</span>
+                                <strong>티켓금액</strong><span id="rInfo_TicketP">140,000</span>
                             </div>
                             <hr>
                             <div id="commision_info">
-                                <strong>예매수수료</strong><span>1,000</span>
+                                <strong>예매수수료</strong><span id="rInfo_Comm">1,000</span>
                             </div>
                             <hr id="final_hr">
                             <div id="total_price_info">
-                                <strong>총 결제</strong><span>141,000</span>
+                                <strong>총 결제</strong><span id="rInfo_TotP">141,000</span>
                             </div>
                         </div>
                     </div>

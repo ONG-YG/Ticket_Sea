@@ -30,7 +30,7 @@
 <%
 	}
 %>
-	//console.log(psList); ///////////////////////////////
+
 </script>
 
 <head>
@@ -79,9 +79,7 @@
                 
                 date_sel = year+"-"+month+"-"+day;
                 $('#date_sel_info span').html(year+"."+month+"."+day);
-                //$('#date_form').val(date_sel);
                 $('#cnt_sel_info span').html(cnt_sel);
-                //$('#cnt_form').val(cnt_sel);
                 //alert(date_sel);
                 
                 var cntList = [];
@@ -93,7 +91,6 @@
                 	}
                 }
                 
-                //var list = $('#cnt_box ul').html();
                 var list = "";
             	for(var i=0; i<cntList.length; i++) {
             		list += " <li id='li_"+ cntList[i][0] +"' onclick='listClick("+ cntList[i][0] +");'> "
@@ -114,7 +111,6 @@
 
                     cnt_sel = $(this).children('.cnt').html();
                     $('#cnt_sel_info span').html($(this).text());
-                    //$('#cnt_form').val(cnt_sel);
                     //alert(cnt_sel);
                 }
             })
@@ -134,14 +130,13 @@
         function listClick(cnt){
             
         	if(date_sel!=null) {
-        		alert(date_sel);
+        		var selectedLi = '#cnt_box #li_'+cnt;
         		$('#cnt_box li').removeClass('selected_cnt_li');
-                $(this).addClass('selected_cnt_li');
+                $(selectedLi).addClass('selected_cnt_li');
 
-                cnt_sel = $(this).children('.cnt').html();
-                //$('#cnt_sel_info span').html($(this).text());
-                $('#cnt_sel_info span').html("hello");
-                //$('#cnt_form').val(cnt_sel);
+                cnt_sel = $(selectedLi).children('.cnt').html();
+                var cntText = $(selectedLi).text();
+                $('#cnt_sel_info span').html(cntText);
                 //alert(cnt_sel);
             }
         }

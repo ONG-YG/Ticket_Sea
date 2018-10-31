@@ -172,6 +172,7 @@
             $('.reserve_btn>a').eq(1).css('background-color','white');
             $('.reserve_btn>a').eq(1).css('color','dodgerblue');
         }
+        
         function selectedSeatView() {
             $('li[id^=selected_seat_no_]').removeClass('selected_li');
             for(var i=0; i<selected_seat.length; i++) {
@@ -183,8 +184,8 @@
                 $(sel_list).children().children('.selected_seat_grade').text(seat_grd); //좌석등급
                 $(sel_list).children().children('.selected_seat_no').text(seat_loc) //좌석위치
             }
-            
         }
+        
         function prev() {
         	var showNo = <%= showNo %>;
             location.href="/dateCntSelect.do?showNo="+showNo;
