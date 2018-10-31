@@ -35,8 +35,6 @@ public class ShowInsertServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		String fileName=null;
 		//파일 사이즈 업로드 
-		
-		
 		Show s = new Show();
 		
 		s.setShow_name(request.getParameter("show_name"));
@@ -48,7 +46,6 @@ public class ShowInsertServlet extends HttpServlet {
 		s.setShow_grd(request.getParameter("show_grd"));
 		s.setShow_run(Integer.parseInt(request.getParameter("show_run")));
 		s.setShow_dtInfo(request.getParameter("showDtInfo"));
-		
 		
 		int result = new ShowService().insertShow(s,fileName);
 		

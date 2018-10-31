@@ -269,7 +269,6 @@ function LoadImg(value){
 			<div id="h_inner">
                 <div id="icon">
                     <a href="../admin/admin_page.html"><img width="180" height="50" alt="Ticket Sea" src="../../img/ticket_admin.png"></a>
-
                 </div>
 			</div>
 		</div>
@@ -447,7 +446,7 @@ function LoadImg(value){
         {
 		     alert("공연카테고리를 선택하세요");
 				return false;
-		}else if(title=""||title==null)
+		}else if(title==""||title==null)
 		{
 				alert("공연명을 입력하세요");
 				return false;
@@ -464,18 +463,18 @@ function LoadImg(value){
         	alert("종료일을 입력해주세요(yyyy.mm.dd)");
 			return false;
         } 
-        else if(artist=""){
+        else if(artist==""){
             alert("출연자를 입력하세요");
 			return false;
         }
         else if(!(/^[ㄱ-ㅎ|가-힣|0-9|\s]+$/g.test(grade)))
             {   
-                 alert("관람등급을 입력하세요")
+                 alert("관람등급을 입력하세요");
                 return false;
             }
         else if(!(/^[0-9]+$/g.test(runTime)))
             {
-                alert("관람시간을 입력하세요(숫자만)")
+                alert("관람시간을 입력하세요(숫자만)");
                 return false;
             }
         else if(!(/^[0-9]+$/g.test(price)))
