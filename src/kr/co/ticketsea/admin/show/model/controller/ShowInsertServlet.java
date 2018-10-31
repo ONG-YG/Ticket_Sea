@@ -31,9 +31,13 @@ public class ShowInsertServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		
+		System.out.println(Integer.parseInt(request.getParameter("th_no")));
+		System.out.println(request.getParameter("sc_code"));
 		Show s = new Show();
 		
 		s.setShow_name(request.getParameter("show_name"));
+		s.setTh_no(Integer.parseInt(request.getParameter("th_no")));
+		s.setSc_code(request.getParameter("sc_code"));
 		s.setShow_st_date(request.getParameter("show_st_date"));
 		s.setShow_ed_date(request.getParameter("show_ed_date"));
 		s.setArtists(request.getParameter("artists"));

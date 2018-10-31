@@ -17,17 +17,22 @@ public class ShowDao {
 	public int insertShow(Connection conn, Show s) {
 		PreparedStatement pstmt= null;
 		int result = 0;
-		String query = "insert into musical_l values(SHOW_DB.nextval,10000,'MSC',?,?,?,?,?,?)";
+		
+		String query = "insert into musical_l values(SHOW_DB.nextval,?,?,?,?,?,?,?,?)";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
 			
-			pstmt.setString(1, s.getShow_name());
-			pstmt.setString(2, s.getShow_st_date());
-			pstmt.setString(3, s.getShow_ed_date());
-			pstmt.setString(4, s.getArtists());
-			pstmt.setString(5, s.getShow_grd());
-			pstmt.setInt(6, s.getShow_run());
+		
+			pstmt.setInt(1, s.getTh_no());
+			pstmt.setString(2, s.getSc_code());
+			pstmt.setString(3, s.getShow_name());
+			pstmt.setString(4, s.getShow_st_date());
+			pstmt.setString(5, s.getShow_ed_date());
+			pstmt.setString(6, s.getArtists());
+			pstmt.setString(7, s.getShow_grd());
+			pstmt.setInt(8, s.getShow_run());
+			
 			
 			result = pstmt.executeUpdate();
 			System.out.println(result);

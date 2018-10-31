@@ -247,6 +247,23 @@
 </head>
 <body>
 
+ <script src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
+  
+  
+<script>
+function LoadImg(value){
+	if(value.files && value.files[0]){
+		var reader = new FileReader();
+		reader.onload = function(e){
+			$('#LoadImg').attr('src',e.target.result);
+		}
+		reader.readAsDataURl(value.files[0]);
+	}
+}
+</script>
+
 	<div id="wrapper">
 		<div id="header">
 			<div id="h_inner">
@@ -300,18 +317,14 @@
                 <div class="input_area">
                     <!--이미지영역-->
                     <div class="event_img_area">
+                    	<input type="file" name="upfile"/><br>
                         <img class="show_post" src="../../img/ticketsea_poster.png" data-default-src="../../img/ticketsea_poster.png" alt="공연포스터" style="width:160px; height:160px;">
                         <!--이미지 업로드 버튼-->
-                        <div class="upload_btn">
-                            <input type="file" class="imgupload" title="공연포스터업로드" value="이미지업로드">
-                            <button type="button" class="btn_change_img">사진변경</button>
-                            <!--파일 업로드 후 사진 삭제하기 버튼 생김-->
-                            <!--<button type="button" class="btn_delete_upload">삭제하기</button>-->
+                         <div class="upload_btn">
                         </div>
                     </div>
                 </div>
                 </div>
-                
                 <div class="right_wrap">
                     <!--카테고리 / 공연명-->
                     <fieldset class="edit_title">
@@ -347,7 +360,7 @@
                           <h3 class="title">공연장소</h3>
                         </legend>
                         <div class="edit">
-                           <select id="place" class="place_select" name="">
+                           <select id="place" class="place_select" name="th_no">
                            <%for(ShowPlace sp : spList) {%>
                                     <option value="<%=sp.getTh_no()%>"><%=sp.getTh_name()%></option>
                             <%} %>
