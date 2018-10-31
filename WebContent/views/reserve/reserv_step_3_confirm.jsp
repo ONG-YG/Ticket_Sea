@@ -205,7 +205,7 @@
                                 <th>휴대폰 번호 <span class="color_red">*<span class="blind">필수입력란</span></span></th>
                                 <td>
                                     <div class="input_block">
-                                        <input type="text" class="input" id="inputPhoneNo" style="width:235px" maxlength="11" title="휴대폰 번호" value="">
+                                        <input type="text" class="input" id="inputPhoneNo" style="width:235px" maxlength="20" title="휴대폰 번호" value="">
                                     </div>
                                 </td>
                             </tr>
