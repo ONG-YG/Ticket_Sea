@@ -202,12 +202,20 @@
 .review_list li{border-top:1px solid #e1e1e1;padding:22px 0 25px;line-height:18px;}
 .review_list li:first-child{border:0}
 .review_list li.no_data{height:153px;line-height:153px;text-align:center;}
+<<<<<<< HEAD:WebContent/views/promo/promo.jsp
 .review_list li .review_info{margin:-1px 0 7px -2px;overflow:hidden}
+=======
+.review_list li .review_info{margin:-15px 0 7px -40px;overflow:hidden}
+>>>>>>> e7df2293a6343e300548246144f599d1fc495dba:WebContent/views/board/board_concertInfo.html
 .review_list li .review_info:after{display:block;clear:both;content:''}
 .review_list li .review_info .star_average{float:none}
 .review_list li .review_info .star_average dt{display:block;visibility:hidden;overflow:hidden;position:absolute;top:-1000em;left:0}
 .review_list li .review_info .star_average dd{height:12px;line-height:12px;padding-right:8px;letter-spacing:0;vertical-align:top;}
+<<<<<<< HEAD:WebContent/views/promo/promo.jsp
 .review_list li .review_info .star_average dd.review_user{font-size:12px;font-weight:bold;color:#444}
+=======
+.review_list li .review_info .star_average dd.review_user{font-size:12px;font-weight:bold;color:#444;}
+>>>>>>> e7df2293a6343e300548246144f599d1fc495dba:WebContent/views/board/board_concertInfo.html
 .review_list li .review_info .star_average dd.review_date{color:#999}
 .review_list li .review_info .star_average dd.review_delete{height:15px;margin-top:-2px;}
 .review_list .review_info a.delete{background-position:-327px -16px;width:16px;height:15px;vertical-align:top;}
@@ -218,6 +226,15 @@
 .review_list li div.reply li .review_info{background:url(../img/sp_theater.png) no-repeat -472px -110px;padding-left:20px;margin-bottom:11px}
 .review_list li div.reply li .star_average{float:none}
 .review_list li div.reply li p{padding-left:20px}
+<<<<<<< HEAD:WebContent/views/promo/promo.jsp
+=======
+    
+    
+    
+    
+    
+    
+>>>>>>> e7df2293a6343e300548246144f599d1fc495dba:WebContent/views/board/board_concertInfo.html
     
 </style>
 </head>
@@ -444,11 +461,17 @@
                     overflow-y:auto;
                     color:#999
                 }
-                .write_review .btn{
+                .write_review_button{
                     margin-left:-5px;
                     *margin-top:1px;
                     color:red;
+                    padding: 37px 0px 0px; 
+                    margin:10px;
+                    width:70px; height:50px; resize:none;
+                    color:white;
+                    background-color: skyblue;
                 }
+                
             </style>
             
                 <div id="i_C_content_c" style="display:none;">
@@ -466,7 +489,11 @@
                                 <textarea title="후기 작성하기" id="reviewContent" name="reviewContent"
                                           style="width:700px; height: 25px; resize:none; margin:0px; 0px; 0px;" maxlength="3000"
                                           placeholder="주민번호, 전화번호, 이메일 등 개인정보를 남기면 타인에 의해 악용될 소지가 있습니다."></textarea>
+<<<<<<< HEAD:WebContent/views/promo/promo.jsp
                                 <input type="button" style="width:70px; height:50px; resize:none;" value="후기작성">
+=======
+                                <input type="button" class="write_review_button"  value="후기작성">
+>>>>>>> e7df2293a6343e300548246144f599d1fc495dba:WebContent/views/board/board_concertInfo.html
                             </div>
 
             
@@ -502,7 +529,56 @@
                         <dt>날짜</dt><dd class="review_date">2018.10.05 16:27</dd>
                     </dl>
                 </div>
+<<<<<<< HEAD:WebContent/views/promo/promo.jsp
                 너무 재밌어
+=======
+                뮤지컬 삼총사를 재밌게 봐서 아이언 마스크도 관람했어요! 배우분들도 다 훌륭했지만 그 중 가장 좋았던 것은 검술 액션이였어요. 정말 긴장감있게 액션 연기를 잘하시더라구요ㅠㅠ 재관람하고 싶은 작품이에요!!
+            </li>
+            
+            <li>
+                <div class="review_info">
+                    <dl class="star_average">
+                        <dt>별점</dt>
+                        <dd class="grade_star">
+                            <span class="star_gauge" style="width: 100%"></span>
+                        </dd>
+                        <dt>아이디</dt>
+                        <dd class="review_user">jm***@ha</dd>
+                        <dt>날짜</dt><dd class="review_date">2018.10.05 16:27</dd>
+                    </dl>
+                </div>
+                뮤지컬 삼총사를 재밌게 봐서 아이언 마스크도 관람했어요! 배우분들도 다 훌륭했지만 그 중 가장 좋았던 것은 검술 액션이였어요. 정말 긴장감있게 액션 연기를 잘하시더라구요ㅠㅠ 재관람하고 싶은 작품이에요!!
+            </li>
+            
+            <li>
+                <div class="review_info">
+                    <dl class="star_average">
+                        <dt>별점</dt>
+                        <dd class="grade_star">
+                            <span class="star_gauge" style="width: 100%"></span>
+                        </dd>
+                        <dt>아이디</dt>
+                        <dd class="review_user">jm***@ha</dd>
+                        <dt>날짜</dt><dd class="review_date">2018.10.05 16:27</dd>
+                    </dl>
+                </div>
+                뮤지컬 삼총사를 재밌게 봐서 아이언 마스크도 관람했어요! 배우분들도 다 훌륭했지만 그 중 가장 좋았던 것은 검술 액션이였어요. 정말 긴장감있게 액션 연기를 잘하시더라구요ㅠㅠ 재관람하고 싶은 작품이에요!!
+            </li>
+            
+            <li>
+                <div class="review_info">
+                    <dl class="star_average">
+                        <dt>별점</dt>
+                        <dd class="grade_star">
+                            <span class="star_gauge" style="width: 100%"></span>
+                        </dd>
+                        <dt>아이디</dt>
+                        <dd class="review_user">jm***@ha</dd>
+                        <dt>날짜</dt><dd class="review_date">2018.10.05 16:27</dd>
+                    </dl>
+                </div>
+                뮤지컬 삼총사를 재밌게 봐서 아이언 마스크도 관람했어요! 배우분들도 다 훌륭했지만 그 중 가장 좋았던 것은 검술 액션이였어요. 정말 긴장감있게 액션 연기를 잘하시더라구요ㅠㅠ 재관람하고 싶은 작품이에요!!
+>>>>>>> e7df2293a6343e300548246144f599d1fc495dba:WebContent/views/board/board_concertInfo.html
             </li>
             
   
