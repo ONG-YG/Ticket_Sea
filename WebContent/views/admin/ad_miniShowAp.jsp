@@ -160,7 +160,7 @@
            <div id="content">
            <div class="content_wrap">
               <div class="top_area">
-                  <h2 class="main_title">소규모공연</h2>
+                  <h2 class="main_title">소규모 승인 완료 공연</h2>
                </div>
                <div class="main_area">
                 <div id="member_table">
@@ -171,16 +171,16 @@
                         <td width="10%">작성자</td>
                         <td width="20%">공연장소</td>
                         <td width="15%">공연일시</td>
-                        <td>승인여부</td>
+                        <td>승인상태</td>
                        </thead>
                        <%for(MiniShow ms : list) {%>
                        <tr>
-                           <td><a href="#"><%=ms.getMs_no() %></a></td>
+                           <td><a href="/miniShowApInfo.do?msNo=<%=ms.getMs_no() %>"><%=ms.getMs_no() %></a></td>
                            <td><%=ms.getMs_name() %></td>
                            <td>test11</td>
                            <td><%=ms.getMs_place() %></td>
                            <td><%=ms.getMs_date() %></td>
-                           <td><input type="button" value="승인" onclick="approve('<%=ms.getMs_no()%>');"/>&nbsp;&nbsp;<input type="button" value="거부"/></td>
+                           <td><%=ms.getMs_state() %></td>
                        </tr>
                         <%} %>
                     </table>
@@ -193,7 +193,6 @@
                     <!--회원검색-->
                     <div class="searchArea"> 
                     <a href="#"><img src="../../img/btn_search4.png" alt="검색" style="float: right"></a>
-                
 					<input type="text" class="textInp" name="searchValue" id="searchValue" style="float: right">
 					<a href="javascript:search();"></a>
 				</div>

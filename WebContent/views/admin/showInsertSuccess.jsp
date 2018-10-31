@@ -8,7 +8,8 @@
 </head>
 <body>
 	<script>
-	alert("성공");
+	alert("공연등록 성공");
+	location.href="/adShowList.do";
 	</script>
 </body>
 </html>

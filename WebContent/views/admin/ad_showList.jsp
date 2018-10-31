@@ -1,5 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import = "kr.co.ticketsea.admin.show.model.vo.*" 
+		import = "java.util.ArrayList"%>
+		
+<% 
+	// Controller(Servlet)에서 보내준 값 가져오기
+	PageData pd = (PageData)request.getAttribute("pageData");
+
+	ArrayList<Show> list=pd.getList(); //현재 페이지의 글 목록
+	String pageNavi = pd.getPageNavi(); //현재 navi Bar
+	
+	
+%>
+		
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -123,28 +136,27 @@
             <div id="c_inner">
             <aside class="main-sidebar">
                 <div id="side-menu">
-                <ul>
+                 <ul>
                     <li><a href="#">공연관리</a>
                         <ul>
-                            <li><a href="ad_showInsert.html">공연등록</a></li>
-                            <li><a href="/adShowList.do">공연수정</a></li>
-                            <li><a href="#">공연삭제</a></li>
+                             <li><a href="ad_showInsert.jsp">공연등록</a></li>
+                            <li><a href="/adShowList.do">공연목록</a></li>
                         </ul>
                     </li>    
                     <li><a href="#">회원관리</a>
                         <ul>
-                            <li><a href="ad_memberList.html">회원목록</a></li>
+                            <li><a href="/adMemberList.do">회원목록</a></li>
                         </ul>
                     </li>
                     <li><a href="#">예매관리</a>
                         <ul>
-                            <li><a href="ad_reserveList.html">예매목록</a></li>
+                            <li><a href="/adReserveList.do">예매목록</a></li>
                         </ul>
                     </li>
                     <li><a href="#">소규모공연</a>
                         <ul>
-                            <li><a href="ad_miniShowList.html">승인대기공연</a></li>
-                            <li><a href="#">승인완료공연</a></li>
+                            <li><a href="/miniShowList.do">승인대기공연</a></li>
+                            <li><a href="/msApproveList.do">승인완료공연</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -166,30 +178,21 @@
                         <td>시작일</td>
                         <td>종료일</td>
                        </thead>
+                       <%for(Show s : list) {%>
                        <tr>
-                           <td><a href="ad_showUpdate.html">S123456</a></td>
-                           <td>지킬앤하이드</td>
-                           <td>조승우,홍광호,윤공주,아이비</td>
-                           <td>170분</td>
-                           <td>2018.11.13</td>
-                           <td>2019.05.19</td>
+                           <td><a href="/adShow.do?m_show_no=<%=s.getM_show_no()%>"><%=s.getM_show_no() %></a></td>
+                           <td><%=s.getShow_name() %></td>
+                           <td><%=s.getArtists() %></td>
+                           <td><%=s.getShow_run() %></td>
+                           <td><%=s.getShow_st_date() %></td>
+                           <td><%=s.getShow_ed_date() %></td>
                        </tr>
-                       <tr>
-                           <td><a href="ad_showUpdate.html">S123457</a></td>
-                           <td>넬 크리스마스콘서트</td>
-                           <td>넬</td>
-                           <td>120분</td>
-                           <td>2018.12.22</td>
-                           <td>2018.12.24</td>
-                       </tr>
+                       <%} %>
                     </table>
                     
                     <!--회원목록 페이지 이동-->
                      <div class="paginate" style="text-align: center">
-                    <a class="prev"><span class="blind">이전</span></a>
-                    <strong>1</strong>
-                    <a href="#" class="">2</a>
-                    <a href="#">다음</a>
+                    <label><%=pageNavi%></label>
                     </div>
                     
                     <!--회원검색-->
