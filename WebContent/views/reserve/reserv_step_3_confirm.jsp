@@ -56,8 +56,6 @@
 	    
 	    function pageInit() {
 	    	
-	    	alert("hello");
-	    	
 	    	var memberName = '<%=memberName%>';
 	    	$('#bookMemName').text(memberName);
 	    	
@@ -86,10 +84,37 @@
 	    	var totalPrice = Number(<%=totalPrice%>).toLocaleString();
 	    	$('#rInfo_TotP').text(totalPrice);
 	    	
-	    	//selectedSeatView();
+	    	selectedSeatView();
 	    }
 	    
-	    
+		function selectedSeatView() {
+	    	
+	    	var selectedSeatList = [];
+        	<%
+        	for (SelectedSeat selSeat : selSeatList) {
+        	%>
+        		var selSeat = ['<%=selSeat.getSeatGrd()%>', '<%=selSeat.getSeatTitle()%>'];
+        		selectedSeatList.push(selSeat);
+        	<%} %>
+        	//console.log(selectedSeatList);/////////////////////////////
+	    	
+	    	var list = "";
+        	for(var i=0; i<selectedSeatList.length; i++) {
+        		var selSeat = selectedSeatList[i];
+        		var grdColor = 'black';
+        		if(selSeat[0]=='R') {grdColor='#ffc000';}//////////////////
+        		else if(selSeat[0]=='S') {grdColor='blue';}////////////////
+        		list += "<li id='selected_seat_no_'+selSeat[0]> "
+				            +"<div class='seat_color' style='background:"+grdColor+"'></div> "
+				            +"<div class='seat_detail_info'> "
+				                +"<span class='seat_grade' >"+selSeat[0]+"</span> "
+				                +"<span class='seat_no'>"+selSeat[1]+"</span> "
+				            +"</div> "
+				        +"</li> ";
+        	}
+        	$('#select_seat_grade').html(list);
+        	
+        }
     	
         function prev() {
             var chk = confirm("이전 단계로 돌아가면 현재의 예매 정보를 잃게 됩니다.");
@@ -118,7 +143,14 @@
                 alert("개인정보 제 3자 제공에 동의하셔야 결제가 가능합니다.");
             }
             else {
-                location.href="#";
+               	var patt1 = new RegExp("^[0-9]+$");
+               	var patt2 = new RegExp("^[0-9]{9,20}$");
+               	var res1 = patt1.test( $("#inputPhoneNo").val());
+               	var res2 = patt2.test( $("#inputPhoneNo").val());
+               	
+               	if( !res1 ){ alert("휴대폰 번호는 숫자만 입력할 수 있습니다."); }
+               	else if( !res2 ){ alert("휴대폰 번호를 9자 이상 입력해주세요."); }
+               	else { location.href="#"; }
             }
         }
     </script>
@@ -224,6 +256,7 @@
                         <hr>
                         <ul id="select_seat_grade" class="seat_lst">
                             <!--좌석등급 별 list-->
+                            <!-- 
                             <li id="seat_grade_33625">
                                 <div class="seat_color" style="background:#ffc000"></div>
                                 <div class="seat_detail_info">
@@ -259,7 +292,7 @@
                                     <span class="seat_no">K열 25번</span>
                                 </div>
                             </li>
-
+                             -->
                         </ul>
                         <div id="reserve_info">
                             <div id="date_sel_info">
@@ -284,8 +317,8 @@
                         </div>
                     </div>
                     <div class="reserve_btn">
-                        <a href="#" class="btn" onclick="prev()">이전단계</a>
-                        <a href="#" class="btn" onclick="next()">다음단계</a>
+                        <a class="btn" onclick="prev()">이전단계</a>
+                        <a class="btn" onclick="next()">다음단계</a>
                     </div>
 
                 </div>

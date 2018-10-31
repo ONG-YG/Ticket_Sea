@@ -884,8 +884,8 @@
                         </form>
                     </div>
                     <div class="reserve_btn">
-                        <a href="#" class="btn" onclick="prev()">이전단계</a>
-                        <a href="#" class="btn" onclick="next()">다음단계</a>
+                        <a class="btn" onclick="prev()">이전단계</a>
+                        <a class="btn" onclick="next()">다음단계</a>
                     </div>
 
                 </div>

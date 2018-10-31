@@ -94,7 +94,7 @@ public class ReserveSeatServlet extends HttpServlet {
 								
 								if(!seatGrdStList.isEmpty()) {
 									rp.setSeatGrdSt(seatGrdStList);
-									System.out.println(rp);/////////////////////////
+									System.out.println("ReserveSeatServlet\n"+rp);/////////////////////////
 									
 									//세션에 넣을 reserveSession객체 - 예매 진행 번호 생성
 									int progNo = new ReserveService().createProgNo();

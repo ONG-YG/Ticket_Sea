@@ -291,7 +291,7 @@
                                     <ul>
                                         
                                         <!-- 날짜 선택시 javaScript function 작동으로 채워짐 -->
-                                        
+                                        <!-- 
                                         <li>
                                             <span class="cnt">1</span>
                                             <span>회</span>
@@ -307,7 +307,7 @@
                                             <span>회</span>
                                             <span class="cnt_time">15:00 ~ 16:30</span>
                                         </li>
-                                        
+                                         -->
                                     </ul>
                                 </div>
                             </div>
@@ -369,7 +369,7 @@
                         </div>
                     </div>
                     <div id="reserve_btn_only">
-                        <a href="#" class="btn" onclick="next()">다음단계</a>
+                        <a class="btn" onclick="next()">다음단계</a>
                     </div>
 
                 </div>
