@@ -1,6 +1,7 @@
 package kr.co.ticketsea.mypage.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,6 +13,8 @@ import javax.servlet.http.HttpSession;
 
 import kr.co.ticketsea.member.model.vo.Member;
 import kr.co.ticketsea.mypage.service.MypageService;
+import kr.co.ticketsea.reserve.model.vo.ReserveInfo;
+import kr.co.ticketsea.reserve.model.vo.ShowInfo;
 
 /**
  * Servlet implementation class ReserveListServlet
@@ -33,29 +36,21 @@ public class ReserveListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-//		1. °Ë»öÇÑ ¸â¹ö ³Ñ¹ö·Î ¿¹¸Å¹øÈ£ °Ë»ö
-//		select bk_no from book_inf where member_no = '(m.getMember_no)';
-//		¿©·¯°³ ³ª¿È..>  ÇÏ³ª¾¿  ºĞ¹è ÇÊ¿ä
-//
-//		2. °¡Á®¿Â ¿¹¸Å¹øÈ£·Î °ø¿¬È¸Â÷¹øÈ£ °Ë»ö
-//		select ps_no from bk_s_l where bk_no = '(°¡Á®¿Â ¿¹¸Å¹øÈ£)';
-//
-//		4. °¡Á®¿Â °ø¿¬È¸Â÷¹øÈ£·Î °ø¿¬¹øÈ£ °Ë»ö
-//		select m_show_no from perf_sch where ps_no = '(°¡Á®¿Â °ø¿¬È¸Â÷¹øÈ£)';
-//
-//		5. °ø¿¬¹øÈ£·Î °ø¿¬¸í ÃßÃâ
-//		select m_show_name from musical_l where m_show_no = '(°ø¿¬¹øÈ£)';
-		
-		// 1. ¸â¹ö °íÀ¯ ³Ñ¹ö ÃßÃâ
+
+
 		HttpSession session = request.getSession(false);
 		int memberNo = ((Member)session.getAttribute("member")).getMemberNo();
 		
-		// 2. ºñÁî´Ï½º ·ÎÁ÷(°ø¿¬¸ñ·Ï Å×ÀÌºí±îÁö)
-		new MypageService().selectMusical(memberNo);
+		// member_noë¡œ bk_noê²€ìƒ‰
+		ArrayList<ReserveInfo> rNumberList = new MypageService().selectReserveNumber(memberNo);
 		
-		// 3. ¿¹¸ÅÁ¤º¸ º¸³»¸é¼­ jsp ÆäÀÌÁö·Î ÀÌµ¿.
+		// ì¶”ì¶œí•œ bk_noë¡œ ps_noë¥¼ ì¡°íšŒí•˜ì—¬ ê³µì—°ì¼,ê³µì—°ë²ˆí˜¸ ì¶”ì¶œ
+		new MypageService().selectPerformSchedule(rNumberList);
+		
+		// ì¶”ì¶œí•œ ê³µì—°ë²ˆí˜¸ë¡œ ê³µì—°ëª… ì¶”ì¶œ
+
 		RequestDispatcher view = request.getRequestDispatcher("views/mypage/reserveList.jsp");
-		request.setAttribute("reserveList", m);
+		request.setAttribute("rNumberList", rNumberList);
 		view.forward(request, response);
 		
 	}

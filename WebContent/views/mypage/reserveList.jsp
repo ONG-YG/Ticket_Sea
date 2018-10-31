@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ page import="kr.co.ticketsea.member.model.vo.*" %>
-    <%
-    	Member m = (Member)request.getAttribute("reserveList");
-    %>
+    <%@ page import="kr.co.ticketsea.reserve.model.vo.*" %>
+    <%@ page import="java.util.ArrayList" %>
+    <% ArrayList<ReserveInfo> rNumberList = (ArrayList<ReserveInfo>)request.getAttribute("rNumberList"); %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -274,22 +274,15 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>라이온킹</td>
-                                <td>18.10.11</td>
-                                <td>2</td>
-                                <td>사용완료</td>
+                        	<%for(ReserveInfo ri:rNumberList){ %>
+                        	<tr>
+                                <td></td>
+                                <td><%=ri.getBk_no() %></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>라이온</td>
-                                <td>18.11.20</td>
-                                <td>3</td>
-                                <td>
-                                    <button class="cancelBtn">취소</button>
-                                </td>
-                            </tr>
+                        	<%} %>
                         </tbody>
                     </table>
                     <div class="paginate">
