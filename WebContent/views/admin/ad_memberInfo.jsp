@@ -250,15 +250,15 @@
                             </tr>
                             <tr>
                                 <th>연락처</th>
-                                <td><input type="text" name="phone" value="<%=m.getMemberPhone()%>"></td>
+                                <td><input type="text" id="phone" name="phone" value="<%=m.getMemberPhone()%>"></td>
                             </tr>
                             <tr>
                                 <th>주소</th>
-                                <td><input type="text" name="address" value="<%=m.getMemberAddr()%>"></td>
+                                <td><input type="text" id="address" name="address" value="<%=m.getMemberAddr()%>"></td>
                             </tr>
                             <tr>
                                 <th>이메일</th>
-                                <td><input type="text" name="email" value="<%=m.getMemberEmail()%>"></td>
+                                <td><input type="text" id="email" name="email" value="<%=m.getMemberEmail()%>"></td>
                             </tr>
                             <tr>
                             	<th>회원상태</th>
@@ -272,14 +272,31 @@
                     </table>
                 </div>
                    <div id="memUpdate">
-                    <button id="updateBtn" onclick = "updateSubmit()">회원정보 수정</button>
+                    <button id="updateBtn" onclick = "return updateSubmit();">회원정보 수정</button>
                    </div>
                </div>
                </form>
                </div>
                <script>
                 function updateSubmit(){
-                	document.getElementById("updateForm").submit();
+                	var phone = document.getElementById("phone").value;
+                	var address = document.getElementById("address").value; 
+                	var email = document.getElementById("email").value; 
+                	
+                	if(phone==""){
+                		alert("연락처를 입력하세요");
+                		return false;
+                	}else if(address==""){
+                		alert("주소를 입력하세요");
+                		return false;
+                	}else if(!(/^[a-z0-9]{4,20}@/.test(email))||email==""){
+                		alert("이메일을 입력하세요");
+                		return false;
+                	}else{
+                		document.getElementById("updateForm").submit();
+                		return true;
+                	}
+                	
                 }
                </script>
                

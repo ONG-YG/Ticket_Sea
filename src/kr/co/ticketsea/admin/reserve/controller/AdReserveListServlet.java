@@ -38,7 +38,6 @@ public class AdReserveListServlet extends HttpServlet {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
 		ReservePageData pd = new ReserveService().reserveAllList(currentPage);
-		
 	}
 
 	/**
