@@ -1,7 +1,6 @@
 package kr.co.ticketsea.reserve.model.service;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.util.ArrayList;
 
 import kr.co.ticketsea.common.JDBCTemplate;

@@ -125,7 +125,6 @@ public class MemberDao {
 			pstmt.setString(2, m.getMemberPhone());
 			pstmt.setString(3, m.getMemberEmail());
 			pstmt.setString(4, m.getMemberAddr());
-			
 			pstmt.setString(5, m.getMemberId());
 			
 			result = pstmt.executeUpdate();
@@ -139,6 +138,7 @@ public class MemberDao {
 		return result;
 		
 	}
+
 
 	public int memberDelete(Connection conn, String userId) {
 

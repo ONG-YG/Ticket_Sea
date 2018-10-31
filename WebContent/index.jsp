@@ -143,6 +143,14 @@
         </div>
 
 
+<script>
+	function btn(){
+		window.open("/adShowPlace.do","_blank","width=1800, height=1500");
+	}
+
+</script>
+
+
         <div id="inner">
             <h3>Best 공연 및 전시</h3>
             <ul class="best_list">

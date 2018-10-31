@@ -1,12 +1,9 @@
 package kr.co.ticketsea.reserve.model.dao;
 
-import java.beans.Statement;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import kr.co.ticketsea.common.JDBCTemplate;
@@ -14,7 +11,6 @@ import kr.co.ticketsea.reserve.model.vo.PerformSchedule;
 import kr.co.ticketsea.reserve.model.vo.SeatGradeState;
 import kr.co.ticketsea.reserve.model.vo.SelectedSeat;
 import kr.co.ticketsea.reserve.model.vo.ShowInfo;
-import oracle.sql.DATE;
 
 public class ReserveDao {
 	
@@ -462,6 +458,7 @@ public class ReserveDao {
 		
 		return result;
 	}
+
 
 	public String getSysdate(Connection conn) {
 		PreparedStatement pstmt = null;

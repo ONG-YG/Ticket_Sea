@@ -52,7 +52,7 @@ public class MemberService {
 		return result;
 	}
 
-	
+
 	public int memberDelete(String userId) {
 		int result = 0 ;
 		Connection conn = JDBCTemplate.getConnection();
@@ -65,5 +65,6 @@ public class MemberService {
 		result = new MemberDao().memberDelete(conn,userId);
 		return result;
 	}
+
 
 }

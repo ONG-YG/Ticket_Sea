@@ -191,14 +191,6 @@ input {
 
 	</div>
 
-
-
-
-
-
-
-
-
 	<script>
 		window.onload = function(){
 			
