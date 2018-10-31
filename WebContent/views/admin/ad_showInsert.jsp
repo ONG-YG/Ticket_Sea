@@ -317,11 +317,8 @@ function LoadImg(value){
                 <div class="input_area">
                     <!--이미지영역-->
                     <div class="event_img_area">
-                    	<input type="file" name="upfile"/><br>
                         <img class="show_post" src="../../img/ticketsea_poster.png" data-default-src="../../img/ticketsea_poster.png" alt="공연포스터" style="width:160px; height:160px;">
-                        <!--이미지 업로드 버튼-->
-                         <div class="upload_btn">
-                        </div>
+                        <input type="file" name="upfile"/><br>
                     </div>
                 </div>
                 </div>
@@ -338,7 +335,7 @@ function LoadImg(value){
                                     <option value="<%=sc.getSc_code()%>"><%=sc.getSc_name()%></option>
                             		<%} %>
                                 </select>
-                                <input id="title" type="text" name="show_name" class="title_input" placeholder="공연명을 입력해 주세요." value="" maxlength="64" autofocus="autofocus">
+                                <input id="title" type="text" name="show_name" class="title_input" placeholder="공연명을 입력해 주세요." maxlength="64" autofocus="autofocus">
                             </div>
                         </div>
                     </fieldset>
@@ -414,11 +411,7 @@ function LoadImg(value){
                         </legend>
                         <div class="edit">
                             <div class="write_wrap">
-                            <!-- form 태그 안에 form   -->
-                                 <!-- <form action="http://localhost/insert.html" method="post" enctype="multipart/form-data">
-                                	<input type="file">
-                                <input type="submit">
-                                </form> -->
+                           		<input type="file" name="showDtInfo"/><br>
                             </div>
                         </div>
                     </fieldset>
@@ -449,16 +442,17 @@ function LoadImg(value){
 		grade= document.getElementById("grade").value;
 		runTime= document.getElementById("runTime").value;
 		price= document.getElementById("price").value;
-		if(category=="")
+		
+		if(category==""||category==null)
         {
 		     alert("공연카테고리를 선택하세요");
 				return false;
-		}else if(title="")
-			{
+		}else if(title=""||title==null)
+		{
 				alert("공연명을 입력하세요");
 				return false;
-            }
-        else if(!(/^(19|20)\d{2}.(0[1-9]|1[012]).(0[1-9]|[12][0-9]|3[0-1])$/.test(startEventDate)))
+        }
+       else if(!(/^(19|20)\d{2}.(0[1-9]|1[012]).(0[1-9]|[12][0-9]|3[0-1])$/.test(startEventDate)))
             //년,월,일 .으로 구분
             {
         		alert("시작일을 입력해주세요(yyyy.mm.dd)");
@@ -479,7 +473,7 @@ function LoadImg(value){
                  alert("관람등급을 입력하세요")
                 return false;
             }
-        else if(!(/^[0-9]+$/g.test(runTime))) // 주소 공백검사
+        else if(!(/^[0-9]+$/g.test(runTime)))
             {
                 alert("관람시간을 입력하세요(숫자만)")
                 return false;
