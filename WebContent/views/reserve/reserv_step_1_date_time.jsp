@@ -56,6 +56,8 @@
         	pageInit();
         	
             $('.calendar-date').click(function(){
+            //$('.week .day').click(function(){
+            	//alert("hello");/////////////////////////////////////////
                 date_sel = null;
                 cnt_sel = null;
                 $('#cnt_box li').removeClass('selected_cnt_li');
@@ -66,19 +68,49 @@
                 var year = yearMonth[0];
                 var month = yearMonth[1];
                 var day = $(this).text();
-                //date_sel = $('.year-month').text()+"."+$(this).text();
+                
+                /*
+                var calSelected = $('#calSelected').val().split('-');
+                alert(calSelcected);
+                var year = calSelected[0];
+                var month = calSelected[1];
+                var day = calSelected[2];
+                */
+                
                 date_sel = year+"-"+month+"-"+day;
                 $('#date_sel_info span').html(year+"."+month+"."+day);
                 //$('#date_form').val(date_sel);
                 $('#cnt_sel_info span').html(cnt_sel);
                 //$('#cnt_form').val(cnt_sel);
                 //alert(date_sel);
+                
+                var cntList = [];
+                for(var i=0; i<psList.length; i++) {
+                	if(psList[i][1]==date_sel) {
+               			var ps = psList[i];
+               			var cntTime = [ ps[2], ps[3] ];
+               			cntList.push(cntTime);
+                	}
+                }
+                
+                //var list = $('#cnt_box ul').html();
+                var list = "";
+            	for(var i=0; i<cntList.length; i++) {
+            		list += " <li id='li_"+ cntList[i][0] +"' onclick='listClick("+ cntList[i][0] +");'> "
+		                        +"<span class='cnt'>"+ cntList[i][0] +"</span> "
+		                        +"<span>회</span> "
+		                        +"<span class='cnt_time'>"+ cntList[i][1] +"</span> "
+		                    +" </li> ";
+            	}
+            	$('#cnt_box ul').html(list);
+            	
             })
 
             $('#cnt_box li').click(function(){
-                if(date_sel!=null) {
+                alert(date_sel);
+            	if(date_sel!=null) {
                     $('#cnt_box li').removeClass('selected_cnt_li');
-                    $(this).addClass('selected_cnt_li');
+                    $('#cnt_box li[id=]').addClass('selected_cnt_li');
 
                     cnt_sel = $(this).children('.cnt').html();
                     $('#cnt_sel_info span').html($(this).text());
@@ -98,6 +130,21 @@
         	$('#mini_poster img').attr('src',showPosterSrc);
         	
         }
+            
+        function listClick(cnt){
+            
+        	if(date_sel!=null) {
+        		alert(date_sel);
+        		$('#cnt_box li').removeClass('selected_cnt_li');
+                $(this).addClass('selected_cnt_li');
+
+                cnt_sel = $(this).children('.cnt').html();
+                //$('#cnt_sel_info span').html($(this).text());
+                $('#cnt_sel_info span').html("hello");
+                //$('#cnt_form').val(cnt_sel);
+                //alert(cnt_sel);
+            }
+        }
         
         function next() {
             var stat = false;
@@ -110,11 +157,8 @@
                 $('#cnt_form').val(cnt_sel);
                 
                 for(var i=0; i<psList.length; i++) {
-                	//console.log(psList[i][1] +" / "+ psList[i][2]);////////////////
                 	if(psList[i][1]==date_sel && psList[i][2]==cnt_sel) {
-                		//console.log("match!");///////////////////////////
                 		psNo = psList[i][0];
-                		//console.log(psNo);///////////////////
                 		break;
                 	}
 				}
@@ -165,6 +209,8 @@
                             <div id="ct_left_date">
                                 <b>날짜선택</b><hr>
                                 <div id="date_box">
+                                	<!--<jsp:include page="/views/reserve/test.html" />-->
+                                	
                                     <div class="calendar">
                                         <div class="calendar-header">
                                             <a class="prev-mon" title="이전달"><span>이전달</span></a>
@@ -241,12 +287,16 @@
                                             <span style="color: red; font-size: 10px;">전월 다음달 선택 시 변수에 반영할것</span>
                                         </div>
                                     </div>
+                                    
                                 </div>
                             </div>
                             <div id="ct_left_cnt">
                                 <b>회차선택</b><hr>
                                 <div id="cnt_box">
                                     <ul>
+                                        
+                                        <!-- 날짜 선택시 javaScript function 작동으로 채워짐 -->
+                                        
                                         <li>
                                             <span class="cnt">1</span>
                                             <span>회</span>
@@ -262,6 +312,7 @@
                                             <span>회</span>
                                             <span class="cnt_time">15:00 ~ 16:30</span>
                                         </li>
+                                        
                                     </ul>
                                 </div>
                             </div>

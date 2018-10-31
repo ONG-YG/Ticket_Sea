@@ -7,11 +7,11 @@
       src="https://code.jquery.com/jquery-3.3.1.js"
       integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
       crossorigin="anonymous"></script>
-    <script src="angular.min.js"></script>
+    <script src="/views/reserve/angular.min.js"></script>
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css" />
-    <link rel="stylesheet" type="text/css"  href="calendar.css" />
+    <link rel="stylesheet" type="text/css"  href="/views/reserve/calendar.css?ver=1" />
 
-    <script  src="moment.min.js"></script>
+    <script  src="/views/reserve/moment.min.js"></script>
     <script type="text/javascript">
     moment.locale('kr', {
         months : "1월_2월_3월_4월_5월_6월_7월_8월_9월_10월_11월_12월".split("_"),
@@ -24,12 +24,12 @@
         }
     });
     </script>
-    <script  src="calendar.js"></script>
+    <script  src="/views/reserve/calendar.js"></script>
 </head>
 <body>
-<div ng-controller="calendarWidget" onclick="test();">
+<div ng-controller="calendarWidget"">
     <calendar selected="day" ></calendar>
-    <input type="hidden" value="{{day.format('YYYY-MM-DD')}}"/>
+    <input type="hidden" id="calSelected" value="{{day.format('YYYY-MM-DD')}}"/>
 </div>
 </body>
 </html>
