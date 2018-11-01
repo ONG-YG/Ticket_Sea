@@ -1,8 +1,10 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta charset="UTF-8">
-<title>마이페이지 예매확인/취소</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>소규모 공연 홍보</title>
 <script
   src="https://code.jquery.com/jquery-3.3.1.js"
   integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
@@ -207,81 +209,22 @@
     letter-spacing: -1px;
     }
     
+    .boxStyle {
+            position: relative;
+            width: 780px;
+            margin: 0 auto 12px;
+            padding: 5px 15px;
+            border: 0px solid #c7c7c7;
+            border-radius: 5px;
+            background-color: #fff;
+            box-shadow: 1px 2px 6px 0px rgba(0, 0, 0, 0.1); 
+            float:right;
+        }
    
-    
-    .pullMethod {
-            background:#fbfbfb;
-            text-align:left;
-            padding:25px 30px;
-            line-height:1.6;
-        }
-    
-    .questionTable{
-            border:1px solid #dedede;
-            border-right:0;
-            font-size:13px;
-            margin:10px auto 12px;
-            line-height:45px;
-            width:730px;
-            text-align: center;
-        }
-    
-    #board{
-        border:1px solid #dedede;
-        width : 760px;
-        height : 500px;
-    }
-    
-    #board_header{
-        border:1px solid #dedede;
-        width : 100%;
-        height : 15%;
-    }
-    
-    #board_header > #b_h_title{
-        border: 1px solid #dedede;
-        width : 100%;
-        height : 60%;
-        font-size: 25px;
-        float : left;
-    }
-    
-    #board_header > #b_h_writer{
-        border: 1px solid #dedede;
-        width : 40%;
-        height : 40%;
-        font-size: 15px;
-        float:left;
-    }
-    
-    #board_header > #b_h_blank{
-        border : 1px solid #dedede;
-        width : 30%;
-        height : 40%;
-        font-size: 15px;
-        float:left;
-    }
-    
-    #board_header > #b_h_date{
-        border : 1px solid #dedede;
-        width : 20%;
-        height : 40%;
-        font-size: 15px;
-        text-align: center;
-        float:left;
-    }
-    
-    #board_header > #b_h_hit{
-        border : 1px solid #dedede;
-        width : 10%;
-        height : 40%;
-        font-size: 15px;
-        text-align: center;
-        float:left;
-    }
     
 </style>
 </head>
+<body>
 <body>
 <div id="wrapper">
     <div id="header">
@@ -295,44 +238,81 @@
         <div id="c_inner">
             <div id="c_inner_top">
                 <div class="title1">
-                    <h2>고객센터</h2>
+                    <h2>소규모 공연</h2>
                 </div>
                 <div class="title2"></div>
             </div>
             <ul id="left_menu">
                 <li class="has_sub">
-                    <span>고객센터 홈</span>
+                    <span>소규모 공연</span>
                     <ul>
-                        <li><a href="board_Notice.html"><strong>공지사항</strong></a></li>
-                        <li><a href="board_Faq.html"><strong>자주묻는 질문</strong></a></li>
-                        <li><a href="board_Qna.html"><strong>질문게시판</strong></a></li>
+                        <li><a href="board_prA.html"><strong>소규모 공연 목록</strong></a></li>
+                        <li><a href="board_prB.html"><strong>소규모 공연 홍보</strong></a></li>
                     </ul>
                 </li>
             </ul>    
             <div id="right_view">
                 <div class="r_line">
-                    <h3>질문게시판</h3>
+                    <h3>소규모 공연 홍보</h3>
                 </div>
                 
-                <div id ="board">
-                    <div id="board_header">
-                        <div id="b_h_title">결제가 안돼요</div>
-                         <div id="b_h_writer">옹옹</div>
-                        <div id="b_h_blank"></div>
-                        <div id="b_h_date">2018-03-03 15:03</div>
-                        <div id="b_h_hit">5020</div>
-                    </div>
-                    <div id="board_contents" style="margin:15px;">
-                        왜 안돼나요ㅛㅛㅛㅛㅛㅛㅛㅛㅛ
-                    </div>
                 
-                
-                </div>
-                
-                <br>
-                
-                <input type="button" value="삭제" style="float: right; margin:5px;"  >
-                <input type="button" value="수정" style="float: right; margin:5px;">
+                     <table id="write-form" class="boxStyle">
+                    <tr>
+                        <td style="width : 70px; text-align : center;" >공연명</td>
+                        <td><input type="text" name="title" style="width: 300px;" /></td>
+                        
+                    </tr>
+                    
+                     <tr>
+                        <td style="width : 70px; text-align : center;" >아티스트</td>
+                        <td colspan="2" >
+                            <textarea name="content" rows="1" cols="50" style="width:300px;"></textarea>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td style="width : 70px; text-align : center;" >공연장소</td>
+                        <td colspan="2" >
+                            <textarea name="content" rows="1" cols="50" style="width:300px;"></textarea>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td style="width : 40px; text-align : center;" >장르</td>
+                        <td>
+                            <select>
+                                <option>연극</option>
+                                <option>음악</option>
+                                <option>뮤지컬</option>
+                            </select>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td style="width : 70px; text-align : center;" >공연소개</td>
+                        <td colspan="2" >
+                            <textarea name="content" rows="17" cols="50" style="width:600px;"></textarea>
+                        </td>
+                    </tr>
+                    
+                    
+                    
+                    <tr>
+                        <td>사진첨부</td>
+                        <td><input type="file" name="attachFile" /></td>
+                    </tr>
+                    
+                    <tr>
+                        <td colspan="2">
+                         <input type="submit" value="작성" style="float:right" width="70px" height="30">
+                        </td>
+                    </tr>
+                        
+                       
+                </table>
+            
+            
                 
             </div>
         </div>
@@ -358,6 +338,5 @@
     </div>
     
 </div>
-
 </body>
 </html>

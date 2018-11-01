@@ -35,6 +35,7 @@ public class ShowInsertServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		String fileName=null;
 		//파일 사이즈 업로드 
+
 		Show s = new Show();
 		
 		s.setShow_name(request.getParameter("show_name"));

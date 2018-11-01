@@ -3,6 +3,7 @@ package kr.co.ticketsea.mypage.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,7 +16,7 @@ import kr.co.ticketsea.member.model.vo.Member;
 import kr.co.ticketsea.mypage.model.vo.MyReserveList;
 import kr.co.ticketsea.mypage.service.MypageService;
 import kr.co.ticketsea.reserve.model.vo.ReserveInfo;
-import kr.co.ticketsea.reserve.model.vo.ShowInfo;
+
 
 /**
  * Servlet implementation class ReserveListServlet
@@ -36,8 +37,6 @@ public class ReserveListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-
 
 		HttpSession session = request.getSession(false);
 		int memberNo = ((Member)session.getAttribute("member")).getMemberNo();
@@ -51,6 +50,7 @@ public class ReserveListServlet extends HttpServlet {
 		RequestDispatcher view = request.getRequestDispatcher("views/mypage/reserveList.jsp");
 		request.setAttribute("rNumberList", rNumberList);
 		request.setAttribute("mrlList", mrlList);
+
 		view.forward(request, response);
 		
 	}

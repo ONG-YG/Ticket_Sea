@@ -25,7 +25,6 @@ public class ReserveStepOne {
 	}
 	
 	
-	
 	public int getShowNo() {
 		return showNo;
 	}
@@ -50,6 +49,7 @@ public class ReserveStepOne {
 	public void setPsList(ArrayList<PerformSchedule> psList) {
 		this.psList = psList;
 	}	
+
 	
 		
 	

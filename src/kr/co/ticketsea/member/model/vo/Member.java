@@ -24,6 +24,7 @@ public class Member {
 	public Member(int memberNo, String memberId, String memberName, String memberPwd, String memberPhone,
 			String memberAddr, String memberEmail, Date memberJoinDate, char memberActive, char memberGender,
 			char memberGrade) {
+
 		super();
 		this.memberNo = memberNo;
 		this.memberId = memberId;
@@ -36,6 +37,7 @@ public class Member {
 		this.memberActive = memberActive;
 		this.memberGender = memberGender;
 		this.memberGrade = memberGrade;
+
 	}
 
 	public int getMemberNo() {
@@ -130,3 +132,4 @@ public class Member {
 	
 	
 }
+

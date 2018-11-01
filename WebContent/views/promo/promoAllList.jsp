@@ -1,8 +1,10 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta charset="UTF-8">
-<title>마이페이지 예매확인/취소</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>소규모 공연 목록</title>
 <script
   src="https://code.jquery.com/jquery-3.3.1.js"
   integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
@@ -10,7 +12,6 @@
 </script>
 <style>
     /* 전체 사이즈 조정 */
-    
     ul, li, a{list-style: none; margin: 0px; padding: 0px; text-decoration: none; color: black;}
     
     div{box-sizing: border-box;}
@@ -21,7 +22,7 @@
     
     /* 990px 고정 사이즈 */
     #h_inner{width: 990px; height: 100%; margin: 0px auto;}
-    #c_inner{width: 990px; height: 1300px; margin: 0px auto; padding: 70px 0 250px 0px;}
+    #c_inner{width: 990px; height: 1800px; margin: 0px auto; padding: 70px 0 250px 0px;}
     #f_inner{width: 990px; margin: 0px auto;}
 
     /* top 버튼 */
@@ -80,7 +81,7 @@
         background: white;
     }
     #right_view{
-        width: 822px;
+        width: 990px;
         float: left;
         border: 1px solid #dedede;
         height: 100%;
@@ -207,36 +208,64 @@
     letter-spacing: -1px;
     }
     
-   
-    
-    .pullMethod {
-            background:#fbfbfb;
-            text-align:left;
-            padding:25px 30px;
-            line-height:1.6;
+    .boxStyle {
+            position: relative;
+            width: 780px;
+            margin: 0 auto 12px;
+            padding: 5px 15px;
+            border: 0px solid #c7c7c7;
+            border-radius: 5px;
+            background-color: #fff;
+            box-shadow: 1px 2px 6px 0px rgba(0, 0, 0, 0.1); 
+            float:right;
         }
-    
-    .faqCategory{
-            border:1px solid #dedede;
-            border-right:0;
-            font-size:13px;
-            margin:10px auto 12px;
-            line-height:45px;
-            width:730px;
-            text-align: center;
+   
+    #prContest{
+            border: 1px solid black;
+            width:100%;
+            height:100%;
+        }    
+        
+        #prContest>#prContestDiv1{
+            border : 1px solid black;
+            width : 100%;
+            height : 28%;
         }
         
-        .faqContent{
-            border:1px solid #dedede;
-            border-right:0;
-            font-size:13px;
-            margin:10px auto 12px;
-            line-height:45px;
-            width:730px;
-            text-align: center;
+        #prContestDiv1>#prContestPic{
+            border : 1px solid black;
+            width : 24%;
+            height : 100%;
+            float : left;
+        }
+        
+        #prContestDiv1>#prContestBlank{
+            border : 1px solid black;
+            width : 1.3%;
+            height : 100%;
+            float : left;
+        }
+        
+        #prContestDiv1>#prContestBlank2{
+            border : 1px solid black;
+            width : 5%;
+            height : 100%;
+            float : left;
+        }
+        
+        #prContest>#prContestDiv2{
+            border : 1px solid black;
+            width : 100%;
+            height : 3%;
+        }
+        #prContest>#prContestDiv3{
+            border: 1px solid black;
+            width : 100%;
+            height : 7%;
         }
     
 </style>
+</head>
 </head>
 <body>
 <div id="wrapper">
@@ -246,68 +275,55 @@
         </div>
     </div>
     
-    
     <div id="container">
         <div id="c_inner">
             <div id="c_inner_top">
                 <div class="title1">
-                    <h2>고객센터</h2>
+                    <h2>소규모 공연</h2>
                 </div>
                 <div class="title2"></div>
             </div>
-            <ul id="left_menu">
-                <li class="has_sub">
-                    <span>고객센터 홈</span>
-                    <ul>
-                        <li><a href="board_Notice.html"><strong>공지사항</strong></a></li>
-                        <li><a href="board_Faq.html"><strong>자주묻는 질문</strong></a></li>
-                        <li><a href="board_Qna.html"><strong>질문게시판</strong></a></li>
-                    </ul>
-                </li>
-            </ul>    
-            <div id="right_view">
-                <div class="r_line">
-                    <h3>자주묻는 질문</h3>
-                </div>
-                
-                     
-            <table border=1px class="faqCategory">
-                        <tr>
-                            <td id = "faqConcert">공연</td>
-                            <td id = "faqBook">예매</td>
-                            <td id = "faqPayment">결제</td>
-                            <td id = "faqID">회원</td>
-                            <td id=" faqEtc">기타</td>
-                        </tr>
-                    </table>
-                    
-                    <br>
-                    
-                    <table border 1px class="faqContent">
-                        <tr style="background-color: gainsboro">
-                            <td id = "contentCategory" style="width: 15%">분류</td>
-                            <td id = "contentQuestion"  style="width: 85%">질문</td>
-                        </tr>
-                    
-                        <tr>
-                            <td>결제</td>
-                            <td>어케 결제해요</td>
-                        </tr>
-                        
-                        <tr>
-                            <td>예매</td>
-                            <td>취소 어케해요</td>    
-                        </tr>
-                        
-                       
-                        
-             
-            </table>    
             
-                
-                
-                
-                
+            <div id="container">
+        <div id = "right_view">
+       <div id = "prContest">
+        <div id = "prContestDiv1">
+            <div id = "prContestPic"></div>   
+            <div id = "prContestBlank"></div>
+            <div id = "prContestPic"></div>   
+            <div id = "prContestBlank"></div>
+            <div id = "prContestPic"></div>  
+            <div id = "prContestBlank"></div>
+            <div id = "prContestPic"></div>  
+        </div>
+        <div id = "prContestDiv2"></div>
+           
+        <div id = "prContestDiv1">
+            <div id = "prContestPic"></div>   
+            <div id = "prContestBlank"></div>
+            <div id = "prContestPic"></div>   
+            <div id = "prContestBlank"></div>
+            <div id = "prContestPic"></div>  
+            <div id = "prContestBlank"></div>
+            <div id = "prContestPic"></div>      
+        </div>
+        <div id = "prContestDiv2"></div>
+           
+        <div id = "prContestDiv1">
+            <div id = "prContestPic"></div>   
+            <div id = "prContestBlank"></div>
+            <div id = "prContestPic"></div>   
+            <div id = "prContestBlank"></div>
+            <div id = "prContestPic"></div>  
+            <div id = "prContestBlank"></div>
+            <div id = "prContestPic"></div>  
+        </div>
+           
+         
+           
+           
+           
+        <div id = "prContestDiv3">
             <div class="paginate" style="text-align: center">
                 <a href="#" class="prev_end"><span class="blind">맨처음</span></a>
                 <a class="prev"><span class="blind">이전</span></a>
@@ -316,19 +332,15 @@
                 <a href="#">다음</span></a>
                 <a href="#" class="next_end"><span class="blind">맨뒤</span></a>
             </div>    
-            
-            
-            
-            <div class="searchArea"> 
-                    <img src="../../img/btn_search4.png" alt="검색" style="float: right">
-					<input type="text" class="textInp" name="searchValue" id="searchValue" value="" style="float: right">
-					<a href="javascript:search();"></a>
-				</div>
-            
-            
-                
-            </div>
+            <a href = "board_prB.html"><input type="button" value="홍보글 작성" style="margin : 15px; 5px; float:right;"></a>   
         </div>
+      </div>
+    </div>
+            
+            
+          </div>  
+        </div>
+       </div>
     </div>
     
     <a href="#" id="back_to_top">Top</a>
@@ -351,6 +363,5 @@
     </div>
     
 </div>
-
 </body>
 </html>

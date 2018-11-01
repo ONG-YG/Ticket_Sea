@@ -165,7 +165,7 @@ public class ReserveService {
 		} finally {
 			JDBCTemplate.close(conn);
 		}
-		
+
 		return progTime;
 	}
 

@@ -13,6 +13,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title></title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+</script>
+
 <style>
     ul, li, a{list-style: none; margin: 0px; padding: 0px;     text-decoration: none; color: black;}
     div{
@@ -243,16 +246,15 @@
             vertical-align: middle;
 
     }
+    #imgUp{
+    	align-content: center;
+    }
 </style>
 </head>
 <body>
-
- <script src="https://code.jquery.com/jquery-3.3.1.js"
-  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-  crossorigin="anonymous"></script>
   
   
-<script>
+<!-- <script>
 function LoadImg(value){
 	if(value.files && value.files[0]){
 		var reader = new FileReader();
@@ -262,7 +264,7 @@ function LoadImg(value){
 		reader.readAsDataURl(value.files[0]);
 	}
 }
-</script>
+</script> -->
 
 	<div id="wrapper">
 		<div id="header">
@@ -279,7 +281,7 @@ function LoadImg(value){
                  <ul>
                     <li><a href="#">공연관리</a>
                         <ul>
-                             <li><a href="/adShowPlaceList.do">공연등록</a></li>
+                             <li><a href="/adShowPlace.do">공연등록</a></li>
                             <li><a href="/adShowList.do">공연목록</a></li>
                         </ul>
                     </li>    
@@ -310,14 +312,15 @@ function LoadImg(value){
                 <h2 class="main_title">공연등록</h2>
             </div>
             <!-- form 태그 -->
-       	<form action="/showInsert.do" method="post">
+       	<form action="/showInsert.do" method="post" enctype="multipart/form-data">
             <div class="main_area">
                 <div class="left_wrap">
                 <div class="input_area">
                     <!--이미지영역-->
                     <div class="event_img_area">
-                        <img class="show_post" src="../../img/ticketsea_poster.png" data-default-src="../../img/ticketsea_poster.png" alt="공연포스터" style="width:160px; height:160px;">
-                        <input type="file" name="upfile"/><br>
+                        
+                        <input type="file"  id="imgUp" name="upfile"/><br>
+                        <img class="show_post" id="postImg" src="../../img/ticketsea_poster.png" data-default-src="../../img/ticketsea_poster.png" alt="공연포스터" style="width:160px; height:160px;">
                     </div>
                 </div>
                 </div>
@@ -410,13 +413,13 @@ function LoadImg(value){
                         </legend>
                         <div class="edit">
                             <div class="write_wrap">
-                           		<input type="file" name="showDtInfo"/><br>
+                           		<input type="file" name="showDtInfo"/>
                             </div>
                         </div>
                     </fieldset>
                 </div>
                 
-            </div>
+            	</div>
 	            <div class="submit_area">
 	            <input type="submit" value="작성" style="float:right;" onclick="return showCheck();" width="70px" height="40px">
 	            </div>
@@ -431,6 +434,19 @@ function LoadImg(value){
 	<!-- script -->
 	
 	<script>
+	$(document).ready(function() {
+		var count = 0;
+		$("#showDt").click(function(){
+			count=1;
+			return true;
+		});
+		return false;
+	});
+		  
+	function imgUp(){
+		var fullpath=
+		$("#postImg").attr("src",getServletContext().getRealPath("/")+"img"+"\\"+poster+"");
+	}
 	function showCheck(){
 		category= document.getElementById("category").value;
 		title= document.getElementById("title").value;
@@ -481,7 +497,10 @@ function LoadImg(value){
 		{
                	alert("가격을 입력하세요");
                 return false;
-                }
+        }else if(count==0){
+        		alert("상세 정보 이미지를 업로드 하세요");
+        		return false;
+        }
        
         else//모든 검사 만족시 true 반환
         {

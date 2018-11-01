@@ -59,6 +59,7 @@ public class MypageDao {
 				ps.setPerformSchNo(rset.getInt("ps_no"));		// 공연회차번호
 				ps.setPerformSchDate(rset.getDate("ps_date"));	// 공연일
 				ps.setShowNo(rset.getInt("m_show_no"));			// 공연번호
+
 			}
 			
 		} catch (SQLException e) {
@@ -67,7 +68,7 @@ public class MypageDao {
 			JDBCTemplate.close(rset);
 			JDBCTemplate.close(pstmt);
 		}
-		
+
 		return ps;
 	}
 
@@ -96,6 +97,5 @@ public class MypageDao {
 		return mName;
 		
 	}
-	
-	
+
 }

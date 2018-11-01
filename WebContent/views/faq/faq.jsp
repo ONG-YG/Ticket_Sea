@@ -1,13 +1,30 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
+    <%@ page import="kr.co.ticketsea.faq.model.vo.*" 
+	import ="kr.co.ticketsea.member.model.vo.*"
+	import = "java.util.ArrayList"
+%>
+    
+    
+    <%
+	Faq faq = (Faq)request.getAttribute("faq"); //공지사항 내용
+%>
+    
+    
+    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>마이페이지 예매확인/취소</title>
+<title>FAQ</title>
 <script
   src="https://code.jquery.com/jquery-3.3.1.js"
   integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
   crossorigin="anonymous">
 </script>
+
+
 <style>
     /* 전체 사이즈 조정 */
     
@@ -21,7 +38,7 @@
     
     /* 990px 고정 사이즈 */
     #h_inner{width: 990px; height: 100%; margin: 0px auto;}
-    #c_inner{width: 990px; height: 1800px; margin: 0px auto; padding: 70px 0 250px 0px;}
+    #c_inner{width: 990px; height: 1300px; margin: 0px auto; padding: 70px 0 250px 0px;}
     #f_inner{width: 990px; margin: 0px auto;}
 
     /* top 버튼 */
@@ -80,7 +97,7 @@
         background: white;
     }
     #right_view{
-        width: 990px;
+        width: 822px;
         float: left;
         border: 1px solid #dedede;
         height: 100%;
@@ -207,70 +224,86 @@
     letter-spacing: -1px;
     }
     
-    .boxStyle {
-            position: relative;
-            width: 780px;
-            margin: 0 auto 12px;
-            padding: 5px 15px;
-            border: 0px solid #c7c7c7;
-            border-radius: 5px;
-            background-color: #fff;
-            box-shadow: 1px 2px 6px 0px rgba(0, 0, 0, 0.1); 
-            float:right;
-        }
    
-    #prContest{
-            border: 1px solid black;
-            width:100%;
-            height:100%;
-        }    
-        
-        #prContest>#prContestDiv1{
-            border : 1px solid black;
-            width : 100%;
-            height : 28%;
-        }
-        
-        #prContestDiv1>#prContestPic{
-            border : 1px solid black;
-            width : 24%;
-            height : 100%;
-            float : left;
-        }
-        
-        #prContestDiv1>#prContestBlank{
-            border : 1px solid black;
-            width : 1.3%;
-            height : 100%;
-            float : left;
-        }
-        
-        #prContestDiv1>#prContestBlank2{
-            border : 1px solid black;
-            width : 5%;
-            height : 100%;
-            float : left;
-        }
-        
-        #prContest>#prContestDiv2{
-            border : 1px solid black;
-            width : 100%;
-            height : 3%;
-        }
-        #prContest>#prContestDiv3{
-            border: 1px solid black;
-            width : 100%;
-            height : 7%;
+    
+    .pullMethod {
+            background:#fbfbfb;
+            text-align:left;
+            padding:25px 30px;
+            line-height:1.6;
         }
     
+    .questionTable{
+            border:1px solid #dedede;
+            border-right:0;
+            font-size:13px;
+            margin:10px auto 12px;
+            line-height:45px;
+            width:730px;
+            text-align: center;
+        }
+    
+    #board{
+        border:1px solid #dedede;
+        width : 760px;
+        height : 500px;
+    }
+    
+    #board_header{
+        border:1px solid #dedede;
+        width : 100%;
+        height : 15%;
+    }
+    
+    #board_header > #b_h_title{
+        border: 1px solid #dedede;
+        width : 100%;
+        height : 60%;
+        font-size: 25px;
+        float : left;
+    }
+    
+    #board_header > #b_h_writer{
+        border: 1px solid #dedede;
+        width : 40%;
+        height : 40%;
+        font-size: 15px;
+        float:left;
+    }
+    
+    #board_header > #b_h_blank{
+        border : 1px solid #dedede;
+        width : 30%;
+        height : 40%;
+        font-size: 15px;
+        float:left;
+    }
+    
+    #board_header > #b_h_date{
+        border : 1px solid #dedede;
+        width : 20%;
+        height : 40%;
+        font-size: 15px;
+        text-align: center;
+        float:left;
+    }
+    
+    #board_header > #b_h_hit{
+        border : 1px solid #dedede;
+        width : 10%;
+        height : 40%;
+        font-size: 15px;
+        text-align: center;
+        float:left;
+    }
+    #header_inner{width:990px; margin: 0px auto;}
 </style>
 </head>
 <body>
+
 <div id="wrapper">
-    <div id="header">
-        <div id="h_inner">
-            <h1>TICKET SEA</h1>
-        </div>
+        <div id="header_inner">
+            <jsp:include page="/header.jsp"/>
     </div>
     
     
@@ -278,89 +311,65 @@
         <div id="c_inner">
             <div id="c_inner_top">
                 <div class="title1">
-                    <h2>소규모 공연</h2>
+                    <h2>고객센터</h2>
                 </div>
                 <div class="title2"></div>
             </div>
-            
-            
-            
-            <div id="container">
-        <div id = "right_view">
-       <div id = "prContest">
-        <div id = "prContestDiv1">
-            <div id = "prContestPic"></div>   
-            <div id = "prContestBlank"></div>
-            <div id = "prContestPic"></div>   
-            <div id = "prContestBlank"></div>
-            <div id = "prContestPic"></div>  
-            <div id = "prContestBlank"></div>
-            <div id = "prContestPic"></div>  
+            <ul id="left_menu">
+                <li class="has_sub">
+                    <span>고객센터</span>
+                 	 <ul>
+                        <li><a href="/noticeList.do"><strong>공지사항</strong></a></li>
+                        <li><a href="/faqList.do"><strong>자주묻는 질문</strong></a></li>
+                        <li><a href="/qnaList.do"><strong>질문게시판</strong></a></li>
+                    </ul>
+                </li>
+            </ul>    
+            <div id="right_view">
+                <div class="r_line">
+                    <h3>자주 묻는 질문</h3>
+                </div>
+                
+                <div id ="board">
+                    <div id="board_header">
+                        <div id="b_h_title" name="boardF_title"> <%= faq.getBoardF_title()  %></div>
+                         <div id="b_h_writer" name="boardF_category"><%= faq.getBoardF_category() %></div>
+                        <div id="b_h_blank""></div>
+                        <div id="b_h_date" name="boardF_date"></div>
+                        <div id="b_h_hit" name="boardQ_hit"></div>
+                    </div>
+                    
+                    <div id="b_h_contents" style="margin:15px;" name="boardQ_contents">
+                        <%= faq.getBoardF_contents() %>
+                    </div>
+                </div>
+                
+                 <%
+					session = request.getSession(false);
+					Member m = (Member)session.getAttribute("member"); 
+				%>
+                
+                <%
+					if(m!=null && m.getMemberId().equals("admin")){
+				%>
+                <br>
+                <button id="btn1" onclick="modifyActive();" style="width: 70px; height: 30px; float:right;">수정</button> 
+				<button id="btn2" onclick="delFaq();" style="width: 70px; height: 30px; float:right;">삭제</button> 
+                <%} %>
+                <script>
+                function delFaq(){
+            		location.href="/faqDelete.do?boardF_no=<%=faq.getBoardF_no()%>";
+            	}
+                </script>
+                
+            </div>
         </div>
-        <div id = "prContestDiv2"></div>
-           
-        <div id = "prContestDiv1">
-            <div id = "prContestPic"></div>   
-            <div id = "prContestBlank"></div>
-            <div id = "prContestPic"></div>   
-            <div id = "prContestBlank"></div>
-            <div id = "prContestPic"></div>  
-            <div id = "prContestBlank"></div>
-            <div id = "prContestPic"></div>      
-        </div>
-        <div id = "prContestDiv2"></div>
-           
-        <div id = "prContestDiv1">
-            <div id = "prContestPic"></div>   
-            <div id = "prContestBlank"></div>
-            <div id = "prContestPic"></div>   
-            <div id = "prContestBlank"></div>
-            <div id = "prContestPic"></div>  
-            <div id = "prContestBlank"></div>
-            <div id = "prContestPic"></div>  
-        </div>
-           
-         
-           
-           
-           
-        <div id = "prContestDiv3">
-            <div class="paginate" style="text-align: center">
-                <a href="#" class="prev_end"><span class="blind">맨처음</span></a>
-                <a class="prev"><span class="blind">이전</span></a>
-                <strong>1</strong>
-                <a href="#" class="">2</a>
-                <a href="#">다음</span></a>
-                <a href="#" class="next_end"><span class="blind">맨뒤</span></a>
-            </div>    
-            <a href = "board_prB.html"><input type="button" value="홍보글 작성" style="margin : 15px; 5px; float:right;"></a>   
-        </div>
-      </div>
-    </div>
-            
-            
-          </div>  
-        </div>
-       </div>
     </div>
     
     <a href="#" id="back_to_top">Top</a>
     
     <div id="footer">
-        <div id="f_inner">
-            <strong class="footer_logo">TICKET SEA</strong>
-        
-            <div class="f_menu">
-                <a href="#">사이트 소개</a><span>|</span>
-                <a href="#">개인정보 처리방침</a><span>|</span>
-                <a href="#">이용약관</a><span>|</span>
-                <a href="#">고객센터</a><span>|</span>
-                <a href="#">티켓판매안내</a><span>|</span>
-                <a href="#">광고안내</a>
-            </div>
-        
-            <p class="copy">Copyright © 옹가네 Corporation. All rights reserved.</p>
-        </div>    
+        <jsp:include page="/footer.jsp"/>
     </div>
     
 </div>

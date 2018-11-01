@@ -16,6 +16,7 @@ import kr.co.ticketsea.reserve.model.vo.PerformSchedule;
 import kr.co.ticketsea.reserve.model.vo.ReserveSession;
 import kr.co.ticketsea.reserve.model.vo.ReserveStepOne;
 import kr.co.ticketsea.reserve.model.vo.SeatGradeState;
+
 import kr.co.ticketsea.reserve.model.vo.ShowInfo;
 
 /**
@@ -95,12 +96,18 @@ public class DateCntSelectServlet extends HttpServlet {
 					}
 					
 					
+
 					stOne = new ReserveStepOne();
 					stOne.setShowNo(showNo);
 					stOne.setShowTitle(showTitle);
 					stOne.setShowPoster(showPoster);
 					stOne.setPsList(psList);
+					
 					//stOne.setSeatGrdStList(seatGrdStList);
+					
+					
+					
+					
 					
 					
 				}

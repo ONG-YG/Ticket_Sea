@@ -6,7 +6,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Ticket Sea || 티켓씨</title>
+
   <link rel=StyleSheet type="text/css" href="/css/header.css"> 
+
 
 </head>
 <body>
@@ -74,7 +76,7 @@
 			</div>
         </div>
        
-       
+
     </div>
 
 

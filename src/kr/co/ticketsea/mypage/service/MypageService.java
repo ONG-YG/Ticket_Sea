@@ -52,6 +52,7 @@ public class MypageService {
 		JDBCTemplate.close(conn);
 		
 		return mrlList;
+
 	}
 
 }

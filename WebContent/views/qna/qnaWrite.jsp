@@ -1,8 +1,10 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>마이페이지 예매확인/취소</title>
+<title>FAQ 작성</title>
 <script
   src="https://code.jquery.com/jquery-3.3.1.js"
   integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
@@ -207,27 +209,33 @@
     letter-spacing: -1px;
     }
     
-    .boxStyle {
-            position: relative;
-            width: 780px;
-            margin: 0 auto 12px;
-            padding: 5px 15px;
-            border: 0px solid #c7c7c7;
-            border-radius: 5px;
-            background-color: #fff;
-            box-shadow: 1px 2px 6px 0px rgba(0, 0, 0, 0.1); 
-            float:right;
-        }
    
     
+    .pullMethod {
+            background:#fbfbfb;
+            text-align:left;
+            padding:25px 30px;
+            line-height:1.6;
+        }
+    
+    .questionTable{
+            border:1px solid #dedede;
+            border-right:0;
+            font-size:13px;
+            margin:10px auto 12px;
+            line-height:45px;
+            width:730px;
+            text-align: center;
+        }
+    
+    #header_inner{width:990px; margin: 0px auto;}
 </style>
 </head>
 <body>
+
 <div id="wrapper">
-    <div id="header">
-        <div id="h_inner">
-            <h1>TICKET SEA</h1>
-        </div>
+        <div id="header_inner">
+            <jsp:include page="/header.jsp"/>
     </div>
     
     
@@ -235,69 +243,47 @@
         <div id="c_inner">
             <div id="c_inner_top">
                 <div class="title1">
-                    <h2>소규모 공연</h2>
+                    <h2>고객센터</h2>
                 </div>
                 <div class="title2"></div>
             </div>
             <ul id="left_menu">
                 <li class="has_sub">
-                    <span>소규모 공연</span>
+                    <span>고객센터</span>
                     <ul>
-                        <li><a href="board_prA.html"><strong>소규모 공연 목록</strong></a></li>
-                        <li><a href="board_prB.html"><strong>소규모 공연 홍보</strong></a></li>
+                        <li><a href="/noticeList.do"><strong>공지사항</strong></a></li>
+                        <li><a href="/faqList.do"><strong>자주묻는 질문</strong></a></li>
+                        <li><a href="/qnaList.do"><strong>질문게시판</strong></a></li>
                     </ul>
                 </li>
             </ul>    
             <div id="right_view">
                 <div class="r_line">
-                    <h3>소규모 공연 홍보</h3>
+                    <h3>질문 게시판</h3>
                 </div>
                 
-                
+                <form action="/qnaWrite.do" method="post">
                      <table id="write-form" class="boxStyle">
                     <tr>
-                        <td style="width : 70px; text-align : center;" >공연명</td>
-                        <td><input type="text" name="title" style="width: 300px;" /></td>
-                        
+                        <td style="width : 70px; text-align : center;" >제목</td>
+                        <td><input type="text" name="title" style="width: 500px;" /></td>
                     </tr>
-                    
-                     <tr>
-                        <td style="width : 70px; text-align : center;" >아티스트</td>
-                        <td colspan="2" >
-                            <textarea name="content" rows="1" cols="50" style="width:300px;"></textarea>
-                        </td>
-                    </tr>
-                    
                     <tr>
-                        <td style="width : 70px; text-align : center;" >공연장소</td>
-                        <td colspan="2" >
-                            <textarea name="content" rows="1" cols="50" style="width:300px;"></textarea>
-                        </td>
-                    </tr>
-                    
-                    <tr>
-                        <td style="width : 40px; text-align : center;" >장르</td>
-                        <td>
+                        <td style="width : 40px; text-align : center;" >분류</td>
+                        <td name="catagory">
                             <select>
-                                <option>연극</option>
-                                <option>음악</option>
-                                <option>뮤지컬</option>
+                                <option>공연</option>
+                                <option>예매</option>
+                                <option>결제</option>
+                                <option>회원</option>
                             </select>
                         </td>
                     </tr>
-                    
                     <tr>
-                        <td style="width : 70px; text-align : center;" >공연소개</td>
+                        <td style="width : 70px; text-align : center;" >글 내용</td>
                         <td colspan="2" >
-                            <textarea name="content" rows="17" cols="50" style="width:600px;"></textarea>
+                            <textarea name="contents" rows="17" cols="50" style="width:600px;"></textarea>
                         </td>
-                    </tr>
-                    
-                    
-                    
-                    <tr>
-                        <td>첨부파일</td>
-                        <td><input type="file" name="attachFile" /></td>
                     </tr>
                     
                     <tr>
@@ -308,30 +294,18 @@
                         
                        
                 </table>
-            
+            </form>
             
                 
             </div>
         </div>
     </div>
     
+    
     <a href="#" id="back_to_top">Top</a>
     
     <div id="footer">
-        <div id="f_inner">
-            <strong class="footer_logo">TICKET SEA</strong>
-        
-            <div class="f_menu">
-                <a href="#">사이트 소개</a><span>|</span>
-                <a href="#">개인정보 처리방침</a><span>|</span>
-                <a href="#">이용약관</a><span>|</span>
-                <a href="#">고객센터</a><span>|</span>
-                <a href="#">티켓판매안내</a><span>|</span>
-                <a href="#">광고안내</a>
-            </div>
-        
-            <p class="copy">Copyright © 옹가네 Corporation. All rights reserved.</p>
-        </div>    
+        <jsp:include page="/footer.jsp"/>
     </div>
     
 </div>
