@@ -1,9 +1,13 @@
+<%@page import="kr.co.ticketsea.mypage.model.vo.MyReserveList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ page import="kr.co.ticketsea.member.model.vo.*" %>
     <%@ page import="kr.co.ticketsea.reserve.model.vo.*" %>
+    <%@ page import="kr.co.ticketsea.mypage.model.vo.*" %>
     <%@ page import="java.util.ArrayList" %>
     <% ArrayList<ReserveInfo> rNumberList = (ArrayList<ReserveInfo>)request.getAttribute("rNumberList"); %>
+    <% ArrayList<MyReserveList> mrlList = (ArrayList<MyReserveList>)request.getAttribute("mrlList"); %>
+    <% MyReserveList mrl = new MyReserveList(); %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -201,20 +205,6 @@
     
 </style>
 </head>
-    
-<script>
-    $(document).ready(function(){
-        $('.cancelBtn').click(function(){
-            if(confirm("정말로 취소하시겠습니까?")){
-                alert("예매가 취소되었습니다.");
-            } else {
-                
-            }
-        })
-    })
-    
-    
-</script>
 <body>
 <div id="wrapper">
     <div id="header">
@@ -277,8 +267,8 @@
                         	<%for(ReserveInfo ri:rNumberList){ %>
                         	<tr>
                                 <td></td>
-                                <td><%=ri.getBk_no() %></td>
-                                <td></td>
+                                <td><%=mrl.getShowNo() %></td>
+                                <td><%=mrl.getShowDate() %></td>
                                 <td></td>
                                 <td></td>
                             </tr>
@@ -333,8 +323,6 @@
             <p class="copy">Copyright © 옹가네 Corporation. All rights reserved.</p>
         </div>    
     </div>
-    
-</div>
 
 </body>
 </html>

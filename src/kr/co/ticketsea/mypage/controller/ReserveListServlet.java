@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import kr.co.ticketsea.member.model.vo.Member;
+import kr.co.ticketsea.mypage.model.vo.MyReserveList;
 import kr.co.ticketsea.mypage.service.MypageService;
 import kr.co.ticketsea.reserve.model.vo.ReserveInfo;
 import kr.co.ticketsea.reserve.model.vo.ShowInfo;
@@ -45,12 +46,11 @@ public class ReserveListServlet extends HttpServlet {
 		ArrayList<ReserveInfo> rNumberList = new MypageService().selectReserveNumber(memberNo);
 		
 		// 추출한 bk_no로 ps_no를 조회하여 공연일,공연번호 추출
-		new MypageService().selectPerformSchedule(rNumberList);
-		
-		// 추출한 공연번호로 공연명 추출
+		ArrayList<MyReserveList> mrlList = new MypageService().selectPerformSchedule(rNumberList);
 
 		RequestDispatcher view = request.getRequestDispatcher("views/mypage/reserveList.jsp");
 		request.setAttribute("rNumberList", rNumberList);
+		request.setAttribute("mrlList", mrlList);
 		view.forward(request, response);
 		
 	}

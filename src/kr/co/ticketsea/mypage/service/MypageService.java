@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import kr.co.ticketsea.common.JDBCTemplate;
 import kr.co.ticketsea.mypage.model.dao.MypageDao;
+import kr.co.ticketsea.mypage.model.vo.MyReserveList;
 import kr.co.ticketsea.reserve.model.vo.PerformSchedule;
 import kr.co.ticketsea.reserve.model.vo.ReserveInfo;
 
@@ -20,23 +21,37 @@ public class MypageService {
 		return list;
 	}
 
-	public void selectPerformSchedule(ArrayList<ReserveInfo> rNumberList) {
+	public ArrayList<MyReserveList> selectPerformSchedule(ArrayList<ReserveInfo> rNumberList) {
 		Connection conn = JDBCTemplate.getConnection();
+		
+		MyReserveList mrl = new MyReserveList();
+		ArrayList<MyReserveList> mrlList = new ArrayList<MyReserveList>();
 		
 		for(ReserveInfo ri:rNumberList) {
 			PerformSchedule ps = new MypageDao().selectPerformSchedule(conn, ri.getBk_no());
 			
 			String mName = new MypageDao().selectMusicalName(conn, ps);
 			
+			mrl.setShowNo(ps.getShowNo());
+			mrl.setShowDate(ps.getPerformSchDate());
+			mrl.setShowName(mName);
+			
 			System.out.println(ps.getShowNo());
 			System.out.println(ps.getPerformSchDate());
 			System.out.println(mName);
+			
+			mrlList.add(mrl);
 		}
 		
-		
+		for(ReserveInfo ri:rNumberList) {
+			System.out.println(mrl.getShowNo());
+			System.out.println(mrl.getShowName());
+			System.out.println(mrl.getShowDate());
+			}
 		
 		JDBCTemplate.close(conn);
 		
+		return mrlList;
 	}
 
 }
