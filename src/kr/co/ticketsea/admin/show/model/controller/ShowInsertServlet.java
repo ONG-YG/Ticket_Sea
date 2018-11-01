@@ -34,7 +34,23 @@ public class ShowInsertServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		String fileName=null;
-		//파일 사이즈 업로드 
+		//파일 사이즈 업로드
+		
+		//최대 업로드 파일 사이즈
+		int fileSizeLimit = 5 * 1024 * 1024;
+		//업로드 될 경로
+		String uploadPath = getServletContext().getRealPath("/")+"img"+"\\"+"poster";
+		//인코딩 타입 (파일 인코딩 타입)
+		String encType="UTF-8";
+		// MultipartRequest 객체를 생성
+		MultipartRequest multi = new MultipartRequest(request,
+				uploadPath,fileSizeLimit,encType,new DefaultFileRenamePolicy());
+		
+		//1. 파일이름
+		String file = multi.getFilesystemName("upfile");
+		
+		
+		//공연 입력 정보 
 		Show s = new Show();
 		
 		s.setShow_name(request.getParameter("show_name"));
