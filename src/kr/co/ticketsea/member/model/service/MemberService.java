@@ -1,4 +1,4 @@
-package kr.co.ticketsea.member.service;
+package kr.co.ticketsea.member.model.service;
 
 import java.sql.Connection;
 
@@ -7,7 +7,23 @@ import kr.co.ticketsea.member.model.dao.MemberDao;
 import kr.co.ticketsea.member.model.vo.Member;
 
 public class MemberService {
-
+	
+	public boolean checkId(String checkId) {
+		Connection conn = JDBCTemplate.getConnection();
+		String userId = new MemberDao().checkId(checkId,conn);
+		JDBCTemplate.close(conn);
+		
+		if(userId==null) {
+			//null인 경우는 해당 ID를 사용하는 사용자가 없다라는 의미
+			return false; //리턴 값이 false는 해당 아이디 사용자가 없음값
+		}
+		else {
+			return true;
+		}
+		
+	}
+	
+	
 	public Member selectMember(Member m) {
 		// TODO Auto-generated method stub
 		Connection conn = null;
@@ -66,5 +82,18 @@ public class MemberService {
 		return result;
 	}
 
+
+
+	public String idSearchMember(Member m) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		String userId=null;
+		userId= new MemberDao().idSearchMember(conn, m);
+		
+		JDBCTemplate.close(conn);
+		
+		return userId;
+		
+	}
 
 }

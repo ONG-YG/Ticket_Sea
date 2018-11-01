@@ -1,0 +1,114 @@
+@charset "UTF-8";
+
+	
+div {
+	
+}
+
+.wrap {
+	width: 405px;
+}
+
+.header {
+	text-align: center;
+	color: #87ceeb;
+	height: 44px;
+}
+
+.header h4 {
+	margin: 0px;
+	margin-top: 10px;
+}
+
+.header h4 span {
+	text-align: center;
+}
+
+#frameJoin p {
+	font-size: 10px;
+	color: red;
+	margin-left: 35px;
+	margin-top: 3px;
+	margin-bottom: 3px;
+}
+
+.contents h4 {
+	margin-bottom: 2px;
+	text-align: center;
+}
+
+.contents p {
+	margin-top: 2px;
+	color: gray;
+	text-align: center;
+	font-size: 10px;
+}
+
+input {
+	width: 330px;
+	height: 44px;
+	margin-left: 35px;
+	font-size: 16px;
+}
+
+#submitBtn {
+	background-color: #87ceeb;
+	color: white;
+	border-spacing: 0px;
+}
+
+.wrap>p {
+	margin-left: 35px;
+	font-size: 10px;
+	color: gray;
+}
+
+input {
+	margin-top: 6px;
+	margin-bottom: 6px;
+}
+
+.agree_area>ul {
+	list-style: none;
+}
+
+.agree_item {
+	
+}
+
+.btn_radio {
+	background: white;
+	border: 1px solid darkgray;
+	box-sizing: padding-box;
+	display: block;
+	float: right;
+	height: 33px;
+	width: 53px;
+	text-align: center;
+	padding-top: 12px;
+}
+
+.radio_area {
+	float: right;
+	margin-right: 37px;
+	margin-top: 7px;
+	height: 50px;
+}
+
+.inp_label {
+	font-size: 17px;
+	text-align: center;
+}
+
+#userName {
+	width: 200px;
+}
+
+#userId{
+	width:250px;
+	}
+
+#idCheckBtn{
+	height:50px;
+	
+}
