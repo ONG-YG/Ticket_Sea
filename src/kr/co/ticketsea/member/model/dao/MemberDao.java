@@ -172,7 +172,7 @@ public class MemberDao {
 			pstmt.setString(2, m.getMemberEmail());
 			pstmt.setString(3, m.getMemberGender()+"");
 			
-			System.out.println(m.getMemberGender() + m.getMemberEmail() + m.getMemberName());
+		
 			rset= pstmt.executeQuery();
 
 			
@@ -180,7 +180,7 @@ public class MemberDao {
 					if(rset.next())
 					{
 				userId=rset.getString("member_id");
-				System.out.println(userId);
+				
 					}
 				
 			

@@ -64,7 +64,7 @@
 	        		<ul class="menu_lst">
 						<li class="menu_item"><a href=""  onclick="window.open('/views/member/idSearch.jsp','아이디찾기','width=430,height=430'); return false;"
 							>아이디 찾기</a></li>
-						<li class="menu_item"><span class="bar">|</span> <a href="#" class="menu_link">비밀번호 찾기</a></li>
+						<li class="menu_item"><span class="bar">|</span> <a href="#" class="menu_link" onclick="window.open('/views/member/pwdSearch.jsp','아이디찾기','width=430,height=510'); return false;">비밀번호 찾기</a></li>
 						<li class="menu_item"><span class="bar">|</span><a href="#" onclick="window.open('/views/member/memberJoin.jsp','회원가입','width=430,height=750'); return false;" 
 												class="menu_link" >회원 가입</a></li>
 					</ul>
