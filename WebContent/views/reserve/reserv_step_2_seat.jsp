@@ -3,6 +3,7 @@
 <%@page import="java.sql.Date"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="kr.co.ticketsea.reserve.model.vo.ReserveProgressing"%>
+<%@page import="kr.co.ticketsea.member.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -187,6 +188,11 @@
         }
         
         function prev() {
+        	<%
+        	Member member = new Member();
+        	member.setMemberNo(rs.getMemberNo());
+        	session.setAttribute("member", member);/////////////////////////////////////////휘명이 페이지와 연결 후 수정 필요
+        	%>
         	var showNo = <%= showNo %>;
             location.href="/dateCntSelect.do?showNo="+showNo;
             //alert("prev");

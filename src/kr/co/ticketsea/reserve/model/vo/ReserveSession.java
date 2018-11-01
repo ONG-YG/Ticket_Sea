@@ -1,6 +1,5 @@
 package kr.co.ticketsea.reserve.model.vo;
 
-//import java.sql.Date;
 
 public class ReserveSession {
 	

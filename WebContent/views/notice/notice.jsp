@@ -1,13 +1,30 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
+    <%@ page import="kr.co.ticketsea.notice.model.vo.*" 
+	import ="kr.co.ticketsea.member.model.vo.*"
+	import = "java.util.ArrayList"
+%>
+    
+    
+    <%
+	Notice notice = (Notice)request.getAttribute("notice"); //공지사항 내용
+%>
+    
+    
+    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>마이페이지 예매확인/취소</title>
+<title>공지사항 글</title>
 <script
   src="https://code.jquery.com/jquery-3.3.1.js"
   integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
   crossorigin="anonymous">
 </script>
+
+
 <style>
     /* 전체 사이즈 조정 */
     
@@ -207,18 +224,16 @@
     letter-spacing: -1px;
     }
     
+   
     
-    .noticeCategory{
-            border:1px solid #dedede;
-            border-right:0;
-            font-size:13px;
-            margin:10px auto 12px;
-            line-height:45px;
-            width:730px;
-            text-align: center;
+    .pullMethod {
+            background:#fbfbfb;
+            text-align:left;
+            padding:25px 30px;
+            line-height:1.6;
         }
-        
-        .noticeContent{
+    
+    .questionTable{
             border:1px solid #dedede;
             border-right:0;
             font-size:13px;
@@ -228,14 +243,68 @@
             text-align: center;
         }
     
+    #board{
+        border:1px solid #dedede;
+        width : 760px;
+        height : 500px;
+    }
+    
+    #board_header{
+        border:1px solid #dedede;
+        width : 100%;
+        height : 15%;
+    }
+    
+    #board_header > #b_h_title{
+        border: 1px solid #dedede;
+        width : 100%;
+        height : 60%;
+        font-size: 25px;
+        float : left;
+    }
+    
+    #board_header > #b_h_writer{
+        border: 1px solid #dedede;
+        width : 40%;
+        height : 40%;
+        font-size: 15px;
+        float:left;
+    }
+    
+    #board_header > #b_h_blank{
+        border : 1px solid #dedede;
+        width : 30%;
+        height : 40%;
+        font-size: 15px;
+        float:left;
+    }
+    
+    #board_header > #b_h_date{
+        border : 1px solid #dedede;
+        width : 20%;
+        height : 40%;
+        font-size: 15px;
+        text-align: center;
+        float:left;
+    }
+    
+    #board_header > #b_h_hit{
+        border : 1px solid #dedede;
+        width : 10%;
+        height : 40%;
+        font-size: 15px;
+        text-align: center;
+        float:left;
+    }
+    
+    #header_inner{width:990px; margin: 0px auto;}
 </style>
 </head>
 <body>
+
 <div id="wrapper">
-    <div id="header">
-        <div id="h_inner">
-            <h1>TICKET SEA</h1>
-        </div>
+        <div id="header_inner">
+            <jsp:include page="/header.jsp"/>
     </div>
     
     
@@ -249,11 +318,11 @@
             </div>
             <ul id="left_menu">
                 <li class="has_sub">
-                    <span>고객센터 홈</span>
-                    <ul>
-                        <li><a href="board_Notice.html"><strong>공지사항</strong></a></li>
-                        <li><a href="board_Faq.html"><strong>자주묻는 질문</strong></a></li>
-                        <li><a href="board_Qna.html"><strong>질문게시판</strong></a></li>
+                    <span>고객센터</span>
+                   <ul>
+                        <li><a href="/noticeList.do"><strong>공지사항</strong></a></li>
+                        <li><a href="/faqList.do"><strong>자주묻는 질문</strong></a></li>
+                        <li><a href="/qnaList.do"><strong>질문게시판</strong></a></li>
                     </ul>
                 </li>
             </ul>    
@@ -261,72 +330,40 @@
                 <div class="r_line">
                     <h3>공지사항</h3>
                 </div>
-               
-                <table border=1px class="noticeCategory">
-                        <tr>
-                            <td id = "faqConcert">공연</td>
-                            <td id = "faqBook">예매</td>
-                            <td id = "faqPayment">결제</td>
-                            <td id = "faqID">회원</td>
-                            <td id=" faqEtc">기타</td>
-                        </tr>
-                    </table>
+                
+                
+                <div id ="board">
+                    <div id="board_header">
+                        <div id="b_h_title" name="boardN_title"> <%= notice.getBoardN_title()  %></div>
+                         <div id="b_h_writer"><%= notice.getBoardN_category() %></div>
+                        <div id="b_h_blank""></div>
+                        <div id="b_h_date" name="boardN_date"> <%= notice.getBoardN_date() %></div>
+                        <div id="b_h_hit" name="boardN_hit"> <%= notice.getBoardN_hit() %></div>
+                    </div>
                     
-                    <br>
-                    
-                    <table border 1px class="noticeContent">
-                        <tr style="background-color: gainsboro">
-                            <td id = "contentCategory" style="width: 15%">분류</td>
-                            <td id = "contentQuestion"  style="width: 75%">질문</td>
-                            <td id = "contentButton" style="width: 10%">작성일</td>
-                        </tr>
-                    
-                        <tr>
-                            <td>기타</td>
-                            <td>티켓씨다</td>
-                            <td>2018-12-12</td>
-                        </tr>
-                        
-                        <tr>
-                            <td>공연</td>
-                            <td>공연이 취소됨</td>
-                            <td>2018-12-12</td>
-                        </tr>
-                        
-                        <tr class="view" style="display: none">
-                            <td colspan="3">
-                                <p>몰라여ㅛ</p>
-                            </td>
-                        </tr>
-                        
-             
-            </table>    
-            
+                    <div id="b_h_contents" style="margin:15px;" name="boardN_contents">
+                        <%= notice.getBoardN_contents() %>
+                    </div>
+                </div>
                 
+                <%
+					session = request.getSession(false);
+					Member m = (Member)session.getAttribute("member"); 
+				%>
                 
-                
-                
-            <div class="paginate" style="text-align: center">
-                <a href="#" class="prev_end"><span class="blind">맨처음</span></a>
-                <a class="prev"><span class="blind">이전</span></a>
-                <strong>1</strong>
-                <a href="#" class="">2</a>
-                <a href="#">다음</span></a>
-                <a href="#" class="next_end"><span class="blind">맨뒤</span></a>
-            </div>    
-            
-            
-            
-            <div class="searchArea"> 
-                    <img src="../../img/btn_search4.png" alt="검색" style="float: right">
-					<input type="text" class="textInp" name="searchValue" id="searchValue" value="" style="float: right">
-					<a href="javascript:search();"></a>
-				</div>
-                
-           
-            
-            
-            
+                <%
+					if(m!=null && m.getMemberId().equals("admin")){
+				%>
+                <br>
+                <button id="btn1" onclick="modifyActive();" style="width: 70px; height: 30px; float:right;">수정</button> 
+				<button id="btn2" onclick="delNotice();" style="width: 70px; height: 30px; float:right;">삭제</button> 
+                <%} %>
+                <script>
+                function delNotice(){
+            		location.href="/noticeDelete.do?boardN_no=<%=notice.getBoardN_no()%>";
+            	}
+                </script>
+        
                 
             </div>
         </div>
@@ -335,20 +372,7 @@
     <a href="#" id="back_to_top">Top</a>
     
     <div id="footer">
-        <div id="f_inner">
-            <strong class="footer_logo">TICKET SEA</strong>
-        
-            <div class="f_menu">
-                <a href="#">사이트 소개</a><span>|</span>
-                <a href="#">개인정보 처리방침</a><span>|</span>
-                <a href="#">이용약관</a><span>|</span>
-                <a href="#">고객센터</a><span>|</span>
-                <a href="#">티켓판매안내</a><span>|</span>
-                <a href="#">광고안내</a>
-            </div>
-        
-            <p class="copy">Copyright © 옹가네 Corporation. All rights reserved.</p>
-        </div>    
+        <jsp:include page="/footer.jsp"/>
     </div>
     
 </div>

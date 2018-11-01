@@ -1,7 +1,6 @@
 package kr.co.ticketsea.reserve.controller;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -45,7 +44,8 @@ public class ReserveConfirmServlet extends HttpServlet {
 				
 				request.setCharacterEncoding("utf-8");
 				HttpSession session = request.getSession(false);
-				
+				System.out.println("check");////////////////////////////////
+
 				if(session!=null) {
 					int progNo = Integer.parseInt( request.getParameter("progNo"));
 					int psNo = Integer.parseInt( request.getParameter("psNo") );

@@ -1,13 +1,29 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
+    <%@ page import = "kr.co.ticketsea.qna.model.vo.*" %>
+    <%@ page import = "java.util.*" %>
+    
+    <%
+	// Controller(Servlet)에서 보내준값 가져오기
+	PageData pd = (PageData)request.getAttribute("pageData");
+
+	ArrayList<Qna> list = pd.getList(); // 현재 페이지의 글 목록
+	String pageNavi = pd.getPageNavi(); // 현재 navi Bar
+	
+%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta charset="UTF-8">
-<title>마이페이지 예매확인/취소</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>질문과 답변 리스트</title>
+
 <script
   src="https://code.jquery.com/jquery-3.3.1.js"
   integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
   crossorigin="anonymous">
 </script>
+
 <style>
     /* 전체 사이즈 조정 */
     
@@ -226,14 +242,14 @@
             text-align: center;
         }
     
+    #header_inner{width:990px; margin: 0px auto;}
 </style>
 </head>
 <body>
+
 <div id="wrapper">
-    <div id="header">
-        <div id="h_inner">
-            <h1>TICKET SEA</h1>
-        </div>
+        <div id="header_inner">
+            <jsp:include page="/header.jsp"/>
     </div>
     
     
@@ -247,50 +263,51 @@
             </div>
             <ul id="left_menu">
                 <li class="has_sub">
-                    <span>고객센터 홈</span>
+                    <span>고객센터</span>
                     <ul>
-                        <li><a href="board_Notice.html"><strong>공지사항</strong></a></li>
-                        <li><a href="board_Faq.html"><strong>자주묻는 질문</strong></a></li>
-                        <li><a href="board_Qna.html"><strong>질문게시판</strong></a></li>
+                        <li><a href="/noticeList.do"><strong>공지사항</strong></a></li>
+                        <li><a href="/faqList.do"><strong>자주묻는 질문</strong></a></li>
+                        <li><a href="/qnaList.do"><strong>질문게시판</strong></a></li>
                     </ul>
                 </li>
             </ul>    
             <div id="right_view">
                 <div class="r_line">
-                    <h3>질문게시판</h3>
+                    <h3>질문 게시판</h3>
                 </div>
                 
-                     <table id="write-form" class="boxStyle">
-                    <tr>
-                        <td style="width : 70px; text-align : center;" >제목</td>
-                        <td><input type="text" name="title" style="width: 500px;" /></td>
-                    </tr>
-                    <tr>
-                        <td style="width : 40px; text-align : center;" >분류</td>
-                        <td>
-                            <select>
-                                <option>공연</option>
-                                <option>예매</option>
-                                <option>결제</option>
-                                <option>회원</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="width : 70px; text-align : center;" >글 내용</td>
-                        <td colspan="2" >
-                            <textarea name="content" rows="17" cols="50" style="width:600px;"></textarea>
-                        </td>
-                    </tr>
-                    
-                    <tr>
-                        <td colspan="2">
-                         <input type="submit" value="작성" style="float:right" width="70px" height="30">
-                        </td>
-                    </tr>
-                        
-                       
-                </table>
+                     <table border=1px class="questionTable">
+                         <thead style="background-color: gainsboro">
+                             <td width="70%">제목</td>
+                             <td width="12%">작성자</td>
+                             <td width="12%">작성일</td>
+                             <td>조회수</td>
+                         </thead>
+                            
+                            <% for (Qna q : list) { %>
+                        <tr>
+                            <td><a href="/qna.do?boardQ_no=<%=q.getBoardQ_no()%>"><%=q.getBoardQ_title()%></a></td>
+                            <td><%= q.getBoardQ_writer() %></td>
+                            <td><%= q.getBoardQ_date() %></td>
+                            <td><%= q.getBoardQ_hit() %></td>
+                        </tr>
+                            <% } %>       
+                    </table>
+                
+             <div style="width:800px; text-align:center;">
+		<label><%=pageNavi%></label>
+		</div>  
+            
+             <form style="display:inline;" action="/views/qna/qnaWrite.jsp">
+				<input type="submit" value="글쓰기" style="width: 70px; height: 30px; float:right;"/> <br>
+			</form>
+            <br>
+            <div class="searchArea"> 
+                    <a href="#"><img src="../../img/btn_search4.png" alt="검색" style="float: right"></a>
+                
+					<input type="text" class="textInp" name="searchValue" id="searchValue" style="float: right">
+					<a href="javascript:search();"></a>
+				</div>
             
             
                 
@@ -300,24 +317,14 @@
     
     <a href="#" id="back_to_top">Top</a>
     
+    <a href="#" id="back_to_top">Top</a>
+    
     <div id="footer">
-        <div id="f_inner">
-            <strong class="footer_logo">TICKET SEA</strong>
-        
-            <div class="f_menu">
-                <a href="#">사이트 소개</a><span>|</span>
-                <a href="#">개인정보 처리방침</a><span>|</span>
-                <a href="#">이용약관</a><span>|</span>
-                <a href="#">고객센터</a><span>|</span>
-                <a href="#">티켓판매안내</a><span>|</span>
-                <a href="#">광고안내</a>
-            </div>
-        
-            <p class="copy">Copyright © 옹가네 Corporation. All rights reserved.</p>
-        </div>    
+        <jsp:include page="/footer.jsp"/>
     </div>
     
 </div>
+
 
 </body>
 </html>

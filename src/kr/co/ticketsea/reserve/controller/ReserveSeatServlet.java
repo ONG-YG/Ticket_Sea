@@ -1,9 +1,6 @@
 package kr.co.ticketsea.reserve.controller;
 
 import java.io.IOException;
-import java.sql.Date;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -14,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import kr.co.ticketsea.member.model.vo.Member;
 import kr.co.ticketsea.reserve.model.service.ReserveService;
 import kr.co.ticketsea.reserve.model.vo.PerformSchedule;
 import kr.co.ticketsea.reserve.model.vo.ReserveProgressing;
