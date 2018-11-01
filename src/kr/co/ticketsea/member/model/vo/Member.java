@@ -14,9 +14,16 @@ public class Member {
 	private Date memberJoinDate;
 	private char memberActive;
 	private char memberGender;
+	private char memberGrade;
+	
+	public Member() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	public Member(int memberNo, String memberId, String memberName, String memberPwd, String memberPhone,
-			String memberAddr, String memberEmail, Date memberJoinDate, char memberActive, char memberGender) {
+			String memberAddr, String memberEmail, Date memberJoinDate, char memberActive, char memberGender,
+			char memberGrade) {
 		super();
 		this.memberNo = memberNo;
 		this.memberId = memberId;
@@ -28,11 +35,7 @@ public class Member {
 		this.memberJoinDate = memberJoinDate;
 		this.memberActive = memberActive;
 		this.memberGender = memberGender;
-	}
-
-	public Member() {
-		super();
-		// TODO Auto-generated constructor stub
+		this.memberGrade = memberGrade;
 	}
 
 	public int getMemberNo() {
@@ -115,4 +118,15 @@ public class Member {
 		this.memberGender = memberGender;
 	}
 
+	public char getMemberGrade() {
+		return memberGrade;
+	}
+
+	public void setMemberGrade(char memberGrade) {
+		this.memberGrade = memberGrade;
+	}
+
+	
+	
+	
 }
