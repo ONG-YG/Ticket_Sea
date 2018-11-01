@@ -36,18 +36,8 @@ public class MypageService {
 			mrl.setShowDate(ps.getPerformSchDate());
 			mrl.setShowName(mName);
 			
-			System.out.println(ps.getShowNo());
-			System.out.println(ps.getPerformSchDate());
-			System.out.println(mName);
-			
 			mrlList.add(mrl);
 		}
-		
-		for(ReserveInfo ri:rNumberList) {
-			System.out.println(mrl.getShowNo());
-			System.out.println(mrl.getShowName());
-			System.out.println(mrl.getShowDate());
-			}
 		
 		JDBCTemplate.close(conn);
 		
