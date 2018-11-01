@@ -3,6 +3,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+
+<link rel="stylesheet" type="text/css" href="/css/mypageAllSize.css" />
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>나의 문의 내역</title>
 <script
@@ -11,34 +14,6 @@
   crossorigin="anonymous">
 </script>
 <style>
-    /* 전체 사이즈 조정 */
-    
-    ul, li, a{list-style: none; margin: 0px; padding: 0px; text-decoration: none; color: black;}
-    
-    div{box-sizing: border-box;}
-    #wrapper{overflow: hidden;min-width: 990px;min-height: 100%; border: 1px solid black;}
-    #header{height: 193px; border: 1px solid black;}
-    #container{height: 100%; border: 1px solid black; background: #f4f4f4;}
-    #footer{height: 153px; border: 1px solid black;}
-    
-    /* 990px 고정 사이즈 */
-    #h_inner{width: 990px; height: 100%; margin: 0px auto;}
-    #c_inner{width: 990px; height: 1300px; margin: 0px auto; padding: 70px 0 250px 0px;}
-    #f_inner{width: 990px; margin: 0px auto;}
-
-    /* top 버튼 */
-    #back_to_top{
-        display: block;
-        position: fixed;
-        top: 50%;
-        right: 0;
-        margin-top: -22px;
-        background-position: -270px -123px;
-        width: 44px;
-        height: 44px;
-        z-index: 1000;
-        background: skyblue;
-    }
     
     /* inner 공간 분할 */
     #c_inner_top{
@@ -182,8 +157,8 @@
 <div id="wrapper">
     <div id="header">
         <div id="h_inner">
-            <h1>TICKET SEA</h1>
-        </div>        </div>
+            <jsp:include page="/header.jsp"/>
+        </div>        
 
     </div>
     
@@ -200,14 +175,14 @@
                 <li class="has_sub">
                     <span>예매 관리</span>
                     <ul>
-                        <li><a href="reserveList.jsp">예매확인/취소</a>
+                        <li><a href="/reserveList.do">예매확인/취소</a>
                     </ul>
                 </li>
                 <li class="has_sub1">
                     <span>활동 관리</span>
                     <ul>
-                        <li><a href="reviewMgr.jsp">후기 관리</a></li>
-                        <li><a href="faqMgr.jsp">나의 문의 내역</a></li>
+                        <li><a href="/views/mypage/reviewMgr.jsp">후기 관리</a></li>
+                        <li><a href="/views/mypage/faqMgr.jsp">나의 문의 내역</a></li>
                         <li><a href="#">소규모 공연 등록관리</a></li>
                         
                     </ul>
@@ -215,8 +190,8 @@
                 <li class="has_sub">
                     <span>회원정보관리</span>
                     <ul>
-                        <li><a href="memberUpdate.jsp">회원 정보 수정</a></li>
-                        <li><a href="memberDelete.jsp">회원 탈퇴</a></li>
+                        <li><a href="/views/mypage/memberUpdate.jsp">회원 정보 수정</a></li>
+                        <li><a href="/views/mypage/memberDelete.jsp">회원 탈퇴</a></li>
                         
                     </ul>
                 </li>
@@ -278,22 +253,11 @@
     
     <div id="footer">
         <div id="f_inner">
-            <strong class="footer_logo">TICKET SEA</strong>
-        
-            <div class="f_menu">
-                <a href="#">사이트 소개</a><span>|</span>
-                <a href="#">개인정보 처리방침</a><span>|</span>
-                <a href="#">이용약관</a><span>|</span>
-                <a href="#">고객센터</a><span>|</span>
-                <a href="#">티켓판매안내</a><span>|</span>
-                <a href="#">광고안내</a>
-            </div>
-        
-            <p class="copy">Copyright © 옹가네 Corporation. All rights reserved.</p>
+            <jsp:include page="/footer.jsp"/>
         </div>    
     </div>
-    
-</div>
+</div>    
+
 
 </body>
 </html>
