@@ -176,23 +176,6 @@
                 $('#cnt_sel_info span').html(cntText);
                 //alert(cnt_sel);
                 
-                /*
-                for(var i=0; i<psList.length; i++) {
-                	if(psList[i][1]==date_sel && psList[i][2]==cnt_sel) {
-                		availSeat = psList[i][4];
-                		break;
-                	}
-				}
-                
-                var list = "";
-           		list += " <li> "
-	                        +"<span class='seat_grade'>전체</span> "
-	                        +"<spaSn class='available_seat'>"+availSeat+"</span> "
-	                        +"<span>석</span> "
-	                   +" </li> ";
-            	$('#seat_box ul').html(list);
-                */
-                
                 var seatGrdStList = [];
                 for(var i=0; i<psList.length; i++) {
                 	if(psList[i][1]==date_sel && psList[i][2]==cnt_sel) {
@@ -207,8 +190,8 @@
                 for(var i=0; i<seatGrdStList.length; i++) {
                 	var seatGrdSt = seatGrdStList[i];
 	           		list += " <li> "
-		                        +"<span class='seat_grade'>"+ seatGrdSt[0] +"</span> "
-		                        +"<spaSn class='available_seat'>"+ seatGrdSt[1] +"</span> "
+		                        +"<span class='seat_grade'>"+ seatGrdSt[0] +" 석 </span> "
+		                        +"<span class='available_seat'> "+ seatGrdSt[1] +" </span> "
 		                        +"<span>석</span> "
 		                   +" </li> ";
 	            	
@@ -227,14 +210,7 @@
                 //console.log("선택한 날짜 : "+date_sel+"  /  선택한 회차 : "+cnt_sel);/////////
                 $('#date_form').val(date_sel);
                 $('#cnt_form').val(cnt_sel);
-                /*
-                for(var i=0; i<psList.length; i++) {
-                	if(psList[i][1]==date_sel && psList[i][2]==cnt_sel) {
-                		psNo = psList[i][0];
-                		break;
-                	}
-				}
-                */
+                
                 $('#dateCntForm').attr('action',"/reserveSeat.do?psNo="+psNo);
                 document.getElementById("dateCntForm").submit();
             }

@@ -130,9 +130,12 @@
         margin-bottom: 5px;
     }
     #ct_left_seat li span:nth-child(1){
-        margin-right: 25px;
+        margin-right: 45px;
     }
-    
+    #ct_left_seat li span:nth-child(3){
+        margin-right: 0px;
+    }
+
     #ct_left_cnt .selected_cnt_li{
         background-color: rgb(190,235,250);
     }

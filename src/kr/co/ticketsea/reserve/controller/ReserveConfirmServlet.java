@@ -44,7 +44,7 @@ public class ReserveConfirmServlet extends HttpServlet {
 				
 				request.setCharacterEncoding("utf-8");
 				HttpSession session = request.getSession(false);
-				
+				System.out.println("check");////////////////////////////////
 				if(session!=null) {
 					int progNo = Integer.parseInt( request.getParameter("progNo"));
 					int psNo = Integer.parseInt( request.getParameter("psNo") );
