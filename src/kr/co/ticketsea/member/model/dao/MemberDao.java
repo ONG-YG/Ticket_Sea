@@ -10,9 +10,11 @@ import kr.co.ticketsea.common.JDBCTemplate;
 import kr.co.ticketsea.member.model.vo.Member;
 import sun.awt.SunHints.Value;
 
+
 public class MemberDao {
 
 	public Member selectMember(Connection conn, Member m) {
+
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		Member member = null;
@@ -45,12 +47,14 @@ public class MemberDao {
 			JDBCTemplate.close(pstmt);
 			JDBCTemplate.close(rset);
 		}
+
 		return member;
 
 	}
 
 	public int insertMember(Connection conn, Member m) {
 		PreparedStatement pstmt = null;
+
 		int result = 0;
 
 		String query = "insert into member values(SEQ_MEMBER_NO.NEXTVAL,?,?,?,?,?,?,sysdate,'Y',?,'M')";
@@ -64,7 +68,6 @@ public class MemberDao {
 			pstmt.setString(4, m.getMemberPhone());
 			pstmt.setString(5, m.getMemberAddr());
 			pstmt.setString(6, m.getMemberEmail());
-
 			pstmt.setString(7, m.getMemberGender() + "");
 
 			result = pstmt.executeUpdate();
@@ -106,6 +109,7 @@ public class MemberDao {
 
 	public int updateMember(Connection conn, Member m) {
 		PreparedStatement pstmt = null;
+
 		int result = 0;
 
 		String query = "update member set member_pwd=?, member_phone=?,member_email=?,member_addr=?,"
@@ -113,12 +117,10 @@ public class MemberDao {
 
 		try {
 			pstmt = conn.prepareStatement(query);
-
 			pstmt.setString(1, m.getMemberPwd());
 			pstmt.setString(2, m.getMemberPhone());
 			pstmt.setString(3, m.getMemberEmail());
 			pstmt.setString(4, m.getMemberAddr());
-
 			pstmt.setString(5, m.getMemberId());
 
 			result = pstmt.executeUpdate();
@@ -132,6 +134,7 @@ public class MemberDao {
 		return result;
 
 	}
+
 
 	public int memberDelete(Connection conn, String userId) {
 
@@ -173,7 +176,7 @@ public class MemberDao {
 			pstmt.setString(2, m.getMemberEmail());
 			pstmt.setString(3, m.getMemberGender()+"");
 			
-			System.out.println(m.getMemberGender() + m.getMemberEmail() + m.getMemberName());
+		
 			rset= pstmt.executeQuery();
 
 			
@@ -181,7 +184,7 @@ public class MemberDao {
 					if(rset.next())
 					{
 				userId=rset.getString("member_id");
-				System.out.println(userId);
+				
 					}
 				
 			
@@ -195,6 +198,7 @@ public class MemberDao {
 		}
 
 		return userId;
+
 	}
 
 }

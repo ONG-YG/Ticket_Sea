@@ -3,6 +3,7 @@
 <%@page import="java.sql.Date"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="kr.co.ticketsea.reserve.model.vo.ReserveProgressing"%>
+<%@page import="kr.co.ticketsea.member.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -172,6 +173,7 @@
             $('.reserve_btn>a').eq(1).css('background-color','white');
             $('.reserve_btn>a').eq(1).css('color','dodgerblue');
         }
+        
         function selectedSeatView() {
             $('li[id^=selected_seat_no_]').removeClass('selected_li');
             for(var i=0; i<selected_seat.length; i++) {
@@ -183,9 +185,14 @@
                 $(sel_list).children().children('.selected_seat_grade').text(seat_grd); //좌석등급
                 $(sel_list).children().children('.selected_seat_no').text(seat_loc) //좌석위치
             }
-            
         }
+        
         function prev() {
+        	<%
+        	Member member = new Member();
+        	member.setMemberNo(rs.getMemberNo());
+        	session.setAttribute("member", member);/////////////////////////////////////////휘명이 페이지와 연결 후 수정 필요
+        	%>
         	var showNo = <%= showNo %>;
             location.href="/dateCntSelect.do?showNo="+showNo;
             //alert("prev");
@@ -883,8 +890,8 @@
                         </form>
                     </div>
                     <div class="reserve_btn">
-                        <a href="#" class="btn" onclick="prev()">이전단계</a>
-                        <a href="#" class="btn" onclick="next()">다음단계</a>
+                        <a class="btn" onclick="prev()">이전단계</a>
+                        <a class="btn" onclick="next()">다음단계</a>
                     </div>
 
                 </div>

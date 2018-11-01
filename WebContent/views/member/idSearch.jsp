@@ -5,13 +5,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Ticket Sea || 아이디 찾기</title>
+
 <link rel=StyleSheet type="text/css" href="/css/member_idSearch.css">
+
 </head>
 <body>
-
-
-	
-
 	
 	<div id="wrap" class="wrap">
 		<!-- header -->
@@ -27,13 +25,16 @@
 		<div id="container">
             
 			<div id="content" class="content">
+
 				<form id="frameIdSearch" action="/idSearch.do" method="post">
+
 					 <fieldset>
 						<legend>아이디찾기</legend>
 						 <!--id및 pw 입력란-->
 						 <div id="infoInputArea">
 						 	<span class="inp_txt" id="nameInput">
 							<input id="name" name="userName" type="text" maxlength="45" placeholder="이름"  value="" >
+
 							</span>
 							 
 							 <!--남녀선택칸-->
@@ -56,6 +57,7 @@
 
 							 <span class="inp_txt" id="emailInput">
 							<input id="email" name="userEmail" type="text" maxlength="100" placeholder="이메일입력"  value="" >
+
 							</span>
 							 
 						 </div>
@@ -65,7 +67,9 @@
 						<!--로그인 버튼-->
 						<div class="btn_area">
 							<button type="submit" id="loginBtn" onclick="return logError();">
+
                                		 아이디 찾기</button>
+
 						</div>
 
 						 </div>
@@ -93,8 +97,7 @@
 			female[0].style.color="darkgray";
 			femaleborder[0].style.border="1px solid darkgray";
 			male[0].value="checked";
-			console.log(maleInput);
-			console.log(femaleInput);
+
 		}
 		function femaleCheck(){
 			var male = document.getElementsByClassName("male");
@@ -109,8 +112,7 @@
 			maleborder[0].style.border="1px solid darkgray";
 			male[0].value="checked";
 			
-			console.log(maleInput);
-			console.log(femaleInput);
+
 		}
 	</script>
 </body>

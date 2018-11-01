@@ -4,10 +4,11 @@ import java.util.ArrayList;
 
 public class ReserveStepOne {
 	
-	private int showNo;							//공연번호
-	private String showTitle;					//공연명
-	private String showPoster;					//공연 포스터 파일명
-	private ArrayList<PerformSchedule> psList;	//공연 일정 목록
+	private int showNo;									//공연번호
+	private String showTitle;							//공연명
+	private String showPoster;							//공연 포스터 파일명
+	private ArrayList<PerformSchedule> psList;			//공연 일정 목록
+	//private ArrayList<SeatGradeState> seatGrdStList;	//등급별 좌석가격 및 잔여석
 	
 	
 	
@@ -22,8 +23,6 @@ public class ReserveStepOne {
 		this.showPoster = showPoster;
 		this.psList = psList;
 	}
-	
-		
 	
 	
 	public int getShowNo() {
@@ -49,8 +48,8 @@ public class ReserveStepOne {
 	}
 	public void setPsList(ArrayList<PerformSchedule> psList) {
 		this.psList = psList;
-	}
-	
+	}	
+
 	
 		
 	

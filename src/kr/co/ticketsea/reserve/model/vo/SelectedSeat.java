@@ -6,6 +6,9 @@ public class SelectedSeat {
 	private String seatGrd;
 	private int seatPrice;
 	private String seatTitle;
+	
+	
+	
 	public SelectedSeat() {
 		super();
 	}
@@ -42,5 +45,20 @@ public class SelectedSeat {
 	}
 	
 	
+	
+	
+	
+	@Override
+	public String toString() {
+		String showInfo = "---------selectedSeat-------\n"
+				+ seatNo + " / "
+				+ seatGrd + " / "
+				+ seatPrice + " / "
+				+ seatTitle + "\n"
+
+						+ "----------------------------\n";
+
+		return showInfo;
+	}
 	
 }

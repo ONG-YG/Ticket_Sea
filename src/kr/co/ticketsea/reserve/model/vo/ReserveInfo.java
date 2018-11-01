@@ -1,7 +1,7 @@
 package kr.co.ticketsea.reserve.model.vo;
 
 public class ReserveInfo {
-	
+
 	private String bk_no;			//예매번호
 	private int member_no;			//회원번호
 	private String bk_stat_cd;		//예매상태코드
@@ -9,6 +9,7 @@ public class ReserveInfo {
 	private int bk_tk_price;		//티켓가격총합
 	private int bk_tot_price;		//총 결제금액
 	private String bk_pay_type;		//결제방법
+	
 	public ReserveInfo(String bk_no, int member_no, String bk_stat_cd, String bk_date, int bk_tk_price,
 			int bk_tot_price, String bk_pay_type) {
 		super();
@@ -20,6 +21,7 @@ public class ReserveInfo {
 		this.bk_tot_price = bk_tot_price;
 		this.bk_pay_type = bk_pay_type;
 	}
+
 	public ReserveInfo() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -70,3 +72,4 @@ public class ReserveInfo {
 	
 	
 }
+

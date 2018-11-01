@@ -10,8 +10,6 @@
 
 </head>
 
-
-
 <body>
 
 
@@ -35,9 +33,10 @@
 
 			<input type="text" name="userId" maxlength="45" title="아이디"
 				placeholder="아이디" id="userId">
+
 			<button onclick="return idCheck();" id="idCheckBtn">ID중복확인</button>
 			<br> <input type="hidden" id="checkFlag" value=0 />
-			
+
 			<p id="id_msg" class="error_txt" style="display: none;">아이디를
 				입력해주세요(영문[소문자]+숫자 4~12자)</p>
 
@@ -65,6 +64,7 @@
 					<label for="male" class="inp_label male">남 </label> <input
 						type="radio" value="M" id="male" name="gender" hidden=""
 						class="inp_radio" selected>
+
 				</div>
 
 
@@ -92,15 +92,8 @@
 
 	</div>
 
-
-
-
-
-
-
-
-
 	<script>
+
 	// 아이디 중복검사
 	function idCheck() {
 		var userId = document.getElementById("userId").value;
@@ -112,6 +105,7 @@
 		window.onload = function() {
 
 		}//유효성 검사
+
 		function check(){
             userId= document.getElementById("userId").value;
 			userPwd= document.getElementById("userPwd").value;
@@ -120,9 +114,9 @@
 			userPhone= document.getElementById("userPhone").value;
 			userAddr= document.getElementById("userAddr").value;
 			userEmail= document.getElementById("userEmail").value;
-			
+
 			 checkFlag = document.getElementById('checkFlag').value;
-			
+
 			if(userId=="")
             {
 			     document.getElementById("id_msg").style.display="block";
@@ -132,7 +126,12 @@
 				{
 					document.getElementById("id_msg").style.display="block";
 					return false;
-                }
+     
+		} else if (userPwd == "") {
+			document.getElementById("pwd_msg").style.display = "block";
+			return false;
+		}
+
             else if(!(/^[a-z0-9][a-z0-9]{7,14}$/i.test(userPwd)))
                 //패스워드 검사 비밀번호는 영,숫 포함 8~15자
                 {
@@ -144,7 +143,14 @@
             {
                 document.getElementById("pwd_re_msg").style.display="block";
 				return false;
+<<<<<<< HEAD
             } 
+=======
+            } else if (userName == "") {
+				document.getElementById("name_msg").style.display = "block";
+				return false;
+			}
+>>>>>>> ts/hwi
             else if(!(/^[가-힣]+$/.test(userName))||userName=="")
                 //이름 검사 한글만 통과 자음 안됨 ㅇㅋ?
             {
@@ -161,26 +167,29 @@
                     document.getElementById("addr_msg").style.display="block";
                     return false;
                 }
+
             else if(!(/^[a-z0-9]{4,50}@/.test(userEmail))||
                    userEmail=="")
                 // 이메일 검사 4~50자 이후 @ 확인
+
 			{
                      document.getElementById("email_msg").style.display="block";
                     return false;
                     }
+
 			// 아이디 중복검사 체크
 			else if (checkFlag == 0) {
 				alert("ID 중복확인을 진행해주세요");
 				return false;
 			}
+
             else//모든 검사 만족시 true 반환
             {
                 return true;
             }
 			
 		}
-		
-		
+
 
 		// 남녀 체크
 		function maleCheck() {
@@ -191,6 +200,7 @@
 			var female = document.getElementsByClassName("female");
 			var femaleborder = document
 					.getElementsByClassName("btn_radio_female");
+
 			male[0].style.color = "#87ceeb";
 			maleborder[0].style.border = "1px solid #87ceeb";
 			female[0].style.color = "darkgray";
@@ -198,6 +208,7 @@
 
 		}
 		// 성별 여자로 클릭시
+
 		function femaleCheck() {
 			var maleRadio = document.getElementById("male");
 			var femaleRadio = document.getElementById("female");
@@ -213,7 +224,6 @@
 
 		}
 
-		
 	</script>
 </body>
 </html>

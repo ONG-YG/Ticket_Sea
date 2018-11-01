@@ -9,7 +9,7 @@
     div{
         box-sizing : border-box;
     }
-    #wrapper{overflow: hidden;width:1250px; height:2000px; border:1px solid black;}
+    #wrapper{overflow: hidden;width:1650px; height:1500px; border:1px solid black;}
     #header{ height:60px; background-color:;}
     #h_inner{width: 990px; height: 80%; margin: 5px auto; float:left; padding-left:20px;}
     #content-wrapper{height:1500px; border:1px solid black;}
@@ -187,28 +187,27 @@
             <div id="c_inner">
             <aside class="main-sidebar">
                 <div id="side-menu">
-                <ul>
+                 <ul>
                     <li><a href="#">공연관리</a>
                         <ul>
-                            <li><a href="ad_showInsert.html">공연등록</a></li>
-                            <li><a href="ad_showList.html">공연수정</a></li>
-                            <li><a href="#">공연삭제</a></li>
+                             <li><a href="/adShowPlace.do">공연등록</a></li>
+                            <li><a href="/adShowList.do">공연목록</a></li>
                         </ul>
                     </li>    
                     <li><a href="#">회원관리</a>
                         <ul>
-                            <li><a href="ad_memberList.html">회원목록</a></li>
+                            <li><a href="/adMemberList.do">회원목록</a></li>
                         </ul>
                     </li>
                     <li><a href="#">예매관리</a>
                         <ul>
-                            <li><a href="ad_reserveList.html">예매목록</a></li>
+                            <li><a href="/adReserveList.do">예매목록</a></li>
                         </ul>
                     </li>
                     <li><a href="#">소규모공연</a>
                         <ul>
-                            <li><a href="ad_miniShowList.html">승인대기공연</a></li>
-                            <li><a href="#">승인완료공연</a></li>
+                            <li><a href="/miniShowList.do">승인대기공연</a></li>
+                            <li><a href="/msApproveList.do">승인완료공연</a></li>
                         </ul>
                     </li>
                 </ul>

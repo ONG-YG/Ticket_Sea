@@ -8,5 +8,10 @@
 </head>
 <body>
 
+<script>
+alert("회원의 정보가 존재하지 않습니다.");
+location.href="/views/member/idSearch.jsp";
+</script>
+
 </body>
 </html>

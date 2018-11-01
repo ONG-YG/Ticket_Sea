@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import = "kr.co.ticketsea.admin.show.model.vo.*" 
+	import = "java.util.ArrayList"%>
+<%
+
+	MiniPgData mpd = (MiniPgData)request.getAttribute("miniPgData");
+	ArrayList<MiniShow> list=mpd.getList(); 
+	String pageNavi = mpd.getPageNavi();
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -126,31 +134,30 @@
                 <ul>
                     <li><a href="#">공연관리</a>
                         <ul>
-                            <li><a href="ad_showInsert.html">공연등록</a></li>
-                            <li><a href="ad_showList.html">공연수정</a></li>
-                            <li><a href="#">공연삭제</a></li>
+                             <li><a href="/adShowPlace.do">공연등록</a></li>
+                            <li><a href="/adShowList.do">공연목록</a></li>
                         </ul>
                     </li>    
                     <li><a href="#">회원관리</a>
                         <ul>
-                            <li><a href="ad_memberList.html">회원목록</a></li>
+                            <li><a href="/adMemberList.do">회원목록</a></li>
                         </ul>
                     </li>
                     <li><a href="#">예매관리</a>
                         <ul>
-                            <li><a href="ad_reserveList.html">예매목록</a></li>
+                            <li><a href="/adReserveList.do">예매목록</a></li>
                         </ul>
                     </li>
                     <li><a href="#">소규모공연</a>
                         <ul>
-                            <li><a href="ad_miniShowList.html">승인대기공연</a></li>
-                            <li><a href="#">승인완료공연</a></li>
+                            <li><a href="/miniShowList.do">승인대기공연</a></li>
+                            <li><a href="/msApproveList.do">승인완료공연</a></li>
                         </ul>
                     </li>
                 </ul>
                 </div>
             </aside>
-                <div id="content">
+           <div id="content">
            <div class="content_wrap">
               <div class="top_area">
                   <h2 class="main_title">소규모공연</h2>
@@ -159,37 +166,28 @@
                 <div id="member_table">
                    <table class="miniShowTbl">
                     <thead style="background-color:#E7E7E7">
-                        <td width="15%" >공연장르</td>
-                        <td width="20%" style="overflow:hidden;">공연명</td>
+                        <td width="15%">공연번호</td>
+                        <td width="20%">공연명</td>
                         <td width="10%">작성자</td>
                         <td width="20%">공연장소</td>
-                        <td width="15%">등록일시</td>
+                        <td width="15%">공연일시</td>
+                        <td>승인여부</td>
                        </thead>
+                       <%for(MiniShow ms : list) {%>
                        <tr>
-                           <td>뮤지컬</td>
-                           <td onclick="">이상하고아름다운</td>
+                           <td><a href="#"><%=ms.getMs_no() %></a></td>
+                           <td><%=ms.getMs_name() %></td>
                            <td>test11</td>
-                           <td>서울시 마포구</td>
-                           <td>2018-09-27</td>
+                           <td><%=ms.getMs_place() %></td>
+                           <td><%=ms.getMs_date() %></td>
+                           <td><input type="button" value="승인" onclick="approve('<%=ms.getMs_no()%>');"/>&nbsp;&nbsp;<input type="button" value="거부"/></td>
                        </tr>
-                       <tr>
-                           <td>연극</td>
-                           <td>도깨비나라</td>
-                           <td>test77</td>
-                           <td>혜화동 로터리</td>
-                           <td>2018-10-01</td>
-                       </tr>
-                       <tr>
-                           
-                       </tr>
+                        <%} %>
                     </table>
                     
                     <!--회원목록 페이지 이동-->
                     <div class="paginate" style="text-align: center">
-                    <a class="prev"><span class="blind">이전</span></a>
-                    <strong>1</strong>
-                    <a href="#" class="">2</a>
-                    <a href="#">다음</a>
+                    <label><%=pageNavi%></label>
                     </div>
                     
                     <!--회원검색-->
@@ -206,5 +204,14 @@
         </div>
         </div>
 	</div>
+	<script>
+		function approve(showNo){
+			if(window.confirm("공연을 승인하시겠습니까?")){
+				location.href="/miniShowApprove.do?msNo="+showNo;
+			}else{
+				return false;
+			}
+		}
+	</script>
 </body>
 </html>

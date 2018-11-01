@@ -1,3 +1,4 @@
+<%@page import="kr.co.ticketsea.reserve.model.vo.SeatGradeState"%>
 <%@page import="kr.co.ticketsea.reserve.model.vo.ReserveStepOne"%>
 <%@page import="kr.co.ticketsea.reserve.model.vo.PerformSchedule"%>
 <%@page import="java.util.ArrayList" %>
@@ -12,7 +13,8 @@
 	
 	String showTitle = stOne.getShowTitle();
 	String showPoster = stOne.getShowPoster();
-	ArrayList<PerformSchedule> psList =stOne.getPsList();
+	ArrayList<PerformSchedule> psList = stOne.getPsList();
+	//ArrayList<SeatGradeState> seatGrdStList = stOne.getSeatGrdStList();//////////////////////////////
 %>
 
 <script>
@@ -20,23 +22,36 @@
 <%
 	for(int i=0; i<psList.size(); i++) {
 %>
+		var psNo=<%=psList.get(i).getPerformSchNo()%>;
 		var psDate='<%=psList.get(i).getPerformSchDate()%>';
 		var psCnt=<%=psList.get(i).getPerformSchCnt()%>;
 		var psTime='<%=psList.get(i).getPerformTime()%>';
-		var availSeat=<%=psList.get(i).getAvailableSeat()%>;
-		var ps = [psDate, psCnt, psTime, availSeat];
+		var seatGrdStList = [];
+		
+		<%
+       	for (SeatGradeState seatGrdSt : psList.get(i).getSeatGrdStList()) {
+       		String seatGrd = seatGrdSt.getTh1_seat_grd();
+       		int avail = seatGrdSt.getAvailableSeatCnt();
+       	%>
+	       	var seatGrdSt = ['<%=seatGrd%>', <%=avail%>];
+	       	seatGrdStList.push(seatGrdSt);
+       	<%} %>
+		
+		//var ps = [psNo, psDate, psCnt, psTime];//, availSeat];
+		var ps = [psNo, psDate, psCnt, psTime, seatGrdStList];
 		psList.push(ps);
+		//console.log(ps);////////////////////////////////////////////
 <%
 	}
 %>
-	console.log(psList);
+
 </script>
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Ticket Sea 예매</title>
     
-    <link rel="shortcut icon" type="image/x-icon" href="http://ticketlink.dn.toastoven.net/web/favicon.ico">
+    <!-- <link rel="shortcut icon" type="image/x-icon" href="http://ticketlink.dn.toastoven.net/web/favicon.ico"> -->
     
     <!-- 외부 스타일 시트 적용 -->
     <link href="../../css/reserv_common.css" rel="stylesheet" type="text/css">
@@ -49,47 +64,141 @@
     <script>
         var date_sel = null;
         var cnt_sel = null;
+        var psNo = null;
+        //var availSeat = null;
+        
         $(document).ready(function(){
             
         	pageInit();
         	
+        	// 날력의 날짜 클릭했을 때
+        	// date_sel에 선택한 날짜 저장
+        	// 날짜와 회차 모두 선택한 상태에서 다른 날짜를 다시 선택했을 경우를 위해 먼저, 선택한 회차정보를 초기화 
             $('.calendar-date').click(function(){
+            //$('.week .day').click(function(){
+            	//alert("hello");/////////////////////////////////////////
                 date_sel = null;
                 cnt_sel = null;
+                psNo = null;
+                //availSeat = null;
+                
+                $('#seat_box ul').html("");
+                $('#cnt_box ul').html("");
+                $('#seat_box ul').html("");
                 $('#cnt_box li').removeClass('selected_cnt_li');
                 $('.calendar-date').removeClass('selected_date_td');
                 $(this).addClass('selected_date_td');
-
-                date_sel = $('.year-month').text()+"."+$(this).text();
-                $('#date_sel_info span').html(date_sel);
-                //$('#date_form').val(date_sel);
+                
+                var yearMonth = $('.year-month').text().split('.');
+                var year = yearMonth[0];
+                var month = yearMonth[1];
+                var day = $(this).text();
+                
+                /*
+                var calSelected = $('#calSelected').val().split('-');
+                alert(calSelcected);
+                var year = calSelected[0];
+                var month = calSelected[1];
+                var day = calSelected[2];
+                */
+                
+                date_sel = year+"-"+month+"-"+day;
+                $('#date_sel_info span').html(year+"."+month+"."+day);
                 $('#cnt_sel_info span').html(cnt_sel);
-                //$('#cnt_form').val(cnt_sel);
                 //alert(date_sel);
+                
+                var cntList = [];
+                for(var i=0; i<psList.length; i++) {
+                	if(psList[i][1]==date_sel) {
+               			var ps = psList[i];
+               			var cntTime = [ ps[2], ps[3] ];
+               			cntList.push(cntTime);
+                	}
+                }
+                
+                var list = "";
+            	for(var i=0; i<cntList.length; i++) {
+            		list += " <li id='li_"+ cntList[i][0] +"' onclick='listClick("+ cntList[i][0] +");'> "
+		                        +"<span class='cnt'>"+ cntList[i][0] +"</span> "
+		                        +"<span>회</span> "
+		                        +"<span class='cnt_time'>"+ cntList[i][1] +"</span> "
+		                    +" </li> ";
+            	}
+            	$('#cnt_box ul').html(list);
+            	
             })
-
+            
+            /*
+            // 회차 정보 li를 클릭했을 때
+            // cnt_sel에 선택한 회차 번호 저장
+            // 선택한 날짜와 회차 정보 종합해서 잔여석 표시
             $('#cnt_box li').click(function(){
-                if(date_sel!=null) {
+                alert(date_sel);
+            	if(date_sel!=null) {
                     $('#cnt_box li').removeClass('selected_cnt_li');
-                    $(this).addClass('selected_cnt_li');
+                    $('#cnt_box li[id=]').addClass('selected_cnt_li');
 
                     cnt_sel = $(this).children('.cnt').html();
                     $('#cnt_sel_info span').html($(this).text());
-                    //$('#cnt_form').val(cnt_sel);
                     //alert(cnt_sel);
                 }
             })
+            */
             
         })
         
         function pageInit() {
         	
         	var showTitle = '<%=showTitle%>';
-        	$('#mini_show_title').text(showTitle);	//공연명
+        	$('#mini_show_title').text(showTitle);	//공연명 표시
         	
         	var showPosterSrc = "/img/poster/<%=showPoster%>";
-        	$('#mini_poster img').attr('src',showPosterSrc);
+        	$('#mini_poster img').attr('src',showPosterSrc);  //포스터 이미지 경로 세팅
         	
+        	
+        	//psList에 담긴 선택가능한 날짜들 달력에 표시해주기
+        	
+        	
+        }
+        
+     	// 회차 정보 li를 클릭했을 때
+        // cnt_sel에 선택한 회차 번호 저장
+        // 선택한 날짜와 회차 정보 종합해서 잔여석 표시
+        function listClick(cnt){
+            
+        	if(date_sel!=null) {
+        		var selectedLi = '#cnt_box #li_'+cnt;
+        		$('#cnt_box li').removeClass('selected_cnt_li');
+                $(selectedLi).addClass('selected_cnt_li');
+
+                cnt_sel = $(selectedLi).children('.cnt').html();
+                var cntText = $(selectedLi).text();
+                $('#cnt_sel_info span').html(cntText);
+                //alert(cnt_sel);
+                
+                var seatGrdStList = [];
+                for(var i=0; i<psList.length; i++) {
+                	if(psList[i][1]==date_sel && psList[i][2]==cnt_sel) {
+                		psNo = psList[i][0];
+                		seatGrdStList = psList[i][4];
+                		break;
+                	}
+				}
+                
+                //console.log(seatGrdStList);/////////////////
+                var list = "";
+                for(var i=0; i<seatGrdStList.length; i++) {
+                	var seatGrdSt = seatGrdStList[i];
+	           		list += " <li> "
+		                        +"<span class='seat_grade'>"+ seatGrdSt[0] +" 석 </span> "
+		                        +"<span class='available_seat'> "+ seatGrdSt[1] +" </span> "
+		                        +"<span>석</span> "
+		                   +" </li> ";
+	            	
+                }
+                $('#seat_box ul').html(list);
+                
+            }
         }
         
         function next() {
@@ -98,9 +207,11 @@
             if(stat==false) {
                 alert("날짜/회차를 선택하세요");
             }else {
-                //alert("선택한 날짜 : "+date_sel+"  /  선택한 회차 : "+cnt_sel);
+                //console.log("선택한 날짜 : "+date_sel+"  /  선택한 회차 : "+cnt_sel);/////////
                 $('#date_form').val(date_sel);
                 $('#cnt_form').val(cnt_sel);
+                
+                $('#dateCntForm').attr('action',"/reserveSeat.do?psNo="+psNo);
                 document.getElementById("dateCntForm").submit();
             }
         }
@@ -147,6 +258,8 @@
                             <div id="ct_left_date">
                                 <b>날짜선택</b><hr>
                                 <div id="date_box">
+                                	<!--<jsp:include page="/views/reserve/reserveCalendar.html" />-->
+                                	
                                     <div class="calendar">
                                         <div class="calendar-header">
                                             <a class="prev-mon" title="이전달"><span>이전달</span></a>
@@ -223,12 +336,16 @@
                                             <span style="color: red; font-size: 10px;">전월 다음달 선택 시 변수에 반영할것</span>
                                         </div>
                                     </div>
+                                    
                                 </div>
                             </div>
                             <div id="ct_left_cnt">
                                 <b>회차선택</b><hr>
                                 <div id="cnt_box">
                                     <ul>
+                                        
+                                        <!-- 날짜 선택시 javaScript function 작동으로 채워짐 -->
+                                        <!-- 
                                         <li>
                                             <span class="cnt">1</span>
                                             <span>회</span>
@@ -244,6 +361,7 @@
                                             <span>회</span>
                                             <span class="cnt_time">15:00 ~ 16:30</span>
                                         </li>
+                                         -->
                                     </ul>
                                 </div>
                             </div>
@@ -251,11 +369,14 @@
                                 <b>잔여석</b><hr>
                                 <div id="seat_box">
                                     <ul>
+                                    	<!-- 날짜와 회차 선택하면 표시됨 -->
+                                    	<!--
                                         <li>
-                                            <span class="seat_grade">일반석</span>
+                                            <span class="seat_grade">전체</span>
                                             <span class="available_seat">27</span>
                                             <span>석</span>
                                         </li>
+                                        -->
                                     </ul>
                                 </div>
                             </div>
@@ -295,15 +416,17 @@
                             <div id="cnt_sel_info">
                                 <h5>공연회차</h5><span></span>
                             </div>
-                            <form action="/reserveSeat.do?psNo=30000" method="post" id="dateCntForm">
-                            <input type="hidden" name="showNo" value="<%= showNo %>"/>
+                            <form action="/reserveSeat.do?psNo=" method="post" id="dateCntForm">
+                            <%--<input type="hidden" name="showNo" value="<%= showNo %>"/>--%>
+                            <!-- 
                             <input type="hidden" id="date_form" name="date_sel" />
                             <input type="hidden" id="cnt_form" name="cnt_sel" />
+                             -->
                             </form>
                         </div>
                     </div>
                     <div id="reserve_btn_only">
-                        <a href="#" class="btn" onclick="next()">다음단계</a>
+                        <a class="btn" onclick="next()">다음단계</a>
                     </div>
 
                 </div>

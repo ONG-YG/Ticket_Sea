@@ -1,9 +1,6 @@
 package kr.co.ticketsea.reserve.controller;
 
 import java.io.IOException;
-import java.sql.Date;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -14,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import kr.co.ticketsea.member.model.vo.Member;
 import kr.co.ticketsea.reserve.model.service.ReserveService;
 import kr.co.ticketsea.reserve.model.vo.PerformSchedule;
 import kr.co.ticketsea.reserve.model.vo.ReserveProgressing;
@@ -47,8 +43,11 @@ public class ReserveSeatServlet extends HttpServlet {
 			if(session!=null) {
 				ReserveSession rs = (ReserveSession)session.getAttribute("reserveSession");
 				int currStat = rs.getCurrStat();
+				
 				//비정상적 루트에서 접근 금지
 				if(currStat==1) {
+					//세션에 넣을 reserveSession객체 - 진행단계 정보 update
+					rs.setCurrStat(2);
 					
 					int psNo = Integer.parseInt( request.getParameter("psNo") );
 					
@@ -58,7 +57,6 @@ public class ReserveSeatServlet extends HttpServlet {
 					//공연회차번호로 공연회차정보 조회
 					PerformSchedule ps = new ReserveService().selectOnePerformSchedule(psNo);
 					
-	
 						if(ps!=null) {
 							//공연번호
 							int showNo = ps.getShowNo();
@@ -87,30 +85,36 @@ public class ReserveSeatServlet extends HttpServlet {
 								rp.setReservedSeatList(reserved_seats);
 								ArrayList<Integer> prog_seats = new ReserveService().selectProgressingSeats(psNo);
 								rp.setProgSeatList(prog_seats);
+								
 								ArrayList<SeatGradeState> seatGrdStList = new ReserveService().getSeatGradeStatus(psNo);
-								rp.setSeatGrdSt(seatGrdStList);
-								System.out.println(rp);/////////////////////////
 								
-								//세션에 넣을 reserveSession객체 - 진행단계 정보 update
-								rs.setCurrStat(2);
-								
-								//세션에 넣을 reserveSession객체 - 예매 진행 번호 생성
-								int progNo = new ReserveService().getProgNo();
-								
-								if(progNo!=0) {
-									rs.setProgNo(progNo);
-									System.out.println("progNo = "+progNo);////////////////
-								}else {
-									System.out.println("error at ReserveSeatServlet-5");
+								if(!seatGrdStList.isEmpty()) {
+									rp.setSeatGrdSt(seatGrdStList);
+									System.out.println("ReserveSeatServlet\n"+rp);/////////////////////////
+									
+									//세션에 넣을 reserveSession객체 - 예매 진행 번호 생성
+									int progNo = new ReserveService().createProgNo();
+									
+									if(progNo!=-1) {
+										rs.setProgNo(progNo);
+										//System.out.println("progNo = "+progNo);////////////////
+									}else {
+										System.out.println("error at ReserveSeatServlet-5");
+										throw new Exception();
+									}//if(progNo!=-1) END
+									
+									//세션 정보 저장
+									session.setAttribute("reserveSession", rs);
+									
+									RequestDispatcher view = request.getRequestDispatcher("views/reserve/reserv_step_2_seat.jsp");
+									request.setAttribute("stepTwo", rp);
+									view.forward(request, response);
+								}
+								else {
+									System.out.println("error at ReserveSeatServlet-6");
 									throw new Exception();
-								}//if(progNo!=0) END
+								}//if(!seatGrdStList.isEmpty())
 								
-								//세션 정보 저장
-								session.setAttribute("reserveSession", rs);
-								
-								RequestDispatcher view = request.getRequestDispatcher("views/reserve/reserv_step_2_seat.jsp");
-								request.setAttribute("stepTwo", rp);
-								view.forward(request, response);
 							}
 							else {
 								System.out.println("error at ReserveSeatServlet-5");

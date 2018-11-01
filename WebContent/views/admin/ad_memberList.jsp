@@ -1,12 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import = "kr.co.ticketsea.member.model.vo.*"
+	import = "kr.co.ticketsea.admin.member.model.vo.*"
+	import = "java.util.ArrayList"
+%>
+
+<%
+	//Controller에서 보내준 값 가져오기
+	MemberPageData pd= (MemberPageData)request.getAttribute("pageData");
+	ArrayList<Member> list = pd.getList();
+	String pageNavi = pd.getPageNavi();
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>회원정보리스트</title>
+
+    <!-- 외부 스타일 시트 불러오기 -->
+    <link href="../../css/ad_memberInfo.css" rel="stylesheet" type="text/css">
 <style>
-     ul, li, a{list-style: none; margin: 0px; padding: 0px;     text-decoration: none; color: black;}
+     ul, li, a{list-style: none; margin: 0px; padding: 0px; text-decoration: none; color: black;}
     div{
         box-sizing : border-box;
     }
@@ -68,8 +82,6 @@
         width:85%;
         height:1300px;
         display: block;
-        position:relative;
-        
     }
     .content_wrap{
         width:980px;
@@ -77,9 +89,7 @@
         margin:0 auto;
         border:1px solid black;
         box-sizing: border-box;
-        display: inline-block;
-        position:absolute;
-        left:4%;
+        
     }
     h2.main_title{
         display: inline-block;
@@ -103,16 +113,87 @@
             
         }
     
-    .memberTbl tr:nth-child(2n){
-        background-color: #F6F6F6;
-        
+    .memberTbl tr{
+        border:1px solid black;
     }
     .content_wrap .searchArea{
         height:10%;
         padding: 30px;
     }
+    .memberInfo_table{
+        border-width: 1px 0;
+        border-style: solid;
+        border-color: #c7c7c7;
+    }
+    .memberInfo_table table{
+        width: 100%;
+        border-spacing: 0;
+    }
+    .memberInfo_table th{
+        
+        border-bottom: 1px dashed #dedede;
+        padding: 30px 0 30px 20px;
+        text-align: left;
+        line-height: 40px;
+        letter-spacing: -1px;
+        color: black;
+        font-size: 16px;
+        width: 200px;
+    }
+    .memberInfo_table td{
+        text-align: center;
+        border-bottom: 1px dashed #dedede;
+        font-size: 14px;
+        text-align: left;
+    }
+    .memberInfo_table input[type="text"]{
+        height:25px;
+        font-size:14px;
+    }
+    
+    #memUpdate{
+        padding-top:40px;
+        text-align: center;
+    }
+    /*버튼 스타일*/
+    button{
+      background:#4ABFD3;
+      color:#fff;
+      border:none;
+      position:relative;
+      height:60px;
+      font-size:1.6em;
+      font-weight: 600;
+      padding:0 2em;
+      cursor:pointer;
+      transition:800ms ease all;
+      outline:none;
+    }
+    button:hover{
+      background:#fff;
+      color:#4ABFD3;
+    }
+    button:before,button:after{
+      content:'';
+      position:absolute;
+      top:0;
+      right:0;
+      height:2px;
+      width:0;
+      background: #4ABFD3;
+      transition:400ms ease all;
+    }
+    button:after{
+      right:inherit;
+      top:inherit;
+      left:0;
+      bottom:0;
+    }
+    button:hover:before,button:hover:after{
+      width:100%;
+      transition:800ms ease all;
+    }
 </style>
-
 </head>
 <body>
 	<div id="wrapper">
@@ -128,28 +209,27 @@
             <div id="c_inner">
             <aside class="main-sidebar">
                 <div id="side-menu">
-                <ul>
+                 <ul>
                     <li><a href="#">공연관리</a>
                         <ul>
-                            <li><a href="ad_showInsert.html">공연등록</a></li>
-                            <li><a href="ad_showList.html">공연수정</a></li>
-                            <li><a href="#">공연삭제</a></li>
+                             <li><a href="/adShowPlace.do">공연등록</a></li>
+                            <li><a href="/adShowList.do">공연목록</a></li>
                         </ul>
                     </li>    
                     <li><a href="#">회원관리</a>
                         <ul>
-                            <li><a href="ad_memberList.html">회원목록</a></li>
+                            <li><a href="/adMemberList.do">회원목록</a></li>
                         </ul>
                     </li>
                     <li><a href="#">예매관리</a>
                         <ul>
-                            <li><a href="ad_reserveList.html">예매목록</a></li>
+                            <li><a href="/adReserveList.do">예매목록</a></li>
                         </ul>
                     </li>
                     <li><a href="#">소규모공연</a>
                         <ul>
-                            <li><a href="ad_miniShowList.html">승인대기공연</a></li>
-                            <li><a href="#">승인완료공연</a></li>
+                            <li><a href="/miniShowList.do">승인대기공연</a></li>
+                            <li><a href="/msApproveList.do">승인완료공연</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -164,51 +244,37 @@
                 <div id="member_table">
                    <table class="memberTbl">
                     <thead style="background-color:#E7E7E7">
-                        <td width="20%">회원번호</td>
+                        <td width="10%">회원번호</td>
                         <td width="15%">아이디</td>
                         <td width="10%">이름</td>
                         <td width="15%">연락처</td>
                         <td width="20%">이메일</td>
-                        <!--<td>주소</td>-->
-                        <td>성별</td>
+                        <td>활동여부</td>
                         <td width="10%">가입일</td>
+                        <td>삭제</td>
                         
                        </thead>
+                       <%for(Member m : list) {%>
                        <tr>
-                           <td style = "cursor:pointer;"><a href="ad_memberInfo.html">1234567</a></td>
-                           <td>test1</td>
-                           <td>박규리</td>
-                           <td>01011112222</td>
-                           <td>test1@iei.or.kr</td>
-                           <td>여자</td>
-                           <td>2018-10-20</td>
+                           <td><a href="adMember.do?memberNo=<%=m.getMemberNo()%>"><%=m.getMemberNo()%></a></td>
+                           <td><%=m.getMemberId() %></td>
+                           <td><%=m.getMemberName() %></td>
+                           <td><%=m.getMemberPhone() %></td>
+                           <td><%=m.getMemberEmail() %></td>
+                           <td><%=m.getMemberGender() %></td>
+                           <td><%=m.getMemberJoinDate() %></td>
+                           <td><input type="button" value="삭제" onclick="delActive('<%=m.getMemberNo()%>');"></td>
+                     <script>
+                    	function delActive(memberNo){
+                    		location.href="/adMemberDelete.do?memberNo="+memberNo; //get방식으로 삭제할 회원번호 넘김
+                    	}
+                     </script>
                        </tr>
-                       <tr>
-                           <td style = "cursor:pointer;"><a href="ad_memberInfo.html">3333333</a></td>
-                           <td>test2</td>
-                           <td>장기용</td>
-                           <td>01033223522</td>
-                           <td>test2@iei.or.kr</td>
-                           <td>남자</td>
-                           <td>2017-05-23</td>
-                       </tr>
-                       <tr>
-                           <td style = "cursor:pointer;"><a href="ad_memberInfo.html">1234567</a></td>
-                           <td>test3</td>
-                           <td>절미절미</td>
-                           <td>01059595959</td>
-                           <td>test3@iei.or.kr</td>
-                           <td>여자</td>
-                           <td>2018-07-17</td>
-                       </tr>
+                        <%} %>
                     </table>
-                    
                     <!--회원목록 페이지 이동-->
                      <div class="paginate" style="text-align: center">
-                    <a class="prev"><span class="blind">이전</span></a>
-                    <strong>1</strong>
-                    <a href="#" class="">2</a>
-                    <a href="#">다음</a>
+                    	 <label><%=pageNavi%></label>
                     </div>
                     
                     <!--회원검색-->

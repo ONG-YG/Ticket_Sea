@@ -7,6 +7,7 @@ import kr.co.ticketsea.common.JDBCTemplate;
 import kr.co.ticketsea.reserve.model.dao.ReserveDao;
 import kr.co.ticketsea.reserve.model.vo.PerformSchedule;
 import kr.co.ticketsea.reserve.model.vo.SeatGradeState;
+import kr.co.ticketsea.reserve.model.vo.SelectedSeat;
 import kr.co.ticketsea.reserve.model.vo.ShowInfo;
 
 public class ReserveService {
@@ -120,18 +121,89 @@ public class ReserveService {
 			seatGrdStList.get(i).setAvailableSeatCnt(available);
 		}
 		
+		JDBCTemplate.close(conn);
+		
 		return seatGrdStList;
 	}
 
-	public int getProgNo() {
+	public int createProgNo() {
 		Connection conn =JDBCTemplate.getConnection();
-		int progNo = new ReserveDao().getProgNo(conn);
+		int progNo = new ReserveDao().createProgNo(conn);
 		
 		JDBCTemplate.close(conn);
 		
 		return progNo;
 	}
 
+	public String insertProgData(int progNo, int memberNo, int psNo, String[] seatList) {
+		Connection conn = JDBCTemplate.getConnection();
+		String progTime = null;
+		
+		try {
+			progTime = new ReserveDao().getSysdate(conn);
+			
+			if(progTime!=null) {
+				
+				for(String seat : seatList) {
+					int seatNo = Integer.parseInt(seat);
+					int result = new ReserveDao().insertProgData(conn, progNo, memberNo, psNo, seatNo, progTime);
+					
+					if(result>0) {
+						JDBCTemplate.commit(conn);
+					}else {
+						JDBCTemplate.rollback(conn);
+						throw new Exception();
+					}
+				}
+				
+			}else {
+				throw new Exception();
+			}
+			
+		} catch (Exception e) {
+			return null;
+		} finally {
+			JDBCTemplate.close(conn);
+		}
+
+		return progTime;
+	}
+
+	public String[] getPhoneMail(int memberNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		String[] contactInfo = new ReserveDao().getPhoneMail(conn, memberNo);
+		
+		JDBCTemplate.close(conn);
+		
+		return contactInfo;
+	}
+
+	public ArrayList<SelectedSeat> getSeatInfo(String[] seatList) {
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<SelectedSeat> selSeatList = new ArrayList<SelectedSeat>();
+		
+		for (String seatNo : seatList) {
+			SelectedSeat selSeat = new ReserveDao().getSeatInfo(conn, seatNo);
+			if(selSeat!=null) {
+				selSeatList.add(selSeat);
+			}else {
+				selSeatList.clear();
+				break;
+			}
+		}
+		
+		JDBCTemplate.close(conn);
+		
+		return selSeatList;
+	}
 	
+	public long createBookNo() {
+		Connection conn =JDBCTemplate.getConnection();
+		long bkNo = new ReserveDao().createBookNo(conn);
+		
+		JDBCTemplate.close(conn);
+		
+		return bkNo;
+	}
 	
 }
