@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html ng-app="calendar">
+<head>
+    <meta charset="utf-8">
+    <title>Angular Calendar</title>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.js"
+      integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+      crossorigin="anonymous"></script>
+    <script src="/views/reserve/angular.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css" />
+    <link rel="stylesheet" type="text/css"  href="/views/reserve/calendar.css?ver=1" />
+
+    <script  src="/views/reserve/moment.min.js"></script>
+    <script type="text/javascript">
+    moment.locale('kr', {
+        months : "1월_2월_3월_4월_5월_6월_7월_8월_9월_10월_11월_12월".split("_"),
+        monthsShort :  "1월_2월_3월_4월_5월_6월_7월_8월_9월_10월_11월_12월".split("_"),
+        weekdays : "일요일_월요일_화요일_수요일_목요일_금요일_토요일".split("_"),
+        weekdaysShort : "일._월._화._수._목._금_토.".split("_"),
+        weekdaysMin :"일._월._화._수._목._금_토.".split("_"),
+        ordinal : function (number) {
+            return number + '일'
+        }
+    });
+    </script>
+    <script  src="/views/reserve/calendar.js"></script>
+</head>
+<body>
+<div ng-controller="calendarWidget"">
+    <calendar selected="day" ></calendar>
+    <input type="hidden" id="calSelected" value="{{day.format('YYYY-MM-DD')}}"/>
+</div>
+</body>
+</html>

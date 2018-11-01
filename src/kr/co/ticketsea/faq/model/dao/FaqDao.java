@@ -77,19 +77,18 @@ public class FaqDao {
 			return faq;	
 		}
 
-		public int deleteFaq(Connection conn, int boardF_no, String userId) {
+		public int deleteFaq(Connection conn, int boardF_no) {
 			
 			PreparedStatement pstmt = null;
 			int result = 0;
 			
-			String query = "delete from board_faq where boardF_no=? and user_id=?";
+			String query = "delete from board_faq where boardF_no=?";
 			
 			
 			try {
 				pstmt = conn.prepareStatement(query);
 				
 				pstmt.setInt(1, boardF_no);
-				pstmt.setString(2, userId);
 				
 				result = pstmt.executeUpdate();
 				
@@ -342,5 +341,32 @@ public class FaqDao {
 			
 			return sb.toString();		
 			
+		}
+
+		public int insertFaq(Connection conn, String category, String title, String contents) {
+			
+			PreparedStatement pstmt = null;
+			int result = 0;
+			
+			String query = "insert into board_faq values(SEQ_boardF_NO.nextval,?,?,?)";
+			
+			try {
+				pstmt = conn.prepareStatement(query);
+				
+				pstmt.setString(1, category);
+				pstmt.setString(2, title);
+				pstmt.setString(3, contents);
+				
+				result = pstmt.executeUpdate();
+			
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				JDBCTemplate.close(pstmt);
+			}
+			
+			return result;
 		}
 }

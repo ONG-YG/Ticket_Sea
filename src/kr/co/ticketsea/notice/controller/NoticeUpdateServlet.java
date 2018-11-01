@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import kr.co.ticketsea.notice.model.service.NoticeService;
+import kr.co.ticketsea.member.model.vo.*;
 
 /**
  * Servlet implementation class NoticeUpdateServlet
@@ -43,7 +44,7 @@ public class NoticeUpdateServlet extends HttpServlet {
 	HttpSession session  = request.getSession(false);
 	
 	try {
-		userId = ((Member)session.getAttribute("member")).getUserId();
+		userId = ((Member)session.getAttribute("member")).getMemberId();
 		if(userId!=null) 
 		{
 		//4. 비즈니스 로직 처리

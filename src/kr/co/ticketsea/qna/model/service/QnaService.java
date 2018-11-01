@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import kr.co.ticketsea.common.JDBCTemplate;
+import kr.co.ticketsea.faq.model.dao.FaqDao;
 import kr.co.ticketsea.qna.model.dao.QnaDao;
 import kr.co.ticketsea.qna.model.vo.*;
 import kr.co.ticketsea.qna.model.vo.PageData;
@@ -70,9 +71,36 @@ public class QnaService {
 		
 	}
 
-	public int deleteQna(int boardQ_no, String userId) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int deleteQna(int boardQ_no) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new QnaDao().deleteQna(conn,boardQ_no);
+		
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		
+		return result;
+		
+	}
+
+	public int insertQna(String title, String contents, String userId) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new QnaDao().insertQna(conn,title,contents,userId);
+		
+		if(result>0)
+		{
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+			
+		return result;
 	}
 
 }

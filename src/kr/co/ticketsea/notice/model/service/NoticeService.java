@@ -44,9 +44,9 @@ public PageData noticeAllList(int currentPage) {
 	}
 	
 
-	public int insertNotice(String title, String category, String contents) {
+	public int insertNotice(String category, String title, String contents) {
 		Connection conn = JDBCTemplate.getConnection();
-		int result = new NoticeDao().insertNotice(conn,title,category,contents);
+		int result = new NoticeDao().insertNotice(conn,category,title,contents);
 		
 		if(result>0)
 		{
@@ -86,10 +86,10 @@ public PageData noticeAllList(int currentPage) {
 		
 	}
 
-	public int deleteNotice(int boardN_no, String userId) {
+	public int deleteNotice(int boardN_no) {
 		Connection conn = JDBCTemplate.getConnection();
 		
-		int result = new NoticeDao().deleteNotice(conn,boardN_no,userId);
+		int result = new NoticeDao().deleteNotice(conn,boardN_no);
 		
 		if(result>0) {
 			JDBCTemplate.commit(conn);
@@ -102,10 +102,10 @@ public PageData noticeAllList(int currentPage) {
 		
 	}
 
-	public int noticeUpdate(int boardN_no, String boardN_title, String boardN_contents, String userId) {
+	public int noticeUpdate(int boardN_no, String boardN_title, String boardN_contents) {
 Connection conn = JDBCTemplate.getConnection();
 		
-		int result = new NoticeDao().noticeUpdate(conn,boardN_no,boardN_title,boardN_contents,userId);
+		int result = new NoticeDao().noticeUpdate(conn,boardN_no,boardN_title,boardN_contents);
 		
 		if(result>0) {
 			JDBCTemplate.commit(conn);

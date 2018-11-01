@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import kr.co.ticketsea.notice.model.service.NoticeService;
+import kr.co.ticketsea.member.model.vo.*;
 
 /**
  * Servlet implementation class NoticeWriteServlet
@@ -40,17 +41,15 @@ public class NoticeWriteServlet extends HttpServlet {
 				//3. session에서 글을 작성한 사람의 ID를 추출
 				HttpSession session  = request.getSession(false);
 			
-				
-				
 				try {
-					String userId = ((Member)session.getAttribute("member")).getUserId();
+					String userId = ((Member)session.getAttribute("member")).getMemberId();
 					//userId를 가져오도록 함 (비로그인 사용자 일시 Exception이 발생함)
 					
 					
 					if(userId.equals("admin")) {
 						
 					//4. 비즈니스 로직 처리
-					int result = new NoticeService().insertNotice(title,category,contents);
+					int result = new NoticeService().insertNotice(category,title,contents);
 						
 						if(result>0)
 						{
@@ -59,7 +58,7 @@ public class NoticeWriteServlet extends HttpServlet {
 						}else {
 							throw new Exception();
 						}
-					}else {
+							}else {
 						response.sendRedirect("/views/notice/writeFail.jsp");
 						throw new Exception();
 					}

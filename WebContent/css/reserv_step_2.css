@@ -1,0 +1,303 @@
+@charset "UTF-8";
+
+#wrap_reserve{}
+
+#header{}
+
+#container{}
+
+/*---------------------- header ----------------------*/
+.reserve_title{}
+
+.reserve_title h1{}
+
+.reserve_title h2{}
+
+.reserve_step{}
+.reserve_step li{}
+.reserve_step li span{}
+
+    /*--reserve_step li--*/
+    .reserve_step li[class=step2]{
+        background-color: skyblue;
+        color: white;
+    }
+    /*--/reserve_step li--*/
+
+/*---------------------- /header ----------------------*/
+/*---------------------- container ----------------------*/
+
+.reserve_content{}
+.reserve_left{}
+.reserve_right{}
+
+.reserve_left{background-color: #F3F3F3;}
+
+/*--------- reserve_left ---------*/
+.reserve_show_info{
+/*    border: 1px solid; border-color: gainsboro;*/
+    border-bottom: 0px;
+    width: 100%; height: 10%;
+    box-sizing: border-box;
+    
+}
+#main_view_top{
+/*    border: 3px solid; border-color: red;*/
+    width: 100%; height: 90%;
+    box-sizing: border-box;
+}
+    /*-- reserve_show_info --*/
+    .show_etc_info{
+/*        border: 1px dotted; border-color: gainsboro;*/
+        margin-right: 10px;
+/*        padding-top: 10px;*/
+        float: right;
+    }
+    .show_title{
+/*        border: 1px dashed; border-color: gainsboro;*/
+        width: 100%; height: 100%;
+        box-sizing: border-box;
+        font-size: 22px;
+        line-height: 230%;
+        padding: 0;
+    }
+    .show_title h4{ /*공연명*/
+/*        border: 1px dotted; border-color: gainsboro;*/
+        margin: 0px;
+/*        padding: 10px;*/
+        width: 100%; height: 100%;
+        box-sizing: border-box;
+    }
+    /*-- /reserve_show_info --*/
+    /*-- main_view_top --*/
+    #select_seat{
+/*        border: 1px dashed; border-color: gainsboro;*/
+        width: auto; height: 90%;
+        box-sizing: border-box;
+        margin-left: 6px;
+        display: block;
+    }
+    .select_seat_info{
+/*        border-top: 1px solid; border-color: gainsboro;*/
+        width: 100%; height: 10%;
+        box-sizing: border-box;
+        line-height: 40px;
+        padding-left: 10px;
+    }
+    .select_seat_info img {
+        float: right;
+        width: 25px;
+        margin-top: 10px;
+        margin-right: 20px;
+    }
+    /*-- /main_view_top --*/
+
+/*--------- /reserve_left ---------*/
+/*--------- reserve_right ---------*/
+
+.top_info_area{
+/*    border: 1px dashed; border-color: red;*/
+    width: 100%; height: 38%;
+    box-sizing: border-box;
+}
+
+.reserve_grade{
+/*    border: 1px dashed; border-color: gainsboro;*/
+    width: 100%; height: 50%;
+    padding-top: 20px;
+    box-sizing: border-box;
+}
+
+.reserve_btn{}
+
+    /*-- #top_info_area --*/
+    #selected_seat_tit_div{
+/*        border: 2px solid; border-color: red;*/
+        width: 100%; height: 25px;
+        box-sizing: border-box;
+    }
+    #selected_seat_tit{
+/*        border: 2px solid; border-color: blue;*/
+        width: auto; height: 25px;
+        font-weight: 600;
+        font-size: 15px;
+        padding-left: 20px;
+        padding-top: 10px;
+        margin-right: 10px;
+        box-sizing: border-box;
+        float: left;
+    }
+/*
+    .top_info_area button {
+        width: 35px; height: 20px;
+        font-size: 10px;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        margin: 0px; margin-top: 11px;
+        background-color: skyblue;
+        float: left;
+    }
+*/
+    .top_info_area hr{
+        border: 1px solid; border-color: gainsboro; /*고정*/
+        width: 90%;
+        margin: 10px;
+    }
+    #selected_seat{
+      border: 1px solid; border-color: gainsboro; /*고정*/
+        margin: 0; padding: 10px;
+        width: 90%; height: 75%;
+        margin-left: 10px;
+        box-sizing: border-box;
+        list-style: none;
+    }
+    /*-- /#top_info_area --*/
+    /*-- .reserve_grade --*/
+    .reserve_grade>.reserve_tit_div{
+/*        border: 1px solid; border-color: aqua;*/
+        width: 100%; height: 25px;
+        font-weight: 600;
+        font-size: 15px;
+        padding-left: 20px;
+        padding-top: 10px;
+        box-sizing: border-box;
+    }
+    .reserve_grade hr{
+        border: 1px solid; border-color: gainsboro; /*고정*/
+        width: 90%;
+        margin: 10px;
+    }
+    .reserve_grade>#select_seat_grade{
+/*      border: 3px solid; border-color: red;*/
+        margin: 0; padding: 0px;
+        padding-left: 20px;
+        width: 100%; height: 75%;
+        box-sizing: border-box;
+        list-style: none;
+    }
+
+    /*-- /.reserve_grade --*/
+        /*-- #selected_seat --*/
+        #selected_seat li {
+/*            border: 2px dashed; border-color: aqua;*/
+            display: none;
+        }
+        #selected_seat li[class=selected_li] {
+/*            border: 2px dashed; border-color: aqua;*/
+            width: 90%; height: 12px;
+            margin-left: 5%;
+            margin-bottom: 5px;
+            box-sizing: border-box;
+            font-size: 12px;
+            display: block;
+        }
+        .selected_seat_color,
+        .selected_seat_detail_info{
+/*            border: 3px dashed; border-color: greenyellow;*/
+            box-sizing: border-box;
+            float: left;
+        }
+        .selected_seat_color{
+/*            border: 3px dashed; border-color: greenyellow;*/
+            width: 12px; height: 12px;
+            margin-top: 0px;
+            margin-right: 7px;
+        }
+        .selected_seat_detail_info{
+/*            border: 3px dashed; border-color: blue;*/
+            width: 195px; height: 100%;
+        }
+        .selected_seat_grade{
+/*            border: 1px dotted; border-color: red;*/
+            float: left;
+            margin-right: 15px;
+        }
+        .selected_seat_no{
+            float: right;
+        }
+        /*-- /#selected_seat --*/
+        /*-- #select_seat_grade --*/
+        #select_seat_grade li {
+/*            border: 2px dashed; border-color: aqua;*/
+            width: 100%; height: 25px;
+            margin-bottom: 10px;
+            font-size: 15px;
+            box-sizing: border-box;
+        }
+        .seat_color,
+        .seat_detail_info{
+/*            border: 3px dashed; border-color: greenyellow;*/
+            box-sizing: border-box;
+            float: left;
+        }
+        .seat_color{
+/*            border: 3px dashed; border-color: greenyellow;*/
+            width: 14px; height: 14px;
+            margin-top: 5px;
+            margin-right: 7px;
+        }
+        .seat_detail_info{
+/*            border: 3px dashed; border-color: blue;*/
+            width: 220px; height: 100%;
+        }
+        .seat_grade,
+        .seat_price{
+/*            border: 1px dotted; border-color: red;*/
+            float: left;
+        }
+        .seat_grade{
+            margin-right: 15px;
+        }
+        .seat_avail{
+            float: right;
+        }
+        /*-- /#select_seat_grade --*/
+
+
+    /*--- reserve_btn ---*/
+    .reserve_btn>a{}
+    .reserve_btn>a>span{}
+    /*--- /reserve_btn ---*/
+
+/*--------- /reserve_right ---------*/
+
+/*---------------------- /container ----------------------*/
+
+
+
+.seat_a {
+    position: absolute;
+    background: url(../img/seat_available.bmp) no-repeat;
+    height: 12px;
+    width: 11px;
+    z-index: 10;
+}
+
+
+.seat_r {
+    position: absolute;
+    background: url(../img/seat_reserved.gif) no-repeat;
+    height: 12px;
+    width: 11px;
+    z-index: 10;
+}
+
+.seat_p {
+    position: absolute;
+    background: url(../img/seat_available.bmp) no-repeat;
+    height: 12px;
+    width: 11px;
+    z-index: 10;
+}
+
+.selected {
+    position: absolute;
+    background: url(../img/seat_selected.bmp) no-repeat;
+    height: 12px;
+    width: 11px;
+    z-index: 10;
+}
+
+
+

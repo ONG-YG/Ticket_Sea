@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import kr.co.ticketsea.notice.model.service.NoticeService;
+import kr.co.ticketsea.member.model.vo.*;
 
 /**
  * Servlet implementation class NoticeDeleteServlet
@@ -34,27 +35,22 @@ public class NoticeDeleteServlet extends HttpServlet {
 		
 		//2. view에서 보낸 정보 변수에 저장
 		int boardN_no = Integer.parseInt(request.getParameter("boardN_no"));
-		String writer = request.getParameter("writer");
 		
 		//3. 세션에서 로그인 사용자 정보를 꺼내어 작성자와 일치하는지 비교
 		HttpSession session = request.getSession(false);
 		
 		try {
-			String userId = ((Member)session.getAttribute("member")).getUserId();
+			String userId = ((Member)session.getAttribute("member")).getMemberId();
 			
-			if(userId.equals(writer)) {
-				//4. 작성자와 로그인 사용자가 같다면 비즈니스 로직 처리
-				int result = new NoticeService().deleteNotice(boardN_no,userId);
+			
+				int result = new NoticeService().deleteNotice(boardN_no);
 				
 				if(result>0) 
 				{
 					response.sendRedirect("/views/notice/deleteSuccess.jsp");
 				}else {
 					throw new Exception();
-				}
-			}else {
-				throw new Exception();
-			}			
+				}	
 			
 		} catch (Exception e) {
 			response.sendRedirect("/views/notice/error.jsp");

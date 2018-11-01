@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
     
     <%@ page import = "kr.co.ticketsea.notice.model.vo.*" %>
+    <%@ page import = "kr.co.ticketsea.member.model.vo.*" %>
     <%@ page import = "java.util.*" %>
     
     <%
@@ -244,16 +245,14 @@
             text-align: center;
         }
     
+    #header_inner{width:990px; margin: 0px auto;}
 </style>
-
 </head>
 <body>
 
 <div id="wrapper">
-    <div id="header">
-        <div id="h_inner">
-            <h1>TICKET SEA</h1>
-        </div>
+        <div id="header_inner">
+            <jsp:include page="/header.jsp"/>
     </div>
     
     
@@ -267,7 +266,7 @@
             </div>
             <ul id="left_menu">
                 <li class="has_sub">
-                    <span>고객센터 홈</span>
+                    <span>고객센터</span>
                     <ul>
                         <li><a href="/noticeList.do"><strong>공지사항</strong></a></li>
                         <li><a href="/faqList.do"><strong>자주묻는 질문</strong></a></li>
@@ -314,13 +313,19 @@
 		</div>
                 
                 
+     <%
+		session = request.getSession(false);
+		Member m = (Member)session.getAttribute("member"); 
+	%>       
                 
-                
-            
-            
-              <div class="btnArea"> 
-                <a href="/noticeWrite.do"> <input type="button" value="글쓰기" style="width: 70px; height: 30px; float:right;"></a> <br>
-            </div>
+       <%
+		if(m!=null && m.getMemberId().equals("admin")){
+		%>         
+     <form style="display:inline;" action="/views/notice/noticeWrite.jsp">
+		<input type="submit" value="글쓰기" style="width: 70px; height: 30px; float:right;"/> <br>
+	</form>
+	
+	<%} %>
             <br>
             <div class="searchArea"> 
                     <a href="#"><img src="../../img/btn_search4.png" alt="검색" style="float: right"></a>
@@ -340,20 +345,7 @@
     <a href="#" id="back_to_top">Top</a>
     
     <div id="footer">
-        <div id="f_inner">
-            <strong class="footer_logo">TICKET SEA</strong>
-        
-            <div class="f_menu">
-                <a href="#">사이트 소개</a><span>|</span>
-                <a href="#">개인정보 처리방침</a><span>|</span>
-                <a href="#">이용약관</a><span>|</span>
-                <a href="#">고객센터</a><span>|</span>
-                <a href="#">티켓판매안내</a><span>|</span>
-                <a href="#">광고안내</a>
-            </div>
-        
-            <p class="copy">Copyright © 옹가네 Corporation. All rights reserved.</p>
-        </div>    
+        <jsp:include page="/footer.jsp"/>
     </div>
   </div>
 

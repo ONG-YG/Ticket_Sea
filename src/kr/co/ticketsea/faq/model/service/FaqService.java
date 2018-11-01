@@ -7,6 +7,7 @@ import kr.co.ticketsea.common.JDBCTemplate;
 import kr.co.ticketsea.faq.model.dao.FaqDao;
 import kr.co.ticketsea.faq.model.vo.Faq;
 import kr.co.ticketsea.faq.model.vo.PageData;
+import kr.co.ticketsea.notice.model.dao.NoticeDao;
 
 public class FaqService {
 	
@@ -68,10 +69,10 @@ public class FaqService {
 		
 	}
 
-	public int deleteFaq(int boardF_no, String userId) {
+	public int deleteFaq(int boardF_no) {
 		Connection conn = JDBCTemplate.getConnection();
 		
-		int result = new FaqDao().deleteFaq(conn,boardF_no,userId);
+		int result = new FaqDao().deleteFaq(conn,boardF_no);
 		
 		if(result>0) {
 			JDBCTemplate.commit(conn);
@@ -97,6 +98,22 @@ public class FaqService {
 		}
 		JDBCTemplate.close(conn);
 		
+		return result;
+	}
+
+	public int insertFaq(String category, String title, String contents) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new FaqDao().insertFaq(conn,category,title,contents);
+		
+		if(result>0)
+		{
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+			
 		return result;
 	}
 

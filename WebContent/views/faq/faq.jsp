@@ -17,7 +17,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>공지사항 글</title>
+<title>FAQ</title>
 <script
   src="https://code.jquery.com/jquery-3.3.1.js"
   integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
@@ -296,16 +296,14 @@
         text-align: center;
         float:left;
     }
-    
+    #header_inner{width:990px; margin: 0px auto;}
 </style>
-
-
 </head>
+<body>
+
 <div id="wrapper">
-    <div id="header">
-        <div id="h_inner">
-            <h1>TICKET SEA</h1>
-        </div>
+        <div id="header_inner">
+            <jsp:include page="/header.jsp"/>
     </div>
     
     
@@ -319,7 +317,7 @@
             </div>
             <ul id="left_menu">
                 <li class="has_sub">
-                    <span>고객센터 홈</span>
+                    <span>고객센터</span>
                  	 <ul>
                         <li><a href="/noticeList.do"><strong>공지사항</strong></a></li>
                         <li><a href="/faqList.do"><strong>자주묻는 질문</strong></a></li>
@@ -329,7 +327,7 @@
             </ul>    
             <div id="right_view">
                 <div class="r_line">
-                    <h3>공지사항</h3>
+                    <h3>자주 묻는 질문</h3>
                 </div>
                 
                 <div id ="board">
@@ -346,10 +344,23 @@
                     </div>
                 </div>
                 
-                <br>
+                 <%
+					session = request.getSession(false);
+					Member m = (Member)session.getAttribute("member"); 
+				%>
                 
-                <input type="button" value="삭제" style="float: right; margin:5px;">
-                <input type="button" value="수정" style="float: right; margin:5px;">
+                <%
+					if(m!=null && m.getMemberId().equals("admin")){
+				%>
+                <br>
+                <button id="btn1" onclick="modifyActive();" style="width: 70px; height: 30px; float:right;">수정</button> 
+				<button id="btn2" onclick="delFaq();" style="width: 70px; height: 30px; float:right;">삭제</button> 
+                <%} %>
+                <script>
+                function delFaq(){
+            		location.href="/faqDelete.do?boardF_no=<%=faq.getBoardF_no()%>";
+            	}
+                </script>
                 
             </div>
         </div>
@@ -358,20 +369,7 @@
     <a href="#" id="back_to_top">Top</a>
     
     <div id="footer">
-        <div id="f_inner">
-            <strong class="footer_logo">TICKET SEA</strong>
-        
-            <div class="f_menu">
-                <a href="#">사이트 소개</a><span>|</span>
-                <a href="#">개인정보 처리방침</a><span>|</span>
-                <a href="#">이용약관</a><span>|</span>
-                <a href="#">고객센터</a><span>|</span>
-                <a href="#">티켓판매안내</a><span>|</span>
-                <a href="#">광고안내</a>
-            </div>
-        
-            <p class="copy">Copyright © 옹가네 Corporation. All rights reserved.</p>
-        </div>    
+        <jsp:include page="/footer.jsp"/>
     </div>
     
 </div>

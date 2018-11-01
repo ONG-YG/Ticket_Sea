@@ -9,8 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import kr.co.ticketsea.faq.model.service.FaqService;
-import kr.co.ticketsea.notice.controller.Member;
-import kr.co.ticketsea.notice.model.service.NoticeService;
+import kr.co.ticketsea.member.model.vo.*;
 
 /**
  * Servlet implementation class FaqUpdateServlet

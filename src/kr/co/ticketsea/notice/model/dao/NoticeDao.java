@@ -50,18 +50,18 @@ public class NoticeDao {
 		
 	}
 
-	public int insertNotice(Connection conn, String title, String category, String contents) {
+	public int insertNotice(Connection conn, String category, String title, String contents) {
 		
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
-		String query = "insert into board_notice values(SEQ_boardN_NO.nextval,?,?,?,SYSDATE)";
+		String query = "insert into board_notice values(SEQ_boardN_NO.nextval,?,?,?,SYSDATE,default)";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
 			
-			pstmt.setString(1, title);
-			pstmt.setString(2, category);
+			pstmt.setString(1, category);
+			pstmt.setString(2, title);
 			pstmt.setString(3, contents);
 			
 			result = pstmt.executeUpdate();
@@ -112,19 +112,18 @@ public class NoticeDao {
 		return notice;	
 	}
 
-	public int deleteNotice(Connection conn, int boardN_no, String userId) {
+	public int deleteNotice(Connection conn, int boardN_no) {
 		
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
-		String query = "delete from board_notice where boardN_no=? and user_id=?";
+		String query = "delete from board_notice where boardN_no=?";
 		
 		
 		try {
 			pstmt = conn.prepareStatement(query);
 			
 			pstmt.setInt(1, boardN_no);
-			pstmt.setString(2, userId);
 			
 			result = pstmt.executeUpdate();
 			
@@ -137,13 +136,13 @@ public class NoticeDao {
 		return result;
 	}
 
-	public int noticeUpdate(Connection conn, int boardN_no, String boardN_title, String boardN_contents, String userId) {
+	public int noticeUpdate(Connection conn, int boardN_no, String boardN_title, String boardN_contents) {
 			
 			PreparedStatement pstmt = null;
 			int result = 0;
 			
 			String query = "update board_notice set boardN_title=?, boardN_contents=?"
-					+ " where boardN_no=? and user_id = ?";
+					+ " where boardN_no=?";
 			
 			try {
 				pstmt = conn.prepareStatement(query);
@@ -151,7 +150,6 @@ public class NoticeDao {
 				pstmt.setString(1, boardN_title);
 				pstmt.setString(2, boardN_contents);
 				pstmt.setInt(3, boardN_no);
-				pstmt.setString(4, userId);
 				
 				result = pstmt.executeUpdate();
 				

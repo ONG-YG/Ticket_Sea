@@ -318,4 +318,55 @@ public class QnaDao {
 		
 	}
 
+	public int insertQna(Connection conn, String title, String contents, String userId) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = "insert into board_qna values(seq_boardQ_no.NEXTVAL,?,?,?,SYSDATE,default)";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setString(1, userId);
+			pstmt.setString(2, title);
+			pstmt.setString(3, contents);
+			
+			result = pstmt.executeUpdate();
+		
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int deleteQna(Connection conn, int boardQ_no) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = "delete from board_qna where boardQ_no=?";
+		
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setInt(1, boardQ_no);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
 }
