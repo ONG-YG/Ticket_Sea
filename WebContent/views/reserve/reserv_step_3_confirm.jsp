@@ -96,14 +96,13 @@
         		var selSeat = ['<%=selSeat.getSeatGrd()%>', '<%=selSeat.getSeatTitle()%>'];
         		selectedSeatList.push(selSeat);
         	<%} %>
-        	//console.log(selectedSeatList);/////////////////////////////
 	    	
 	    	var list = "";
         	for(var i=0; i<selectedSeatList.length; i++) {
         		var selSeat = selectedSeatList[i];
         		var grdColor = 'black';
-        		if(selSeat[0]=='R') {grdColor='#ffc000';}//////////////////
-        		else if(selSeat[0]=='S') {grdColor='blue';}////////////////
+        		if(selSeat[0]=='R') {grdColor='#ffc000';}/////////////////////////////////////////////
+        		else if(selSeat[0]=='S') {grdColor='blue';}///////////////////////////////////////////
         		list += "<li id='selected_seat_no_'+selSeat[0]> "
 				            +"<div class='seat_color' style='background:"+grdColor+"'></div> "
 				            +"<div class='seat_detail_info'> "
@@ -122,11 +121,12 @@
             	<%
 	        	//세션에 담긴 reserveSession객체 - 진행단계 정보 update
 				rs.setCurrStat(1);
+            	rs.setProgNo(-1);
+            	rs.setProgTime(null);
         		session.setAttribute("reserveSession", rs);
         		//예매중정보지우는 코드 추가할것////////////////////////////////////////////////////////////////////////////////  ※※※※※※※※※※※※※※※
         		%>
                 location.href="/reserveSeat.do?psNo="+<%=psNo%>;
-                //document.getElementById("goBackStep2").submit();
             }
         }
         function next() {
@@ -265,34 +265,6 @@
                                     <span class="seat_no">K열 21번</span>
                                 </div>
                             </li>
-                            <li id="seat_grade_33625">
-                                <div class="seat_color" style="background:#ffc000"></div>
-                                <div class="seat_detail_info">
-                                    <span class="seat_grade" >VIP석</span>
-                                    <span class="seat_no">K열 22번</span>
-                                </div>
-                            </li>
-                            <li id="seat_grade_33625">
-                                <div class="seat_color" style="background:#ffc000"></div>
-                                <div class="seat_detail_info">
-                                    <span class="seat_grade" >VIP석</span>
-                                    <span class="seat_no">K열 23번</span>
-                                </div>
-                            </li>
-                            <li id="seat_grade_33625">
-                                <div class="seat_color" style="background:#ffc000"></div>
-                                <div class="seat_detail_info">
-                                    <span class="seat_grade" >VIP석</span>
-                                    <span class="seat_no">K열 24번</span>
-                                </div>
-                            </li>
-                            <li id="seat_grade_33625">
-                                <div class="seat_color" style="background:#ffc000"></div>
-                                <div class="seat_detail_info">
-                                    <span class="seat_grade" >VIP석</span>
-                                    <span class="seat_no">K열 25번</span>
-                                </div>
-                            </li>
                              -->
                         </ul>
                         <div id="reserve_info">
@@ -316,10 +288,6 @@
                                 <strong>총 결제</strong><span id="rInfo_TotP">141,000</span>
                             </div>
                         </div>
-                        <!--
-                        <form action="/reserveSeat.do?psNo=" method="post" id="goBackStep2">
-                        </form>
-                         -->
                     </div>
                     <div class="reserve_btn">
                         <a class="btn" onclick="prev()">이전단계</a>

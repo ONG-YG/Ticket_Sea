@@ -21,18 +21,9 @@ public class ReserveSession {
 		this.progNo = progNo;
 		this.progTime = progTime;
 	}
-//	public ReserveSession(int memberNo, int currStat, ReserveProgressing rp, int progNo, String progTime) {
-//		super();
-//		this.memberNo = memberNo;
-//		this.currStat = currStat;
-//		this.rp = rp;
-//		this.progNo = progNo;
-//		this.progTime = progTime;
-//	}
 	
 	
 	
-
 	public int getMemberNo() {
 		return memberNo;
 	}
@@ -45,12 +36,6 @@ public class ReserveSession {
 	public void setCurrStat(int currStat) {
 		this.currStat = currStat;
 	}
-//	public ReserveProgressing getRp() {
-//		return rp;
-//	}
-//	public void setRp(ReserveProgressing rp) {
-//		this.rp = rp;
-//	}
 	public int getProgNo() {
 		return progNo;
 	}
@@ -63,7 +48,6 @@ public class ReserveSession {
 	public void setProgTime(String progTime) {
 		this.progTime = progTime;
 	}
-	
 	
 	
 	

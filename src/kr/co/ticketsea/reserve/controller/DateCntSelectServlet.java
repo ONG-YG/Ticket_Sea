@@ -16,7 +16,6 @@ import kr.co.ticketsea.reserve.model.vo.PerformSchedule;
 import kr.co.ticketsea.reserve.model.vo.ReserveSession;
 import kr.co.ticketsea.reserve.model.vo.ReserveStepOne;
 import kr.co.ticketsea.reserve.model.vo.SeatGradeState;
-
 import kr.co.ticketsea.reserve.model.vo.ShowInfo;
 
 /**
@@ -80,7 +79,6 @@ public class DateCntSelectServlet extends HttpServlet {
 						int psNo = ps.getPerformSchNo();
 						//System.out.println("회차번호 = "+ps.getPerformSchNo());
 						
-						
 						seatGrdStList = new ReserveService().getSeatGradeStatus(psNo);
 						if(!seatGrdStList.isEmpty()) {
 							ps.setSeatGrdStList(seatGrdStList);
@@ -115,7 +113,6 @@ public class DateCntSelectServlet extends HttpServlet {
 			response.sendRedirect("/views/reserve/reserveError.jsp");
 			System.out.println("로그인 안내");
 		}
-		
 		
 	}
 

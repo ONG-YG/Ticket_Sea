@@ -38,7 +38,6 @@
 		
 		var ps = [psNo, psDate, psCnt, psTime, seatGrdStList];
 		psList.push(ps);
-		//console.log(ps);////////////////////////////////////////////
 <%
 	}
 %>
@@ -78,7 +77,6 @@
                 date_sel = null;
                 cnt_sel = null;
                 psNo = null;
-                //availSeat = null;
                 
                 $('#seat_box ul').html("");
                 $('#cnt_box ul').html("");
@@ -126,23 +124,6 @@
             	
             })
             
-            /*
-            // 회차 정보 li를 클릭했을 때
-            // cnt_sel에 선택한 회차 번호 저장
-            // 선택한 날짜와 회차 정보 종합해서 잔여석 표시
-            $('#cnt_box li').click(function(){
-                alert(date_sel);
-            	if(date_sel!=null) {
-                    $('#cnt_box li').removeClass('selected_cnt_li');
-                    $('#cnt_box li[id=]').addClass('selected_cnt_li');
-
-                    cnt_sel = $(this).children('.cnt').html();
-                    $('#cnt_sel_info span').html($(this).text());
-                    //alert(cnt_sel);
-                }
-            })
-            */
-            
         })
         
         function pageInit() {
@@ -154,7 +135,9 @@
         	$('#mini_poster img').attr('src',showPosterSrc);  //포스터 이미지 경로 세팅
         	
         	
-        	//psList에 담긴 선택가능한 날짜들 달력에 표시해주기
+        	
+        	//psList에 담긴 선택가능한 날짜들 달력에 표시해주기////////////////////////////////////
+        	
         	
         	
         }
@@ -182,8 +165,8 @@
                 		break;
                 	}
 				}
+                //console.log(seatGrdStList);
                 
-                //console.log(seatGrdStList);/////////////////
                 var list = "";
                 for(var i=0; i<seatGrdStList.length; i++) {
                 	var seatGrdSt = seatGrdStList[i];
@@ -205,7 +188,7 @@
             if(stat==false) {
                 alert("날짜/회차를 선택하세요");
             }else {
-                //console.log("선택한 날짜 : "+date_sel+"  /  선택한 회차 : "+cnt_sel);/////////
+                //console.log("선택한 날짜 : "+date_sel+"  /  선택한 회차 : "+cnt_sel);
                 location.href="/reserveSeat.do?psNo="+psNo;
             }
         }

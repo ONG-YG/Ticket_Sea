@@ -39,12 +39,12 @@ public class ReserveConfirmServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		if(!postDone) {
+			
 			try {
-				
 				request.setCharacterEncoding("utf-8");
 				HttpSession session = request.getSession(false);
-				System.out.println("check");////////////////////////////////
 
 				if(session!=null) {
 					int progNo = Integer.parseInt( request.getParameter("progNo"));
@@ -204,9 +204,12 @@ public class ReserveConfirmServlet extends HttpServlet {
 				System.out.println("error at ReserveConfirmServlet-1");
 				response.sendRedirect("/views/reserve/reserveError.jsp");
 			}
+		}//if(!postDone) END
+		else {
+			postDone = false;
 		}
 			
-	}
+	}//void doGet함수 END
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

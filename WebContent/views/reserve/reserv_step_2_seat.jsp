@@ -145,7 +145,7 @@
         	
         	var list = "";
         	for(var i=0; i<seatGrdStList.length; i++) {
-        		list += "<li id='seat_grade_33625'>"
+        		list += "<li id='seat_grade_"+seatGrdStList[i][0]+"'>"
        				+"<div class='seat_color' style='background:#ffc000'></div>"
        				+"<div class='seat_detail_info'>"
 	        				+"<span class='seat_grade'>"+seatGrdStList[i][0]+"석</span>"
@@ -157,7 +157,7 @@
        			+"</li>";
        			
         	}
-        	//console.log(list);
+        	
         	$('#select_seat_grade').html(list);
         	
         }
@@ -195,7 +195,6 @@
         	%>
         	var showNo = <%= showNo %>;
             location.href="/dateCntSelect.do?showNo="+showNo;
-            //alert("prev");
         }
 
         function next() {
@@ -214,7 +213,6 @@
             	}
             	$('#seat_form').val(selected_seat_val);
                 document.getElementById("seatSubmitForm").submit();
-                //location.href="./reserv_step_3_confirm.html";
             }
         }
 
@@ -814,43 +812,43 @@
                     <div class="top_info_area">
                         <div id="selected_seat_tit_div">
                             <div id="selected_seat_tit">선택한 좌석</div>
-                            <!--<button onclick="selectedSeatView();">보기</button>-->
                         </div>
                         <hr>
                         <ul id="selected_seat">
+                        	
                             <li id="selected_seat_no_1">
                                 <div class="selected_seat_color" style="background:#ffc000"></div>
                                 <div class="selected_seat_detail_info">
-                                    <span class="selected_seat_grade" >VIP석</span>
-                                    <span class="selected_seat_no">K열 21번</span>
+                                    <span class="selected_seat_grade" >--석</span>
+                                    <span class="selected_seat_no">-열 --번</span>
                                 </div>
                             </li>
                             <li id="selected_seat_no_2">
                                 <div class="selected_seat_color" style="background:#ffc000"></div>
                                 <div class="selected_seat_detail_info">
-                                    <span class="selected_seat_grade" >VIP석</span>
-                                    <span class="selected_seat_no">K열 22번</span>
+                                    <span class="selected_seat_grade" >--석</span>
+                                    <span class="selected_seat_no">-열 --번</span>
                                 </div>
                             </li>
                             <li id="selected_seat_no_3">
                                 <div class="selected_seat_color" style="background:#ffc000"></div>
                                 <div class="selected_seat_detail_info">
-                                    <span class="selected_seat_grade" >VIP석</span>
-                                    <span class="selected_seat_no">K열 23번</span>
+                                    <span class="selected_seat_grade" >--석</span>
+                                    <span class="selected_seat_no">-열 --번</span>
                                 </div>
                             </li>
                             <li id="selected_seat_no_4">
                                 <div class="selected_seat_color" style="background:#ffc000"></div>
                                 <div class="selected_seat_detail_info">
-                                    <span class="selected_seat_grade" >VIP석</span>
-                                    <span class="selected_seat_no">K열 24번</span>
+                                    <span class="selected_seat_grade" >--석</span>
+                                    <span class="selected_seat_no">-열 --번</span>
                                 </div>
                             </li>
                             <li id="selected_seat_no_5">
                                 <div class="selected_seat_color" style="background:#ffc000"></div>
                                     <div class="selected_seat_detail_info">
-                                        <span class="selected_seat_grade" >VIP석</span>
-                                        <span class="selected_seat_no">K열 25번</span>
+                                        <span class="selected_seat_grade" >--석</span>
+                                        <span class="selected_seat_no">-열 --번</span>
                                     </div>
                             </li>
 						</ul>
@@ -861,15 +859,9 @@
                         </div>
                         <hr>
                         <ul id="select_seat_grade" class="seat_lst">
-                        	<!-- 
-                            <li id="seat_total">
-                                <div class="seat_color" style="background: black"></div>
-                                <div class="seat_detail_info">
-                                    <span class="seat_level">전체</span>
-                                </div>
-                            </li>
-                             -->
+                        	
                             <!--좌석등급 별 list-->
+                            <!--
                             <li id="seat_grade_33625">
                                 <div class="seat_color" style="background:#ffc000"></div>
                                 <div class="seat_detail_info">
@@ -882,7 +874,7 @@
                                     </span>
                                 </div>
                             </li>
-
+							-->
                         </ul>
                         <form action="/reserveConfirm.do?progNo=<%=progNo%>" method="post" id="seatSubmitForm">
                             <input type="hidden" id="psNo_form" name="psNo" value="<%= psNo %>"/>

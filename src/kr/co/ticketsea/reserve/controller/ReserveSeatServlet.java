@@ -39,6 +39,7 @@ public class ReserveSeatServlet extends HttpServlet {
 		try {
 			request.setCharacterEncoding("utf-8");
 			HttpSession session = request.getSession(false);
+			
 			//세션발급되지 않은 상태에서 접근 금지
 			if(session!=null) {
 				ReserveSession rs = (ReserveSession)session.getAttribute("reserveSession");
@@ -90,14 +91,13 @@ public class ReserveSeatServlet extends HttpServlet {
 								
 								if(!seatGrdStList.isEmpty()) {
 									rp.setSeatGrdSt(seatGrdStList);
-									System.out.println("ReserveSeatServlet\n"+rp);/////////////////////////
+									System.out.println("\n\nReserveSeatServlet\n"+rp);/////////////////////////
 									
 									//세션에 넣을 reserveSession객체 - 예매 진행 번호 생성
 									int progNo = new ReserveService().createProgNo();
 									
 									if(progNo!=-1) {
 										rs.setProgNo(progNo);
-										//System.out.println("progNo = "+progNo);////////////////
 									}else {
 										System.out.println("error at ReserveSeatServlet-5");
 										throw new Exception();
