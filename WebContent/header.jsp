@@ -11,6 +11,13 @@
 
 
 </head>
+
+<script>
+function adminBtn(){
+	window.open("/adShowPlace.do","_blank","width=1800, height=1500");
+}
+</script>
+
 <body>
    <!--wrap div-->
     <div id="wrap">
@@ -26,10 +33,18 @@
 								Member member = (Member)session.getAttribute("member");	
 								if(member!=null){ //로그인 성공시
 							%>
+							
+							<%if(member.getMemberId().equals("admin")){%>
 							<a href="/logout.do" id="logout">로그아웃</a>
+							<a onclick="adminBtn();">관리자페이지</a>
 							<a href="/reserveList.do" id="myPage">마이페이지</a>
 							<a href="/reserveList.do" id="reserve">예매확인/취소</a><span>|</span>
 							
+							<%}else{ %>
+							<a href="/logout.do" id="logout">로그아웃</a>
+							<a href="/reserveList.do" id="myPage">마이페이지</a>
+							<a href="/reserveList.do" id="reserve">예매확인/취소</a><span>|</span>
+							<%} %>
 							<%}else{ %>
 							<a href="#"  class="btn login" 
 							onclick="window.open('/views/member/login.jsp','로그인','width=430,height=440'); return false;"  id="loginBtn">로그인</a>
