@@ -115,7 +115,7 @@
 			userAddr= document.getElementById("userAddr").value;
 			userEmail= document.getElementById("userEmail").value;
 
-			 checkFlag = document.getElementById('checkFlag').value;
+			checkFlag = document.getElementById('checkFlag').value;
 
 			if(userId=="")
             {
@@ -143,14 +143,11 @@
             {
                 document.getElementById("pwd_re_msg").style.display="block";
 				return false;
-<<<<<<< HEAD
-            } 
-=======
+
             } else if (userName == "") {
 				document.getElementById("name_msg").style.display = "block";
 				return false;
 			}
->>>>>>> ts/hwi
             else if(!(/^[가-힣]+$/.test(userName))||userName=="")
                 //이름 검사 한글만 통과 자음 안됨 ㅇㅋ?
             {
