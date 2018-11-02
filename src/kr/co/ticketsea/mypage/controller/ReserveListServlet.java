@@ -48,21 +48,49 @@ public class ReserveListServlet extends HttpServlet {
 		ArrayList<MyReserveList> mrlList = new MypageService().selectPerformSchedule(rNumberList);
 
 		// 매수와 중복된 값을 뽑아낸다.
-		
-		// 1. 추출한 값으로 공연회차번호가 같을 경우 매수는 증가
-		// 2. 다를 경우 배열에 넣기
-		
-		
-		
+		MyReserveList finalMrl = new MyReserveList(); // 최종 저장할 mrl값
+		ArrayList<MyReserveList> finalMrlList = new ArrayList<MyReserveList>(); // 최종 저장할 배열 mrl값
+		int count = 1; // 저장할 매수 초기화
+		int tableNum = 1; // view에 표현되는 번호
 		
 		
-		
+		for(int i=0; i<mrlList.size(); i++) {
+
+			if((i+1)!=mrlList.size()) { // int no2변수의 mrlList.get(i+1)이 없는 index이므로 조건 처리
+				int no1 = mrlList.get(i).getShowNo();
+				int no2 = mrlList.get(i+1).getShowNo();
+				
+				if(no1==no2) { // 회차번호 같으면 카운트 증가(매수증가)
+					count++;
+				}else { // 회차번호가 다르면 해당 공연명과 공연일 매수와 함께 배열에 저장
+					
+					finalMrl.setTableNum(tableNum);						// 번호
+					finalMrl.setShowName(mrlList.get(i).getShowName()); // 공연명
+					finalMrl.setShowDate(mrlList.get(i).getShowDate());	// 공연일
+					finalMrl.setCount(count);							// 매수
+					
+					count=1; // 배열에 등록 후 카운트 초기화
+					tableNum++; // 등록 후 번호 증가
+					
+					finalMrlList.add(finalMrl);
+				}				
+			}else { // 마지막 진행 시 넣어주고 끝.
+				finalMrl.setTableNum(tableNum);						// 번호
+				finalMrl.setShowName(mrlList.get(i).getShowName()); // 공연명
+				finalMrl.setShowDate(mrlList.get(i).getShowDate());	// 공연일
+				finalMrl.setCount(count);							// 매수
+				
+				count=1; // 배열에 등록 후 카운트 초기화
+				tableNum++; // 등록 후 번호 증가
+				
+				finalMrlList.add(finalMrl);
+			}
+		}
 		
 		
 		
 		RequestDispatcher view = request.getRequestDispatcher("views/mypage/reserveList.jsp");
-		request.setAttribute("mrlList", mrlList);
-
+		request.setAttribute("finalMrlList", finalMrlList);
 		view.forward(request, response);
 		
 	}

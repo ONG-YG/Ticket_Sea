@@ -40,10 +40,6 @@ public class MypageService {
 			mrlList.add(mrl);
 		}
 		
-		
-		
-		
-		
 		JDBCTemplate.close(conn);
 		
 		return mrlList;

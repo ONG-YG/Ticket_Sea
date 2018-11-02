@@ -5,7 +5,7 @@
     <%@ page import="kr.co.ticketsea.reserve.model.vo.*" %>
     <%@ page import="kr.co.ticketsea.mypage.model.vo.*" %>
     <%@ page import="java.util.ArrayList" %>
-    <% ArrayList<MyReserveList> mrlList = (ArrayList<MyReserveList>)request.getAttribute("mrlList"); %>
+    <% ArrayList<MyReserveList> finalMrlList = (ArrayList<MyReserveList>)request.getAttribute("finalMrlList"); %>
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -239,13 +239,13 @@
                         <tbody>
 
                                                 	
-                        	<%	for(MyReserveList mrl: mrlList){ %>
+                        	<%	for(MyReserveList finalMrl: finalMrlList){ %>
 
                         	<tr>
-                                <td></td>
-                                <td><%=mrl.getShowName() %></td>
-                                <td><%=mrl.getShowDate() %></td>
-                                <td></td>
+                                <td><%=finalMrl.getTableNum() %></td>
+                                <td><%=finalMrl.getShowName() %></td>
+                                <td><%=finalMrl.getShowDate() %></td>
+                                <td><%=finalMrl.getCount() %></td>
                                 <td></td>
                             </tr>
                         	<%} %>
