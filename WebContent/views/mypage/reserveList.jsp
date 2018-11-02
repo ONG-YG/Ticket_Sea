@@ -237,7 +237,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                        	<%for(MyReserveList mrl: mrlList){ %>
+
+                                                	
+                        	<%	for(MyReserveList mrl: mrlList){ %>
+
                         	<tr>
                                 <td></td>
                                 <td><%=mrl.getShowName() %></td>

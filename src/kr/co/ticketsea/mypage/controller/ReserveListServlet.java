@@ -47,8 +47,20 @@ public class ReserveListServlet extends HttpServlet {
 		// 추출한 bk_no로 ps_no를 조회하여 공연일,공연번호 추출
 		ArrayList<MyReserveList> mrlList = new MypageService().selectPerformSchedule(rNumberList);
 
+		// 매수와 중복된 값을 뽑아낸다.
+		
+		// 1. 추출한 값으로 공연회차번호가 같을 경우 매수는 증가
+		// 2. 다를 경우 배열에 넣기
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		RequestDispatcher view = request.getRequestDispatcher("views/mypage/reserveList.jsp");
-		request.setAttribute("rNumberList", rNumberList);
 		request.setAttribute("mrlList", mrlList);
 
 		view.forward(request, response);

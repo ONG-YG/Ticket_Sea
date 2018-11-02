@@ -27,27 +27,22 @@ public class MypageService {
 		MyReserveList mrl = new MyReserveList();
 		ArrayList<MyReserveList> mrlList = new ArrayList<MyReserveList>();
 		
+		
 		for(ReserveInfo ri:rNumberList) {
 			PerformSchedule ps = new MypageDao().selectPerformSchedule(conn, ri.getBk_no());
 			
 			String mName = new MypageDao().selectMusicalName(conn, ps);
 			
-			mrl.setShowNo(ps.getShowNo());
-			mrl.setShowDate(ps.getPerformSchDate());
-			mrl.setShowName(mName);
-			
-			System.out.println(ps.getShowNo());
-			System.out.println(ps.getPerformSchDate());
-			System.out.println(mName);
-			
+			mrl.setShowNo(ps.getShowNo());//int
+			mrl.setShowDate(ps.getPerformSchDate());//date
+			mrl.setShowName(mName);//string
+					
 			mrlList.add(mrl);
 		}
 		
-		for(ReserveInfo ri:rNumberList) {
-			System.out.println(mrl.getShowNo());
-			System.out.println(mrl.getShowName());
-			System.out.println(mrl.getShowDate());
-			}
+		
+		
+		
 		
 		JDBCTemplate.close(conn);
 		
