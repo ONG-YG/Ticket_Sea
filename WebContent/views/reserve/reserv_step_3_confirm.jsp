@@ -316,10 +316,8 @@
                                 <strong>총 결제</strong><span id="rInfo_TotP">141,000</span>
                             </div>
                         </div>
-                        <!-- 
-                        <form action="/reserveConfirm.do?progNo=<%=progNo%>" method="post" id="goBackStep2">
-                            <input type="hidden" id="psNo_form" name="psNo" value="<%= psNo %>"/>
-                            <input type="hidden" id="seat_form" name="seatList" />
+                        <!--
+                        <form action="/reserveSeat.do?psNo=" method="post" id="goBackStep2">
                         </form>
                          -->
                     </div>

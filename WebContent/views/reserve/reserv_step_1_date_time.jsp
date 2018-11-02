@@ -14,7 +14,6 @@
 	String showTitle = stOne.getShowTitle();
 	String showPoster = stOne.getShowPoster();
 	ArrayList<PerformSchedule> psList = stOne.getPsList();
-	//ArrayList<SeatGradeState> seatGrdStList = stOne.getSeatGrdStList();//////////////////////////////
 %>
 
 <script>
@@ -37,7 +36,6 @@
 	       	seatGrdStList.push(seatGrdSt);
        	<%} %>
 		
-		//var ps = [psNo, psDate, psCnt, psTime];//, availSeat];
 		var ps = [psNo, psDate, psCnt, psTime, seatGrdStList];
 		psList.push(ps);
 		//console.log(ps);////////////////////////////////////////////
@@ -208,11 +206,7 @@
                 alert("날짜/회차를 선택하세요");
             }else {
                 //console.log("선택한 날짜 : "+date_sel+"  /  선택한 회차 : "+cnt_sel);/////////
-                $('#date_form').val(date_sel);
-                $('#cnt_form').val(cnt_sel);
-                
-                $('#dateCntForm').attr('action',"/reserveSeat.do?psNo="+psNo);
-                document.getElementById("dateCntForm").submit();
+                location.href="/reserveSeat.do?psNo="+psNo;
             }
         }
         
@@ -416,13 +410,6 @@
                             <div id="cnt_sel_info">
                                 <h5>공연회차</h5><span></span>
                             </div>
-                            <form action="/reserveSeat.do?psNo=" method="post" id="dateCntForm">
-                            <%--<input type="hidden" name="showNo" value="<%= showNo %>"/>--%>
-                            <!-- 
-                            <input type="hidden" id="date_form" name="date_sel" />
-                            <input type="hidden" id="cnt_form" name="cnt_sel" />
-                             -->
-                            </form>
                         </div>
                     </div>
                     <div id="reserve_btn_only">

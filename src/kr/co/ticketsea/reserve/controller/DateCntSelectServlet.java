@@ -88,27 +88,13 @@ public class DateCntSelectServlet extends HttpServlet {
 							response.sendRedirect("/views/reserve/reserveError.jsp");
 							System.out.println("error at DateCntSelectServlet-3");
 						}
-						
-						
-						//int availableSeat = new ReserveService().availableSeatCount(ps.getPerformSchNo());
-						//ps.setAvailableSeat(availableSeat);
-						//System.out.println("잔여좌석수 = "+psList.get(i).getAvailableSeat());
 					}
 					
-					
-
 					stOne = new ReserveStepOne();
 					stOne.setShowNo(showNo);
 					stOne.setShowTitle(showTitle);
 					stOne.setShowPoster(showPoster);
 					stOne.setPsList(psList);
-					
-					//stOne.setSeatGrdStList(seatGrdStList);
-					
-					
-					
-					
-					
 					
 				}
 				
