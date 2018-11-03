@@ -146,6 +146,7 @@ public class ReserveConfirmServlet extends HttpServlet {
 											for(SeatGradeState sg: rp.getSeatGrdSt()) {
 												if (sg.getTh1_seat_grd().equals(seatGrd)) {
 													selSeatList.get(i).setSeatPrice(sg.getTh1_seat_prc());
+													selSeatList.get(i).setSeatGrdColor(sg.getGrd_color());
 													continue gp;
 												}
 											}

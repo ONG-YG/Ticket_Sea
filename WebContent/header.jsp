@@ -14,7 +14,7 @@
 
 <script>
 function adminBtn(){
-	window.open("/adShowPlace.do","_blank","width=1800, height=1500");
+	window.open("/adShowPlace.do","admin","width=1800, height=1500"); //_blank는 중복 팝업 가능함
 }
 </script>
 
@@ -36,7 +36,7 @@ function adminBtn(){
 							
 							<%if(member.getMemberId().equals("admin")){%>
 							<a href="/logout.do" id="logout">로그아웃</a>
-							<a onclick="adminBtn();">관리자페이지</a>
+							<a href="" onclick="adminBtn();">관리자페이지</a>
 							<a href="/reserveList.do" id="myPage">마이페이지</a>
 							<a href="/reserveList.do" id="reserve">예매확인/취소</a><span>|</span>
 							
@@ -49,7 +49,7 @@ function adminBtn(){
 							<a href="#"  class="btn login" 
 							onclick="window.open('/views/member/login.jsp','로그인','width=430,height=440'); return false;"  id="loginBtn">로그인</a>
 							 <a href="#" id="joinBtn"
-                   			 onclick="window.open('/views/member/memberJoin.jsp','회원가입','width=430,height=750'); return false;">회원가입</a><span>|</span> 
+                   			 onclick="window.open('/views/member/memberJoin.jsp','회원가입','width=430,height=750'); return false;">회원가입</a><span> | </span> 
 							<% } %>
 							
 							<a href="#" >고객센터</a>

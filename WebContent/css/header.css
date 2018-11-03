@@ -11,9 +11,9 @@
             position: relative;
             background: #fafafa;
             border-bottom: 1px solid #f0f0f0;
-            height: 21px;
+            height: 40px;  /*로그인, 회원가입 글씨 다 들어오는 크기로 바꿈-ONG*/
             padding-top: 11px;
-            box-sizing: padding-box;
+            box-sizing: padding-box;  /*개발자모드로 보면 invalid property value라고 뜸-border-box아닌지?*/
         }
         #header .search_area {
         width: 70%;

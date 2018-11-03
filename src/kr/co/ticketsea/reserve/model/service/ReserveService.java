@@ -111,7 +111,7 @@ public class ReserveService {
 
 	public ArrayList<SeatGradeState> getSeatGradeStatus(int psNo) {
 		Connection conn = JDBCTemplate.getConnection();
-		ArrayList<SeatGradeState> seatGrdStList = new ReserveDao().getSeatGradeAndPrice(conn);
+		ArrayList<SeatGradeState> seatGrdStList = new ReserveDao().getSeatGradeAndPrice(conn, psNo);
 		
 		for (int i=0; i<seatGrdStList.size(); i++) {
 			String grade = seatGrdStList.get(i).getTh1_seat_grd();

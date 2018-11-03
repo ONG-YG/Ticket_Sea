@@ -132,7 +132,8 @@ public class ReserveDao {
 		ResultSet rset = null;
 		ArrayList<Integer> reserved_seats = new ArrayList<Integer>();
 		
-		String query = "SELECT TH1_SEAT_NO FROM BK_S_L WHERE PS_NO=? AND BK_NO IN (SELECT BK_NO FROM BOOK_INF WHERE BK_STAT_CD='RSV_CPL')";
+		String query = "SELECT TH1_SEAT_NO FROM BK_S_L WHERE PS_NO=? "
+						+ "AND BK_NO IN (SELECT BK_NO FROM BOOK_INF WHERE BK_STAT_CD='RSV_CPL')";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -225,7 +226,8 @@ public class ReserveDao {
 		ResultSet rset = null;
 		int reservedSeat = -1;
 		
-		String query = "SELECT COUNT(*) AS CNT FROM BK_S_L WHERE PS_NO=? AND BK_NO IN (SELECT BK_NO FROM BOOK_INF WHERE BK_STAT_CD='RSV_CPL')";
+		String query = "SELECT COUNT(*) AS CNT FROM BK_S_L WHERE PS_NO=? "
+						+ "AND BK_NO IN (SELECT BK_NO FROM BOOK_INF WHERE BK_STAT_CD='RSV_CPL')";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -251,7 +253,9 @@ public class ReserveDao {
 		ResultSet rset = null;
 		int totalSeat = -1;
 		
-		String query = "SELECT COUNT(*) AS CNT FROM TH1_SEAT_L WHERE TH_NO=(SELECT TH_NO FROM MUSICAL_L WHERE M_SHOW_NO=(SELECT M_SHOW_NO FROM PERF_SCH WHERE PS_NO=?))";
+		String query = "SELECT COUNT(*) AS CNT FROM TH1_SEAT_L WHERE TH_NO="
+						+ "(SELECT TH_NO FROM MUSICAL_L WHERE M_SHOW_NO="
+						+ "(SELECT M_SHOW_NO FROM PERF_SCH WHERE PS_NO=?))";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -324,22 +328,26 @@ public class ReserveDao {
 		return thName;
 	}
 
-	public ArrayList<SeatGradeState> getSeatGradeAndPrice(Connection conn) {
+	public ArrayList<SeatGradeState> getSeatGradeAndPrice(Connection conn, int psNo) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<SeatGradeState> seatGrdStList = new ArrayList<SeatGradeState>();
 		
-		String query = "SELECT * FROM TH1_PRICE";
+		String query = "SELECT * FROM TH1_PRICE WHERE TH_NO="
+						+ "(SELECT TH_NO FROM MUSICAL_L WHERE M_SHOW_NO="
+						+ "(SELECT M_SHOW_NO FROM PERF_SCH WHERE PS_NO=?))";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			//pstmt.setInt(1, th_no);
+			pstmt.setInt(1, psNo);
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
 				SeatGradeState seatGrdSt = new SeatGradeState();
-				seatGrdSt.setTh1_seat_grd(rset.getString("th1_seat_grd"));
-				seatGrdSt.setTh1_seat_prc(rset.getInt("th1_seat_prc"));
+				seatGrdSt.setTh1_seat_grd(rset.getString("TH1_SEAT_GRD"));
+				seatGrdSt.setTh1_seat_prc(rset.getInt("TH1_SEAT_PRC"));
+				seatGrdSt.setGrd_color(rset.getString("GRD_COL"));
+				
 				seatGrdStList.add(seatGrdSt);
 			}
 			
@@ -385,9 +393,9 @@ public class ReserveDao {
 		int reservedSeat = -1;
 		
 		String query = "SELECT COUNT(*) AS CNT FROM BK_S_L " + 
-				"WHERE PS_NO=? " + 
-				"AND TH1_SEAT_NO IN (SELECT TH1_SEAT_NO FROM TH1_SEAT_L WHERE TH1_SEAT_GRD=?) " + 
-				"AND BK_NO IN (SELECT BK_NO FROM BOOK_INF WHERE BK_STAT_CD='RSV_CPL')";
+						"WHERE PS_NO=? " + 
+						"AND TH1_SEAT_NO IN (SELECT TH1_SEAT_NO FROM TH1_SEAT_L WHERE TH1_SEAT_GRD=?) " + 
+						"AND BK_NO IN (SELECT BK_NO FROM BOOK_INF WHERE BK_STAT_CD='RSV_CPL')";
 		
 		try {
 			pstmt = conn.prepareStatement(query);

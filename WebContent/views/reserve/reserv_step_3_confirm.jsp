@@ -51,6 +51,17 @@
 	    $(document).ready(function(){
 	    	
 	    	pageInit();
+	    	
+	    	$(document).change(function(){
+	    		console.log("mouseup");
+	    		check();
+	    	});
+	    	
+	    	$(document).keyup(function(){
+	    		console.log("keyup");
+	    		check();
+	    	});
+	    	
 			
 	    });
 	    
@@ -93,18 +104,16 @@
         	<%
         	for (SelectedSeat selSeat : selSeatList) {
         	%>
-        		var selSeat = ['<%=selSeat.getSeatGrd()%>', '<%=selSeat.getSeatTitle()%>'];
+        		var selSeat = ['<%=selSeat.getSeatGrd()%>', '<%=selSeat.getSeatTitle()%>', '<%=selSeat.getSeatGrdColor()%>'];
         		selectedSeatList.push(selSeat);
         	<%} %>
 	    	
 	    	var list = "";
         	for(var i=0; i<selectedSeatList.length; i++) {
         		var selSeat = selectedSeatList[i];
-        		var grdColor = 'black';
-        		if(selSeat[0]=='R') {grdColor='#ffc000';}/////////////////////////////////////////////
-        		else if(selSeat[0]=='S') {grdColor='blue';}///////////////////////////////////////////
+        		
         		list += "<li id='selected_seat_no_'+selSeat[0]> "
-				            +"<div class='seat_color' style='background:"+grdColor+"'></div> "
+				            +"<div class='seat_color' style='background:"+selSeat[2]+"'></div> "
 				            +"<div class='seat_detail_info'> "
 				                +"<span class='seat_grade' >"+selSeat[0]+"</span> "
 				                +"<span class='seat_no'>"+selSeat[1]+"</span> "
@@ -114,6 +123,27 @@
         	$('#select_seat_grade').html(list);
         	
         }
+		
+		function check() {
+			var phone = document.getElementById("inputPhoneNo").value;
+			var userCheck = document.getElementById("agree_phone").checked;
+			var userInfoAgree = document.getElementById("reserve_agree2").checked;
+			
+			var patt1 = new RegExp("^[0-9]+$");
+		   	var patt2 = new RegExp("^[0-9]{9,20}$");
+		   	var res1 = patt1.test( $("#inputPhoneNo").val());
+		   	var res2 = patt2.test( $("#inputPhoneNo").val());
+			
+			
+			if(phone!="" && userCheck && userInfoAgree && res1 && res2) {
+				$('.reserve_btn>a').eq(1).css('background-color','skyblue');
+                $('.reserve_btn>a').eq(1).css('color','white');
+			}else {
+				$('.reserve_btn>a').eq(1).css('background-color','white');
+                $('.reserve_btn>a').eq(1).css('color','dodgerblue');
+			}
+			
+		}
     	
         function prev() {
             var chk = confirm("이전 단계로 돌아가면 현재의 예매 정보를 잃게 됩니다.");
@@ -291,7 +321,7 @@
                     </div>
                     <div class="reserve_btn">
                         <a class="btn" onclick="prev()">이전단계</a>
-                        <a class="btn" onclick="next()">다음단계</a>
+                        <a class="btn" onclick="next()">결제하기</a>
                     </div>
 
                 </div>

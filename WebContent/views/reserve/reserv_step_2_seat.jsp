@@ -29,11 +29,12 @@
 	ReserveSession rs = (ReserveSession)session.getAttribute("reserveSession");
 	int progNo = rs.getProgNo();
 %>
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Ticket Sea 예매</title>
     
-    <link rel="shortcut icon" type="image/x-icon" href="http://ticketlink.dn.toastoven.net/web/favicon.ico">
+    <!-- <link rel="shortcut icon" type="image/x-icon" href="http://ticketlink.dn.toastoven.net/web/favicon.ico"> -->
     
     <!-- 외부 스타일 시트 적용 -->
     <link href="../../css/reserv_common.css" rel="stylesheet" type="text/css">
@@ -52,6 +53,19 @@
     <script>		
         var selected_seat = [];
         var selected_seat_val = [];
+        
+        var seatGrdStList = [];
+    	<%
+    	for (SeatGradeState seatGrdSt : seatGrdStList) {
+    		String seatGrd = seatGrdSt.getTh1_seat_grd();
+    		int seatPrice = seatGrdSt.getTh1_seat_prc();
+    		int avail = seatGrdSt.getAvailableSeatCnt();
+    		String grd_color = seatGrdSt.getGrd_color();
+    	%>
+    	var seatGrdSt = ['<%=seatGrd%>', <%=seatPrice%>, <%=avail%>, '<%=grd_color%>'];
+    	seatGrdStList.push(seatGrdSt);
+    	<%} %>
+        
         $(document).ready(function(){
         	
         	pageInit();
@@ -131,18 +145,6 @@
         		$('#select_seat div[value='+progSeatList[i]+']').removeClass('seat_a');
         	}
         	
-        	
-        	var seatGrdStList = [];
-        	<%
-        	for (SeatGradeState seatGrdSt : seatGrdStList) {
-        		String seatGrd = seatGrdSt.getTh1_seat_grd();
-        		int seatPrice = seatGrdSt.getTh1_seat_prc();
-        		int avail = seatGrdSt.getAvailableSeatCnt();
-        	%>
-        	var seatGrdSt = ['<%=seatGrd%>', <%=seatPrice%>, <%=avail%>];
-        	seatGrdStList.push(seatGrdSt);
-        	<%} %>
-        	
         	var list = "";
         	for(var i=0; i<seatGrdStList.length; i++) {
         		list += "<li id='seat_grade_"+seatGrdStList[i][0]+"'>"
@@ -182,6 +184,19 @@
                 
                 var sel_list = $('li[id^=selected_seat_no_]').eq(i);
                 $(sel_list).addClass('selected_li');
+                
+                var grdColor = "";
+                var temp = seat_grd.split('석')[0];
+                
+                for(var k=0; k<seatGrdStList.length; k++){
+                	var seatGrdSt = seatGrdStList[k];
+                 	if(seatGrdSt[0]==seat_grd.split('석')[0]) {
+                		grdColor = seatGrdSt[3];
+                		break;
+                	}
+                }
+                
+                $(sel_list).children('.selected_seat_color').attr('style', 'background:'+grdColor);////////////////////////////
                 $(sel_list).children().children('.selected_seat_grade').text(seat_grd); //좌석등급
                 $(sel_list).children().children('.selected_seat_no').text(seat_loc) //좌석위치
             }
