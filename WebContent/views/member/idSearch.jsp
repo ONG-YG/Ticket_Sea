@@ -85,6 +85,28 @@
 	</div>
 	
 	<script>
+	
+		function logError(){
+				userName= document.getElementById("name").value;
+				userEmail= document.getElementById("email").value;
+	    		
+
+				if(userName=="")
+	            {
+					alert("이름를 입력해주세요.");
+					return false;
+				}else if(userEmail=="")
+				{
+					alert("이메일을 입력해주세요.");
+					return false;
+				}
+	            else//모든 검사 만족시 true 반환
+	            {
+	                return true;
+	            }
+				
+			}
+		
 		function maleCheck(){
 			var male = document.getElementsByClassName("male");
 			var maleborder = document.getElementsByClassName("btn_radio_male");

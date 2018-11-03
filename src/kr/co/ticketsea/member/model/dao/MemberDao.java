@@ -201,4 +201,45 @@ public class MemberDao {
 
 	}
 
+	public char pwdSearchMember(Connection conn, Member m) {
+		PreparedStatement pstmt = null;
+		char userActive = 0 ;
+		ResultSet rset = null;
+		
+		String query = "select * from member where member_id=? and member_name=? and member_email=? and member_phone=? ";
+
+		try {
+
+			pstmt = conn.prepareStatement(query);
+		
+			pstmt.setString(1, m.getMemberId());
+			pstmt.setString(2, m.getMemberName());
+			pstmt.setString(3, m.getMemberEmail());
+			pstmt.setString(4, m.getMemberPhone());
+			
+		
+			rset= pstmt.executeQuery();
+
+			
+				
+					if(rset.next())
+					{
+						userActive=rset.getString("member_active").charAt(0);
+						
+					}
+				
+			
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+
+		return userActive;
+		
+	}
+
 }
