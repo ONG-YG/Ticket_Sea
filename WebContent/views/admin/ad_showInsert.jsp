@@ -13,243 +13,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title></title>
+<link rel=StyleSheet type="text/css" href="/css/ad_showInsert.css">
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
 </script>
 
-<style>
-    ul, li, a{list-style: none; margin: 0px; padding: 0px;     text-decoration: none; color: black;}
-    div{
-        box-sizing : border-box;
-    }
-    #wrapper{overflow: hidden;width:1250px; height:2000px; border:1px solid black;}
-    #header{ height:60px; background-color:;}
-    #h_inner{width: 990px; height: 80%; margin: 5px auto; float:left; padding-left:20px;}
-    #content-wrapper{height:1500px; border:1px solid black;}
-    #c_inner{width: 100%; height: 100%; margin: 0px auto; padding: 0px;}
-    .main-sidebar{
-        height:100%;
-        width: 15%;
-        float:left;
-        padding:0px;
-        background-color:#004C63;
-    }
-    /*사이드바 서브메뉴 숨기기*/
-    ul ul{display: none; width:100%;}
-    ul li:hover>ul{display:block;}
-    
-    #side-menu ul>li{
-        height:20%; padding-top:15px; padding-left:15px;padding-bottom: 15px;
-        background-color:#004C63;
-    }
-    #side-menu ul>li li{
-        background-color:#004554;
-        
-    }
-    #side-menu ul>li>a{
-        color:white;
-        font-weight: 600;
-    }
-    .content-header{
-        width:83%;
-        height:100%;
-        float:right;
-        padding:0px;
-        padding-right: 10px;
-        border:1px solid red;
-    }
-    .content-header>h1{
-        margin:0;
-    }
-    #icon{
-        max-width:20%; max-height:80%; align-content: center;
-    }
-/*    #content-wrapper li ul{
-        background-color: azure;
-        display : none; 평상시에 서브메뉴 안보이게 하기
-        height: auto;
-        width:200px;
-    }*/
-    
-    /*공연등록 페이지*/
-    div{
-        box-sizing: border-box;
-        display: block;
-    }
-    #content{
-        overflow: hidden;
-        border:1px solid black;
-        border-style: dashed;
-        padding: 20px 0;
-        width:1000px;
-        height:1300px;
-        display: block;
-    }
-    .content_wrap{
-        width:980px;
-        height: 100%;
-        margin:0 auto;
-        border:1px solid black;
-        box-sizing: border-box;
-        
-    }
-    
-    .content_wrap form{
-    	width:980px;
-        height: 80%;
-         z-index:-10;
-    }
-    h2.main_title{
-        display: inline-block;
-        font-size: 23px;
-        font-weight: normal;
-    }
-    #content .main_area{
-        padding:30px 10px;
-        border:1px solid #d8d8d8;
-        background-color:white;
-        box-sizing: border-box;
-        display: block;
-        height:90%;
-        
-    }
-    #content .top_area{
-        height:5%;
-        border-bottom: 1px solid #d8d8d8;
-    }
-    #content .submit_area{
-        height:3%;
-        border:1px solid red;
-        display: block;
-        padding-right:20px;
-        padding-top:5px;
-    }
-    .event_img_area{
-        float:left;
-        width:160px;
-        height:160px;
-        padding-right: 30px;
-        overflow: hidden;
-        border:1px solid #d8d8d8;
-        display: block;
-    }
-    .event_img_area .show_post{
-        width:100%;
-        height:160px;
-        height: auto;
-        
-    }
-    .event_img_area .upload_btn{
-        top:50%;
-        left:50%;
-        padding:0;
-        display: none;
-        transform: translate(-50%, -50%);
-    }
-    .left_wrap{
-        display: inline-block;
-        width:200px;
-        border:1px solid black;
-        float:left;
-        padding:0px;
-    }
-    .right_wrap{
-        display: inline-block;
-        width:750px;
-        border:1px solid black;
-        float:right;
-        padding-right: 20px;
-    }
-    fieldset {
-        padding: 20px 0 16px;
-        width: 100%;
-        display: block;
-        border:none;
-        border-bottom: 1px dashed black;
-    }
-    fieldset:first-child {
-        padding-top: 0;
-    }
-    fieldset:last-child{
-        border:none;
-    }
-    .right_wrap legend {
-         margin-right: 0;
-        padding-left: 5px;
-    }
-    fieldset legend {
-        float: left;
-        width: 130px;
-        padding-top: 6px;
-    }
-    .edit_title h3.title {
-    font-size: 16px;
-    font-weight: normal;
-    white-space: pre-line;
-    }
-    .edit{
-        box-sizing:border-box;
-        display: inline-block;
-        height:50%;
-        padding-top:18px;
-    }
-    
-    .right_wrap .edit{
-        width:590px;
-    }
-    .edit_title .category_select {
-        width: 120px;
-        margin-right: 4px;
-        height:30px;
-    }
-    .edit_title .place_select {
-        width: 120px;
-        margin-right: 4px;
-        height:30px;
-    }
-    input[type="text"], input[type="password"] {
-        padding: 0 9px;
-        height: 30px; 
-    }
-    .edit_title .title_input {
-        width: 300px;
-    }
-    
-    .right_wrap h3.title {
-        font-size: 16px;
-        font-weight: normal;
-        white-space: pre-line;
-    }
-    .edit_date .start_time{
-        float:left;
-        width:50%;
-        vertical-align: top;
-    }
-    .edit_date input[type="text"], .edit_apply_date input[type="text"] {
-    width: 110px;
-    margin-right: 4px;
-    }
-    .edit_artist input[type="text"]{
-        width:300px;
-    }
-    .edit_place input[type="text"]{
-        width:300px;
-        padding: 0 9px;
-    }
-    #place_search input[type="submit"]{
-            width: 42px;
-            height: 30px;
-            line-height: 28px;
-            display: inline-block;
-            margin-left: -2px;
-            margin-right: 3px;
-            font-size: 11px;
-            vertical-align: middle;
-
-    }
-    #imgUp{
-    	align-content: center;
-    }
-</style>
 </head>
 <body>
   
@@ -309,7 +77,7 @@ function LoadImg(value){
               
         <div class="content_wrap">
             <div class="top_area">
-                <h2 class="main_title">공연등록</h2>
+                <h2 class="main_title" style="text-align:left">공연등록</h2>
             </div>
             <!-- form 태그 -->
        	<form action="/showInsert.do" method="post" enctype="multipart/form-data">
@@ -318,9 +86,12 @@ function LoadImg(value){
                 <div class="input_area">
                     <!--이미지영역-->
                     <div class="event_img_area">
-                        
-                        <input type="file"  id="imgUp" name="upfile"/><br>
-                        <img class="show_post" id="postImg" src="../../img/ticketsea_poster.png" data-default-src="../../img/ticketsea_poster.png" alt="공연포스터" style="width:160px; height:160px;">
+                        <img class="show_post" id="postImg" src="/img/ticketsea_poster.png" data-default-src="../../img/ticketsea_poster.png" alt="공연포스터" style="width:160px; height:160px;">
+                   
+                       <div class="btn_area">
+                        	<input type="file" class="postupload" id="imgUp" name="upfile" title="공연 포스터 업로드"/><br>
+                        	<button type="button" class="change_poster">포스터 변경</button>
+                        </div> 
                     </div>
                 </div>
                 </div>
@@ -382,7 +153,7 @@ function LoadImg(value){
                         </legend>
                         <div class="edit">
                             <div class="write_wrap">
-                                <input type="text" id="grade" name="show_grd" value="" placeholder="">
+                                <input type="text" id="grade" name="show_grd" value="" placeholder="관람 등급을 입력해주세요">
                             </div>
                         </div>
                         
@@ -393,7 +164,7 @@ function LoadImg(value){
                         </legend>
                         <div class="edit">
                             <div class="write_wrap">
-                                <input type="text" id="runTime" name="show_run" value="" placeholder="">
+                                <input type="text" id="runTime" name="show_run" value="" placeholder="관람 시간을 입력해주세요">
                             </div>
                         </div>
                     </fieldset>
@@ -404,6 +175,26 @@ function LoadImg(value){
                         <div class="edit">
                             <div class="write_wrap">
                                 <input type="text" id="price" name="price" value="" placeholder="">
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="edit_comm">
+                        <legend>
+                          <h3 class="title">수수료</h3>
+                        </legend>
+                        <div class="edit">
+                            <div class="write_wrap">
+                                <input type="text" id="comm" name="comm" value="" placeholder="">
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="edit_poster">
+                        <legend>
+                          <h3 class="title">공연포스터</h3>
+                        </legend>
+                        <div class="edit">
+                            <div class="write_wrap">
+                           		<input type="file" name="show_poster"/>
                             </div>
                         </div>
                     </fieldset>
@@ -434,19 +225,7 @@ function LoadImg(value){
 	<!-- script -->
 	
 	<script>
-	$(document).ready(function() {
-		var count = 0;
-		$("#showDt").click(function(){
-			count=1;
-			return true;
-		});
-		return false;
-	});
 		  
-	function imgUp(){
-		var fullpath=
-		$("#postImg").attr("src",getServletContext().getRealPath("/")+"img"+"\\"+poster+"");
-	}
 	function showCheck(){
 		category= document.getElementById("category").value;
 		title= document.getElementById("title").value;
@@ -457,6 +236,7 @@ function LoadImg(value){
 		grade= document.getElementById("grade").value;
 		runTime= document.getElementById("runTime").value;
 		price= document.getElementById("price").value;
+		comm= document.getElementById("comm").value;
 		
 		if(category==""||category==null)
         {
@@ -497,7 +277,12 @@ function LoadImg(value){
 		{
                	alert("가격을 입력하세요");
                 return false;
-        }else if(count==0){
+        }else if(!(/^[0-9]+$/g.test(comm)))
+		{
+           	alert("수수료를 입력하세요");
+            return false;
+    	}
+        else if(count==0){
         		alert("상세 정보 이미지를 업로드 하세요");
         		return false;
         }

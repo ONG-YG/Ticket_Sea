@@ -6,19 +6,19 @@ public class FileData {
 		private String fileName;
 		private String filePath;
 		private long fileSize;
-		private String fileUser;
+		private String showName;
 		private Timestamp uploadTime;
 
 		public FileData() {
 			super();
 			// TODO Auto-generated constructor stub
 		}
-		public FileData(String fileName, String filePath, long fileSize, String fileUser, Timestamp uploadTime) {
+		public FileData(String fileName, String filePath, long fileSize, String showName, Timestamp uploadTime) {
 			super();
 			this.fileName = fileName;
 			this.filePath = filePath;
 			this.fileSize = fileSize;
-			this.fileUser = fileUser;
+			this.showName = showName;
 			this.uploadTime = uploadTime;
 		}
 		public String getFileName() {
@@ -39,11 +39,11 @@ public class FileData {
 		public void setFileSize(long fileSize) {
 			this.fileSize = fileSize;
 		}
-		public String getFileUser() {
-			return fileUser;
+		public String getShowName() {
+			return showName;
 		}
-		public void setFileUser(String fileUser) {
-			this.fileUser = fileUser;
+		public void setShowName(String showName) {
+			this.showName = showName;
 		}
 		public Timestamp getUploadTime() {
 			return uploadTime;
