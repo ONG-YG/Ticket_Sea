@@ -5,14 +5,9 @@
 	import ="kr.co.ticketsea.member.model.vo.*"
 	import = "java.util.ArrayList"
 %>
-    
-    
-    <%
+ <%
 	Notice notice = (Notice)request.getAttribute("notice"); //공지사항 내용
-%>
-    
-    
-    
+%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -243,59 +238,28 @@
             text-align: center;
         }
     
-    #board{
-        border:1px solid #dedede;
-        width : 760px;
-        height : 500px;
+    #notice_header{
+    	width : 100%;
     }
     
-    #board_header{
-        border:1px solid #dedede;
-        width : 100%;
-        height : 15%;
+    #notice_header_a{
+    	width : 15%;
+    	text-align: center;
+    	background-color:lightskyblue;
+    	color:white;
     }
     
-    #board_header > #b_h_title{
-        border: 1px solid #dedede;
-        width : 100%;
-        height : 60%;
-        font-size: 25px;
-        float : left;
+    #notice_header_b{
+    	border : 1px solid black;
+    	width : 85%;
     }
     
-    #board_header > #b_h_writer{
-        border: 1px solid #dedede;
-        width : 40%;
-        height : 40%;
-        font-size: 15px;
-        float:left;
+    #notice_contents{
+   		width : 100%;
+   		padding : 10px 10px 10px;
     }
     
-    #board_header > #b_h_blank{
-        border : 1px solid #dedede;
-        width : 30%;
-        height : 40%;
-        font-size: 15px;
-        float:left;
-    }
     
-    #board_header > #b_h_date{
-        border : 1px solid #dedede;
-        width : 20%;
-        height : 40%;
-        font-size: 15px;
-        text-align: center;
-        float:left;
-    }
-    
-    #board_header > #b_h_hit{
-        border : 1px solid #dedede;
-        width : 10%;
-        height : 40%;
-        font-size: 15px;
-        text-align: center;
-        float:left;
-    }
     
     #header_inner{width:990px; margin: 0px auto;}
 </style>
@@ -332,19 +296,50 @@
                 </div>
                 
                 
-                <div id ="board">
+                
+                <table id = "notice_header">
+                	<tr>
+                	<td id = "notice_header_a">제목</td>
+                	<td id = "notice_header_b"><%= notice.getBoardN_title()%></td>
+                	</tr>
+                	
+                	<tr>
+                	<td id = "notice_header_a">카테고리</td>
+                	<td id = "notice_header_b"><%= notice.getBoardN_category() %></td>
+                	</tr>
+                	
+                	<tr>
+                	<td id = "notice_header_a">작성일</td>
+                	<td id = "notice_header_b"><%= notice.getBoardN_date() %></td>
+                	</tr>
+                	
+                	<tr>
+                	<td id = "notice_header_a">조회수</td>
+                	<td id = "notice_header_b"><%= notice.getBoardN_hit() %></td>
+                	</tr>
+                	
+                	<tr>
+                </table>
+                
+                <span id = "notice_contents">
+                		<%= notice.getBoardN_contents() %>
+        		</span>
+                
+             <!--    <div id ="board">
                     <div id="board_header">
-                        <div id="b_h_title" name="boardN_title"> <%= notice.getBoardN_title()  %></div>
-                         <div id="b_h_writer"><%= notice.getBoardN_category() %></div>
+                        <div id="boardN_title" name="boardN_title"> <%= notice.getBoardN_title()  %></div>
+	<br>
+                         <div id="boardN_category"><%= notice.getBoardN_category() %></div>
                         <div id="b_h_blank""></div>
-                        <div id="b_h_date" name="boardN_date"> <%= notice.getBoardN_date() %></div>
-                        <div id="b_h_hit" name="boardN_hit"> <%= notice.getBoardN_hit() %></div>
+                        <div id="boardN_date" name="boardN_date"> <%= notice.getBoardN_date() %></div>
+                        <div id="boardN_hit" name="boardN_hit"> <%= notice.getBoardN_hit() %></div>
                     </div>
                     
-                    <div id="b_h_contents" style="margin:15px;" name="boardN_contents">
+                    <div id="boardN_contents" style="margin:15px;" name="boardN_contents">
                         <%= notice.getBoardN_contents() %>
                     </div>
-                </div>
+                </div> -->
+                
                 
                 <%
 					session = request.getSession(false);
@@ -358,6 +353,7 @@
                 <button id="btn1" onclick="modifyActive();" style="width: 70px; height: 30px; float:right;">수정</button> 
 				<button id="btn2" onclick="delNotice();" style="width: 70px; height: 30px; float:right;">삭제</button> 
                 <%} %>
+                
                 <script>
                 function delNotice(){
             		location.href="/noticeDelete.do?boardN_no=<%=notice.getBoardN_no()%>";

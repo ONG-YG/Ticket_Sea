@@ -292,10 +292,10 @@
                     <br>
                     
                     <table border=1px class="noticeContent">
-                        <tr style="background-color: gainsboro">
-                            <td id = "contentCategory" style="width: 15%">분류</td>
-                            <td id = "contentQuestion"  style="width: 75%">질문</td>
-                            <td id = "contentButton" style="width: 10%">작성일</td>
+                        <tr style="background-color: lightskyblue;">
+                            <td id = "contentCategory" style="width: 15%; color:white ">분류</td>
+                            <td id = "contentQuestion"  style="width: 75%; color:white">질문</td>
+                            <td id = "contentButton" style="width: 10%; color:white">작성일</td>
                         </tr>
                         
                        <% for (Notice n : list) { %>

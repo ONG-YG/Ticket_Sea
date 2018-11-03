@@ -300,7 +300,7 @@
                     <br>
                     
                     <table border 1px class="faqContent">
-                        <tr style="background-color: gainsboro">
+                        <tr style="background-color: lightskyblue; color:white">
                             <td id = "contentCategory" style="width: 15%">분류</td>
                             <td id = "contentQuestion"  style="width: 85%">질문</td>
                         </tr>

@@ -277,7 +277,7 @@
                 </div>
                 
                      <table border=1px class="questionTable">
-                         <thead style="background-color: gainsboro">
+                         <thead style="background-color: lightskyblue; color:white" >
                              <td width="70%">제목</td>
                              <td width="12%">작성자</td>
                              <td width="12%">작성일</td>
