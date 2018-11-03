@@ -93,89 +93,79 @@
 	</div>
 
 	<script>
+		// 아이디 중복검사
+		function idCheck() {
+			var userId = document.getElementById("userId").value;
+			window.open("/views/member/idCheck.jsp?checkId=" + userId,
+					"_blank", "width=500px,height=100px");
 
-	// 아이디 중복검사
-	function idCheck() {
-		var userId = document.getElementById("userId").value;
-		window.open("/views/member/idCheck.jsp?checkId=" + userId,
-				"_blank", "width=500px,height=100px");
-
-		return false;
-	}
+			return false;
+		}
 		window.onload = function() {
 
 		}//유효성 검사
 
-		function check(){
-            userId= document.getElementById("userId").value;
-			userPwd= document.getElementById("userPwd").value;
-			userPwd_re=document.getElementById("userPwd_re").value;
-			userName= document.getElementById("userName").value;
-			userPhone= document.getElementById("userPhone").value;
-			userAddr= document.getElementById("userAddr").value;
-			userEmail= document.getElementById("userEmail").value;
+		function check() {
+			userId = document.getElementById("userId").value;
+			userPwd = document.getElementById("userPwd").value;
+			userPwd_re = document.getElementById("userPwd_re").value;
+			userName = document.getElementById("userName").value;
+			userPhone = document.getElementById("userPhone").value;
+			userAddr = document.getElementById("userAddr").value;
+			userEmail = document.getElementById("userEmail").value;
 
-			 checkFlag = document.getElementById('checkFlag').value;
+			checkFlag = document.getElementById("checkFlag").value;
 
-			if(userId=="")
-            {
-			     document.getElementById("id_msg").style.display="block";
+			if (userId == "") {
+				document.getElementById("id_msg").style.display = "block";
 				return false;
-			}else if(!(/^[a-z][a-z0-9]{3,11}$/.test(userId)))
-				//아이디검사 아이디는 소문자, 숫자만 가능 4~12글자
-				{
-					document.getElementById("id_msg").style.display="block";
-					return false;
-     
-		} else if (userPwd == "") {
-			document.getElementById("pwd_msg").style.display = "block";
-			return false;
-		}
-
-            else if(!(/^[a-z0-9][a-z0-9]{7,14}$/i.test(userPwd)))
-                //패스워드 검사 비밀번호는 영,숫 포함 8~15자
-                {
-                    document.getElementById("pwd_msg").style.display="block";
-					return false;
-                }
-            else if(userPwd!=userPwd_re)
-                //패스워드가 같지 않다면 false
-            {
-                document.getElementById("pwd_re_msg").style.display="block";
+			} else if (!(/^[a-z][a-z0-9]{3,11}$/.test(userId)))
+			//아이디검사 아이디는 소문자, 숫자만 가능 4~12글자
+			{
+				document.getElementById("id_msg").style.display = "block";
 				return false;
-<<<<<<< HEAD
-            } 
-=======
-            } else if (userName == "") {
-				document.getElementById("name_msg").style.display = "block";
+
+			} else if (userPwd == "") {
+				document.getElementById("pwd_msg").style.display = "block";
 				return false;
 			}
->>>>>>> ts/hwi
-            else if(!(/^[가-힣]+$/.test(userName))||userName=="")
-                //이름 검사 한글만 통과 자음 안됨 ㅇㅋ?
-            {
-                document.getElementById("name_msg").style.display="block";
-				return false;
-            }
-            else if(userPhone=="") //폰번호 공백검사
-                {   
-                     document.getElementById("phone_msg").style.display="block";
-                    return false;
-                }
-            else if(userAddr=="") // 주소 공백검사
-                {
-                    document.getElementById("addr_msg").style.display="block";
-                    return false;
-                }
 
-            else if(!(/^[a-z0-9]{4,50}@/.test(userEmail))||
-                   userEmail=="")
-                // 이메일 검사 4~50자 이후 @ 확인
+			else if (!(/^[a-z0-9][a-z0-9]{7,14}$/i.test(userPwd)))
+			//패스워드 검사 비밀번호는 영,숫 포함 8~15자
+			{
+				document.getElementById("pwd_msg").style.display = "block";
+				return false;
+			} else if (userPwd != userPwd_re)
+			//패스워드가 같지 않다면 false
+			{
+				document.getElementById("pwd_re_msg").style.display = "block";
+				return false;
+
+			} else if (userName == "") {
+				document.getElementById("name_msg").style.display = "block";
+				return false;
+			} else if (!(/^[가-힣]+$/.test(userName)) || userName == "")
+			//이름 검사 한글만 통과 자음 안됨 ㅇㅋ?
+			{
+				document.getElementById("name_msg").style.display = "block";
+				return false;
+			} else if (userPhone == "") //폰번호 공백검사
+			{
+				document.getElementById("phone_msg").style.display = "block";
+				return false;
+			} else if (userAddr == "") // 주소 공백검사
+			{
+				document.getElementById("addr_msg").style.display = "block";
+				return false;
+			}
+
+			else if (!(/^[a-z0-9]{4,50}@/.test(userEmail)) || userEmail == "")
+			// 이메일 검사 4~50자 이후 @ 확인
 
 			{
-                     document.getElementById("email_msg").style.display="block";
-                    return false;
-                    }
+				document.getElementById("email_msg").style.display = "block";
+				return false;
+			}
 
 			// 아이디 중복검사 체크
 			else if (checkFlag == 0) {
@@ -183,13 +173,12 @@
 				return false;
 			}
 
-            else//모든 검사 만족시 true 반환
-            {
-                return true;
-            }
-			
-		}
+			else//모든 검사 만족시 true 반환
+			{
+				return true;
+			}
 
+		}
 
 		// 남녀 체크
 		function maleCheck() {
@@ -223,7 +212,6 @@
 			maleborder[0].style.border = "1px solid darkgray";
 
 		}
-
 	</script>
 </body>
 </html>
