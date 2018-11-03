@@ -178,7 +178,7 @@ public class ReserveDao {
 				si.setM_show_ed_date(rset.getDate("M_SHOW_ED_DATE"));
 				si.setBk_comm(rset.getInt("BK_COMM"));
 				si.setM_show_poster(rset.getString("M_SHOW_POSTER"));
-						//System.out.println(si);
+				//System.out.println(si);
 			}			
 				
 		} catch (SQLException e) {
@@ -303,9 +303,13 @@ public class ReserveDao {
 		ResultSet rset = null;
 		ArrayList<SeatGradeState> seatGrdStList = new ArrayList<SeatGradeState>();
 		
-		String query = "SELECT * FROM TH1_PRICE WHERE TH_NO="
-						+ "(SELECT TH_NO FROM MUSICAL_L WHERE M_SHOW_NO="
-						+ "(SELECT M_SHOW_NO FROM PERF_SCH WHERE PS_NO=?))";
+//		String query = "SELECT * FROM TH1_PRICE WHERE TH_NO="
+//						+ "(SELECT TH_NO FROM MUSICAL_L WHERE M_SHOW_NO="
+//						+ "(SELECT M_SHOW_NO FROM PERF_SCH WHERE PS_NO=?))";/////
+		
+		String query = "SELECT * FROM TH1_PRICE WHERE M_SHOW_NO="
+						+ "(SELECT M_SHOW_NO FROM PERF_SCH WHERE PS_NO=?)";
+		
 		
 		try {
 			pstmt = conn.prepareStatement(query);

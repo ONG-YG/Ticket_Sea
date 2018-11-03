@@ -53,7 +53,7 @@ public class ReserveSeatServlet extends HttpServlet {
 					if(result>0) {
 						currStat = 1;
 					}else {
-						System.out.println("error at ReserveSeatServlet-7");
+						System.out.println("error at ReserveSeatServlet-9");
 						throw new Exception();
 					}
 				}
@@ -85,11 +85,12 @@ public class ReserveSeatServlet extends HttpServlet {
 								rp.setShowTitle(si.getM_show_name());
 								rp.setShowPoster(si.getM_show_poster());
 								String thName = new ReserveService().getTheaterName(si.getTh_no());
+								
 								if(thName!=null) {
 									rp.setTheaterName(thName);			
 								}
 								else {
-									System.out.println("error at ReserveSeatServlet-6");
+									System.out.println("error at ReserveSeatServlet-8");
 									throw new Exception();
 								}
 								rp.setPsDate(ps.getPerformSchDate());
@@ -112,7 +113,7 @@ public class ReserveSeatServlet extends HttpServlet {
 									if(progNo!=-1) {
 										rs.setProgNo(progNo);
 									}else {
-										System.out.println("error at ReserveSeatServlet-5");
+										System.out.println("error at ReserveSeatServlet-7");
 										throw new Exception();
 									}//if(progNo!=-1) END
 									

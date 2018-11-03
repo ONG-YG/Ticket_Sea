@@ -80,6 +80,7 @@ public class DateCntSelectServlet extends HttpServlet {
 						//System.out.println("회차번호 = "+ps.getPerformSchNo());
 						
 						seatGrdStList = new ReserveService().getSeatGradeStatus(psNo);
+						
 						if(!seatGrdStList.isEmpty()) {
 							ps.setSeatGrdStList(seatGrdStList);
 						}else {
@@ -102,12 +103,12 @@ public class DateCntSelectServlet extends HttpServlet {
 					view.forward(request, response);
 				}else {
 					response.sendRedirect("/views/reserve/reserveError.jsp");
-					System.out.println("error at DateCntSelectServlet-1");
+					System.out.println("error at DateCntSelectServlet-2");
 				}
 				
 			}else {
 				response.sendRedirect("/views/reserve/reserveError.jsp");
-				System.out.println("error at DateCntSelectServlet-2");
+				System.out.println("error at DateCntSelectServlet-1");
 			}
 		}else {
 			response.sendRedirect("/views/reserve/reserveError.jsp");

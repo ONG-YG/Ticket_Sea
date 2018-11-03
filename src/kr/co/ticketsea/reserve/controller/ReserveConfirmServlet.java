@@ -87,7 +87,7 @@ public class ReserveConfirmServlet extends HttpServlet {
 										rp.setTheaterName(thName);			
 									}
 									else {
-										System.out.println("error at ReserveConfirmServlet-6");
+										System.out.println("error at ReserveConfirmServlet-9");
 										throw new Exception();
 									}
 									rp.setPsDate(ps.getPerformSchDate());
@@ -101,13 +101,13 @@ public class ReserveConfirmServlet extends HttpServlet {
 										
 									}
 									else {
-										System.out.println("error at ReserveConfirmServlet-7");
+										System.out.println("error at ReserveConfirmServlet-8");
 										throw new Exception();
 									}//if(!seatGrdStList.isEmpty()) END
 									
 								}
 								else {
-									System.out.println("error at ReserveConfirmServlet-5");
+									System.out.println("error at ReserveConfirmServlet-7");
 									throw new Exception();
 								}//if(si!=null) END
 								
@@ -160,7 +160,7 @@ public class ReserveConfirmServlet extends HttpServlet {
 											rp.setTotalPrice();
 											
 										}else {
-											System.out.println("error at ReserveConfirmServlet-8");
+											System.out.println("error at ReserveConfirmServlet-6");
 											throw new Exception();
 										}//if(chk) END
 										
