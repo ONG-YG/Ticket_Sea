@@ -103,7 +103,7 @@ public PageData noticeAllList(int currentPage) {
 	}
 
 	public int noticeUpdate(int boardN_no, String boardN_title, String boardN_contents) {
-Connection conn = JDBCTemplate.getConnection();
+		Connection conn = JDBCTemplate.getConnection();
 		
 		int result = new NoticeDao().noticeUpdate(conn,boardN_no,boardN_title,boardN_contents);
 		
@@ -116,4 +116,5 @@ Connection conn = JDBCTemplate.getConnection();
 		
 		return result;
 	}
+
 }
