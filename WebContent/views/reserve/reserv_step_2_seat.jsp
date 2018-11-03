@@ -196,7 +196,7 @@
                 	}
                 }
                 
-                $(sel_list).children('.selected_seat_color').attr('style', 'background:'+grdColor);////////////////////////////
+                $(sel_list).children('.selected_seat_color').attr('style', 'background:'+grdColor);
                 $(sel_list).children().children('.selected_seat_grade').text(seat_grd); //좌석등급
                 $(sel_list).children().children('.selected_seat_no').text(seat_loc) //좌석위치
             }

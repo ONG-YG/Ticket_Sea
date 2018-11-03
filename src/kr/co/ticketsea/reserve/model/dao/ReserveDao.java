@@ -65,36 +65,6 @@ public class ReserveDao {
 		
 		return psList;
 	}
-
-//	public int selectOnePerformSchedule(Connection conn, int showNo, String date_sel, String cnt_sel) {
-//		PreparedStatement pstmt = null;
-//		ResultSet rset = null;
-//		int performSchNo = 0;
-//		
-//		String query = "SELECT PS_NO FROM PERF_SCH WHERE M_SHOW_NO=? AND PS_DATE=? AND PS_CNT=?";
-////		System.out.println(showNo);
-////		System.out.println(date_sel);
-////		System.out.println(cnt_sel);
-//		try {
-//			pstmt = conn.prepareStatement(query);
-//			pstmt.setInt(1, showNo);
-//			pstmt.setString(2, date_sel);
-//			pstmt.setString(3, cnt_sel);
-//			rset = pstmt.executeQuery();
-//			
-//			if(rset.next()) {
-//				performSchNo = rset.getInt("PS_NO");
-//			}			
-//				
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		} finally {
-//			JDBCTemplate.close(rset);
-//			JDBCTemplate.close(pstmt);
-//		}			
-//			
-//		return performSchNo;
-//	}
 	
 	public PerformSchedule selectOnePerformSchedule(Connection conn, int psNo) {
 		PreparedStatement pstmt = null;
@@ -163,7 +133,7 @@ public class ReserveDao {
 		
 		String query = "SELECT TH1_SEAT_NO FROM PROG_S_L "
 				+ "WHERE PS_NO=? AND "
-				+ "(SYSDATE-PROG_TIME)*24*60 < 5";
+				+ "(SYSDATE-PROG_TIME)*24*60 <= 10";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -577,6 +547,28 @@ public class ReserveDao {
 		}
 		
 		return bkNo;
+	}
+
+	public int deleteProgData(Connection conn, int progNo) {
+
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = "DELETE FROM PROG_S_L WHERE PROG_NO=?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, progNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
 	}
 
 	

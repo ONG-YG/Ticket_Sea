@@ -1,3 +1,5 @@
+<%@page import="java.text.ParseException"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="kr.co.ticketsea.reserve.model.vo.SelectedSeat"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="kr.co.ticketsea.reserve.model.vo.ReserveSession"%>
@@ -34,6 +36,8 @@
 	
 	ReserveSession rs = (ReserveSession)session.getAttribute("reserveSession");
 	int progNo = rs.getProgNo();
+	String progTime = rs.getProgTime();
+	//System.out.println("progTime" + progTime);
 %>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -47,6 +51,8 @@
       type="text/javascript"
         src="../../resources/jquery-3.3.1.js">
     </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+	</script>
     <script>
 	    $(document).ready(function(){
 	    	
@@ -150,16 +156,62 @@
             if(chk) {
             	<%
 	        	//세션에 담긴 reserveSession객체 - 진행단계 정보 update
-				rs.setCurrStat(1);
-            	rs.setProgNo(-1);
+				rs.setCurrStat(3); // currStat==3 이면 예매진행 중 정보 DELETE
+            	//rs.setProgNo(-1);
             	rs.setProgTime(null);
         		session.setAttribute("reserveSession", rs);
-        		//예매중정보지우는 코드 추가할것////////////////////////////////////////////////////////////////////////////////  ※※※※※※※※※※※※※※※
         		%>
                 location.href="/reserveSeat.do?psNo="+<%=psNo%>;
             }
         }
         function next() {
+        	
+        	// 예매 진행시간 10분 초과했으면 결제 불가 안내!
+        	// 예매 진행 정보 지우고 창 close
+        	var diff = null;
+        	<%
+	    		try {
+	    			long progTimeL = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss").parse(progTime).getTime();
+	    	%>
+
+        	var progTimeL = <%=progTimeL%>;
+        	
+        	var timestamp = new Date();
+        	//console.log("현재 시간 : "+timestamp);
+        	var currentTimeL = timestamp.getTime();
+        	
+        	diff = (currentTimeL - progTimeL)/1000/60;
+        	//console.log("경과시간(분) : "+diff);
+        	
+        	<%
+	    		} catch (ParseException e) {
+	    			e.printStackTrace();
+	    		}
+        	%>
+        	
+        	if(diff>10) {
+        		var progNo_del = <%=progNo%>;
+        		//console.log("progNo_del : "+progNo_del);
+        		
+        		$.ajax({
+    				url : "/reserveExpire.do",
+    				data : {progNo: progNo_del},
+    				type : "post",
+    				success : function(){
+    					//console.log("정상 처리 완료");
+    				},
+    				error : function(){
+    					//console.log("ajax 통신 에러");
+    				},
+    				complete : function(){
+    					alert("예매 진행 가능 시간이 초과되어 예매가 종료됩니다.");
+    					window.close();
+    				}
+    			});
+        		
+        	}
+        	
+        	
             var phone = document.getElementById("inputPhoneNo").value;
             var userCheck = document.getElementById("agree_phone").checked;
             //alert(userCheck);

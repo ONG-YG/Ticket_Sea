@@ -205,5 +205,21 @@ public class ReserveService {
 		
 		return bkNo;
 	}
+
+	public int deleteProgData(int progNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new ReserveDao().deleteProgData(conn, progNo);
+		
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+
+		return result;
+	}
 	
 }

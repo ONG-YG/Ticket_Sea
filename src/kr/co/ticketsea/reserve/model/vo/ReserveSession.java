@@ -59,7 +59,7 @@ public class ReserveSession {
 				+ currStat + "\n"
 				+ progNo + "\n"
 				+ progTime + "\n"
-							+ "-----------------------------\n";
+							+ "-----------------------------\n\n\n";
 
 		return resvSession;
 	}

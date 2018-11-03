@@ -215,7 +215,7 @@ public class ReserveProgressing {
 							+ commission + "\n"
 							+ ticketPrice + "\n"
 							+ totalPrice + "\n"
-							+ "-------------------------\n";
+							+ "-------------------------\n\n\n";
 		
 		
 		return reservProg;

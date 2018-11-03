@@ -45,6 +45,19 @@ public class ReserveSeatServlet extends HttpServlet {
 				ReserveSession rs = (ReserveSession)session.getAttribute("reserveSession");
 				int currStat = rs.getCurrStat();
 				
+				//step3_jsp에서 돌아온 경우 예매진행 정보 DELETE
+				if(currStat==3) {
+					int progNo = rs.getProgNo();
+					int result = new ReserveService().deleteProgData(progNo);
+					
+					if(result>0) {
+						currStat = 1;
+					}else {
+						System.out.println("error at ReserveSeatServlet-7");
+						throw new Exception();
+					}
+				}
+				
 				//비정상적 루트에서 접근 금지
 				if(currStat==1) {
 					//세션에 넣을 reserveSession객체 - 진행단계 정보 update
@@ -84,7 +97,7 @@ public class ReserveSeatServlet extends HttpServlet {
 								rp.setShowTime(ps.getPerformTime());
 								ArrayList<Integer> reserved_seats = new ReserveService().selectReservedSeats(psNo);
 								rp.setReservedSeatList(reserved_seats);
-								ArrayList<Integer> prog_seats = new ReserveService().selectProgressingSeats(psNo);
+								ArrayList<Integer> prog_seats = new ReserveService().selectProgressingSeats(psNo);  //예매 진행 정보 INSERT 시점부터 20분경과하지 않은 좌석
 								rp.setProgSeatList(prog_seats);
 								
 								ArrayList<SeatGradeState> seatGrdStList = new ReserveService().getSeatGradeStatus(psNo);
