@@ -221,16 +221,14 @@
             float:right;
         }
    
-    
+ #header_inner{width:990px; margin: 0px auto;}
 </style>
 </head>
-<body>
+</head>
 <body>
 <div id="wrapper">
-    <div id="header">
-        <div id="h_inner">
-            <h1>TICKET SEA</h1>
-        </div>
+        <div id="header_inner">
+            <jsp:include page="/header.jsp"/>
     </div>
     
     
@@ -256,32 +254,31 @@
                     <h3>소규모 공연 홍보</h3>
                 </div>
                 
-                
+                <form action="/promoWrite.do" method="post">
                      <table id="write-form" class="boxStyle">
                     <tr>
                         <td style="width : 70px; text-align : center;" >공연명</td>
                         <td><input type="text" name="title" style="width: 300px;" /></td>
-                        
                     </tr>
                     
                      <tr>
                         <td style="width : 70px; text-align : center;" >아티스트</td>
                         <td colspan="2" >
-                            <textarea name="content" rows="1" cols="50" style="width:300px;"></textarea>
+                            <textarea name="artist" rows="1" cols="50" style="width:300px;"></textarea>
                         </td>
                     </tr>
                     
                     <tr>
                         <td style="width : 70px; text-align : center;" >공연장소</td>
                         <td colspan="2" >
-                            <textarea name="content" rows="1" cols="50" style="width:300px;"></textarea>
+                            <textarea name="location" rows="1" cols="50" style="width:300px;"></textarea>
                         </td>
                     </tr>
                     
                     <tr>
                         <td style="width : 40px; text-align : center;" >장르</td>
                         <td>
-                            <select>
+                            <select name="category">
                                 <option>연극</option>
                                 <option>음악</option>
                                 <option>뮤지컬</option>
@@ -292,7 +289,7 @@
                     <tr>
                         <td style="width : 70px; text-align : center;" >공연소개</td>
                         <td colspan="2" >
-                            <textarea name="content" rows="17" cols="50" style="width:600px;"></textarea>
+                            <textarea name="contents" rows="17" cols="50" style="width:600px;"></textarea>
                         </td>
                     </tr>
                     
@@ -311,6 +308,7 @@
                         
                        
                 </table>
+               </form>
             
             
                 

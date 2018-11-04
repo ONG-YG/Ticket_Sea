@@ -1,14 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-    <%@ page import="kr.co.ticketsea.promo.model.vo.*" 
-	import ="kr.co.ticketsea.member.model.vo.*"
-	import = "java.util.ArrayList"
-%>
+    <%@ page import = "kr.co.ticketsea.promo.model.vo.*" 
+    import = "java.util.ArrayList"
+    %>
     
-    <%
-	Promo promo = (Promo)request.getAttribute("promo"); //공지사항 내용
-%>   
+    <% Show show = (Show)request.getAttribute("show"); %>
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -199,7 +196,6 @@
         letter-spacing:-1px;
         color:#767676;
     }
-    #header_inner{width:990px; margin: 0px auto;}
     
     .review_list{border-width:2px 0 1px;border-style:solid;border-color:#999}
     
@@ -237,13 +233,16 @@
 .review_list li div.reply li .review_info{background:url(../img/sp_theater.png) no-repeat -472px -110px;padding-left:20px;margin-bottom:11px}
 .review_list li div.reply li .star_average{float:none}
 .review_list li div.reply li p{padding-left:20px}
-
+<<<<<<< HEAD:WebContent/views/promo/promo.jsp
 =======
     
     
     
- 
-
+    
+    
+    
+>>>>>>> e7df2293a6343e300548246144f599d1fc495dba:WebContent/views/board/board_concertInfo.html
+    
 </style>
 </head>
 
@@ -256,8 +255,10 @@
 </script>
 
 <div id="wrapper">
-    <div id="header_inner">
-            <jsp:include page="/header.jsp"/>
+    <div id="header">
+        <div id="h_inner">
+            <h1>TICKET SEA</h1>
+        </div>
     </div>
     
     
@@ -276,27 +277,49 @@
                 
                 <div id="infoHeader">
                     <div id="i_H_title">
-                        <%= promo.getBoardP_title() %>
+                        <%= show.getShow_title() %>
                     </div>
                     
                     <div id="i_H_pic">
-                       		포스터
+                        <img src="../../img/poster_ex.jpg" style="width:350px; height:450px; ">
                     </div>
                     
                     <div id="i_H_info">
                         <div>
-                        <strong><div id = "info_tit">아티스트</div></strong>  <%=promo.getBoardP_artist() %>
+                        <strong><div id = "info_tit">부제</div></strong> 
+              				<%= show.getShow_subTitle() %>
                         </div>
                         <br>
                         <div>
-                        <strong><div id = "info_tit">장르</div></strong> <%=promo.getBoardP_category() %>
+                        <strong><div id = "info_tit">장소</div></strong>
+                        	<%=show.getShow_location() %>
                         </div>
                         <br>
                         <div>
-                        <strong><div id = "info_tit">공연장소</div></strong> <%=promo.getBoardP_location()%>
+                        <strong><div id = "info_tit">날짜</div></strong>
+                        	<%=show.getShow_date() %>
                         </div>
+                        <br>
+                        <div>
+                        <strong><div id = "info_tit">관람시간</div></strong>
+                        	<%=show.getShow_time() +" 분" %>
+                        </div>
+                        <br>
+                        <div>
+                        <strong><div id = "info_tit">관람등급</div></strong>
+                        	<%="만" + show.getShow_grade() +"세 이상" %>
+                        </div>
+                        <br>
+                        <div>
+                        <strong><div id = "info_tit">가격</div></strong>
+                        	<%=show.getShow_price() + " 원" %>
+                        </div>
+                        <br><br><br>
+                        <input type="button" value="예매하기" style="width:250px; height:80px; background-color:skyblue; color:white; float:right;" onclick="return reserve()">
+                        
                     </div>
                 </div>
+                
         <div id="infoContent">
                     <div id="i_C_category">
                         
@@ -313,6 +336,10 @@
                         </div>
                     </div>
                     
+            <style>
+            
+                
+            </style>
                     
                     <div id="i_C_content_a">
                         
@@ -343,9 +370,9 @@
                             </tr>
                             <tr>
                                 <th scope="row">작가/출연자</th>
-                                <td> <%= promo.getBoardP_artist() %></td>
+                                <td></td>
                                 <th scope="row">공연장소</th>
-                                <td><%= promo.getBoardP_location() %></td>
+                                <td>Pulp Seoul</td>
                             </tr>
                             <tr>
                                 <th scope="row">예매수수료</th>
@@ -475,7 +502,11 @@
                                 <textarea title="후기 작성하기" id="reviewContent" name="reviewContent"
                                           style="width:700px; height: 25px; resize:none; margin:0px; 0px; 0px;" maxlength="3000"
                                           placeholder="주민번호, 전화번호, 이메일 등 개인정보를 남기면 타인에 의해 악용될 소지가 있습니다."></textarea>
+<<<<<<< HEAD:WebContent/views/promo/promo.jsp
+                                <input type="button" style="width:70px; height:50px; resize:none;" value="후기작성">
+=======
                                 <input type="button" class="write_review_button"  value="후기작성">
+>>>>>>> e7df2293a6343e300548246144f599d1fc495dba:WebContent/views/board/board_concertInfo.html
                             </div>
 
             
@@ -511,7 +542,9 @@
                         <dt>날짜</dt><dd class="review_date">2018.10.05 16:27</dd>
                     </dl>
                 </div>
+<<<<<<< HEAD:WebContent/views/promo/promo.jsp
                 너무 재밌어
+=======
                 뮤지컬 삼총사를 재밌게 봐서 아이언 마스크도 관람했어요! 배우분들도 다 훌륭했지만 그 중 가장 좋았던 것은 검술 액션이였어요. 정말 긴장감있게 액션 연기를 잘하시더라구요ㅠㅠ 재관람하고 싶은 작품이에요!!
             </li>
             
@@ -558,6 +591,7 @@
                     </dl>
                 </div>
                 뮤지컬 삼총사를 재밌게 봐서 아이언 마스크도 관람했어요! 배우분들도 다 훌륭했지만 그 중 가장 좋았던 것은 검술 액션이였어요. 정말 긴장감있게 액션 연기를 잘하시더라구요ㅠㅠ 재관람하고 싶은 작품이에요!!
+>>>>>>> e7df2293a6343e300548246144f599d1fc495dba:WebContent/views/board/board_concertInfo.html
             </li>
             
   
