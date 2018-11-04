@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import kr.co.ticketsea.common.JDBCTemplate;
+import kr.co.ticketsea.promo.model.vo.Comment;
 import kr.co.ticketsea.promo.model.vo.Promo;
 
 public class PromoDao {
@@ -293,4 +294,70 @@ public class PromoDao {
 		
 		return result;
 	}
+
+	public int insertComment(Connection conn, int promoNo, String contents, String userId) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = "insert into promocomment values(SEQ_promocomment.NEXTVAL,?,?,?,SYSDATE)";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setInt(1, promoNo);
+			pstmt.setString(2, contents);
+			pstmt.setString(3, userId);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		
+		return result;
+	}
+
+	public ArrayList<Comment> selectComments(Connection conn, int boardP_no) {
+	
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = "select * from PROMOCOMMENT "
+				+ "where boardP_no = ?";
+		
+		ArrayList<Comment> list = new ArrayList<Comment>();
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setInt(1, boardP_no);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next())
+			{
+				Comment co = new Comment();
+				co.setCommentNo(rset.getInt("promoComment"));
+				co.setPromoNo(rset.getInt("boardP_no"));
+				co.setContents(rset.getString("promoComment_contents"));
+				co.setUserId(rset.getString("promoComment_writer"));
+				co.setRegDate(rset.getDate("promoComment_date"));
+				
+				list.add(co);
+			}	
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return list;
+	}
+	
 }

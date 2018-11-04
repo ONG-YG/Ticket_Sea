@@ -1,15 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-    <%@ page import="kr.co.ticketsea.promo.model.vo.*" 
+<%@ 
+    page import="kr.co.ticketsea.promo.model.vo.*" 
 	import ="kr.co.ticketsea.member.model.vo.*"
 	import = "java.util.ArrayList"
 %>
     
-    <%
-	Promo promo = (Promo)request.getAttribute("promo"); //공지사항 내용
-%>   
-    
+<%
+	PromoData pd = (PromoData)request.getAttribute("promoData");
+	Promo promo = pd.getPromo(); 
+	ArrayList<Comment> list = pd.getList();
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -145,6 +147,7 @@
         width : 100%;
         height : 75%;
         padding : 30px;
+        margin : 10px 10px 10px;
     }
     
     #infoContent > #i_C_category{
@@ -187,6 +190,7 @@
         padding : 30px;
         height: 95%;
     }
+    
     
     
     
@@ -269,6 +273,27 @@
                 </div>
                 <div class="title2"></div>
             </div>
+            
+            
+	//작성자가 아니면 수정 버튼을 보여주지 않는 코드
+	<%
+	Member m = ((Member)request.getSession(false).getAttribute("member"));
+	// 로그인한 사용자는 Member 객체가 리턴 되고
+	// 비로그인 사용자는 null이 리턴 됨
+
+	
+	if(m!=null){ //m!=null 의 의미는 비로그인 사용자가 아니라면
+	String user1 =  m.getMemberId(); //로그인 사용자
+	String user2 =  promo.getBoardP_writer(); // 작성자
+%>
+
+<%
+	if(user1.equals(user2)){ // 로그인한 사용자와 작성자가 같다면
+%>
+		<button id="btn1" onclick="modifyActive();">수정</button> 
+		<button id="btn2" onclick="delNotice();">삭제</button> 
+<%}}%>
+
            
             <div id="right_view">
                 
@@ -295,6 +320,8 @@
                         <div>
                         <strong><div id = "info_tit">공연장소</div></strong> <%=promo.getBoardP_location()%>
                         </div>
+                        <br>
+                        <br>
                     </div>
                 </div>
         <div id="infoContent">
@@ -315,7 +342,8 @@
                     
                     
                     <div id="i_C_content_a">
-                        
+                        <br><br>
+                        <%= promo.getBoardP_contents() %>
                           <img src="../../img/poster_ex.jpg" style="width:700px; height:850px; padding : 50px;">
                         
                         
@@ -432,7 +460,9 @@
                 }
                 
                 .write_review{
+                	border: 1px solid black;
                     clear:both;
+                    width:900px;
                     height:100px;
                     overflow:hidden;
                     padding-top:9px
@@ -470,21 +500,36 @@
                     티켓 양도 및 매매의 경우 전화번호, 이메일 등의 개인정보가 악용될 소지가 있으므로 게재를 삼가 주시기 바랍니다. <br>
                     운영 규정을 지속적으로 어기는 게시글을 게재할 경우 티켓링크 게시판 이용이 제한될 수 있습니다.
                     </div>
-                    
+                    <form action="/promoInsertComment.do" method="post">
+                    <%if(session.getAttribute("member")!=null){ %>
                             <div class="write_review">
+                            
                                 <textarea title="후기 작성하기" id="reviewContent" name="reviewContent"
                                           style="width:700px; height: 25px; resize:none; margin:0px; 0px; 0px;" maxlength="3000"
                                           placeholder="주민번호, 전화번호, 이메일 등 개인정보를 남기면 타인에 의해 악용될 소지가 있습니다."></textarea>
-                                <input type="button" class="write_review_button"  value="후기작성">
-                            </div>
+                                 <input type="hidden" name="promoNo" value="<%=promo.getBoardP_no()%>"/>       
+                                <input type="submit" class="write_review_button"  value="후기작성">
+                                <% }else{ %>
+                                <h3>댓글을 작성하려면 로그인 해주세요.</h3>
+                                <%} %>
+                               
 
+                            </div>
+					</form>
             
         <div class="review_list">
                     
                     
         <ul id="reviewUl" style="word-break: break-all;">
             
+            <%
+				if(list.isEmpty()){ //댓글이 비어 있다면 (없다면!)
+			%>
+				<h3>댓글이 없습니다.</h3>
+			<%	
+				}else{%>
             <li>
+             <% for(Comment co : list) { %>
                 <div class="review_info">
                     <dl class="star_average">
                         <dt>별점</dt>
@@ -492,75 +537,14 @@
                             <span class="star_gauge" style="width: 100%"></span>
                         </dd>
                         <dt>아이디</dt>
-                        <dd class="review_user">jm***@ha</dd>
-                        <dt>날짜</dt><dd class="review_date">2018.10.05 16:27</dd>
+                        <dd class="review_user"><%=co.getUserId()%></dd>
+                        <dt>날짜</dt><dd class="review_date"><%=co.getRegDate()%></dd>
                     </dl>
                 </div>
-                재미있어요
+               	<%=co.getContents()%>
+                <%}%>
+               <%}%>
             </li>
-            
-            <li>
-                <div class="review_info">
-                    <dl class="star_average">
-                        <dt>별점</dt>
-                        <dd class="grade_star">
-                            <span class="star_gauge" style="width: 100%"></span>
-                        </dd>
-                        <dt>아이디</dt>
-                        <dd class="review_user">jm***@ha</dd>
-                        <dt>날짜</dt><dd class="review_date">2018.10.05 16:27</dd>
-                    </dl>
-                </div>
-                너무 재밌어
-                뮤지컬 삼총사를 재밌게 봐서 아이언 마스크도 관람했어요! 배우분들도 다 훌륭했지만 그 중 가장 좋았던 것은 검술 액션이였어요. 정말 긴장감있게 액션 연기를 잘하시더라구요ㅠㅠ 재관람하고 싶은 작품이에요!!
-            </li>
-            
-            <li>
-                <div class="review_info">
-                    <dl class="star_average">
-                        <dt>별점</dt>
-                        <dd class="grade_star">
-                            <span class="star_gauge" style="width: 100%"></span>
-                        </dd>
-                        <dt>아이디</dt>
-                        <dd class="review_user">jm***@ha</dd>
-                        <dt>날짜</dt><dd class="review_date">2018.10.05 16:27</dd>
-                    </dl>
-                </div>
-                뮤지컬 삼총사를 재밌게 봐서 아이언 마스크도 관람했어요! 배우분들도 다 훌륭했지만 그 중 가장 좋았던 것은 검술 액션이였어요. 정말 긴장감있게 액션 연기를 잘하시더라구요ㅠㅠ 재관람하고 싶은 작품이에요!!
-            </li>
-            
-            <li>
-                <div class="review_info">
-                    <dl class="star_average">
-                        <dt>별점</dt>
-                        <dd class="grade_star">
-                            <span class="star_gauge" style="width: 100%"></span>
-                        </dd>
-                        <dt>아이디</dt>
-                        <dd class="review_user">jm***@ha</dd>
-                        <dt>날짜</dt><dd class="review_date">2018.10.05 16:27</dd>
-                    </dl>
-                </div>
-                뮤지컬 삼총사를 재밌게 봐서 아이언 마스크도 관람했어요! 배우분들도 다 훌륭했지만 그 중 가장 좋았던 것은 검술 액션이였어요. 정말 긴장감있게 액션 연기를 잘하시더라구요ㅠㅠ 재관람하고 싶은 작품이에요!!
-            </li>
-            
-            <li>
-                <div class="review_info">
-                    <dl class="star_average">
-                        <dt>별점</dt>
-                        <dd class="grade_star">
-                            <span class="star_gauge" style="width: 100%"></span>
-                        </dd>
-                        <dt>아이디</dt>
-                        <dd class="review_user">jm***@ha</dd>
-                        <dt>날짜</dt><dd class="review_date">2018.10.05 16:27</dd>
-                    </dl>
-                </div>
-                뮤지컬 삼총사를 재밌게 봐서 아이언 마스크도 관람했어요! 배우분들도 다 훌륭했지만 그 중 가장 좋았던 것은 검술 액션이였어요. 정말 긴장감있게 액션 연기를 잘하시더라구요ㅠㅠ 재관람하고 싶은 작품이에요!!
-            </li>
-            
-  
             
             </ul>
     </div>

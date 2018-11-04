@@ -8,8 +8,9 @@ import kr.co.ticketsea.notice.model.dao.NoticeDao;
 import kr.co.ticketsea.notice.model.vo.Notice;
 import kr.co.ticketsea.promo.model.dao.PromoDao;
 import kr.co.ticketsea.promo.model.vo.Promo;
+import kr.co.ticketsea.promo.model.vo.PromoData;
 import kr.co.ticketsea.qna.model.dao.QnaDao;
-import kr.co.ticketsea.promo.model.vo.PageData;
+import kr.co.ticketsea.promo.model.vo.*;
 
 public class PromoService {
 
@@ -46,7 +47,7 @@ public class PromoService {
 	
 }
 
-	public Promo selectOnePromo(int boardP_no) {
+	public PromoData selectOnePromo(int boardP_no) {
 		//하나의 공지사항을 읽으면 공지사항의 내용과 댓글을 가져와야 함
 		
 		
@@ -54,20 +55,19 @@ public class PromoService {
 		
 		//공지사항 가져오는 메소드
 		Promo promo = new PromoDao().selectOnePromo(conn,boardP_no);
-		
+		ArrayList<Comment> list = new PromoDao().selectComments(conn,boardP_no);
 		
 		//리턴을 하기 위하여 공지사항과 댓글을 저장하는 VO를 생성하여 저장
-		
-		if(promo != null) {
-			JDBCTemplate.commit(conn);
-		}
-		else {
-			JDBCTemplate.rollback(conn);
-		}
+		PromoData pd = null;
+		if(promo!=null) {
+			pd = new PromoData();
+			pd.setList(list);
+			pd.setPromo(promo);
+			}
 		
 		JDBCTemplate.close(conn);
 		
-		return promo;
+		return pd;
 		
 		
 	}
@@ -85,6 +85,23 @@ public class PromoService {
 		
 		JDBCTemplate.close(conn);
 			
+		return result;
+	}
+
+	public int insertComment(int promoNo, String contents, String userId) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new PromoDao().insertComment(conn,promoNo,contents,userId);
+		
+		if(result>0)
+		{
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		
 		return result;
 	}
 

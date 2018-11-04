@@ -1,31 +1,27 @@
 package kr.co.ticketsea.promo.controller;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import kr.co.ticketsea.notice.model.service.NoticeService;
-import kr.co.ticketsea.notice.model.vo.Notice;
-import kr.co.ticketsea.promo.model.service.PromoService;
-import kr.co.ticketsea.promo.model.vo.Promo;
-import kr.co.ticketsea.promo.model.vo.PromoData;
+import kr.co.ticketsea.member.model.vo.Member;
+import kr.co.ticketsea.promo.model.service.*;
 
 /**
- * Servlet implementation class PromoServlet
+ * Servlet implementation class PromoInsertCommentServlet
  */
-@WebServlet(name = "Promo", urlPatterns = { "/promo.do" })
-public class PromoServlet extends HttpServlet {
+@WebServlet(name = "PromoInsertComment", urlPatterns = { "/promoInsertComment.do" })
+public class PromoInsertCommentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PromoServlet() {
+    public PromoInsertCommentServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,27 +34,39 @@ public class PromoServlet extends HttpServlet {
 		//1. 인코딩
 		request.setCharacterEncoding("utf-8");
 		
-		//2. view에서 전송한 데이터를 변수에 저장
-		int boardP_no = Integer.parseInt(request.getParameter("boardP_no"));
+		//2. view에서 보내준 데이터 변수에 저장 (내용,글번호)
+		String contents = request.getParameter("reviewContent");
+		int promoNo = Integer.parseInt(request.getParameter("promoNo"));
 		
-		//3. 비즈니스 로직 처리 
-		PromoData pd =  new PromoService().selectOnePromo(boardP_no);
+		//3. 작성자
+		HttpSession session = request.getSession(false);
 		
-		//4. 결과 리턴
-		if(pd !=null) {
-			RequestDispatcher view = request.getRequestDispatcher("views/promo/promo.jsp");
-			request.setAttribute("promoData", pd);
-			view.forward(request, response);
+		
+		
+		try { //로그인한 사용자만 댓글을 작성하고 그 이외에는 Exception 발생
 			
-		}else {
+			String userId = ((Member)session.getAttribute("member")).getMemberId();
+			
+			
+		int result = new PromoService().insertComment(promoNo,contents,userId);
+		
+			if(result>0)
+			{
+				response.sendRedirect("/promo.do?boardP_no="+promoNo);
+			}else {
+				throw new Exception();
+			}
+		} catch (Exception e) {
 			response.sendRedirect("/views/notice/error.jsp");
 		}
 		
 		
 		
 		
+		
+		
+		
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

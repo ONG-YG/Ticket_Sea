@@ -244,8 +244,8 @@
                 <li class="has_sub">
                     <span>소규모 공연</span>
                     <ul>
-                        <li><a href="board_prA.html"><strong>소규모 공연 목록</strong></a></li>
-                        <li><a href="board_prB.html"><strong>소규모 공연 홍보</strong></a></li>
+                        <li><a href="/promoList.do"><strong>소규모 공연 목록</strong></a></li>
+                        <li><a href=""><strong>소규모 공연 홍보</strong></a></li>
                     </ul>
                 </li>
             </ul>    
@@ -255,9 +255,9 @@
                 </div>
                 
                 <form action="/promoWrite.do" method="post">
-                     <table id="write-form" class="boxStyle">
+                     <table id="write-form">
                     <tr>
-                        <td style="width : 70px; text-align : center;" >공연명</td>
+                        <td style="width : 70px;" >공연명</td>
                         <td><input type="text" name="title" style="width: 300px;" /></td>
                     </tr>
                     

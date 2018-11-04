@@ -236,37 +236,35 @@
         }
    
     #prContest{
-            border: 1px solid black;
             width:100%;
-            height:100%;
+            height:95%;
             float : left;
         }    
         
         #prContest>#prContestDiv1{
-            border : 1px solid black;
-            width : 24%;
-            height : 28%;
+            width : 25%;
+            height : 29%;
             float : left;
+            padding :5px 10px 15px;
+            
         }
         
         #prContest>#prContestDiv2{
        	border : 1px solid black;
-       	width : 1.33333333333%;
-       	height : 28%;
+       	width : 100%;
        	float:left;
        }
         
         #prContestDiv1>#prContestPic{
-            border : 1px solid black;
             width : 100%;
             height : 90%;
             float : left;
         }
         #prContestDiv1>#prContestTitle{
-        	border: 1px solid black;
         	width : 100%;
         	height : 10%;
         	float: left;
+        	text-align: center;
         }
         
         
@@ -291,37 +289,35 @@
             
             <div id="container">
         <div id = "right_view">
-        
-        
-        
-
         <div id="prContest">
         <% for (Promo p : list) { %>
-           
-            <div id = "prContestDiv1">
-	            <div id="prContestPic">사진</div>
+            <div id = "prContestDiv1" ">
+	            <div id="prContestPic"><a href="/promo.do?boardP_no=<%=p.getBoardP_no()%>"><img src="../../img/poster_ex.jpg" style="width:205px; height:330px; align-content: center;"></a></div> <br>
 	        	<div id="prContestTitle"><a href="/promo.do?boardP_no=<%=p.getBoardP_no()%>"><%=p.getBoardP_title()%></a></div>
         	</div>
          <% } %> 
-           
-         </div>
-           
-        <div id = "prContestDiv3">
-            <div style="width:800px; text-align:center;">
-		<label><%=pageNavi%></label>
-		</div>
-            <%
+         
+        
+    </div>
+            <div id="prContestDiv2">
+            	 <div style="width:100%; text-align:center;">
+				<label><%=pageNavi%></label>
+		
+		
+		   <%
 		session = request.getSession(false);
 		Member m = (Member)session.getAttribute("member"); 
 			%>
 			
-		<%if(m!=null) {%>
+           <%if(m!=null) {%>
             <form style="display:inline;" action="/views/promo/promoWrite.jsp">
 				<input type="submit" value="글쓰기" style="width: 70px; height: 30px; float:right;"/> <br>				
 			</form>
 			<%} %>
-      </div>
-    </div>
+   
+         </div>
+         
+            </div>
             
             
           </div>  
