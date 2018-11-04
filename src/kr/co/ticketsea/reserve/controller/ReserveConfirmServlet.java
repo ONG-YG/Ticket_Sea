@@ -167,8 +167,7 @@ public class ReserveConfirmServlet extends HttpServlet {
 										//예매번호 생성 후 정상적으로 예매번호 생성완료 시 step3 jsp페이지로 객체 전달 및 이동
 										long bkNo = new ReserveService().createBookNo();
 										if(bkNo!=-1) {
-											rp.setBkNo(bkNo);
-											
+											rp.setBkNo(bkNo); //jsp페이지 전달 객체에 저장
 											System.out.println("ReserveConfirmServlet\n"+rp);/////////////////////////
 											
 											//세션 정보 저장

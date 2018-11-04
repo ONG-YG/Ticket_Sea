@@ -59,12 +59,12 @@
 	    	pageInit();
 	    	
 	    	$(document).change(function(){
-	    		console.log("mouseup");
+	    		//console.log("mouseup");
 	    		check();
 	    	});
 	    	
 	    	$(document).keyup(function(){
-	    		console.log("keyup");
+	    		//console.log("keyup");
 	    		check();
 	    	});
 	    	
@@ -233,7 +233,25 @@
                	
                	if( !res1 ){ alert("휴대폰 번호는 숫자만 입력할 수 있습니다."); }
                	else if( !res2 ){ alert("휴대폰 번호를 9자 이상 입력해주세요."); }
-               	else { location.href="#"; }
+               	else {
+               		<%
+    	        	//세션에 reserveSession객체 저장
+    	        	rs.setBkNo(bkNo);
+            		session.setAttribute("reserveSession", rs);
+            		%>
+            		
+            		
+            		var bkStateCd = "RSV_CPL";///////////////////일단 임의로 완료상태로 설정
+            		var payType = "CARD";///////////////////일단 임의로 카드결제로 설정
+            		
+            		$('#phone_form').val( $('#inputPhoneNo').val() );
+            		$('#email_form').val( $('#inputEmail').val() );
+            		$('#bkStateCd_form').val( bkStateCd );
+            		$('#payType_form').val( payType );
+            		
+            		document.getElementById("completeSubmitForm").submit();
+               		<%--location.href="/reserveComplete.do?progNo=<%=progNo%>";--%>
+               	}
             }
         }
     </script>
@@ -367,9 +385,16 @@
                             </div>
                             <hr id="final_hr">
                             <div id="total_price_info">
-                                <strong>총 결제</strong><span id="rInfo_TotP">141,000</span>
+                                <strong>총 결제 금액</strong><span id="rInfo_TotP">141,000</span>
                             </div>
                         </div>
+                        <form action="/reserveComplete.do?progNo=<%=progNo%>" method="post" id="completeSubmitForm">
+                            <input type="hidden" id="psNo_form" name="psNo" value="<%= psNo %>"/>
+                            <input type="hidden" id="phone_form" name="phone" />
+                            <input type="hidden" id="email_form" name="email" />
+                            <input type="hidden" id="bkStateCd_form" name="bkStateCd" />
+                            <input type="hidden" id="payType_form" name="payType" />
+                        </form>
                     </div>
                     <div class="reserve_btn">
                         <a class="btn" onclick="prev()">이전단계</a>

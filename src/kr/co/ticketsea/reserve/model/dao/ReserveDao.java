@@ -575,5 +575,120 @@ public class ReserveDao {
 		return result;
 	}
 
+	public String[] getSeatListByProgNo(Connection conn, int progNo) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<String> list = new ArrayList<String>();
+		String[] seatList = null;
+		
+		String query = "SELECT TH1_SEAT_NO FROM PROG_S_L WHERE PROG_NO=?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, progNo);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				String seatNo = rset.getString("TH1_SEAT_NO");
+				list.add(seatNo);
+			}
+			
+			if(!list.isEmpty()) {
+				int size = list.size();
+				seatList = new String[size];
+				for(int i=0; i<size; i++) {
+					seatList[i] = list.get(i);
+				}
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return seatList;
+	}
+
+	public int getPerformNoByProgNo(Connection conn, int progNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int psNo = -1;
+		
+		String query = "SELECT PS_NO FROM PROG_S_L WHERE PROG_NO=?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, progNo);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				psNo = rset.getInt("PS_NO");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return psNo;
+	}
+
+	public int insertBookInfo(Connection conn, long bkNo, int memberNo, String bkStateCd, int ticketPrice,
+			int totalPrice, String payType) {
+
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = "INSERT INTO BOOK_INF VALUES(?, ?, ?, SYSDATE, ?, ?, ?)";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setLong(1, bkNo);
+			pstmt.setInt(2, memberNo);
+			pstmt.setString(3, bkStateCd);
+			pstmt.setInt(4, ticketPrice);
+			pstmt.setInt(5, totalPrice);
+			pstmt.setString(6, payType);
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int insertBookSeatList(Connection conn, String sc_code, long bkNo, int psNo, int seatNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = "INSERT INTO BK_S_L VALUES"
+				+ "(?||TO_CHAR( TO_NUMBER(TO_CHAR(SYSDATE, 'YYMMDD'))*100000+TKNO_SEQ.NEXTVAL ), "
+				+ "?, ?, ?)";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, sc_code);
+			pstmt.setLong(2, bkNo);
+			pstmt.setInt(3, psNo);
+			pstmt.setInt(4, seatNo);
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+
 	
 }
