@@ -44,29 +44,23 @@
 <%
 	}
 %>
-	//////////////////////////////////////////////////////////////////////////////////////
-	var startDate = psList[0][1];////////////////////////////////////////////////////////
+	
+	var startDate = psList[0][1];
 	var startDateSp = startDate.split('-');
 	var startDateN = Number(startDateSp[0]+startDateSp[1]+startDateSp[2]);
 	
-	var endDate = psList[psList.length-1][1];////////////////////////////////////////////
+	var endDate = psList[psList.length-1][1];
 	var endDateSp = endDate.split('-');
 	var endDateN = Number(endDateSp[0]+endDateSp[1]+endDateSp[2]);
-	console.log("start : "+startDateN+"\nend : "+endDateN);//////////////////////////////////////
+	//console.log("start : "+startDateN+"\nend : "+endDateN);
 	
 	//오늘 날짜를 Number 형식으로 today에 저장
 	var todayYear = new Date().getFullYear();
 	var todayMonth = new Date().getMonth()+1; //오늘이 속한 달
 	var todayDate = new Date().getDate();
 	var today = todayYear*10000+todayMonth*100+todayDate;
-	console.log("today : " + today);/////////////////////////////////////
-    /*
-    var diff = today - startDateN;
-	alert("start : "+startDateN+"\nend : "+endDateN+"\ndiff : "+diff);
-	//양수나 0이면 오늘부터
-	//음수면 공연시작일부터
-	*/
-	//////////////////////////////////////////////////////////////////////////////////////
+	//console.log("today : " + today);
+    
 </script>
 
 <head>
@@ -89,22 +83,19 @@
         var psNo = null;
         
         $(document).ready(function(){
-            
-        	pageInit();
-        	/* 
-        	$('calendar').ready( function(){
+			
+			pageInit();
+			
+			/* 
+			$(document).one('mousemove', function(){
 				viewSelectableDays();
 			});
-        	 */
-        	/* 
-			$(document).one('mousemove', function(){
-			 	viewSelectableDays();
+			*/
+			$(document).mousemove(function(){
+				viewSelectableDays();
 			});
-        	 */
-        	 $(document).mousemove(function(){
-        		 viewSelectableDays();
-        	 });
-        	
+			
+
         	// 날력의 날짜 클릭했을 때
         	// date_sel에 선택한 날짜 저장
         	// 날짜와 회차 모두 선택한 상태에서 다른 날짜를 다시 선택했을 경우를 위해 먼저, 선택한 회차정보를 초기화 
@@ -118,10 +109,10 @@
 				
 				if(date_sel!=chkSel) {
 					date_sel = chkSel;
-					console.log( "date_sel : " + date_sel );//////////////////////////////////////////////
+					//console.log( "date_sel : " + date_sel );
 				}
 				
-				viewSelectableDays();///////////////////////////
+				viewSelectableDays();
 				
                 $('#seat_box ul').html("");
                 $('#cnt_box ul').html("");
@@ -131,8 +122,8 @@
                 $(this).addClass('selected_date_td');
                 
                 var calSelected = date_sel.split('-');
-                //console.log("date_sel : "+date_sel);//////////////////////
-                //console.log("calSelcected : "+calSelected);//////////////
+                //console.log("date_sel : "+date_sel);
+                //console.log("calSelcected : "+calSelected);
                 
                 var year = calSelected[0];
                 var month = calSelected[1];
@@ -162,10 +153,7 @@
             	}
             	$('#cnt_box ul').html(list);
 				
-				
-				
 			});//$('calendar').click END
-        	
         	
         	
         });//$(document).ready END
@@ -240,19 +228,19 @@
 				viewStart = startDateN;
 			}
 			
-			console.log("viewStart : " + viewStart);//////////////////////
-			console.log("viewEnd : " + viewEnd);////////////////////////
+			//console.log("viewStart : " + viewStart);
+			//console.log("viewEnd : " + viewEnd);
 			
 			// 현재표시시작일 & 현재표시종료일 세팅
 			var viewStartMonth = Math.floor(viewStart/100); //표시 시작일 달(연도포함)
 			var viewEndMonth = Math.floor(viewEnd/100); //표시 종료일 달(연도포함)
-			console.log("viewStartMonth : " + viewStartMonth);//////////////////////
-			console.log("viewEndMonth : " + viewEndMonth);//////////////////////
+			//console.log("viewStartMonth : " + viewStartMonth);
+			//console.log("viewEndMonth : " + viewEndMonth);
 			
 			//달력이 표시 중인 월(연도포함)
 			var currMonth = Number($('calendar div.header span.ng-binding').text().split('월,')[1])*100
 							+ Number($('calendar div.header span.ng-binding').text().split('월,')[0]);
-			console.log("currMonth : " + currMonth);///////////////////////////
+			//console.log("currMonth : " + currMonth);
 			
 			var currStart = null; //현재 표시 시작일
 			var currEnd = null; //현재 표시 종료일
@@ -261,16 +249,16 @@
 				currStart = viewStart;
 				if(currMonth == viewEndMonth) {
 					currEnd = viewEnd;
-					console.log("1-1");/////////////////////
+					//console.log("1-1");
 				}
 				else if(currMonth > viewEndMonth) {
 					currStart = Math.floor(viewStart/100)*100 + 00;
 					currEnd = Math.floor(viewEnd/100)*100 + 00;
-					console.log("1-2");//////////////
+					//console.log("1-2");
 				}
 				else {
 					currEnd = Math.floor(viewEnd/100)*100 + 50;
-					console.log("1-2");//////////////
+					//console.log("1-3");
 				}
 			}
 			else if(currMonth > viewStartMonth) {
@@ -278,45 +266,44 @@
 				if(currMonth == viewEndMonth) {
 					currStart = Math.floor(viewStart/100)*100 + 1;
 					currEnd = viewEnd;
-					console.log("2-1");//////////////
+					//console.log("2-1");
 				}
 				else if(currMonth > viewEndMonth) {
 					currStart = Math.floor(viewStart/100)*100 + 00;
 					currEnd = Math.floor(viewEnd/100)*100 + 00;
-					console.log("2-2");//////////////
+					//console.log("2-2");
 				}
 				else {
 					currStart = Math.floor(viewStart/100)*100 + 1;
 					currEnd = Math.floor(viewEnd/100)*100 + 50;
-					console.log("2-3");///////////////
+					//console.log("2-3");
 				}
 			}
 			else {
 				currStart = Math.floor(viewStart/100)*100 + 00;
 				currEnd = Math.floor(viewEnd/100)*100 + 00;
-				console.log("3");//////////////////
+				//console.log("3");
 			}
 			
-			console.log("currStart : " + currStart);//////////////
-			console.log("currEnd : " + currEnd);///////////////////
+			//console.log("currStart : " + currStart);
+			//console.log("currEnd : " + currEnd);
 			
 			
 			var days = $('calendar div.week span.day.ng-binding').not('.different-month');
 			
-			//console.log( days );//////////////////////////////////////////////////
 			
 			$.each( days, function(index, item){
 				
 				var s = currStart%100;
 				var e = currEnd%100;
-				//console.log("s : " + s);//////////////
-				//console.log("e : " + e);//////////////
+				//console.log("s : " + s);
+				//console.log("e : " + e);
 				
 				//console.log("1-"+$('calendar div.week span.day.ng-binding').eq(index).text());
 				//console.log("2-"+item.innerHTML);
 				
 				if(item.innerHTML>=s && item.innerHTML<=e) {
-					console.log("day-"+item.innerHTML);//////////////////////////
+					//console.log("day-"+item.innerHTML);
 					days.eq(index).addClass('selectable');
 				}
 			});
@@ -376,98 +363,9 @@
                             <div id="ct_left_date">
                                 <b>날짜선택</b><hr>
                                 <div id="date_box">
-                                
-                                
-                                
+                                	
                                 	<jsp:include page="/views/reserve/reserveCalendar.html" />
                                 	
-                                	
-                                	
-                                	
-                                	<!--
-                                    <div class="calendar">
-                                        <div class="calendar-header">
-                                            <a class="prev-mon" title="이전달"><span>이전달</span></a>
-                                            <a class="next-mon" title="다음달"><span>다음달</span></a>
-
-                                            <div class="current-mon"><span class="year-month">2018.11</span></div>
-                                        </div>
-                                        <div class="calendar-body">
-                                            <table>
-                                                <thead>
-                                                <tr>
-                                                    <th><span title="일요일">일</span></th>
-                                                    <th><span title="월요일">월</span></th>
-                                                    <th><span title="화요일">화</span></th>
-                                                    <th><span title="수요일">수</span></th>
-                                                    <th><span title="목요일">목</span></th>
-                                                    <th><span title="금요일">금</span></th>
-                                                    <th><span title="토요일">토</span></th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr class="calendar-week">
-                                                        <td class="calendar-date calendar-sun">30</td>
-                                                        
-                                                        <td class="calendar-date">1</td>
-                                                        <td class="calendar-date">2</td>
-                                                        <td class="calendar-date">3</td>
-                                                        <td class="calendar-date">4</td>
-                                                        <td class="calendar-date">5</td>
-                                                        <td class="calendar-date calendar-sat">6</td>
-                                                    </tr>
-                                                    <tr class="calendar-week">
-                                                        <td class="calendar-date calendar-sun">7</td>
-                                                        
-                                                        <td class="calendar-date">8</td>
-                                                        <td class="calendar-date">9</td>
-                                                        <td class="calendar-date">10</td>
-                                                        <td class="calendar-date">11</td>
-                                                        <td class="calendar-date">12</td>
-                                                        <td class="calendar-date calendar-sat available">13</td>
-                                                    </tr>
-                                                    <tr class="calendar-week">
-                                                        <td class="calendar-date calendar-sun available">14</td>
-                                                        
-                                                        <td class="calendar-date available">15</td>
-                                                        <td class="calendar-date calendar-today available">16</td>
-                                                        <td class="calendar-date">17</td>
-                                                        <td class="calendar-date">18</td>
-                                                        <td class="calendar-date">19</td>
-                                                        <td class="calendar-date calendar-sat">20</td>
-                                                    </tr>
-                                                    <tr class="calendar-week">
-                                                        <td class="calendar-date calendar-sun">21</td>
-                                                        
-                                                        <td class="calendar-date">22</td>
-                                                        <td class="calendar-date">23</td>
-                                                        <td class="calendar-date">24</td>
-                                                        <td class="calendar-date">25</td>
-                                                        <td class="calendar-date">26</td>
-                                                        <td class="calendar-date calendar-sat">27</td>
-                                                    </tr>
-                                                    <tr class="calendar-week">
-                                                        <td class="calendar-date calendar-sun">28</td>
-                                                        
-                                                        <td class="calendar-date">29</td>
-                                                        <td class="calendar-date">30</td>
-                                                        <td class="calendar-date">31</td>
-                                                        <td class="calendar-date calendar-next-mon">1</td>
-                                                        <td class="calendar-date calendar-next-mon">2</td>
-                                                        <td class="calendar-date calendar-next-mon calendar-sat">3</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                            <span style="color: red; font-size: 10px;">전월 다음달 선택 시 변수에 반영할것</span>
-                                        </div>
-                                    </div>
-                                    -->
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
                                 </div>
                             </div>
                             <div id="ct_left_cnt">

@@ -71,9 +71,6 @@ public class DateCntSelectServlet extends HttpServlet {
 				//공연 종료일
 				String endDate = si.getM_show_ed_date().toString();
 				
-				System.out.println("'"+startDate+"'");/////////////////////////
-				System.out.println("'"+endDate+"'");///////////////////////////
-				System.out.println("setting");/////////////////////////
 				
 				//공연 일정 목록 (잔여좌석정보x)
 				ArrayList<PerformSchedule> psList = new ReserveService().selectAllPerformSchedule(showNo);
