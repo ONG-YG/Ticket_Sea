@@ -2,6 +2,7 @@ package kr.co.ticketsea.member.controller;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import kr.co.ticketsea.member.model.service.MemberService;
 import kr.co.ticketsea.member.model.vo.Member;
+import kr.co.ticketsea.member.model.vo.PwdMember;
 
 /**
  * Servlet implementation class PwdSearchServlet
@@ -39,14 +41,25 @@ public class PwdSearchServlet extends HttpServlet {
 		String userEmail = request.getParameter("userEmail");
 		String userPhone = request.getParameter("userPhone");
 		
+		//Member 변수 m에 id,name,email,phone을 넣음
 		Member m = new Member();
 		m.setMemberId(userId);
 		m.setMemberName(userName);
 		m.setMemberEmail(userEmail);
 		m.setMemberPhone(userPhone);
 		
-		new MemberService().pwdSearchMember(m);
+	
+		//비즈니스 로직
+		PwdMember pm = new PwdMember();
+		pm=new MemberService().pwdSearchMember(m);
 		
+		if(pm.getResult()>0) {
+			RequestDispatcher view = request.getRequestDispatcher("views/member/pwdSearchSuccess.jsp");
+			request.setAttribute("pm", pm);
+			view.forward(request, response);
+		}else {
+			response.sendRedirect("/views/member/pwdSearchFail.jsp");
+		}
 	}
 
 	/**
