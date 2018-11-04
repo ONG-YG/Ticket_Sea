@@ -49,7 +49,7 @@ public class ShowDao {
 		return result;
 		
 	}
-
+	//공연정보페이지
 	public ArrayList<Show> getcurrentPage(Connection conn, int currentPage, int recordCountPerPage) {
 		
 		PreparedStatement pstmt=null;
@@ -61,7 +61,11 @@ public class ShowDao {
 		//끝 게시물 계산
 		int end = currentPage* recordCountPerPage;
 		
-		String query = "select * from (select row_number() over(order by m_show_no desc) num, musical_l.* from musical_l) where num between ? and ?";
+		String query = "select * from theater_l t right join"+
+		" (select * from (select row_number() over(order by m_show_no desc) num, musical_l.* from musical_l)"
+		+" where num between ? and ?)m on m.th_no = t.th_no";
+		
+		
 		
 		ArrayList<Show> list = new ArrayList<Show>();
 		
@@ -76,6 +80,7 @@ public class ShowDao {
 				Show s = new Show();
 				s.setM_show_no(rset.getInt("m_show_no"));
 				s.setTh_no(rset.getInt("TH_NO"));
+				s.setTh_name(rset.getString("TH_NAME"));
 				s.setSc_code(rset.getString("sc_code"));
 				s.setShow_name(rset.getString("m_show_name"));
 				s.setArtists(rset.getString("m_artists"));
@@ -96,6 +101,7 @@ public class ShowDao {
 		return list;
 	}
 
+	//공연정보내비
 	public String getPageNavi(Connection conn, int currentPage, int recordCountPerPage, int naviCountPerPage) {
 		PreparedStatement pstmt=null;
 		ResultSet rset=null;
@@ -284,6 +290,30 @@ public class ShowDao {
 		
 		return list;
 	}
+
+	//공연삭제
+	public int deleteShow(Connection conn, int showNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;	
+		
+		String query = "delete from musical_l where m_show_no=?";
+		
+		try {
+			pstmt=conn.prepareStatement(query);
+			pstmt.setInt(1, showNo);
+			result=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	
+	
 
 
 

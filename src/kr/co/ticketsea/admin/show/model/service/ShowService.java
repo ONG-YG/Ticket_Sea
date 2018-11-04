@@ -87,6 +87,19 @@ public class ShowService {
 		
 		return list;
 	}
+
+	public int deleteShow(int showNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new ShowDao().deleteShow(conn,showNo);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
 	
 
 

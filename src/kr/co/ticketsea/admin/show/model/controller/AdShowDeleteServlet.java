@@ -1,28 +1,26 @@
 package kr.co.ticketsea.admin.show.model.controller;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import kr.co.ticketsea.admin.show.model.vo.*;
 
+import kr.co.ticketsea.admin.show.model.dao.ShowDao;
 import kr.co.ticketsea.admin.show.model.service.ShowService;
 
 /**
- * Servlet implementation class AdShowListServlet
+ * Servlet implementation class AdShowDeleteServlet
  */
-@WebServlet(name = "AdShowList", urlPatterns = { "/adShowList.do" })
-public class AdShowListServlet extends HttpServlet {
+@WebServlet(name = "AdShowDelete", urlPatterns = { "/adShowDelete.do" })
+public class AdShowDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdShowListServlet() {
+    public AdShowDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,23 +29,16 @@ public class AdShowListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		int currentPage;
+		request.setCharacterEncoding("utf-8");
 		
-		if(request.getParameter("currentPage")==null) {
-			currentPage=1;
+		int showNo=Integer.parseInt(request.getParameter("showNo"));
+		
+		int result = new ShowService().deleteShow(showNo);
+		if(result>0) {
+			response.sendRedirect("/adShowList.do");
 		}else {
-			currentPage=Integer.parseInt(request.getParameter("currentPage"));
+			response.sendRedirect("/views/admin/error.jsp");
 		}
-		
-		PageData pd=new ShowService().showAllList(currentPage);
-		
-		// 3. 결과값을 view 페이지로 리턴
-			
-			RequestDispatcher view = request.getRequestDispatcher("views/admin/ad_showList.jsp"); 
-			request.setAttribute("pageData", pd);
-			view.forward(request, response);
-		
 	}
 
 	/**

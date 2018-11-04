@@ -1,9 +1,6 @@
 @charset "UTF-8";
 
-
-
-    
-    /*회원관리 페이지*/
+    /*예매정보관리 페이지*/
     #content{
         overflow: hidden;
         border:1px solid black;
@@ -41,25 +38,17 @@
             width:900px;
             text-align: center;
             
-        }
-    
-    .memberTbl tr{
-        border:1px solid black;
     }
-    .content_wrap .searchArea{
-        height:10%;
-        padding: 30px;
-    }
-    .memberInfo_table{
+    .reserveInfo_table{
         border-width: 1px 0;
         border-style: solid;
         border-color: #c7c7c7;
     }
-    .memberInfo_table table{
+    .reserveInfo_table table{
         width: 100%;
         border-spacing: 0;
     }
-    .memberInfo_table th{
+    .reserveInfo_table th{
         
         border-bottom: 1px dashed #dedede;
         padding: 30px 0 15px 20px;
@@ -70,18 +59,18 @@
         font-size: 16px;
         width: 200px;
     }
-    .memberInfo_table td{
+    .reserveInfo_table td{
         text-align: center;
         border-bottom: 1px dashed #dedede;
         font-size: 14px;
         text-align: left;
     }
-    .memberInfo_table input[type="text"]{
+    .reserveInfo_table input[type="text"]{
         height:25px;
         font-size:14px;
     }
     
-    #memUpdate{
+    #reserveCancel{
         padding-top:40px;
         text-align: center;
     }
