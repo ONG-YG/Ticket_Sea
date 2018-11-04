@@ -105,4 +105,20 @@ public class PromoService {
 		return result;
 	}
 
+	public int deletePromo(int boardP_no, String userId) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new PromoDao().deletePromo(conn,boardP_no,userId);
+		
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		
+		return result;
+		
+	}
+
 }

@@ -4,14 +4,17 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>삭제 결과</title>
 </head>
 <body>
 
 <script>
-alert("회원의 정보가 존재하지 않습니다.");
-location.href="/views/member/idSearch.jsp";
+	alert("공연 삭제 완료");
+	location.href="/promoList.do";
 </script>
+
 
 </body>
 </html>
+
+

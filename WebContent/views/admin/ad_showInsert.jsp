@@ -13,9 +13,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title></title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
-</script>
-
 <style>
     ul, li, a{list-style: none; margin: 0px; padding: 0px;     text-decoration: none; color: black;}
     div{
@@ -246,15 +243,16 @@
             vertical-align: middle;
 
     }
-    #imgUp{
-    	align-content: center;
-    }
 </style>
 </head>
 <body>
+
+ <script src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
   
   
-<!-- <script>
+<script>
 function LoadImg(value){
 	if(value.files && value.files[0]){
 		var reader = new FileReader();
@@ -264,13 +262,14 @@ function LoadImg(value){
 		reader.readAsDataURl(value.files[0]);
 	}
 }
-</script> -->
+</script>
 
 	<div id="wrapper">
 		<div id="header">
 			<div id="h_inner">
                 <div id="icon">
                     <a href="../admin/admin_page.html"><img width="180" height="50" alt="Ticket Sea" src="../../img/ticket_admin.png"></a>
+
                 </div>
 			</div>
 		</div>
@@ -281,7 +280,7 @@ function LoadImg(value){
                  <ul>
                     <li><a href="#">공연관리</a>
                         <ul>
-                             <li><a href="/adShowPlace.do">공연등록</a></li>
+                             <li><a href="/adShowPlaceList.do">공연등록</a></li>
                             <li><a href="/adShowList.do">공연목록</a></li>
                         </ul>
                     </li>    
@@ -312,15 +311,17 @@ function LoadImg(value){
                 <h2 class="main_title">공연등록</h2>
             </div>
             <!-- form 태그 -->
-       	<form action="/showInsert.do" method="post" enctype="multipart/form-data">
+       	<form action="/showInsert.do" method="post">
             <div class="main_area">
                 <div class="left_wrap">
                 <div class="input_area">
                     <!--이미지영역-->
                     <div class="event_img_area">
-                        
-                        <input type="file"  id="imgUp" name="upfile"/><br>
-                        <img class="show_post" id="postImg" src="../../img/ticketsea_poster.png" data-default-src="../../img/ticketsea_poster.png" alt="공연포스터" style="width:160px; height:160px;">
+                    	<input type="file" name="upfile"/><br>
+                        <img class="show_post" src="../../img/ticketsea_poster.png" data-default-src="../../img/ticketsea_poster.png" alt="공연포스터" style="width:160px; height:160px;">
+                        <!--이미지 업로드 버튼-->
+                         <div class="upload_btn">
+                        </div>
                     </div>
                 </div>
                 </div>
@@ -337,7 +338,7 @@ function LoadImg(value){
                                     <option value="<%=sc.getSc_code()%>"><%=sc.getSc_name()%></option>
                             		<%} %>
                                 </select>
-                                <input id="title" type="text" name="show_name" class="title_input" placeholder="공연명을 입력해 주세요." maxlength="64" autofocus="autofocus">
+                                <input id="title" type="text" name="show_name" class="title_input" placeholder="공연명을 입력해 주세요." value="" maxlength="64" autofocus="autofocus">
                             </div>
                         </div>
                     </fieldset>
@@ -413,13 +414,17 @@ function LoadImg(value){
                         </legend>
                         <div class="edit">
                             <div class="write_wrap">
-                           		<input type="file" name="showDtInfo"/>
+                            <!-- form 태그 안에 form   -->
+                                 <!-- <form action="http://localhost/insert.html" method="post" enctype="multipart/form-data">
+                                	<input type="file">
+                                <input type="submit">
+                                </form> -->
                             </div>
                         </div>
                     </fieldset>
                 </div>
                 
-            	</div>
+            </div>
 	            <div class="submit_area">
 	            <input type="submit" value="작성" style="float:right;" onclick="return showCheck();" width="70px" height="40px">
 	            </div>
@@ -434,19 +439,6 @@ function LoadImg(value){
 	<!-- script -->
 	
 	<script>
-	$(document).ready(function() {
-		var count = 0;
-		$("#showDt").click(function(){
-			count=1;
-			return true;
-		});
-		return false;
-	});
-		  
-	function imgUp(){
-		var fullpath=
-		$("#postImg").attr("src",getServletContext().getRealPath("/")+"img"+"\\"+poster+"");
-	}
 	function showCheck(){
 		category= document.getElementById("category").value;
 		title= document.getElementById("title").value;
@@ -457,17 +449,16 @@ function LoadImg(value){
 		grade= document.getElementById("grade").value;
 		runTime= document.getElementById("runTime").value;
 		price= document.getElementById("price").value;
-		
-		if(category==""||category==null)
+		if(category=="")
         {
 		     alert("공연카테고리를 선택하세요");
 				return false;
-		}else if(title==""||title==null)
-		{
+		}else if(title="")
+			{
 				alert("공연명을 입력하세요");
 				return false;
-        }
-       else if(!(/^(19|20)\d{2}.(0[1-9]|1[012]).(0[1-9]|[12][0-9]|3[0-1])$/.test(startEventDate)))
+            }
+        else if(!(/^(19|20)\d{2}.(0[1-9]|1[012]).(0[1-9]|[12][0-9]|3[0-1])$/.test(startEventDate)))
             //년,월,일 .으로 구분
             {
         		alert("시작일을 입력해주세요(yyyy.mm.dd)");
@@ -479,28 +470,25 @@ function LoadImg(value){
         	alert("종료일을 입력해주세요(yyyy.mm.dd)");
 			return false;
         } 
-        else if(artist==""){
+        else if(artist=""){
             alert("출연자를 입력하세요");
 			return false;
         }
         else if(!(/^[ㄱ-ㅎ|가-힣|0-9|\s]+$/g.test(grade)))
             {   
-                 alert("관람등급을 입력하세요");
+                 alert("관람등급을 입력하세요")
                 return false;
             }
-        else if(!(/^[0-9]+$/g.test(runTime)))
+        else if(!(/^[0-9]+$/g.test(runTime))) // 주소 공백검사
             {
-                alert("관람시간을 입력하세요(숫자만)");
+                alert("관람시간을 입력하세요(숫자만)")
                 return false;
             }
         else if(!(/^[0-9]+$/g.test(price)))
 		{
                	alert("가격을 입력하세요");
                 return false;
-        }else if(count==0){
-        		alert("상세 정보 이미지를 업로드 하세요");
-        		return false;
-        }
+                }
        
         else//모든 검사 만족시 true 반환
         {

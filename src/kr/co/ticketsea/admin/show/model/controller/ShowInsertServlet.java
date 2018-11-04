@@ -7,9 +7,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
-
 import kr.co.ticketsea.admin.show.model.service.ShowService;
 import kr.co.ticketsea.admin.show.model.vo.Show;
 
@@ -33,9 +30,9 @@ public class ShowInsertServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		String fileName=null;
-		//파일 사이즈 업로드 
-
+		
+		System.out.println(Integer.parseInt(request.getParameter("th_no")));
+		System.out.println(request.getParameter("sc_code"));
 		Show s = new Show();
 		
 		s.setShow_name(request.getParameter("show_name"));
@@ -46,9 +43,9 @@ public class ShowInsertServlet extends HttpServlet {
 		s.setArtists(request.getParameter("artists"));
 		s.setShow_grd(request.getParameter("show_grd"));
 		s.setShow_run(Integer.parseInt(request.getParameter("show_run")));
-		s.setShow_dtInfo(request.getParameter("showDtInfo"));
 		
-		int result = new ShowService().insertShow(s,fileName);
+		
+		int result = new ShowService().insertShow(s);
 		
 		if(result>0) {
 			response.sendRedirect("/views/admin/showInsertSuccess.jsp");

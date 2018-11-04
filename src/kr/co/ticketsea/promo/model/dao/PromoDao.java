@@ -359,5 +359,30 @@ public class PromoDao {
 		}
 		return list;
 	}
+
+	public int deletePromo(Connection conn, int boardP_no, String userId) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = "delete from board_promo where boardP_no=? and boardP_writer=?";
+		
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setInt(1, boardP_no);
+			pstmt.setString(2, userId);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
 	
 }

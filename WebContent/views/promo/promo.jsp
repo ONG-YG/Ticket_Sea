@@ -78,7 +78,6 @@
         float: left;
         height: 100px;
     }
-    
     #left_menu{
         width: 166px;
         float: left;
@@ -124,6 +123,13 @@
         padding : 40px;
         font-size : 30px;
     }
+    
+    .write_review{
+                    clear:both;
+                    width:990px;
+                    height:100px;
+                    overflow:hidden;
+                }
     
     #infoHeader > #i_H_pic{
         border : 1px solid #dedede;
@@ -275,7 +281,6 @@
             </div>
             
             
-	//작성자가 아니면 수정 버튼을 보여주지 않는 코드
 	<%
 	Member m = ((Member)request.getSession(false).getAttribute("member"));
 	// 로그인한 사용자는 Member 객체가 리턴 되고
@@ -288,12 +293,17 @@
 %>
 
 <%
-	if(user1.equals(user2)){ // 로그인한 사용자와 작성자가 같다면
+	if(user1.equals(user2) || user1.equals("admin")){ // 로그인한 사용자와 작성자가 같다면
 %>
 		<button id="btn1" onclick="modifyActive();">수정</button> 
-		<button id="btn2" onclick="delNotice();">삭제</button> 
+		<button id="btn2" onclick="delPromo();">삭제</button> 
 <%}}%>
 
+<script>
+function delPromo(){
+	location.href="/promoDelete.do?boardP_no=<%=promo.getBoardP_no()%>&writer=<%=promo.getBoardP_writer()%>";
+}
+</script>
            
             <div id="right_view">
                 
@@ -343,7 +353,11 @@
                     
                     <div id="i_C_content_a">
                         <br><br>
+                        
+                        <div style="width : 500px; height: 300px; " >
                         <%= promo.getBoardP_contents() %>
+                        </div>
+                        
                           <img src="../../img/poster_ex.jpg" style="width:700px; height:850px; padding : 50px;">
                         
                         
@@ -459,14 +473,7 @@
                     background-color: #d5d5d5;
                 }
                 
-                .write_review{
-                	border: 1px solid black;
-                    clear:both;
-                    width:900px;
-                    height:100px;
-                    overflow:hidden;
-                    padding-top:9px
-                }
+                
                 
                 .write_review textarea{
                     border:px solid #d4d4d4;
@@ -509,12 +516,13 @@
                                           placeholder="주민번호, 전화번호, 이메일 등 개인정보를 남기면 타인에 의해 악용될 소지가 있습니다."></textarea>
                                  <input type="hidden" name="promoNo" value="<%=promo.getBoardP_no()%>"/>       
                                 <input type="submit" class="write_review_button"  value="후기작성">
-                                <% }else{ %>
-                                <h3>댓글을 작성하려면 로그인 해주세요.</h3>
-                                <%} %>
-                               
-
+                                
                             </div>
+                            <% }else{ %>
+                            <div class="write_review">
+                                <span><h3>댓글을 작성하려면 로그인 해주세요.</h3></span>
+                                <%} %>
+                                </div>
 					</form>
             
         <div class="review_list">
@@ -531,17 +539,18 @@
             <li>
              <% for(Comment co : list) { %>
                 <div class="review_info">
-                    <dl class="star_average">
-                        <dt>별점</dt>
+                        <dt></dt>
                         <dd class="grade_star">
                             <span class="star_gauge" style="width: 100%"></span>
                         </dd>
-                        <dt>아이디</dt>
-                        <dd class="review_user"><%=co.getUserId()%></dd>
-                        <dt>날짜</dt><dd class="review_date"><%=co.getRegDate()%></dd>
-                    </dl>
-                </div>
+                        <dt><%=co.getUserId()%></dt>
+                        <dd class="review_user"></dd>
+                        <dt><%=co.getRegDate()%></dt><dd class="review_date"></dd>
+                    
+                </div><br>
+                <div style = "border-bottom : 1px solid #dedede;">
                	<%=co.getContents()%>
+               	</div>
                 <%}%>
                <%}%>
             </li>

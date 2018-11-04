@@ -13,6 +13,28 @@ public class Promo {
 	private String boardP_location;
 	private Date boardP_date;
 	private int boardP_hit;
+	private char boardP_active;
+	
+	public Promo(int boardP_no, String boardP_writer, String boardP_category, String boardP_title, String boardP_artist,
+			String boardP_contents, String boardP_location, Date boardP_date, int boardP_hit, char boardP_active) {
+		super();
+		this.boardP_no = boardP_no;
+		this.boardP_writer = boardP_writer;
+		this.boardP_category = boardP_category;
+		this.boardP_title = boardP_title;
+		this.boardP_artist = boardP_artist;
+		this.boardP_contents = boardP_contents;
+		this.boardP_location = boardP_location;
+		this.boardP_date = boardP_date;
+		this.boardP_hit = boardP_hit;
+		this.boardP_active = boardP_active;
+	}
+	public char getBoardP_active() {
+		return boardP_active;
+	}
+	public void setBoardP_active(char boardP_active) {
+		this.boardP_active = boardP_active;
+	}
 	public int getBoardP_no() {
 		return boardP_no;
 	}
@@ -70,19 +92,6 @@ public class Promo {
 	public Promo() {
 		super();
 		// TODO Auto-generated constructor stub
-	}
-	public Promo(int boardP_no, String boardP_writer, String boardP_category, String boardP_title, String boardP_artist,
-			String boardP_contents, String boardP_location, Date boardP_date, int boardP_hit) {
-		super();
-		this.boardP_no = boardP_no;
-		this.boardP_writer = boardP_writer;
-		this.boardP_category = boardP_category;
-		this.boardP_title = boardP_title;
-		this.boardP_artist = boardP_artist;
-		this.boardP_contents = boardP_contents;
-		this.boardP_location = boardP_location;
-		this.boardP_date = boardP_date;
-		this.boardP_hit = boardP_hit;
 	}
 	
 	

@@ -1,30 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-    <%@ page import = "kr.co.ticketsea.faq.model.vo.*" %>
+    <%@ page import = "kr.co.ticketsea.qna.model.vo.*" %>
     <%@ page import = "java.util.*" %>
-    <%@ page import = "kr.co.ticketsea.member.model.vo.*" %>
     
     <%
 	// Controller(Servlet)에서 보내준값 가져오기
 	PageData pd = (PageData)request.getAttribute("pageData");
-
-	ArrayList<Faq> list = pd.getList(); // 현재 페이지의 글 목록
-	String pageNavi = pd.getPageNavi(); // 현재 navi Bar
+    String keyword = (String)request.getAttribute("keyword");
+    
+	ArrayList<Qna> list = null; // 현재 페이지의 글 목록
+	String pageNavi = null; // 현재 navi Bar
+	
+	if(pd!=null){
+		 list = pd.getList(); // 현재 페이지의 글 목록
+		 pageNavi = pd.getPageNavi(); // 현재 navi Bar
+		}
 	
 %>
-    
-    
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta charset="UTF-8">
-<title>FAQ 리스트</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>질문과 답변 리스트</title>
+
 <script
   src="https://code.jquery.com/jquery-3.3.1.js"
   integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
   crossorigin="anonymous">
 </script>
+
 <style>
     /* 전체 사이즈 조정 */
     
@@ -233,7 +238,7 @@
             line-height:1.6;
         }
     
-    .faqCategory{
+    .questionTable{
             border:1px solid #dedede;
             border-right:0;
             font-size:13px;
@@ -242,16 +247,7 @@
             width:730px;
             text-align: center;
         }
-        
-        .faqContent{
-            border:1px solid #dedede;
-            border-right:0;
-            font-size:13px;
-            margin:10px auto 12px;
-            line-height:45px;
-            width:730px;
-            text-align: center;
-        }
+    
     #header_inner{width:990px; margin: 0px auto;}
 </style>
 </head>
@@ -283,68 +279,47 @@
             </ul>    
             <div id="right_view">
                 <div class="r_line">
-                    <h3>자주묻는 질문</h3>
+                    <h3>질문 게시판</h3>
                 </div>
-                
-                     
-            <table border=1px class="faqCategory">
-                         <tr>
-                           <td id = "faqConcert"><a href="#">공연</a></td>
-                           <td id = "faqBook"><a href="#">예매 </a></td> 
-                           <td id = "faqPayment"><a href="#">결제</a></td>
-                           <td id = "faqID"><a href="#">회원</a></td>
-                           <td id=" faqEtc"><a href="#">기타</a></td>
-                         </tr>
-                    </table>
-                    
-                    <br>
-                    
-                    <table border 1px class="faqContent">
-                        <tr style="background-color: lightskyblue; color:white">
-                            <td id = "contentCategory" style="width: 15%">분류</td>
-                            <td id = "contentQuestion"  style="width: 85%">질문</td>
-                        </tr>
-                    
-                        <% for (Faq f : list) { %>
-                    
+                <h2>'<%=keyword%>' 검색 결과 </h2>
+                     <table border=1px class="questionTable">
+                         <thead style="background-color: lightskyblue; color:white" >
+                             <td width="70%">제목</td>
+                             <td width="12%">작성자</td>
+                             <td width="12%">작성일</td>
+                             <td>조회수</td>
+                         </thead>
+                             <%if(pd!=null){ %>
+                            <% for (Qna q : list) { %>
                         <tr>
-                            <td><%= f.getBoardF_category() %></td>
-                            <td><a href="/faq.do?boardF_no=<%=f.getBoardF_no()%>"><%=f.getBoardF_title()%></a></td>
+                            <td><a href="/qna.do?boardQ_no=<%=q.getBoardQ_no()%>"><%=q.getBoardQ_title()%></a></td>
+                            <td><%= q.getBoardQ_writer() %></td>
+                            <td><%= q.getBoardQ_date() %></td>
+                            <td><%= q.getBoardQ_hit() %></td>
                         </tr>
-                        
-                        <% } %> 
-                        
-                       
-                        
-             
-            </table>    
-            
+                            <% } %>       
+                    </table>
                 
-                
-           <div style="width:800px; text-align:center;">
+             <div style="width:800px; text-align:center;">
 		<label><%=pageNavi%></label>
-		</div>
-            <%
-		session = request.getSession(false);
-		Member m = (Member)session.getAttribute("member"); 
-	%>       
-            
-           <%
-		if(m!=null && m.getMemberId().equals("admin")){
-		%>         
-     	<form style="display:inline;" action="/views/faq/faqWrite.jsp">
-		<input type="submit" value="글쓰기" style="width: 70px; height: 30px; float:right;"/> <br>
-	</form>
-	<%} %>
+		</div>  
+            <%}else{ %>
+            <h2>검색 결과가 없습니다.</h2>
+                <%} %>
+             <form style="display:inline;" action="/views/qna/qnaWrite.jsp">
+				<input type="submit" value="글쓰기" style="width: 70px; height: 30px; float:right;"/> <br>
+			</form>
             <br>
             <div class="searchArea"> 
-            <form style="display:inline;" action="/faqSearch.do" method="get">
+            
+            <form style="display:inline;" action="/qnaSearch.do" method="get">
                     <a href="#"><input type="submit" style="display: none"><img src="../../img/btn_search4.png" alt="검색" style="float: right"></a>
                 
 					<input type="text" class="textInp" name="search" id="search" style="float: right">
 					<a href="javascript:search();"></a>
 					</form>
 				</div>
+            
             
                 
             </div>
@@ -353,11 +328,14 @@
     
     <a href="#" id="back_to_top">Top</a>
     
+    <a href="#" id="back_to_top">Top</a>
+    
     <div id="footer">
         <jsp:include page="/footer.jsp"/>
     </div>
     
 </div>
+
 
 </body>
 </html>

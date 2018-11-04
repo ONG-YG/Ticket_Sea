@@ -14,11 +14,11 @@ import kr.co.ticketsea.common.JDBCTemplate;
 
 public class ShowDao {
 
-	public int insertShow(Connection conn, Show s,String fileName) {
+	public int insertShow(Connection conn, Show s) {
 		PreparedStatement pstmt= null;
 		int result = 0;
 		
-		String query = "insert into musical_l values(SHOW_DB.nextval,?,?,?,?,?,?,?,?,1000,?)";
+		String query = "insert into musical_l values(SHOW_DB.nextval,?,?,?,?,?,?,?,?)";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -32,7 +32,6 @@ public class ShowDao {
 			pstmt.setString(6, s.getArtists());
 			pstmt.setString(7, s.getShow_grd());
 			pstmt.setInt(8, s.getShow_run());
-			pstmt.setString(9, s.getShow_dtInfo());
 			
 			
 			result = pstmt.executeUpdate();
@@ -208,7 +207,7 @@ public class ShowDao {
 				show.setM_show_no(rset.getInt("m_show_no"));
 				show.setSc_code(rset.getString("sc_name"));
 				show.setShow_name(rset.getString("m_show_name"));
-				show.setTh_name(rset.getString("th_name"));
+				show.setth_name(rset.getString("th_name"));
 				show.setArtists(rset.getString("m_artists"));
 				show.setShow_grd(rset.getString("m_show_grd"));
 				show.setShow_run(rset.getInt("m_show_run"));

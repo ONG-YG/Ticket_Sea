@@ -7,11 +7,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>회원정보페이지</title>
-    <!-- 외부 스타일 시트 불러오기 -->
-    <link href="../../css/ad_memberInfo.css" rel="stylesheet" type="text/css">
-    <style>
-     ul, li, a{list-style: none; margin: 0px; padding: 0px; text-decoration: none; color: black;}
+<title>Insert title here</title>
+
+<style>
+     ul, li, a{list-style: none; margin: 0px; padding: 0px;     text-decoration: none; color: black;}
     div{
         box-sizing : border-box;
     }
@@ -185,6 +184,7 @@
       transition:800ms ease all;
     }
 </style>
+<title>관리자페이지</title>
 </head>
 <body>
 		<div id="wrapper">
@@ -202,7 +202,7 @@
                 <ul>
                     <li><a href="#">공연관리</a>
                         <ul>
-                             <li><a href="/adShowPlace.do">공연등록</a></li>
+                             <li><a href="/admin/ad_showInsert.jsp">공연등록</a></li>
                             <li><a href="/adShowList.do">공연목록</a></li>
                         </ul>
                     </li>    
@@ -250,15 +250,15 @@
                             </tr>
                             <tr>
                                 <th>연락처</th>
-                                <td><input type="text" id="phone" name="phone" value="<%=m.getMemberPhone()%>"></td>
+                                <td><input type="text" name="phone" value="<%=m.getMemberPhone()%>"></td>
                             </tr>
                             <tr>
                                 <th>주소</th>
-                                <td><input type="text" id="address" name="address" value="<%=m.getMemberAddr()%>"></td>
+                                <td><input type="text" name="address" value="<%=m.getMemberAddr()%>"></td>
                             </tr>
                             <tr>
                                 <th>이메일</th>
-                                <td><input type="text" id="email" name="email" value="<%=m.getMemberEmail()%>"></td>
+                                <td><input type="text" name="email" value="<%=m.getMemberEmail()%>"></td>
                             </tr>
                             <tr>
                             	<th>회원상태</th>
@@ -272,31 +272,14 @@
                     </table>
                 </div>
                    <div id="memUpdate">
-                    <button id="updateBtn" onclick = "return updateSubmit();">회원정보 수정</button>
+                    <button id="updateBtn" onclick = "updateSubmit()">회원정보 수정</button>
                    </div>
                </div>
                </form>
                </div>
                <script>
                 function updateSubmit(){
-                	var phone = document.getElementById("phone").value;
-                	var address = document.getElementById("address").value; 
-                	var email = document.getElementById("email").value; 
-                	
-                	if(phone==""){
-                		alert("연락처를 입력하세요");
-                		return false;
-                	}else if(address==""){
-                		alert("주소를 입력하세요");
-                		return false;
-                	}else if(!(/^[a-z0-9]{4,20}@/.test(email))||email==""){
-                		alert("이메일을 입력하세요");
-                		return false;
-                	}else{
-                		document.getElementById("updateForm").submit();
-                		return true;
-                	}
-                	
+                	document.getElementById("updateForm").submit();
                 }
                </script>
                

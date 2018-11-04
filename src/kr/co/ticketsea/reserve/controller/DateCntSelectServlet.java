@@ -11,12 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import kr.co.ticketsea.member.model.vo.Member;
 import kr.co.ticketsea.reserve.model.service.ReserveService;
 import kr.co.ticketsea.reserve.model.vo.PerformSchedule;
 import kr.co.ticketsea.reserve.model.vo.ReserveSession;
 import kr.co.ticketsea.reserve.model.vo.ReserveStepOne;
-import kr.co.ticketsea.reserve.model.vo.SeatGradeState;
-
 import kr.co.ticketsea.reserve.model.vo.ShowInfo;
 
 /**
@@ -74,42 +73,19 @@ public class DateCntSelectServlet extends HttpServlet {
 				
 				if(!psList.isEmpty()) {
 					//잔여좌석정보 (PS_NO확인 & BK_S_L테이블에서 예약완료인지 확인)
-					ArrayList<SeatGradeState> seatGrdStList = null;
 					for(int i=0; i<psList.size(); i++) {
 						PerformSchedule ps = psList.get(i);
-						int psNo = ps.getPerformSchNo();
 						//System.out.println("회차번호 = "+ps.getPerformSchNo());
-						
-						
-						seatGrdStList = new ReserveService().getSeatGradeStatus(psNo);
-						if(!seatGrdStList.isEmpty()) {
-							ps.setSeatGrdStList(seatGrdStList);
-						}else {
-							response.sendRedirect("/views/reserve/reserveError.jsp");
-							System.out.println("error at DateCntSelectServlet-3");
-						}
-						
-						
-						//int availableSeat = new ReserveService().availableSeatCount(ps.getPerformSchNo());
-						//ps.setAvailableSeat(availableSeat);
+						int availableSeat = new ReserveService().availableSeatCount(ps.getPerformSchNo());
+						ps.setAvailableSeat(availableSeat);
 						//System.out.println("잔여좌석수 = "+psList.get(i).getAvailableSeat());
 					}
 					
-					
-
 					stOne = new ReserveStepOne();
 					stOne.setShowNo(showNo);
 					stOne.setShowTitle(showTitle);
 					stOne.setShowPoster(showPoster);
 					stOne.setPsList(psList);
-					
-					//stOne.setSeatGrdStList(seatGrdStList);
-					
-					
-					
-					
-					
-					
 				}
 				
 				if(stOne!=null) {

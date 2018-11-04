@@ -117,4 +117,37 @@ public PageData noticeAllList(int currentPage) {
 		return result;
 	}
 
+
+	public PageData searchList(String keyword, int currentPage) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		// 2개값을 저장하는 변수 생성 (게시물의 개수, navi의 개수)	
+		int recordCountPerPage = 10; //게시물의 개수
+		int naviCountPerPage = 5; //navi의 개수
+		
+		
+		// Service에서 DAO를 호출 (2번의 DAO를 호출)
+		// 1. 현재 페이지의 게시물 리스트 요청
+		// 2. 현재 페이지를 중심으로 만들어지는 navi 리스트 요청
+		
+		
+		ArrayList<Notice> list = new NoticeDao().getSearchCurrentPage(conn,currentPage,recordCountPerPage,keyword);
+		String pageNavi = new NoticeDao().getSearchPageNavi(conn,currentPage,recordCountPerPage,naviCountPerPage,keyword);
+		PageData pd = null;
+		
+		
+		if(!list.isEmpty() && !pageNavi.isEmpty())
+		{
+			pd = new PageData();
+			pd.setList(list);
+			pd.setPageNavi(pageNavi);
+		}
+		
+		JDBCTemplate.close(conn);
+		
+		return pd;
+		
+	}
+
 }
