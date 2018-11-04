@@ -66,6 +66,14 @@ public class DateCntSelectServlet extends HttpServlet {
 				String showTitle = si.getM_show_name();
 				//공연 포스터 파일명
 				String showPoster = si.getM_show_poster();
+				//공연 시작일
+				String startDate = si.getM_show_st_date().toString();
+				//공연 종료일
+				String endDate = si.getM_show_ed_date().toString();
+				
+				System.out.println("'"+startDate+"'");/////////////////////////
+				System.out.println("'"+endDate+"'");///////////////////////////
+				System.out.println("setting");/////////////////////////
 				
 				//공연 일정 목록 (잔여좌석정보x)
 				ArrayList<PerformSchedule> psList = new ReserveService().selectAllPerformSchedule(showNo);
@@ -94,6 +102,8 @@ public class DateCntSelectServlet extends HttpServlet {
 					stOne.setShowTitle(showTitle);
 					stOne.setShowPoster(showPoster);
 					stOne.setPsList(psList);
+					stOne.setStartDate(startDate);
+					stOne.setEndDate(endDate);
 					
 				}
 				

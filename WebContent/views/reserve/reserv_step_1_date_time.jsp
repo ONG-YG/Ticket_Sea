@@ -11,8 +11,11 @@
 	int showNo = Integer.parseInt(request.getParameter("showNo"));
 	ReserveStepOne stOne = (ReserveStepOne)request.getAttribute("stepOne");
 	
-	String showTitle = stOne.getShowTitle();
-	String showPoster = stOne.getShowPoster();
+	String showTitle = stOne.getShowTitle(); //공연명
+	String showPoster = stOne.getShowPoster(); //공연 포스터 파일명
+	//String startDate = stOne.getStartDate(); //공연 시작일 ///////////////////////////////////
+	//String endDate = stOne.getEndDate(); //공연 종료일 ///////////////////////////////////////
+	
 	ArrayList<PerformSchedule> psList = stOne.getPsList();
 %>
 
@@ -41,7 +44,29 @@
 <%
 	}
 %>
-
+	//////////////////////////////////////////////////////////////////////////////////////
+	var startDate = psList[0][1];////////////////////////////////////////////////////////
+	var startDateSp = startDate.split('-');
+	var startDateN = Number(startDateSp[0]+startDateSp[1]+startDateSp[2]);
+	
+	var endDate = psList[psList.length-1][1];////////////////////////////////////////////
+	var endDateSp = endDate.split('-');
+	var endDateN = Number(endDateSp[0]+endDateSp[1]+endDateSp[2]);
+	console.log("start : "+startDateN+"\nend : "+endDateN);//////////////////////////////////////
+	
+	//오늘 날짜를 Number 형식으로 today에 저장
+	var todayYear = new Date().getFullYear();
+	var todayMonth = new Date().getMonth()+1; //오늘이 속한 달
+	var todayDate = new Date().getDate();
+	var today = todayYear*10000+todayMonth*100+todayDate;
+	console.log("today : " + today);/////////////////////////////////////
+    /*
+    var diff = today - startDateN;
+	alert("start : "+startDateN+"\nend : "+endDateN+"\ndiff : "+diff);
+	//양수나 0이면 오늘부터
+	//음수면 공연시작일부터
+	*/
+	//////////////////////////////////////////////////////////////////////////////////////
 </script>
 
 <head>
@@ -62,17 +87,23 @@
         var date_sel = null;
         var cnt_sel = null;
         var psNo = null;
-        //var availSeat = null;
         
         $(document).ready(function(){
             
         	pageInit();
-        	
-        	
-        	
-        	
-        	
-        	
+        	/* 
+        	$('calendar').ready( function(){
+				viewSelectableDays();
+			});
+        	 */
+        	/* 
+			$(document).one('mousemove', function(){
+			 	viewSelectableDays();
+			});
+        	 */
+        	 $(document).mousemove(function(){
+        		 viewSelectableDays();
+        	 });
         	
         	// 날력의 날짜 클릭했을 때
         	// date_sel에 선택한 날짜 저장
@@ -87,15 +118,10 @@
 				
 				if(date_sel!=chkSel) {
 					date_sel = chkSel;
-					console.log( date_sel );
+					console.log( "date_sel : " + date_sel );//////////////////////////////////////////////
 				}
 				
-				
-				
-				
-				
-				
-				
+				viewSelectableDays();///////////////////////////
 				
                 $('#seat_box ul').html("");
                 $('#cnt_box ul').html("");
@@ -104,23 +130,15 @@
                 $('.calendar-date').removeClass('selected_date_td');
                 $(this).addClass('selected_date_td');
                 
-                /*
-                var yearMonth = $('.year-month').text().split('.');
-                var year = yearMonth[0];
-                var month = yearMonth[1];
-                var day = $(this).text();
-                */
-                
                 var calSelected = date_sel.split('-');
-                console.log("date_sel : "+date_sel);
-                console.log("calSelcected : "+calSelected);
+                //console.log("date_sel : "+date_sel);//////////////////////
+                //console.log("calSelcected : "+calSelected);//////////////
                 
                 var year = calSelected[0];
                 var month = calSelected[1];
                 var day = calSelected[2];
                 
-                
-                date_sel = year+"-"+month+"-"+day;
+                //date_sel = year+"-"+month+"-"+day;
                 $('#date_sel_info span').html(year+"."+month+"."+day);
                 $('#cnt_sel_info span').html(cnt_sel);
                 //alert(date_sel);
@@ -150,72 +168,9 @@
         	
         	
         	
-        	
-        	
-        	
-        	
-        	
-        	
-        	
-        	
-        	/*
-        	// 날력의 날짜 클릭했을 때
-        	// date_sel에 선택한 날짜 저장
-        	// 날짜와 회차 모두 선택한 상태에서 다른 날짜를 다시 선택했을 경우를 위해 먼저, 선택한 회차정보를 초기화 
-            $('.calendar-date').click(function(){
-            //$('.week .day').click(function(){
-            	//alert("hello");/////////////////////////////////////////
-                date_sel = null;
-                cnt_sel = null;
-                psNo = null;
-                
-                $('#seat_box ul').html("");
-                $('#cnt_box ul').html("");
-                $('#seat_box ul').html("");
-                $('#cnt_box li').removeClass('selected_cnt_li');
-                $('.calendar-date').removeClass('selected_date_td');
-                $(this).addClass('selected_date_td');
-                
-                var yearMonth = $('.year-month').text().split('.');
-                var year = yearMonth[0];
-                var month = yearMonth[1];
-                var day = $(this).text();
-                
-                date_sel = year+"-"+month+"-"+day;
-                $('#date_sel_info span').html(year+"."+month+"."+day);
-                $('#cnt_sel_info span').html(cnt_sel);
-                //alert(date_sel);
-                
-                var cntList = [];
-                for(var i=0; i<psList.length; i++) {
-                	if(psList[i][1]==date_sel) {
-               			var ps = psList[i];
-               			var cntTime = [ ps[2], ps[3] ];
-               			cntList.push(cntTime);
-                	}
-                }
-                
-                var list = "";
-            	for(var i=0; i<cntList.length; i++) {
-            		list += " <li id='li_"+ cntList[i][0] +"' onclick='listClick("+ cntList[i][0] +");'> "
-		                        +"<span class='cnt'>"+ cntList[i][0] +"</span> "
-		                        +"<span>회</span> "
-		                        +"<span class='cnt_time'>"+ cntList[i][1] +"</span> "
-		                    +" </li> ";
-            	}
-            	$('#cnt_box ul').html(list);
-            	
-            });//$('.calendar-date').click END
-            */
-            
-            
-            
-            
-            
-            
-            
-            
         });//$(document).ready END
+        
+        
         
         function pageInit() {
         	
@@ -225,13 +180,7 @@
         	var showPosterSrc = "/img/poster/<%=showPoster%>";
         	$('#mini_poster img').attr('src',showPosterSrc);  //포스터 이미지 경로 세팅
         	
-        	
-        	
-        	//psList에 담긴 선택가능한 날짜들 달력에 표시해주기////////////////////////////////////
-        	
-        	
-        	
-        }
+        }//function pageInit() END
         
      	// 회차 정보 li를 클릭했을 때
         // cnt_sel에 선택한 회차 번호 저장
@@ -271,7 +220,108 @@
                 $('#seat_box ul').html(list);
                 
             }
-        }
+        }//function listClick(cnt) END
+     	
+		function viewSelectableDays(){
+	    	
+			//스케줄 시작일이 오늘 이후인지 아닌지
+			var diff = today - startDateN;
+			console.log("diff : "+diff);
+			
+			var viewStart = null; //표시 시작일
+			var viewEnd = endDateN; //표시 종료일
+			
+			if(diff>=0) {
+				//양수나 0이면 오늘부터
+				viewStart = today;
+			}
+			else {
+				//음수면 스케줄 시작일부터
+				viewStart = startDateN;
+			}
+			
+			console.log("viewStart : " + viewStart);//////////////////////
+			console.log("viewEnd : " + viewEnd);////////////////////////
+			
+			// 현재표시시작일 & 현재표시종료일 세팅
+			var viewStartMonth = Math.floor(viewStart/100); //표시 시작일 달(연도포함)
+			var viewEndMonth = Math.floor(viewEnd/100); //표시 종료일 달(연도포함)
+			console.log("viewStartMonth : " + viewStartMonth);//////////////////////
+			console.log("viewEndMonth : " + viewEndMonth);//////////////////////
+			
+			//달력이 표시 중인 월(연도포함)
+			var currMonth = Number($('calendar div.header span.ng-binding').text().split('월,')[1])*100
+							+ Number($('calendar div.header span.ng-binding').text().split('월,')[0]);
+			console.log("currMonth : " + currMonth);///////////////////////////
+			
+			var currStart = null; //현재 표시 시작일
+			var currEnd = null; //현재 표시 종료일
+			
+			if(currMonth == viewStartMonth) {
+				currStart = viewStart;
+				if(currMonth == viewEndMonth) {
+					currEnd = viewEnd;
+					console.log("1-1");/////////////////////
+				}
+				else if(currMonth > viewEndMonth) {
+					currStart = Math.floor(viewStart/100)*100 + 00;
+					currEnd = Math.floor(viewEnd/100)*100 + 00;
+					console.log("1-2");//////////////
+				}
+				else {
+					currEnd = Math.floor(viewEnd/100)*100 + 50;
+					console.log("1-2");//////////////
+				}
+			}
+			else if(currMonth > viewStartMonth) {
+				
+				if(currMonth == viewEndMonth) {
+					currStart = Math.floor(viewStart/100)*100 + 1;
+					currEnd = viewEnd;
+					console.log("2-1");//////////////
+				}
+				else if(currMonth > viewEndMonth) {
+					currStart = Math.floor(viewStart/100)*100 + 00;
+					currEnd = Math.floor(viewEnd/100)*100 + 00;
+					console.log("2-2");//////////////
+				}
+				else {
+					currStart = Math.floor(viewStart/100)*100 + 1;
+					currEnd = Math.floor(viewEnd/100)*100 + 50;
+					console.log("2-3");///////////////
+				}
+			}
+			else {
+				currStart = Math.floor(viewStart/100)*100 + 00;
+				currEnd = Math.floor(viewEnd/100)*100 + 00;
+				console.log("3");//////////////////
+			}
+			
+			console.log("currStart : " + currStart);//////////////
+			console.log("currEnd : " + currEnd);///////////////////
+			
+			
+			var days = $('calendar div.week span.day.ng-binding').not('.different-month');
+			
+			//console.log( days );//////////////////////////////////////////////////
+			
+			$.each( days, function(index, item){
+				
+				var s = currStart%100;
+				var e = currEnd%100;
+				//console.log("s : " + s);//////////////
+				//console.log("e : " + e);//////////////
+				
+				//console.log("1-"+$('calendar div.week span.day.ng-binding').eq(index).text());
+				//console.log("2-"+item.innerHTML);
+				
+				if(item.innerHTML>=s && item.innerHTML<=e) {
+					console.log("day-"+item.innerHTML);//////////////////////////
+					days.eq(index).addClass('selectable');
+				}
+			});
+	    
+	    }//function viewSelectableDays() END
         
         function next() {
             var stat = false;
@@ -282,7 +332,7 @@
                 //console.log("선택한 날짜 : "+date_sel+"  /  선택한 회차 : "+cnt_sel);
                 location.href="/reserveSeat.do?psNo="+psNo;
             }
-        }
+        }//function next() END
         
     </script>
     
@@ -507,6 +557,6 @@
             </div>
         </div>
     </div>
-
+	
 </body>
 </html>
