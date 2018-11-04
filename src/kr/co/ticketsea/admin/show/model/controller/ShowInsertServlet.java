@@ -2,6 +2,7 @@ package kr.co.ticketsea.admin.show.model.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Enumeration;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -36,11 +37,14 @@ public class ShowInsertServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		  request.setCharacterEncoding("euc-kr");	
+		 
+		try {
 		//=====파일 사이즈 업로드==========
 		
 		//최대 업로드 파일 사이즈
 		int fileSizeLimit = 5 * 1024 * 1024;
+		
+		
 		//업로드 될 경로
 		
 		String uploadPath = getServletContext().getRealPath("/")+"img"+"\\"+"poster";
@@ -50,10 +54,21 @@ public class ShowInsertServlet extends HttpServlet {
 		MultipartRequest multi = new MultipartRequest(request,
 				uploadPath,fileSizeLimit,encType,new DefaultFileRenamePolicy());
 		
+		//getFileNames() : input 태그 중 속성이 파일인 것 
+		//파라미터 이름 모두 반환, 벡터에 넣은 순서대로 생성
 		
+		Enumeration fileNames = multi.getFileNames();
+		while(fileNames.hasMoreElements()) {
+			String parameter = (String)fileNames.nextElement();
+			String fileName = multi.getOriginalFileName(parameter);
+			String fileRealName = multi.getFilesystemName(parameter);
+			
+			if(fileName==null)continue;
+		}
 		//공연 입력 정보 
 		request.getParameter("utf-8");
 		Show s = new Show();
+		System.out.println(multi.getParameter("show_poster"));
 		s.setShow_name(multi.getParameter("show_name"));
 		s.setTh_no(Integer.parseInt(multi.getParameter("th_no")));
 		s.setSc_code(multi.getParameter("sc_code"));
@@ -63,8 +78,8 @@ public class ShowInsertServlet extends HttpServlet {
 		s.setShow_grd(multi.getParameter("show_grd"));
 		s.setShow_run(Integer.parseInt(multi.getParameter("show_run")));
 		s.setBk_comm(Integer.parseInt(multi.getParameter("comm")));
-		s.setShow_poster(multi.getParameter("show_poster"));
-		s.setShow_dtInfo(multi.getParameter("showDtInfo"));
+		s.setShow_poster(multi.getFilesystemName("show_poster"));
+		s.setShow_dtInfo(multi.getFilesystemName("showDtInfo"));
 		
 		int result = new ShowService().insertShow(s);
 		
@@ -72,6 +87,10 @@ public class ShowInsertServlet extends HttpServlet {
 			response.sendRedirect("/views/admin/showInsertSuccess.jsp");
 		}else {
 			response.sendRedirect("/views/admin/error.jsp");
+		}
+		}catch (Exception e) {
+			
+			response.sendRedirect("/views/file/error.jsp");
 		}
 	}
 

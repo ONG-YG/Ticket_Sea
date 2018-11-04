@@ -1,4 +1,4 @@
-package kr.co.ticketsea.admin.reserve.controller;
+package kr.co.ticketsea.admin.show.model.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,22 +7,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kr.co.ticketsea.admin.reserve.model.service.AdReserveService;
-import kr.co.ticketsea.admin.reserve.model.vo.ReservePageData;
-import kr.co.ticketsea.admin.show.model.service.ShowService;
-import kr.co.ticketsea.reserve.model.service.ReserveService;
+import kr.co.ticketsea.admin.show.model.service.PlaceService;
 
 /**
- * Servlet implementation class AdReserveListServlet
+ * Servlet implementation class PlaceInsertServlet
  */
-@WebServlet(name = "AdReserveList", urlPatterns = { "/adReserveList.do" })
-public class AdReserveListServlet extends HttpServlet {
+@WebServlet(name = "PlaceInsert", urlPatterns = { "/placeInsert.do" })
+public class PlaceInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdReserveListServlet() {
+    public PlaceInsertServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,14 +28,18 @@ public class AdReserveListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int currentPage;
+		request.setCharacterEncoding("UTF-8");
+		String th_name = request.getParameter("placeName");
+		String th_lct = request.getParameter("placeAddress");
 		
-		if(request.getParameter("currentPage")==null) {
-			currentPage=1;
-		}else {
-			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		System.out.println("장소이름:"+th_name);
+		System.out.println("주소:"+th_lct);
+		
+		int result=new PlaceService().insertPlace(th_name,th_lct);
+		
+		if(result>0) {
+			response.sendRedirect("/adShowPlace.do");
 		}
-		ReservePageData pd = new AdReserveService().reserveAllList(currentPage);
 	}
 
 	/**

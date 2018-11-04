@@ -3,7 +3,7 @@ package kr.co.ticketsea.admin.reserve.model.vo;
 import java.sql.Date;
 
 public class Reserve {
-	private String bk_no; //예매번호
+	private int bk_no; //예매번호
 	private int member_no; //예매한 회원 번호
 	private String bk_stat_cd; //예매 상태코드
 	private Date bk_date; //예매일
@@ -16,7 +16,7 @@ public class Reserve {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Reserve(String bk_no, int member_no, String bk_stat_cd, Date bk_date, int bk_tk_price, int bk_tot_price,
+	public Reserve(int bk_no, int member_no, String bk_stat_cd, Date bk_date, int bk_tk_price, int bk_tot_price,
 			String bk_pay_type) {
 		super();
 		this.bk_no = bk_no;
@@ -27,10 +27,10 @@ public class Reserve {
 		this.bk_tot_price = bk_tot_price;
 		this.bk_pay_type = bk_pay_type;
 	}
-	public String getBk_no() {
+	public int getBk_no() {
 		return bk_no;
 	}
-	public void setBk_no(String bk_no) {
+	public void setBk_no(int bk_no) {
 		this.bk_no = bk_no;
 	}
 	public int getMember_no() {

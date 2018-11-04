@@ -166,25 +166,13 @@
                         <td >상태</td>
                        </thead>
                        <tr>
-                           <td><a href="../admin/ad_reserveInfo.html">123456</a></td>
+                           <td><a href="adReserveList.do">123456</a></td>
                            <td><a href="">test1</a></td>
                            <td>2018-10-15</td>
                            <td><a href="">지킬앤하이드</a></td>
                            <td>2018-12-13</td>
                            <td>2018-11-15 17:00</td>
                            <td>예매완료</td>
-                       </tr>
-                       <tr>
-                           <td><a href="../admin/ad_reserveInfo.html">987644</a></td>
-                           <td><a href="">iei321</a></td>
-                           <td>2018-09-22</td>
-                           <td><a href="">아이다</a></td>
-                           <td>2018-11-17</td>
-                           <td>2018-10-22 17:00</td>
-                           <td>예매완료</td>
-                       </tr>
-                       <tr>
-                           
                        </tr>
                     </table>
                     

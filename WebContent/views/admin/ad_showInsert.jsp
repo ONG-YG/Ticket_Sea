@@ -136,6 +136,7 @@ function LoadImg(value){
                              <option value="<%=sp.getTh_no()%>"><%=sp.getTh_name()%></option>
                            <%} %>
                           </select>
+                          <input type="button" id="placeSearch" onclick="placeSearch();" value="주소검색"/> 
                         </div>
                     </fieldset>
                     <fieldset class="edit_artist">
@@ -200,7 +201,7 @@ function LoadImg(value){
                         </div>
                     </fieldset>
                     <div class="submit_area">
-	            <input type="submit" value="작성" style="float:right;" onclick="return showCheck();" width="70px" height="40px">
+	            <input type="submit" value="작성" style="float:right;" onclick="showCheck();" width="70px" height="40px">
 	            </div>
 	            </div>
 	            </div>
@@ -218,8 +219,8 @@ function LoadImg(value){
 	<!-- script -->
 	
 	<script>
-/*	$(document).ready(function() {
-	    $("#btn").click(function(){
+	$(document).ready(function() {
+	   /*  $("#btn").click(function(){
 	    	var  data = $("input[name=showDtInfo]")[0].files[0];
 	    	$.ajax({
 	    		url : '/adPostUpload.do',
@@ -232,10 +233,13 @@ function LoadImg(value){
 	    			alert("업로드 성공!");
 	    		}
 	    	});
+	    }); */
+	    $("#placeSearch").click(function(){
+	    	location.href="/views/admin/placeInsert.jsp";
 	    });
 
-	}); */
-
+	}); 
+	
 		  
 	function showCheck(){
 		category= document.getElementById("category").value;
@@ -294,11 +298,6 @@ function LoadImg(value){
            	alert("수수료를 입력하세요");
             return false;
     	}
-        else if(count==0){
-        		alert("상세 정보 이미지를 업로드 하세요");
-        		return false;
-        }
-       
         else//모든 검사 만족시 true 반환
         {
             return true;
