@@ -68,6 +68,97 @@
             
         	pageInit();
         	
+        	
+        	
+        	
+        	
+        	
+        	
+        	// 날력의 날짜 클릭했을 때
+        	// date_sel에 선택한 날짜 저장
+        	// 날짜와 회차 모두 선택한 상태에서 다른 날짜를 다시 선택했을 경우를 위해 먼저, 선택한 회차정보를 초기화 
+			$('calendar').click(function(){
+				
+				date_sel = null;
+	            cnt_sel = null;
+	            psNo = null;
+				
+				var chkSel = $('#calSelected').val();
+				
+				if(date_sel!=chkSel) {
+					date_sel = chkSel;
+					console.log( date_sel );
+				}
+				
+				
+				
+				
+				
+				
+				
+				
+                $('#seat_box ul').html("");
+                $('#cnt_box ul').html("");
+                $('#seat_box ul').html("");
+                $('#cnt_box li').removeClass('selected_cnt_li');
+                $('.calendar-date').removeClass('selected_date_td');
+                $(this).addClass('selected_date_td');
+                
+                /*
+                var yearMonth = $('.year-month').text().split('.');
+                var year = yearMonth[0];
+                var month = yearMonth[1];
+                var day = $(this).text();
+                */
+                
+                var calSelected = date_sel.split('-');
+                console.log("date_sel : "+date_sel);
+                console.log("calSelcected : "+calSelected);
+                
+                var year = calSelected[0];
+                var month = calSelected[1];
+                var day = calSelected[2];
+                
+                
+                date_sel = year+"-"+month+"-"+day;
+                $('#date_sel_info span').html(year+"."+month+"."+day);
+                $('#cnt_sel_info span').html(cnt_sel);
+                //alert(date_sel);
+                
+                var cntList = [];
+                for(var i=0; i<psList.length; i++) {
+                	if(psList[i][1]==date_sel) {
+               			var ps = psList[i];
+               			var cntTime = [ ps[2], ps[3] ];
+               			cntList.push(cntTime);
+                	}
+                }
+                
+                var list = "";
+            	for(var i=0; i<cntList.length; i++) {
+            		list += " <li id='li_"+ cntList[i][0] +"' onclick='listClick("+ cntList[i][0] +");'> "
+		                        +"<span class='cnt'>"+ cntList[i][0] +"</span> "
+		                        +"<span>회</span> "
+		                        +"<span class='cnt_time'>"+ cntList[i][1] +"</span> "
+		                    +" </li> ";
+            	}
+            	$('#cnt_box ul').html(list);
+				
+				
+				
+			});//$('calendar').click END
+        	
+        	
+        	
+        	
+        	
+        	
+        	
+        	
+        	
+        	
+        	
+        	/*
         	// 날력의 날짜 클릭했을 때
         	// date_sel에 선택한 날짜 저장
         	// 날짜와 회차 모두 선택한 상태에서 다른 날짜를 다시 선택했을 경우를 위해 먼저, 선택한 회차정보를 초기화 
@@ -89,14 +180,6 @@
                 var year = yearMonth[0];
                 var month = yearMonth[1];
                 var day = $(this).text();
-                
-                /*
-                var calSelected = $('#calSelected').val().split('-');
-                alert(calSelcected);
-                var year = calSelected[0];
-                var month = calSelected[1];
-                var day = calSelected[2];
-                */
                 
                 date_sel = year+"-"+month+"-"+day;
                 $('#date_sel_info span').html(year+"."+month+"."+day);
@@ -122,9 +205,17 @@
             	}
             	$('#cnt_box ul').html(list);
             	
-            })
+            });//$('.calendar-date').click END
+            */
             
-        })
+            
+            
+            
+            
+            
+            
+            
+        });//$(document).ready END
         
         function pageInit() {
         	
@@ -235,8 +326,15 @@
                             <div id="ct_left_date">
                                 <b>날짜선택</b><hr>
                                 <div id="date_box">
-                                	<!--<jsp:include page="/views/reserve/reserveCalendar.html" />-->
+                                
+                                
+                                
+                                	<jsp:include page="/views/reserve/reserveCalendar.html" />
                                 	
+                                	
+                                	
+                                	
+                                	<!--
                                     <div class="calendar">
                                         <div class="calendar-header">
                                             <a class="prev-mon" title="이전달"><span>이전달</span></a>
@@ -258,9 +356,9 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr class="calendar-week"> <!-- 달력의 한 주에 해당하는 엘리먼트 컨테이너 -->
+                                                    <tr class="calendar-week">
                                                         <td class="calendar-date calendar-sun">30</td>
-                                                        <!-- 날짜가 표시될 엘리먼트 -->
+                                                        
                                                         <td class="calendar-date">1</td>
                                                         <td class="calendar-date">2</td>
                                                         <td class="calendar-date">3</td>
@@ -268,9 +366,9 @@
                                                         <td class="calendar-date">5</td>
                                                         <td class="calendar-date calendar-sat">6</td>
                                                     </tr>
-                                                    <tr class="calendar-week"> <!-- 달력의 한 주에 해당하는 엘리먼트 컨테이너 -->
+                                                    <tr class="calendar-week">
                                                         <td class="calendar-date calendar-sun">7</td>
-                                                        <!-- 날짜가 표시될 엘리먼트 -->
+                                                        
                                                         <td class="calendar-date">8</td>
                                                         <td class="calendar-date">9</td>
                                                         <td class="calendar-date">10</td>
@@ -278,9 +376,9 @@
                                                         <td class="calendar-date">12</td>
                                                         <td class="calendar-date calendar-sat available">13</td>
                                                     </tr>
-                                                    <tr class="calendar-week"> <!-- 달력의 한 주에 해당하는 엘리먼트 컨테이너 -->
+                                                    <tr class="calendar-week">
                                                         <td class="calendar-date calendar-sun available">14</td>
-                                                        <!-- 날짜가 표시될 엘리먼트 -->
+                                                        
                                                         <td class="calendar-date available">15</td>
                                                         <td class="calendar-date calendar-today available">16</td>
                                                         <td class="calendar-date">17</td>
@@ -288,9 +386,9 @@
                                                         <td class="calendar-date">19</td>
                                                         <td class="calendar-date calendar-sat">20</td>
                                                     </tr>
-                                                    <tr class="calendar-week"> <!-- 달력의 한 주에 해당하는 엘리먼트 컨테이너 -->
+                                                    <tr class="calendar-week">
                                                         <td class="calendar-date calendar-sun">21</td>
-                                                        <!-- 날짜가 표시될 엘리먼트 -->
+                                                        
                                                         <td class="calendar-date">22</td>
                                                         <td class="calendar-date">23</td>
                                                         <td class="calendar-date">24</td>
@@ -298,9 +396,9 @@
                                                         <td class="calendar-date">26</td>
                                                         <td class="calendar-date calendar-sat">27</td>
                                                     </tr>
-                                                    <tr class="calendar-week"> <!-- 달력의 한 주에 해당하는 엘리먼트 컨테이너 -->
+                                                    <tr class="calendar-week">
                                                         <td class="calendar-date calendar-sun">28</td>
-                                                        <!-- 날짜가 표시될 엘리먼트 -->
+                                                        
                                                         <td class="calendar-date">29</td>
                                                         <td class="calendar-date">30</td>
                                                         <td class="calendar-date">31</td>
@@ -313,6 +411,12 @@
                                             <span style="color: red; font-size: 10px;">전월 다음달 선택 시 변수에 반영할것</span>
                                         </div>
                                     </div>
+                                    -->
+                                    
+                                    
+                                    
+                                    
+                                    
                                     
                                 </div>
                             </div>
