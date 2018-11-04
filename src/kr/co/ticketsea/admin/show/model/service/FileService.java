@@ -2,6 +2,7 @@ package kr.co.ticketsea.admin.show.model.service;
 
 import java.sql.Connection;
 
+import kr.co.ticketsea.admin.show.model.dao.FileDao;
 import kr.co.ticketsea.admin.show.model.vo.FileData;
 import kr.co.ticketsea.common.JDBCTemplate;
 

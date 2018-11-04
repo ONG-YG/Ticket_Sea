@@ -7,43 +7,45 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.tomcat.jni.Mmap;
-
-import kr.co.ticketsea.admin.show.model.service.MiniShowService;
-import kr.co.ticketsea.admin.show.model.service.ShowService;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 /**
- * Servlet implementation class MiniShowApproveServlet
+ * Servlet implementation class AdPostUploadServlet
  */
-@WebServlet(name = "MiniShowApprove", urlPatterns = { "/miniShowApprove.do" })
-public class MiniShowApproveServlet extends HttpServlet {
+@WebServlet(name = "AdPostUpload", urlPatterns = { "/adPostUpload.do" })
+public class AdPostUploadServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MiniShowApproveServlet() {
+    public AdPostUploadServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
 
 	/**
+	 * @return 
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getParameter("utf-8");
+		request.setCharacterEncoding("utf-8");
+		//=====파일 사이즈 업로드==========
 		
-		int msNo =  Integer.parseInt(request.getParameter("msNo"));
-		System.out.println(msNo);
-		int result = new MiniShowService().miniShowApprove(msNo);
+		//최대 업로드 파일 사이즈
+		int fileSizeLimit = 5 * 1024 * 1024;
+		//업로드 될 경로
 		
+		String uploadPath = getServletContext().getRealPath("/")+"img"+"\\"+"poster";
+		//인코딩 타입 (파일 인코딩 타입)
+		String encType="UTF-8";
+		// MultipartRequest 객체를 생성
+		MultipartRequest multi = new MultipartRequest(request,
+				uploadPath,fileSizeLimit,encType,new DefaultFileRenamePolicy());
 		
-		if(result>0) {
-			response.sendRedirect("/views/admin/msApproveSuccess.jsp");
-		}else {
-			response.sendRedirect("/views/admin/error.jsp");
-		}
-		
+		String fileName = multi.getFilesystemName("show_poster");
+		System.out.println(fileName);
 	}
 
 	/**

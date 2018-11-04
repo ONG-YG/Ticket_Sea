@@ -170,7 +170,7 @@
                         <td width="20%">공연명</td>
                         <td width="10%">작성자</td>
                         <td width="20%">공연장소</td>
-                        <td width="15%">공연일시</td>
+                        <td width="15%">작성일</td>
                         <td>승인여부</td>
                        </thead>
                        <%for(MiniShow ms : list) {%>
@@ -179,7 +179,7 @@
                            <td><%=ms.getMs_name() %></td>
                            <td>test11</td>
                            <td><%=ms.getMs_place() %></td>
-                           <td><%=ms.getMs_date() %></td>
+                           <td><%=ms.getMs_wrtdate() %></td>
                            <td><input type="button" value="승인" onclick="approve('<%=ms.getMs_no()%>');"/>&nbsp;&nbsp;<input type="button" value="거부"/></td>
                        </tr>
                         <%} %>

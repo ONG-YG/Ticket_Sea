@@ -170,16 +170,16 @@
                         <td width="20%">공연명</td>
                         <td width="10%">작성자</td>
                         <td width="20%">공연장소</td>
-                        <td width="15%">공연일시</td>
+                        <td width="15%">작성일</td>
                         <td>승인상태</td>
                        </thead>
                        <%for(MiniShow ms : list) {%>
                        <tr>
                            <td><a href="/miniShowApInfo.do?msNo=<%=ms.getMs_no() %>"><%=ms.getMs_no() %></a></td>
                            <td><%=ms.getMs_name() %></td>
-                           <td>test11</td>
+                           <td><%=ms.getMs_userId() %></td>
                            <td><%=ms.getMs_place() %></td>
-                           <td><%=ms.getMs_date() %></td>
+                           <td><%=ms.getMs_wrtdate() %></td>
                            <td><%=ms.getMs_state() %></td>
                        </tr>
                         <%} %>

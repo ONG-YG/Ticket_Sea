@@ -186,6 +186,7 @@ function LoadImg(value){
                         <div class="edit">
                             <div class="write_wrap">
                            		<input type="file" id="show_poster" name="show_poster"/>
+                           		<button onclick="uploadFile();">파일업로드</button>
                             </div>
                         </div>
                     </fieldset>

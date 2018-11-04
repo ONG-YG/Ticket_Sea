@@ -139,6 +139,7 @@
     .event_img_area .show_post{
         width:100%;
         height: auto;
+        z-index:-100;
         
     }
     .event_img_area .btn_area{
@@ -148,6 +149,7 @@
     	padding:0;
     	display:none;
     	transform: translate(-50%, -50%);
+    	z-index:1;
     }
     .btn_area .postupload{
     	    position: absolute;

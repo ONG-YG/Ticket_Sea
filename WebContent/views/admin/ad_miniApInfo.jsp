@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="kr.co.ticketsea.admin.show.model.vo.*" %>
-<% MiniShow ms = (MiniShow)request.getAttribute("ms"); %>
+<% MiniShow ms = (MiniShow)request.getAttribute("miniShow"); %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -228,7 +228,7 @@
               <div class="top_area">
                   <h2 class="main_title">회원정보</h2>
                </div>
-               <form action ="/adMsApUpdate.do" method="post" id="updateForm">
+               <form action ="/adMsApUpdate.do" method="post" id="updateForm" enctype=”multipart/form-data”>
                <div class="main_area">
                    <div class="memberInfo_table">
                     <table>
@@ -243,7 +243,7 @@
                                 <td><%=ms.getMs_ct()%></td>
                             </tr>
                             <tr>
-                                <th>공연이름</th>
+                                <th>공연명</th>
                                 <td><%=ms.getMs_name() %></td>
                             </tr>
                             <tr>
@@ -259,12 +259,24 @@
                                 <td><input type="text" id="place" name="place" value="<%=ms.getMs_place()%>"></td>
                             </tr>
                             <tr>
+                                <th>시작일</th>
+                                <td><input type="text" id="st_date" name="st_date" value="<%=ms.getMs_st_date()%>"></td>
+                            </tr>
+                            <tr>
+                                <th>종료일</th>
+                                <td><input type="text" id="ed_date" name="ed_date" value="<%=ms.getMs_ed_date()%>"></td>
+                            </tr>
+                            <tr>
                                 <th>작성일</th>
-                                <td><%=ms.getMs_date()%></td>
+                                <td><%=ms.getMs_wrtdate()%></td>
                             </tr>
                             <tr>
                             	<th>승인상태</th>
                             	<td><%=ms.getMs_ct() %></td>
+                            </tr>
+                            <tr>
+                            	<th>공연포스터</th>
+                            	<td><input type="file" name="show_poster" value="<%=ms.getMs_poster() %>"/></td>
                             </tr>
                             <tr>
                                 <th>공연소개</th>
