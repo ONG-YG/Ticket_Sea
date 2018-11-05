@@ -34,6 +34,7 @@
 	int totalPrice = rp.getTotalPrice();							//총 결제 금액
 	String payType = rp.getPayType();								//결제방식
 	
+	//System.out.println("티켓가격="+ticketPrice);//////////////
 	
 	ReserveSession rs = (ReserveSession)session.getAttribute("reserveSession");
 	int progNo = rs.getProgNo();
@@ -81,7 +82,7 @@
             $('#phoneNo_td').text('<%=phone%>'); //휴대폰번호
 	    	$('#email_td').text('<%=email%>'); //이메일
             
-	    	var payInfo = <%=payType%>; //결제방식
+	    	var payInfo = '<%=payType%>'; //결제방식
 	    	$('#payInfo_td').text(payInfo); //결제방식
 	    	
 	    	var psDate = '<%=psDate%>'.split('-');
