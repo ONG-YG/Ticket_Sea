@@ -1,10 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    <%@ page import = "kr.co.ticketsea.promo.model.vo.*" %>
+    <%@ page import = "java.util.*" %>
+    <%@ page import = "kr.co.ticketsea.member.model.vo.*" %>
+    
+    
+    <%
+	// Controller(Servlet)에서 보내준값 가져오기
+	PageData pd = (PageData)request.getAttribute("pageData");
+    String keyword = (String)request.getAttribute("keyword");
+    
+	ArrayList<Promo> list = null; // 현재 페이지의 글 목록
+	String pageNavi = null; // 현재 navi Bar
+	
+	if(pd!=null){
+		 list = pd.getList(); // 현재 페이지의 글 목록
+		 pageNavi = pd.getPageNavi(); // 현재 navi Bar
+		}
+	
+%>
+    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>소규모 공연 홍보</title>
+<title>소규모 공연 목록</title>
 <script
   src="https://code.jquery.com/jquery-3.3.1.js"
   integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
@@ -12,7 +33,6 @@
 </script>
 <style>
     /* 전체 사이즈 조정 */
-    
     ul, li, a{list-style: none; margin: 0px; padding: 0px; text-decoration: none; color: black;}
     
     div{box-sizing: border-box;}
@@ -23,7 +43,7 @@
     
     /* 990px 고정 사이즈 */
     #h_inner{width: 990px; height: 100%; margin: 0px auto;}
-    #c_inner{width: 990px; height: 1300px; margin: 0px auto; padding: 70px 0 250px 0px;}
+    #c_inner{width: 990px; height: 1800px; margin: 0px auto; padding: 70px 0 250px 0px;}
     #f_inner{width: 990px; margin: 0px auto;}
 
     /* top 버튼 */
@@ -82,7 +102,7 @@
         background: white;
     }
     #right_view{
-        width: 822px;
+        width: 990px;
         float: left;
         border: 1px solid #dedede;
         height: 100%;
@@ -221,7 +241,40 @@
             float:right;
         }
    
- #header_inner{width:990px; margin: 0px auto;}
+    #prContest{
+            width:100%;
+            height:95%;
+            float : left;
+        }    
+        
+        #prContest>#prContestDiv1{
+            width : 25%;
+            height : 29%;
+            float : left;
+            padding :5px 10px 15px;
+            
+        }
+        
+        #prContest>#prContestDiv2{
+       	border : 1px solid black;
+       	width : 100%;
+       	float:left;
+       }
+        
+        #prContestDiv1>#prContestPic{
+            width : 100%;
+            height : 90%;
+            float : left;
+        }
+        #prContestDiv1>#prContestTitle{
+        	width : 100%;
+        	height : 10%;
+        	float: left;
+        	text-align: center;
+        }
+        
+        
+    #header_inner{width:990px; margin: 0px auto;}
 </style>
 </head>
 </head>
@@ -231,7 +284,6 @@
             <jsp:include page="/header.jsp"/>
     </div>
     
-    
     <div id="container">
         <div id="c_inner">
             <div id="c_inner_top">
@@ -240,99 +292,54 @@
                 </div>
                 <div class="title2"></div>
             </div>
-            <ul id="left_menu">
-                <li class="has_sub">
-                    <span>소규모 공연</span>
-                    <ul>
-                        <li><a href="/promoList.do"><strong>소규모 공연 목록</strong></a></li>
-                        <li><a href=""><strong>소규모 공연 홍보</strong></a></li>
-                    </ul>
-                </li>
-            </ul>    
-            <div id="right_view">
-                <div class="r_line">
-                    <h3>소규모 공연 홍보</h3>
-                </div>
-                
-                <form action="/promoWrite.do" method="post">
-                     <table id="write-form">
-                    <tr>
-                        <td style="width : 70px;" >공연명</td>
-                        <td><input type="text" name="title" style="width: 300px;" /></td>
-                    </tr>
-                    
-                     <tr>
-                        <td style="width : 70px; text-align : center;" >아티스트</td>
-                        <td colspan="2" >
-                            <textarea name="artist" rows="1" cols="50" style="width:300px;"></textarea>
-                        </td>
-                    </tr>
-                    
-                    <tr>
-                        <td style="width : 70px; text-align : center;" >공연장소</td>
-                        <td colspan="2" >
-                            <textarea name="location" rows="1" cols="50" style="width:300px;"></textarea>
-                        </td>
-                    </tr>
-                    
-                    <tr>
-                        <td style="width : 40px; text-align : center;" >장르</td>
-                        <td>
-                            <select name="category">
-                                <option>연극</option>
-                                <option>음악</option>
-                                <option>뮤지컬</option>
-                            </select>
-                        </td>
-                    </tr>
-                    
-                    <tr>
-                        <td style="width : 70px; text-align : center;" >공연소개</td>
-                        <td colspan="2" >
-                            <textarea name="contents" rows="17" cols="50" style="width:600px;"></textarea>
-                        </td>
-                    </tr>
-                    
-                    
-                    
-                    <tr>
-                        <td>사진첨부</td>
-                        <td><input type="file" name="attachFile" /></td>
-                    </tr>
-                    
-                    <tr>
-                        <td colspan="2">
-                         <input type="submit" value="작성" style="float:right" width="70px" height="30">
-                        </td>
-                    </tr>
-                        
-                       
-                </table>
-               </form>
             
+            <div id="container">
             
-                
+        <div id = "right_view">
+        <div id="prContest">
+        <%if(pd != null) { %>
+        <h1>'<%=keyword%>' 검색 결과 </h1>
+        <% for (Promo p : list) { %>
+            <div id = "prContestDiv1" ">
+	            <div id="prContestPic"><a href="/promo.do?boardP_no=<%=p.getBoardP_no()%>"><img src="../../img/poster_ex.jpg" style="width:205px; height:330px; align-content: center;"></a></div> <br>
+	        	<div id="prContestTitle" style="font-size: 10px"><a href="/promo.do?boardP_no=<%=p.getBoardP_no()%>"><%=p.getBoardP_title()%></a></div>
+        	</div>
+         <% } %> 
+         <%} else { %>
+         <h3>검색 결과가 없습니다.</h3>
+         <% } %>
+        
+    </div>
+            <div id="prContestDiv2">
+            	 <div style="width:100%; text-align:center;">
+				<label><%=pageNavi%></label>
+		
+		
+		   <%
+		session = request.getSession(false);
+		Member m = (Member)session.getAttribute("member"); 
+			%>
+			
+           <%if(m!=null) {%>
+            <form style="display:inline;" action="/views/promo/promoWrite.jsp">
+				<input type="submit" value="글쓰기" style="width: 70px; height: 30px; float:right;"/> <br>				
+			</form>
+			<%} %>
+   
+         </div>
+         
             </div>
+            
+            
+          </div>  
         </div>
+       </div>
     </div>
     
     <a href="#" id="back_to_top">Top</a>
     
     <div id="footer">
-        <div id="f_inner">
-            <strong class="footer_logo">TICKET SEA</strong>
-        
-            <div class="f_menu">
-                <a href="#">사이트 소개</a><span>|</span>
-                <a href="#">개인정보 처리방침</a><span>|</span>
-                <a href="#">이용약관</a><span>|</span>
-                <a href="#">고객센터</a><span>|</span>
-                <a href="#">티켓판매안내</a><span>|</span>
-                <a href="#">광고안내</a>
-            </div>
-        
-            <p class="copy">Copyright © 옹가네 Corporation. All rights reserved.</p>
-        </div>    
+        <jsp:include page="/footer.jsp"/>
     </div>
     
 </div>

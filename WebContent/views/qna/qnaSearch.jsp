@@ -1,15 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    <%@ page import = "kr.co.ticketsea.qna.model.vo.*" %>
+    <%@ page import = "java.util.*" %>
+    
+    <%
+	// Controller(Servlet)에서 보내준값 가져오기
+	PageData pd = (PageData)request.getAttribute("pageData");
+    String keyword = (String)request.getAttribute("keyword");
+    
+	ArrayList<Qna> list = null; // 현재 페이지의 글 목록
+	String pageNavi = null; // 현재 navi Bar
+	
+	if(pd!=null){
+		 list = pd.getList(); // 현재 페이지의 글 목록
+		 pageNavi = pd.getPageNavi(); // 현재 navi Bar
+		}
+	
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>소규모 공연 홍보</title>
+<title>질문과 답변 리스트</title>
+
 <script
   src="https://code.jquery.com/jquery-3.3.1.js"
   integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
   crossorigin="anonymous">
 </script>
+
 <style>
     /* 전체 사이즈 조정 */
     
@@ -209,23 +229,30 @@
     letter-spacing: -1px;
     }
     
-    .boxStyle {
-            position: relative;
-            width: 780px;
-            margin: 0 auto 12px;
-            padding: 5px 15px;
-            border: 0px solid #c7c7c7;
-            border-radius: 5px;
-            background-color: #fff;
-            box-shadow: 1px 2px 6px 0px rgba(0, 0, 0, 0.1); 
-            float:right;
-        }
    
- #header_inner{width:990px; margin: 0px auto;}
+    
+    .pullMethod {
+            background:#fbfbfb;
+            text-align:left;
+            padding:25px 30px;
+            line-height:1.6;
+        }
+    
+    .questionTable{
+            border:1px solid #dedede;
+            border-right:0;
+            font-size:13px;
+            margin:10px auto 12px;
+            line-height:45px;
+            width:730px;
+            text-align: center;
+        }
+    
+    #header_inner{width:990px; margin: 0px auto;}
 </style>
 </head>
-</head>
 <body>
+
 <div id="wrapper">
         <div id="header_inner">
             <jsp:include page="/header.jsp"/>
@@ -236,79 +263,62 @@
         <div id="c_inner">
             <div id="c_inner_top">
                 <div class="title1">
-                    <h2>소규모 공연</h2>
+                    <h2>고객센터</h2>
                 </div>
                 <div class="title2"></div>
             </div>
             <ul id="left_menu">
                 <li class="has_sub">
-                    <span>소규모 공연</span>
+                    <span>고객센터</span>
                     <ul>
-                        <li><a href="/promoList.do"><strong>소규모 공연 목록</strong></a></li>
-                        <li><a href=""><strong>소규모 공연 홍보</strong></a></li>
+                        <li><a href="/noticeList.do"><strong>공지사항</strong></a></li>
+                        <li><a href="/faqList.do"><strong>자주묻는 질문</strong></a></li>
+                        <li><a href="/qnaList.do"><strong>질문게시판</strong></a></li>
                     </ul>
                 </li>
             </ul>    
             <div id="right_view">
                 <div class="r_line">
-                    <h3>소규모 공연 홍보</h3>
+                    <h3>질문 게시판</h3>
                 </div>
+                <h2>'<%=keyword%>' 검색 결과 </h2>
+                     <table border=1px class="questionTable">
+                         <thead style="background-color: lightskyblue; color:white" >
+                             <td width="70%">제목</td>
+                             <td width="12%">작성자</td>
+                             <td width="12%">작성일</td>
+                             <td>조회수</td>
+                         </thead>
+                             <%if(pd!=null){ %>
+                            <% for (Qna q : list) { %>
+                        <tr>
+                            <td><a href="/qna.do?boardQ_no=<%=q.getBoardQ_no()%>"><%=q.getBoardQ_title()%></a></td>
+                            <td><%= q.getBoardQ_writer() %></td>
+                            <td><%= q.getBoardQ_date() %></td>
+                            <td><%= q.getBoardQ_hit() %></td>
+                        </tr>
+                            <% } %>       
+                    </table>
                 
-                <form action="/promoWrite.do" method="post">
-                     <table id="write-form">
-                    <tr>
-                        <td style="width : 70px;" >공연명</td>
-                        <td><input type="text" name="title" style="width: 300px;" /></td>
-                    </tr>
-                    
-                     <tr>
-                        <td style="width : 70px; text-align : center;" >아티스트</td>
-                        <td colspan="2" >
-                            <textarea name="artist" rows="1" cols="50" style="width:300px;"></textarea>
-                        </td>
-                    </tr>
-                    
-                    <tr>
-                        <td style="width : 70px; text-align : center;" >공연장소</td>
-                        <td colspan="2" >
-                            <textarea name="location" rows="1" cols="50" style="width:300px;"></textarea>
-                        </td>
-                    </tr>
-                    
-                    <tr>
-                        <td style="width : 40px; text-align : center;" >장르</td>
-                        <td>
-                            <select name="category">
-                                <option>연극</option>
-                                <option>음악</option>
-                                <option>뮤지컬</option>
-                            </select>
-                        </td>
-                    </tr>
-                    
-                    <tr>
-                        <td style="width : 70px; text-align : center;" >공연소개</td>
-                        <td colspan="2" >
-                            <textarea name="contents" rows="17" cols="50" style="width:600px;"></textarea>
-                        </td>
-                    </tr>
-                    
-                    
-                    
-                    <tr>
-                        <td>사진첨부</td>
-                        <td><input type="file" name="attachFile" /></td>
-                    </tr>
-                    
-                    <tr>
-                        <td colspan="2">
-                         <input type="submit" value="작성" style="float:right" width="70px" height="30">
-                        </td>
-                    </tr>
-                        
-                       
-                </table>
-               </form>
+             <div style="width:800px; text-align:center;">
+		<label><%=pageNavi%></label>
+		</div>  
+            <%}else{ %>
+            <h2>검색 결과가 없습니다.</h2>
+                <%} %>
+             <form style="display:inline;" action="/views/qna/qnaWrite.jsp">
+				<input type="submit" value="글쓰기" style="width: 70px; height: 30px; float:right;"/> <br>
+			</form>
+            <br>
+            <div class="searchArea"> 
+            
+            <form style="display:inline;" action="/qnaSearch.do" method="get">
+                    <a href="#"><input type="submit" style="display: none"><img src="../../img/btn_search4.png" alt="검색" style="float: right"></a>
+                
+					<input type="text" class="textInp" name="search" id="search" style="float: right">
+					<a href="javascript:search();"></a>
+					</form>
+				</div>
             
             
                 
@@ -318,23 +328,14 @@
     
     <a href="#" id="back_to_top">Top</a>
     
+    <a href="#" id="back_to_top">Top</a>
+    
     <div id="footer">
-        <div id="f_inner">
-            <strong class="footer_logo">TICKET SEA</strong>
-        
-            <div class="f_menu">
-                <a href="#">사이트 소개</a><span>|</span>
-                <a href="#">개인정보 처리방침</a><span>|</span>
-                <a href="#">이용약관</a><span>|</span>
-                <a href="#">고객센터</a><span>|</span>
-                <a href="#">티켓판매안내</a><span>|</span>
-                <a href="#">광고안내</a>
-            </div>
-        
-            <p class="copy">Copyright © 옹가네 Corporation. All rights reserved.</p>
-        </div>    
+        <jsp:include page="/footer.jsp"/>
     </div>
     
 </div>
+
+
 </body>
 </html>

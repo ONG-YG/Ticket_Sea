@@ -292,10 +292,10 @@
                     <br>
                     
                     <table border=1px class="noticeContent">
-                        <tr style="background-color: gainsboro">
-                            <td id = "contentCategory" style="width: 15%">분류</td>
-                            <td id = "contentQuestion"  style="width: 75%">질문</td>
-                            <td id = "contentButton" style="width: 10%">작성일</td>
+                        <tr style="background-color: lightskyblue;">
+                            <td id = "contentCategory" style="width: 15%; color:white ">분류</td>
+                            <td id = "contentQuestion"  style="width: 75%; color:white">질문</td>
+                            <td id = "contentButton" style="width: 10%; color:white">작성일</td>
                         </tr>
                         
                        <% for (Notice n : list) { %>
@@ -328,10 +328,12 @@
 	<%} %>
             <br>
             <div class="searchArea"> 
-                    <a href="#"><img src="../../img/btn_search4.png" alt="검색" style="float: right"></a>
+            <form style="display:inline;" action="/noticeSearch.do" method="get">
+                    <a href="#"><input type="submit" style="display: none"><img src="../../img/btn_search4.png" alt="검색" style="float: right"></a>
                 
-					<input type="text" class="textInp" name="searchValue" id="searchValue" style="float: right">
+					<input type="text" class="textInp" name="search" id="search" style="float: right">
 					<a href="javascript:search();"></a>
+					</form>
 				</div>
            
             
