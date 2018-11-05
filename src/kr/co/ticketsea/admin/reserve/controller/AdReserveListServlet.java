@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kr.co.ticketsea.admin.reserve.model.service.AdReserveService;
 import kr.co.ticketsea.admin.reserve.model.vo.ReservePageData;
 import kr.co.ticketsea.admin.show.model.service.ShowService;
 import kr.co.ticketsea.reserve.model.service.ReserveService;
@@ -37,7 +38,7 @@ public class AdReserveListServlet extends HttpServlet {
 		}else {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
-		ReservePageData pd = new ReserveService().reserveAllList(currentPage);
+		ReservePageData pd = new AdReserveService().reserveAllList(currentPage);
 	}
 
 	/**

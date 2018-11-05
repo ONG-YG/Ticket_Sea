@@ -1,0 +1,241 @@
+@charset "UTF-8";
+
+
+    /*공연등록 페이지*/
+    div{
+        box-sizing: border-box;
+        display: block;
+    }
+    #content{
+        overflow: hidden;
+        border:1px solid black;
+        border-style: dashed;
+        /* padding: 20px 0; */
+        width:1000px;
+        height:1200px;
+        backgound-color:#FFFFFF;
+       display: inline-block;
+    }
+    .content_wrap{
+   		 position:relative;
+        width:980px;
+        height: 100%;
+        margin:0 auto;
+        border:1px solid black;
+        box-sizing: border-box;
+        
+    }
+    
+    .content_wrap form{
+    	width:980px;
+        height: 100%;
+         z-index:-10;
+    }
+    h2.main_title:not(.content-header){
+        font-size: 23px;
+        font-weight: normal;
+        text-align:left;
+        padding-left:10px;
+        
+    }
+    #content .main_area{
+        padding:30px 10px;
+        border:1px solid #d8d8d8;
+        background-color:white;
+        box-sizing: border-box;
+        display: block;
+        height:90%;
+        
+    }
+    #content .top_area{
+        height:5%;
+        border-bottom: 1px solid #d8d8d8;
+    }
+    #content .submit_area{
+        height:3%;
+        border:1px solid red;
+        display: block;
+        padding-right:20px;
+        padding-top:5px;
+    }
+    
+    
+    .left_wrap{
+        display: inline-block;
+        width:200px;
+        border:1px solid black;
+        float:left;
+        padding:0px;
+    }
+    .left_wrap .input_area{
+   		 position:relative;
+    	width:100%;
+    	height:160px;
+    }
+    
+        /* 포스터 업로드  */
+    
+    .event_img_area{
+    	position:relative;
+	    width: 160px;
+	    height: 160px;
+	    /* overflow: hidden; */
+    }
+ 
+    .event_img_area .show_post{
+        width:100%;
+        height: auto;
+        z-index:-100;
+        
+    }
+    .event_img_area .btn_area{
+    	position:absolute;
+    	top:50%;
+    	left:50%;
+    	padding:0;
+    	display:none;
+    	transform: translate(-50%, -50%);
+    	z-index:1;
+    }
+    .btn_area .postupload{
+    	    position: absolute;
+		    width: 100px;
+		    height: 36px;
+		    overflow: hidden;
+    }
+    .btn_area .change_poster{
+	    padding: 0;
+	    box-sizing: border-box;
+	    display: block;
+	    border-radius: 3px 3px 3px 3px;
+	    background: none;
+	    letter-spacing: -1px;
+	    text-decoration: none;
+	    text-align: center;
+	    cursor: pointer;
+    	width:100px;
+    	height:35px;
+    	line-height :33px;
+    	font-size:12px;
+    	border:1px solid #3187e9;
+    	color:#ffffff;
+    	bakground-color:#4195f5;
+    }
+    .event_img_area .delete_poster{
+    	padding: 0;
+	    box-sizing: border-box;
+	    display: block;
+	    border-radius: 3px 3px 3px 3px;
+	    background: none;
+	    letter-spacing: -1px;
+	    text-decoration: none;
+	    text-align: center;
+	    cursor: pointer;
+    	width: 100px;
+    	height: 36px;
+    	line-height: 34px;
+	    display: none;
+	    margin-top: 6px;
+	    font-size: 12px;
+	    border: 1px solid #b8b8b8;
+    	color: #666666;
+    	background-color: #ffffff;
+    } 
+    
+    
+    .right_wrap:not(.content-header){
+        width:750px;
+        border:1px solid black;
+        float:right;
+        padding-right: 20px;
+    }
+    fieldset {
+        padding: 20px 0 16px;
+        width: 100%;
+        display: block;
+        border:none;
+        border-bottom: 1px dashed black;
+    }
+    fieldset:first-child {
+        padding-top: 0;
+    }
+    fieldset:last-child{
+        border:none;
+    }
+    .right_wrap legend {
+         margin-right: 0;
+        padding-left: 5px;
+    }
+    fieldset legend {
+        float: left;
+        width: 130px;
+        padding-top: 6px;
+    }
+    .edit_title h3.title {
+    font-size: 16px;
+    font-weight: normal;
+    white-space: pre-line;
+    }
+    .edit{
+        box-sizing:border-box;
+        display: inline-block;
+        height:50%;
+        padding-top:18px;
+    }
+    
+    .right_wrap .edit{
+        width:590px;
+    }
+    .edit_title .category_select {
+        width: 120px;
+        margin-right: 4px;
+        height:30px;
+    }
+    .edit_place .place_select {
+        width: 120px;
+        margin-right: 4px;
+        height:30px;
+    }
+    input[type="text"], input[type="password"] {
+        padding: 0 9px;
+        height: 30px; 
+    }
+    .edit_title .title_input {
+        width: 300px;
+    }
+    
+    .right_wrap h3.title {
+        font-size: 16px;
+        font-weight: normal;
+        white-space: pre-line;
+    }
+    .edit_date .start_time{
+        float:left;
+        width:50%;
+        vertical-align: top;
+    }
+    .edit_date input[type="text"], .edit_apply_date input[type="text"] {
+    width: 110px;
+    margin-right: 4px;
+    }
+    .edit_artist input[type="text"]{
+        width:300px;
+    }
+    .edit_place input[type="text"]{
+        width:300px;
+        padding: 0 9px;
+    }
+    #place_search input[type="submit"]{
+            width: 42px;
+            height: 30px;
+            line-height: 28px;
+            display: inline-block;
+            margin-left: -2px;
+            margin-right: 3px;
+            font-size: 11px;
+            vertical-align: middle;
+
+    }
+    #imgUp{
+    	align-content: center;
+    }

@@ -7,22 +7,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.tomcat.jni.Mmap;
-
-import kr.co.ticketsea.admin.show.model.service.MiniShowService;
+import kr.co.ticketsea.admin.show.model.dao.ShowDao;
 import kr.co.ticketsea.admin.show.model.service.ShowService;
 
 /**
- * Servlet implementation class MiniShowApproveServlet
+ * Servlet implementation class AdShowDeleteServlet
  */
-@WebServlet(name = "MiniShowApprove", urlPatterns = { "/miniShowApprove.do" })
-public class MiniShowApproveServlet extends HttpServlet {
+@WebServlet(name = "AdShowDelete", urlPatterns = { "/adShowDelete.do" })
+public class AdShowDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MiniShowApproveServlet() {
+    public AdShowDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,19 +29,16 @@ public class MiniShowApproveServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getParameter("utf-8");
+		request.setCharacterEncoding("utf-8");
 		
-		int msNo =  Integer.parseInt(request.getParameter("msNo"));
-		System.out.println(msNo);
-		int result = new MiniShowService().miniShowApprove(msNo);
+		int showNo=Integer.parseInt(request.getParameter("showNo"));
 		
-		
+		int result = new ShowService().deleteShow(showNo);
 		if(result>0) {
-			response.sendRedirect("/views/admin/msApproveSuccess.jsp");
+			response.sendRedirect("/adShowList.do");
 		}else {
 			response.sendRedirect("/views/admin/error.jsp");
 		}
-		
 	}
 
 	/**

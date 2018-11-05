@@ -14,7 +14,7 @@ public class MemberService {
 		JDBCTemplate.close(conn);
 
 		if (userId == null) {
-			// null인 경우는 해당 ID를 사용하는 사용자가 없다라는 의미
+			// null인 경우는 해당 ID를 사용하는 사용자가 없다라는 의미kk
 			return false; // 리턴 값이 false는 해당 아이디 사용자가 없음값
 		} else {
 			return true;

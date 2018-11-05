@@ -7,22 +7,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.tomcat.jni.Mmap;
-
-import kr.co.ticketsea.admin.show.model.service.MiniShowService;
-import kr.co.ticketsea.admin.show.model.service.ShowService;
+import kr.co.ticketsea.admin.show.model.service.PlaceService;
 
 /**
- * Servlet implementation class MiniShowApproveServlet
+ * Servlet implementation class PlaceInsertServlet
  */
-@WebServlet(name = "MiniShowApprove", urlPatterns = { "/miniShowApprove.do" })
-public class MiniShowApproveServlet extends HttpServlet {
+@WebServlet(name = "PlaceInsert", urlPatterns = { "/placeInsert.do" })
+public class PlaceInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MiniShowApproveServlet() {
+    public PlaceInsertServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,19 +28,18 @@ public class MiniShowApproveServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getParameter("utf-8");
+		request.setCharacterEncoding("UTF-8");
+		String th_name = request.getParameter("placeName");
+		String th_lct = request.getParameter("placeAddress");
 		
-		int msNo =  Integer.parseInt(request.getParameter("msNo"));
-		System.out.println(msNo);
-		int result = new MiniShowService().miniShowApprove(msNo);
+		System.out.println("장소이름:"+th_name);
+		System.out.println("주소:"+th_lct);
 		
+		int result=new PlaceService().insertPlace(th_name,th_lct);
 		
 		if(result>0) {
-			response.sendRedirect("/views/admin/msApproveSuccess.jsp");
-		}else {
-			response.sendRedirect("/views/admin/error.jsp");
+			response.sendRedirect("/adShowPlace.do");
 		}
-		
 	}
 
 	/**

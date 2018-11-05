@@ -13,9 +13,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title></title>
-<link rel=StyleSheet type="text/css" href="/css/admin_common.css">
 <link rel=StyleSheet type="text/css" href="/css/ad_showInsert.css">
-
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
 </script>
@@ -138,7 +136,6 @@ function LoadImg(value){
                              <option value="<%=sp.getTh_no()%>"><%=sp.getTh_name()%></option>
                            <%} %>
                           </select>
-                          <input type="button" id="placeSearch" onclick="placeSearch();" value="주소검색"/> 
                         </div>
                     </fieldset>
                     <fieldset class="edit_artist">
@@ -189,6 +186,7 @@ function LoadImg(value){
                         <div class="edit">
                             <div class="write_wrap">
                            		<input type="file" id="show_poster" name="show_poster"/>
+                           		<button onclick="uploadFile();">파일업로드</button>
                             </div>
                         </div>
                     </fieldset>
@@ -203,7 +201,7 @@ function LoadImg(value){
                         </div>
                     </fieldset>
                     <div class="submit_area">
-	            <input type="submit" value="작성" style="float:right;" onclick="showCheck();" width="70px" height="40px">
+	            <input type="submit" value="작성" style="float:right;" onclick="return showCheck();" width="70px" height="40px">
 	            </div>
 	            </div>
 	            </div>
@@ -221,8 +219,8 @@ function LoadImg(value){
 	<!-- script -->
 	
 	<script>
-	$(document).ready(function() {
-	   /*  $("#btn").click(function(){
+/*	$(document).ready(function() {
+	    $("#btn").click(function(){
 	    	var  data = $("input[name=showDtInfo]")[0].files[0];
 	    	$.ajax({
 	    		url : '/adPostUpload.do',
@@ -235,13 +233,10 @@ function LoadImg(value){
 	    			alert("업로드 성공!");
 	    		}
 	    	});
-	    }); */
-	    $("#placeSearch").click(function(){
-	    	location.href="/views/admin/placeInsert.jsp";
 	    });
 
-	}); 
-	
+	}); */
+
 		  
 	function showCheck(){
 		category= document.getElementById("category").value;
@@ -300,6 +295,11 @@ function LoadImg(value){
            	alert("수수료를 입력하세요");
             return false;
     	}
+        else if(count==0){
+        		alert("상세 정보 이미지를 업로드 하세요");
+        		return false;
+        }
+       
         else//모든 검사 만족시 true 반환
         {
             return true;
