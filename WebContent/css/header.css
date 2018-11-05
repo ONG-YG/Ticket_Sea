@@ -86,7 +86,7 @@
 			border: 0;
 			padding: 0px;
 			height: 100%;
-			width: 400px;;
+			width: 400px;
 		}
 		#searchline{
 			height: 35px;;
@@ -104,6 +104,11 @@
 		
         #searchIcon{
             height: 41px;
+        }
+        .btn_search{
+        	padding:0px;
+        	height:42px;
+        	width:41px;
         }
        
       

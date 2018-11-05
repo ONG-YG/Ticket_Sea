@@ -65,18 +65,19 @@ function adminBtn(){
 				</h1>
 				<div class="search">
 					
-					<form name="searchForm" action="" method="GET">
+					<form name="search" action="/musicalSearchList.do" method="GET">
                 <fieldset>
                     <legend>검색창</legend>
-                    <input type="text" id="searchline" name="query" title="검색어 입력" value="">
-                    <a href="#" class="btn_search"><img id="searchIcon"  src="/img/searchicon.PNG" width="41px"
-                    ></a>
+                    <input type="text" id="searchline" name="search" title="검색어 입력" value="">
+                    <img  id="searchIcon" src="/img/searchicon.PNG"
+                    onclick="goSearch();">
                 </fieldset>
                         
             		</form>
         		</div>
 				  
 			</div>
+			
             <!--menu div-->
             <div id="menu">
 				<ul>
@@ -93,7 +94,12 @@ function adminBtn(){
        
 
     </div>
-
+	<script>
+		function goSearch(){
+			var keyword = document.getElementById("searchline").value;
+			location.href=("/musicalSearchList.do"+"?search="+keyword);
+		}
+	</script>
 
 </body>
 </html>
