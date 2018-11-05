@@ -3,9 +3,7 @@
     pageEncoding="UTF-8"%>
     <%@ page import="kr.co.ticketsea.member.model.vo.*" %>
     <%@ page import="kr.co.ticketsea.reserve.model.vo.*" %>
-    <%@ page import="kr.co.ticketsea.mypage.model.vo.*" %>
     <%@ page import="java.util.ArrayList" %>
-    <% ArrayList<MyReserveList> finalMrlList = (ArrayList<MyReserveList>)request.getAttribute("finalMrlList"); %>
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
