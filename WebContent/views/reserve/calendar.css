@@ -85,11 +85,33 @@ calendar div.week span.day.today{
 calendar div.week span.day.different-month{
    color:#C0C0C0;
 }
-calendar div.week span.day.selected {
-    background: rgb(190,235,250);
+
+
+
+
+
+
+calendar div.week span.day.selectable {
+    background: rgb(230,242,255);
+    /*background: red;*/
+}
+
+
+
+
+
+
+calendar div.week span.day.selected.selectable {
+    background: skyblue;
     color:white;
 }
 calendar div.week.names>span {
     color: dodgerblue;
     font-weight:bold;
 }
+
+
+
+
+
+

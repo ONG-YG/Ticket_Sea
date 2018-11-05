@@ -24,6 +24,7 @@ public class ReserveProgressing {
 	private int commission;								//수수료
 	private int ticketPrice;							//티켓가격 총합
 	private int totalPrice;								//총 결제 금액
+	private String payType;								//결제방식
 	
 	
 	
@@ -38,9 +39,9 @@ public class ReserveProgressing {
 	}
 	public ReserveProgressing(int psNo, int showNo, String showTitle, String showPoster, String theaterName,
 			Date psDate, int showCnt, String showTime, ArrayList<Integer> reservedSeatList,
-			ArrayList<Integer> progSeatList, ArrayList<SeatGradeState> seatGrdSt, String memberName, int bkNo,
+			ArrayList<Integer> progSeatList, ArrayList<SeatGradeState> seatGrdStList, String memberName, long bkNo,
 			ArrayList<SelectedSeat> selSeatList, String phone, String email, int commission, int ticketPrice,
-			int totalPrice) {
+			int totalPrice, String payType) {
 		super();
 		this.psNo = psNo;
 		this.showNo = showNo;
@@ -52,7 +53,7 @@ public class ReserveProgressing {
 		this.showTime = showTime;
 		this.reservedSeatList = reservedSeatList;
 		this.progSeatList = progSeatList;
-		this.seatGrdStList = seatGrdSt;
+		this.seatGrdStList = seatGrdStList;
 		this.memberName = memberName;
 		this.bkNo = bkNo;
 		this.selSeatList = selSeatList;
@@ -61,11 +62,13 @@ public class ReserveProgressing {
 		this.commission = commission;
 		this.ticketPrice = ticketPrice;
 		this.totalPrice = totalPrice;
+		this.payType = payType;
 	}
-	
-	
-	
-	
+
+
+
+
+
 	public int getPsNo() {
 		return psNo;
 	}
@@ -188,6 +191,12 @@ public class ReserveProgressing {
 			this.totalPrice = this.ticketPrice + commission;
 		}
 	}
+	public String getPayType() {
+		return payType;
+	}
+	public void setPayType(String payType) {
+		this.payType = payType;
+	}
 	
 	
 	
@@ -215,6 +224,7 @@ public class ReserveProgressing {
 							+ commission + "\n"
 							+ ticketPrice + "\n"
 							+ totalPrice + "\n"
+							+ payType + "\n"
 							+ "-------------------------\n\n\n";
 		
 		

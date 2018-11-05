@@ -87,7 +87,7 @@ public class ReserveConfirmServlet extends HttpServlet {
 										rp.setTheaterName(thName);			
 									}
 									else {
-										System.out.println("error at ReserveConfirmServlet-6");
+										System.out.println("error at ReserveConfirmServlet-9");
 										throw new Exception();
 									}
 									rp.setPsDate(ps.getPerformSchDate());
@@ -101,13 +101,13 @@ public class ReserveConfirmServlet extends HttpServlet {
 										
 									}
 									else {
-										System.out.println("error at ReserveConfirmServlet-7");
+										System.out.println("error at ReserveConfirmServlet-8");
 										throw new Exception();
 									}//if(!seatGrdStList.isEmpty()) END
 									
 								}
 								else {
-									System.out.println("error at ReserveConfirmServlet-5");
+									System.out.println("error at ReserveConfirmServlet-7");
 									throw new Exception();
 								}//if(si!=null) END
 								
@@ -160,15 +160,14 @@ public class ReserveConfirmServlet extends HttpServlet {
 											rp.setTotalPrice();
 											
 										}else {
-											System.out.println("error at ReserveConfirmServlet-8");
+											System.out.println("error at ReserveConfirmServlet-6");
 											throw new Exception();
 										}//if(chk) END
 										
 										//예매번호 생성 후 정상적으로 예매번호 생성완료 시 step3 jsp페이지로 객체 전달 및 이동
 										long bkNo = new ReserveService().createBookNo();
 										if(bkNo!=-1) {
-											rp.setBkNo(bkNo);
-											
+											rp.setBkNo(bkNo); //jsp페이지 전달 객체에 저장
 											System.out.println("ReserveConfirmServlet\n"+rp);/////////////////////////
 											
 											//세션 정보 저장
