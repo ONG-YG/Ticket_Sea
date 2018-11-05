@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import = "kr.co.ticketsea.admin.reserve.model.vo.*" 
+		import = "java.util.ArrayList"%>    
+<% 
+	// Controller(Servlet)에서 보내준 값 가져오기
+	ArrayList<Reserve> list = (ArrayList<Reserve>)request.getAttribute("reserveList");
+	
+	
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -58,22 +66,22 @@
                    <table class="reserveTbl">
                     <thead style="background-color:#E7E7E7">
                         <td width="15%">예매번호</td>
-                        <td width="15%">아이디</td>
+                        <td width="15%">공연번호</td>
+                        <td width="15%">예매상태</td>
                         <td width="15%">예매일</td>
-                        <td width="15%" style="overflow:hidden;">공연명</td>
-                        <td width="15%">관람일시</td>
-                        <td width="15%">취소가능일시</td>
-                        <td >상태</td>
+                        <td width="15%">총결제금액</td>
+                        <td >삭제</td>
                        </thead>
+                       <%for(Reserve rs : list) {%>
                        <tr>
-                           <td><a href="adReserveList.do">123456</a></td>
-                           <td><a href="">test1</a></td>
-                           <td>2018-10-15</td>
-                           <td><a href="">지킬앤하이드</a></td>
-                           <td>2018-12-13</td>
-                           <td>2018-11-15 17:00</td>
-                           <td>예매완료</td>
+                           <td><%=rs.getBk_no() %></td>
+                           <td><%=rs.getShow_no() %></td>
+                           <td><%=rs.getBk_stat_cd() %></td>
+                           <td><%=rs.getBk_date() %></td>
+                           <td><%=rs.getTot_price() %></td>
+                           <td><input type="button" value="삭제" onclick="delActive('<%=rs.getBk_no()%>');"></td>
                        </tr>
+                        <%} %>
                     </table>
                     
                     <!--회원목록 페이지 이동-->
