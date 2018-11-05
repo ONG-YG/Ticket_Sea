@@ -1,6 +1,9 @@
 package kr.co.ticketsea.admin.reserve.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,9 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kr.co.ticketsea.admin.reserve.model.service.AdReserveService;
-import kr.co.ticketsea.admin.reserve.model.vo.ReservePageData;
-import kr.co.ticketsea.admin.show.model.service.ShowService;
-import kr.co.ticketsea.reserve.model.service.ReserveService;
+import kr.co.ticketsea.admin.reserve.model.vo.Reserve;
 
 /**
  * Servlet implementation class AdReserveListServlet
@@ -36,9 +37,9 @@ public class AdReserveListServlet extends HttpServlet {
 		if(request.getParameter("currentPage")==null) {
 			currentPage=1;
 		}else {
-			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+			currentPage=Integer.parseInt(request.getParameter("currentPage"));
 		}
-		ReservePageData pd = new AdReserveService().reserveAllList(currentPage);
+		new AdReserveService().reserveAllList(currentPage);
 	}
 
 	/**
