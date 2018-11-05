@@ -134,4 +134,9 @@ public class QnaService {
 		
 	}
 
+	public int qnaUpdate(int boardQ_no, String boardQ_title, String boardQ_contents, String userId) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

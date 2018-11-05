@@ -358,10 +358,8 @@ function delPromo(){
                         <%= promo.getBoardP_contents() %>
                         </div>
                         
-                          <img src="../../img/poster_ex.jpg" style="width:700px; height:850px; padding : 50px;">
-                        
-                        
-                        
+                         <img src="../../uploadFile/mslove/<%= promo.getBoardP_fileName() %>" style="width:700px; height:850px; padding : 50px;">
+                         <%=promo.getBoardP_filePath() %>
                         <table class="detail_info_tbl">
                             
                             <colgroup>

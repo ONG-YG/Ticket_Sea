@@ -44,7 +44,7 @@ public class PromoFileUploadServlet extends HttpServlet {
 		//1. 사용자 계정명 (업로드한 사람의 정보 - session을 이용)
 		HttpSession session = request.getSession(false);
 		try {
-		String userId = ((Member)session.getAttribute("member")).getUserId();
+		String userId = ((Member)session.getAttribute("member")).getMemberId();
 
 		//2. 최대 업로드 파일 사이즈 (cos 라이브러리는 10MB가 한계)
 		int fileSizeLimit = 5 * 1024 * 1024;

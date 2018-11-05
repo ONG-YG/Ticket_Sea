@@ -301,7 +301,7 @@
                 <table id = "notice_header">
                 	<tr>
                 	<td id = "notice_header_a">제목</td>
-                	<td id = "notice_header_b"><span name="boardN_title" id = "boardN_title"><%= notice.getBoardN_title()%></span>
+                	<td id = "notice_header_b"><span name="boardN_title" id="boardN_title"><%= notice.getBoardN_title()%></span>
                 	<input type="hidden" name="boardN_title_fd" id="boardN_title_fd" value="<%=notice.getBoardN_title()%>"/></td>
                 	</tr>
                 	
@@ -347,7 +347,7 @@
                 
                 <form action="/noticeUpdate.do" method="post" id="updateForm">
 					<input type="hidden" name="boardN_no" id="boardN_no" value="<%=notice.getBoardN_no()%>"/>
-					<input type="hidden" id="subject_form" name="subject" />
+					<input type="hidden" id="title_form" name="title" />
 					<input type="hidden" id="contents_form" name="contents" />
 				</form>
 					
@@ -373,7 +373,7 @@
 	            		document.getElementById("btn1").onclick=function(){modifySubmit()};
 	            	}
 	            	function modifySubmit(){
-	            		document.getElementById("subject_form").value = 
+	            		document.getElementById("title_form").value = 
 	            			document.getElementById("boardN_title_fd").value;
 	            		
 	            		document.getElementById("contents_form").value = 

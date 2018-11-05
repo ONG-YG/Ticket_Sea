@@ -294,12 +294,11 @@
                     </tr>
                     
                     
-                    
-                    <tr>
-                        <td>사진첨부</td>
-                        <td><input type="file" name="attachFile" /></td>
-                    </tr>
-                    
+	                    <tr>
+	                        <td>사진첨부</td>
+	                        <td><input type="file" name="upFile" /></td>
+	                    </tr>
+	               
                     <tr>
                         <td colspan="2">
                          <input type="submit" value="작성" style="float:right" width="70px" height="30">

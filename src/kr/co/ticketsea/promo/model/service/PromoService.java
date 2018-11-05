@@ -1,6 +1,7 @@
 package kr.co.ticketsea.promo.model.service;
 
 import java.sql.Connection;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import kr.co.ticketsea.common.JDBCTemplate;
@@ -72,9 +73,9 @@ public class PromoService {
 		
 	}
 
-	public int insertPromo(String title, String category, String contents, String artist, String location, String userId) {
+	public int insertPromo(String title, String category, String contents, String artist, String location, String userId, String fileName, String fullFilePath, long fileSize, Timestamp uploadTime) {
 		Connection conn = JDBCTemplate.getConnection();
-		int result = new PromoDao().insertPromo(conn,title,category,contents,artist,location,userId);
+		int result = new PromoDao().insertPromo(conn,title,category,contents,artist,location,userId,fileName, fullFilePath, fileSize, uploadTime);
 		
 		if(result>0)
 		{

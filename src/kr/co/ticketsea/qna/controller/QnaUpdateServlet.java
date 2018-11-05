@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import kr.co.ticketsea.faq.controller.Member;
-import kr.co.ticketsea.faq.model.service.FaqService;
+import kr.co.ticketsea.qna.model.service.*;
+import kr.co.ticketsea.member.model.vo.*;
 
 /**
  * Servlet implementation class QnaUpdateServlet
@@ -44,11 +44,11 @@ public class QnaUpdateServlet extends HttpServlet {
 		HttpSession session  = request.getSession(false);
 		
 		try {
-			userId = ((Member)session.getAttribute("member")).getUserId();
+			userId = ((Member)session.getAttribute("member")).getMemberId();
 			if(userId!=null) 
 			{
 			//4. 비즈니스 로직 처리
-			int result = new FaqService().faqUpdate(boardQ_no,boardQ_title,boardQ_contents,userId);
+			int result = new QnaService().qnaUpdate(boardQ_no,boardQ_title,boardQ_contents,userId);
 			
 				if(result>0)
 				{

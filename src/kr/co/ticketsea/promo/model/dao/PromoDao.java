@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import kr.co.ticketsea.common.JDBCTemplate;
@@ -17,25 +18,25 @@ public class PromoDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		//½ÃÀÛ °Ô½Ã¹° °è»ê
+		//ï¿½ï¿½ï¿½ï¿½ ï¿½Ô½Ã¹ï¿½ ï¿½ï¿½ï¿½
 		int start = currentPage * recordCountPerPage - (recordCountPerPage-1);
-		//¸¸¾à ¿äÃ»ÇÑ ÆäÀÌÁö°¡ 1ÆäÀÌÁö¶ó¸é? -> 1ÀÌ ³ª¿Í¾ß µÊ
+		//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã»ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½? -> 1ï¿½ï¿½ ï¿½ï¿½ï¿½Í¾ï¿½ ï¿½ï¿½
 			// 1 * 10 - (10-1)  => 1
-		//¸¸¾à ¿äÃ»ÇÑ ÆäÀÌÁö°¡ 4ÆäÀÌÁö¶ó¸é? -> 31ÀÌ ³ª¿Í¾ß µÊ
+		//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã»ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 4ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½? -> 31ï¿½ï¿½ ï¿½ï¿½ï¿½Í¾ï¿½ ï¿½ï¿½
 			// 4 * 10 - (10-1)  => 31
 		
-		//ex) currentPage°¡ 3 ÀÌ°í, recordCountPerPage 5¶ó¸é?
-		//¸¸¾à ¿äÃ»ÇÑ ÆäÀÌÁö°¡ 3ÆäÀÌÁö¶ó¸é? -> 11ÀÌ ³ª¿Í¾ß µÊ
+		//ex) currentPageï¿½ï¿½ 3 ï¿½Ì°ï¿½, recordCountPerPage 5ï¿½ï¿½ï¿½?
+		//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã»ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 3ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½? -> 11ï¿½ï¿½ ï¿½ï¿½ï¿½Í¾ï¿½ ï¿½ï¿½
 			// 3 * 5 - (5-1) 	=> 11
 		
 		
 		
 		
-		//³¡ °Ô½Ã¹° °è»ê
+		//ï¿½ï¿½ ï¿½Ô½Ã¹ï¿½ ï¿½ï¿½ï¿½
 		int end = currentPage * recordCountPerPage;
-		// ¸¸¾à ¿äÃ»ÇÑ ÆäÀÌÁö°¡ 1ÆäÀÌÁö¶ó¸é? -> 10
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã»ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½? -> 10
 			// 1 * 10	=> 10
-		// ¸¸¾à ¿äÃ»ÇÑ ÆäÀÌÁö°¡ 3ÆäÀÌÁö¶ó¸é? -> 30
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã»ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 3ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½? -> 30
 			// 3 * 10 	=> 30
 		
 		
@@ -83,8 +84,8 @@ public class PromoDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		// °Ô½Ã¹°ÀÇ ÅäÅ» °³¼ö¸¦ ±¸ÇØ¾ß ÇÔ
-		int recordTotalCount = 0; //ÃÊ±â°ªÀº Á¤º¸°¡ ¾øÀ¸¹Ç·Î 0À¸·Î ¼ÂÆÃ
+		// ï¿½Ô½Ã¹ï¿½ï¿½ï¿½ ï¿½ï¿½Å» ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ø¾ï¿½ ï¿½ï¿½
+		int recordTotalCount = 0; //ï¿½Ê±â°ªï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ 0ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		
 		String query = "select count(*) AS TOTALCOUNT FROM board_promo";
 		
@@ -103,15 +104,15 @@ public class PromoDao {
 		}
 		 
 		
-		 // ±¸ÇØ¿Â °Ô½Ã¹°ÀÇ ÅäÅ» °³¼ö¸¦ ¹ÙÅÁÀ¸·Î ÆäÀÌÁöÀÇ ÅäÅ» °³¼ö¸¦ ±¸ÇØ¾ß ÇÔ
-		 // Áï, °Ô½Ã¹°ÀÌ 124°³ ¶ó¸é? 
-		 // page´Â ÃÑ 13°³°¡ µÇ¾î¾ß ÇÔ (ÆäÀÌÁö´ç 10°³ÀÇ °Ô½Ã¹°ÀÌ¶ó°í Á¤ÇÏ¿´À»¶§ ±âÁØ)
+		 // ï¿½ï¿½ï¿½Ø¿ï¿½ ï¿½Ô½Ã¹ï¿½ï¿½ï¿½ ï¿½ï¿½Å» ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å» ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ø¾ï¿½ ï¿½ï¿½
+		 // ï¿½ï¿½, ï¿½Ô½Ã¹ï¿½ï¿½ï¿½ 124ï¿½ï¿½ ï¿½ï¿½ï¿½? 
+		 // pageï¿½ï¿½ ï¿½ï¿½ 13ï¿½ï¿½ï¿½ï¿½ ï¿½Ç¾ï¿½ï¿½ ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 10ï¿½ï¿½ï¿½ï¿½ ï¿½Ô½Ã¹ï¿½ï¿½Ì¶ï¿½ï¿½ ï¿½ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
 		 
-		 int pageToTalCount = 0; //Á¤º¸°¡ ¾øÀ¸¹Ç·Î ÃÊ±â°ªÀº 0 ¼ÂÆÃ
+		 int pageToTalCount = 0; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ ï¿½Ê±â°ªï¿½ï¿½ 0 ï¿½ï¿½ï¿½ï¿½
 		 
 		 
-		 // ÆäÀÌÁöÀÇ ÅäÅ» °³¼ö ±¸ÇÏ´Â °ø½Ä
-		 // °Ô½Ã¹°ÅäÅ» °³¼ö / 10  + 1(Á¶°Ç¿¡ µû¶ó Àû¿ë)
+		 // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å» ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½
+		 // ï¿½Ô½Ã¹ï¿½ï¿½ï¿½Å» ï¿½ï¿½ï¿½ï¿½ / 10  + 1(ï¿½ï¿½ï¿½Ç¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
 		 
 		 if(recordTotalCount%recordCountPerPage !=0)
 		 {
@@ -123,7 +124,7 @@ public class PromoDao {
 		 }
 		 
 		 
-		 // ¿¡·¯ ¹æÁö ÄÚµå
+		 // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Úµï¿½
 		 if(currentPage<1)
 		 {
 			 currentPage = 1;
@@ -133,59 +134,17 @@ public class PromoDao {
 			 currentPage = pageToTalCount;
 		 }
 		 
-		 
-		 // ÇöÀç ÆäÀÌÁö¸¦ ±âÁ¡À¸·Î ½ÃÀÛ navi ¿Í ³¡ navi¸¦ ¸¸µé¾î¾ß ÇÔ
-		 
-		 // ÇöÀç ÆäÀÌÁö°¡ ¸¸¾à 1ÀÌ¶ó¸é  ?    1 2 3 4 5
-		 // ÇöÀç ÆäÀÌÁö°¡ ¸¸¾à 3ÀÌ¶ó¸é  ?    1 2 3 4 5
-		 // ÇöÀç ÆäÀÌÁö°¡ ¸¸¾à 7ÀÌ¶ó¸é  ? 	 6 7 8 9 10
-		 // ÇöÀç ÆäÀÌÁö°¡ ¸¸¾à 12ÀÌ¶ó¸é?	 11 12 13 14 15
-		 
-		 // ½ÃÀÛ ÆäÀÌÁö¸¦ ±¸ÇÏ´Â °ø½Ä
-		 // ((ÇöÀçÆäÀÌÁö-1)/¸®½ºÆ®°³¼ö)*¸®½ºÆ®°³¼ö+1
-		 
-		 // ¸¸¾à 1ÆäÀÌÁö ¶ó¸é?
-		 // ((1-1)/5)*5+1   => 1
-		 
-		 // ¸¸¾à 3ÆäÀÌÁö ¶ó¸é?
-		 // ((3-1)/5)*5+1	=> 1
-		 
-		 // ¸¸¾à 7ÆäÀÌÁö ¶ó¸é?
-		 // ((7-1)/5)*5+1	=> 6
-		 
-		 // ¸¸¾à 12ÆäÀÌÁö ¶ó¸é?
-		 // ((12-1)/5)*5+1	=> 11
-		 
-		
-		 // ½ÃÀÛ ÆäÀÌÁö ±¸ÇÏ´Â °ø½Ä ´ëÀÔ
 		int startNavi = ((currentPage-1)/naviCountPerPage)*naviCountPerPage+1; 
 		
 		
-		// ³¡ ÆäÀÌÁö¸¦ ±¸ÇÏ´Â °ø½Ä
-		// ½ÃÀÛnavi + º¸¿©ÁÙ navi °³¼ö -1;
-		// ex. ½ÃÀÛ navi°¡ 11 ÀÌ¶ó¸é?
-		// 11 + 5 -1 => 15 °¡ ³ª¿È
-		// Áï, 11 12 13 14 15 °¡ ±¸ÇØÁü  
-		
 		int endNavi = startNavi + naviCountPerPage -1;
 		
-		
-		// ³¡ navi¸¦ ±¸ÇÒ¶§ ÁÖÀÇÇØ¾ß Ç×Á¡
-		// ÅäÅ» °³¼ö°¡ 122°³ ¶ó°í ÇÒ¶§ ( ÃÑ ÅäÅ» ÆäÀÌÁö´Â 13°³)
-		// 1 2 3 4 5
-		// 6 7 8 9 10
-		// 11 12 13 14 15
-		// ÅäÅ» ÆäÀÌÁö¸¦ °í·ÁÇÏÁö ¾Ê°í ¸¸µé°Ô µÇ¸é À§¿¡ Ã³·³ ³¡ navi°¡ ÀÌ»óÇÏ°Ô ±¸ÇØÁö°Ô µÊ
 		
 		if(endNavi > pageToTalCount)
 		{
 			endNavi = pageToTalCount;
 		}
 	
-		
-		// ÆäÀÌÁö¸¦ Ç¥ÇöÇÏ´Â navi¿¡¼­ »ç¿ëÇÒ '<' ¸ð¾ç°ú '>'¸ð¾çÀ» ¾²±âÀ§ÇØ
-		// ÇÊ¿äÇÑ º¯¼ö 2°³¸¦ »ý¼º (º¯¼ö¿¡ °ª¿¡ µû¶ó¼­ ½ÃÀÛ ºÎºÐ°ú ³¡ºÎºÐÀº Ç¥ÇöÇÏÁö ¾Ê±â À§ÇØ)
-		
 		boolean needPrev = true;
 		boolean needNext = true;
 		
@@ -196,24 +155,24 @@ public class PromoDao {
 		
 		StringBuilder sb = new StringBuilder();
 		
-		// needPrev´Â ½ÃÀÛÆäÀÌÁö°¡ 1ÀÌ¸é false, ½ÃÀÛÆäÀÌÁö°¡ 1ÀÌ ¾Æ´Ï¶ó¸é true
-		if(needPrev==true) // ½ÃÀÛ ÆäÀÌÁö°¡ 1ÆäÀÌÁö°¡ ¾Æ´Ï¶ó¸é!
+		// needPrevï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 1ï¿½Ì¸ï¿½ false, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 1ï¿½ï¿½ ï¿½Æ´Ï¶ï¿½ï¿½ true
+		if(needPrev==true) // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Æ´Ï¶ï¿½ï¿½!
 		{
 			sb.append("<a href='/promoList.do?currentPage="+(startNavi-1)+"'> < </a>");
 		}
-		// ÇöÀç ³» À§Ä¡(startNavi°ª)°¡ 2¶ó¸é? '<' ¹öÆ°À» Å¬¸¯ÇÏ¸é 1ÆäÀÌÁö·Î ÀÌµ¿ÇØ¾ß ÇÔ
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½Ä¡(startNaviï¿½ï¿½)ï¿½ï¿½ 2ï¿½ï¿½ï¿½? '<' ï¿½ï¿½Æ°ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½Ï¸ï¿½ 1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½Ø¾ï¿½ ï¿½ï¿½
 		// <a href='/promoList.do?cureentPage=1> < </a>
 		
 		for(int i=startNavi; i<=endNavi;i++){
 			if(i==currentPage)
 			{
-				// ÇöÀç ÆäÀÌÁö°¡ ³»°¡ ÀÖ´Â À§Ä¡ÆäÀÌÁö¿Í °°´Ù¸é ÁøÇÏ°Ô Ç¥½Ã
+				// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ù¸ï¿½ ï¿½ï¿½ï¿½Ï°ï¿½ Ç¥ï¿½ï¿½
 				sb.append("<a href='/promoList.do?currentPage="+i+"'><B style='font-size:30px'>"+i+"</B></a> ");
 				//<a href='/promoList.do?cureentPage=1'><B>1</B></a>
 			}
 			else
 			{
-				// ÇöÀç ÆäÀÌÁö°¡ ³»°¡ ÀÖ´Â À§Ä¡ ÆäÀÌÁö¿Í ´Ù¸£´Ù¸é ÀÏ¹Ý Ç¥½Ã
+				// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¸ï¿½ï¿½Ù¸ï¿½ ï¿½Ï¹ï¿½ Ç¥ï¿½ï¿½
 				sb.append("<a href='/promoList.do?currentPage="+i+"'>"+i+"</a> ");
 			}
 		}
@@ -252,6 +211,10 @@ public class PromoDao {
 				promo.setBoardP_location(rset.getString("boardP_location"));
 				promo.setBoardP_date(rset.getDate("boardP_date"));	
 				promo.setBoardP_hit(rset.getInt("boardP_hit"));
+				promo.setBoardP_fileName(rset.getString("boardP_fileName"));
+				promo.setBoardP_filePath(rset.getString("boardP_filePath"));
+				promo.setBoardP_fileSize(rset.getLong("boardP_fileSize"));
+				promo.setBoardP_uploadTime(rset.getTimestamp("boardP_uploadTime"));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -265,12 +228,12 @@ public class PromoDao {
 	}
 
 	public int insertPromo(Connection conn, String title, String category,String contents, String artist, String location,
-			String userId) {
+			String userId, String fileName, String fullFilePath, long fileSize, Timestamp uploadTime) {
 		
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
-		String query = "insert into board_promo values(seq_boardp_no.NEXTVAL,?,?,?,?,?,?,SYSDATE,default)";
+		String query = "insert into board_promo values(seq_boardp_no.NEXTVAL,?,?,?,?,?,?,SYSDATE,default,default,?,?,?,?)";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -281,6 +244,10 @@ public class PromoDao {
 			pstmt.setString(4, artist);
 			pstmt.setString(5, contents);
 			pstmt.setString(6, location);
+			pstmt.setString(7, fileName);
+			pstmt.setString(8, fullFilePath);
+			pstmt.setLong(9,  fileSize);
+			pstmt.setTimestamp(10, uploadTime);
 			
 			result = pstmt.executeUpdate();
 		
