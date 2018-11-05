@@ -2,24 +2,22 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<%
+	request.setCharacterEncoding("utf-8");
+	int showNo = Integer.parseInt(request.getParameter("showNo"));
+	int performSchNo = Integer.parseInt(request.getParameter("psNo"));
+			System.out.println("showNo "+showNo);
+			System.out.println("performSchNo "+performSchNo);
+%>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>Ticket Sea 예매</title>
 </head>
 <body>
-	<center>
-	<br><br>
-	<h1>잘못된 접근입니다.</h1><br><br>
-	<h3>문제가 계속 발생할 시에는 관리자에게 문의바랍니다.</h3>
-		<br><br>
-		<button onclick="back();">홈으로</button>
-	</center>
 
 <script>
-	function back(){
-		location.href="/index.jsp";
-		
-	}
+	location.href="";
 </script>
+
 </body>
 </html>

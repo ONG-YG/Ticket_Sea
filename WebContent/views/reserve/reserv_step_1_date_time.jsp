@@ -1,4 +1,3 @@
-<%@page import="kr.co.ticketsea.reserve.model.vo.SeatGradeState"%>
 <%@page import="kr.co.ticketsea.reserve.model.vo.ReserveStepOne"%>
 <%@page import="kr.co.ticketsea.reserve.model.vo.PerformSchedule"%>
 <%@page import="java.util.ArrayList" %>
@@ -13,8 +12,7 @@
 	
 	String showTitle = stOne.getShowTitle();
 	String showPoster = stOne.getShowPoster();
-	ArrayList<PerformSchedule> psList = stOne.getPsList();
-	//ArrayList<SeatGradeState> seatGrdStList = stOne.getSeatGrdStList();//////////////////////////////
+	ArrayList<PerformSchedule> psList =stOne.getPsList();
 %>
 
 <script>
@@ -26,21 +24,9 @@
 		var psDate='<%=psList.get(i).getPerformSchDate()%>';
 		var psCnt=<%=psList.get(i).getPerformSchCnt()%>;
 		var psTime='<%=psList.get(i).getPerformTime()%>';
-		var seatGrdStList = [];
-		
-		<%
-       	for (SeatGradeState seatGrdSt : psList.get(i).getSeatGrdStList()) {
-       		String seatGrd = seatGrdSt.getTh1_seat_grd();
-       		int avail = seatGrdSt.getAvailableSeatCnt();
-       	%>
-	       	var seatGrdSt = ['<%=seatGrd%>', <%=avail%>];
-	       	seatGrdStList.push(seatGrdSt);
-       	<%} %>
-		
-		//var ps = [psNo, psDate, psCnt, psTime];//, availSeat];
-		var ps = [psNo, psDate, psCnt, psTime, seatGrdStList];
+		var availSeat=<%=psList.get(i).getAvailableSeat()%>;
+		var ps = [psNo, psDate, psCnt, psTime, availSeat];
 		psList.push(ps);
-		//console.log(ps);////////////////////////////////////////////
 <%
 	}
 %>
@@ -65,26 +51,15 @@
         var date_sel = null;
         var cnt_sel = null;
         var psNo = null;
-        //var availSeat = null;
-        
         $(document).ready(function(){
             
         	pageInit();
         	
-        	// 날력의 날짜 클릭했을 때
-        	// date_sel에 선택한 날짜 저장
-        	// 날짜와 회차 모두 선택한 상태에서 다른 날짜를 다시 선택했을 경우를 위해 먼저, 선택한 회차정보를 초기화 
             $('.calendar-date').click(function(){
             //$('.week .day').click(function(){
             	//alert("hello");/////////////////////////////////////////
                 date_sel = null;
                 cnt_sel = null;
-                psNo = null;
-                //availSeat = null;
-                
-                $('#seat_box ul').html("");
-                $('#cnt_box ul').html("");
-                $('#seat_box ul').html("");
                 $('#cnt_box li').removeClass('selected_cnt_li');
                 $('.calendar-date').removeClass('selected_date_td');
                 $(this).addClass('selected_date_td');
@@ -127,11 +102,7 @@
             	$('#cnt_box ul').html(list);
             	
             })
-            
-            /*
-            // 회차 정보 li를 클릭했을 때
-            // cnt_sel에 선택한 회차 번호 저장
-            // 선택한 날짜와 회차 정보 종합해서 잔여석 표시
+
             $('#cnt_box li').click(function(){
                 alert(date_sel);
             	if(date_sel!=null) {
@@ -143,27 +114,19 @@
                     //alert(cnt_sel);
                 }
             })
-            */
             
         })
         
         function pageInit() {
         	
         	var showTitle = '<%=showTitle%>';
-        	$('#mini_show_title').text(showTitle);	//공연명 표시
+        	$('#mini_show_title').text(showTitle);	//공연명
         	
         	var showPosterSrc = "/img/poster/<%=showPoster%>";
-        	$('#mini_poster img').attr('src',showPosterSrc);  //포스터 이미지 경로 세팅
-        	
-        	
-        	//psList에 담긴 선택가능한 날짜들 달력에 표시해주기
-        	
+        	$('#mini_poster img').attr('src',showPosterSrc);
         	
         }
-        
-     	// 회차 정보 li를 클릭했을 때
-        // cnt_sel에 선택한 회차 번호 저장
-        // 선택한 날짜와 회차 정보 종합해서 잔여석 표시
+            
         function listClick(cnt){
             
         	if(date_sel!=null) {
@@ -175,29 +138,6 @@
                 var cntText = $(selectedLi).text();
                 $('#cnt_sel_info span').html(cntText);
                 //alert(cnt_sel);
-                
-                var seatGrdStList = [];
-                for(var i=0; i<psList.length; i++) {
-                	if(psList[i][1]==date_sel && psList[i][2]==cnt_sel) {
-                		psNo = psList[i][0];
-                		seatGrdStList = psList[i][4];
-                		break;
-                	}
-				}
-                
-                //console.log(seatGrdStList);/////////////////
-                var list = "";
-                for(var i=0; i<seatGrdStList.length; i++) {
-                	var seatGrdSt = seatGrdStList[i];
-	           		list += " <li> "
-		                        +"<span class='seat_grade'>"+ seatGrdSt[0] +" 석 </span> "
-		                        +"<span class='available_seat'> "+ seatGrdSt[1] +" </span> "
-		                        +"<span>석</span> "
-		                   +" </li> ";
-	            	
-                }
-                $('#seat_box ul').html(list);
-                
             }
         }
         
@@ -211,6 +151,12 @@
                 $('#date_form').val(date_sel);
                 $('#cnt_form').val(cnt_sel);
                 
+                for(var i=0; i<psList.length; i++) {
+                	if(psList[i][1]==date_sel && psList[i][2]==cnt_sel) {
+                		psNo = psList[i][0];
+                		break;
+                	}
+				}
                 $('#dateCntForm').attr('action',"/reserveSeat.do?psNo="+psNo);
                 document.getElementById("dateCntForm").submit();
             }
@@ -258,7 +204,7 @@
                             <div id="ct_left_date">
                                 <b>날짜선택</b><hr>
                                 <div id="date_box">
-                                	<!--<jsp:include page="/views/reserve/reserveCalendar.html" />-->
+                                	<!--<jsp:include page="/views/reserve/test.html" />-->
                                 	
                                     <div class="calendar">
                                         <div class="calendar-header">
@@ -369,14 +315,11 @@
                                 <b>잔여석</b><hr>
                                 <div id="seat_box">
                                     <ul>
-                                    	<!-- 날짜와 회차 선택하면 표시됨 -->
-                                    	<!--
                                         <li>
-                                            <span class="seat_grade">전체</span>
+                                            <span class="seat_grade">일반석</span>
                                             <span class="available_seat">27</span>
                                             <span>석</span>
                                         </li>
-                                        -->
                                     </ul>
                                 </div>
                             </div>

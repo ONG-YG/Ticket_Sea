@@ -1,7 +1,6 @@
 package kr.co.ticketsea.reserve.model.vo;
 
 import java.sql.Date;
-import java.util.ArrayList;
 
 public class PerformSchedule {
 	
@@ -10,8 +9,7 @@ public class PerformSchedule {
 	private int performSchCnt;		//공연회차
 	private int showNo;				//공연번호
 	private String performTime;		//공연시간
-	//private int availableSeat;		//해당회차 잔여석 수
-	private ArrayList<SeatGradeState> seatGrdStList;	//등급별 좌석가격 및 잔여석
+	private int availableSeat;		//해당회차 잔여석 수
 	
 	
 	
@@ -19,20 +17,18 @@ public class PerformSchedule {
 		super();
 	}
 	public PerformSchedule(int performSchNo, Date performSchDate, int performSchCnt, int showNo, String performTime,
-			ArrayList<SeatGradeState> seatGrdStList) {
+			int availableSeat) {
 		super();
 		this.performSchNo = performSchNo;
 		this.performSchDate = performSchDate;
 		this.performSchCnt = performSchCnt;
 		this.showNo = showNo;
 		this.performTime = performTime;
-		this.seatGrdStList = seatGrdStList;
+		this.availableSeat = availableSeat;
 	}
-
-
-
-
-
+	
+	
+	
 	public int getPerformSchNo() {
 		return performSchNo;
 	}
@@ -63,11 +59,11 @@ public class PerformSchedule {
 	public void setPerformTime(String performTime) {
 		this.performTime = performTime;
 	}
-	public ArrayList<SeatGradeState> getSeatGrdStList() {
-		return seatGrdStList;
+	public int getAvailableSeat() {
+		return availableSeat;
 	}
-	public void setSeatGrdStList(ArrayList<SeatGradeState> seatGrdStList) {
-		this.seatGrdStList = seatGrdStList;
+	public void setAvailableSeat(int availableSeat) {
+		this.availableSeat = availableSeat;
 	}
 	
 	
@@ -82,7 +78,7 @@ public class PerformSchedule {
 						+ performSchCnt + "\n"
 						+ showNo + "\n"
 						+ performTime + "\n"
-						+ "--seatGrdStList--\n"+ seatGrdStList + "\n"
+						+ availableSeat + "\n"
 					+ "--------------------------------\n";
 		
 		return ps;

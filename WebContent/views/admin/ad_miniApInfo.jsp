@@ -200,7 +200,7 @@
                 <ul>
                     <li><a href="#">공연관리</a>
                         <ul>
-                             <li><a href="/adShowPlace.do">공연등록</a></li>
+                             <li><a href="/admin/ad_showInsert.jsp">공연등록</a></li>
                             <li><a href="/adShowList.do">공연목록</a></li>
                         </ul>
                     </li>    
@@ -252,11 +252,11 @@
                             </tr>
                             <tr>
                                 <th>아티스트</th>
-                                <td><input type="text" id="artists" name="artists" value="<%=ms.getMs_artists()%>"></td>
+                                <td><input type="text" name="artists" value="<%=ms.getMs_artists()%>"></td>
                             </tr>
                             <tr>
                                 <th>장소</th>
-                                <td><input type="text" id="place" name="place" value="<%=ms.getMs_place()%>"></td>
+                                <td><input type="text" name="place" value="<%=ms.getMs_place()%>"></td>
                             </tr>
                             <tr>
                                 <th>작성일</th>
@@ -268,36 +268,20 @@
                             </tr>
                             <tr>
                                 <th>공연소개</th>
-                                <td><input type="text" id="intd" name="intd" value="<%=ms.getMs_intd()%>"/></td>
+                                <td><input type="text" name="intd" value="<%=ms.getMs_intd()%>"/></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
                    <div id="msUpdate">
-                    <button id="updateBtn" onclick = "return updateSubmit()">소규모공연 수정</button>
+                    <button id="updateBtn" onclick = "updateSubmit()">소규모공연 수정</button>
                    </div>
                </div>
                </form>
                </div>
                <script>
                 function updateSubmit(){
-                	var artists = document.getElementById("artists"); 
-                	var place = document.getElementById("place"); 
-                	var intd = document.getElementById("intd"); 
-                	
-                	if(artists==""){
-                		alert("아티스트 정보를 입력하세요");
-                		return false;
-                	}else if(place=""){
-                		alert("장소를 입력하세요");
-                		return false;
-                	}else if(intd==""){
-                		alert("공연정보를 입력하세요");
-                		return false;
-                	}else{
-                		document.getElementById("updateForm").submit();	
-                		return true;
-                	}
+                	document.getElementById("updateForm").submit();
                 }
                </script>
                

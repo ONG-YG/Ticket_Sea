@@ -17,25 +17,25 @@ public class PromoDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		//ì‹œìž‘ ê²Œì‹œë¬¼ ê³„ì‚°
+		//½ÃÀÛ °Ô½Ã¹° °è»ê
 		int start = currentPage * recordCountPerPage - (recordCountPerPage-1);
-		//ë§Œì•½ ìš”ì²­í•œ íŽ˜ì´ì§€ê°€ 1íŽ˜ì´ì§€ë¼ë©´? -> 1ì´ ë‚˜ì™€ì•¼ ë¨
+		//¸¸¾à ¿äÃ»ÇÑ ÆäÀÌÁö°¡ 1ÆäÀÌÁö¶ó¸é? -> 1ÀÌ ³ª¿Í¾ß µÊ
 			// 1 * 10 - (10-1)  => 1
-		//ë§Œì•½ ìš”ì²­í•œ íŽ˜ì´ì§€ê°€ 4íŽ˜ì´ì§€ë¼ë©´? -> 31ì´ ë‚˜ì™€ì•¼ ë¨
+		//¸¸¾à ¿äÃ»ÇÑ ÆäÀÌÁö°¡ 4ÆäÀÌÁö¶ó¸é? -> 31ÀÌ ³ª¿Í¾ß µÊ
 			// 4 * 10 - (10-1)  => 31
 		
-		//ex) currentPageê°€ 3 ì´ê³ , recordCountPerPage 5ë¼ë©´?
-		//ë§Œì•½ ìš”ì²­í•œ íŽ˜ì´ì§€ê°€ 3íŽ˜ì´ì§€ë¼ë©´? -> 11ì´ ë‚˜ì™€ì•¼ ë¨
+		//ex) currentPage°¡ 3 ÀÌ°í, recordCountPerPage 5¶ó¸é?
+		//¸¸¾à ¿äÃ»ÇÑ ÆäÀÌÁö°¡ 3ÆäÀÌÁö¶ó¸é? -> 11ÀÌ ³ª¿Í¾ß µÊ
 			// 3 * 5 - (5-1) 	=> 11
 		
 		
 		
 		
-		//ë ê²Œì‹œë¬¼ ê³„ì‚°
+		//³¡ °Ô½Ã¹° °è»ê
 		int end = currentPage * recordCountPerPage;
-		// ë§Œì•½ ìš”ì²­í•œ íŽ˜ì´ì§€ê°€ 1íŽ˜ì´ì§€ë¼ë©´? -> 10
+		// ¸¸¾à ¿äÃ»ÇÑ ÆäÀÌÁö°¡ 1ÆäÀÌÁö¶ó¸é? -> 10
 			// 1 * 10	=> 10
-		// ë§Œì•½ ìš”ì²­í•œ íŽ˜ì´ì§€ê°€ 3íŽ˜ì´ì§€ë¼ë©´? -> 30
+		// ¸¸¾à ¿äÃ»ÇÑ ÆäÀÌÁö°¡ 3ÆäÀÌÁö¶ó¸é? -> 30
 			// 3 * 10 	=> 30
 		
 		
@@ -83,8 +83,8 @@ public class PromoDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		// ê²Œì‹œë¬¼ì˜ í† íƒˆ ê°œìˆ˜ë¥¼ êµ¬í•´ì•¼ í•¨
-		int recordTotalCount = 0; //ì´ˆê¸°ê°’ì€ ì •ë³´ê°€ ì—†ìœ¼ë¯€ë¡œ 0ìœ¼ë¡œ ì…‹íŒ…
+		// °Ô½Ã¹°ÀÇ ÅäÅ» °³¼ö¸¦ ±¸ÇØ¾ß ÇÔ
+		int recordTotalCount = 0; //ÃÊ±â°ªÀº Á¤º¸°¡ ¾øÀ¸¹Ç·Î 0À¸·Î ¼ÂÆÃ
 		
 		String query = "select count(*) AS TOTALCOUNT FROM board_promo";
 		
@@ -103,15 +103,15 @@ public class PromoDao {
 		}
 		 
 		
-		 // êµ¬í•´ì˜¨ ê²Œì‹œë¬¼ì˜ í† íƒˆ ê°œìˆ˜ë¥¼ ë°”íƒ•ìœ¼ë¡œ íŽ˜ì´ì§€ì˜ í† íƒˆ ê°œìˆ˜ë¥¼ êµ¬í•´ì•¼ í•¨
-		 // ì¦‰, ê²Œì‹œë¬¼ì´ 124ê°œ ë¼ë©´? 
-		 // pageëŠ” ì´ 13ê°œê°€ ë˜ì–´ì•¼ í•¨ (íŽ˜ì´ì§€ë‹¹ 10ê°œì˜ ê²Œì‹œë¬¼ì´ë¼ê³  ì •í•˜ì˜€ì„ë•Œ ê¸°ì¤€)
+		 // ±¸ÇØ¿Â °Ô½Ã¹°ÀÇ ÅäÅ» °³¼ö¸¦ ¹ÙÅÁÀ¸·Î ÆäÀÌÁöÀÇ ÅäÅ» °³¼ö¸¦ ±¸ÇØ¾ß ÇÔ
+		 // Áï, °Ô½Ã¹°ÀÌ 124°³ ¶ó¸é? 
+		 // page´Â ÃÑ 13°³°¡ µÇ¾î¾ß ÇÔ (ÆäÀÌÁö´ç 10°³ÀÇ °Ô½Ã¹°ÀÌ¶ó°í Á¤ÇÏ¿´À»¶§ ±âÁØ)
 		 
-		 int pageToTalCount = 0; //ì •ë³´ê°€ ì—†ìœ¼ë¯€ë¡œ ì´ˆê¸°ê°’ì€ 0 ì…‹íŒ…
+		 int pageToTalCount = 0; //Á¤º¸°¡ ¾øÀ¸¹Ç·Î ÃÊ±â°ªÀº 0 ¼ÂÆÃ
 		 
 		 
-		 // íŽ˜ì´ì§€ì˜ í† íƒˆ ê°œìˆ˜ êµ¬í•˜ëŠ” ê³µì‹
-		 // ê²Œì‹œë¬¼í† íƒˆ ê°œìˆ˜ / 10  + 1(ì¡°ê±´ì— ë”°ë¼ ì ìš©)
+		 // ÆäÀÌÁöÀÇ ÅäÅ» °³¼ö ±¸ÇÏ´Â °ø½Ä
+		 // °Ô½Ã¹°ÅäÅ» °³¼ö / 10  + 1(Á¶°Ç¿¡ µû¶ó Àû¿ë)
 		 
 		 if(recordTotalCount%recordCountPerPage !=0)
 		 {
@@ -123,7 +123,7 @@ public class PromoDao {
 		 }
 		 
 		 
-		 // ì—ëŸ¬ ë°©ì§€ ì½”ë“œ
+		 // ¿¡·¯ ¹æÁö ÄÚµå
 		 if(currentPage<1)
 		 {
 			 currentPage = 1;
@@ -134,48 +134,48 @@ public class PromoDao {
 		 }
 		 
 		 
-		 // í˜„ìž¬ íŽ˜ì´ì§€ë¥¼ ê¸°ì ìœ¼ë¡œ ì‹œìž‘ navi ì™€ ë navië¥¼ ë§Œë“¤ì–´ì•¼ í•¨
+		 // ÇöÀç ÆäÀÌÁö¸¦ ±âÁ¡À¸·Î ½ÃÀÛ navi ¿Í ³¡ navi¸¦ ¸¸µé¾î¾ß ÇÔ
 		 
-		 // í˜„ìž¬ íŽ˜ì´ì§€ê°€ ë§Œì•½ 1ì´ë¼ë©´  ?    1 2 3 4 5
-		 // í˜„ìž¬ íŽ˜ì´ì§€ê°€ ë§Œì•½ 3ì´ë¼ë©´  ?    1 2 3 4 5
-		 // í˜„ìž¬ íŽ˜ì´ì§€ê°€ ë§Œì•½ 7ì´ë¼ë©´  ? 	 6 7 8 9 10
-		 // í˜„ìž¬ íŽ˜ì´ì§€ê°€ ë§Œì•½ 12ì´ë¼ë©´?	 11 12 13 14 15
+		 // ÇöÀç ÆäÀÌÁö°¡ ¸¸¾à 1ÀÌ¶ó¸é  ?    1 2 3 4 5
+		 // ÇöÀç ÆäÀÌÁö°¡ ¸¸¾à 3ÀÌ¶ó¸é  ?    1 2 3 4 5
+		 // ÇöÀç ÆäÀÌÁö°¡ ¸¸¾à 7ÀÌ¶ó¸é  ? 	 6 7 8 9 10
+		 // ÇöÀç ÆäÀÌÁö°¡ ¸¸¾à 12ÀÌ¶ó¸é?	 11 12 13 14 15
 		 
-		 // ì‹œìž‘ íŽ˜ì´ì§€ë¥¼ êµ¬í•˜ëŠ” ê³µì‹
-		 // ((í˜„ìž¬íŽ˜ì´ì§€-1)/ë¦¬ìŠ¤íŠ¸ê°œìˆ˜)*ë¦¬ìŠ¤íŠ¸ê°œìˆ˜+1
+		 // ½ÃÀÛ ÆäÀÌÁö¸¦ ±¸ÇÏ´Â °ø½Ä
+		 // ((ÇöÀçÆäÀÌÁö-1)/¸®½ºÆ®°³¼ö)*¸®½ºÆ®°³¼ö+1
 		 
-		 // ë§Œì•½ 1íŽ˜ì´ì§€ ë¼ë©´?
+		 // ¸¸¾à 1ÆäÀÌÁö ¶ó¸é?
 		 // ((1-1)/5)*5+1   => 1
 		 
-		 // ë§Œì•½ 3íŽ˜ì´ì§€ ë¼ë©´?
+		 // ¸¸¾à 3ÆäÀÌÁö ¶ó¸é?
 		 // ((3-1)/5)*5+1	=> 1
 		 
-		 // ë§Œì•½ 7íŽ˜ì´ì§€ ë¼ë©´?
+		 // ¸¸¾à 7ÆäÀÌÁö ¶ó¸é?
 		 // ((7-1)/5)*5+1	=> 6
 		 
-		 // ë§Œì•½ 12íŽ˜ì´ì§€ ë¼ë©´?
+		 // ¸¸¾à 12ÆäÀÌÁö ¶ó¸é?
 		 // ((12-1)/5)*5+1	=> 11
 		 
 		
-		 // ì‹œìž‘ íŽ˜ì´ì§€ êµ¬í•˜ëŠ” ê³µì‹ ëŒ€ìž…
+		 // ½ÃÀÛ ÆäÀÌÁö ±¸ÇÏ´Â °ø½Ä ´ëÀÔ
 		int startNavi = ((currentPage-1)/naviCountPerPage)*naviCountPerPage+1; 
 		
 		
-		// ë íŽ˜ì´ì§€ë¥¼ êµ¬í•˜ëŠ” ê³µì‹
-		// ì‹œìž‘navi + ë³´ì—¬ì¤„ navi ê°œìˆ˜ -1;
-		// ex. ì‹œìž‘ naviê°€ 11 ì´ë¼ë©´?
-		// 11 + 5 -1 => 15 ê°€ ë‚˜ì˜´
-		// ì¦‰, 11 12 13 14 15 ê°€ êµ¬í•´ì§  
+		// ³¡ ÆäÀÌÁö¸¦ ±¸ÇÏ´Â °ø½Ä
+		// ½ÃÀÛnavi + º¸¿©ÁÙ navi °³¼ö -1;
+		// ex. ½ÃÀÛ navi°¡ 11 ÀÌ¶ó¸é?
+		// 11 + 5 -1 => 15 °¡ ³ª¿È
+		// Áï, 11 12 13 14 15 °¡ ±¸ÇØÁü  
 		
 		int endNavi = startNavi + naviCountPerPage -1;
 		
 		
-		// ë navië¥¼ êµ¬í• ë•Œ ì£¼ì˜í•´ì•¼ í•­ì 
-		// í† íƒˆ ê°œìˆ˜ê°€ 122ê°œ ë¼ê³  í• ë•Œ ( ì´ í† íƒˆ íŽ˜ì´ì§€ëŠ” 13ê°œ)
+		// ³¡ navi¸¦ ±¸ÇÒ¶§ ÁÖÀÇÇØ¾ß Ç×Á¡
+		// ÅäÅ» °³¼ö°¡ 122°³ ¶ó°í ÇÒ¶§ ( ÃÑ ÅäÅ» ÆäÀÌÁö´Â 13°³)
 		// 1 2 3 4 5
 		// 6 7 8 9 10
 		// 11 12 13 14 15
-		// í† íƒˆ íŽ˜ì´ì§€ë¥¼ ê³ ë ¤í•˜ì§€ ì•Šê³  ë§Œë“¤ê²Œ ë˜ë©´ ìœ„ì— ì²˜ëŸ¼ ë naviê°€ ì´ìƒí•˜ê²Œ êµ¬í•´ì§€ê²Œ ë¨
+		// ÅäÅ» ÆäÀÌÁö¸¦ °í·ÁÇÏÁö ¾Ê°í ¸¸µé°Ô µÇ¸é À§¿¡ Ã³·³ ³¡ navi°¡ ÀÌ»óÇÏ°Ô ±¸ÇØÁö°Ô µÊ
 		
 		if(endNavi > pageToTalCount)
 		{
@@ -183,8 +183,8 @@ public class PromoDao {
 		}
 	
 		
-		// íŽ˜ì´ì§€ë¥¼ í‘œí˜„í•˜ëŠ” naviì—ì„œ ì‚¬ìš©í•  '<' ëª¨ì–‘ê³¼ '>'ëª¨ì–‘ì„ ì“°ê¸°ìœ„í•´
-		// í•„ìš”í•œ ë³€ìˆ˜ 2ê°œë¥¼ ìƒì„± (ë³€ìˆ˜ì— ê°’ì— ë”°ë¼ì„œ ì‹œìž‘ ë¶€ë¶„ê³¼ ëë¶€ë¶„ì€ í‘œí˜„í•˜ì§€ ì•Šê¸° ìœ„í•´)
+		// ÆäÀÌÁö¸¦ Ç¥ÇöÇÏ´Â navi¿¡¼­ »ç¿ëÇÒ '<' ¸ð¾ç°ú '>'¸ð¾çÀ» ¾²±âÀ§ÇØ
+		// ÇÊ¿äÇÑ º¯¼ö 2°³¸¦ »ý¼º (º¯¼ö¿¡ °ª¿¡ µû¶ó¼­ ½ÃÀÛ ºÎºÐ°ú ³¡ºÎºÐÀº Ç¥ÇöÇÏÁö ¾Ê±â À§ÇØ)
 		
 		boolean needPrev = true;
 		boolean needNext = true;
@@ -196,24 +196,24 @@ public class PromoDao {
 		
 		StringBuilder sb = new StringBuilder();
 		
-		// needPrevëŠ” ì‹œìž‘íŽ˜ì´ì§€ê°€ 1ì´ë©´ false, ì‹œìž‘íŽ˜ì´ì§€ê°€ 1ì´ ì•„ë‹ˆë¼ë©´ true
-		if(needPrev==true) // ì‹œìž‘ íŽ˜ì´ì§€ê°€ 1íŽ˜ì´ì§€ê°€ ì•„ë‹ˆë¼ë©´!
+		// needPrev´Â ½ÃÀÛÆäÀÌÁö°¡ 1ÀÌ¸é false, ½ÃÀÛÆäÀÌÁö°¡ 1ÀÌ ¾Æ´Ï¶ó¸é true
+		if(needPrev==true) // ½ÃÀÛ ÆäÀÌÁö°¡ 1ÆäÀÌÁö°¡ ¾Æ´Ï¶ó¸é!
 		{
 			sb.append("<a href='/promoList.do?currentPage="+(startNavi-1)+"'> < </a>");
 		}
-		// í˜„ìž¬ ë‚´ ìœ„ì¹˜(startNaviê°’)ê°€ 2ë¼ë©´? '<' ë²„íŠ¼ì„ í´ë¦­í•˜ë©´ 1íŽ˜ì´ì§€ë¡œ ì´ë™í•´ì•¼ í•¨
+		// ÇöÀç ³» À§Ä¡(startNavi°ª)°¡ 2¶ó¸é? '<' ¹öÆ°À» Å¬¸¯ÇÏ¸é 1ÆäÀÌÁö·Î ÀÌµ¿ÇØ¾ß ÇÔ
 		// <a href='/promoList.do?cureentPage=1> < </a>
 		
 		for(int i=startNavi; i<=endNavi;i++){
 			if(i==currentPage)
 			{
-				// í˜„ìž¬ íŽ˜ì´ì§€ê°€ ë‚´ê°€ ìžˆëŠ” ìœ„ì¹˜íŽ˜ì´ì§€ì™€ ê°™ë‹¤ë©´ ì§„í•˜ê²Œ í‘œì‹œ
+				// ÇöÀç ÆäÀÌÁö°¡ ³»°¡ ÀÖ´Â À§Ä¡ÆäÀÌÁö¿Í °°´Ù¸é ÁøÇÏ°Ô Ç¥½Ã
 				sb.append("<a href='/promoList.do?currentPage="+i+"'><B style='font-size:30px'>"+i+"</B></a> ");
 				//<a href='/promoList.do?cureentPage=1'><B>1</B></a>
 			}
 			else
 			{
-				// í˜„ìž¬ íŽ˜ì´ì§€ê°€ ë‚´ê°€ ìžˆëŠ” ìœ„ì¹˜ íŽ˜ì´ì§€ì™€ ë‹¤ë¥´ë‹¤ë©´ ì¼ë°˜ í‘œì‹œ
+				// ÇöÀç ÆäÀÌÁö°¡ ³»°¡ ÀÖ´Â À§Ä¡ ÆäÀÌÁö¿Í ´Ù¸£´Ù¸é ÀÏ¹Ý Ç¥½Ã
 				sb.append("<a href='/promoList.do?currentPage="+i+"'>"+i+"</a> ");
 			}
 		}

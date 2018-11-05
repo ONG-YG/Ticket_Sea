@@ -1,4 +1,4 @@
-package kr.co.ticketsea.admin.member.controller;
+package kr.co.ticketsea.faq.controller;
 
 import java.io.IOException;
 
@@ -9,22 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kr.co.ticketsea.admin.member.model.service.AdMemberService;
-import kr.co.ticketsea.member.model.vo.*;
-import kr.co.ticketsea.admin.member.model.vo.*;
-
+import kr.co.ticketsea.faq.model.service.FaqService;
+import kr.co.ticketsea.faq.model.vo.PageData;
 
 /**
- * Servlet implementation class AdMemberListServlet
+ * Servlet implementation class FaqSearchServlet
  */
-@WebServlet(name = "AdMemberList", urlPatterns = { "/adMemberList.do" })
-public class AdMemberListServlet extends HttpServlet {
+@WebServlet(name = "FaqSearch", urlPatterns = { "/faqSearch.do" })
+public class FaqSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdMemberListServlet() {
+    public FaqSearchServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,21 +31,33 @@ public class AdMemberListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//1. 한글 인코딩
+		request.setCharacterEncoding("utf-8");
+		
+		
+		//2. view에서 보내준 값을 변수에 저장
+		String keyword = request.getParameter("search");
+			
+		
+		//3. 페이징 처리를 하기 위한 작업 (현재 페이지값 저장)
 		int currentPage;
+		if(request.getParameter("currentPage")==null) {currentPage=1;}
+		else {currentPage = Integer.parseInt(request.getParameter("currentPage"));}
 		
-		if (request.getParameter("currentPage")==null) {
-			currentPage=1;
-		}else {
-			currentPage=Integer.parseInt(request.getParameter("currentPage"));
-		}
-		MemberPageData pd=new AdMemberService().memberAllList(currentPage);
+		//4. 비즈니스 로직 처리
+		PageData pd = new FaqService().searchList(keyword,currentPage);
 		
-		//3. 결과값 view페이지로 리턴
+		
+		//5. 결과 리턴
+		
+		
+			RequestDispatcher view = request.getRequestDispatcher("views/faq/faqSearch.jsp");
+			request.setAttribute("pageData", pd);
+			request.setAttribute("keyword",keyword);
+			
+			view.forward(request, response);
 		
 	
-			RequestDispatcher view = request.getRequestDispatcher("views/admin/ad_memberList.jsp"); 
-			request.setAttribute("pageData", pd);
-			view.forward(request, response);
 	}
 
 	/**

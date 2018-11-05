@@ -139,7 +139,7 @@
                  <ul>
                     <li><a href="#">공연관리</a>
                         <ul>
-                             <li><a href="/adShowPlace.do">공연등록</a></li>
+                             <li><a href="ad_showInsert.jsp">공연등록</a></li>
                             <li><a href="/adShowList.do">공연목록</a></li>
                         </ul>
                     </li>    
