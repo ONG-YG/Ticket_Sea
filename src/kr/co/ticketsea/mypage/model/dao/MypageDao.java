@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import kr.co.ticketsea.common.JDBCTemplate;
+import kr.co.ticketsea.member.model.vo.Member;
 import kr.co.ticketsea.reserve.model.vo.PerformSchedule;
 import kr.co.ticketsea.reserve.model.vo.ReserveInfo;
 
@@ -96,6 +97,65 @@ public class MypageDao {
 		}
 		return mName;
 		
+	}
+
+	public Member memberUpdate(Connection conn, int memberNo) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = "select * from member where member_no = ?";
+		Member updateList = null;
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setInt(1, memberNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				updateList = new Member();
+				
+				updateList.setMemberId(rset.getString("member_id"));
+				updateList.setMemberPhone(rset.getString("member_phone"));
+				updateList.setMemberAddr(rset.getString("member_addr"));
+				updateList.setMemberEmail(rset.getString("member_email"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		
+		return updateList;
+	}
+
+	public int updateMemberConfirm(Connection conn, Member m) {
+		PreparedStatement pstmt = null;
+		
+		int result = 0;	
+		
+		String query="update member set member_phone=?, member_addr=?, member_email=? where member_id=?";
+		
+		try {
+			pstmt=conn.prepareStatement(query);
+			
+			pstmt.setString(1, m.getMemberPhone());
+			pstmt.setString(2, m.getMemberAddr());
+			pstmt.setString(3, m.getMemberEmail());
+			pstmt.setString(4, m.getMemberId());
+			
+			result=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
 	}
 
 }

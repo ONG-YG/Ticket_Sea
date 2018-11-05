@@ -199,7 +199,7 @@
                 <li class="has_sub">
                     <span>회원정보관리</span>
                     <ul>
-                        <li><a href="/views/mypage/memberUpdate.jsp">회원 정보 수정</a></li>
+                        <li><a href="/myMemberUpdate.do">회원 정보 수정</a></li>
                         <li><a href="/views/mypage/memberDelete.jsp">회원 탈퇴</a></li>
                         
                     </ul>

@@ -64,12 +64,17 @@ public class MemberService {
 	public int memberDelete(String userId) {
 		int result = 0;
 		Connection conn = JDBCTemplate.getConnection();
-		if (result > 0) {
+
+		result = new MemberDao().memberDelete(conn,userId);
+		if(result>0)
+		{
 			JDBCTemplate.commit(conn);
 		} else {
 			JDBCTemplate.rollback(conn);
 		}
-		result = new MemberDao().memberDelete(conn, userId);
+
+		JDBCTemplate.close(conn);
+
 		return result;
 	}
 
