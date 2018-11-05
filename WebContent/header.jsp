@@ -6,9 +6,117 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Ticket Sea || 티켓씨</title>
+  <style>
 
-  <link rel=StyleSheet type="text/css" href="/css/header.css"> 
+		#menu ul{padding: 0px; margin: 0px;}
 
+        #header{
+            width: 990px;
+            height: 230px;
+            box-sizing: padding-box;
+        }
+        #header .topnav {
+            position: relative;
+            background: #fafafa;
+            border-bottom: 1px solid #f0f0f0;
+            height: 21px;
+            padding-top: 11px;
+            box-sizing: padding-box;
+        }
+        #header .search_area {
+        width: 70%;
+		height: 43px;
+        margin: 32px auto;
+        position: relative;
+        box-sizing: padding-box;
+	   
+        }
+        
+        .inner {
+        width: 100%;
+            margin: 0 auto;
+            position: relative;
+			text-align: right;
+			box-sizing: padding-box;
+        }
+       
+		#header .search_area .search {
+    
+    width: 400px;
+    height: 40px;
+	position: relative;
+    
+	float: left;
+	
+		box-sizing: padding-box;
+	
+		}
+		#header .search_area>h1>a{
+            display: inline;
+			position:relative;
+			float: left;
+			padding-right: 100px;
+			text-decoration: none;
+			box-sizing: padding-box;
+			text-align: center;
+		}
+        #menu {
+            width: 100%;
+            height: 64px;
+            box-sizing: padding-box;
+			padding: 0px;	
+        }
+		#menu ul{
+			width: 992px;
+			height: 66px;
+		}
+		#menu ul li {
+			list-style: none;
+			float: left;
+			line-height: 60px;
+			vertical-align: middle;
+			text-align: center;
+			background: #87ceeb;
+		}
+		
+		.menulink{
+			text-decoration: none;
+			color: white;
+			display: block;
+			width: 141px;
+			font-size: 16px;
+			font-weight: bold;
+			box-sizing: padding-box;
+			
+		}
+		legend{display: none;}
+		fieldset{
+			border: 0;
+			padding: 0px;
+			height: 100%;
+			width: 400px;;
+		}
+		#searchline{
+			height: 35px;;
+			width: 230px;
+			padding-left: 10px;
+			font-size: 15px;
+			font-weight: 600;
+			border: 2px solid #87ceeb;
+            float: left;			
+		}
+		form{
+			width: 180px;
+			height: 100%;
+		}
+		
+        #searchIcon{
+            height: 41px;
+        }
+       
+      
+        
+    </style>
 
 </head>
 <body>
@@ -27,8 +135,8 @@
 								if(member!=null){ //로그인 성공시
 							%>
 							<a href="/logout.do" id="logout">로그아웃</a>
-							<a href="/reserveList.do" id="myPage">마이페이지</a>
-							<a href="/reserveList.do" id="reserve">예매확인/취소</a><span>|</span>
+							<a href="reserveList.do" id="myPage">마이페이지</a>
+							<a href="reserveList.do" id="reserve">예매확인/취소</a><span>|</span>
 							
 							<%}else{ %>
 							<a href="#"  class="btn login" 
@@ -68,15 +176,15 @@
 					<li><a class="menulink">&nbsp;</a></li>
 					<li><a class="menulink" href="#">뮤지컬</a></li>
 					<li><a class="menulink" href="#">콘서트</a></li>
-					<li><a class="menulink" href="#">소규모공연</a>		</li>
+					<li><a class="menulink" href="/promoList.do">소규모공연</a>		</li>
 					<li><a class="menulink" href="#">랭킹</a></li>
-					<li><a class="menulink" href="#">고객센터</a>		</li>
+					<li><a class="menulink" href="/noticeList.do">고객센터</a>		</li>
 					<li><a class="menulink">&nbsp;</a></li>
 				</ul>
 			</div>
         </div>
        
-
+        <!--git test-->
     </div>
 
 
