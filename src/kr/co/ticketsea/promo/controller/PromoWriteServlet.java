@@ -111,7 +111,7 @@ public class PromoWriteServlet extends HttpServlet {
 			}
 			
 		} catch (Exception e) {
-			response.sendRedirect("/views/notice/error.jsp");
+			response.sendRedirect("/views/promo/error.jsp");
 		} 
 } 
 
