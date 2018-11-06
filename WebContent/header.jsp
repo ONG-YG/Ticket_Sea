@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ page import="kr.co.ticketsea.member.model.vo.*" %>
+    <%@ page import="kr.co.ticketsea.member.model.vo.*" 
+		%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -25,6 +26,10 @@
 								session = request.getSession(false);
 								Member member = (Member)session.getAttribute("member");	
 								if(member!=null){ //로그인 성공시
+									if((String)request.getAttribute("keyword")!=null){
+								String searchKeyword = (String)request.getAttribute("keyword");
+									}
+								
 							%>
 							<a href="/logout.do" id="logout">로그아웃</a>
 							<a href="/reserveList.do" id="myPage">마이페이지</a>
@@ -54,7 +59,7 @@
                 <fieldset>
                     <legend>검색창</legend>
                     <input type="text" id="searchline" name="search" title="검색어 입력" value="">
-                    <img  id="searchIcon" src="/img/searchicon.PNG"
+                    <img  id="searchIcon" src="/img/searchicon.PNG"s
                     onclick="goSearch();">
                 </fieldset>
                         

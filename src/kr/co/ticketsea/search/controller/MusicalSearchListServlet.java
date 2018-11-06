@@ -39,6 +39,9 @@ public class MusicalSearchListServlet extends HttpServlet {
 		//2. view에서 보내준 값을 변수에 저장
 		String keyword = request.getParameter("search");
 			
+		if(keyword!="")
+		{
+			
 		
 		//3. 페이징 처리를 하기 위한 작업 (현재 페이지값 저장)
 		int currentPage;
@@ -50,15 +53,26 @@ public class MusicalSearchListServlet extends HttpServlet {
 		
 		
 		//5. 결과 리턴
-		
-		
-			RequestDispatcher view = request.getRequestDispatcher("views/search/searchList.jsp");
-			request.setAttribute("pageData", pd);
-			request.setAttribute("keyword",keyword);
-			
-			view.forward(request, response);
-			
-		
+		try {
+			if(!pd.getList().isEmpty())
+			{
+				
+				RequestDispatcher view = request.getRequestDispatcher("views/search/searchList.jsp");
+				request.setAttribute("pageData", pd);
+				request.setAttribute("keyword",keyword);
+				
+				view.forward(request, response);
+				
+			}else {
+				
+				response.sendRedirect("/views/search/searchFail.jsp");
+			}
+		} catch (Exception e) {
+			response.sendRedirect("/views/search/searchFail.jsp");
+		}
+		}else {
+			response.sendRedirect("/views/search/searchFail.jsp");
+		}
 		
 		
 		
