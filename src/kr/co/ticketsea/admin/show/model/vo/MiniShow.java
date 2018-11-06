@@ -10,8 +10,8 @@ public class MiniShow {
 	private String ms_artists; //출연아티스트
 	private String ms_place; //공연장소
 	private Date ms_wrtdate; //작성일
-	private Date ms_st_date; //시작일
-	private Date ms_ed_date; //종료일
+	private String ms_st_date; //시작일
+	private String ms_ed_date; //종료일
 	private String ms_ct; //공연 장르
 	private String ms_intd; //공연소개
 	private String ms_poster;
@@ -21,7 +21,7 @@ public class MiniShow {
 		// TODO Auto-generated constructor stub
 	}
 	public MiniShow(int ms_no, String ms_name, String ms_userId, String ms_artists, String ms_place, Date ms_wrtdate,
-			Date ms_st_date, Date ms_ed_date, String ms_ct, String ms_intd, String ms_poster, String ms_state) {
+			String ms_st_date, String ms_ed_date, String ms_ct, String ms_intd, String ms_poster, String ms_state) {
 		super();
 		this.ms_no = ms_no;
 		this.ms_name = ms_name;
@@ -72,16 +72,16 @@ public class MiniShow {
 	public void setMs_wrtdate(Date ms_wrtdate) {
 		this.ms_wrtdate = ms_wrtdate;
 	}
-	public Date getMs_st_date() {
+	public String getMs_st_date() {
 		return ms_st_date;
 	}
-	public void setMs_st_date(Date ms_st_date) {
+	public void setMs_st_date(String ms_st_date) {
 		this.ms_st_date = ms_st_date;
 	}
-	public Date getMs_ed_date() {
+	public String getMs_ed_date() {
 		return ms_ed_date;
 	}
-	public void setMs_ed_date(Date ms_ed_date) {
+	public void setMs_ed_date(String ms_ed_date) {
 		this.ms_ed_date = ms_ed_date;
 	}
 	public String getMs_ct() {

@@ -277,5 +277,13 @@ public class ReserveService {
 		
 		return result;
 	}
+
+	public void selectOneReserve(int reserveNo) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		new ReserveDao().selectOneReserve(conn,reserveNo);
+		
+	}
 	
 }
