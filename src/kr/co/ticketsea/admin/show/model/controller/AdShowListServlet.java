@@ -43,12 +43,10 @@ public class AdShowListServlet extends HttpServlet {
 		PageData pd=new ShowService().showAllList(currentPage);
 		
 		// 3. 결과값을 view 페이지로 리턴
-		
 			
 			RequestDispatcher view = request.getRequestDispatcher("views/admin/ad_showList.jsp"); 
 			request.setAttribute("pageData", pd);
 			view.forward(request, response);
-			
 		
 	}
 

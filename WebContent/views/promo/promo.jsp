@@ -241,11 +241,14 @@
 
 <body>
 <script>
+	
     function reserve(){
         //alert("예매시작");
         var showNo = 20000; //////////////////////////////////////////////////// showNo 받아오는 코드 추가할 것
-        location.href="/dateCntSelect.do?showNo="+showNo;  /////////////////// showNo 받아오는 코드 추가할 것
-        //location.href="../reserve/reserv_step_1_date_time.html";
+        //location.href="/dateCntSelect.do?showNo="+showNo;  /////////////////// showNo 받아오는 코드 추가할 것
+        window.open("/dateCntSelect.do?showNo="+showNo, "reservePopUp", "width=1010, height=625");
+        
+        return false;
     }
 </script>
 

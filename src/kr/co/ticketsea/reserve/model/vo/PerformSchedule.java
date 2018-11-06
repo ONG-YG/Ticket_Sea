@@ -10,7 +10,6 @@ public class PerformSchedule {
 	private int performSchCnt;		//공연회차
 	private int showNo;				//공연번호
 	private String performTime;		//공연시간
-	//private int availableSeat;		//해당회차 잔여석 수
 	private ArrayList<SeatGradeState> seatGrdStList;	//등급별 좌석가격 및 잔여석
 	
 	
@@ -28,11 +27,9 @@ public class PerformSchedule {
 		this.performTime = performTime;
 		this.seatGrdStList = seatGrdStList;
 	}
-
-
-
-
-
+	
+	
+	
 	public int getPerformSchNo() {
 		return performSchNo;
 	}

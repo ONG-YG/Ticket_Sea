@@ -1,3 +1,5 @@
+<%@page import="java.text.ParseException"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="kr.co.ticketsea.reserve.model.vo.SelectedSeat"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="kr.co.ticketsea.reserve.model.vo.ReserveSession"%>
@@ -34,6 +36,8 @@
 	
 	ReserveSession rs = (ReserveSession)session.getAttribute("reserveSession");
 	int progNo = rs.getProgNo();
+	String progTime = rs.getProgTime();
+	//System.out.println("progTime" + progTime);
 %>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -47,10 +51,23 @@
       type="text/javascript"
         src="../../resources/jquery-3.3.1.js">
     </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+	</script>
     <script>
 	    $(document).ready(function(){
 	    	
 	    	pageInit();
+	    	
+	    	$(document).change(function(){
+	    		//console.log("mouseup");
+	    		check();
+	    	});
+	    	
+	    	$(document).keyup(function(){
+	    		//console.log("keyup");
+	    		check();
+	    	});
+	    	
 			
 	    });
 	    
@@ -93,19 +110,16 @@
         	<%
         	for (SelectedSeat selSeat : selSeatList) {
         	%>
-        		var selSeat = ['<%=selSeat.getSeatGrd()%>', '<%=selSeat.getSeatTitle()%>'];
+        		var selSeat = ['<%=selSeat.getSeatGrd()%>', '<%=selSeat.getSeatTitle()%>', '<%=selSeat.getSeatGrdColor()%>'];
         		selectedSeatList.push(selSeat);
         	<%} %>
-        	//console.log(selectedSeatList);/////////////////////////////
 	    	
 	    	var list = "";
         	for(var i=0; i<selectedSeatList.length; i++) {
         		var selSeat = selectedSeatList[i];
-        		var grdColor = 'black';
-        		if(selSeat[0]=='R') {grdColor='#ffc000';}//////////////////
-        		else if(selSeat[0]=='S') {grdColor='blue';}////////////////
+        		
         		list += "<li id='selected_seat_no_'+selSeat[0]> "
-				            +"<div class='seat_color' style='background:"+grdColor+"'></div> "
+				            +"<div class='seat_color' style='background:"+selSeat[2]+"'></div> "
 				            +"<div class='seat_detail_info'> "
 				                +"<span class='seat_grade' >"+selSeat[0]+"</span> "
 				                +"<span class='seat_no'>"+selSeat[1]+"</span> "
@@ -115,21 +129,89 @@
         	$('#select_seat_grade').html(list);
         	
         }
+		
+		function check() {
+			var phone = document.getElementById("inputPhoneNo").value;
+			var userCheck = document.getElementById("agree_phone").checked;
+			var userInfoAgree = document.getElementById("reserve_agree2").checked;
+			
+			var patt1 = new RegExp("^[0-9]+$");
+		   	var patt2 = new RegExp("^[0-9]{9,20}$");
+		   	var res1 = patt1.test( $("#inputPhoneNo").val());
+		   	var res2 = patt2.test( $("#inputPhoneNo").val());
+			
+			
+			if(phone!="" && userCheck && userInfoAgree && res1 && res2) {
+				$('.reserve_btn>a').eq(1).css('background-color','skyblue');
+                $('.reserve_btn>a').eq(1).css('color','white');
+			}else {
+				$('.reserve_btn>a').eq(1).css('background-color','white');
+                $('.reserve_btn>a').eq(1).css('color','dodgerblue');
+			}
+			
+		}
     	
         function prev() {
             var chk = confirm("이전 단계로 돌아가면 현재의 예매 정보를 잃게 됩니다.");
             if(chk) {
             	<%
 	        	//세션에 담긴 reserveSession객체 - 진행단계 정보 update
-				rs.setCurrStat(1);
+				rs.setCurrStat(3); // currStat==3 이면 예매진행 중 정보 DELETE
+            	//rs.setProgNo(-1);
+            	rs.setProgTime(null);
         		session.setAttribute("reserveSession", rs);
-        		//예매중정보지우는 코드 추가할것////////////////////////////////////////////////////////////////////////////////  ※※※※※※※※※※※※※※※
         		%>
                 location.href="/reserveSeat.do?psNo="+<%=psNo%>;
-                //document.getElementById("goBackStep2").submit();
             }
         }
         function next() {
+        	
+        	// 예매 진행시간 10분 초과했으면 결제 불가 안내!
+        	// 예매 진행 정보 지우고 창 close
+        	var diff = null;
+        	<%
+	    		try {
+	    			long progTimeL = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss").parse(progTime).getTime();
+	    	%>
+
+        	var progTimeL = <%=progTimeL%>;
+        	
+        	var timestamp = new Date();
+        	//console.log("현재 시간 : "+timestamp);
+        	var currentTimeL = timestamp.getTime();
+        	
+        	diff = (currentTimeL - progTimeL)/1000/60;
+        	//console.log("경과시간(분) : "+diff);
+        	
+        	<%
+	    		} catch (ParseException e) {
+	    			e.printStackTrace();
+	    		}
+        	%>
+        	
+        	if(diff>10) {
+        		var progNo_del = <%=progNo%>;
+        		//console.log("progNo_del : "+progNo_del);
+        		
+        		$.ajax({
+    				url : "/reserveExpire.do",
+    				data : {progNo: progNo_del},
+    				type : "post",
+    				success : function(){
+    					//console.log("정상 처리 완료");
+    				},
+    				error : function(){
+    					//console.log("ajax 통신 에러");
+    				},
+    				complete : function(){
+    					alert("예매 진행 가능 시간이 초과되어 예매가 종료됩니다.");
+    					window.close();
+    				}
+    			});
+        		
+        	}
+        	
+        	
             var phone = document.getElementById("inputPhoneNo").value;
             var userCheck = document.getElementById("agree_phone").checked;
             //alert(userCheck);
@@ -151,7 +233,25 @@
                	
                	if( !res1 ){ alert("휴대폰 번호는 숫자만 입력할 수 있습니다."); }
                	else if( !res2 ){ alert("휴대폰 번호를 9자 이상 입력해주세요."); }
-               	else { location.href="#"; }
+               	else {
+               		<%
+    	        	//세션에 reserveSession객체 저장
+    	        	rs.setBkNo(bkNo);
+            		session.setAttribute("reserveSession", rs);
+            		%>
+            		
+            		
+            		var bkStateCd = "RSV_CPL";///////////////////일단 임의로 완료상태로 설정
+            		var payType = "CARD";///////////////////일단 임의로 카드결제로 설정
+            		
+            		$('#phone_form').val( $('#inputPhoneNo').val() );
+            		$('#email_form').val( $('#inputEmail').val() );
+            		$('#bkStateCd_form').val( bkStateCd );
+            		$('#payType_form').val( payType );
+            		
+            		document.getElementById("completeSubmitForm").submit();
+               		<%--location.href="/reserveComplete.do?progNo=<%=progNo%>";--%>
+               	}
             }
         }
     </script>
@@ -265,34 +365,6 @@
                                     <span class="seat_no">K열 21번</span>
                                 </div>
                             </li>
-                            <li id="seat_grade_33625">
-                                <div class="seat_color" style="background:#ffc000"></div>
-                                <div class="seat_detail_info">
-                                    <span class="seat_grade" >VIP석</span>
-                                    <span class="seat_no">K열 22번</span>
-                                </div>
-                            </li>
-                            <li id="seat_grade_33625">
-                                <div class="seat_color" style="background:#ffc000"></div>
-                                <div class="seat_detail_info">
-                                    <span class="seat_grade" >VIP석</span>
-                                    <span class="seat_no">K열 23번</span>
-                                </div>
-                            </li>
-                            <li id="seat_grade_33625">
-                                <div class="seat_color" style="background:#ffc000"></div>
-                                <div class="seat_detail_info">
-                                    <span class="seat_grade" >VIP석</span>
-                                    <span class="seat_no">K열 24번</span>
-                                </div>
-                            </li>
-                            <li id="seat_grade_33625">
-                                <div class="seat_color" style="background:#ffc000"></div>
-                                <div class="seat_detail_info">
-                                    <span class="seat_grade" >VIP석</span>
-                                    <span class="seat_no">K열 25번</span>
-                                </div>
-                            </li>
                              -->
                         </ul>
                         <div id="reserve_info">
@@ -313,19 +385,20 @@
                             </div>
                             <hr id="final_hr">
                             <div id="total_price_info">
-                                <strong>총 결제</strong><span id="rInfo_TotP">141,000</span>
+                                <strong>총 결제 금액</strong><span id="rInfo_TotP">141,000</span>
                             </div>
                         </div>
-                        <!-- 
-                        <form action="/reserveConfirm.do?progNo=<%=progNo%>" method="post" id="goBackStep2">
+                        <form action="/reserveComplete.do?progNo=<%=progNo%>" method="post" id="completeSubmitForm">
                             <input type="hidden" id="psNo_form" name="psNo" value="<%= psNo %>"/>
-                            <input type="hidden" id="seat_form" name="seatList" />
+                            <input type="hidden" id="phone_form" name="phone" />
+                            <input type="hidden" id="email_form" name="email" />
+                            <input type="hidden" id="bkStateCd_form" name="bkStateCd" />
+                            <input type="hidden" id="payType_form" name="payType" />
                         </form>
-                         -->
                     </div>
                     <div class="reserve_btn">
                         <a class="btn" onclick="prev()">이전단계</a>
-                        <a class="btn" onclick="next()">다음단계</a>
+                        <a class="btn" onclick="next()">결제하기</a>
                     </div>
 
                 </div>

@@ -84,4 +84,20 @@ public class MiniShowService {
 		
 	}
 
+	//소규모 공연 승인하는 로직
+	public int miniShowApprove(int msNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result=new MiniShowDao().miniShowApprove(conn,msNo);
+		
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
+
+
 }
