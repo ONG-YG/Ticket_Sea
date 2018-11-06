@@ -15,16 +15,19 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>회원정보리스트</title>
+
+    <!-- 외부 스타일 시트 불러오기 -->
+    <link href="../../css/ad_memberInfo.css" rel="stylesheet" type="text/css">
 <style>
-     ul, li, a{list-style: none; margin: 0px; padding: 0px;     text-decoration: none; color: black;}
+     ul, li, a{list-style: none; margin: 0px; padding: 0px; text-decoration: none; color: black;}
     div{
         box-sizing : border-box;
     }
-    #wrapper{overflow: hidden;width:1650px; height:1300px; border:1px solid black;}
+    #wrapper{overflow: hidden;width:1250px; height:2000px; border:1px solid black;}
     #header{ height:60px; background-color:;}
     #h_inner{width: 990px; height: 80%; margin: 5px auto; float:left; padding-left:20px;}
-    #content-wrapper{height:1300px; border:1px solid black;}
+    #content-wrapper{height:1500px; border:1px solid black;}
     #c_inner{width: 100%; height: 100%; margin: 0px auto; padding: 0px;}
     .main-sidebar{
         height:100%;
@@ -79,8 +82,6 @@
         width:85%;
         height:1300px;
         display: block;
-        position:relative;
-        
     }
     .content_wrap{
         width:980px;
@@ -88,9 +89,7 @@
         margin:0 auto;
         border:1px solid black;
         box-sizing: border-box;
-        display: inline-block;
-        position:absolute;
-        left:4%;
+        
     }
     h2.main_title{
         display: inline-block;
@@ -114,19 +113,87 @@
             
         }
     
-    .memberTbl tr:nth-child(2n){
-        background-color: #F6F6F6;
-        
+    .memberTbl tr{
+        border:1px solid black;
     }
     .content_wrap .searchArea{
         height:10%;
         padding: 30px;
     }
+    .memberInfo_table{
+        border-width: 1px 0;
+        border-style: solid;
+        border-color: #c7c7c7;
+    }
+    .memberInfo_table table{
+        width: 100%;
+        border-spacing: 0;
+    }
+    .memberInfo_table th{
+        
+        border-bottom: 1px dashed #dedede;
+        padding: 30px 0 30px 20px;
+        text-align: left;
+        line-height: 40px;
+        letter-spacing: -1px;
+        color: black;
+        font-size: 16px;
+        width: 200px;
+    }
+    .memberInfo_table td{
+        text-align: center;
+        border-bottom: 1px dashed #dedede;
+        font-size: 14px;
+        text-align: left;
+    }
+    .memberInfo_table input[type="text"]{
+        height:25px;
+        font-size:14px;
+    }
     
-    /* 버튼 스타일  */
-	
+    #memUpdate{
+        padding-top:40px;
+        text-align: center;
+    }
+    /*버튼 스타일*/
+    button{
+      background:#4ABFD3;
+      color:#fff;
+      border:none;
+      position:relative;
+      height:60px;
+      font-size:1.6em;
+      font-weight: 600;
+      padding:0 2em;
+      cursor:pointer;
+      transition:800ms ease all;
+      outline:none;
+    }
+    button:hover{
+      background:#fff;
+      color:#4ABFD3;
+    }
+    button:before,button:after{
+      content:'';
+      position:absolute;
+      top:0;
+      right:0;
+      height:2px;
+      width:0;
+      background: #4ABFD3;
+      transition:400ms ease all;
+    }
+    button:after{
+      right:inherit;
+      top:inherit;
+      left:0;
+      bottom:0;
+    }
+    button:hover:before,button:hover:after{
+      width:100%;
+      transition:800ms ease all;
+    }
 </style>
-
 </head>
 <body>
 	<div id="wrapper">
@@ -145,7 +212,7 @@
                  <ul>
                     <li><a href="#">공연관리</a>
                         <ul>
-                             <li><a href="ad_showInsert.jsp">공연등록</a></li>
+                             <li><a href="/adShowPlace.do">공연등록</a></li>
                             <li><a href="/adShowList.do">공연목록</a></li>
                         </ul>
                     </li>    

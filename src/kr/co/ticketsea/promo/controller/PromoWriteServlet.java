@@ -2,6 +2,7 @@ package kr.co.ticketsea.promo.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.Savepoint;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -41,13 +42,12 @@ public class PromoWriteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//1. 한글 인코딩
 		request.setCharacterEncoding("utf-8");
-		
+
 		//2. view에서 보내준 데이터를 변수에 저장
-		String title = request.getParameter("title");
-		String category = request.getParameter("category");
-		String contents = request.getParameter("contents");
-		String artist = request.getParameter("artist");
-		String location = request.getParameter("location");
+		
+		
+		
+		
 		
 		//3. session에서 글을 작성한 사람의 ID를 추출
 		HttpSession session  = request.getSession(false);
@@ -69,6 +69,12 @@ public class PromoWriteServlet extends HttpServlet {
 						fileSizeLimit,
 						encType,
 						new DefaultFileRenamePolicy());
+				
+				String title = multi.getParameter("title");
+				String category = multi.getParameter("category");
+				String contents = multi.getParameter("contents");
+				String artist = multi.getParameter("artist");
+				String location = multi.getParameter("location");
 				
 				String fileName = multi.getFilesystemName("upfile");
 				System.out.println("파일 이름 : " + fileName);

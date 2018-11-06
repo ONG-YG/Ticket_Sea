@@ -42,12 +42,10 @@ public class AdMemberListServlet extends HttpServlet {
 		}
 		MemberPageData pd=new AdMemberService().memberAllList(currentPage);
 		
-		//3. 결과값 view페이지로 리턴
-		
-	
-			RequestDispatcher view = request.getRequestDispatcher("views/admin/ad_memberList.jsp"); 
-			request.setAttribute("pageData", pd);
-			view.forward(request, response);
+		RequestDispatcher view = request.getRequestDispatcher("views/admin/ad_memberList.jsp"); 
+		request.setAttribute("pageData", pd);
+		view.forward(request, response);
+
 	}
 
 	/**

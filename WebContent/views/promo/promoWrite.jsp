@@ -254,31 +254,31 @@
                     <h3>소규모 공연 홍보</h3>
                 </div>
                 
-                <form action="/promoWrite.do" method="post">
+                <form action="/promoWrite.do" method="post" enctype="multipart/form-data" >
                      <table id="write-form">
                     <tr>
                         <td style="width : 70px;" >공연명</td>
-                        <td><input type="text" name="title" style="width: 300px;" /></td>
+                        <td><input type="text" name="title" id="title" style="width: 300px;" /></td>
                     </tr>
                     
                      <tr>
                         <td style="width : 70px; text-align : center;" >아티스트</td>
                         <td colspan="2" >
-                            <textarea name="artist" rows="1" cols="50" style="width:300px;"></textarea>
+                            <textarea name="artist" id="artist" rows="1" cols="50" style="width:300px;"></textarea>
                         </td>
                     </tr>
                     
                     <tr>
                         <td style="width : 70px; text-align : center;" >공연장소</td>
                         <td colspan="2" >
-                            <textarea name="location" rows="1" cols="50" style="width:300px;"></textarea>
+                            <textarea name="location" id="location" rows="1" cols="50" style="width:300px;"></textarea>
                         </td>
                     </tr>
                     
                     <tr>
                         <td style="width : 40px; text-align : center;" >장르</td>
                         <td>
-                            <select name="category">
+                            <select name="category" id="category">
                                 <option>연극</option>
                                 <option>음악</option>
                                 <option>뮤지컬</option>
@@ -289,15 +289,16 @@
                     <tr>
                         <td style="width : 70px; text-align : center;" >공연소개</td>
                         <td colspan="2" >
-                            <textarea name="contents" rows="17" cols="50" style="width:600px;"></textarea>
+                            <textarea name="contents" id="contents" rows="17" cols="50" style="width:600px;"></textarea>
                         </td>
                     </tr>
                     
                     
 	                    <tr>
 	                        <td>사진첨부</td>
-	                        <td><input type="file" name="upFile" /></td>
+	                        <td><input type="file" name="upFile" id="upFile"></td>
 	                    </tr>
+	         
 	               
                     <tr>
                         <td colspan="2">

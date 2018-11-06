@@ -126,6 +126,7 @@
         		//예매중정보지우는 코드 추가할것////////////////////////////////////////////////////////////////////////////////  ※※※※※※※※※※※※※※※
         		%>
                 location.href="/reserveSeat.do?psNo="+<%=psNo%>;
+                //document.getElementById("goBackStep2").submit();
             }
         }
         function next() {
@@ -205,7 +206,7 @@
                                 <th>휴대폰 번호 <span class="color_red">*<span class="blind">필수입력란</span></span></th>
                                 <td>
                                     <div class="input_block">
-                                        <input type="text" class="input" id="inputPhoneNo" style="width:235px" maxlength="11" title="휴대폰 번호" value="">
+                                        <input type="text" class="input" id="inputPhoneNo" style="width:235px" maxlength="20" title="휴대폰 번호" value="">
                                     </div>
                                 </td>
                             </tr>
@@ -315,6 +316,12 @@
                                 <strong>총 결제</strong><span id="rInfo_TotP">141,000</span>
                             </div>
                         </div>
+                        <!-- 
+                        <form action="/reserveConfirm.do?progNo=<%=progNo%>" method="post" id="goBackStep2">
+                            <input type="hidden" id="psNo_form" name="psNo" value="<%= psNo %>"/>
+                            <input type="hidden" id="seat_form" name="seatList" />
+                        </form>
+                         -->
                     </div>
                     <div class="reserve_btn">
                         <a class="btn" onclick="prev()">이전단계</a>

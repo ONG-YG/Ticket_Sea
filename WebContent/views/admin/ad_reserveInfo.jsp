@@ -9,7 +9,7 @@
     div{
         box-sizing : border-box;
     }
-    #wrapper{overflow: hidden;width:1250px; height:2000px; border:1px solid black;}
+    #wrapper{overflow: hidden;width:1650px; height:1500px; border:1px solid black;}
     #header{ height:60px; background-color:;}
     #h_inner{width: 990px; height: 80%; margin: 5px auto; float:left; padding-left:20px;}
     #content-wrapper{height:1500px; border:1px solid black;}
@@ -190,7 +190,7 @@
                  <ul>
                     <li><a href="#">공연관리</a>
                         <ul>
-                             <li><a href="ad_showInsert.jsp">공연등록</a></li>
+                             <li><a href="/adShowPlace.do">공연등록</a></li>
                             <li><a href="/adShowList.do">공연목록</a></li>
                         </ul>
                     </li>    

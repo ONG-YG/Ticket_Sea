@@ -9,8 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import kr.co.ticketsea.member.model.service.MemberService;
 import kr.co.ticketsea.member.model.vo.Member;
-import kr.co.ticketsea.member.service.MemberService;
+
 
 /**
  * Servlet implementation class MemberUpdateServlet

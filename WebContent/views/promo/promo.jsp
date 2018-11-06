@@ -315,7 +315,7 @@ function delPromo(){
                     </div>
                     
                     <div id="i_H_pic">
-                       		포스터
+                       		<img src="../../uploadFile/mslove/<%= promo.getBoardP_fileName() %>" style="width:360px; height:465px;">
                     </div>
                     
                     <div id="i_H_info">

@@ -42,7 +42,7 @@ public class AdMemberServlet extends HttpServlet {
 			request.setAttribute("Member", m);
 			view.forward(request, response);
 		}else {
-			System.out.println("불러오기실패");
+			System.out.println("목록없음");
 			response.sendRedirect("/views/admin/error.jsp");
 		} 
 	}

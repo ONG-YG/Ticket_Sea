@@ -121,6 +121,8 @@ public class ReserveService {
 			seatGrdStList.get(i).setAvailableSeatCnt(available);
 		}
 		
+		JDBCTemplate.close(conn);
+		
 		return seatGrdStList;
 	}
 
@@ -160,10 +162,10 @@ public class ReserveService {
 			
 		} catch (Exception e) {
 			return null;
+		} finally {
+			JDBCTemplate.close(conn);
 		}
-		
-		JDBCTemplate.close(conn);
-		
+
 		return progTime;
 	}
 

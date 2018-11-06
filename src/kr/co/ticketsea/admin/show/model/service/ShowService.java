@@ -10,9 +10,10 @@ import kr.co.ticketsea.admin.show.model.vo.*;
 
 public class ShowService {
 
-	public int insertShow(Show s) {
+	public int insertShow(Show s,String fileName) {
 		Connection conn=JDBCTemplate.getConnection();
-		int result = new ShowDao().insertShow(conn,s);
+		int result = new ShowDao().insertShow(conn,s,fileName);
+
 		if(result>0) {
 			JDBCTemplate.commit(conn);
 		}else {
