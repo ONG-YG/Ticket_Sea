@@ -6,19 +6,26 @@ public class SelectedSeat {
 	private String seatGrd;
 	private int seatPrice;
 	private String seatTitle;
+	private String seatGrdColor;
 	
 	
 	
 	public SelectedSeat() {
 		super();
 	}
-	public SelectedSeat(int seatNo, String seatGrd, int seatPrice, String seatTitle) {
+	public SelectedSeat(int seatNo, String seatGrd, int seatPrice, String seatTitle, String seatGrdColor) {
 		super();
 		this.seatNo = seatNo;
 		this.seatGrd = seatGrd;
 		this.seatPrice = seatPrice;
 		this.seatTitle = seatTitle;
+		this.seatGrdColor = seatGrdColor;
 	}
+	
+	
+	
+	
+	
 	public int getSeatNo() {
 		return seatNo;
 	}
@@ -43,6 +50,14 @@ public class SelectedSeat {
 	public void setSeatTitle(String seatTitle) {
 		this.seatTitle = seatTitle;
 	}
+	public String getSeatGrdColor() {
+		return seatGrdColor;
+	}
+	public void setSeatGrdColor(String seatGrdColor) {
+		this.seatGrdColor = seatGrdColor;
+	}
+	
+	
 	
 	
 	

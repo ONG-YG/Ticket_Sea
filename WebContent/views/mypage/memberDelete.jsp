@@ -140,11 +140,23 @@
 <script>
     $(document).ready(function(){
         $('.cancelBtn').click(function(){
-            if(confirm("정말로 탈퇴하시겠습니까?")){
-                alert("정상적으로 탈되되었습니다.")
-            }else{
-                
-            }
+        	
+        	var chk = false;
+
+        	if($('input:checkbox[id="checkbox1"]').is(":checked")){
+        		chk = true;
+        	}else{
+        		chk = false;
+        	}
+        	
+        	if(chk){
+        		if(confirm("정말로 탈퇴하시겠습니까?")){
+                    location.href="/memberDelete.do";
+                }else{                
+                }
+        	}else{
+        		alert("동의 후 탈퇴가 가능합니다.");
+        	}
         });
     })
 </script>
@@ -155,8 +167,7 @@
             <jsp:include page="/header.jsp"/>
         </div>
     </div>
-    
-    
+        
     <div id="container">
         <div id="c_inner">
             <div id="c_inner_top">
@@ -183,7 +194,7 @@
                 <li class="has_sub1">
                     <span>회원정보관리</span>
                     <ul>
-                        <li><a href="/views/mypage/memberUpdate.jsp">회원 정보 수정</a>
+                        <li><a href="/myMemberUpdate.do">회원 정보 수정</a>
                         <li><a href="/views/mypage/memberDelete.jsp">회원 탈퇴</a></li>
                     </ul>
                 </li>
@@ -211,7 +222,7 @@
                 </textarea>
                 <div class="mberck">
                     <span>
-                        <input type="checkbox">
+                        <input type="checkbox" id="checkbox1" />
                     </span>
                     위 내용을 모두 확인하였으며 동의합니다.
                 </div>

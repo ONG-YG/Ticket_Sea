@@ -16,7 +16,6 @@ import kr.co.ticketsea.reserve.model.vo.PerformSchedule;
 import kr.co.ticketsea.reserve.model.vo.ReserveSession;
 import kr.co.ticketsea.reserve.model.vo.ReserveStepOne;
 import kr.co.ticketsea.reserve.model.vo.SeatGradeState;
-
 import kr.co.ticketsea.reserve.model.vo.ShowInfo;
 
 /**
@@ -67,6 +66,11 @@ public class DateCntSelectServlet extends HttpServlet {
 				String showTitle = si.getM_show_name();
 				//공연 포스터 파일명
 				String showPoster = si.getM_show_poster();
+				//공연 시작일
+				String startDate = si.getM_show_st_date().toString();
+				//공연 종료일
+				String endDate = si.getM_show_ed_date().toString();
+				
 				
 				//공연 일정 목록 (잔여좌석정보x)
 				ArrayList<PerformSchedule> psList = new ReserveService().selectAllPerformSchedule(showNo);
@@ -80,35 +84,23 @@ public class DateCntSelectServlet extends HttpServlet {
 						int psNo = ps.getPerformSchNo();
 						//System.out.println("회차번호 = "+ps.getPerformSchNo());
 						
-						
 						seatGrdStList = new ReserveService().getSeatGradeStatus(psNo);
+						
 						if(!seatGrdStList.isEmpty()) {
 							ps.setSeatGrdStList(seatGrdStList);
 						}else {
 							response.sendRedirect("/views/reserve/reserveError.jsp");
 							System.out.println("error at DateCntSelectServlet-3");
 						}
-						
-						
-						//int availableSeat = new ReserveService().availableSeatCount(ps.getPerformSchNo());
-						//ps.setAvailableSeat(availableSeat);
-						//System.out.println("잔여좌석수 = "+psList.get(i).getAvailableSeat());
 					}
 					
-					
-
 					stOne = new ReserveStepOne();
 					stOne.setShowNo(showNo);
 					stOne.setShowTitle(showTitle);
 					stOne.setShowPoster(showPoster);
 					stOne.setPsList(psList);
-					
-					//stOne.setSeatGrdStList(seatGrdStList);
-					
-					
-					
-					
-					
+					stOne.setStartDate(startDate);
+					stOne.setEndDate(endDate);
 					
 				}
 				
@@ -118,18 +110,17 @@ public class DateCntSelectServlet extends HttpServlet {
 					view.forward(request, response);
 				}else {
 					response.sendRedirect("/views/reserve/reserveError.jsp");
-					System.out.println("error at DateCntSelectServlet-1");
+					System.out.println("error at DateCntSelectServlet-2");
 				}
 				
 			}else {
 				response.sendRedirect("/views/reserve/reserveError.jsp");
-				System.out.println("error at DateCntSelectServlet-2");
+				System.out.println("error at DateCntSelectServlet-1");
 			}
 		}else {
 			response.sendRedirect("/views/reserve/reserveError.jsp");
 			System.out.println("로그인 안내");
 		}
-		
 		
 	}
 

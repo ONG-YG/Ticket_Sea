@@ -10,9 +10,9 @@ import kr.co.ticketsea.admin.show.model.vo.*;
 
 public class ShowService {
 
-	public int insertShow(Show s,String fileName) {
+	public int insertShow(Show s) {
 		Connection conn=JDBCTemplate.getConnection();
-		int result = new ShowDao().insertShow(conn,s,fileName);
+		int result = new ShowDao().insertShow(conn,s);
 
 		if(result>0) {
 			JDBCTemplate.commit(conn);
@@ -87,12 +87,10 @@ public class ShowService {
 		
 		return list;
 	}
-	
-	//소규모 공연 승인하는 로직
-	public int miniShowApprove(int msNo) {
+
+	public int deleteShow(int showNo) {
 		Connection conn = JDBCTemplate.getConnection();
-		int result=new ShowDao().miniShowApprove(conn,msNo);
-		
+		int result = new ShowDao().deleteShow(conn,showNo);
 		if(result>0) {
 			JDBCTemplate.commit(conn);
 		}else {
@@ -102,6 +100,7 @@ public class ShowService {
 		
 		return result;
 	}
+	
 
 
 	

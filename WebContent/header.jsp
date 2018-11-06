@@ -11,6 +11,13 @@
 
 
 </head>
+
+<script>
+function adminBtn(){
+	window.open("/adShowPlace.do","admin","width=1800, height=1500"); //_blank는 중복 팝업 가능함
+}
+</script>
+
 <body>
    <!--wrap div-->
     <div id="wrap">
@@ -26,15 +33,23 @@
 								Member member = (Member)session.getAttribute("member");	
 								if(member!=null){ //로그인 성공시
 							%>
+							
+							<%if(member.getMemberId().equals("admin")){%>
 							<a href="/logout.do" id="logout">로그아웃</a>
+							<a href="" onclick="adminBtn();">관리자페이지</a>
 							<a href="/reserveList.do" id="myPage">마이페이지</a>
 							<a href="/reserveList.do" id="reserve">예매확인/취소</a><span>|</span>
 							
 							<%}else{ %>
+							<a href="/logout.do" id="logout">로그아웃</a>
+							<a href="/reserveList.do" id="myPage">마이페이지</a>
+							<a href="/reserveList.do" id="reserve">예매확인/취소</a><span>|</span>
+							<%} %>
+							<%}else{ %>
 							<a href="#"  class="btn login" 
 							onclick="window.open('/views/member/login.jsp','로그인','width=430,height=440'); return false;"  id="loginBtn">로그인</a>
 							 <a href="#" id="joinBtn"
-                   			 onclick="window.open('/views/member/memberJoin.jsp','회원가입','width=430,height=750'); return false;">회원가입</a><span>|</span> 
+                   			 onclick="window.open('/views/member/memberJoin.jsp','회원가입','width=430,height=750'); return false;">회원가입</a><span> | </span> 
 							<% } %>
 							
 							<a href="#" >고객센터</a>
@@ -50,18 +65,19 @@
 				</h1>
 				<div class="search">
 					
-					<form name="searchForm" action="" method="GET">
+					<form name="search" action="/musicalSearchList.do" method="GET">
                 <fieldset>
                     <legend>검색창</legend>
-                    <input type="text" id="searchline" name="query" title="검색어 입력" value="">
-                    <a href="#" class="btn_search"><img id="searchIcon"  src="/img/searchicon.PNG" width="41px"
-                    ></a>
+                    <input type="text" id="searchline" name="search" title="검색어 입력" value="">
+                    <img  id="searchIcon" src="/img/searchicon.PNG"
+                    onclick="goSearch();">
                 </fieldset>
                         
             		</form>
         		</div>
 				  
 			</div>
+			
             <!--menu div-->
             <div id="menu">
 				<ul>
@@ -78,7 +94,12 @@
        
 
     </div>
-
+	<script>
+		function goSearch(){
+			var keyword = document.getElementById("searchline").value;
+			location.href=("/musicalSearchList.do"+"?search="+keyword);
+		}
+	</script>
 
 </body>
 </html>

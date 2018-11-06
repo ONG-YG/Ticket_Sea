@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="kr.co.ticketsea.member.model.vo.*" %>
+<% Member updateList = (Member)request.getAttribute("updateMember"); %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -111,7 +113,12 @@
     
     
     /* right_view 내용 관리 */
-    #right_view>.r_line{
+    #updateForm{
+    	width:auto;
+    	height: auto;
+    }
+    
+    #right_view .r_line{
         border-bottom: 2px solid gray;
         margin-bottom: 150px;
     }
@@ -196,7 +203,7 @@
                 <li class="has_sub1">
                     <span>회원정보관리</span>
                     <ul>
-                        <li><a href="/views/mypage/memberUpdate.jsp">회원 정보 수정</a>
+                        <li><a href="/myMemberUpdate.do">회원 정보 수정</a>
                         <li><a href="/views/mypage/memberDelete.jsp">회원 탈퇴</a></li>
                     </ul>
                 </li>
@@ -205,28 +212,58 @@
                 <div class="r_line">
                     <h3>회원정보수정</h3>
                 </div>
+                <form action ="/myMemberUpdateConfirm.do" method="post" id="updateForm">
                 <div class="r_table">
                     <table>
                         <tbody>
                             <tr>
                                 <th>아이디</th>
-                                <td>cho******@naver.com</td>
+                                <td><%=updateList.getMemberId() %></td>
+                                <input type="hidden" name="member_id" value="<%=updateList.getMemberId() %>"/>
                             </tr>
                             <tr>
                                 <th>연락처</th>
-                                <td>010******78</td>
+                                <td><input type="text" id="phone" name="phone" value="<%=updateList.getMemberPhone()%>"></td>
                             </tr>
                             <tr>
                                 <th>주소</th>
-                                <td>서울시 특별시</td>
+                                <td><input type="text" id="address" name="address" value="<%=updateList.getMemberAddr()%>"></td>
+                            </tr>
+                            <tr>
+                                <th>이메일</th>
+                                <td><input type="text" id="email" name="email" value="<%=updateList.getMemberEmail()%>"></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
+                
                 <div class="list_btn">
-                    <a href="#">회원 정보 수정</a>
+                    <a href="#" onclick = "return updateSubmit();">회원 정보 수정</a>
                 </div>
+                </form>
             </div>
+            <script>
+                function updateSubmit(){
+                	var phone = document.getElementById("phone").value;
+                	var address = document.getElementById("address").value; 
+                	var email = document.getElementById("email").value; 
+                	
+                	if(phone==""){
+                		alert("연락처를 입력하세요");
+                		return false;
+                	}else if(address==""){
+                		alert("주소를 입력하세요");
+                		return false;
+                	}else if(!(/^[a-z0-9]{4,20}@/.test(email))||email==""){
+                		alert("이메일을 입력하세요");
+                		return false;
+                	}else{
+                		document.getElementById("updateForm").submit();
+                		return true;
+                	}
+                	
+                }
+               </script>
         </div>
     </div>
     

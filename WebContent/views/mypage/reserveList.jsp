@@ -1,11 +1,11 @@
-<%@page import="kr.co.ticketsea.mypage.model.vo.MyReserveList"%>
+<%@ page import="kr.co.ticketsea.mypage.model.vo.MyReserveList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ page import="kr.co.ticketsea.member.model.vo.*" %>
     <%@ page import="kr.co.ticketsea.reserve.model.vo.*" %>
     <%@ page import="kr.co.ticketsea.mypage.model.vo.*" %>
     <%@ page import="java.util.ArrayList" %>
-    <% ArrayList<MyReserveList> mrlList = (ArrayList<MyReserveList>)request.getAttribute("mrlList"); %>
+    <% ArrayList<MyReserveList> finalMrlList = (ArrayList<MyReserveList>)request.getAttribute("finalMrlList"); %>
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -215,7 +215,7 @@
                 <li class="has_sub">
                     <span>회원정보관리</span>
                     <ul>
-                        <li><a href="/views/mypage/memberUpdate.jsp">회원 정보 수정</a></li>
+                        <li><a href="/myMemberUpdate.do">회원 정보 수정</a></li>
                         <li><a href="/views/mypage/memberDelete.jsp">회원 탈퇴</a></li>
                         
                     </ul>
@@ -237,12 +237,15 @@
                             </tr>
                         </thead>
                         <tbody>
-                        	<%for(MyReserveList mrl: mrlList){ %>
+
+                                                	
+                        	<%	for(MyReserveList finalMrl: finalMrlList){ %>
+
                         	<tr>
-                                <td></td>
-                                <td><%=mrl.getShowName() %></td>
-                                <td><%=mrl.getShowDate() %></td>
-                                <td></td>
+                                <td><%=finalMrl.getTableNum() %></td>
+                                <td><%=finalMrl.getShowName() %></td>
+                                <td><%=finalMrl.getShowDate() %></td>
+                                <td><%=finalMrl.getCount() %></td>
                                 <td></td>
                             </tr>
                         	<%} %>
