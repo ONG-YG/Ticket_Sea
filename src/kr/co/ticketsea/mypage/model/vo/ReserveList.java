@@ -8,12 +8,14 @@ public class ReserveList {
 	private Date bkDate;
 	private String bkStatCd;
 	private int num;
-	public ReserveList(String mShowName, Date bkDate, String bkStatCd, int num) {
+	private String bkNo;
+	public ReserveList(String mShowName, Date bkDate, String bkStatCd, int num, String bkNo) {
 		super();
 		this.mShowName = mShowName;
 		this.bkDate = bkDate;
 		this.bkStatCd = bkStatCd;
 		this.num = num;
+		this.bkNo = bkNo;
 	}
 	public ReserveList() {
 		super();
@@ -43,6 +45,13 @@ public class ReserveList {
 	public void setNum(int num) {
 		this.num = num;
 	}
+	public String getBkNo() {
+		return bkNo;
+	}
+	public void setBkNo(String bkNo) {
+		this.bkNo = bkNo;
+	}
+	
 	
 	
 }
