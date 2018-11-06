@@ -110,6 +110,12 @@
         	height:42px;
         	width:41px;
         }
-       
+        #login>a{
+        text-decoration:none;
+        }
+        h1>a {
+        	text-decoration:none;
+        	color:#87ceeb;
+        }
       
         
