@@ -1,33 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-    <%@ page import="kr.co.ticketsea.qna.model.vo.*" 
-	import ="kr.co.ticketsea.member.model.vo.*"
-	import = "java.util.ArrayList"
-%>
+    <%@ page import = "kr.co.ticketsea.show.model.vo.*" %>
+    <%@ page import = "java.util.*" %>
+    <%@ page import = "kr.co.ticketsea.member.model.vo.*" %>
     
     
     <%
-	Qna qna = (Qna)request.getAttribute("qna"); //공지사항 내용
+	// Controller(Servlet)에서 보내준값 가져오기
+	PageData pd = (PageData)request.getAttribute("pageData");
+
+	ArrayList<Show> list = pd.getList(); // 현재 페이지의 글 목록
+	String pageNavi = pd.getPageNavi(); // 현재 navi Bar
+	
 %>
     
-    
-    
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta charset="UTF-8">
-<title>질문 게시판</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>소규모 공연 목록</title>
 <script
   src="https://code.jquery.com/jquery-3.3.1.js"
   integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
   crossorigin="anonymous">
 </script>
-
-
 <style>
     /* 전체 사이즈 조정 */
-    
     ul, li, a{list-style: none; margin: 0px; padding: 0px; text-decoration: none; color: black;}
     
     div{box-sizing: border-box;}
@@ -38,7 +37,7 @@
     
     /* 990px 고정 사이즈 */
     #h_inner{width: 990px; height: 100%; margin: 0px auto;}
-    #c_inner{width: 990px; height: 1300px; margin: 0px auto; padding: 70px 0 250px 0px;}
+    #c_inner{width: 990px; height: 1800px; margin: 0px auto; padding: 70px 0 250px 0px;}
     #f_inner{width: 990px; margin: 0px auto;}
 
     /* top 버튼 */
@@ -97,7 +96,7 @@
         background: white;
     }
     #right_view{
-        width: 822px;
+        width: 990px;
         float: left;
         border: 1px solid #dedede;
         height: 100%;
@@ -224,132 +223,106 @@
     letter-spacing: -1px;
     }
     
+    .boxStyle {
+            position: relative;
+            width: 780px;
+            margin: 0 auto 12px;
+            padding: 5px 15px;
+            border: 0px solid #c7c7c7;
+            border-radius: 5px;
+            background-color: #fff;
+            box-shadow: 1px 2px 6px 0px rgba(0, 0, 0, 0.1); 
+            float:right;
+        }
    
-    
-    .pullMethod {
-            background:#fbfbfb;
-            text-align:left;
-            padding:25px 30px;
-            line-height:1.6;
+    #prContest{
+            width:100%;
+            height:95%;
+            float : left;
+        }    
+        
+        #prContest>#prContestDiv1{
+            width : 25%;
+            height : 29%;
+            float : left;
+            padding :5px 10px 15px;
+            
         }
-    
-    .questionTable{
-            border:1px solid #dedede;
-            border-right:0;
-            font-size:13px;
-            margin:10px auto 12px;
-            line-height:45px;
-            width:730px;
-            text-align: center;
+        
+        #prContest>#prContestDiv2{
+       	border : 1px solid black;
+       	width : 100%;
+       	float:left;
+       }
+        
+        #prContestDiv1>#prContestPic{
+            width : 100%;
+            height : 90%;
+            float : left;
         }
-    
-     #qna_header{
-    	width : 100%;
-    }
-    
-    #qna_header_a{
-    	width : 15%;
-    	text-align: center;
-    	background-color:lightskyblue;
-    	color:white;
-    }
-    
-    #qna_header_b{
-    	border : 1px solid black;
-    	width : 85%;
-    }
-    
-    #qna_contents{
-   		width : 100%;
-   		padding : 10px 10px 10px;
-    }
-    
+        #prContestDiv1>#prContestTitle{
+        	width : 100%;
+        	height : 10%;
+        	float: left;
+        	text-align: center;
+        }
+        
+        
     #header_inner{width:990px; margin: 0px auto;}
 </style>
 </head>
+</head>
 <body>
-
 <div id="wrapper">
         <div id="header_inner">
             <jsp:include page="/header.jsp"/>
     </div>
     
-    
     <div id="container">
         <div id="c_inner">
             <div id="c_inner_top">
                 <div class="title1">
-                    <h2>고객센터</h2>
+                    <h2>뮤지컬</h2>
                 </div>
                 <div class="title2"></div>
             </div>
-            <ul id="left_menu">
-                <li class="has_sub">
-                    <span>고객센터</span>
-                 	 <ul>
-                        <li><a href="/noticeList.do"><strong>공지사항</strong></a></li>
-                        <li><a href="/faqList.do"><strong>자주묻는 질문</strong></a></li>
-                        <li><a href="/qnaList.do"><strong>질문게시판</strong></a></li>
-                    </ul>
-                </li>
-            </ul>    
-            <div id="right_view">
-                <div class="r_line">
-                    <h3>질문 게시판</h3>
-                </div>
-                
-                 <table id = "qna_header">
-                	<tr>
-                	<td id = "qna_header_a">제목</td>
-                	<td id = "qna_header_b"><%= qna.getBoardQ_title()%></td>
-                	</tr>
-                	
-                	<tr>
-                	<td id = "qna_header_a">작성자</td>
-                	<td id = "qna_header_b"><%= qna.getBoardQ_writer() %></td>
-                	</tr>
-                	
-                	<tr>
-                	<td id = "qna_header_a">작성일</td>
-                	<td id = "qna_header_b"><%= qna.getBoardQ_date() %></td>
-                	</tr>
-                	
-                	<tr>
-                	<td id = "qna_header_a">조회수</td>
-                	<td id = "qna_header_b"><%= qna.getBoardQ_hit() %></td>
-                	</tr>
-                	
-                	<tr>
-                </table>
-                
-                <span id = "qna_contents">
-                		<%= qna.getBoardQ_contents() %>
-        		</span>
-                
-                <br>
-                
-                 <%
-					session = request.getSession(false);
-					Member m = (Member)session.getAttribute("member"); 
-				%>
-                
-                <%
-					if(m!=null && m.getMemberId().equals("admin")){
-				%>
-                <br>
-                <button id="btn1" onclick="modifyActive();" style="width: 70px; height: 30px; float:right;">수정</button> 
-				<button id="btn2" onclick="delQna();" style="width: 70px; height: 30px; float:right;">삭제</button> 
-                <%} %>
-                
-                
-                <script>
-                function delQna(){
-            		location.href="/qnaDelete.do?boardQ_no=<%=qna.getBoardQ_no()%>";
-            	}
-                </script>
-                
+            
+            <div id="container">
+        <div id = "right_view">
+        <div id="prContest">
+        <% for (Show s : list) { %>
+            <div id = "prContestDiv1" ">
+	            <div id="prContestPic"><a href="/show.do?show_no=<%=s.getShow_no()%>"><img src="../../uploadFile/mslove/<%= s.getShow_fileName() %>" style="width:205px; height:330px; align-content: center;"></a></div> <br>
+	        	<div id="prContestTitle" style="font-size: 10px"><a href="/show.do?show_no=<%=s.getShow_no()%>"><%=s.getShow_title()%></a></div>
+        	</div>
+         <% } %> 
+         
+        
+    </div>
+            <div id="prContestDiv2">
+            	 <div style="width:100%; text-align:center;">
+				<label><%=pageNavi%></label>
+		
+		
+		   <%
+		session = request.getSession(false);
+		Member m = (Member)session.getAttribute("member"); 
+			%>
+			
+           <%if(m!=null) {%>
+            <form style="display:inline;" action="/views/show/showWrite.jsp">
+				<input type="submit" value="글쓰기" style="width: 70px; height: 30px; float:right;"/> <br>				
+			</form>
+			<%} %>
+   
+         </div>
+         
             </div>
+            
+            
+          </div>  
         </div>
+       </div>
     </div>
     
     <a href="#" id="back_to_top">Top</a>
@@ -359,6 +332,5 @@
     </div>
     
 </div>
-
 </body>
 </html>

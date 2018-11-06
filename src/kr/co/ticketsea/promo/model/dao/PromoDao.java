@@ -18,26 +18,11 @@ public class PromoDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		//���� �Խù� ���
 		int start = currentPage * recordCountPerPage - (recordCountPerPage-1);
-		//���� ��û�� �������� 1���������? -> 1�� ���;� ��
-			// 1 * 10 - (10-1)  => 1
-		//���� ��û�� �������� 4���������? -> 31�� ���;� ��
-			// 4 * 10 - (10-1)  => 31
-		
-		//ex) currentPage�� 3 �̰�, recordCountPerPage 5���?
-		//���� ��û�� �������� 3���������? -> 11�� ���;� ��
-			// 3 * 5 - (5-1) 	=> 11
 		
 		
 		
-		
-		//�� �Խù� ���
 		int end = currentPage * recordCountPerPage;
-		// ���� ��û�� �������� 1���������? -> 10
-			// 1 * 10	=> 10
-		// ���� ��û�� �������� 3���������? -> 30
-			// 3 * 10 	=> 30
 		
 		
 		String query = "select * from (select board_promo.*,row_number() " + 
@@ -84,8 +69,7 @@ public class PromoDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		// �Խù��� ��Ż ������ ���ؾ� ��
-		int recordTotalCount = 0; //�ʱⰪ�� ������ �����Ƿ� 0���� ����
+		int recordTotalCount = 0; 
 		
 		String query = "select count(*) AS TOTALCOUNT FROM board_promo";
 		
@@ -104,15 +88,8 @@ public class PromoDao {
 		}
 		 
 		
-		 // ���ؿ� �Խù��� ��Ż ������ �������� �������� ��Ż ������ ���ؾ� ��
-		 // ��, �Խù��� 124�� ���? 
-		 // page�� �� 13���� �Ǿ�� �� (�������� 10���� �Խù��̶�� ���Ͽ����� ����)
+		 int pageToTalCount = 0; 
 		 
-		 int pageToTalCount = 0; //������ �����Ƿ� �ʱⰪ�� 0 ����
-		 
-		 
-		 // �������� ��Ż ���� ���ϴ� ����
-		 // �Խù���Ż ���� / 10  + 1(���ǿ� ���� ����)
 		 
 		 if(recordTotalCount%recordCountPerPage !=0)
 		 {
@@ -155,24 +132,23 @@ public class PromoDao {
 		
 		StringBuilder sb = new StringBuilder();
 		
-		// needPrev�� ������������ 1�̸� false, ������������ 1�� �ƴ϶�� true
-		if(needPrev==true) // ���� �������� 1�������� �ƴ϶��!
+	
+		if(needPrev==true)
 		{
 			sb.append("<a href='/promoList.do?currentPage="+(startNavi-1)+"'> < </a>");
 		}
-		// ���� �� ��ġ(startNavi��)�� 2���? '<' ��ư�� Ŭ���ϸ� 1�������� �̵��ؾ� ��
-		// <a href='/promoList.do?cureentPage=1> < </a>
+		
 		
 		for(int i=startNavi; i<=endNavi;i++){
 			if(i==currentPage)
 			{
-				// ���� �������� ���� �ִ� ��ġ�������� ���ٸ� ���ϰ� ǥ��
+				
 				sb.append("<a href='/promoList.do?currentPage="+i+"'><B style='font-size:30px'>"+i+"</B></a> ");
-				//<a href='/promoList.do?cureentPage=1'><B>1</B></a>
+				
 			}
 			else
 			{
-				// ���� �������� ���� �ִ� ��ġ �������� �ٸ��ٸ� �Ϲ� ǥ��
+				
 				sb.append("<a href='/promoList.do?currentPage="+i+"'>"+i+"</a> ");
 			}
 		}
