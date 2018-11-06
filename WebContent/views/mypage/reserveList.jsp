@@ -243,6 +243,7 @@
                         <thead>
                             <tr>
                                 <th>번호</th>
+                                <th>예매번호</th>
                                 <th>공연명</th>
                                 <th>공연일</th>
                                 <th>예매 상태</th>
@@ -254,28 +255,41 @@
 
                         	<tr>
                                 <td><%=rl.getNum() %></td>
+                                <td><%=rl.getBkNo() %></td>
                                 <td><%=rl.getmShowName() %></td>
                                 <td><%=rl.getBkDate() %></td>
                                 <td>
                                 <% if(rl.getBkStatCd().equals("RSV_CNL")){ %>
-                                	예매취소 완료
+                                	취소완료
                                 <%}else if(rl.getBkStatCd().equals("RSV_CPL")){ %>
                                 	예매완료 <button class=list_btn id=list_btn>취소</button>
                                 <%}else{ %>
                                 	예매중 <button class=list_btn id=list_btn>취소</button>
                                 <%} %>
                                 </td>
-                                <td><button id=list_btn>보기</button></td>
+                                <td>
+                                <input type="submit" id=list_btn class=show_btn value="보기"/>
+                                <input type="hidden" name="show_btn" value="<%=rl.getBkNo()%>" />
+                                </td>
                             </tr>
                         	<%} %>
                         </tbody>
                     </table>		
                     <script>
                     $(document).ready(function(){
+
+                    	// 예매 취소 동작
                         $('.list_btn').click(function(){
                         	if(confirm("예매를 취소하시겠습니까?")){
                             	location.href="/memberDelete.do";
-                            }else{}
+                            }else{
+                            	location.href="/reserveList.do"
+                            }
+                        });
+                        
+                    	// 상세보기 팝업 동작
+                        $('.show_btn').click(function(){
+                        	window.open("/popupReserveList.do","예매내역 상세보기","width=1000, height=500");
                         });
                     })
                     </script>
