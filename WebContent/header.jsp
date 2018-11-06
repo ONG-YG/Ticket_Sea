@@ -8,7 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Ticket Sea || 티켓씨</title>
 
-  <link rel=StyleSheet type="text/css" href="/css/header.css"> 
+  <link rel=StyleSheet type="text/css" href="/css/header.css?text=100" > 
 
 
 </head>
@@ -33,13 +33,13 @@
 							%>
 							<a href="/logout.do" id="logout">로그아웃</a>
 							<a href="/reserveList.do" id="myPage">마이페이지</a>
-							<a href="/reserveList.do" id="reserve">예매확인/취소</a><span>|</span>
+							<a href="/reserveList.do" id="reserve">예매확인/취소</a>
 							
 							<%}else{ %>
 							<a href="#"  class="btn login" 
 							onclick="window.open('/views/member/login.jsp','로그인','width=430,height=440'); return false;"  id="loginBtn">로그인</a>
 							 <a href="#" id="joinBtn"
-                   			 onclick="window.open('/views/member/memberJoin.jsp','회원가입','width=430,height=750'); return false;">회원가입</a><span>|</span> 
+                   			 onclick="window.open('/views/member/memberJoin.jsp','회원가입','width=430,height=750'); return false;">회원가입</a> 
 							<% } %>
 							
 							<a href="#" >고객센터</a>

@@ -11,8 +11,8 @@
             position: relative;
             background: #fafafa;
             border-bottom: 1px solid #f0f0f0;
-            height: 21px;
-            padding-top: 11px;
+            height: 25px;
+            
             box-sizing: padding-box;
         }
         #header .search_area {
@@ -112,10 +112,16 @@
         }
         #login>a{
         text-decoration:none;
+        color:#87ceeb;
+        font-weight: bold;
         }
         h1>a {
         	text-decoration:none;
         	color:#87ceeb;
+        	
         }
+        
+		h1>A:visited {color:#87ceeb; text-decoration:none}
+
       
         
