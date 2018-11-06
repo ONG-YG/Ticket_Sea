@@ -37,6 +37,18 @@ public class DateCntSelectServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		/*
+		<script>
+	    function reserve(){
+	        var showNo = 20000; //////////////////////////////////////////////////// showNo 받아오는 코드 추가할 것
+	        window.open("/dateCntSelect.do?showNo="+showNo, "reservePopUp", "width=1010, height=625");
+	        
+	        return false;
+	    }
+	    </script>
+	    /////////////////휘명이 공연정보페이지에 넣을것
+		*/
+		
 		request.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession(true);//////////////////////////////
 		ReserveSession rs = new ReserveSession();
