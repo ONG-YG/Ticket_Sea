@@ -254,7 +254,7 @@
                     <h3>소규모 공연 홍보</h3>
                 </div>
                 
-                <form action="/promoWrite.do" method="post" enctype="multipart/form-data" >
+                <form action="/promoWrite.do" method="get" enctype="multipart/form-data">
                      <table id="write-form">
                     <tr>
                         <td style="width : 70px;" >공연명</td>
@@ -296,7 +296,7 @@
                     
 	                    <tr>
 	                        <td>사진첨부</td>
-	                        <td><input type="file" name="upFile" id="upFile"></td>
+	                        <td><input type="file" name="upFile" id="upFile" /></td>
 	                    </tr>
 	         
 	               

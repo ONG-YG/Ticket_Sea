@@ -89,9 +89,9 @@ function adminBtn(){
 					<li><a class="menulink">&nbsp;</a></li>
 					<li><a class="menulink" href="#">뮤지컬</a></li>
 					<li><a class="menulink" href="#">콘서트</a></li>
-					<li><a class="menulink" href="#">소규모공연</a>		</li>
+					<li><a class="menulink" href="/promoList.do">소규모공연</a>		</li>
 					<li><a class="menulink" href="#">랭킹</a></li>
-					<li><a class="menulink" href="#">고객센터</a>		</li>
+					<li><a class="menulink" href="/noticeList.do">고객센터</a>		</li>
 					<li><a class="menulink">&nbsp;</a></li>
 				</ul>
 			</div>
