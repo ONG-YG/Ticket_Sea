@@ -1,4 +1,4 @@
-package kr.co.ticketsea.promo.controller;
+package kr.co.ticketsea.show.controller;
 
 import java.io.IOException;
 
@@ -9,8 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kr.co.ticketsea.promo.model.service.ShowService;
-import kr.co.ticketsea.promo.model.vo.*;
+import kr.co.ticketsea.show.model.service.ShowService;
+import kr.co.ticketsea.show.model.vo.ShowData;
+import kr.co.ticketsea.show.model.service.ShowService;
 
 /**
  * Servlet implementation class ShowServlet
@@ -39,12 +40,12 @@ public class ShowServlet extends HttpServlet {
 		int show_no = Integer.parseInt(request.getParameter("show_no"));
 		
 		//3. 비즈니스 로직 처리 
-		Show show =  new ShowService().selectOneShow(show_no);
+		ShowData pd =  new ShowService().selectOneShow(show_no);
 		
 		//4. 결과 리턴
-		if(show !=null) {
+		if(pd !=null) {
 			RequestDispatcher view = request.getRequestDispatcher("views/show/show.jsp");
-			request.setAttribute("show", show);
+			request.setAttribute("showData", pd);
 			view.forward(request, response);
 			
 		}else {
