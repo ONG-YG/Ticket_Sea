@@ -6,6 +6,7 @@ import java.sql.Savepoint;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Enumeration;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -39,62 +40,69 @@ public class PromoWriteServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//1. 한글 인코딩
-		request.setCharacterEncoding("utf-8");
+    
 
-		//2. view에서 보내준 데이터를 변수에 저장
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
-		
-		
+		request.setCharacterEncoding("utf-8");
 		
 		//3. session에서 글을 작성한 사람의 ID를 추출
 		HttpSession session  = request.getSession(false);
+		
+		
+		String title = "";
+		String category = "";
+		String contents = "";
+		String artist = "";
+		String location = "";
+		String fileName = "";
+		
+		////////////////////////
+			int fileSizeLimit = 5 * 1024 * 1024;
+			String uploadPath = "C:\\Users\\user1\\Desktop\\workspace_ticketsea\\Ticket_Sea\\WebContent\\upLoad";
+			String encType = "UTF-8";
+			
+			MultipartRequest multi = new MultipartRequest(
+					request,
+					uploadPath,
+					fileSizeLimit,
+					encType,
+					new DefaultFileRenamePolicy());
+			
+			title = multi.getParameter("title");
+			category = multi.getParameter("category");
+			contents = multi.getParameter("contents");
+			artist = multi.getParameter("artist");
+			location = multi.getParameter("location");
+			
+			Enumeration formNames = multi.getFileNames();
+			String formName = (String)formNames.nextElement();
+			fileName = multi.getFilesystemName(formName);
+			System.out.println("파일 이름 : " + fileName);
+			
+			String fullFilePath = uploadPath+"\\"+fileName;
+			System.out.println("총 경로 : " + fullFilePath);
+			
+			File file = new File(fullFilePath); //import java.io.File
+			long fileSize = file.length(); //파일의 사이즈를 가져옴
+			
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
+			Timestamp uploadTime = null;
+			
+			uploadTime = Timestamp.valueOf(formatter.format(Calendar.getInstance().getTimeInMillis()));
+			
+			System.out.println("업로드된 시간 : " + uploadTime);
+			
+			////////////////////////////////////////////////
 	
+		
 		try {
 			String userId = ((Member)session.getAttribute("member")).getMemberId();
 			//userId를 가져오도록 함 (비로그인 사용자 일시 Exception이 발생함)
 			
-			
+				
 			if(userId != null) {
-				////////////////////////
-				int fileSizeLimit = 5 * 1024 * 1024;
-				String uploadPath = getServletContext().getRealPath("/") + "uploadFile"+"\\"+userId;
-				String encType = "UTF-8";
-				
-				MultipartRequest multi = new MultipartRequest(
-						request,
-						uploadPath,
-						fileSizeLimit,
-						encType,
-						new DefaultFileRenamePolicy());
-				
-				String title = multi.getParameter("title");
-				String category = multi.getParameter("category");
-				String contents = multi.getParameter("contents");
-				String artist = multi.getParameter("artist");
-				String location = multi.getParameter("location");
-				
-				String fileName = multi.getFilesystemName("upfile");
-				System.out.println("파일 이름 : " + fileName);
-				
-				String fullFilePath = uploadPath+"\\"+fileName;
-				System.out.println("총 경로 : " + fullFilePath);
-				
-				File file = new File(fullFilePath); //import java.io.File
-				long fileSize = file.length(); //파일의 사이즈를 가져옴
-				
-				SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
-				Timestamp uploadTime = null;
-				
-				uploadTime = Timestamp.valueOf(formatter.format(Calendar.getInstance().getTimeInMillis()));
-				
-				System.out.println("업로드된 시간 : " + uploadTime);
-				
-				////////////////////////////////////////////////
-				
-				
 			//4. 비즈니스 로직 처리
 				int result = new PromoService().insertPromo(title, category, contents, artist, location, userId, fileName, fullFilePath, fileSize, uploadTime);
 				

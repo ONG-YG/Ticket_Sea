@@ -10,7 +10,7 @@
 <%
 	PromoData pd = (PromoData)request.getAttribute("promoData");
 	Promo promo = pd.getPromo(); 
-	ArrayList<Comment> list = pd.getList();
+	
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -356,8 +356,7 @@ function delPromo(){
                         <div style="width : 500px; height: 300px; " >
                         <%= promo.getBoardP_contents() %>
                         </div>
-                        
-                         <img src="../../uploadFile/mslove/<%= promo.getBoardP_fileName() %>" style="width:700px; height:850px; padding : 50px;">
+                         <img src="../../upLoad/<%= promo.getBoardP_fileName()%>" style="width:700px; height:850px; padding : 50px;">
                          <%=promo.getBoardP_filePath() %>
                         <table class="detail_info_tbl">
                             
@@ -495,6 +494,7 @@ function delPromo(){
             </style>
             
                 <div id="i_C_content_c" style="display:none;">
+                <% ArrayList<Comment> list = pd.getList(); %>
                     <div id="c_title">
                     네티즌 후기
                     </div>
@@ -504,6 +504,7 @@ function delPromo(){
                     티켓 양도 및 매매의 경우 전화번호, 이메일 등의 개인정보가 악용될 소지가 있으므로 게재를 삼가 주시기 바랍니다. <br>
                     운영 규정을 지속적으로 어기는 게시글을 게재할 경우 티켓링크 게시판 이용이 제한될 수 있습니다.
                     </div>
+                    
                     <form action="/promoInsertComment.do" method="post">
                     <%if(session.getAttribute("member")!=null){ %>
                             <div class="write_review">
@@ -552,12 +553,12 @@ function delPromo(){
                <%}%>
             </li>
             
-            </ul>
+           </ul>
     </div>
             
             
 
-                </div>
+          </div>
 
           </div>
                 
