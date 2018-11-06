@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class Reserve {
 	//예매정보
-	private int bk_no; //예매번호
+	private String bk_no; //예매번호
 	private int member_no; //예매한 회원 번호
 	private String bk_stat_cd; //예매 상태코드
 	private Date bk_date; //예매일
@@ -35,7 +35,7 @@ public class Reserve {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Reserve(int bk_no, int member_no, String bk_stat_cd, Date bk_date, int tot_price, String bk_pay_type,
+	public Reserve(String bk_no, int member_no, String bk_stat_cd, Date bk_date, int tot_price, String bk_pay_type,
 			String member_id, String member_name, String bk_stat_name, String tk_no, int ps_no, int seat_no,
 			String seat_grd, String seat_title, Date ps_date, int ps_cnt, String ps_time, int show_no,
 			String show_name) {
@@ -61,11 +61,11 @@ public class Reserve {
 		this.show_name = show_name;
 	}
 
-	public int getBk_no() {
+	public String getBk_no() {
 		return bk_no;
 	}
 
-	public void setBk_no(int bk_no) {
+	public void setBk_no(String bk_no) {
 		this.bk_no = bk_no;
 	}
 

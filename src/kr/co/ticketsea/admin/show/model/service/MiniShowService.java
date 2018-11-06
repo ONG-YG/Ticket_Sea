@@ -99,5 +99,17 @@ public class MiniShowService {
 		return result;
 	}
 
+	public int updateApMiniShow(MiniShow ms) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result=new MiniShowDao().updateApMiniShow(conn,ms);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
 
 }

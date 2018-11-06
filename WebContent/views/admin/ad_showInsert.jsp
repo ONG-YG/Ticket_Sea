@@ -198,12 +198,12 @@ function LoadImg(value){
                         </legend>
                         <div class="edit">
                             <div class="write_wrap">
-                           		<input type="file" id="showDtInfo" name="showDtInfo"/>
+                           		<!-- <input type="file" id="showDtInfo" name="showDtInfo"/> -->
                             </div>
                         </div>
                     </fieldset>
                     <div class="submit_area">
-	            <input type="submit" value="작성" style="float:right;" onclick="showCheck();" width="70px" height="40px">
+	            <input type="submit" value="작성" style="float:right;" onclick="return showCheck()" width="70px" height="40px">
 	            </div>
 	            </div>
 	            </div>
@@ -214,28 +214,12 @@ function LoadImg(value){
         	</div>
     	</div>
           </div> 
-        </div>
-        </div>
-	</div>
+      </div>
 	
 	<!-- script -->
 	
 	<script>
 	$(document).ready(function() {
-	   /*  $("#btn").click(function(){
-	    	var  data = $("input[name=showDtInfo]")[0].files[0];
-	    	$.ajax({
-	    		url : '/adPostUpload.do',
-	    		enctype: 'multipart/form-data',
-	    		type:'POST',
-	    		processData:false,
-	    		contentType:false,
-	    		data:data,
-	    		success:function(result){
-	    			alert("업로드 성공!");
-	    		}
-	    	});
-	    }); */
 	    $("#placeSearch").click(function(){
 	    	location.href="/views/admin/placeInsert.jsp";
 	    });

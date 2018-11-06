@@ -1,28 +1,25 @@
-package kr.co.ticketsea.admin.show.model.controller;
+package kr.co.ticketsea.admin.reserve.controller;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kr.co.ticketsea.admin.show.model.service.MiniShowService;
-import kr.co.ticketsea.admin.show.model.vo.MiniPgData;
+import kr.co.ticketsea.reserve.model.service.ReserveService;
 
 /**
- * Servlet implementation class MiniShowListServlet
+ * Servlet implementation class AdOneReserveServlet
  */
-@WebServlet(name = "MiniShowList", urlPatterns = { "/miniShowList.do" })
-public class MiniShowListServlet extends HttpServlet {
+@WebServlet(name = "AdOneReserve", urlPatterns = { "/adOneReserve.do" })
+public class AdOneReserveServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MiniShowListServlet() {
+    public AdOneReserveServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,21 +28,11 @@ public class MiniShowListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int currentPage;
+		request.setCharacterEncoding("utf-8");
 		
-		if(request.getParameter("currentPage")==null) {
-			currentPage=1;
-		}else {
-			currentPage=Integer.parseInt(request.getParameter("currentPage"));
-		}
-		MiniPgData mpd=new MiniShowService().showWaitList(currentPage);
+		int reserveNo = Integer.parseInt(request.getParameter("rs_bk_no"));
 		
-		//결과값 view로 리턴
-		
-			RequestDispatcher view = request.getRequestDispatcher("/views/admin/ad_miniShowList.jsp");
-			request.setAttribute("miniPgData", mpd);
-			view.forward(request, response);
-		
+		new ReserveService().selectOneReserve(reserveNo);
 	}
 
 	/**
