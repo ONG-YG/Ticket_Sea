@@ -8,9 +8,15 @@
     <%
 	// Controller(Servlet)에서 보내준값 가져오기
 	PageData pd = (PageData)request.getAttribute("pageData");
-
-	ArrayList<Faq> list = pd.getList(); // 현재 페이지의 글 목록
-	String pageNavi = pd.getPageNavi(); // 현재 navi Bar
+    String keyword = (String)request.getAttribute("keyword");
+    
+	ArrayList<Faq> list = null; // 현재 페이지의 글 목록
+	String pageNavi = null; // 현재 navi Bar
+	
+	if(pd!=null){
+		 list = pd.getList(); // 현재 페이지의 글 목록
+		 pageNavi = pd.getPageNavi(); // 현재 navi Bar
+		}
 	
 %>
     
@@ -286,7 +292,7 @@
                     <h3>자주묻는 질문</h3>
                 </div>
                 
-                     
+                     <h2>'<%=keyword%>' 검색 결과 </h2>
             <table border=1px class="faqCategory">
                          <tr>
                            <td id = "faqConcert"><a href="#">공연</a></td>
@@ -304,7 +310,7 @@
                             <td id = "contentCategory" style="width: 15%">분류</td>
                             <td id = "contentQuestion"  style="width: 85%">질문</td>
                         </tr>
-                    
+                    <%if(pd!=null){ %>
                         <% for (Faq f : list) { %>
                     
                         <tr>
@@ -324,6 +330,10 @@
            <div style="width:800px; text-align:center;">
 		<label><%=pageNavi%></label>
 		</div>
+		<%}else{ %>
+                <h2>검색 결과가 없습니다.</h2>
+                <%} %>
+		
             <%
 		session = request.getSession(false);
 		Member m = (Member)session.getAttribute("member"); 

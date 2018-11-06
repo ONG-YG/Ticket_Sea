@@ -221,16 +221,14 @@
             float:right;
         }
    
-    
+ #header_inner{width:990px; margin: 0px auto;}
 </style>
 </head>
-<body>
+</head>
 <body>
 <div id="wrapper">
-    <div id="header">
-        <div id="h_inner">
-            <h1>TICKET SEA</h1>
-        </div>
+        <div id="header_inner">
+            <jsp:include page="/header.jsp"/>
     </div>
     
     
@@ -246,8 +244,8 @@
                 <li class="has_sub">
                     <span>소규모 공연</span>
                     <ul>
-                        <li><a href="board_prA.html"><strong>소규모 공연 목록</strong></a></li>
-                        <li><a href="board_prB.html"><strong>소규모 공연 홍보</strong></a></li>
+                        <li><a href="/promoList.do"><strong>소규모 공연 목록</strong></a></li>
+                        <li><a href=""><strong>소규모 공연 홍보</strong></a></li>
                     </ul>
                 </li>
             </ul>    
@@ -256,32 +254,31 @@
                     <h3>소규모 공연 홍보</h3>
                 </div>
                 
-                
-                     <table id="write-form" class="boxStyle">
+                <form action="/promoWrite.do" method="post" enctype="multipart/form-data" >
+                     <table id="write-form">
                     <tr>
-                        <td style="width : 70px; text-align : center;" >공연명</td>
-                        <td><input type="text" name="title" style="width: 300px;" /></td>
-                        
+                        <td style="width : 70px;" >공연명</td>
+                        <td><input type="text" name="title" id="title" style="width: 300px;" /></td>
                     </tr>
                     
                      <tr>
                         <td style="width : 70px; text-align : center;" >아티스트</td>
                         <td colspan="2" >
-                            <textarea name="content" rows="1" cols="50" style="width:300px;"></textarea>
+                            <textarea name="artist" id="artist" rows="1" cols="50" style="width:300px;"></textarea>
                         </td>
                     </tr>
                     
                     <tr>
                         <td style="width : 70px; text-align : center;" >공연장소</td>
                         <td colspan="2" >
-                            <textarea name="content" rows="1" cols="50" style="width:300px;"></textarea>
+                            <textarea name="location" id="location" rows="1" cols="50" style="width:300px;"></textarea>
                         </td>
                     </tr>
                     
                     <tr>
                         <td style="width : 40px; text-align : center;" >장르</td>
                         <td>
-                            <select>
+                            <select name="category" id="category">
                                 <option>연극</option>
                                 <option>음악</option>
                                 <option>뮤지컬</option>
@@ -292,17 +289,17 @@
                     <tr>
                         <td style="width : 70px; text-align : center;" >공연소개</td>
                         <td colspan="2" >
-                            <textarea name="content" rows="17" cols="50" style="width:600px;"></textarea>
+                            <textarea name="contents" id="contents" rows="17" cols="50" style="width:600px;"></textarea>
                         </td>
                     </tr>
                     
                     
-                    
-                    <tr>
-                        <td>사진첨부</td>
-                        <td><input type="file" name="attachFile" /></td>
-                    </tr>
-                    
+	                    <tr>
+	                        <td>사진첨부</td>
+	                        <td><input type="file" name="upFile" id="upFile"></td>
+	                    </tr>
+	         
+	               
                     <tr>
                         <td colspan="2">
                          <input type="submit" value="작성" style="float:right" width="70px" height="30">
@@ -311,6 +308,7 @@
                         
                        
                 </table>
+               </form>
             
             
                 

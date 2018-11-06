@@ -243,58 +243,25 @@
             text-align: center;
         }
     
-    #board{
-        border:1px solid #dedede;
-        width : 760px;
-        height : 500px;
+     #qna_header{
+    	width : 100%;
     }
     
-    #board_header{
-        border:1px solid #dedede;
-        width : 100%;
-        height : 15%;
+    #qna_header_a{
+    	width : 15%;
+    	text-align: center;
+    	background-color:lightskyblue;
+    	color:white;
     }
     
-    #board_header > #b_h_title{
-        border: 1px solid #dedede;
-        width : 100%;
-        height : 60%;
-        font-size: 25px;
-        float : left;
+    #qna_header_b{
+    	border : 1px solid black;
+    	width : 85%;
     }
     
-    #board_header > #b_h_writer{
-        border: 1px solid #dedede;
-        width : 40%;
-        height : 40%;
-        font-size: 15px;
-        float:left;
-    }
-    
-    #board_header > #b_h_blank{
-        border : 1px solid #dedede;
-        width : 30%;
-        height : 40%;
-        font-size: 15px;
-        float:left;
-    }
-    
-    #board_header > #b_h_date{
-        border : 1px solid #dedede;
-        width : 20%;
-        height : 40%;
-        font-size: 15px;
-        text-align: center;
-        float:left;
-    }
-    
-    #board_header > #b_h_hit{
-        border : 1px solid #dedede;
-        width : 10%;
-        height : 40%;
-        font-size: 15px;
-        text-align: center;
-        float:left;
+    #qna_contents{
+   		width : 100%;
+   		padding : 10px 10px 10px;
     }
     
     #header_inner{width:990px; margin: 0px auto;}
@@ -331,45 +298,59 @@
                     <h3>질문 게시판</h3>
                 </div>
                 
-                <div id ="board">
-                    <div id="board_header">
-                        <div id="b_h_title" name="title"> <%= qna.getBoardQ_title()  %></div>
-                         <div id="b_h_writer" name="writer"><%= qna.getBoardQ_writer() %></div>
-                        <div id="b_h_blank""></div>
-                        <div id="b_h_date" name="date"> <%= qna.getBoardQ_date() %></div>
-                        <div id="b_h_hit" name="hit"> <%= qna.getBoardQ_hit() %></div>
-                    </div>
-                    
-                    <div id="b_h_contents" style="margin:15px;" name="contents">
-                        <%= qna.getBoardQ_contents() %>
-                    </div>
-                </div>
+                 <table id = "qna_header">
+                	<tr>
+                	<td id = "qna_header_a">제목</td>
+                	<td id = "qna_header_b"><%= qna.getBoardQ_title()%></td>
+                	</tr>
+                	
+                	<tr>
+                	<td id = "qna_header_a">작성자</td>
+                	<td id = "qna_header_b"><%= qna.getBoardQ_writer() %></td>
+                	</tr>
+                	
+                	<tr>
+                	<td id = "qna_header_a">작성일</td>
+                	<td id = "qna_header_b"><%= qna.getBoardQ_date() %></td>
+                	</tr>
+                	
+                	<tr>
+                	<td id = "qna_header_a">조회수</td>
+                	<td id = "qna_header_b"><%= qna.getBoardQ_hit() %></td>
+                	</tr>
+                	
+                	<tr>
+                </table>
+                
+                <span id = "qna_contents">
+                		<%= qna.getBoardQ_contents() %>
+        		</span>
                 
                 <br>
                 
-                <%
+                 <%
 					session = request.getSession(false);
 					Member m = (Member)session.getAttribute("member"); 
-					String writer = qna.getBoardQ_writer();
 				%>
                 
                 <%
-					if(m!=null && m.getMemberId().equals(writer)){
+					if(m!=null && m.getMemberId().equals("admin")){
 				%>
                 <br>
                 <button id="btn1" onclick="modifyActive();" style="width: 70px; height: 30px; float:right;">수정</button> 
-				<button id="btn2" onclick="delQna();" style="width: 70px; height: 30px; float:right;">삭제</button> 
+				<button id="btn2" onclick="delFaq();" style="width: 70px; height: 30px; float:right;">삭제</button> 
                 <%} %>
+                
+                
                 <script>
                 function delQna(){
-                	location.href="/qnaDelete.do?boardQ_no=<%=qna.getBoardQ_no()%>";
+            		location.href="/qnaDelete.do?boardQ_no=<%=qna.getBoardQ_no()%>";
             	}
+                </script>
                 
             </div>
         </div>
     </div>
-    
-    <a href="#" id="back_to_top">Top</a>
     
     <a href="#" id="back_to_top">Top</a>
     
