@@ -1,25 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-    <%@ page import = "kr.co.ticketsea.faq.model.vo.*" %>
+    <%@ page import = "kr.co.ticketsea.promo.model.vo.*" %>
     <%@ page import = "java.util.*" %>
     <%@ page import = "kr.co.ticketsea.member.model.vo.*" %>
+    
     
     <%
 	// Controller(Servlet)에서 보내준값 가져오기
 	PageData pd = (PageData)request.getAttribute("pageData");
-
-	ArrayList<Faq> list = pd.getList(); // 현재 페이지의 글 목록
-	String pageNavi = pd.getPageNavi(); // 현재 navi Bar
+    String keyword = (String)request.getAttribute("keyword");
+    
+	ArrayList<Promo> list = null; // 현재 페이지의 글 목록
+	String pageNavi = null; // 현재 navi Bar
+	
+	if(pd!=null){
+		 list = pd.getList(); // 현재 페이지의 글 목록
+		 pageNavi = pd.getPageNavi(); // 현재 navi Bar
+		}
 	
 %>
     
-    
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta charset="UTF-8">
-<title>FAQ 리스트</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>소규모 공연 목록</title>
 <script
   src="https://code.jquery.com/jquery-3.3.1.js"
   integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
@@ -27,7 +33,6 @@
 </script>
 <style>
     /* 전체 사이즈 조정 */
-    
     ul, li, a{list-style: none; margin: 0px; padding: 0px; text-decoration: none; color: black;}
     
     div{box-sizing: border-box;}
@@ -38,7 +43,7 @@
     
     /* 990px 고정 사이즈 */
     #h_inner{width: 990px; height: 100%; margin: 0px auto;}
-    #c_inner{width: 990px; height: 1300px; margin: 0px auto; padding: 70px 0 250px 0px;}
+    #c_inner{width: 990px; height: 1800px; margin: 0px auto; padding: 70px 0 250px 0px;}
     #f_inner{width: 990px; margin: 0px auto;}
 
     /* top 버튼 */
@@ -97,7 +102,7 @@
         background: white;
     }
     #right_view{
-        width: 822px;
+        width: 990px;
         float: left;
         border: 1px solid #dedede;
         height: 100%;
@@ -224,131 +229,111 @@
     letter-spacing: -1px;
     }
     
-   
-    
-    .pullMethod {
-            background:#fbfbfb;
-            text-align:left;
-            padding:25px 30px;
-            line-height:1.6;
+    .boxStyle {
+            position: relative;
+            width: 780px;
+            margin: 0 auto 12px;
+            padding: 5px 15px;
+            border: 0px solid #c7c7c7;
+            border-radius: 5px;
+            background-color: #fff;
+            box-shadow: 1px 2px 6px 0px rgba(0, 0, 0, 0.1); 
+            float:right;
         }
-    
-    .faqCategory{
-            border:1px solid #dedede;
-            border-right:0;
-            font-size:13px;
-            margin:10px auto 12px;
-            line-height:45px;
-            width:730px;
-            text-align: center;
+   
+    #prContest{
+            width:100%;
+            height:95%;
+            float : left;
+        }    
+        
+        #prContest>#prContestDiv1{
+            width : 25%;
+            height : 29%;
+            float : left;
+            padding :5px 10px 15px;
+            
         }
         
-        .faqContent{
-            border:1px solid #dedede;
-            border-right:0;
-            font-size:13px;
-            margin:10px auto 12px;
-            line-height:45px;
-            width:730px;
-            text-align: center;
+        #prContest>#prContestDiv2{
+       	border : 1px solid black;
+       	width : 100%;
+       	float:left;
+       }
+        
+        #prContestDiv1>#prContestPic{
+            width : 100%;
+            height : 90%;
+            float : left;
         }
+        #prContestDiv1>#prContestTitle{
+        	width : 100%;
+        	height : 10%;
+        	float: left;
+        	text-align: center;
+        }
+        
+        
     #header_inner{width:990px; margin: 0px auto;}
 </style>
 </head>
+</head>
 <body>
-
 <div id="wrapper">
         <div id="header_inner">
             <jsp:include page="/header.jsp"/>
     </div>
     
-    
     <div id="container">
         <div id="c_inner">
             <div id="c_inner_top">
                 <div class="title1">
-                    <h2>고객센터</h2>
+                    <h2>소규모 공연</h2>
                 </div>
                 <div class="title2"></div>
             </div>
-            <ul id="left_menu">
-                <li class="has_sub">
-                    <span>고객센터</span>
-                    <ul>
-                        <li><a href="/noticeList.do"><strong>공지사항</strong></a></li>
-                        <li><a href="/faqList.do"><strong>자주묻는 질문</strong></a></li>
-                        <li><a href="/qnaList.do"><strong>질문게시판</strong></a></li>
-                    </ul>
-                </li>
-            </ul>    
-            <div id="right_view">
-                <div class="r_line">
-                    <h3>자주묻는 질문</h3>
-                </div>
-                
-                     
-            <table border=1px class="faqCategory">
-                         <tr>
-                           <td id = "faqConcert"><a href="#">공연</a></td>
-                           <td id = "faqBook"><a href="#">예매 </a></td> 
-                           <td id = "faqPayment"><a href="#">결제</a></td>
-                           <td id = "faqID"><a href="#">회원</a></td>
-                           <td id=" faqEtc"><a href="#">기타</a></td>
-                         </tr>
-                    </table>
-                    
-                    <br>
-                    
-                    <table border 1px class="faqContent">
-                        <tr style="background-color: lightskyblue; color:white">
-                            <td id = "contentCategory" style="width: 15%">분류</td>
-                            <td id = "contentQuestion"  style="width: 85%">질문</td>
-                        </tr>
-                    
-                        <% for (Faq f : list) { %>
-                    
-                        <tr>
-                            <td><%= f.getBoardF_category() %></td>
-                            <td><a href="/faq.do?boardF_no=<%=f.getBoardF_no()%>"><%=f.getBoardF_title()%></a></td>
-                        </tr>
-                        
-                        <% } %> 
-                        
-                       
-                        
-             
-            </table>    
             
-                
-                
-           <div style="width:800px; text-align:center;">
-		<label><%=pageNavi%></label>
-		</div>
-            <%
+            <div id="container">
+            
+        <div id = "right_view">
+        <div id="prContest">
+        <%if(pd != null) { %>
+        <h1>'<%=keyword%>' 검색 결과 </h1>
+        <% for (Promo p : list) { %>
+            <div id = "prContestDiv1" ">
+	            <div id="prContestPic"><a href="/promo.do?boardP_no=<%=p.getBoardP_no()%>"><img src="../../img/poster_ex.jpg" style="width:205px; height:330px; align-content: center;"></a></div> <br>
+	        	<div id="prContestTitle" style="font-size: 10px"><a href="/promo.do?boardP_no=<%=p.getBoardP_no()%>"><%=p.getBoardP_title()%></a></div>
+        	</div>
+         <% } %> 
+         <%} else { %>
+         <h3>검색 결과가 없습니다.</h3>
+         <% } %>
+        
+    </div>
+            <div id="prContestDiv2">
+            	 <div style="width:100%; text-align:center;">
+				<label><%=pageNavi%></label>
+		
+		
+		   <%
 		session = request.getSession(false);
 		Member m = (Member)session.getAttribute("member"); 
-	%>       
-            
-           <%
-		if(m!=null && m.getMemberId().equals("admin")){
-		%>         
-     	<form style="display:inline;" action="/views/faq/faqWrite.jsp">
-		<input type="submit" value="글쓰기" style="width: 70px; height: 30px; float:right;"/> <br>
-	</form>
-	<%} %>
-            <br>
-            <div class="searchArea"> 
-            <form style="display:inline;" action="/faqSearch.do" method="get">
-                    <a href="#"><input type="submit" style="display: none"><img src="../../img/btn_search4.png" alt="검색" style="float: right"></a>
-                
-					<input type="text" class="textInp" name="search" id="search" style="float: right">
-					<a href="javascript:search();"></a>
-					</form>
-				</div>
-            
-                
+			%>
+			
+           <%if(m!=null) {%>
+            <form style="display:inline;" action="/views/promo/promoWrite.jsp">
+				<input type="submit" value="글쓰기" style="width: 70px; height: 30px; float:right;"/> <br>				
+			</form>
+			<%} %>
+   
+         </div>
+         
             </div>
+            
+            
+          </div>  
         </div>
+       </div>
     </div>
     
     <a href="#" id="back_to_top">Top</a>
@@ -358,6 +343,5 @@
     </div>
     
 </div>
-
 </body>
 </html>

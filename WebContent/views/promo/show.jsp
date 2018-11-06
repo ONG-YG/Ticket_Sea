@@ -1,17 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<%@ 
-    page import="kr.co.ticketsea.promo.model.vo.*" 
-	import ="kr.co.ticketsea.member.model.vo.*"
-	import = "java.util.ArrayList"
-%>
+    <%@ page import = "kr.co.ticketsea.promo.model.vo.*" 
+    import = "java.util.ArrayList"
+    %>
     
-<%
-	PromoData pd = (PromoData)request.getAttribute("promoData");
-	Promo promo = pd.getPromo(); 
-	ArrayList<Comment> list = pd.getList();
-%>
+    <% Show show = (Show)request.getAttribute("show"); %>
+    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -78,6 +73,7 @@
         float: left;
         height: 100px;
     }
+    
     #left_menu{
         width: 166px;
         float: left;
@@ -124,13 +120,6 @@
         font-size : 30px;
     }
     
-    .write_review{
-                    clear:both;
-                    width:990px;
-                    height:100px;
-                    overflow:hidden;
-                }
-    
     #infoHeader > #i_H_pic{
         border : 1px solid #dedede;
         width : 50%;
@@ -153,7 +142,6 @@
         width : 100%;
         height : 75%;
         padding : 30px;
-        margin : 10px 10px 10px;
     }
     
     #infoContent > #i_C_category{
@@ -199,7 +187,6 @@
     
     
     
-    
     .detail_info_tbl{
         border:1px solid #dedede; 
         width:100%;
@@ -209,7 +196,6 @@
         letter-spacing:-1px;
         color:#767676;
     }
-    #header_inner{width:990px; margin: 0px auto;}
     
     .review_list{border-width:2px 0 1px;border-style:solid;border-color:#999}
     
@@ -247,32 +233,32 @@
 .review_list li div.reply li .review_info{background:url(../img/sp_theater.png) no-repeat -472px -110px;padding-left:20px;margin-bottom:11px}
 .review_list li div.reply li .star_average{float:none}
 .review_list li div.reply li p{padding-left:20px}
-
+<<<<<<< HEAD:WebContent/views/promo/promo.jsp
 =======
     
     
     
- 
-
+    
+    
+    
+>>>>>>> e7df2293a6343e300548246144f599d1fc495dba:WebContent/views/board/board_concertInfo.html
+    
 </style>
 </head>
 
 <body>
 <script>
-	
     function reserve(){
         //alert("예매시작");
-        var showNo = 20000; //////////////////////////////////////////////////// showNo 받아오는 코드 추가할 것
-        //location.href="/dateCntSelect.do?showNo="+showNo;  /////////////////// showNo 받아오는 코드 추가할 것
-        window.open("/dateCntSelect.do?showNo="+showNo, "reservePopUp", "width=1010, height=625");
-        
-        return false;
+        location.href="../reserve/TicketSea_reserv_step_1_date_time.html";
     }
 </script>
 
 <div id="wrapper">
-    <div id="header_inner">
-            <jsp:include page="/header.jsp"/>
+    <div id="header">
+        <div id="h_inner">
+            <h1>TICKET SEA</h1>
+        </div>
     </div>
     
     
@@ -284,31 +270,6 @@
                 </div>
                 <div class="title2"></div>
             </div>
-            
-            
-	<%
-	Member m = ((Member)request.getSession(false).getAttribute("member"));
-	// 로그인한 사용자는 Member 객체가 리턴 되고
-	// 비로그인 사용자는 null이 리턴 됨
-
-	
-	if(m!=null){ //m!=null 의 의미는 비로그인 사용자가 아니라면
-	String user1 =  m.getMemberId(); //로그인 사용자
-	String user2 =  promo.getBoardP_writer(); // 작성자
-%>
-
-<%
-	if(user1.equals(user2) || user1.equals("admin")){ // 로그인한 사용자와 작성자가 같다면
-%>
-		<button id="btn1" onclick="modifyActive();">수정</button> 
-		<button id="btn2" onclick="delPromo();">삭제</button> 
-<%}}%>
-
-<script>
-function delPromo(){
-	location.href="/promoDelete.do?boardP_no=<%=promo.getBoardP_no()%>&writer=<%=promo.getBoardP_writer()%>";
-}
-</script>
            
             <div id="right_view">
                 
@@ -316,29 +277,49 @@ function delPromo(){
                 
                 <div id="infoHeader">
                     <div id="i_H_title">
-                        <%= promo.getBoardP_title() %>
+                        <%= show.getShow_title() %>
                     </div>
                     
                     <div id="i_H_pic">
-                       		<img src="../../uploadFile/mslove/<%= promo.getBoardP_fileName() %>" style="width:360px; height:465px;">
+                        <img src="../../img/poster_ex.jpg" style="width:350px; height:450px; ">
                     </div>
                     
                     <div id="i_H_info">
                         <div>
-                        <strong><div id = "info_tit">아티스트</div></strong>  <%=promo.getBoardP_artist() %>
+                        <strong><div id = "info_tit">부제</div></strong> 
+              				<%= show.getShow_subTitle() %>
                         </div>
                         <br>
                         <div>
-                        <strong><div id = "info_tit">장르</div></strong> <%=promo.getBoardP_category() %>
+                        <strong><div id = "info_tit">장소</div></strong>
+                        	<%=show.getShow_location() %>
                         </div>
                         <br>
                         <div>
-                        <strong><div id = "info_tit">공연장소</div></strong> <%=promo.getBoardP_location()%>
+                        <strong><div id = "info_tit">날짜</div></strong>
+                        	<%=show.getShow_date() %>
                         </div>
                         <br>
+                        <div>
+                        <strong><div id = "info_tit">관람시간</div></strong>
+                        	<%=show.getShow_time() +" 분" %>
+                        </div>
                         <br>
+                        <div>
+                        <strong><div id = "info_tit">관람등급</div></strong>
+                        	<%="만" + show.getShow_grade() +"세 이상" %>
+                        </div>
+                        <br>
+                        <div>
+                        <strong><div id = "info_tit">가격</div></strong>
+                        	<%=show.getShow_price() + " 원" %>
+                        </div>
+                        <br><br><br>
+                        <input type="button" value="예매하기" style="width:250px; height:80px; background-color:skyblue; color:white; float:right;" onclick="return reserve()">
+                        
                     </div>
                 </div>
+                
         <div id="infoContent">
                     <div id="i_C_category">
                         
@@ -355,16 +336,17 @@ function delPromo(){
                         </div>
                     </div>
                     
+            <style>
+            
+                
+            </style>
                     
                     <div id="i_C_content_a">
-                        <br><br>
                         
-                        <div style="width : 500px; height: 300px; " >
-                        <%= promo.getBoardP_contents() %>
-                        </div>
+                          <img src="../../img/poster_ex.jpg" style="width:700px; height:850px; padding : 50px;">
                         
-                         <img src="../../uploadFile/mslove/<%= promo.getBoardP_fileName() %>" style="width:700px; height:850px; padding : 50px;">
-                         <%=promo.getBoardP_filePath() %>
+                        
+                        
                         <table class="detail_info_tbl">
                             
                             <colgroup>
@@ -388,9 +370,9 @@ function delPromo(){
                             </tr>
                             <tr>
                                 <th scope="row">작가/출연자</th>
-                                <td> <%= promo.getBoardP_artist() %></td>
+                                <td></td>
                                 <th scope="row">공연장소</th>
-                                <td><%= promo.getBoardP_location() %></td>
+                                <td>Pulp Seoul</td>
                             </tr>
                             <tr>
                                 <th scope="row">예매수수료</th>
@@ -476,7 +458,12 @@ function delPromo(){
                     background-color: #d5d5d5;
                 }
                 
-                
+                .write_review{
+                    clear:both;
+                    height:100px;
+                    overflow:hidden;
+                    padding-top:9px
+                }
                 
                 .write_review textarea{
                     border:px solid #d4d4d4;
@@ -510,53 +497,104 @@ function delPromo(){
                     티켓 양도 및 매매의 경우 전화번호, 이메일 등의 개인정보가 악용될 소지가 있으므로 게재를 삼가 주시기 바랍니다. <br>
                     운영 규정을 지속적으로 어기는 게시글을 게재할 경우 티켓링크 게시판 이용이 제한될 수 있습니다.
                     </div>
-                    <form action="/promoInsertComment.do" method="post">
-                    <%if(session.getAttribute("member")!=null){ %>
+                    
                             <div class="write_review">
-                            
                                 <textarea title="후기 작성하기" id="reviewContent" name="reviewContent"
                                           style="width:700px; height: 25px; resize:none; margin:0px; 0px; 0px;" maxlength="3000"
                                           placeholder="주민번호, 전화번호, 이메일 등 개인정보를 남기면 타인에 의해 악용될 소지가 있습니다."></textarea>
-                                 <input type="hidden" name="promoNo" value="<%=promo.getBoardP_no()%>"/>       
-                                <input type="submit" class="write_review_button"  value="후기작성">
-                                
+<<<<<<< HEAD:WebContent/views/promo/promo.jsp
+                                <input type="button" style="width:70px; height:50px; resize:none;" value="후기작성">
+=======
+                                <input type="button" class="write_review_button"  value="후기작성">
+>>>>>>> e7df2293a6343e300548246144f599d1fc495dba:WebContent/views/board/board_concertInfo.html
                             </div>
-                            <% }else{ %>
-                            <div class="write_review">
-                                <span><h3>댓글을 작성하려면 로그인 해주세요.</h3></span>
-                                <%} %>
-                                </div>
-					</form>
+
             
         <div class="review_list">
                     
                     
         <ul id="reviewUl" style="word-break: break-all;">
             
-            <%
-				if(list.isEmpty()){ //댓글이 비어 있다면 (없다면!)
-			%>
-				<h3>댓글이 없습니다.</h3>
-			<%	
-				}else{%>
             <li>
-             <% for(Comment co : list) { %>
                 <div class="review_info">
-                        <dt></dt>
+                    <dl class="star_average">
+                        <dt>별점</dt>
                         <dd class="grade_star">
                             <span class="star_gauge" style="width: 100%"></span>
                         </dd>
-                        <dt><%=co.getUserId()%></dt>
-                        <dd class="review_user"></dd>
-                        <dt><%=co.getRegDate()%></dt><dd class="review_date"></dd>
-                    
-                </div><br>
-                <div style = "border-bottom : 1px solid #dedede;">
-               	<%=co.getContents()%>
-               	</div>
-                <%}%>
-               <%}%>
+                        <dt>아이디</dt>
+                        <dd class="review_user">jm***@ha</dd>
+                        <dt>날짜</dt><dd class="review_date">2018.10.05 16:27</dd>
+                    </dl>
+                </div>
+                재미있어요
             </li>
+            
+            <li>
+                <div class="review_info">
+                    <dl class="star_average">
+                        <dt>별점</dt>
+                        <dd class="grade_star">
+                            <span class="star_gauge" style="width: 100%"></span>
+                        </dd>
+                        <dt>아이디</dt>
+                        <dd class="review_user">jm***@ha</dd>
+                        <dt>날짜</dt><dd class="review_date">2018.10.05 16:27</dd>
+                    </dl>
+                </div>
+<<<<<<< HEAD:WebContent/views/promo/promo.jsp
+                너무 재밌어
+=======
+                뮤지컬 삼총사를 재밌게 봐서 아이언 마스크도 관람했어요! 배우분들도 다 훌륭했지만 그 중 가장 좋았던 것은 검술 액션이였어요. 정말 긴장감있게 액션 연기를 잘하시더라구요ㅠㅠ 재관람하고 싶은 작품이에요!!
+            </li>
+            
+            <li>
+                <div class="review_info">
+                    <dl class="star_average">
+                        <dt>별점</dt>
+                        <dd class="grade_star">
+                            <span class="star_gauge" style="width: 100%"></span>
+                        </dd>
+                        <dt>아이디</dt>
+                        <dd class="review_user">jm***@ha</dd>
+                        <dt>날짜</dt><dd class="review_date">2018.10.05 16:27</dd>
+                    </dl>
+                </div>
+                뮤지컬 삼총사를 재밌게 봐서 아이언 마스크도 관람했어요! 배우분들도 다 훌륭했지만 그 중 가장 좋았던 것은 검술 액션이였어요. 정말 긴장감있게 액션 연기를 잘하시더라구요ㅠㅠ 재관람하고 싶은 작품이에요!!
+            </li>
+            
+            <li>
+                <div class="review_info">
+                    <dl class="star_average">
+                        <dt>별점</dt>
+                        <dd class="grade_star">
+                            <span class="star_gauge" style="width: 100%"></span>
+                        </dd>
+                        <dt>아이디</dt>
+                        <dd class="review_user">jm***@ha</dd>
+                        <dt>날짜</dt><dd class="review_date">2018.10.05 16:27</dd>
+                    </dl>
+                </div>
+                뮤지컬 삼총사를 재밌게 봐서 아이언 마스크도 관람했어요! 배우분들도 다 훌륭했지만 그 중 가장 좋았던 것은 검술 액션이였어요. 정말 긴장감있게 액션 연기를 잘하시더라구요ㅠㅠ 재관람하고 싶은 작품이에요!!
+            </li>
+            
+            <li>
+                <div class="review_info">
+                    <dl class="star_average">
+                        <dt>별점</dt>
+                        <dd class="grade_star">
+                            <span class="star_gauge" style="width: 100%"></span>
+                        </dd>
+                        <dt>아이디</dt>
+                        <dd class="review_user">jm***@ha</dd>
+                        <dt>날짜</dt><dd class="review_date">2018.10.05 16:27</dd>
+                    </dl>
+                </div>
+                뮤지컬 삼총사를 재밌게 봐서 아이언 마스크도 관람했어요! 배우분들도 다 훌륭했지만 그 중 가장 좋았던 것은 검술 액션이였어요. 정말 긴장감있게 액션 연기를 잘하시더라구요ㅠㅠ 재관람하고 싶은 작품이에요!!
+>>>>>>> e7df2293a6343e300548246144f599d1fc495dba:WebContent/views/board/board_concertInfo.html
+            </li>
+            
+  
             
             </ul>
     </div>

@@ -1,5 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    <%@ page import = "kr.co.ticketsea.promo.model.vo.*" %>
+    <%@ page import = "java.util.*" %>
+    <%@ page import = "kr.co.ticketsea.member.model.vo.*" %>
+    
+    
+    <%
+	// Controller(Servlet)에서 보내준값 가져오기
+	PageData pd = (PageData)request.getAttribute("pageData");
+
+	ArrayList<Promo> list = pd.getList(); // 현재 페이지의 글 목록
+	String pageNavi = pd.getPageNavi(); // 현재 navi Bar
+	
+%>
+    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -221,58 +236,46 @@
         }
    
     #prContest{
-            border: 1px solid black;
             width:100%;
-            height:100%;
+            height:95%;
+            float : left;
         }    
         
         #prContest>#prContestDiv1{
-            border : 1px solid black;
-            width : 100%;
-            height : 28%;
-        }
-        
-        #prContestDiv1>#prContestPic{
-            border : 1px solid black;
-            width : 24%;
-            height : 100%;
+            width : 25%;
+            height : 29%;
             float : left;
-        }
-        
-        #prContestDiv1>#prContestBlank{
-            border : 1px solid black;
-            width : 1.3%;
-            height : 100%;
-            float : left;
-        }
-        
-        #prContestDiv1>#prContestBlank2{
-            border : 1px solid black;
-            width : 5%;
-            height : 100%;
-            float : left;
+            padding :5px 10px 15px;
+            
         }
         
         #prContest>#prContestDiv2{
-            border : 1px solid black;
+       	border : 1px solid black;
+       	width : 100%;
+       	float:left;
+       }
+        
+        #prContestDiv1>#prContestPic{
             width : 100%;
-            height : 3%;
+            height : 90%;
+            float : left;
         }
-        #prContest>#prContestDiv3{
-            border: 1px solid black;
-            width : 100%;
-            height : 7%;
+        #prContestDiv1>#prContestTitle{
+        	width : 100%;
+        	height : 10%;
+        	float: left;
+        	text-align: center;
         }
-    
+        
+        
+    #header_inner{width:990px; margin: 0px auto;}
 </style>
 </head>
 </head>
 <body>
 <div id="wrapper">
-    <div id="header">
-        <div id="h_inner">
-            <h1>TICKET SEA</h1>
-        </div>
+        <div id="header_inner">
+            <jsp:include page="/header.jsp"/>
     </div>
     
     <div id="container">
@@ -286,56 +289,35 @@
             
             <div id="container">
         <div id = "right_view">
-       <div id = "prContest">
-        <div id = "prContestDiv1">
-            <div id = "prContestPic"></div>   
-            <div id = "prContestBlank"></div>
-            <div id = "prContestPic"></div>   
-            <div id = "prContestBlank"></div>
-            <div id = "prContestPic"></div>  
-            <div id = "prContestBlank"></div>
-            <div id = "prContestPic"></div>  
-        </div>
-        <div id = "prContestDiv2"></div>
-           
-        <div id = "prContestDiv1">
-            <div id = "prContestPic"></div>   
-            <div id = "prContestBlank"></div>
-            <div id = "prContestPic"></div>   
-            <div id = "prContestBlank"></div>
-            <div id = "prContestPic"></div>  
-            <div id = "prContestBlank"></div>
-            <div id = "prContestPic"></div>      
-        </div>
-        <div id = "prContestDiv2"></div>
-           
-        <div id = "prContestDiv1">
-            <div id = "prContestPic"></div>   
-            <div id = "prContestBlank"></div>
-            <div id = "prContestPic"></div>   
-            <div id = "prContestBlank"></div>
-            <div id = "prContestPic"></div>  
-            <div id = "prContestBlank"></div>
-            <div id = "prContestPic"></div>  
-        </div>
-           
+        <div id="prContest">
+        <% for (Promo p : list) { %>
+            <div id = "prContestDiv1" ">
+	            <div id="prContestPic"><a href="/promo.do?boardP_no=<%=p.getBoardP_no()%>"><img src="../../uploadFile/mslove/<%= p.getBoardP_fileName() %>" style="width:205px; height:330px; align-content: center;"></a></div> <br>
+	        	<div id="prContestTitle" style="font-size: 10px"><a href="/promo.do?boardP_no=<%=p.getBoardP_no()%>"><%=p.getBoardP_title()%></a></div>
+        	</div>
+         <% } %> 
          
-           
-           
-           
-        <div id = "prContestDiv3">
-            <div class="paginate" style="text-align: center">
-                <a href="#" class="prev_end"><span class="blind">맨처음</span></a>
-                <a class="prev"><span class="blind">이전</span></a>
-                <strong>1</strong>
-                <a href="#" class="">2</a>
-                <a href="#">다음</span></a>
-                <a href="#" class="next_end"><span class="blind">맨뒤</span></a>
-            </div>    
-            <a href = "board_prB.html"><input type="button" value="홍보글 작성" style="margin : 15px; 5px; float:right;"></a>   
-        </div>
-      </div>
+        
     </div>
+            <div id="prContestDiv2">
+            	 <div style="width:100%; text-align:center;">
+				<label><%=pageNavi%></label>
+		
+		
+		   <%
+		session = request.getSession(false);
+		Member m = (Member)session.getAttribute("member"); 
+			%>
+			
+           <%if(m!=null) {%>
+            <form style="display:inline;" action="/views/promo/promoWrite.jsp">
+				<input type="submit" value="글쓰기" style="width: 70px; height: 30px; float:right;"/> <br>				
+			</form>
+			<%} %>
+   
+         </div>
+         
+            </div>
             
             
           </div>  
@@ -346,20 +328,7 @@
     <a href="#" id="back_to_top">Top</a>
     
     <div id="footer">
-        <div id="f_inner">
-            <strong class="footer_logo">TICKET SEA</strong>
-        
-            <div class="f_menu">
-                <a href="#">사이트 소개</a><span>|</span>
-                <a href="#">개인정보 처리방침</a><span>|</span>
-                <a href="#">이용약관</a><span>|</span>
-                <a href="#">고객센터</a><span>|</span>
-                <a href="#">티켓판매안내</a><span>|</span>
-                <a href="#">광고안내</a>
-            </div>
-        
-            <p class="copy">Copyright © 옹가네 Corporation. All rights reserved.</p>
-        </div>    
+        <jsp:include page="/footer.jsp"/>
     </div>
     
 </div>

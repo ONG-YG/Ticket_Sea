@@ -1,4 +1,4 @@
-package kr.co.ticketsea.notice.controller;
+package kr.co.ticketsea.qna.controller;
 
 import java.io.IOException;
 
@@ -9,21 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kr.co.ticketsea.notice.model.service.NoticeService;
-import kr.co.ticketsea.notice.model.vo.PageData;
-
+import kr.co.ticketsea.qna.model.service.QnaService;
+import kr.co.ticketsea.qna.model.vo.*;
 
 /**
- * Servlet implementation class NoticeSearchServlet
+ * Servlet implementation class QnaSearchServlet
  */
-@WebServlet(name = "NoticeSearch", urlPatterns = { "/noticeSearch.do" })
-public class NoticeSearchServlet extends HttpServlet {
+@WebServlet(name = "QnaSearch", urlPatterns = { "/qnaSearch.do" })
+public class QnaSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeSearchServlet() {
+    public QnaSearchServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -46,13 +45,13 @@ public class NoticeSearchServlet extends HttpServlet {
 		else {currentPage = Integer.parseInt(request.getParameter("currentPage"));}
 		
 		//4. 비즈니스 로직 처리
-		PageData pd = new NoticeService().searchList(keyword,currentPage);
+		PageData pd = new QnaService().searchList(keyword,currentPage);
 		
 		
 		//5. 결과 리턴
 		
 		
-			RequestDispatcher view = request.getRequestDispatcher("views/notice/noticeSearch.jsp");
+			RequestDispatcher view = request.getRequestDispatcher("views/qna/qnaSearch.jsp");
 			request.setAttribute("pageData", pd);
 			request.setAttribute("keyword",keyword);
 			
@@ -60,6 +59,7 @@ public class NoticeSearchServlet extends HttpServlet {
 		
 	
 	}
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

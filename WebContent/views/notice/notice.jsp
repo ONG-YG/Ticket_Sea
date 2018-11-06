@@ -5,14 +5,9 @@
 	import ="kr.co.ticketsea.member.model.vo.*"
 	import = "java.util.ArrayList"
 %>
-    
-    
-    <%
+ <%
 	Notice notice = (Notice)request.getAttribute("notice"); //공지사항 내용
-%>
-    
-    
-    
+%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -243,59 +238,28 @@
             text-align: center;
         }
     
-    #board{
-        border:1px solid #dedede;
-        width : 760px;
-        height : 500px;
+    #notice_header{
+    	width : 100%;
     }
     
-    #board_header{
-        border:1px solid #dedede;
-        width : 100%;
-        height : 15%;
+    #notice_header_a{
+    	width : 15%;
+    	text-align: center;
+    	background-color:lightskyblue;
+    	color:white;
     }
     
-    #board_header > #b_h_title{
-        border: 1px solid #dedede;
-        width : 100%;
-        height : 60%;
-        font-size: 25px;
-        float : left;
+    #notice_header_b{
+    	border : 1px solid black;
+    	width : 85%;
     }
     
-    #board_header > #b_h_writer{
-        border: 1px solid #dedede;
-        width : 40%;
-        height : 40%;
-        font-size: 15px;
-        float:left;
+    #notice_contents{
+   		width : 100%;
+   		padding : 10px 10px 10px;
     }
     
-    #board_header > #b_h_blank{
-        border : 1px solid #dedede;
-        width : 30%;
-        height : 40%;
-        font-size: 15px;
-        float:left;
-    }
     
-    #board_header > #b_h_date{
-        border : 1px solid #dedede;
-        width : 20%;
-        height : 40%;
-        font-size: 15px;
-        text-align: center;
-        float:left;
-    }
-    
-    #board_header > #b_h_hit{
-        border : 1px solid #dedede;
-        width : 10%;
-        height : 40%;
-        font-size: 15px;
-        text-align: center;
-        float:left;
-    }
     
     #header_inner{width:990px; margin: 0px auto;}
 </style>
@@ -326,45 +290,120 @@
                     </ul>
                 </li>
             </ul>    
+            
             <div id="right_view">
                 <div class="r_line">
                     <h3>공지사항</h3>
                 </div>
                 
                 
-                <div id ="board">
-                    <div id="board_header">
-                        <div id="b_h_title" name="boardN_title"> <%= notice.getBoardN_title()  %></div>
-                         <div id="b_h_writer"><%= notice.getBoardN_category() %></div>
-                        <div id="b_h_blank""></div>
-                        <div id="b_h_date" name="boardN_date"> <%= notice.getBoardN_date() %></div>
-                        <div id="b_h_hit" name="boardN_hit"> <%= notice.getBoardN_hit() %></div>
-                    </div>
-                    
-                    <div id="b_h_contents" style="margin:15px;" name="boardN_contents">
-                        <%= notice.getBoardN_contents() %>
-                    </div>
-                </div>
                 
-                <%
-					session = request.getSession(false);
-					Member m = (Member)session.getAttribute("member"); 
-				%>
+                <table id = "notice_header">
+                	<tr>
+                	<td id = "notice_header_a">제목</td>
+                	<td id = "notice_header_b"><span name="boardN_title" id="boardN_title"><%= notice.getBoardN_title()%></span>
+                	<input type="hidden" name="boardN_title_fd" id="boardN_title_fd" value="<%=notice.getBoardN_title()%>"/></td>
+                	</tr>
+                	
+                	<tr>
+                	<td id = "notice_header_a">카테고리</td>
+                	<td id = "notice_header_b"><span id="boardN_category"><%= notice.getBoardN_category() %></span></td>
+                	</tr>
+                	
+                	<tr>
+                	<td id = "notice_header_a">작성일</td>
+                	<td id = "notice_header_b"><%= notice.getBoardN_date() %></td>
+                	</tr>
+                	
+                	<tr>
+                	<td id = "notice_header_a">조회수</td>
+                	<td id = "notice_header_b"><%= notice.getBoardN_hit() %></td>
+                	</tr>
+                	
+                	<tr>
+                	<td>
+                	<span id = "boardN_contents" name="boardN_contents"><%= notice.getBoardN_contents() %></span>
+                	<textarea id="boardN_contents_fd" name="boardN_contents_fd" style="display:none;"rows="5" cols="50">
+                	<%=notice.getBoardN_contents()%></textarea>
+					</td>
+					</tr>
+        			
+        			<%
+						session = request.getSession(false);
+						Member m = (Member)session.getAttribute("member"); 
+					%>
                 
-                <%
-					if(m!=null && m.getMemberId().equals("admin")){
-				%>
-                <br>
-                <button id="btn1" onclick="modifyActive();" style="width: 70px; height: 30px; float:right;">수정</button> 
-				<button id="btn2" onclick="delNotice();" style="width: 70px; height: 30px; float:right;">삭제</button> 
-                <%} %>
+                	<%
+						if(m!=null && m.getMemberId().equals("admin")){
+					%>
+               
+	                <br>
+	                <button id="btn1" name="btn1" onclick="modifyActive();" style="width: 70px; height: 30px; float:right;">수정</button> 
+					<button id="btn2" name="btn2" onclick="delNotice();" style="width: 70px; height: 30px; float:right;">삭제</button> 
+	                <%} %>
+	                <button onclick="list();">목록</button> 
+                	
+                </table>
+                
+                <form action="/noticeUpdate.do" method="post" id="updateForm">
+					<input type="hidden" name="boardN_no" id="boardN_no" value="<%=notice.getBoardN_no()%>"/>
+					<input type="hidden" id="title_form" name="title" />
+					<input type="hidden" id="contents_form" name="contents" />
+				</form>
+					
+                
+                
+                
                 <script>
-                function delNotice(){
-            		location.href="/noticeDelete.do?boardN_no=<%=notice.getBoardN_no()%>";
-            	}
+	                function list(){
+	            		location.href="/noticeList.do";
+	            	}
+	                
+	            	function modifyActive(){
+	            		document.getElementById("boardN_title").style.display="none";
+	            		document.getElementById("boardN_title_fd").type="text";
+	            		
+	            		
+	            		document.getElementById("boardN_contents").style.display="none";
+	            		document.getElementById("boardN_contents_fd").style.display="block";
+	            		
+	            		document.getElementById("btn2").innerHTML="취소";	
+	            		document.getElementById("btn2").onclick=function(){cancelNotice()};
+	            		
+	            		document.getElementById("btn1").onclick=function(){modifySubmit()};
+	            	}
+	            	function modifySubmit(){
+	            		document.getElementById("title_form").value = 
+	            			document.getElementById("boardN_title_fd").value;
+	            		
+	            		document.getElementById("contents_form").value = 
+	            			document.getElementById("boardN_contents_fd").value;
+	            		
+	            		document.getElementById("updateForm").submit();
+	            	}
+	                function delNotice(){
+	            		location.href="/noticeDelete.do?boardN_no=<%=notice.getBoardN_no()%>";
+	            	}
+	                function cancelNotice(){
+	            		document.getElementById("boardN_title").style.display="inline";
+	            		document.getElementById("boardN_title_fd").type="hidden";
+	            		document.getElementById("boardN_title_fd").value=
+	            			document.getElementById("boardN_title").innerHTML;
+	            		
+	            		
+	            		
+	            		document.getElementById("boardN_contents").style.display="inline";
+	            		document.getElementById("boardN_contents_fd").style.display="none";
+	            		document.getElementById("boardN_contents_fd").value=
+	            			document.getElementById("boardN_contents").innerHTML;
+	            		
+	            		
+	            		
+	            		document.getElementById("btn2").innerHTML="삭제";	
+	            		document.getElementById("btn2").onclick=function(){delNotice()};
+	            		document.getElementById("btn1").onclick=function(){modifyActive()};
+	            	}
                 </script>
-        
-                
             </div>
         </div>
     </div>
