@@ -147,17 +147,22 @@
     }
     
     .paginate{
-        text-align: center;
+        
         padding-top: 20px;
         border-top: 1px solid #c7c7c7;
     }
-    .pagi_num{
-        border: 1px solid skyblue;
-        color: skyblue;
-        padding: 5px 10px;
-        margin: 2px;
-        
+    #paginate_inner{
+    	margin : 0 auto;
     }
+    
+    #list_btn{
+        background-color: #f0f0f0;
+        border-radius: 5px;
+        color: grey;
+        padding: 2px;
+        font-size: 13px;
+    }
+    
     
     
     /* 하단 회원 약관 */
@@ -240,7 +245,8 @@
                                 <th>번호</th>
                                 <th>공연명</th>
                                 <th>공연일</th>
-                                <th>상태</th>
+                                <th>예매 상태</th>
+                                <th>상세보기</th>
                             </tr>
                         </thead>
                         <tbody>        	
@@ -250,28 +256,40 @@
                                 <td><%=rl.getNum() %></td>
                                 <td><%=rl.getmShowName() %></td>
                                 <td><%=rl.getBkDate() %></td>
-                                <td><%=rl.getBkStatCd() %></td>
+                                <td>
+                                <% if(rl.getBkStatCd().equals("RSV_CNL")){ %>
+                                	예매취소 완료
+                                <%}else if(rl.getBkStatCd().equals("RSV_CPL")){ %>
+                                	예매완료 <button class=list_btn id=list_btn>취소</button>
+                                <%}else{ %>
+                                	예매중 <button class=list_btn id=list_btn>취소</button>
+                                <%} %>
+                                </td>
+                                <td><button id=list_btn>보기</button></td>
                             </tr>
                         	<%} %>
                         </tbody>
-                    </table>
-                    <div style="width:315px; text-align:center;">
-						<label><%=pageNavi%></label>
-					</div>
+                    </table>		
+                    <script>
+                    $(document).ready(function(){
+                        $('.list_btn').click(function(){
+                        	if(confirm("예매를 취소하시겠습니까?")){
+                            	location.href="/memberDelete.do";
+                            }else{}
+                        });
+                    })
+                    </script>
+					
                     <div class="paginate">
+                    
+                    	<div id="paginate_inner" style="width:315px; text-align:center;">
+							<label><%=pageNavi%></label>
+						</div>
                         
-                        <a href="#">처음</a>
-                        
-                        <a class="pagi_num" href="#">
-                            <strong>1</strong>
-                        </a>
-                        
-                        <a class="pagi_num" href="#">
-                            <strong>2</strong>
-                        </a>
-                        
-                        <a href="#">끝</a>
+                      
                     </div>
+                    
+                    
                 </div>
                 <div class="note">
                     <h6>티켓취소 안내</h6>
