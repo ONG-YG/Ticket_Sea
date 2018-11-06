@@ -245,6 +245,7 @@ public class PromoDao {
 			pstmt.setString(4, artist);
 			pstmt.setString(5, contents);
 			pstmt.setString(6, location);
+			
 			pstmt.setString(7, fileName);
 			pstmt.setString(8, fullFilePath);
 			pstmt.setLong(9,  fileSize);
