@@ -264,7 +264,7 @@ public class MypageDao {
 		// needPrev는 시작페이지가 1이면 false, 시작페이지가 1이 아니라면 true
 		if(needPrev==true) // 시작 페이지가 1페이지가 아니라면!
 		{
-			sb.append("<a href='/noticeList.do?currentPage="+(startNavi-1)+"'> < </a>");
+			sb.append("<a href='/reserveList.do?currentPage="+(startNavi-1)+"'> < </a>");
 		}
 		// 현재 내 위치(startNavi값)가 2라면? '<' 버튼을 클릭하면 1페이지로 이동해야 함
 		// <a href='/noticeList.do?cureentPage=1> < </a>
@@ -273,19 +273,19 @@ public class MypageDao {
 			if(i==currentPage)
 			{
 				// 현재 페이지가 내가 있는 위치페이지와 같다면 진하게 표시
-				sb.append("<a href='/noticeList.do?currentPage="+i+"'><B style='font-size:30px'>"+i+"</B></a> ");
+				sb.append("<a href='/reserveList.do?currentPage="+i+"'><B style='font-size:30px'>"+i+"</B></a> ");
 				//<a href='/noticeList.do?cureentPage=1'><B>1</B></a>
 			}
 			else
 			{
 				// 현재 페이지가 내가 있는 위치 페이지와 다르다면 일반 표시
-				sb.append("<a href='/noticeList.do?currentPage="+i+"'>"+i+"</a> ");
+				sb.append("<a href='/reserveList.do?currentPage="+i+"'>"+i+"</a> ");
 			}
 		}
 		
 		if(needNext) 
 		{
-			sb.append("<a href='/noticeList.do?currentPage="+(endNavi+1)+"'> > </a>");
+			sb.append("<a href='/reserveList.do?currentPage="+(endNavi+1)+"'> > </a>");
 		}
 		
 		return sb.toString();	
