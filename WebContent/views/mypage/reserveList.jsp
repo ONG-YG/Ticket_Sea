@@ -1,9 +1,19 @@
-<%@ page import="kr.co.ticketsea.mypage.model.vo.MyReserveList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ page import="kr.co.ticketsea.member.model.vo.*" %>
     <%@ page import="kr.co.ticketsea.reserve.model.vo.*" %>
+    <%@ page import="kr.co.ticketsea.mypage.model.vo.*" %>
     <%@ page import="java.util.ArrayList" %>
+    
+    <%
+	// Controller(Servlet)에서 보내준값 가져오기
+	ReservePageData pd = (ReservePageData)request.getAttribute("pd");
+
+	ArrayList<ReserveList> list = pd.getList(); // 현재 페이지의 글 목록
+	String pageNavi = pd.getPageNavi(); // 현재 navi Bar
+	
+%>
+    
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -230,25 +240,24 @@
                                 <th>번호</th>
                                 <th>공연명</th>
                                 <th>공연일</th>
-                                <th>매수</th>
                                 <th>상태</th>
                             </tr>
                         </thead>
-                        <tbody>
-
-                                                	
-                        	<%	for(MyReserveList finalMrl: finalMrlList){ %>
+                        <tbody>        	
+                        	<%	for(ReserveList rl: list){ %>
 
                         	<tr>
-                                <td><%=finalMrl.getTableNum() %></td>
-                                <td><%=finalMrl.getShowName() %></td>
-                                <td><%=finalMrl.getShowDate() %></td>
-                                <td><%=finalMrl.getCount() %></td>
-                                <td></td>
+                                <td><%=rl.getNum() %></td>
+                                <td><%=rl.getmShowName() %></td>
+                                <td><%=rl.getBkDate() %></td>
+                                <td><%=rl.getBkStatCd() %></td>
                             </tr>
                         	<%} %>
                         </tbody>
                     </table>
+                    <div style="width:315px; text-align:center;">
+						<label><%=pageNavi%></label>
+					</div>
                     <div class="paginate">
                         
                         <a href="#">처음</a>

@@ -1,8 +1,6 @@
 package kr.co.ticketsea.mypage.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,12 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import kr.co.ticketsea.mypage.model.vo.ReservePageData;
 import kr.co.ticketsea.member.model.vo.Member;
-import kr.co.ticketsea.mypage.model.vo.MyReserveList;
 import kr.co.ticketsea.mypage.service.MypageService;
-import kr.co.ticketsea.notice.model.service.NoticeService;
-import kr.co.ticketsea.notice.model.vo.PageData;
-import kr.co.ticketsea.reserve.model.vo.ReserveInfo;
 
 
 /**
@@ -57,11 +52,11 @@ public class ReserveListServlet extends HttpServlet {
 		}
 		
 		//2. 비즈니스 로직
-		new MypageService().reserveAllList(currentPage);		
+		ReservePageData pd = new MypageService().reserveAllList(currentPage,memberNo);		
 
-		
+		//3. jsp 페이지로 넘겨준다
 		RequestDispatcher view = request.getRequestDispatcher("views/mypage/reserveList.jsp");
-		request.setAttribute("finalMrlList", finalMrlList);
+		request.setAttribute("pd", pd);
 		view.forward(request, response);
 		
 	}

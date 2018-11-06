@@ -71,7 +71,7 @@ public class MypageDao {
 		return result;
 	}
 
-	public ArrayList<ReserveList> getCurrentPage(Connection conn, int currentPage, int recordCountPerPage) {
+	public ArrayList<ReserveList> getCurrentPage(Connection conn, int currentPage, int recordCountPerPage, int memberNo) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
@@ -89,30 +89,37 @@ public class MypageDao {
 		
 		
 		// ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 쿼리문 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
-		/*String query = "select * from (select board_notice.*,row_number() " + 
-				"over(order by boardN_no desc) AS num " + 
-				"from board_notice) where num between ? and ?";*/
-		
+		String query = "select * from \r\n" + 
+				"(select DISTINCT a.*, ROW_NUMBER() OVER (ORDER BY bk_no desc) AS num from\r\n" + 
+				"(select ps_no,bk_no,member_no,a.m_show_no,m_show_name,bk_date,bk_stat_cd from \r\n" + 
+				"(select a.ps_no,bk_no,member_no,bk_stat_cd,m_show_no,bk_date from \r\n" + 
+				"(select a.bk_no,member_no,bk_stat_cd,bk_date,ps_no \r\n" + 
+				"from book_inf a,bk_s_l b \r\n" + 
+				"where a.BK_NO = b.bk_no and member_no=?) a,perf_sch b\r\n" + 
+				"where a.ps_no = b.ps_no) a,musical_l b\r\n" + 
+				"where a.m_show_no = b.m_show_no) a)\r\n" + 
+				"where num BETWEEN ? and ?\r\n" + 
+				"order by num asc";		
 
 		// 쿼리문 내용 담을 list 배열 초기화		
 		ArrayList<ReserveList> list = new ArrayList<ReserveList>();
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, start);
-			pstmt.setInt(2, end);
+			pstmt.setInt(1, memberNo);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
 			
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) 
 			{
 				ReserveList rl = new ReserveList();
-				rl.setPsNo(rset.getInt("ps_no"));
-				rl.setBkNo(rset.getString("bk_no"));
-				rl.setmShowNo(rset.getInt("m_show_no"));
-				rl.setmShowName(rset.getString("m_show_name"));
-				rl.setBkDate(rset.getDate("bk_date"));
-				rl.setBkStatCd(rset.getString("bk_stat_cd"));
+				
+				rl.setmShowName(rset.getString("m_show_name"));			// 공연명
+				rl.setBkDate(rset.getDate("bk_date"));					// 예매일
+				rl.setBkStatCd(rset.getString("bk_stat_cd"));			// 예매 상태
+				rl.setNum(Integer.parseInt(rset.getString("num")));		// 번호
 				
 				list.add(rl);
 			}		
@@ -128,18 +135,30 @@ public class MypageDao {
 		return list;
 	}
 
-	public String getPageNavi(Connection conn, int currentPage, int recordCountPerPage, int naviCountPerPage) {
+	public String getPageNavi(Connection conn, int currentPage, int recordCountPerPage, int naviCountPerPage, int memberNo) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
 		// 게시물의 토탈 개수를 구해야 함
 		int recordTotalCount = 0; //초기값은 정보가 없으므로 0으로 셋팅
 		
-		String query = "select count(*) AS TOTALCOUNT FROM board_notice";
+		String query = "select count(*) as totalcount from \r\n" + 
+				"(select DISTINCT a.*, ROW_NUMBER() OVER (ORDER BY bk_no desc) AS num from\r\n" + 
+				"(select ps_no,bk_no,member_no,a.m_show_no,m_show_name,bk_date,bk_stat_cd from \r\n" + 
+				"(select a.ps_no,bk_no,member_no,bk_stat_cd,m_show_no,bk_date from \r\n" + 
+				"(select a.bk_no,member_no,bk_stat_cd,bk_date,ps_no \r\n" + 
+				"from book_inf a,bk_s_l b \r\n" + 
+				"where a.BK_NO = b.bk_no and member_no=?) a,perf_sch b\r\n" + 
+				"where a.ps_no = b.ps_no) a,musical_l b\r\n" + 
+				"where a.m_show_no = b.m_show_no) a)";
 		
 		 try {
 			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setInt(1, memberNo);
+			
 			rset = pstmt.executeQuery();
+			
 			if(rset.next()) {
 				recordTotalCount = rset.getInt("TOTALCOUNT");
 			}
@@ -158,7 +177,6 @@ public class MypageDao {
 		 
 		 int pageToTalCount = 0; //정보가 없으므로 초기값은 0 셋팅
 		 
-		 
 		 // 페이지의 토탈 개수 구하는 공식
 		 // 게시물토탈 개수 / 10  + 1(조건에 따라 적용)
 		 
@@ -170,7 +188,6 @@ public class MypageDao {
 		 {
 			 pageToTalCount = recordTotalCount / recordCountPerPage;
 		 }
-		 
 		 
 		 // 에러 방지 코드
 		 if(currentPage<1)
@@ -231,7 +248,6 @@ public class MypageDao {
 			endNavi = pageToTalCount;
 		}
 	
-		
 		// 페이지를 표현하는 navi에서 사용할 '<' 모양과 '>'모양을 쓰기위해
 		// 필요한 변수 2개를 생성 (변수에 값에 따라서 시작 부분과 끝부분은 표현하지 않기 위해)
 		

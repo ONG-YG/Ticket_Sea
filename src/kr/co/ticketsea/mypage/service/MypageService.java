@@ -14,7 +14,7 @@ public class MypageService {
 
 	
 	// [예매확인.취소] 페이지의 페이징처리 포함 서비스 메소드
-	public void reserveAllList(int currentPage) {
+	public ReservePageData reserveAllList(int currentPage, int memberNo) {
 		
 		Connection conn = JDBCTemplate.getConnection();
 			
@@ -24,10 +24,10 @@ public class MypageService {
 		
 		// Service에서 DAO를 호출 (2번의 DAO를 호출)
 		// 1. 현재 페이지의 게시물 리스트 요청
-		ArrayList<ReserveList> list = new MypageDao().getCurrentPage(conn,currentPage,recordCountPerPage);
+		ArrayList<ReserveList> list = new MypageDao().getCurrentPage(conn,currentPage,recordCountPerPage,memberNo);
 		
 		// 2. 현재 페이지를 중심으로 만들어지는 navi 리스트 요청
-		String pageNavi = new MypageDao().getPageNavi(conn,currentPage,recordCountPerPage,naviCountPerPage);
+		String pageNavi = new MypageDao().getPageNavi(conn,currentPage,recordCountPerPage,naviCountPerPage,memberNo);
 		
 		// 메소드에 담아서 넣기
 		ReservePageData pd = null;
@@ -41,8 +41,7 @@ public class MypageService {
 		
 		JDBCTemplate.close(conn);
 		
-		//return pd;		
-				
+		return pd;		
 		
 	}
 
