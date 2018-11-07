@@ -9,7 +9,7 @@
 	
 	//현재 페이지 글 목록
 	ArrayList<Reserve> list = rpg.getList(); 
-	//현재 navi Bar
+	//현재 내비바
 	String pageNavi = rpg.getPageNavi();
 	
 %>
