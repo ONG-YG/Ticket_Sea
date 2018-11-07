@@ -162,7 +162,7 @@
 
 <div id="inner">
 		<div id="result_wrap">
-			<p id="resultText"><em><b><%= keyword %></b></em>&nbsp;&nbsp;에 대한 검색 결과입니다.</p>
+			<p id="resultText"><br><br><em><b><%= keyword %></b></em>&nbsp;&nbsp;에 대한 검색 결과입니다.</p>
 			
 			
 			<div id="detailBox">
@@ -171,7 +171,9 @@
 				
 					<li><a href="" class="result_info">
                                                         <span class="img_box">
-                                                            <img src="/img/poster/<%=s.getmShowPoster() %>" width="110px" height="134px">
+                                                            <img src="/img/poster/<%=s.getmShowPoster()%>" width="110px" height="134px">
+                                                            
+                                                        	
                                                         </span>
                                                         <div class="bx_tit">
                                                             <span class="info_tit">
@@ -199,13 +201,14 @@
                                           </a></li>
                                           <%} %>
 				</ul>
+				<div id="pageNavi">
+		<label><%=pageNavi%></label>
+	</div>
 			</div>
 			
 				
 		</div>
-		<div id="pageNavi">
-		<label><%=pageNavi%></label>
-	</div>
+		
 			
 	</div>
 			
