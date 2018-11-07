@@ -53,8 +53,34 @@ public class AdReserveService {
 	public ArrayList<SelectedSeat> reserveSeat(String reserveNo) {
 		Connection conn=JDBCTemplate.getConnection();
 		ArrayList<SelectedSeat> seatList=new AdReserveDao().seatList(conn,reserveNo);
-		System.out.println(seatList.size());
+		JDBCTemplate.close(conn);
 		return seatList;
+	}
+
+	public int reserveUpdate(String bk_no,String phone, String email) {
+		Connection conn=JDBCTemplate.getConnection();
+		int result=new AdReserveDao().reserveUpdate(conn,bk_no,phone,email);
+		
+		if(result>0) {
+			JDBCTemplate.commit(conn);;
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
+
+	public int deleteReserve(String bkNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new AdReserveDao().deleteReserve(conn,bkNo);
+		if(result>0) {
+			JDBCTemplate.commit(conn);;
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
 	}
 
 	

@@ -111,5 +111,15 @@ public class MiniShowService {
 		return result;
 	}
 
+	public MiniShow selectWtShow(int msNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		MiniShow ms= new MiniShowDao().selectWtShow(conn,msNo);
+		
+		JDBCTemplate.close(conn);
+		
+		return ms;
+	}
+
 
 }

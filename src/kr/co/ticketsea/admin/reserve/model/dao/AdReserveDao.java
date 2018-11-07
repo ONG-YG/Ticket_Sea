@@ -224,6 +224,48 @@ public class AdReserveDao {
 		
 	}
 
+	public int reserveUpdate(Connection conn, String bk_no,String phone, String email) {
+		PreparedStatement pstmt=null;
+		int result =0;
+		
+		String query="update book_inf set BK_PHONE=?, BK_EMAIL=? where bk_no=?";
+		
+		try {
+			pstmt=conn.prepareStatement(query);
+			pstmt.setString(1, phone);
+			pstmt.setString(2, email);
+			pstmt.setString(3, bk_no);
+			
+			result=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+		
+	}
+
+	public int deleteReserve(Connection conn, String bkNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;	
+		String query ="update book_inf set bk_stat_cd='RSV_CNL' where bk_no=?";
+		
+		try {
+			pstmt=conn.prepareStatement(query);
+			pstmt.setString(1, bkNo);
+			
+			result=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
 	
 	
 	

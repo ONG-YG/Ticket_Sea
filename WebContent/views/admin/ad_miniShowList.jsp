@@ -75,9 +75,9 @@
                        </thead>
                        <%for(MiniShow ms : list) {%>
                        <tr>
-                           <td><a href="#"><%=ms.getMs_no() %></a></td>
+                           <td><a href="/miniShowWtInfo.do?msNo=<%=ms.getMs_no() %>"><%=ms.getMs_no() %></a></td>
                            <td><%=ms.getMs_name() %></td>
-                           <td>test11</td>
+                           <td><%=ms.getMs_userId() %></td>
                            <td><%=ms.getMs_place() %></td>
                            <td><%=ms.getMs_wrtdate() %></td>
                            <td><input type="button" value="승인" onclick="approve('<%=ms.getMs_no()%>');"/>&nbsp;&nbsp;<input type="button" value="거부"/></td>

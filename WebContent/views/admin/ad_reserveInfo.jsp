@@ -62,6 +62,7 @@
               <div class="top_area">
                   <h2 class="main_title">예매정보</h2>
                </div>
+               <form action ="/adReserveUpdate.do" method="post" id="updateForm">
                <div class="main_area">
                    <div class="reserveInfo_table">
                     <table>
@@ -69,6 +70,7 @@
                             <tr>
                                 <th>예매번호</th>
                                 <td><%=rs.getBk_no() %></td>
+                                <input type="hidden" name="bk_no" value="<%=rs.getBk_no() %>"/>
                             </tr>
                             <tr>
                                 <th>공연명</th>
@@ -112,10 +114,28 @@
                     </table>
                 </div>
                    <div id="reserveCancel">
-                    <button >예매취소</button>
+                    <button id="updateBtn" onclick="return updateSubmit();">예매수정</button>
                    </div>
                </div>
+               </form>
                </div>
+               <script>
+               		function updateSubmit(){
+               			var bk_phone=document.getElementById("bk_phone").value;
+               			var bk_email=document.getElementById("bk_email").value;
+               			
+               			if(!(/^[0-9]+$/g.test(bk_phone))||bk_phone==""){
+               				alert("연락처를 입력하세요");
+               				return false;
+               			}else if(!(/^[a-z0-9]{4,20}@/.test(email))||email==""){
+               				alert("이메일을 입력하세요");
+                    		return false;
+               			}else{
+                    		document.getElementById("updateForm").submit();
+                    		return true;
+                    	}
+               		} 
+               </script>
           </div> 
         </div>
         </div>

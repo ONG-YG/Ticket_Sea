@@ -85,6 +85,11 @@
                            <td><%=rs.getShow_name()%></td>
                            <td><%=rs.getBk_date()%></td>
                            <td><input type="button" value="삭제" onclick="delActive('<%=rs.getBk_no()%>');"></td>
+                      <script>
+                    	function delActive(bkNo){
+                    		location.href="/adReserveDelete.do?bkNo="+bkNo; //get방식으로 삭제할 회원번호 넘김
+                    	}
+                     </script>
                        </tr>
                         <%} %>
                     </table>
