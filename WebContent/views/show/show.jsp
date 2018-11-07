@@ -540,10 +540,16 @@
                         <dd class="review_user"></dd>
                         <dt><%=co.getRegDate()%></dt><dd class="review_date"></dd>
                     
-                </div><br>
+                </div>
                 <div style = "border-bottom : 1px solid #dedede;">
-               	<%=co.getContents()%>
+               	<%=co.getContents()%> 	
+               	<form action="/showDeleteComment.do">
+	               	<input type="hidden" name="m_show_no" value="<%=show.getM_show_no()%>"/>
+	               	<input type="submit" value="삭제">
+	               	
+               	</form>
                	</div>
+               
                 <%}%>
                <%}%>
             </li>

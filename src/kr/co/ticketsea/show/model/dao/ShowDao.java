@@ -44,6 +44,7 @@ public class ShowDao {
 				s.setM_show_no(rset.getInt("m_show_no"));
 				s.setShow_name(rset.getString("m_show_name"));
 				s.setShow_poster(rset.getString("m_show_poster"));
+				s.setSc_code(rset.getString("sc_code"));
 				
 				list.add(s);
 			}		
@@ -297,5 +298,29 @@ public class ShowDao {
 			
 			return result;
 		}
+	public int deleteComment(Connection conn, int m_show_no) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = "delete from showcomment where m_show_no=?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setInt(1, m_show_no);
+			
+			result = pstmt.executeUpdate();
+		
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
 
 }

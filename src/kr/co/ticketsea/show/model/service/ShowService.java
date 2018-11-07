@@ -88,6 +88,23 @@ public class ShowService {
 		return result;
 	}
 
+	public int deleteComment(int m_show_no) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new ShowDao().deleteComment(conn,m_show_no);
+		
+		if(result>0)
+		{
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
+
 	
 	
 

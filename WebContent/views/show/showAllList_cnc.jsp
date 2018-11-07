@@ -283,37 +283,35 @@
         <div id="c_inner">
             <div id="c_inner_top">
                 <div class="title1">
-                    <h2>뮤지컬</h2>
+                    <h2>콘서트</h2>
                 </div>
                 <div class="title2"></div>
             </div>
             
             <div id="container">
         <div id = "right_view">
-        <div id="prContest">
-        <% for (Show s : list) { %>
-            <div id = "prContestDiv1" ">
-	            <div id="prContestPic"><a href="/show.do?m_show_no=<%=s.getM_show_no()%>"><img src="<%=s.getShow_poster() %>" style="width:205px; height:330px; align-content: center;"></a></div> <br>
-	        	<div id="prContestTitle" style="font-size: 10px"><a href="/show.do?m_show_no=<%=s.getM_show_no()%>"><%=s.getShow_name()%></a></div>
-        	</div>
-         <% } %> 
-         
         
-    </div>
-            <div id="prContestDiv2">
-            	 <div style="width:100%; text-align:center;">
-				<label><%=pageNavi%></label>
-		
+      <div id="prContest">
+        <% for (Show s : list) { %>
+        	<% if(s.getSc_code().equals("CNC")){ %>
+            <div id = "prContestDiv1">
+	            <div id="prContestPic"><a href="/show.do?m_show_no=<%=s.getM_show_no()%>"><img src="<%=s.getShow_poster() %>" style="width:205px; height:330px; align-content: center;"></a></div> <br>
+	        	<div id="prContestTitle" style="font-size: 10px"><a href="/show.do?m_show_no=<%=s.getM_show_no()%>"><%=s.getShow_name()%> </a></div>
+        	</div>
+         <% }}  %> 
+   	 </div>
+   	 
+   	 
+      <div id="prContestDiv2">
+            <div style="width:100%; text-align:center;">
+			label><%=pageNavi%></label>
 		
 		   <%
 		session = request.getSession(false);
 		Member m = (Member)session.getAttribute("member"); 
 			%>
-	
-   
          </div>
-         
-            </div>
+       </div>
             
             
           </div>  
