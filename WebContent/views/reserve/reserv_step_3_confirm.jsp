@@ -194,28 +194,8 @@
 	    		}
         	%>
         	
-        	if(diff>1) {/////////////////////////////////////////////10분으로 바꿀것
+        	if(diff>10) {/////////////////////////////////////////////10분으로 바꿀것
         		deleteProgData();
-        		<%-- 
-        		var progNo_del = <%=progNo%>;
-        		//console.log("progNo_del : "+progNo_del);
-        		
-        		$.ajax({
-    				url : "/reserveExpire.do",
-    				data : {progNo: progNo_del},
-    				type : "post",
-    				success : function(){
-    					//console.log("정상 처리 완료");
-    				},
-    				error : function(){
-    					//console.log("ajax 통신 에러");
-    				},
-    				complete : function(){
-    					alert("예매 진행 가능 시간이 초과되어 예매가 종료됩니다.");
-    					window.close();
-    				}
-    			});
-        		 --%>
         	}
         	else {
         		var phone = document.getElementById("inputPhoneNo").value;
@@ -240,7 +220,19 @@
                    	if( !res1 ){ alert("휴대폰 번호는 숫자만 입력할 수 있습니다."); }
                    	else if( !res2 ){ alert("휴대폰 번호를 9자 이상 입력해주세요."); }
                    	else {
-                   		payStart();
+                   		//var payResult = payStart();/////////////////////////// 임시로 결제 단계 off
+                   		var payResult = true;/////////////////////////////////// 임시로 결제 단계 off
+                   		payType = "card";///////// 일단 임의로 카드결제로 설정(결제 function 다시 활성화할 경우 지울것 )
+                   		customerPhone = $('#inputPhoneNo').val();////// 일단 임의로 카드결제로 설정(결제 function 다시 활성화할 경우 지울것 )
+            			customerEmail = $('#inputEmail').val();//////// 일단 임의로 카드결제로 설정(결제 function 다시 활성화할 경우 지울것 )
+                   		if(payResult) {
+                   			//결제 성공할 경우 예매 정보 DB에 등록
+                   			insertBookInfo();
+                   		}
+                   		else {
+                   			//결제 실패할 경우 예매진행중 데이터를 삭제
+        			        deleteProgData();
+                   		}
                    	}
                 }
         	}//if(diff>1) END
@@ -253,15 +245,15 @@
 			customerPhone = $('#inputPhoneNo').val();///////////////////
 			customerEmail = $('#inputEmail').val();/////////////////////
     		
+			<%-- 
         	var test = "merchant_uid : "+<%=bkNo%>+",\n"+
 			    "name : "+'<%=showTitle%>'+" 예매,\n"+
 			    "amount : "+<%=totalPrice%>+",\n"+
 			    "buyer_email : "+customerEmail+",\n"+
 			    "buyer_name : "+'<%=memberName%>'+",\n"+
 			    "buyer_tel : "+customerPhone;
-			    
 			alert(test);///////////////////////////////////////////////
-			
+			 --%>
 			
 			IMP.request_pay({
 			    //pg : 'html5_inicis', //ActiveX 결제창은 inicis를 사용
@@ -274,10 +266,12 @@
 			    buyer_tel : customerPhone //누락되면 이니시스 결제창에서 오류
 			    
 			}, function(rsp) {
+				var payResult = null;
 			    if ( rsp.success ) {
 			    	
-			    	alert("결제 성공");///////////////////////////////////////////
-			    	insertBookInfo();
+			    	alert("성공적으로 결제가 완료되었습니다.");///////////////////////////////////////////
+			    	//insertBookInfo();
+			    	payResult = true;
 			    	
 			    	<%-- 
 			    	//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
@@ -301,7 +295,6 @@
 			    			alert(msg);
 			    			
 			    			// REST API로 아임포트 서버에서 결제 정상적으로 완료되었는지 확인 후 step4로 넘어가도록 아래 코드 주석 풀기
-			    			
 		               		//insertBookInfo();
 		               		
 		               		
@@ -320,8 +313,10 @@
 			        alert(msg);//////////////////////////////////
 			        
 			        //결제 실패할 경우 예매진행중 데이터를 삭제
-			        deleteProgData();
+			        //deleteProgData();
+			        payResult = false;
 			    }
+			    return payResult;
 			});
 			
 		}//function payStart() END
@@ -342,12 +337,10 @@
 			$('#bkStateCd_form').val( bkStateCd );
 			$('#payType_form').val( payType );
 			
-			alert( $('#phone_form').val()////////////////////////////////
-			+"\n"+ $('#email_form').val()////////////////////////////////
-			+"\n"+ $('#bkStateCd_form').val()////////////////////////////
-			+"\n"+ $('#payType_form').val() );///////////////////////////
+			//////////////////////////////////////////////////////////////////////세션 메인페이지 용으로 바꿔줄 것
 			
-			//위에서 hidden type의 input태그에 값을 채워준 form태그를 reserveComplete서블릿에 submit 
+			//위에서 hidden type의 input태그에 값을 채워준 form태그를 reserveComplete서블릿에 submit
+			//ReserveComplete서블릿 안에 예매진행중 데이터 지우는 과정 포함되어 있음 (deleteProgData()함수 호출 안해도됨)
 			document.getElementById("completeSubmitForm").submit();
     		
 		}//function insertBookInfo() END
@@ -368,7 +361,10 @@
 				},
 				complete : function(){
 					alert("예매 진행 가능 시간이 초과되어 예매가 종료됩니다.");
-					window.close();///////////////////////////////////안되면 메인으로 이동하도록 수정
+					
+					//////////////////////////////////////////////////////////세션 메인페이지용으로 바꿀것
+					
+					window.close();///////////////////////////////안되면 예매 시작단계(step1)로 이동하도록 수정해둠 >> 메인페이지로 넘어가도록 바꿀것
 					if( !window.closed ) {
 						location.href="/dateCntSelect.do?showNo=<%=showNo%>";
 					}
