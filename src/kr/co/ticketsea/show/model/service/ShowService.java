@@ -1,12 +1,15 @@
 package kr.co.ticketsea.show.model.service;
 
 import java.sql.Connection;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import kr.co.ticketsea.common.JDBCTemplate;
+import kr.co.ticketsea.show.model.vo.Comment;
 import kr.co.ticketsea.show.model.dao.ShowDao;
 import kr.co.ticketsea.show.model.vo.PageData;
-import kr.co.ticketsea.show.model.vo.*;
+import kr.co.ticketsea.show.model.vo.ShowData;
+import kr.co.ticketsea.admin.show.model.vo.Show;
 
 public class ShowService {
 
@@ -67,5 +70,25 @@ public class ShowService {
 		
 		
 	}
+
+	public int insertComment(int showNo, String contents, String userId) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new ShowDao().insertComment(conn,showNo,contents,userId);
+		
+		if(result>0)
+		{
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
+
+	
+	
 
 }

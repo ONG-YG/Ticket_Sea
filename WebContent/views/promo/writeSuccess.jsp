@@ -8,7 +8,7 @@
 </head>
 <body>
 <script>
-	alert("글 작성 성공");
+	alert("해당 글은 관리자 승인 후 게시됩니다.");
 	location.href="/promoList.do";
 </script>
 

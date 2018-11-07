@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-    <%@ page import = "kr.co.ticketsea.show.model.vo.*" %>
+    <%@ page import = "kr.co.ticketsea.admin.show.model.vo.Show" %>
+    <%@ page import = "kr.co.ticketsea.show.model.vo.PageData" %>
     <%@ page import = "java.util.*" %>
     <%@ page import = "kr.co.ticketsea.member.model.vo.*" %>
     
@@ -292,8 +293,8 @@
         <div id="prContest">
         <% for (Show s : list) { %>
             <div id = "prContestDiv1" ">
-	            <div id="prContestPic"><a href="/show.do?show_no=<%=s.getShow_no()%>"><img src="../../uploadFile/mslove/<%= s.getShow_fileName() %>" style="width:205px; height:330px; align-content: center;"></a></div> <br>
-	        	<div id="prContestTitle" style="font-size: 10px"><a href="/show.do?show_no=<%=s.getShow_no()%>"><%=s.getShow_title()%></a></div>
+	            <div id="prContestPic"><a href="/show.do?m_show_no=<%=s.getM_show_no()%>"><img src="<%=s.getShow_poster() %>" style="width:205px; height:330px; align-content: center;"></a></div> <br>
+	        	<div id="prContestTitle" style="font-size: 10px"><a href="/show.do?m_show_no=<%=s.getM_show_no()%>"><%=s.getShow_name()%></a></div>
         	</div>
          <% } %> 
          
@@ -308,12 +309,7 @@
 		session = request.getSession(false);
 		Member m = (Member)session.getAttribute("member"); 
 			%>
-			
-           <%if(m!=null) {%>
-            <form style="display:inline;" action="/views/show/showWrite.jsp">
-				<input type="submit" value="글쓰기" style="width: 70px; height: 30px; float:right;"/> <br>				
-			</form>
-			<%} %>
+	
    
          </div>
          
