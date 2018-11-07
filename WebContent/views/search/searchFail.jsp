@@ -3,12 +3,14 @@
     <%@ page import="kr.co.ticketsea.search.model.vo.*"
 	import="java.util.ArrayList"
 	import="kr.co.ticketsea.member.model.vo.*"
- %>  
+ %> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>TiceketSea || 검색 </title>
+<title>Ticket Sea || 검색</title>
+</head>
+<body>
 <style>
 #inner{
 	background-color:#f4f4f4;
@@ -27,7 +29,7 @@
 	#detailBox>ul>li{
 		list-style:none;
 		width:800px;
-		height:144px;
+		height:20px;
 		padding-bottom:15px;
 		padding-top:15px;
 		display:inline;
@@ -146,7 +148,7 @@
 	 list = pd.getList(); // 현재 페이지의 글 목록
 	 pageNavi = pd.getPageNavi(); // 현재 navi Bar
 	}
-	
+
 %>
 </head>
 <body>
@@ -162,52 +164,25 @@
 
 <div id="inner">
 		<div id="result_wrap">
-			<p id="resultText"><em><b><%= keyword %></b></em>&nbsp;&nbsp;에 대한 검색 결과입니다.</p>
+		<br><br>
+			<p id="resultText"> <b>검색 결과를 찾을수 없습니다.</b></p>
 			
 			
 			<div id="detailBox">
-				<ul><% for(Search s : list)
-						{	%>
+			<ul>
 				
-					<li><a href="" class="result_info">
-                                                        <span class="img_box">
-                                                            <img src="/img/poster/<%=s.getmShowPoster() %>" width="110px" height="134px">
-                                                        </span>
-                                                        <div class="bx_tit">
-                                                            <span class="info_tit">
-                                                                <strong class="tit"><%=s.getmShowName() %></strong>
-                                                            </span><br><br>
-                                                            <dl>
-                                                                <dt>아티스트 :</dt> 	<button class="reserveBtn">예매하기</button>
-                                                                <dd><%=s.getmArtists() %></dd><br>
-                                                                <dt>기&nbsp;&nbsp;&nbsp;간 :</dt>
-                                                                <dd>
-                                                                    <%=s.getmShowStDate() %>
-                                                                    ~
-                                                                    <%=s.getmShoEdDate() %>
-                                                                </dd><br>
-                                                                
-                                                                
-                                                                    <dt>관람시간 :</dt>
-                                                                    <dd><%=s.getmShowRun() %> 분</dd>
-                                                               
-                                                               
-                                                            </dl>
-                                                            
-                                                        </div>
-                                                         
-                                          </a></li>
-                                          <%} %>
+					<li>단어의 철자가 정확한지 확인해 보세요.</li>
+                    <li>한글을 영어로 혹은 영어를 한글로 입력했는지 확인해 보세요.</li>
+                    <li>검색어의 단어 수를 줄이거나, 보다 일반적인 검색어로 다시 검색해 보세요.</li>
+                    <li>두 단어 이상의 검색어인 경우, 띄어쓰기를 확인해 보세요. </li>
+                 
 				</ul>
-			</div>
+		
 			
 				
 		</div>
-		<div id="pageNavi">
-		<label><%=pageNavi%></label>
-	</div>
+		
 			
 	</div>
-			
 </body>
 </html>
