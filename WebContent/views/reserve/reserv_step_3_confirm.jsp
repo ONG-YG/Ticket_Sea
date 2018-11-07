@@ -220,11 +220,11 @@
                    	if( !res1 ){ alert("휴대폰 번호는 숫자만 입력할 수 있습니다."); }
                    	else if( !res2 ){ alert("휴대폰 번호를 9자 이상 입력해주세요."); }
                    	else {
-                   		//var payResult = payStart();/////////////////////////// 임시로 결제 단계 off
-                   		var payResult = true;/////////////////////////////////// 임시로 결제 단계 off
-                   		payType = "card";///////// 일단 임의로 카드결제로 설정(결제 function 다시 활성화할 경우 지울것 )
-                   		customerPhone = $('#inputPhoneNo').val();////// 일단 임의로 카드결제로 설정(결제 function 다시 활성화할 경우 지울것 )
-            			customerEmail = $('#inputEmail').val();//////// 일단 임의로 카드결제로 설정(결제 function 다시 활성화할 경우 지울것 )
+                   		var payResult = payStart();/////////////////////////// 임시로 결제 단계 off
+                   		//var payResult = true;/////////////////////////////////// 임시로 결제 단계 off
+                   		//payType = "card";///////// 일단 임의로 카드결제로 설정(결제 function 다시 활성화할 경우 지울것 )
+                   		//customerPhone = $('#inputPhoneNo').val();////// 일단 임의로 카드결제로 설정(결제 function 다시 활성화할 경우 지울것 )
+            			//customerEmail = $('#inputEmail').val();//////// 일단 임의로 카드결제로 설정(결제 function 다시 활성화할 경우 지울것 )
                    		if(payResult) {
                    			//결제 성공할 경우 예매 정보 DB에 등록
                    			insertBookInfo();

@@ -1,3 +1,4 @@
+<%@page import="kr.co.ticketsea.member.model.vo.Member"%>
 <%@page import="java.text.ParseException"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="kr.co.ticketsea.reserve.model.vo.SelectedSeat"%>
@@ -40,6 +41,9 @@
 	int progNo = rs.getProgNo();
 	String progTime = rs.getProgTime();
 	//System.out.println("progTime" + progTime);
+	Member member = (Member)session.getAttribute("member");
+	System.out.println(member.getMemberId());////
+	session.setAttribute("member", member);
 %>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
