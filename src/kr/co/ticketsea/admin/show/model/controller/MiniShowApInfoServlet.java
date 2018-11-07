@@ -36,7 +36,6 @@ public class MiniShowApInfoServlet extends HttpServlet {
 		int msNo=Integer.parseInt(request.getParameter("msNo"));
 		
 		MiniShow ms = new MiniShowService().selectApShow(msNo);
-		System.out.println(ms.getMs_name());
 		
 		RequestDispatcher view = request.getRequestDispatcher("/views/admin/ad_miniApInfo.jsp");
 		request.setAttribute("miniShow", ms);

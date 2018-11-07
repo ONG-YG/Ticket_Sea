@@ -5,8 +5,10 @@ import java.util.ArrayList;
 
 import kr.co.ticketsea.admin.reserve.model.dao.AdReserveDao;
 import kr.co.ticketsea.admin.reserve.model.vo.Reserve;
+import kr.co.ticketsea.admin.reserve.model.vo.ReserveApInfo;
 import kr.co.ticketsea.admin.reserve.model.vo.ReservePageData;
 import kr.co.ticketsea.common.JDBCTemplate;
+import kr.co.ticketsea.reserve.model.vo.SelectedSeat;
 
 public class AdReserveService {
 	
@@ -34,6 +36,25 @@ public class AdReserveService {
 		JDBCTemplate.close(conn);
 		
 		return rpg;
+	}
+
+	public ReserveApInfo selectOneReserve(String reserveNo) {
+		Connection conn=JDBCTemplate.getConnection();
+		
+		ReserveApInfo rs=new AdReserveDao().selectOneReserve(conn,reserveNo);
+		
+		System.out.println(rs.getSeatInfo());
+		JDBCTemplate.close(conn);
+		
+		return rs;
+		
+	}
+
+	public ArrayList<SelectedSeat> reserveSeat(String reserveNo) {
+		Connection conn=JDBCTemplate.getConnection();
+		ArrayList<SelectedSeat> seatList=new AdReserveDao().seatList(conn,reserveNo);
+		System.out.println(seatList.size());
+		return seatList;
 	}
 
 	

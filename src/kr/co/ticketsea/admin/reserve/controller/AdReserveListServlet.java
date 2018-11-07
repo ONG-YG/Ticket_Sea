@@ -49,7 +49,7 @@ public class AdReserveListServlet extends HttpServlet {
 			request.setAttribute("reservePgData", rpg);
 			view.forward(request, response);
 		}else {
-			response.sendRedirect("/views/notice/error.jsp");
+			response.sendRedirect("/views/admin/error.jsp");
 		}
 	}
 

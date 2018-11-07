@@ -1,6 +1,9 @@
 package kr.co.ticketsea.admin.reserve.model.vo;
 
 import java.sql.Date;
+import java.util.ArrayList;
+
+import kr.co.ticketsea.reserve.model.vo.SelectedSeat;
 
 public class ReserveApInfo {
 	private String bk_no; //예매번호
@@ -8,9 +11,8 @@ public class ReserveApInfo {
 	private String m_show_name; //공연명
 	private Date ps_date; // 공연일
 	private int ps_cnt; //공연회차 
-	private int ps_time; //공연시간
-	private String th1_seat_grd; //좌석등급
-	private String seat_title; //좌석타이틀
+	private String ps_time; //공연시간
+	private ArrayList<SelectedSeat> seatInfo;
 	private int ps_no; //공연회차번호
 	private int member_no; 
 	private String member_id;
@@ -24,8 +26,8 @@ public class ReserveApInfo {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public ReserveApInfo(String bk_no, int m_show_no, String m_show_name, Date ps_date, int ps_cnt, int ps_time,
-			String th1_seat_grd, String seat_title, int ps_no, int member_no, String member_id, String member_name,
+	public ReserveApInfo(String bk_no, int m_show_no, String m_show_name, Date ps_date, int ps_cnt, String ps_time,
+			ArrayList<SelectedSeat> seatInfo, int ps_no, int member_no, String member_id, String member_name,
 			Date bk_date, int bk_tot_price, String bk_phone, String bk_email, String bk_stat_name) {
 		super();
 		this.bk_no = bk_no;
@@ -34,8 +36,7 @@ public class ReserveApInfo {
 		this.ps_date = ps_date;
 		this.ps_cnt = ps_cnt;
 		this.ps_time = ps_time;
-		this.th1_seat_grd = th1_seat_grd;
-		this.seat_title = seat_title;
+		this.seatInfo = seatInfo;
 		this.ps_no = ps_no;
 		this.member_no = member_no;
 		this.member_id = member_id;
@@ -76,23 +77,17 @@ public class ReserveApInfo {
 	public void setPs_cnt(int ps_cnt) {
 		this.ps_cnt = ps_cnt;
 	}
-	public int getPs_time() {
+	public String getPs_time() {
 		return ps_time;
 	}
-	public void setPs_time(int ps_time) {
+	public void setPs_time(String ps_time) {
 		this.ps_time = ps_time;
 	}
-	public String getTh1_seat_grd() {
-		return th1_seat_grd;
+	public ArrayList<SelectedSeat> getSeatInfo() {
+		return seatInfo;
 	}
-	public void setTh1_seat_grd(String th1_seat_grd) {
-		this.th1_seat_grd = th1_seat_grd;
-	}
-	public String getSeat_title() {
-		return seat_title;
-	}
-	public void setSeat_title(String seat_title) {
-		this.seat_title = seat_title;
+	public void setSeatInfo(ArrayList<SelectedSeat> seatInfo) {
+		this.seatInfo = seatInfo;
 	}
 	public int getPs_no() {
 		return ps_no;
@@ -148,7 +143,6 @@ public class ReserveApInfo {
 	public void setBk_stat_name(String bk_stat_name) {
 		this.bk_stat_name = bk_stat_name;
 	}
-	
 	
 	
 }
