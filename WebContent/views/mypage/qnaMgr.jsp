@@ -1,5 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ page import="kr.co.ticketsea.member.model.vo.*" %>
+    <%@ page import="kr.co.ticketsea.mypage.model.vo.*" %>
+    <%@ page import="java.util.ArrayList" %>
+    
+    <%
+	// Controller(Servlet)에서 보내준값 가져오기
+	ReservePageData qpd = (ReservePageData)request.getAttribute("qpd");
+
+	ArrayList<QnaMgr> list = qpd.getQnaList(); // 현재 페이지의 글 목록
+	String pageNavi = qpd.getPageNavi(); // 현재 navi Bar
+	
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -138,16 +150,12 @@
         font-size: 14px;
     }
     .paginate{
-        text-align: center;
+        
         padding-top: 20px;
         border-top: 1px solid #c7c7c7;
     }
-    .pagi_num{
-        border: 1px solid skyblue;
-        color: skyblue;
-        padding: 5px 10px;
-        margin: 2px;
-        
+    #paginate_inner{
+    	margin : 0 auto;
     }
     
     
@@ -181,8 +189,8 @@
                 <li class="has_sub1">
                     <span>활동 관리</span>
                     <ul>
-                        <li><a href="/views/mypage/reviewMgr.jsp">후기 관리</a></li>
-                        <li><a href="/views/mypage/faqMgr.jsp">나의 문의 내역</a></li>
+                        <li><a href="/reviewMgr.do">후기 관리</a></li>
+                        <li><a href="/qnaMgr.do">나의 문의 내역</a></li>
                         <li><a href="#">소규모 공연 등록관리</a></li>
                         
                     </ul>
@@ -216,33 +224,21 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>라이온킹</td>
-                                <td>환불 요청드립니다.</td>
-                                <td>18.10.11</td>
-                                <td>답변완료</td>
+                            <%	for(QnaMgr qm: list){ %>
+
+                        	<tr>
+                                <td><%=qm.getNum() %></td>
+                                <td><%=qm.getBoardqTitle() %></td>
+                                <td><%=qm.getBoardqDate() %></td>
+                                <td><%=qm.getBoardqHit() %></td>
                             </tr>
-                            <tr>
-                                <td>라이온</td>
-                                <td>몇 세 부터 관람가능한가요?</td>
-                                <td>18.11.20</td>
-                                <td>미답변</td>
-                            </tr>
+                        	<%} %>
                         </tbody>
                     </table>
                     <div class="paginate">
-                        
-                        <a href="#">처음</a>
-                        
-                        <a class="pagi_num" href="#">
-                            <strong>1</strong>
-                        </a>
-                        
-                        <a class="pagi_num" href="#">
-                            <strong>2</strong>
-                        </a>
-                        
-                        <a href="#">끝</a>
+                    	<div id="paginate_inner" style="width:315px; text-align:center;">
+							<label><%=pageNavi%></label>
+						</div>
                     </div>
                 </div>
             </div>
