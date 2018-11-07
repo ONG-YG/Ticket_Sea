@@ -177,7 +177,7 @@ public class ReserveCompleteServlet extends HttpServlet {
 										rp.setPayType(payType);
 										
 										//예매정보 데이터 INSERT - BOOK_INF 테이블
-										int result1 = new ReserveService().insertBookInfo(bkNo, memberNo, bkStateCd, rp.getTicketPrice(), rp.getTotalPrice(), payType);
+										int result1 = new ReserveService().insertBookInfo(bkNo, memberNo, bkStateCd, rp.getTicketPrice(), rp.getTotalPrice(), payType, phone, email);
 										
 										if(result1>0) {
 											

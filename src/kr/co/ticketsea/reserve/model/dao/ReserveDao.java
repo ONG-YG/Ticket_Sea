@@ -639,12 +639,12 @@ public class ReserveDao {
 	}
 
 	public int insertBookInfo(Connection conn, long bkNo, int memberNo, String bkStateCd, int ticketPrice,
-			int totalPrice, String payType) {
+			int totalPrice, String payType, String phone, String email) {
 
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
-		String query = "INSERT INTO BOOK_INF VALUES(?, ?, ?, SYSDATE, ?, ?, ?)";
+		String query = "INSERT INTO BOOK_INF VALUES(?, ?, ?, SYSDATE, ?, ?, ?, ?, ?)";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -654,6 +654,8 @@ public class ReserveDao {
 			pstmt.setInt(4, ticketPrice);
 			pstmt.setInt(5, totalPrice);
 			pstmt.setString(6, payType);
+			pstmt.setString(7, phone);
+			pstmt.setString(8, email);
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {

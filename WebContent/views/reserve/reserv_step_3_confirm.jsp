@@ -240,7 +240,6 @@
                		payStart();
                		
                		
-               		
                		<%--
                		<%
     	        	//세션에 reserveSession객체 저장
@@ -305,6 +304,31 @@
 			    			msg += '카드 승인번호 : ' + rsp.apply_num;
 			    			
 			    			alert(msg);
+			    			
+			    			
+			    			// REST API로 아임포트 서버에서 결제 정상적으로 완료되었는지 확인 후 step4로 넘어가도록 아래 코드 주석 풀기
+			    			
+			    			
+			    			
+		               		<%
+		    	        	//세션에 reserveSession객체 저장
+		    	        	rs.setBkNo(bkNo);
+		            		session.setAttribute("reserveSession", rs);
+		            		%>
+		            		
+		            		
+		            		var bkStateCd = "RSV_CPL";///////////////////일단 임의로 완료상태로 설정
+		            		var payType = "CARD";///////////////////일단 임의로 카드결제로 설정
+		            		
+		            		$('#phone_form').val( $('#inputPhoneNo').val() );
+		            		$('#email_form').val( $('#inputEmail').val() );
+		            		$('#bkStateCd_form').val( bkStateCd );
+		            		$('#payType_form').val( payType );
+		            		
+		            		document.getElementById("completeSubmitForm").submit();
+		               		
+			    			
+			    			
 			    		} else {
 			    			//[3] 아직 제대로 결제가 되지 않았습니다.
 			    			//[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
