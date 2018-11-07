@@ -5,18 +5,6 @@ import java.util.ArrayList;
 
 public class ReserveProgressing {
 	
-	//초기에 ReserveSession객체에 넣어뒀던 정보들
-	private int memberNo;			//회원번호
-	private int currStat;			//현재 진행단계 (DateCnt-1 / ReserveSeat-2 / ReserveConfirm-3)
-	private int progNo;				//예매진행번호
-	private String progTime;		//예매시작시간(step3진입 시점)
-	
-	//초기에 ReserveStepOne객체에 넣어뒀던 정보들
-	private ArrayList<PerformSchedule> psList;			//공연 일정 목록
-	private String startDate;							//공연 시작일
-	private String endDate;								//공연 종료일
-	
-	//초기 ReserveProgressing객체
 	private int psNo;									//공연회차번호
 	private int showNo;									//공연번호
 	private String showTitle;							//공연명
@@ -41,9 +29,6 @@ public class ReserveProgressing {
 	
 	
 	public ReserveProgressing() {
-		
-		this.progTime = null;
-		
 		this.psNo = -1;
 		this.showNo = -1;
 		this.showCnt = -1;
@@ -52,20 +37,12 @@ public class ReserveProgressing {
 		this.ticketPrice = -1;
 		this.totalPrice = -1;
 	}
-	public ReserveProgressing(int memberNo, int currStat, int progNo, String progTime,
-			ArrayList<PerformSchedule> psList, String startDate, String endDate, int psNo, int showNo, String showTitle,
-			String showPoster, String theaterName, Date psDate, int showCnt, String showTime,
-			ArrayList<Integer> reservedSeatList, ArrayList<Integer> progSeatList,
-			ArrayList<SeatGradeState> seatGrdStList, String memberName, long bkNo, ArrayList<SelectedSeat> selSeatList,
-			String phone, String email, int commission, int ticketPrice, int totalPrice, String payType) {
+	public ReserveProgressing(int psNo, int showNo, String showTitle, String showPoster, String theaterName,
+			Date psDate, int showCnt, String showTime, ArrayList<Integer> reservedSeatList,
+			ArrayList<Integer> progSeatList, ArrayList<SeatGradeState> seatGrdStList, String memberName, long bkNo,
+			ArrayList<SelectedSeat> selSeatList, String phone, String email, int commission, int ticketPrice,
+			int totalPrice, String payType) {
 		super();
-		this.memberNo = memberNo;
-		this.currStat = currStat;
-		this.progNo = progNo;
-		this.progTime = progTime;
-		this.psList = psList;
-		this.startDate = startDate;
-		this.endDate = endDate;
 		this.psNo = psNo;
 		this.showNo = showNo;
 		this.showTitle = showTitle;
@@ -90,63 +67,11 @@ public class ReserveProgressing {
 	
 	
 	
-	public int getMemberNo() {
-		return memberNo;
-	}
-	public void setMemberNo(int memberNo) {
-		this.memberNo = memberNo;
-	}
-	public int getCurrStat() {
-		return currStat;
-	}
-	public void setCurrStat(int currStat) {
-		this.currStat = currStat;
-	}
-	public int getProgNo() {
-		return progNo;
-	}
-	public void setProgNo(int progNo) {
-		this.progNo = progNo;
-	}
-	public String getProgTime() {
-		return progTime;
-	}
-	public void setProgTime(String progTime) {
-		this.progTime = progTime;
-	}
-	public ArrayList<PerformSchedule> getPsList() {
-		return psList;
-	}
-	public void setPsList(ArrayList<PerformSchedule> psList) {
-		this.psList = psList;
-	}
-	public String getStartDate() {
-		return startDate;
-	}
-	public void setStartDate(String startDate) {
-		this.startDate = startDate;
-	}
-	public String getEndDate() {
-		return endDate;
-	}
-	public void setEndDate(String endDate) {
-		this.endDate = endDate;
-	}
-	public ArrayList<SeatGradeState> getSeatGrdStList() {
-		return seatGrdStList;
-	}
-	public void setSeatGrdStList(ArrayList<SeatGradeState> seatGrdStList) {
-		this.seatGrdStList = seatGrdStList;
-	}
-	public void setSelSeatList(ArrayList<SelectedSeat> selSeatList) {
-		this.selSeatList = selSeatList;
-	}
-	public void setTicketPrice(int ticketPrice) {
-		this.ticketPrice = ticketPrice;
-	}
-	public void setTotalPrice(int totalPrice) {
-		this.totalPrice = totalPrice;
-	}
+	
+	
+	
+	
+	
 	public int getPsNo() {
 		return psNo;
 	}
@@ -207,11 +132,11 @@ public class ReserveProgressing {
 	public void setProgSeatList(ArrayList<Integer> progSeatList) {
 		this.progSeatList = progSeatList;
 	}
-	public ArrayList<SeatGradeState> getSeatGrdSt() {
+	public ArrayList<SeatGradeState> getSeatGrdStList() {
 		return seatGrdStList;
 	}
-	public void setSeatGrdSt(ArrayList<SeatGradeState> seatGrdSt) {
-		this.seatGrdStList = seatGrdSt;
+	public void setSeatGrdStList(ArrayList<SeatGradeState> seatGrdStList) {
+		this.seatGrdStList = seatGrdStList;
 	}
 	public String getMemberName() {
 		return memberName;
@@ -228,7 +153,7 @@ public class ReserveProgressing {
 	public ArrayList<SelectedSeat> getSelSeatList() {
 		return selSeatList;
 	}
-	public void setSelecSeatList(ArrayList<SelectedSeat> selSeatList) {
+	public void setSelSeatList(ArrayList<SelectedSeat> selSeatList) {
 		this.selSeatList = selSeatList;
 	}
 	public String getPhone() {
@@ -282,20 +207,6 @@ public class ReserveProgressing {
 	@Override
 	public String toString() {
 		
-		String resvSession = "---------reserveSession-------\n"
-				+ memberNo + "\n"
-				+ currStat + "\n"
-				+ progNo + "\n"
-				+ progTime + "\n"
-				+ bkNo + "\n"
-							+ "-----------------------------\n\n\n";
-		
-		String resvStepOne = "---------reserveStepOne-------\n"
-				+ psList + "\n"
-				+ startDate + "\n"
-				+ endDate + "\n"
-							+ "-----------------------------\n\n\n";
-		
 		String reservProg = "---------reservProg-------\n"
 							+ psNo + "\n"
 							+ showNo + "\n"
@@ -320,7 +231,7 @@ public class ReserveProgressing {
 							+ "-------------------------\n\n\n";
 		
 		
-		return (resvSession+resvStepOne+reservProg);
+		return reservProg;
 	}
 	
 	

@@ -24,7 +24,7 @@
 	String showTime = rp.getShowTime();								//공연시간
 	ArrayList<Integer> reservedSeatList = rp.getReservedSeatList();	//예매완료 좌석 목록
 	ArrayList<Integer> progSeatList = rp.getProgSeatList();			//예매진행 중 좌석 목록
-	ArrayList<SeatGradeState> seatGrdStList = rp.getSeatGrdSt();	//등급별 좌석가격 및 잔여석	
+	ArrayList<SeatGradeState> seatGrdStList = rp.getSeatGrdStList();	//등급별 좌석가격 및 잔여석	
 	
 	ReserveSession rs = (ReserveSession)session.getAttribute("reserveSession");
 	int progNo = rs.getProgNo();

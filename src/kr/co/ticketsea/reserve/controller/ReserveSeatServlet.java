@@ -102,13 +102,13 @@ public class ReserveSeatServlet extends HttpServlet {
 									rp.setShowTime(ps.getPerformTime());
 									ArrayList<Integer> reserved_seats = new ReserveService().selectReservedSeats(psNo);
 									rp.setReservedSeatList(reserved_seats);
-									ArrayList<Integer> prog_seats = new ReserveService().selectProgressingSeats(psNo);  //예매 진행 정보 INSERT 시점부터 20분경과하지 않은 좌석
+									ArrayList<Integer> prog_seats = new ReserveService().selectProgressingSeats(psNo);  //예매 진행 정보 INSERT 시점부터 10분경과하지 않은 좌석
 									rp.setProgSeatList(prog_seats);
 									
 									ArrayList<SeatGradeState> seatGrdStList = new ReserveService().getSeatGradeStatus(psNo);
 									
 									if(!seatGrdStList.isEmpty()) {
-										rp.setSeatGrdSt(seatGrdStList);
+										rp.setSeatGrdStList(seatGrdStList);
 										System.out.println("\n\nReserveSeatServlet\n"+rp);/////////////////////////
 										
 										//세션에 넣을 reserveSession객체 - 예매 진행 번호 생성

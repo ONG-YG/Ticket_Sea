@@ -35,15 +35,12 @@
 	int totalPrice = rp.getTotalPrice();							//총 결제 금액
 	String payType = rp.getPayType();								//결제방식
 	
-	//System.out.println("티켓가격="+ticketPrice);//////////////
 	
 	ReserveSession rs = (ReserveSession)session.getAttribute("reserveSession");
 	int progNo = rs.getProgNo();
 	String progTime = rs.getProgTime();
 	//System.out.println("progTime" + progTime);
 	Member member = (Member)session.getAttribute("member");
-	System.out.println(member.getMemberId());////
-	session.setAttribute("member", member);
 %>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -136,7 +133,12 @@
 		
 		
         function reserveView() {
-        	location.href="#";
+        	<%
+        	session.invalidate();
+        	session = request.getSession(true);
+        	session.setAttribute("member", member);
+        	%>
+        	location.href="/reserveList.do";
         }
     </script>
     

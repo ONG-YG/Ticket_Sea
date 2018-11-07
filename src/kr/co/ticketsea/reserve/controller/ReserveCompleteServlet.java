@@ -109,7 +109,7 @@ public class ReserveCompleteServlet extends HttpServlet {
 											
 											ArrayList<SeatGradeState> seatGrdStList = new ReserveService().getSeatGradeStatus(psNo);
 											if(!seatGrdStList.isEmpty()) {
-												rp.setSeatGrdSt(seatGrdStList);
+												rp.setSeatGrdStList(seatGrdStList);
 												
 											}
 											else {
@@ -147,14 +147,14 @@ public class ReserveCompleteServlet extends HttpServlet {
 										ArrayList<SelectedSeat> selSeatList = new ReserveService().getSeatInfo(seatList);
 										
 										if(!selSeatList.isEmpty()) {
-											rp.setSelecSeatList(selSeatList);
+											rp.setSelSeatList(selSeatList);
 											
 											//각 선택좌석의 가격정보 저장
 											boolean chk = true;
 											gp: for(int i=0; i<selSeatList.size(); i++) {
 												String seatGrd = selSeatList.get(i).getSeatGrd();
 												
-												for(SeatGradeState sg: rp.getSeatGrdSt()) {
+												for(SeatGradeState sg: rp.getSeatGrdStList()) {
 													if (sg.getTh1_seat_grd().equals(seatGrd)) {
 														selSeatList.get(i).setSeatPrice(sg.getTh1_seat_prc());
 														selSeatList.get(i).setSeatGrdColor(sg.getGrd_color());
@@ -199,7 +199,6 @@ public class ReserveCompleteServlet extends HttpServlet {
 														//세션 정보 저장
 														session.setAttribute("member", m);
 														session.setAttribute("reserveSession", rs);
-														System.out.println(((Member)session.getAttribute("member")).getMemberId());///
 														
 														RequestDispatcher view = request.getRequestDispatcher("views/reserve/reserv_step_4_complete.jsp");
 														request.setAttribute("stepFour", rp);

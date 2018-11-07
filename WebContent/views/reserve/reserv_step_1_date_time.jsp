@@ -13,8 +13,6 @@
 	
 	String showTitle = stOne.getShowTitle(); //공연명
 	String showPoster = stOne.getShowPoster(); //공연 포스터 파일명
-	//String startDate = stOne.getStartDate(); //공연 시작일 ///////////////////////////////////
-	//String endDate = stOne.getEndDate(); //공연 종료일 ///////////////////////////////////////
 	
 	ArrayList<PerformSchedule> psList = stOne.getPsList();
 %>
@@ -86,11 +84,6 @@
 			
 			pageInit();
 			
-			/* 
-			$(document).one('mousemove', function(){
-				viewSelectableDays();
-			});
-			*/
 			$(document).mousemove(function(){
 				viewSelectableDays();
 			});
