@@ -319,7 +319,7 @@ function delPromo(){
                     
                     <div id="i_H_info">
                         <div>
-                        <strong><div id = "info_tit">아티스트</div></strong>  <%=promo.getBoardP_artist() %>
+                        <strong><div id = "info_tit">아티스트</div></strong>  <%=promo.getBoardP_artist() %> 
                         </div>
                         <br>
                         <div>
@@ -352,11 +352,10 @@ function delPromo(){
                     
                     <div id="i_C_content_a">
                         <br><br>
-                        
                         <div style="width : 500px; height: 300px; " >
                         <%= promo.getBoardP_contents() %>
                         </div>
-                         <img src="../../upLoad/<%= promo.getBoardP_fileName()%>" style="width:700px; height:850px; padding : 50px;">
+                         <img src="<%= promo.getBoardP_filePath()%>" style="width:700px; height:850px; padding : 50px;">
                          <%=promo.getBoardP_filePath() %>
                         <table class="detail_info_tbl">
                             
@@ -428,18 +427,6 @@ function delPromo(){
                         </table>
                                     </div>
                     <div id="i_C_content_b" style="display:none;">
-                        <div id="map" style="width:500px;height:400px;"></div>
-                        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b8639cd941f4df4218630f1cf5bd7d14"></script>
-                        
-                        <script>
-                            var container = document.getElementById('map');
-                            var options = {
-                                center: new daum.maps.LatLng(33.450701, 126.570667),
-                                level: 3
-                            };
-
-                            var map = new daum.maps.Map(container, options);
-	                   </script>
             
                         
                     </div>

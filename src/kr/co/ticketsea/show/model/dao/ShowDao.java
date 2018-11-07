@@ -4,11 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import kr.co.ticketsea.common.JDBCTemplate;
 import kr.co.ticketsea.show.model.vo.Comment;
-import kr.co.ticketsea.show.model.vo.Show;
+import kr.co.ticketsea.admin.show.model.vo.Show;
 
 public class ShowDao {
 
@@ -24,9 +25,9 @@ public class ShowDao {
 		int end = currentPage * recordCountPerPage;
 		
 		
-		String query = "select * from (select show.*,row_number() " + 
-				"over(order by show_no desc) AS num " + 
-				"from show) where num between ? and ?";
+		String query = "select * from (select musical_l.*,row_number() " + 
+				"over(order by m_show_no desc) AS num " + 
+				"from musical_l) where num between ? and ?";
 		
 		ArrayList<Show> list = new ArrayList<Show>();
 		
@@ -40,9 +41,10 @@ public class ShowDao {
 			while(rset.next()) 
 			{
 				Show s = new Show();
-				s.setShow_no(rset.getInt("show_no"));
-				s.setShow_title(rset.getString("show_title"));
-				s.setShow_filePath(rset.getString("show_filepath"));
+				s.setM_show_no(rset.getInt("m_show_no"));
+				s.setShow_name(rset.getString("m_show_name"));
+				s.setShow_poster(rset.getString("m_show_poster"));
+				s.setSc_code(rset.getString("sc_code"));
 				
 				list.add(s);
 			}		
@@ -157,7 +159,7 @@ public class ShowDao {
 		ResultSet rset = null;
 		Show show = null;
 		
-		String query = "select * from show where show_no = ?";
+		String query = "select * from musical_l where m_show_no = ?";
 		
 		
 		try {
@@ -168,23 +170,19 @@ public class ShowDao {
 			
 			if(rset.next()) {
 				show = new Show();
-				show.setShow_artist(rset.getString("show_artist"));
-				show.setShow_category(rset.getString("show_category"));
-				show.setShow_contents(rset.getString("show_contents"));
-				show.setShow_writer(rset.getString("show_writer"));
-				show.setShow_endDate(rset.getDate("show_endDate"));
-				show.setShow_fileName(rset.getString("show_fileName"));
-				show.setShow_filePath(rset.getString("show_filePath"));
-				show.setShow_fileSize(rset.getLong("show_fileSize"));
-				show.setShow_grade(rset.getString("show_grade"));
-				show.setShow_location(rset.getString("show_location"));
-				show.setShow_no(rset.getInt("show_no"));
-				show.setShow_price(rset.getInt("show_price"));
-				show.setShow_startDate(rset.getDate("show_startDate"));
-				show.setShow_subTitle(rset.getString("show_subTitle"));
-				show.setShow_time(rset.getInt("show_time"));
-				show.setShow_title(rset.getString("show_title"));
-				show.setShow_uploadTime(rset.getTimestamp("show_uploadTime"));
+				show.setArtists(rset.getString("m_artists"));
+				show.setSc_code(rset.getString("sc_code"));
+				show.setBk_comm(rset.getInt("BK_COMM"));
+				show.setM_show_no(rset.getInt("m_show_no"));
+				show.setShow_dtInfo(rset.getString("m_show_dtinfo"));
+				show.setShow_st_date(rset.getString("m_show_st_date"));
+				show.setShow_ed_date(rset.getString("m_show_ed_date"));
+				show.setShow_grd(rset.getString("m_show_grd"));
+				show.setShow_name(rset.getString("m_show_name"));
+				show.setShow_poster(rset.getString("m_show_poster"));
+				show.setShow_run(rset.getInt("m_show_run"));
+				//show.setTh_name(rset.getString("m_show_ed_date")); // 확인
+				show.setTh_no(rset.getInt("th_no"));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -232,6 +230,97 @@ public class ShowDao {
 			JDBCTemplate.close(pstmt);
 		}
 		return list;
+	}
+	public int insertComment(Connection conn, int showNo, String contents, String userId) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = "insert into showcomment values(SEQ_showcomment.NEXTVAL,?,?,?,SYSDATE)";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setInt(1, showNo);
+			pstmt.setString(2, contents);
+			pstmt.setString(3, userId);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		
+		return result;
+	}
+	public int insertShow(Connection conn, String userId, String category, String title, String subTitle, String artist,
+			String contents, String location, int time, String grade, int price, String fileName, String fullFilePath,
+			long fileSize, Timestamp uploadTime) {
+		
+			PreparedStatement pstmt = null;
+			int result = 0;
+			
+			String query = "insert into show values(seq_show_no.NEXTVAL,?,?,?,?,?,?,?,sysdate,sysdate,?,?,?,?,?,?,?)";
+			
+			try {
+				pstmt = conn.prepareStatement(query);
+				
+				pstmt.setString(1, userId);
+				pstmt.setString(2, category);
+				pstmt.setString(3, title);
+				pstmt.setString(4, subTitle);
+				pstmt.setString(5, artist);
+				pstmt.setString(6, contents);
+				pstmt.setString(7, location);
+				pstmt.setInt(8, time);
+				pstmt.setString(9, grade);
+				pstmt.setInt(10, price);
+				
+				
+				pstmt.setString(11, fileName);
+				pstmt.setString(12, fullFilePath);
+				pstmt.setLong(13,  fileSize);
+				pstmt.setTimestamp(14, uploadTime);
+				
+				result = pstmt.executeUpdate();
+			
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				JDBCTemplate.close(pstmt);
+			}
+			
+			return result;
+		}
+	public int deleteComment(Connection conn, int m_show_no) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = "delete from showcomment where m_show_no=?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setInt(1, m_show_no);
+			
+			result = pstmt.executeUpdate();
+		
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
 	}
 
 }

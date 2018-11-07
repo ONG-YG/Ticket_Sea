@@ -9,20 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kr.co.ticketsea.show.model.vo.PageData;
 import kr.co.ticketsea.show.model.service.ShowService;
+import kr.co.ticketsea.show.model.vo.PageData;
 
 /**
- * Servlet implementation class ShowListServlet
+ * Servlet implementation class ShowListCncServlet
  */
-@WebServlet(name = "ShowList", urlPatterns = { "/showList.do" })
-public class ShowListServlet extends HttpServlet {
+@WebServlet(name = "ShowListCnc", urlPatterns = { "/showListCnc.do" })
+public class ShowListCncServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ShowListServlet() {
+    public ShowListCncServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -51,7 +51,7 @@ public class ShowListServlet extends HttpServlet {
 				//3. 결과값을 view페이지로 리턴
 				if(pd!=null)
 				{
-					RequestDispatcher view = request.getRequestDispatcher("views/show/showAllList_msc.jsp");
+					RequestDispatcher view = request.getRequestDispatcher("views/show/showAllList_cnc.jsp");
 					request.setAttribute("pageData", pd);
 					
 					view.forward(request, response);

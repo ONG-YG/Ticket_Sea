@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-    <%@ page import = "kr.co.ticketsea.promo.model.vo.*" %>
+    <%@ page import = "kr.co.ticketsea.admin.show.model.vo.Show" %>
+    <%@ page import = "kr.co.ticketsea.show.model.vo.PageData" %>
     <%@ page import = "java.util.*" %>
     <%@ page import = "kr.co.ticketsea.member.model.vo.*" %>
     
@@ -10,7 +11,7 @@
 	// Controller(Servlet)에서 보내준값 가져오기
 	PageData pd = (PageData)request.getAttribute("pageData");
 
-	ArrayList<Promo> list = pd.getList(); // 현재 페이지의 글 목록
+	ArrayList<Show> list = pd.getList(); // 현재 페이지의 글 목록
 	String pageNavi = pd.getPageNavi(); // 현재 navi Bar
 	
 %>
@@ -282,7 +283,7 @@
         <div id="c_inner">
             <div id="c_inner_top">
                 <div class="title1">
-                    <h2>소규모 공연</h2>
+                    <h2>뮤지컬</h2>
                 </div>
                 <div class="title2"></div>
             </div>
@@ -290,15 +291,13 @@
             <div id="container">
         <div id = "right_view">
         <div id="prContest">
-        
-        <% for (Promo p : list) { %>
-        <% if(p.getBoardP_active() == 'Y'){ %>
+        <% for (Show s : list) { %>
+        	<% if(s.getSc_code().equals("MSC")){ %>
             <div id = "prContestDiv1" ">
-	            <div id="prContestPic"><a href="/promo.do?boardP_no=<%=p.getBoardP_no()%>"><img src="../../uploadFile/mslove/<%= p.getBoardP_fileName() %>" style="width:205px; height:330px; align-content: center;"></a></div> <br>
-	        	<div id="prContestTitle" style="font-size: 10px"><a href="/promo.do?boardP_no=<%=p.getBoardP_no()%>"><%=p.getBoardP_title()%></a></div>
+	            <div id="prContestPic"><a href="/show.do?m_show_no=<%=s.getM_show_no()%>"><img src="<%=s.getShow_poster() %>" style="width:205px; height:330px; align-content: center;"></a></div> <br>
+	        	<div id="prContestTitle" style="font-size: 10px"><a href="/show.do?m_show_no=<%=s.getM_show_no()%>"><%=s.getShow_name()%></a></div>
         	</div>
-         <% } %>
-         <%}  %>
+         <% }} %> 
          
         
     </div>
@@ -311,12 +310,7 @@
 		session = request.getSession(false);
 		Member m = (Member)session.getAttribute("member"); 
 			%>
-			
-           <%if(m!=null) {%>
-            <form style="display:inline;" action="/views/promo/promoWrite.jsp">
-				<input type="submit" value="글쓰기" style="width: 70px; height: 30px; float:right;"/> <br>				
-			</form>
-			<%} %>
+	
    
          </div>
          

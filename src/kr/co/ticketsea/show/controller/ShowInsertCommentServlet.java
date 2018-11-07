@@ -1,28 +1,27 @@
 package kr.co.ticketsea.show.controller;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import kr.co.ticketsea.member.model.vo.Member;
 import kr.co.ticketsea.show.model.service.ShowService;
-import kr.co.ticketsea.show.model.vo.ShowData;
 
 /**
- * Servlet implementation class ShowServlet
+ * Servlet implementation class ShowInsertCommentServlet
  */
-@WebServlet(name = "Show", urlPatterns = { "/show.do" })
-public class ShowServlet extends HttpServlet {
+@WebServlet(name = "ShowInsertComment", urlPatterns = { "/showInsertComment.do" })
+public class ShowInsertCommentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ShowServlet() {
+    public ShowInsertCommentServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,26 +34,40 @@ public class ShowServlet extends HttpServlet {
 		//1. 인코딩
 		request.setCharacterEncoding("utf-8");
 		
-		//2. view에서 전송한 데이터를 변수에 저장
+		//2. view에서 보내준 데이터 변수에 저장 (내용,글번호)
+		String contents = request.getParameter("reviewContent");
 		int m_show_no = Integer.parseInt(request.getParameter("m_show_no"));
 		
-		//3. 비즈니스 로직 처리 
-		ShowData pd =  new ShowService().selectOneShow(m_show_no);
+		//3. 작성자
+		HttpSession session = request.getSession(false);
 		
-		//4. 결과 리턴
-		if(pd !=null) {
-			RequestDispatcher view = request.getRequestDispatcher("views/show/show.jsp");
-			request.setAttribute("showData", pd);
-			view.forward(request, response);
+		
+		
+		try { //로그인한 사용자만 댓글을 작성하고 그 이외에는 Exception 발생
 			
-		}else {
+			String userId = ((Member)session.getAttribute("member")).getMemberId();
+			
+			
+		int result = new ShowService().insertComment(m_show_no,contents,userId);
+		
+			if(result>0)
+			{
+				response.sendRedirect("/show.do?m_show_no="+m_show_no);
+			}else {
+				throw new Exception();
+			}
+		} catch (Exception e) {
 			response.sendRedirect("/views/notice/error.jsp");
 		}
 		
 		
 		
 		
+		
+		
+		
 	}
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

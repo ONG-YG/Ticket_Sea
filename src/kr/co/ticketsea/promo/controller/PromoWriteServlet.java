@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Enumeration;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -57,10 +58,12 @@ public class PromoWriteServlet extends HttpServlet {
 		String artist = "";
 		String location = "";
 		String fileName = "";
+		ServletContext scontext = getServletContext();
+		String uploadPath = scontext.getRealPath(fileName);
 		
 		////////////////////////
 			int fileSizeLimit = 5 * 1024 * 1024;
-			String uploadPath = "C:\\Users\\user1\\Desktop\\workspace_ticketsea\\Ticket_Sea\\WebContent\\upLoad";
+			
 			String encType = "UTF-8";
 			
 			MultipartRequest multi = new MultipartRequest(

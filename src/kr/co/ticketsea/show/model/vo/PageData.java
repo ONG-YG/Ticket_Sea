@@ -1,5 +1,7 @@
 package kr.co.ticketsea.show.model.vo;
 
+import kr.co.ticketsea.admin.show.model.vo.Show;
+
 import java.util.ArrayList;
 
 public class PageData {
