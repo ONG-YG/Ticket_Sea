@@ -1,5 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ page import="kr.co.ticketsea.member.model.vo.*" %>
+    <%@ page import="kr.co.ticketsea.mypage.model.vo.*" %>
+    <%@ page import="java.util.ArrayList" %>
+    
+    <%
+	// Controller(Servlet)에서 보내준값 가져오기
+	ReservePageData pd = (ReservePageData)request.getAttribute("reviewPd");
+
+	ArrayList<ReviewMgr> list = pd.getReviewList(); // 현재 페이지의 글 목록
+	String pageNavi = pd.getPageNavi(); // 현재 navi Bar
+	
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -147,9 +159,11 @@
         font-size: 14px;
     }
     .paginate{
-        text-align: center;
         padding-top: 20px;
         border-top: 1px solid #c7c7c7;
+    }
+    #paginate_inner{
+    	margin : 0 auto;
     }
     .pagi_num{
         border: 1px solid skyblue;
@@ -190,8 +204,8 @@
                 <li class="has_sub1">
                     <span>활동 관리</span>
                     <ul>
-                        <li><a href="/views/mypage/reviewMgr.jsp">후기 관리</a></li>
-                        <li><a href="/views/mypage/faqMgr.jsp">나의 문의 내역</a></li>
+                        <li><a href="/reviewMgr.do">후기 관리</a></li>
+                        <li><a href="/qnaMgr.do">나의 문의 내역</a></li>
                         <li><a href="#">소규모 공연 등록관리</a></li>
                         
                     </ul>
@@ -218,38 +232,33 @@
                     <table>
                         <thead>
                             <tr>
-                                <th>티켓명</th>
-                                <th>후기내용</th>
+                                <th>번호</th>
+                                <th>공연명</th>
+                                <th>댓글 내용</th>
                                 <th>작성일</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>라이온킹</td>
-                                <td>재미있네요!</td>
-                                <td>18.10.11</td>
+                            <%	for(ReviewMgr rm: list){ %>
+
+                        	<tr>
+                                <td><%=rm.getNum() %></td>
+                                <td><%=rm.getmShowName() %></td>
+                                <td><%=rm.getShowcommentContents() %></td>
+                                <td><%=rm.getShowcommentDate() %></td>
                             </tr>
-                            <tr>
-                                <td>라이온</td>
-                                <td>추천합니다.~~~~~~~~~~~~~~~~~~~~</td>
-                                <td>18.11.20</td>
-                            </tr>
+                        	<%} %>
                         </tbody>
                     </table>
+                    
+                    
                     <div class="paginate">
-                        
-                        <a href="#">처음</a>
-                        
-                        <a class="pagi_num" href="#">
-                            <strong>1</strong>
-                        </a>
-                        
-                        <a class="pagi_num" href="#">
-                            <strong>2</strong>
-                        </a>
-                        
-                        <a href="#">끝</a>
+                    	<div id="paginate_inner" style="width:315px; text-align:center;">
+							<label><%=pageNavi%></label>
+						</div>
                     </div>
+                    
+                    
                 </div>
             </div>
         </div>

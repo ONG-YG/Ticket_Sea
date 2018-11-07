@@ -59,7 +59,7 @@ function adminBtn(){
 
 							<% } %>
 							
-							<a href="#" >고객센터</a>
+							<a href="/noticeList.do" >고객센터</a>
 						</div>
                     </div>
                 </div>

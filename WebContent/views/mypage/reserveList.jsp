@@ -193,6 +193,7 @@
     
     
     #btnForm{width: auto; height:auto;}
+    #btnForm2{width: auto; height:auto;}
     
 </style>
 </head>
@@ -223,8 +224,8 @@
                 <li class="has_sub">
                     <span>활동 관리</span>
                     <ul>
-                        <li><a href="/views/mypage/reviewMgr.jsp">후기 관리</a></li>
-                        <li><a href="/views/mypage/faqMgr.jsp">나의 문의 내역</a></li>
+                        <li><a href="/reviewMgr.do">후기 관리</a></li>
+                        <li><a href="/qnaMgr.do">나의 문의 내역</a></li>
                         <li><a href="#">소규모 공연 등록관리</a></li>
                         
                     </ul>
@@ -263,18 +264,30 @@
                                 <td><%=rl.getmShowName() %></td>
                                 <td><%=rl.getBkDate() %></td>
                                 <td>
+                                <form action="/reserveDelete.do" method="post" id="btnForm2">
+                                <input type="hidden" name="reserveDelete" value="<%=rl.getBkNo()%>"/>
                                 <% if(rl.getBkStatCd().equals("RSV_CNL")){ %>
                                 	취소완료
+                                	
+                                	
                                 <%}else if(rl.getBkStatCd().equals("RSV_CPL")){ %>
-                                	예매완료 <button class=list_btn id=list_btn>취소</button>
+                                	예매완료 <button id="list_btn" class="list_btn">취소</button>
+                                	<!-- <input type="submit" value="취소" class=list_btn id=list_btn /> -->
+                                	
                                 <%}else{ %>
-                                	예매중 <button class=list_btn id=list_btn>취소</button>
+                                	예매중<button id="list_btn" class="list_btn">취소</button>
+                                	 <!-- <input type="submit" value="취소" class=list_btn id=list_btn /> -->
+                                	
+                                	
                                 <%} %>
+                                </form>
                                 </td>
                                 <td>
                                 <form action="/popupReserveList.do" method="get" id="btnForm" target="popup_detail_reserve">
-                                <input type="submit" id=list_btn class=show_btn value="보기"/>
-                                <input type="hidden" name="show_btn" value="<%=rl.getBkNo()%>" />
+                                
+                                	<input type="submit" id=list_btn class=show_btn value="보기"/>
+                                	<input type="hidden" name="show_btn" value="<%=rl.getBkNo()%>" />
+                                
                                 </form>
                                 </td>
                             </tr>
@@ -286,11 +299,15 @@
 
                     	// 예매 취소 동작
                         $('.list_btn').click(function(){
-                        	if(confirm("예매를 취소하시겠습니까?")){
-                            	location.href="/memberDelete.do";
+                        	
+                        	var ck = confirm("예매를 취소하시겠습니까?");
+                        	console.log(ck);
+                        	if(ck){
+                            	$('#btnForm2').submit();
                             }else{
-                            	location.href="/reserveList.do"
+                            	location.href="/reserveList.do";
                             }
+                        	return false;
                         });
                         
                     	// 상세보기 팝업 동작
