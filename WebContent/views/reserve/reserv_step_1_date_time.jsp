@@ -118,8 +118,8 @@
                 $('#cnt_box ul').html("");
                 $('#seat_box ul').html("");
                 $('#cnt_box li').removeClass('selected_cnt_li');
-                $('.calendar-date').removeClass('selected_date_td');
-                $(this).addClass('selected_date_td');
+                //$('.calendar-date').removeClass('selected_date_td');
+                //$(this).addClass('selected_date_td');
                 
                 var calSelected = date_sel.split('-');
                 //console.log("date_sel : "+date_sel);
@@ -129,8 +129,8 @@
                 var month = calSelected[1];
                 var day = calSelected[2];
                 
-                //date_sel = year+"-"+month+"-"+day;
-                $('#date_sel_info span').html(year+"."+month+"."+day);
+                //$('#date_sel_info span').html(year+"."+month+"."+day);
+                $('#date_sel_info span').html("");
                 $('#cnt_sel_info span').html(cnt_sel);
                 //alert(date_sel);
                 
@@ -179,7 +179,15 @@
         		var selectedLi = '#cnt_box #li_'+cnt;
         		$('#cnt_box li').removeClass('selected_cnt_li');
                 $(selectedLi).addClass('selected_cnt_li');
-
+                
+                ////////////////////////
+                var calSelected = date_sel.split('-');
+                var year = calSelected[0];
+                var month = calSelected[1];
+                var day = calSelected[2];
+                $('#date_sel_info span').html(year+"."+month+"."+day);
+                /////////////////////
+                
                 cnt_sel = $(selectedLi).children('.cnt').html();
                 var cntText = $(selectedLi).text();
                 $('#cnt_sel_info span').html(cntText);

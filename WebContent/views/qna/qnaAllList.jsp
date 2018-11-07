@@ -277,7 +277,7 @@
                 </div>
                 
                      <table border=1px class="questionTable">
-                         <thead style="background-color: gainsboro">
+                         <thead style="background-color: lightskyblue; color:white" >
                              <td width="70%">제목</td>
                              <td width="12%">작성자</td>
                              <td width="12%">작성일</td>
@@ -303,10 +303,12 @@
 			</form>
             <br>
             <div class="searchArea"> 
-                    <a href="#"><img src="../../img/btn_search4.png" alt="검색" style="float: right"></a>
+            <form style="display:inline;" action="/qnaSearch.do" method="get">
+                    <a href="#"><input type="submit" style="display: none"><img src="../../img/btn_search4.png" alt="검색" style="float: right"></a>
                 
-					<input type="text" class="textInp" name="searchValue" id="searchValue" style="float: right">
+					<input type="text" class="textInp" name="search" id="search" style="float: right">
 					<a href="javascript:search();"></a>
+					</form>
 				</div>
             
             

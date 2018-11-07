@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ page import="kr.co.ticketsea.member.model.vo.*" %>
+    <%@ page import="kr.co.ticketsea.member.model.vo.*" 
+		%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Ticket Sea || 티켓씨</title>
 
-  <link rel=StyleSheet type="text/css" href="/css/header.css"> 
+  <link rel=StyleSheet type="text/css" href="/css/header.css?text=100" > 
 
 
 </head>
@@ -32,13 +33,17 @@ function adminBtn(){
 								session = request.getSession(false);
 								Member member = (Member)session.getAttribute("member");	
 								if(member!=null){ //로그인 성공시
+									if((String)request.getAttribute("keyword")!=null){
+								String searchKeyword = (String)request.getAttribute("keyword");
+									}
+								
 							%>
 							
 							<%if(member.getMemberId().equals("admin")){%>
 							<a href="/logout.do" id="logout">로그아웃</a>
 							<a href="" onclick="adminBtn();">관리자페이지</a>
 							<a href="/reserveList.do" id="myPage">마이페이지</a>
-							<a href="/reserveList.do" id="reserve">예매확인/취소</a><span>|</span>
+							<a href="/reserveList.do" id="reserve">예매확인/취소</a>
 							
 							<%}else{ %>
 							<a href="/logout.do" id="logout">로그아웃</a>
@@ -49,7 +54,7 @@ function adminBtn(){
 							<a href="#"  class="btn login" 
 							onclick="window.open('/views/member/login.jsp','로그인','width=430,height=440'); return false;"  id="loginBtn">로그인</a>
 							 <a href="#" id="joinBtn"
-                   			 onclick="window.open('/views/member/memberJoin.jsp','회원가입','width=430,height=750'); return false;">회원가입</a><span> | </span> 
+                   			 onclick="window.open('/views/member/memberJoin.jsp','회원가입','width=430,height=750'); return false;">회원가입</a> 
 							<% } %>
 							
 							<a href="#" >고객센터</a>
@@ -65,27 +70,28 @@ function adminBtn(){
 				</h1>
 				<div class="search">
 					
-					<form name="searchForm" action="" method="GET">
+					<form name="search" action="/musicalSearchList.do" method="GET">
                 <fieldset>
                     <legend>검색창</legend>
-                    <input type="text" id="searchline" name="query" title="검색어 입력" value="">
-                    <a href="#" class="btn_search"><img id="searchIcon"  src="/img/searchicon.PNG" width="41px"
-                    ></a>
+                    <input type="text" id="searchline" name="search" title="검색어 입력" value="">
+                    <img  id="searchIcon" src="/img/searchicon.PNG"s
+                    onclick="goSearch();">
                 </fieldset>
                         
             		</form>
         		</div>
 				  
 			</div>
+			
             <!--menu div-->
             <div id="menu">
 				<ul>
 					<li><a class="menulink">&nbsp;</a></li>
-					<li><a class="menulink" href="#">뮤지컬</a></li>
+					<li><a class="menulink" href="/showList.do">뮤지컬</a></li>
 					<li><a class="menulink" href="#">콘서트</a></li>
-					<li><a class="menulink" href="#">소규모공연</a>		</li>
+					<li><a class="menulink" href="/promoList.do">소규모공연</a>		</li>
 					<li><a class="menulink" href="#">랭킹</a></li>
-					<li><a class="menulink" href="#">고객센터</a>		</li>
+					<li><a class="menulink" href="/noticeList.do">고객센터</a>		</li>
 					<li><a class="menulink">&nbsp;</a></li>
 				</ul>
 			</div>
@@ -93,7 +99,12 @@ function adminBtn(){
        
 
     </div>
-
+	<script>
+		function goSearch(){
+			var keyword = document.getElementById("searchline").value;
+			location.href=("/musicalSearchList.do"+"?search="+keyword);
+		}
+	</script>
 
 </body>
 </html>

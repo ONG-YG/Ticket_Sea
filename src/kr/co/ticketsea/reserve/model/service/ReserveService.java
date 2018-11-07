@@ -241,9 +241,9 @@ public class ReserveService {
 		return psNo;
 	}
 
-	public int insertBookInfo(long bkNo, int memberNo, String bkStateCd, int ticketPrice, int totalPrice, String payType) {
+	public int insertBookInfo(long bkNo, int memberNo, String bkStateCd, int ticketPrice, int totalPrice, String payType, String phone, String email) {
 		Connection conn = JDBCTemplate.getConnection();
-		int result = new ReserveDao().insertBookInfo(conn, bkNo, memberNo, bkStateCd, ticketPrice, totalPrice, payType);
+		int result = new ReserveDao().insertBookInfo(conn, bkNo, memberNo, bkStateCd, ticketPrice, totalPrice, payType, phone, email);
 		
 		if(result>0) {
 			JDBCTemplate.commit(conn);
@@ -278,5 +278,4 @@ public class ReserveService {
 		return result;
 	}
 
-	
 }

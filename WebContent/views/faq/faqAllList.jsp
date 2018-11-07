@@ -300,7 +300,7 @@
                     <br>
                     
                     <table border 1px class="faqContent">
-                        <tr style="background-color: gainsboro">
+                        <tr style="background-color: lightskyblue; color:white">
                             <td id = "contentCategory" style="width: 15%">분류</td>
                             <td id = "contentQuestion"  style="width: 85%">질문</td>
                         </tr>
@@ -338,10 +338,12 @@
 	<%} %>
             <br>
             <div class="searchArea"> 
-                    <a href="#"><img src="../../img/btn_search4.png" alt="검색" style="float: right"></a>
+            <form style="display:inline;" action="/faqSearch.do" method="get">
+                    <a href="#"><input type="submit" style="display: none"><img src="../../img/btn_search4.png" alt="검색" style="float: right"></a>
                 
-					<input type="text" class="textInp" name="searchValue" id="searchValue" style="float: right">
+					<input type="text" class="textInp" name="search" id="search" style="float: right">
 					<a href="javascript:search();"></a>
+					</form>
 				</div>
             
                 
