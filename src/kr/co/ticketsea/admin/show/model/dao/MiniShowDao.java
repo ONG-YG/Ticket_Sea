@@ -386,4 +386,26 @@ public class MiniShowDao {
 		return ms;
 	}
 
+	public int refuseMiniShow(Connection conn, int msNo) {
+		PreparedStatement pstmt=null;
+		int result =0;
+		
+		String query="update mini_show set ms_state='ap_dec' where ms_no=?";
+		
+		try {
+			pstmt=conn.prepareStatement(query);
+			
+			pstmt.setInt(1, msNo);
+			
+			result=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+		
+	}
+
 }

@@ -85,6 +85,10 @@
                                 <td><%=rs.getPs_date() %></td>
                             </tr>
                             <tr>
+                            	<th>관람회차 /시간</th>
+                            	<td><%=rs.getPs_cnt()%>회차 / <%=rs.getPs_time() %>
+                            </tr>
+                            <tr>
                                 <th>아이디</th>
                                 <td><%=rs.getMember_id() %></td>
                             </tr>
@@ -114,7 +118,7 @@
                     </table>
                 </div>
                    <div id="reserveCancel">
-                    <button id="updateBtn" onclick="return updateSubmit();">예매수정</button>
+                    <button id="updateBtn" onclick="return updateSubmit()">예매수정</button>
                    </div>
                </div>
                </form>

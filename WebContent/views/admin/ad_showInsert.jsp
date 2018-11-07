@@ -82,7 +82,7 @@ function LoadImg(value){
                 <h2 class="main_title" style="text-align:left">공연등록</h2>
             </div>
              <!-- form 태그 -->
-       		<form action="/showInsert.do" method="post" enctype="multipart/form-data">
+       		<form action="/showInsert.do" method="post" enctype="multipart/form-data" id="updateForm">
             <div class="main_area">
                 <div class="left_wrap">
                 <div class="input_area">
@@ -198,7 +198,7 @@ function LoadImg(value){
                         </div>
                     </fieldset>
                     <div class="submit_area">
-	            <input type="submit" value="작성" style="float:right;" onclick="return showCheck()" width="70px" height="40px">
+                    <button id="updateBtn" onclick = "return showCheck();">공연등록</button>
 	            </div>
 	            </div>
 	            </div>
@@ -214,17 +214,11 @@ function LoadImg(value){
 	<!-- script -->
 	
 	<script>
-	$(document).ready(function() {
-	    $("#placeSearch").click(function(){
-	    	location.href="/views/admin/placeInsert.jsp";
-	    });
-
-	}); 
 
 		
 		/* submit */
 
-	function showCheck(){
+		function showCheck(){
 		var category= document.getElementById("category").value;
 		var title= document.getElementById("title").value;
 		var startEventDate=document.getElementById("startEventDate").value;
@@ -283,10 +277,17 @@ function LoadImg(value){
     	}
         else//모든 검사 만족시 true 반환
         {
+        	document.getElementById("updateForm").submit();
             return true;
         }
 		
 	}
+		$(document).ready(function() {
+		    $("#placeSearch").click(function(){
+		    	location.href="/views/admin/placeInsert.jsp";
+		    });
+
+		}); 
 	</script>
 </body>
 </html>

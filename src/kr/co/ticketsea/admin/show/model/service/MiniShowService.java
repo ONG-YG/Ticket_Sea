@@ -121,5 +121,14 @@ public class MiniShowService {
 		return ms;
 	}
 
+	public int refuseMiniShow(int msNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new MiniShowDao().refuseMiniShow(conn,msNo);
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
+
 
 }

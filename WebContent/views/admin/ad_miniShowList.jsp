@@ -80,7 +80,7 @@
                            <td><%=ms.getMs_userId() %></td>
                            <td><%=ms.getMs_place() %></td>
                            <td><%=ms.getMs_wrtdate() %></td>
-                           <td><input type="button" value="승인" onclick="approve('<%=ms.getMs_no()%>');"/>&nbsp;&nbsp;<input type="button" value="거부"/></td>
+                           <td><input type="button" value="승인" onclick="approve('<%=ms.getMs_no()%>');"/>&nbsp;&nbsp;<input type="button" value="거부" onclick="refuse('<%=ms.getMs_no()%>');"/></td>
                        </tr>
                         <%} %>
                     </table>
@@ -96,7 +96,7 @@
                 
 					<input type="text" class="textInp" name="searchValue" id="searchValue" style="float: right">
 					<a href="javascript:search();"></a>
-				</div>
+				 </div>
                 </div>
                </div>
                </div>
@@ -106,8 +106,15 @@
 	</div>
 	<script>
 		function approve(showNo){
-			if(window.confirm("공연을 승인하시겠습니까?")){
+			if(window.confirm("소규모 공연 등록을 승인하시겠습니까?")){
 				location.href="/miniShowApprove.do?msNo="+showNo;
+			}else{
+				return false;
+			}
+		}
+		function refuse(showNo){
+			if(window.confirm("소규모 공연 등록을 거부하시겠습니까?")){
+				location.href="/miniShowRefuse.do?msNo="+showNo;
 			}else{
 				return false;
 			}
