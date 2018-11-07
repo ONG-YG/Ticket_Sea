@@ -8,7 +8,7 @@
     
     <!-- 외부 스타일 시트 적용 -->
     <link href="../../css/reserv_common.css" rel="stylesheet" type="text/css">
-    <link href="../../css/reserv_error.css" rel="stylesheet" type="text/css">
+    <link href="../../css/reserv_error.css?ver=1" rel="stylesheet" type="text/css">
     
     <script
       type="text/javascript"
@@ -16,7 +16,14 @@
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
 	</script>
-    
+    <script>
+        function terminate() {
+            window.close();
+            if(!window.closed) {
+                location.href="/";
+            }
+        }
+    </script>
 </head>
     
 <body>
@@ -51,7 +58,12 @@
                 <div class="reserve_left">
                     <center>
                     <div class="reserve_step3">
-                    <strong class="title"><span>티켓예매가 완료되었습니다</span></strong>
+                        
+                        
+                        <strong class="title"><span>오류가 발생했습니다.</span></strong><br>
+                        <strong class="title2"><span>문제가 지속될 경우 관리자에게 문의해주세요.</span></strong>
+                        
+                        
                     <div class="white_box">
                         
                     </div>
@@ -62,9 +74,9 @@
                 <!--------------------------------------->
                 </div>
                 <div class="reserve_right">
-                    
+                    <div class="reserve_result"></div>
                     <div id="reserve_btn_only">
-                        <a class="btn" onclick="reserveView()">닫 기</a>
+                        <a class="btn" onclick="terminate()">닫 기</a>
                     </div>
                     
                 </div>
