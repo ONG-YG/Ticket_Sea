@@ -313,23 +313,16 @@ public class MypageDao {
 		
 		
 		// ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 쿼리문 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
-		String query = "select * from\r\n" + 
-				"(select ROW_NUMBER() OVER (ORDER BY ticket_no asc) AS num , a.* from\r\n" + 
-				"(select ticket_no,bk_no,ps_no,ps_date,ps_cnt,ps_time,th1_seat_no,th1_seat_grd,seat_title,a.m_show_no,m_show_name,m_show_run from\r\n" + 
-				"(select ticket_no,bk_no,ps_no,ps_date,ps_cnt,ps_time,m_show_no,a.th1_seat_no,th1_seat_grd,seat_title from\r\n" + 
-				"(select ticket_no,bk_no,a.ps_no,ps_date,ps_cnt,ps_time,m_show_no,th1_seat_no from\r\n" + 
-				"(select * from bk_s_l where bk_no = ?) a,perf_sch b\r\n" + 
-				"where a.ps_no = b.ps_no)a, th1_seat_l b\r\n" + 
-				"where a.th1_seat_no = b.th1_seat_no) a, musical_l b\r\n" + 
-				"where a.m_show_no = b.m_show_no) a)\r\n" + 
-				"where num between ? and ?\r\n" + 
-				"order by num asc";		
+		String query = "select * from (select ROW_NUMBER() OVER (ORDER BY ticket_no asc) AS num , a.* from (select ticket_no,bk_no,ps_no,ps_date,ps_cnt,ps_time,th1_seat_no,th1_seat_grd,seat_title,a.m_show_no,m_show_name,m_show_run from (select ticket_no,bk_no,ps_no,ps_date,ps_cnt,ps_time,m_show_no,a.th1_seat_no,th1_seat_grd,seat_title from (select ticket_no,bk_no,a.ps_no,ps_date,ps_cnt,ps_time,m_show_no,th1_seat_no from (select * from bk_s_l where bk_no = ?) a,perf_sch b where a.ps_no = b.ps_no)a, th1_seat_l b where a.th1_seat_no = b.th1_seat_no) a, musical_l b where a.m_show_no = b.m_show_no) a) where num between ? and ? order by num asc";	
+		
+		//select * from (select ROW_NUMBER() OVER (ORDER BY ticket_no asc) AS num , a.* from (select ticket_no,bk_no,ps_no,ps_date,ps_cnt,ps_time,th1_seat_no,th1_seat_grd,seat_title,a.m_show_no,m_show_name,m_show_run from (select ticket_no,bk_no,ps_no,ps_date,ps_cnt,ps_time,m_show_no,a.th1_seat_no,th1_seat_grd,seat_title from (select ticket_no,bk_no,a.ps_no,ps_date,ps_cnt,ps_time,m_show_no,th1_seat_no from (select * from bk_s_l where bk_no = ?) a,perf_sch b where a.ps_no = b.ps_no)a, th1_seat_l b where a.th1_seat_no = b.th1_seat_no) a, musical_l b where a.m_show_no = b.m_show_no) a) where num between ? and ? order by num asc
 
 		// 쿼리문 내용 담을 list 배열 초기화		
 		ArrayList<PopupReserveList> pList = new ArrayList<PopupReserveList>();
 		
 		try {
 			pstmt = conn.prepareStatement(query);
+			
 			pstmt.setString(1, bkNo);
 			pstmt.setInt(2, start);
 			pstmt.setInt(3, end);
@@ -364,8 +357,6 @@ public class MypageDao {
 			JDBCTemplate.close(rset);
 			JDBCTemplate.close(pstmt);
 		}
-		
-		System.out.println(pList);
 		
 		return pList;
 	}

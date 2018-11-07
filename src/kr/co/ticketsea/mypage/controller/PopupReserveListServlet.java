@@ -34,9 +34,12 @@ public class PopupReserveListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		
+		// 인코딩
+		request.setCharacterEncoding("utf-8");
+		
 		// 파라미터 불러오기(bk_no불러오기)
 		String bkNo = request.getParameter("show_btn");
-		
 		
 		// ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 페이징 처리 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 		// 1. 현재 페이지 저장을 위해 변수 선언
@@ -52,11 +55,10 @@ public class PopupReserveListServlet extends HttpServlet {
 		ReservePageData pd = new MypageService().popupReserveList(currentPage,bkNo);		
 
 		//3. jsp 페이지로 넘겨준다
+		
 		RequestDispatcher view = request.getRequestDispatcher("views/mypage/popupReserveList.jsp");
 		request.setAttribute("pd", pd);
 		view.forward(request, response);
-		
-		
 	}
 
 	/**

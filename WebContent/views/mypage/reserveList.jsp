@@ -190,6 +190,10 @@
     }
     
     
+    
+    
+    #btnForm{width: auto; height:auto;}
+    
 </style>
 </head>
 <body>
@@ -268,8 +272,10 @@
                                 <%} %>
                                 </td>
                                 <td>
+                                <form action="/popupReserveList.do" method="get" id="btnForm" target="popup_detail_reserve">
                                 <input type="submit" id=list_btn class=show_btn value="보기"/>
                                 <input type="hidden" name="show_btn" value="<%=rl.getBkNo()%>" />
+                                </form>
                                 </td>
                             </tr>
                         	<%} %>
@@ -289,18 +295,16 @@
                         
                     	// 상세보기 팝업 동작
                         $('.show_btn').click(function(){
-                        	window.open("/popupReserveList.do","예매내역 상세보기","width=1000, height=500");
+                        	window.open("","popup_detail_reserve","width=1000, height=500");
+                        	$('#btnForm').submit();
                         });
                     })
                     </script>
 					
                     <div class="paginate">
-                    
                     	<div id="paginate_inner" style="width:315px; text-align:center;">
 							<label><%=pageNavi%></label>
 						</div>
-                        
-                      
                     </div>
                     
                     

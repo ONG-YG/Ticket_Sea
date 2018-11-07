@@ -52,11 +52,11 @@ public class ReserveListServlet extends HttpServlet {
 		}
 		
 		//2. 비즈니스 로직
-		ReservePageData pd = new MypageService().reserveAllList(currentPage,memberNo);		
+		ReservePageData rpd = new MypageService().reserveAllList(currentPage,memberNo);		
 
 		//3. jsp 페이지로 넘겨준다
 		RequestDispatcher view = request.getRequestDispatcher("views/mypage/reserveList.jsp");
-		request.setAttribute("pd", pd);
+		request.setAttribute("pd", rpd);
 		view.forward(request, response);
 		
 	}
