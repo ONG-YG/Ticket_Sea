@@ -87,9 +87,9 @@
                         <div class="edit">
                             <div class="write_wrap">
                                 <select class="category_select" id="category" name="sc_code">
-                                    <option value="1" selected="selected" >카테고리 선택</option>
-                                    <option value="MSC">뮤지컬</option>
-                                    <option value="CNT">콘서트</option>
+                                    <%for(ShowCategory sc : scList) {%>
+                                    <option value="<%=sc.getSc_code()%>"><%=sc.getSc_name()%></option>
+                            		<%} %>
                                 </select>
                                 <input id="title" type="text" name="show_name" class="title_input" placeholder="공연명을 입력해 주세요." value="<%=show.getShow_name() %>" maxlength="64" autofocus="autofocus">
                             </div>

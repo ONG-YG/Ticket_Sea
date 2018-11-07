@@ -13,16 +13,16 @@ import kr.co.ticketsea.admin.show.model.service.MiniShowService;
 import kr.co.ticketsea.admin.show.model.vo.MiniShow;
 
 /**
- * Servlet implementation class MiniShowApInfoServlet
+ * Servlet implementation class MiniShowWtInfoServlet
  */
-@WebServlet(name = "MiniShowApInfo", urlPatterns = { "/miniShowApInfo.do" })
-public class MiniShowApInfoServlet extends HttpServlet {
+@WebServlet(name = "MiniShowWtInfo", urlPatterns = { "/miniShowWtInfo.do" })
+public class MiniShowWtInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MiniShowApInfoServlet() {
+    public MiniShowWtInfoServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,12 +35,11 @@ public class MiniShowApInfoServlet extends HttpServlet {
 		
 		int msNo=Integer.parseInt(request.getParameter("msNo"));
 		
-		MiniShow ms = new MiniShowService().selectApShow(msNo);
+		MiniShow ms = new MiniShowService().selectWtShow(msNo);
 		
-		RequestDispatcher view = request.getRequestDispatcher("/views/admin/ad_miniApInfo.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("/views/admin/ad_miniWtInfo.jsp");
 		request.setAttribute("miniShow", ms);
 		view.forward(request, response);
-		
 	}
 
 	/**

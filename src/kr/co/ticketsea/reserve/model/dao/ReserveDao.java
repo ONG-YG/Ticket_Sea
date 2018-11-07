@@ -692,12 +692,7 @@ public class ReserveDao {
 		return result;
 	}
 
-	public void selectOneReserve(Connection conn, int reserveNo) {
-		PreparedStatement pstmt=null;
-		ResultSet rset= null;
-		
-		
-	}
+
 
 	
 }

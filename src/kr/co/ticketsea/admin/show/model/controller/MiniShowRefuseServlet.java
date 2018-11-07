@@ -1,30 +1,25 @@
-package kr.co.ticketsea.admin.reserve.controller;
+package kr.co.ticketsea.admin.show.model.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kr.co.ticketsea.admin.reserve.model.service.AdReserveService;
-import kr.co.ticketsea.admin.reserve.model.vo.Reserve;
-import kr.co.ticketsea.admin.reserve.model.vo.ReservePageData;
+import kr.co.ticketsea.admin.show.model.service.MiniShowService;
 
 /**
- * Servlet implementation class AdReserveListServlet
+ * Servlet implementation class MiniShowRefuseServlet
  */
-@WebServlet(name = "AdReserveList", urlPatterns = { "/adReserveList.do" })
-public class AdReserveListServlet extends HttpServlet {
+@WebServlet(name = "MiniShowRefuse", urlPatterns = { "/miniShowRefuse.do" })
+public class MiniShowRefuseServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdReserveListServlet() {
+    public MiniShowRefuseServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,21 +28,14 @@ public class AdReserveListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int currentPage;
+		request.getParameter("utf-8");
 		
-		if(request.getParameter("currentPage")==null) {
-			currentPage=1;
-		}else {
-			currentPage=Integer.parseInt(request.getParameter("currentPage"));
-		}
+		int msNo = Integer.parseInt(request.getParameter("msNo"));
 		
-		//비즈니스 로직 
-		ReservePageData rpg=new AdReserveService().reserveAllList(currentPage);
+		int result = new MiniShowService().refuseMiniShow(msNo);
 		
-		if(rpg!=null) {
-			RequestDispatcher view = request.getRequestDispatcher("views/admin/ad_reserveList.jsp");
-			request.setAttribute("reservePgData", rpg);
-			view.forward(request, response);
+		if(result>0) {
+			response.sendRedirect("/views/admin/msRefuseSuccess.jsp");
 		}else {
 			response.sendRedirect("/views/admin/error.jsp");
 		}

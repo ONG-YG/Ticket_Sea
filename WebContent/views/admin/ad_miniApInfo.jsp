@@ -126,6 +126,8 @@
                 function updateSubmit(){
                 	var artists = document.getElementById("artists").value; 
                 	var place = document.getElementById("place").value; 
+                	var st_date = document.getElementById("st_date").value; 
+                	var ed_date = document.getElementById("ed_date").value; 
                 	var intd = document.getElementById("intd").value; 
                 	
                 	if(artists==""){
@@ -134,7 +136,14 @@
                 	}else if(place=""){
                 		alert("장소를 입력하세요");
                 		return false;
-                	}else if(intd==""){
+                	}else if(!(/^(19|20)\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$/.test(st_date))){
+                		alert("시작일을 입력해주세요(yyyy-mm-dd)");
+        				return false;
+                	}else if(!(/^(19|20)\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$/.test(ed_date))){
+                		alert("종료일을 입력해주세요(yyyy-mm-dd)");
+            			return false;
+                	}
+                	else if(intd==""){
                 		alert("공연정보를 입력하세요");
                 		return false;
                 	}else{

@@ -8,8 +8,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import kr.co.ticketsea.admin.reserve.model.vo.Reserve;
+import kr.co.ticketsea.admin.reserve.model.vo.ReserveApInfo;
 import kr.co.ticketsea.admin.show.model.vo.Show;
 import kr.co.ticketsea.common.JDBCTemplate;
+import kr.co.ticketsea.reserve.model.vo.SelectedSeat;
 
 public class AdReserveDao {
 	
@@ -23,16 +25,15 @@ public class AdReserveDao {
 		//끝 게시물 계산
 		int end = currentPage* recordCountPerPage;
 		
-		String query = "select * " + 
-				"from(select row_number() over(order by bk_no desc)num,a.* from(" + 
-				"select distinct bk_no, a.member_no,member_id,m_show_name,bk_date " + 
-				"from(select member_no,m_show_name,bk_date,bk_no " + 
-				"from (select bk_no,member_no,bk_date,m_show_no,a.ps_no " + 
-				"from(select a.bk_no,member_no,bk_date,ps_no " + 
-				"from book_inf a, bk_s_l b " + 
-				"where a.bk_no=b.bk_no)a,perf_sch b " + 
-				"where a.ps_no=b.ps_no)a,musical_l b " + 
-				"where a.m_show_no=b.m_show_no)a , member b " + 
+		String query = "select * from(select row_number() over(order by bk_no desc)num,a.* \r\n" + 
+				"from(select distinct bk_no, a.member_no,member_id,m_show_name,bk_date,bk_stat_cd\r\n" + 
+				"from(select member_no,m_show_name,bk_date,bk_no,bk_stat_cd\r\n" + 
+				"from (select bk_no,member_no,bk_date,m_show_no,a.ps_no,bk_stat_cd \r\n" + 
+				"from(select a.bk_no,member_no,bk_date,ps_no,bk_stat_cd\r\n" + 
+				"from book_inf a, bk_s_l b \r\n" + 
+				"where a.bk_no=b.bk_no AND bk_stat_cd='RSV_CPL')a,perf_sch b \r\n" + 
+				"where a.ps_no=b.ps_no)a,musical_l b \r\n" + 
+				"where a.m_show_no=b.m_show_no)a , member b \r\n" + 
 				"where a.member_no=b.member_no)a) where num between ? and ?";
 		
 		ArrayList<Reserve> list = new ArrayList<Reserve>();
@@ -140,6 +141,132 @@ public class AdReserveDao {
 		return sb.toString();
 	}
 
+	public ReserveApInfo selectOneReserve(Connection conn, String reserveNo) {
+		
+		PreparedStatement pstmt=null;
+		ResultSet rset=null;
+		ReserveApInfo rs=null;
+		String query = "select a.m_show_no,m_show_name,ps_date,ps_cnt,ps_time,th1_seat_grd,seat_title,a.ps_no,a.bk_no,member_no,member_id,member_name,bk_date,bk_tot_price,bk_phone,bk_email,bk_stat_name\r\n" + 
+				"from(select ps_date,ps_cnt,ps_time,m_show_no,th1_seat_grd,seat_title,a.ps_no,a.bk_no,member_no,member_id,member_name,bk_date,bk_tot_price,bk_phone,bk_email,bk_stat_name\r\n" + 
+				"from(select th1_seat_grd,seat_title,ps_no,a.bk_no,member_no,member_id,member_name,bk_date,bk_tot_price,bk_phone,bk_email,bk_stat_name\r\n" + 
+				"from(select ps_no,th1_seat_no,a.bk_no,member_no,member_id,member_name,bk_date,bk_tot_price,bk_phone,bk_email,bk_stat_name\r\n" + 
+				"from(select bk_no,a.member_no,member_id,member_name,bk_date,bk_tot_price,bk_phone,bk_email,bk_stat_name\r\n" + 
+				"from(select * from book_inf a,bk_state_l b\r\n" + 
+				"where a.bk_stat_cd=b.bk_stat_cd)a, member b\r\n" + 
+				"where a.member_no=b.member_no)a,BK_S_L b\r\n" + 
+				"where a.bk_no=b.bk_no)a, TH1_SEAT_L b\r\n" + 
+				"where a.th1_seat_no=b.th1_seat_no)a, perf_sch b\r\n" + 
+				"where a.ps_no=b.ps_no)a, musical_l b\r\n" + 
+				"where a.m_show_no=b.m_show_no and a.bk_no=?";
+		
+		try {
+			pstmt=conn.prepareStatement(query);
+			pstmt.setString(1, reserveNo);
+			
+			rset=pstmt.executeQuery();
+			
+			if(rset.next()) {
+				rs=new ReserveApInfo();
+				rs.setBk_no(rset.getString("bk_no"));
+				rs.setM_show_name(rset.getString("m_show_name"));
+				rs.setPs_date(rset.getDate("ps_date"));
+				rs.setPs_cnt(rset.getInt("ps_cnt"));
+				rs.setPs_time(rset.getString("PS_TIME"));
+				rs.setMember_id(rset.getString("member_id"));
+				rs.setMember_name(rset.getString("member_name"));
+				rs.setBk_date(rset.getDate("bk_date"));
+				rs.setBk_tot_price(rset.getInt("bk_tot_price"));
+				rs.setBk_phone(rset.getString("bk_phone"));
+				rs.setBk_email(rset.getString("bk_email"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rset);
+		}
+		return rs;
+	}
+
+	public ArrayList<SelectedSeat> seatList(Connection conn, String reserveNo) {
+		PreparedStatement pstmt=null;
+		ResultSet rset=null;
+		SelectedSeat st=null;
+		ArrayList<SelectedSeat> list=new ArrayList<SelectedSeat>();
+		
+		String query="select th1_seat_grd, seat_title\r\n" + 
+				"from(select * from book_inf a, bk_s_l b\r\n" + 
+				"where a.bk_no=b.bk_no and a.bk_no=?)a, th1_seat_l b\r\n" + 
+				"where a.th1_seat_no=b.TH1_SEAT_NO ";
+		
+		try {
+			pstmt=conn.prepareStatement(query);
+			pstmt.setString(1, reserveNo);
+			
+			rset=pstmt.executeQuery();
+			while(rset.next()) {
+				st=new SelectedSeat();
+				st.setSeatGrd(rset.getString("th1_seat_grd"));
+				st.setSeatTitle(rset.getString("seat_title"));
+				
+				list.add(st);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rset);
+		}
+		return list;
+		
+	}
+
+	public int reserveUpdate(Connection conn, String bk_no,String phone, String email) {
+		PreparedStatement pstmt=null;
+		int result =0;
+		
+		String query="update book_inf set BK_PHONE=?, BK_EMAIL=? where bk_no=?";
+		
+		try {
+			pstmt=conn.prepareStatement(query);
+			pstmt.setString(1, phone);
+			pstmt.setString(2, email);
+			pstmt.setString(3, bk_no);
+			
+			result=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+		
+	}
+
+	public int deleteReserve(Connection conn, String bkNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;	
+		String query ="update book_inf set bk_stat_cd='RSV_CNL' where bk_no=?";
+		
+		try {
+			pstmt=conn.prepareStatement(query);
+			pstmt.setString(1, bkNo);
+			
+			result=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	
 	
 	
 

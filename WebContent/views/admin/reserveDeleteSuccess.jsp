@@ -8,8 +8,8 @@
 </head>
 <body>
 	<script>
-		alert("소규모공연 수정 완료");
-		location.href="/msApproveList.do";
+		alert("예매 취소 완료");
+		location.href="/adReserveList.do";
 	</script>
 </body>
 </html>

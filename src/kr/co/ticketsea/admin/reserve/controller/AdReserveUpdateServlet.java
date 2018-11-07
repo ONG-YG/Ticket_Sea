@@ -1,9 +1,6 @@
 package kr.co.ticketsea.admin.reserve.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,21 +8,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kr.co.ticketsea.admin.reserve.model.service.AdReserveService;
-import kr.co.ticketsea.admin.reserve.model.vo.ReserveApInfo;
-import kr.co.ticketsea.reserve.model.service.ReserveService;
-import kr.co.ticketsea.reserve.model.vo.SelectedSeat;
 
 /**
- * Servlet implementation class AdOneReserveServlet
+ * Servlet implementation class AdReserveUpdateServlet
  */
-@WebServlet(name = "AdOneReserve", urlPatterns = { "/adOneReserve.do" })
-public class AdOneReserveServlet extends HttpServlet {
+@WebServlet(name = "AdReserveUpdate", urlPatterns = { "/adReserveUpdate.do" })
+public class AdReserveUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdOneReserveServlet() {
+    public AdReserveUpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,21 +30,17 @@ public class AdOneReserveServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		
-		String reserveNo = request.getParameter("rs_bk_no");
+		String bk_no=request.getParameter("bk_no");
+		String phone=request.getParameter("bk_phone");
+		String email=request.getParameter("bk_email");
 		
-		ReserveApInfo rs= new AdReserveService().selectOneReserve(reserveNo);
-		ArrayList<SelectedSeat> seatList = new AdReserveService().reserveSeat(reserveNo);
+		int result=new AdReserveService().reserveUpdate(bk_no,phone,email);
 		
-		rs.setSeatInfo(seatList);
-		
-		if(rs!=null) {
-			RequestDispatcher view = request.getRequestDispatcher("views/admin/ad_reserveInfo.jsp");
-			request.setAttribute("ReserveInfo", rs);
-			view.forward(request, response);
+		if(result>0) {
+			response.sendRedirect("views/admin/adReserveUpdateSuccess.jsp");
 		}else {
-			System.out.println("목록없음");
-			response.sendRedirect("/views/admin/error.jsp");
-		} 
+			response.sendRedirect("views/admin/error.jsp");
+		}
 	}
 
 	/**

@@ -7,9 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<script>
-		alert("소규모공연 수정 완료");
-		location.href="/msApproveList.do";
-	</script>
+<script>
+	alert("예매정보 수정 성공");
+	location.href="/adReserveList.do";
+</script>
 </body>
 </html>

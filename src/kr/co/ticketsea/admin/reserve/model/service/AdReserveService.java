@@ -5,8 +5,10 @@ import java.util.ArrayList;
 
 import kr.co.ticketsea.admin.reserve.model.dao.AdReserveDao;
 import kr.co.ticketsea.admin.reserve.model.vo.Reserve;
+import kr.co.ticketsea.admin.reserve.model.vo.ReserveApInfo;
 import kr.co.ticketsea.admin.reserve.model.vo.ReservePageData;
 import kr.co.ticketsea.common.JDBCTemplate;
+import kr.co.ticketsea.reserve.model.vo.SelectedSeat;
 
 public class AdReserveService {
 	
@@ -34,6 +36,51 @@ public class AdReserveService {
 		JDBCTemplate.close(conn);
 		
 		return rpg;
+	}
+
+	public ReserveApInfo selectOneReserve(String reserveNo) {
+		Connection conn=JDBCTemplate.getConnection();
+		
+		ReserveApInfo rs=new AdReserveDao().selectOneReserve(conn,reserveNo);
+		
+		System.out.println(rs.getSeatInfo());
+		JDBCTemplate.close(conn);
+		
+		return rs;
+		
+	}
+
+	public ArrayList<SelectedSeat> reserveSeat(String reserveNo) {
+		Connection conn=JDBCTemplate.getConnection();
+		ArrayList<SelectedSeat> seatList=new AdReserveDao().seatList(conn,reserveNo);
+		JDBCTemplate.close(conn);
+		return seatList;
+	}
+
+	public int reserveUpdate(String bk_no,String phone, String email) {
+		Connection conn=JDBCTemplate.getConnection();
+		int result=new AdReserveDao().reserveUpdate(conn,bk_no,phone,email);
+		
+		if(result>0) {
+			JDBCTemplate.commit(conn);;
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
+
+	public int deleteReserve(String bkNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new AdReserveDao().deleteReserve(conn,bkNo);
+		if(result>0) {
+			JDBCTemplate.commit(conn);;
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
 	}
 
 	
