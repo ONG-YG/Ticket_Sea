@@ -169,7 +169,7 @@
 				<ul><% for(Search s : list)
 						{	%>
 				
-					<li><a href="" class="result_info">
+					<li><a href="/show.do?m_show_no=<%=s.getmShowNo()%>" class="result_info">
                                                         <span class="img_box">
                                                             <img src="/img/poster/<%=s.getmShowPoster()%>" width="110px" height="134px">
                                                             
