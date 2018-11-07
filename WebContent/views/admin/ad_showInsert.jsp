@@ -88,7 +88,7 @@ function LoadImg(value){
                 <div class="input_area">
                     <!--이미지영역-->
                     <div class="event_img_area">
-                        <img class="show_post" id="postImg" src="/img/ticketsea_poster.png" data-default-src="/img/ticketsea_poster.png" alt="공연포스터" style="width:160px; height:160px;">
+                        <div id="holder"></div>
                    
                        <div class="btn_area">
                         	<input type="file" class="postupload" id="imgUp" name="upfile" title="공연 포스터 업로드"/><br>
@@ -226,7 +226,40 @@ function LoadImg(value){
 
 	}); 
 	
-		  
+	/* 이미지 업로드=> 사진변경 */
+	var upload = document.getElementId('show_poster'),
+	postImg = document.getElementById('holder');
+
+		/* if (typeof window.FileReader === 'undefined') {
+		  state.className = 'fail';
+		} else {
+		  state.className = 'success';
+		  state.innerHTML = 'File API & FileReader available';
+		} */
+		 
+		upload.onchange = function (e) {
+		  e.preventDefault();
+		
+		  var file = upload.files[0],
+		      reader = new FileReader();
+		  reader.onload = function (event) {
+		    var img = new Image();
+		    img.src = event.target.result;
+		    // note: no onload required since we've got the dataurl...I think! :)
+		    if (img.width > 160||img.height>160) { // holder width
+		      img.width = 160;
+		      img.height = 160;
+		    }
+		    postImg.innerHTML = '';
+		    postImg.appendChild(img);
+		  };
+		  reader.readAsDataURL(file);
+		
+		  return false;
+		};
+		
+		/* submit */
+
 	function showCheck(){
 		category= document.getElementById("category").value;
 		title= document.getElementById("title").value;
