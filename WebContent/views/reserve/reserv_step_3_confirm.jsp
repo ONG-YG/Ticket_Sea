@@ -55,6 +55,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
 	</script>
     <script>
+	    var payType = null;/////////////////////////
+		var customerPhone = null;///////////////////
+		var customerEmail = null;///////////////////
+	    
 	    $(document).ready(function(){
 	    	
 	    	pageInit();
@@ -190,7 +194,9 @@
 	    		}
         	%>
         	
-        	if(diff>10) {
+        	if(diff>1) {/////////////////////////////////////////////10분으로 바꿀것
+        		deleteProgData();
+        		<%-- 
         		var progNo_del = <%=progNo%>;
         		//console.log("progNo_del : "+progNo_del);
         		
@@ -209,82 +215,71 @@
     					window.close();
     				}
     			});
-        		
+        		 --%>
         	}
-        	
-        	
-            var phone = document.getElementById("inputPhoneNo").value;
-            var userCheck = document.getElementById("agree_phone").checked;
-            //alert(userCheck);
-            var userInfoAgree = document.getElementById("reserve_agree2").checked;
-            if(phone=="") {
-                alert("휴대폰번호를 입력해주세요");
-            }
-            else if(!userCheck) {
-                alert("주문자 확인 및 휴대폰 번호 수집을 확인하셔야 결제가 가능합니다.");
-            }
-            else if(!userInfoAgree) {
-                alert("개인정보 제 3자 제공에 동의하셔야 결제가 가능합니다.");
-            }
-            else {
-               	var patt1 = new RegExp("^[0-9]+$");
-               	var patt2 = new RegExp("^[0-9]{9,20}$");
-               	var res1 = patt1.test( $("#inputPhoneNo").val());
-               	var res2 = patt2.test( $("#inputPhoneNo").val());
-               	
-               	if( !res1 ){ alert("휴대폰 번호는 숫자만 입력할 수 있습니다."); }
-               	else if( !res2 ){ alert("휴대폰 번호를 9자 이상 입력해주세요."); }
-               	else {
-               		
-               		
-               		payStart();
-               		
-               		
-               		<%--
-               		<%
-    	        	//세션에 reserveSession객체 저장
-    	        	rs.setBkNo(bkNo);
-            		session.setAttribute("reserveSession", rs);
-            		%>
-            		
-            		
-            		var bkStateCd = "RSV_CPL";///////////////////일단 임의로 완료상태로 설정
-            		var payType = "CARD";///////////////////일단 임의로 카드결제로 설정
-            		
-            		$('#phone_form').val( $('#inputPhoneNo').val() );
-            		$('#email_form').val( $('#inputEmail').val() );
-            		$('#bkStateCd_form').val( bkStateCd );
-            		$('#payType_form').val( payType );
-            		
-            		document.getElementById("completeSubmitForm").submit();
-               		--%>
-               	}
-            }
+        	else {
+        		var phone = document.getElementById("inputPhoneNo").value;
+                var userCheck = document.getElementById("agree_phone").checked;
+                //alert(userCheck);
+                var userInfoAgree = document.getElementById("reserve_agree2").checked;
+                if(phone=="") {
+                    alert("휴대폰번호를 입력해주세요");
+                }
+                else if(!userCheck) {
+                    alert("주문자 확인 및 휴대폰 번호 수집을 확인하셔야 결제가 가능합니다.");
+                }
+                else if(!userInfoAgree) {
+                    alert("개인정보 제 3자 제공에 동의하셔야 결제가 가능합니다.");
+                }
+                else {
+                   	var patt1 = new RegExp("^[0-9]+$");
+                   	var patt2 = new RegExp("^[0-9]{9,20}$");
+                   	var res1 = patt1.test( $("#inputPhoneNo").val());
+                   	var res2 = patt2.test( $("#inputPhoneNo").val());
+                   	
+                   	if( !res1 ){ alert("휴대폰 번호는 숫자만 입력할 수 있습니다."); }
+                   	else if( !res2 ){ alert("휴대폰 번호를 9자 이상 입력해주세요."); }
+                   	else {
+                   		payStart();
+                   	}
+                }
+        	}//if(diff>1) END
+            
         }//function next() END
         
 		function payStart(){
         	
+			payType = "card";///////////////////////////////////////////일단 임의로 카드결제로 설정
+			customerPhone = $('#inputPhoneNo').val();///////////////////
+			customerEmail = $('#inputEmail').val();/////////////////////
+    		
         	var test = "merchant_uid : "+<%=bkNo%>+",\n"+
 			    "name : "+'<%=showTitle%>'+" 예매,\n"+
 			    "amount : "+<%=totalPrice%>+",\n"+
-			    "buyer_email : "+$('#inputEmail').val()+",\n"+
+			    "buyer_email : "+customerEmail+",\n"+
 			    "buyer_name : "+'<%=memberName%>'+",\n"+
-			    "buyer_tel : "+$('#inputPhoneNo').val();
+			    "buyer_tel : "+customerPhone;
 			    
-			alert(test);
+			alert(test);///////////////////////////////////////////////
+			
 			
 			IMP.request_pay({
 			    //pg : 'html5_inicis', //ActiveX 결제창은 inicis를 사용
-			    pay_method : 'card', //card(신용카드), trans(실시간계좌이체), vbank(가상계좌), phone(휴대폰소액결제)
+			    pay_method : payType, //card(신용카드), trans(실시간계좌이체), vbank(가상계좌), phone(휴대폰소액결제)
 			    merchant_uid : <%=bkNo%>, //상점에서 관리하시는 고유 주문번호를 전달
 			    name : '<%=showTitle%>'+' 예매',
 			    amount : <%=totalPrice%>,
-			    buyer_email : $('#inputEmail').val(),
+			    buyer_email : customerEmail,
 			    buyer_name : '<%=memberName%>',
-			    buyer_tel : $('#inputPhoneNo').val() //누락되면 이니시스 결제창에서 오류
+			    buyer_tel : customerPhone //누락되면 이니시스 결제창에서 오류
 			    
 			}, function(rsp) {
 			    if ( rsp.success ) {
+			    	
+			    	alert("결제 성공");///////////////////////////////////////////
+			    	insertBookInfo();
+			    	
+			    	<%-- 
 			    	//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
 			    	jQuery.ajax({
 			    		url: "/payments/complete", //cross-domain error가 발생하지 않도록 주의해주세요
@@ -305,44 +300,81 @@
 			    			
 			    			alert(msg);
 			    			
-			    			
 			    			// REST API로 아임포트 서버에서 결제 정상적으로 완료되었는지 확인 후 step4로 넘어가도록 아래 코드 주석 풀기
 			    			
-			    			
-			    			
-		               		<%
-		    	        	//세션에 reserveSession객체 저장
-		    	        	rs.setBkNo(bkNo);
-		            		session.setAttribute("reserveSession", rs);
-		            		%>
-		            		
-		            		
-		            		var bkStateCd = "RSV_CPL";///////////////////일단 임의로 완료상태로 설정
-		            		var payType = "CARD";///////////////////일단 임의로 카드결제로 설정
-		            		
-		            		$('#phone_form').val( $('#inputPhoneNo').val() );
-		            		$('#email_form').val( $('#inputEmail').val() );
-		            		$('#bkStateCd_form').val( bkStateCd );
-		            		$('#payType_form').val( payType );
-		            		
-		            		document.getElementById("completeSubmitForm").submit();
+		               		//insertBookInfo();
 		               		
-			    			
-			    			
+		               		
 			    		} else {
 			    			//[3] 아직 제대로 결제가 되지 않았습니다.
 			    			//[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
 			    		}
 			    	});
+			    	 --%>
+			    	 
 			    } else {
-			        var msg = '결제에 실패하였습니다.';
-			        msg += '에러내용 : ' + rsp.error_msg;
+			    	
+			        var msg = '결제에 실패하였습니다.';/////////////////
+			        msg += '에러내용 : ' + rsp.error_msg;///////////
 			        
-			        alert(msg);
+			        alert(msg);//////////////////////////////////
+			        
+			        //결제 실패할 경우 예매진행중 데이터를 삭제
+			        deleteProgData();
 			    }
 			});
 			
 		}//function payStart() END
+		
+		function insertBookInfo() {
+			
+			<%
+			//세션에 reserveSession객체 저장
+			rs.setBkNo(bkNo);
+			session.setAttribute("reserveSession", rs);
+			%>
+			
+			var bkStateCd = "RSV_CPL";///////////////////일단 임의로 완료상태로 설정
+			
+			//form태그에 예매자가 입력한 휴대폰번호, 이메일주소, 결제상태, 결제방식을 입력해줌
+			$('#phone_form').val( customerPhone );
+			$('#email_form').val( customerEmail );
+			$('#bkStateCd_form').val( bkStateCd );
+			$('#payType_form').val( payType );
+			
+			alert( $('#phone_form').val()////////////////////////////////
+			+"\n"+ $('#email_form').val()////////////////////////////////
+			+"\n"+ $('#bkStateCd_form').val()////////////////////////////
+			+"\n"+ $('#payType_form').val() );///////////////////////////
+			
+			//위에서 hidden type의 input태그에 값을 채워준 form태그를 reserveComplete서블릿에 submit 
+			document.getElementById("completeSubmitForm").submit();
+    		
+		}//function insertBookInfo() END
+		
+		function deleteProgData() {
+			var progNo_del = <%=progNo%>;
+    		//console.log("progNo_del : "+progNo_del);
+    		
+    		$.ajax({
+				url : "/reserveExpire.do",
+				data : {progNo: progNo_del},
+				type : "post",
+				success : function(){
+					//console.log("정상 처리 완료");
+				},
+				error : function(){
+					//console.log("ajax 통신 에러");
+				},
+				complete : function(){
+					alert("예매 진행 가능 시간이 초과되어 예매가 종료됩니다.");
+					window.close();///////////////////////////////////안되면 메인으로 이동하도록 수정
+					if( !window.closed ) {
+						location.href="/dateCntSelect.do?showNo=<%=showNo%>";
+					}
+				}
+			});
+		}//function deleteProgData() END
 		
     </script>
     
