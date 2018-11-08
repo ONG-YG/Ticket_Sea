@@ -285,11 +285,11 @@
                 
                 <br>
                 
-                <div id = "boardF_contents" name="boardF_contents" style="border:1px solid #dedede; width : 100%; height : 300px;">
-					<%= faq.getBoardF_contents() %>
+                <div id = "boardF_contents" name="boardF_contents" style="border:1px solid #dedede; width : 100%; ">
+					<%= faq.getBoardF_contents().replace("\r\n", "<br>") %>
 					</div>
 					<textarea id="boardF_contents_fd" rows="17" cols="50" style="display:none; width:100%;">
-					<%=faq.getBoardF_contents() %>
+					<%=faq.getBoardF_contents().replace("\r\n", "<br>") %>
 					</textarea>
         		
         		<br>

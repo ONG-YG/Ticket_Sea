@@ -297,11 +297,11 @@
                 
                 <br>
                 
-                <div id = "boardQ_contents" name="boardQ_contents" style="border:1px solid #dedede; width : 100%; height : 300px;">
-					<%= qna.getBoardQ_contents() %>
+                <div id = "boardQ_contents" name="boardQ_contents" style="border:1px solid #dedede; width : 100%;">
+					<%= qna.getBoardQ_contents().replace("\r\n", "<br>") %>
 					</div>
 					<textarea id="boardQ_contents_fd" rows="17" cols="50" style="display:none; width:100%;">
-					<%=qna.getBoardQ_contents() %>
+					<%=qna.getBoardQ_contents().replace("\r\n", "<br>") %>
 					</textarea>
                 
                 <br>

@@ -11,8 +11,6 @@
 	// Controller(Servlet)에서 보내준값 가져오기
 	PageData pd = (PageData)request.getAttribute("pageData");
 
-	ArrayList<Show> list = pd.getList(); // 현재 페이지의 글 목록
-	String pageNavi = pd.getPageNavi(); // 현재 navi Bar
 	
 %>
     
@@ -20,7 +18,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>소규모 공연 목록</title>
+<title>콘서트 목록</title>
 <script
   src="https://code.jquery.com/jquery-3.3.1.js"
   integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
@@ -293,19 +291,17 @@
         <div id = "right_view">
         
       <div id="prContest">
-        <% for (Show s : list) { %>
-        	<% if(s.getSc_code().equals("CNC")){ %>
-            <div id = "prContestDiv1">
-	            <div id="prContestPic"><a href="/show.do?m_show_no=<%=s.getM_show_no()%>"><img src="/img/poster/<%=s.getShow_poster() %>" style="width:210px; height:300px; align-content: center;"></a></div> <br>
-	        	<div id="prContestTitle" style="font-size: 13px; font-weight: bold;"><a href="/show.do?m_show_no=<%=s.getM_show_no()%>"><%=s.getShow_name()%> </a></div>
-        	</div>
-         <% }}  %> 
-   	 </div>
+        <div style="text-align: center; background-color: #dedede;">
+        <br><br><br><br><br>
+        <h1 style="font-weight: bold;">등록된 콘서트 공연이 없습니다.</h1>
+        <br><br><br><br><br>
+         </div>
+        
+    </div>
    	 
    	 
       <div id="prContestDiv2">
             <div style="width:100%; text-align:center;">
-			<label><%=pageNavi%></label>
 		
 		   <%
 				session = request.getSession(false);

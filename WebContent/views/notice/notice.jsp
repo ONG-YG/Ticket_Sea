@@ -296,11 +296,11 @@
 				
 					<br>
 					
-					<div id = "boardN_contents" name="boardN_contents" style="border:1px solid #dedede; width : 100%; height : 300px;">
-					<%= notice.getBoardN_contents() %>
+					<div id = "boardN_contents" name="boardN_contents" style="border:1px solid #dedede; width : 100%; ">
+					<%= notice.getBoardN_contents().replace("\r\n", "<br>") %>
 					</div>
 					<textarea id="boardN_contents_fd" rows="17" cols="50" style="display:none; width:100%;">
-					<%=notice.getBoardN_contents() %>
+					<%=notice.getBoardN_contents().replace("\r\n", "<br>") %>
 					</textarea>
 					
 					<%
