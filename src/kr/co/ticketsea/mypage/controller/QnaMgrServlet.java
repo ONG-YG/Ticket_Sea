@@ -53,10 +53,15 @@ public class QnaMgrServlet extends HttpServlet {
 		// 2. 비즈니스 로직
 		ReservePageData qpd = new MypageService().qnaMgrList(currentPage, memberName);
 
+		
+		if(qpd!=null) {
 		// 3. jsp 페이지로 넘겨준다
 		RequestDispatcher view = request.getRequestDispatcher("views/mypage/qnaMgr.jsp");
 		request.setAttribute("qpd", qpd);
 		view.forward(request, response);
+		}else {
+			response.sendRedirect("/views/mypage/qnaMgrNoData.jsp");
+		}
 		
 		
 	}

@@ -56,12 +56,16 @@ public class ReviewMgrServlet extends HttpServlet {
 		ReservePageData reviewPd = new MypageService().reviewMgr(currentPage, memberId);
 		
 		
-
+		
+		
+		if(reviewPd!=null) {
 		// 3. jsp 페이지로 넘겨준다
 		RequestDispatcher view = request.getRequestDispatcher("views/mypage/reviewMgr.jsp");
 		request.setAttribute("reviewPd", reviewPd);
 		view.forward(request, response);
-		
+		}else {
+			response.sendRedirect("/views/mypage/reviewMgrNoData.jsp");
+		}
 		
 		
 		
