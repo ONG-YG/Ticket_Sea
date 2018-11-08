@@ -9,6 +9,7 @@
     	width:980px;
         height: 100%;
          z-index:-10;
+          padding-left:90px;
     }
     h2.main_title:not(.content-header){
         font-size: 23px;
@@ -23,19 +24,18 @@
         background-color:white;
         box-sizing: border-box;
         display: block;
-        height:90%;
+        height:100%;
         
     }
     #content .top_area{
         height:5%;
-        border-bottom: 1px solid #d8d8d8;
+        padding-left:90px;
     }
     #content .submit_area{
-        height:3%;
-        border:1px solid red;
-        display: block;
+         display: inline-block;
         padding-right:20px;
-        padding-top:5px;
+        padding-top:50px;
+        padding-left:200px;
     }
     
     
@@ -130,7 +130,7 @@
         padding-right: 20px;
     }
     fieldset {
-        padding: 20px 0 16px;
+        padding: 10px 0 16px;
         width: 100%;
         display: block;
         border:none;
@@ -219,4 +219,43 @@
     }
     #imgUp{
     	align-content: center;
+    }
+    
+     /*버튼 스타일*/
+    button{
+      background:#4ABFD3;
+      color:#fff;
+      border:none;
+      position:relative;
+      height:60px;
+      font-size:1.6em;
+      font-weight: 600;
+      padding:0 2em;
+      cursor:pointer;
+      transition:800ms ease all;
+      outline:none;
+    }
+    button:hover{
+      background:#fff;
+      color:#4ABFD3;
+    }
+    button:before,button:after{
+      content:'';
+      position:absolute;
+      top:0;
+      right:0;
+      height:2px;
+      width:0;
+      background: #4ABFD3;
+      transition:400ms ease all;
+    }
+    button:after{
+      right:inherit;
+      top:inherit;
+      left:0;
+      bottom:0;
+    }
+    button:hover:before,button:hover:after{
+      width:100%;
+      transition:800ms ease all;
     }

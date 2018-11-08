@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import kr.co.ticketsea.admin.show.model.service.ShowService;
+import kr.co.ticketsea.admin.show.model.vo.Show;
 import kr.co.ticketsea.admin.show.model.vo.ShowCategory;
 import kr.co.ticketsea.admin.show.model.vo.ShowPlace;
 import kr.co.ticketsea.member.model.vo.Member;
@@ -44,13 +45,18 @@ public class ShowUpdatePlaceServlet extends HttpServlet {
 				Member m = (Member)session.getAttribute("member");
 					
 				if(m!=null && m.getMemberGrade()=='A') {
+					
+					int showNo=Integer.parseInt(request.getParameter("m_show_no"));
 					ArrayList<ShowPlace> splist = new ShowService().showPlaceList();
 					
 					ArrayList<ShowCategory> sclist = new ShowService().showCategoryList();
 					
-					RequestDispatcher view= request.getRequestDispatcher("/views/admin/ad_showInsert.jsp");
+					Show show=new ShowService().selectOneShow(showNo);
+					
+					RequestDispatcher view= request.getRequestDispatcher("/views/admin/ad_showUpdate.jsp");
 					request.setAttribute("showPlaceList", splist);
 					request.setAttribute("showCTGList", sclist);
+					request.setAttribute("showData", show);
 					view.forward(request, response);
 				}else{
 					throw new Exception();

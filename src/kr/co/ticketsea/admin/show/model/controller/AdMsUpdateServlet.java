@@ -58,19 +58,24 @@ public class AdMsUpdateServlet extends HttpServlet {
 					String fileName = multi.getFilesystemName("show_poster");
 					System.out.println("파일 이름 : " + fileName);
 					
+					
 					String fullFilePath = uploadPath+"\\"+fileName;
 					System.out.println("총 경로 : " + fullFilePath);
 					
 					request.setCharacterEncoding("utf-8");
 					
+					
 					MiniShow ms = new MiniShow();
-					ms.setMs_no(Integer.parseInt(multi.getParameter("msNo")));
-					ms.setMs_artists(multi.getParameter("artists"));
-					ms.setMs_place(multi.getParameter("place"));
-					ms.setMs_st_date(multi.getParameter("st_date"));
-					ms.setMs_ed_date(multi.getParameter("ed_date"));
-					ms.setMs_poster(multi.getFilesystemName("show_poster"));
-					ms.setMs_intd(multi.getParameter("intd"));
+					ms.setBoardp_no(Integer.parseInt(multi.getParameter("msNo")));
+					ms.setBoardp_artist(multi.getParameter("artists"));
+					ms.setBoardp_location(multi.getParameter("place"));
+					ms.setBoardp_price(Integer.parseInt(multi.getParameter("price")));
+					if(fileName==null) {
+						ms.setBoardp_filename(multi.getParameter("exist_poster"));
+					}else {
+						ms.setBoardp_filename(multi.getFilesystemName("show_poster"));
+					}
+					ms.setBoardp_contents(multi.getParameter("intd"));
 					
 					int result = new MiniShowService().updateApMiniShow(ms);
 					if(result>0) {

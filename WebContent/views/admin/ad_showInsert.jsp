@@ -188,11 +188,12 @@
                             </div>
                         </div>
                     </fieldset>
-	            </div>
-	            </div>
-	            <div class="submit_area">
+                    <div class="submit_area">
                     <button id="updateBtn" onclick = "return showCheck();">공연등록</button>
 	            </div>
+	            </div>
+	            </div>
+	        
             </form>
                 </div>
                 

@@ -41,7 +41,7 @@ public class AdShowUpdateServlet extends HttpServlet {
 			
 			if(session!=null) {
 				Member m = (Member)session.getAttribute("member");
-					
+					System.out.println(m.getMemberGrade());
 				if(m!=null && m.getMemberGrade()=='A') {
 					int fileSizeLimit = 5 * 1024 * 1024;
 					
@@ -53,6 +53,10 @@ public class AdShowUpdateServlet extends HttpServlet {
 							uploadPath,fileSizeLimit,encType,new DefaultFileRenamePolicy());
 					
 					String fileName = multi.getFilesystemName("show_poster");
+					System.out.println("파일 이름 : " + fileName);
+					
+					
+					String fileName2 = multi.getFilesystemName("showDtInfo");
 					System.out.println("파일 이름 : " + fileName);
 					
 					String fullFilePath = uploadPath+"\\"+fileName;
@@ -71,8 +75,18 @@ public class AdShowUpdateServlet extends HttpServlet {
 					s.setShow_grd(multi.getParameter("show_grd"));
 					s.setShow_run(Integer.parseInt(multi.getParameter("show_run")));
 					s.setBk_comm(Integer.parseInt(multi.getParameter("comm")));
-					s.setShow_poster(multi.getFilesystemName("show_poster"));
-					s.setShow_dtInfo(multi.getFilesystemName("showDtInfo"));
+					
+					
+					if(fileName==null) {
+						s.setShow_poster(multi.getParameter("existing_poster"));
+					}else {
+						s.setShow_poster(multi.getFilesystemName("show_poster"));
+					}
+					if(fileName2==null) {
+						s.setShow_dtInfo(multi.getParameter("existing_dtInfo"));
+					}else {
+						s.setShow_dtInfo(multi.getFilesystemName("showDtInfo"));	
+					}
 					
 					int result=new ShowService().updateShow(s);
 					

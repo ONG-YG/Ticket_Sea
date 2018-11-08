@@ -102,10 +102,10 @@
                     
                     <!--회원검색-->
                     <div class="searchArea"> 
-                    <a href="#"><img src="../../img/btn_search4.png" alt="검색" style="float: right"></a>
-                
-					<input type="text" class="textInp" name="searchValue" id="searchValue" style="float: right">
-					<a href="javascript:search();"></a>
+                    <form style="display:inline;" action="/showSearch.do" method="get">
+						<input type="text" name="search"/>
+						<input type="submit" value="검색"/>
+					</form>
 				</div>
                 </div>
                </div>

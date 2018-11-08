@@ -47,8 +47,7 @@ public class ShowInsertServlet extends HttpServlet {
 				
 			if(session!=null) {
 				Member m = (Member)session.getAttribute("member");
-					
-				if(m!=null && m.getMemberGrade()=='A') {
+				if(m.getMemberGrade()=='A' && m!=null ) {
 					//=====파일 사이즈 업로드==========
 					//최대 업로드 파일 사이즈
 					int fileSizeLimit = 5 * 1024 * 1024;

@@ -1,21 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import = "kr.co.ticketsea.admin.show.model.vo.*" 
-	import = "java.util.ArrayList"%>
-<%
-
-	MiniPgData mpd = (MiniPgData)request.getAttribute("miniPgData");
-	ArrayList<MiniShow> list=mpd.getList(); 
-	String pageNavi = mpd.getPageNavi();
+		import = "java.util.ArrayList"%>
+		
+<% 
+	// Controller(Servlet)에서 보내준 값 가져오기
+	PageData pd = (PageData)request.getAttribute("pageData");
+	String keyword = (String)request.getAttribute("keyword");
+	ArrayList<Show> list= null;//현재 페이지의 글 목록
+	String pageNavi = null; //현재 navi Bar
+	
+	if(pd!=null){
+		list=pd.getList();
+		pageNavi=pd.getPageNavi();
+	}
+	
 %>
+		
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>공연목록</title>
 <!-- 외부 스타일 시트 불러오기 -->
     <link href="/css/admin_common.css" rel="stylesheet" type="text/css">
-    <link href="/css/ad_miniShowAp.css" rel="stylesheet" type="text/css">
+    <link href="/css/ad_showList.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 		<div id="wrapper">
@@ -31,7 +40,7 @@
             <div id="c_inner">
             <aside class="main-sidebar">
                 <div id="side-menu">
-                <ul>
+                 <ul>
                     <li><a href="#">공연관리</a>
                         <ul>
                              <li><a href="/adShowPlace.do">공연등록</a></li>
@@ -57,44 +66,54 @@
                 </ul>
                 </div>
             </aside>
-           <div id="content">
+                <div id="content">
            <div class="content_wrap">
               <div class="top_area">
-                  <h2 class="main_title">소규모 승인 완료 공연</h2>
+                  <h2 class="main_title">공연정보</h2>
                </div>
                <div class="main_area">
-                <div id="member_table">
-                   <table class="miniShowTbl">
+                <div id="show_table">
+                   <table class="showTbl">
                     <thead style="background-color:#E7E7E7">
                         <td width="15%">공연번호</td>
                         <td width="20%">공연명</td>
-                        <td width="10%">작성자</td>
-                        <td width="20%">공연장소</td>
-                        <td width="15%">공연일</td>
-                        <td>승인상태</td>
+                        <td width="25%">츨연자</td>
+                        <td width="15%">관람시간</td>
+                        <td>공연장소</td>
+                        <td>삭제</td>
                        </thead>
-                       <%for(MiniShow ms : list) {%>
+                       <%if(pd!=null){%>
+                       <%for(Show s : list) {%>
                        <tr>
-                           <td><a href="/miniShowApInfo.do?msNo=<%=ms.getBoardp_no() %>"><%=ms.getBoardp_no() %></a></td>
-                           <td><%=ms.getBoardp_title() %></td>
-                           <td><%=ms.getBoardp_writer()%></td>
-                           <td><%=ms.getBoardp_location()%></td>
-                           <td><%=ms.getBoardp_date()%></td>
-                           <td><%=ms.getBoardp_active()%></td>
+                           <td><a href="/showUpdatePlace.do?m_show_no=<%=s.getM_show_no()%>"><%=s.getM_show_no() %></a></td>
+                           <td><%=s.getShow_name() %></td>
+                           <td><%=s.getArtists() %></td>
+                           <td><%=s.getShow_run() %></td>
+                           <td><%=s.getTh_name() %></td>
+                           <td><input type="button" value="삭제" onclick="delActive('<%=s.getM_show_no()%>');"></td>
+                           <script>
+	                    	function delActive(showNo){
+	                    		location.href="/adShowDelete.do?showNo="+showNo; //get방식으로 삭제할 회원번호 넘김
+	                    	}
+                     </script>
                        </tr>
-                        <%} %>
+                       <%} %>
+                    	<%}else{ %>
+                    	<h2>검색결과가 없습니다.</h2>
+                    <%} %>
                     </table>
-                    
+                  
                     <!--회원목록 페이지 이동-->
-                    <div class="paginate" style="text-align: center">
+                     <div class="paginate" style="text-align: center">
                     <label><%=pageNavi%></label>
                     </div>
                     
                     <!--회원검색-->
                     <div class="searchArea"> 
-                    <a href="#"><img src="../../img/btn_search4.png" alt="검색" style="float: right"></a>
-					<input type="text" class="textInp" name="searchValue" id="searchValue" style="float: right">
-					<a href="javascript:search();"></a>
+                    <form style="display:inline;" action="/showSearch.do" method="get">
+						<input type="text" name="search" value="<%=keyword%>"/>
+						<input type="submit" value="검색" />
+					</form>
 				</div>
                 </div>
                </div>
@@ -103,14 +122,5 @@
         </div>
         </div>
 	</div>
-	<script>
-		function approve(showNo){
-			if(window.confirm("공연을 승인하시겠습니까?")){
-				location.href="/miniShowApprove.do?msNo="+showNo;
-			}else{
-				return false;
-			}
-		}
-	</script>
 </body>
 </html>
