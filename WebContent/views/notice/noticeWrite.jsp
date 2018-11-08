@@ -10,36 +10,8 @@
   integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
   crossorigin="anonymous">
 </script>
-
+<link rel="stylesheet" type="text/css" href="/css/mypageAllSize.css" />
 <style>
-    /* 전체 사이즈 조정 */
-    
-    ul, li, a{list-style: none; margin: 0px; padding: 0px; text-decoration: none; color: black;}
-    
-    div{box-sizing: border-box;}
-    #wrapper{overflow: hidden;min-width: 990px;min-height: 100%; border: 1px solid black;}
-    #header{height: 193px; border: 1px solid black;}
-    #container{height: 100%; border: 1px solid black; background: #f4f4f4;}
-    #footer{height: 153px; border: 1px solid black;}
-    
-    /* 990px 고정 사이즈 */
-    #h_inner{width: 990px; height: 100%; margin: 0px auto;}
-    #c_inner{width: 990px; height: 1300px; margin: 0px auto; padding: 70px 0 250px 0px;}
-    #f_inner{width: 990px; margin: 0px auto;}
-
-    /* top 버튼 */
-    #back_to_top{
-        display: block;
-        position: fixed;
-        top: 50%;
-        right: 0;
-        margin-top: -22px;
-        background-position: -270px -123px;
-        width: 44px;
-        height: 44px;
-        z-index: 1000;
-        background: skyblue;
-    }
     
     /* inner 공간 분할 */
     #c_inner_top{
@@ -264,34 +236,29 @@
                 </div>
                 
                <form action="/noticeWrite.do" method="post">
-                     <table id="write-form" class="boxStyle">
-                    <tr>
-                        <td style="width : 70px; text-align : center;" >제목</td>
-                        <td><input type="text" name="title" style="width: 500px;" /></td>
-                    </tr>
-                    <tr>
-                        <td style="width : 40px; text-align : center;" >분류</td>
-                        <td>
-                            <select name="category">
+                   <table id="write-form" class="boxStyle">
+                    
+                    <div>제목 <input type="text" name="title" style="width: 500px;" placeholder="제목을 입력해주세요" /></div>
+                     <br>
+                     <div>분류  </div>
+                     <select name="category">
                                 <option>공연</option>
                                 <option>예매</option>
                                 <option>결제</option>
                                 <option>회원</option>
                             </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="width : 70px; text-align : center;" >글 내용</td>
-                        <td colspan="2" >
-                            <textarea name="contents" rows="17" cols="50" style="width:600px;"></textarea>
-                        </td>
-                    </tr>
+                    </div>
                     
-                    <tr>
-                        <td colspan="2">
-                         <input type="submit" value="작성" style="float:right" width="70px" height="30">
-                        </td>
-                    </tr>
+                    
+                    <br><br>
+                    
+                    <div>글 내용
+                            <textarea name="contents" rows="17" cols="50" style="width:600px;" placeholder="내용을 입력해주세요"></textarea>
+                    </div>
+                    <br>
+                    <div>
+                         <input type="submit" value="작성" style="width=70px; height=30px; background-color:skyblue; color:white;">
+                    </div>
                         
                        
                 </table>

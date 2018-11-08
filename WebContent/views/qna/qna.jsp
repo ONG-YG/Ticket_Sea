@@ -24,36 +24,8 @@
   crossorigin="anonymous">
 </script>
 
-
+<link rel="stylesheet" type="text/css" href="/css/mypageAllSize.css" />
 <style>
-    /* 전체 사이즈 조정 */
-    
-    ul, li, a{list-style: none; margin: 0px; padding: 0px; text-decoration: none; color: black;}
-    
-    div{box-sizing: border-box;}
-    #wrapper{overflow: hidden;min-width: 990px;min-height: 100%; border: 1px solid black;}
-    #header{height: 193px; border: 1px solid black;}
-    #container{height: 100%; border: 1px solid black; background: #f4f4f4;}
-    #footer{height: 153px; border: 1px solid black;}
-    
-    /* 990px 고정 사이즈 */
-    #h_inner{width: 990px; height: 100%; margin: 0px auto;}
-    #c_inner{width: 990px; height: 1300px; margin: 0px auto; padding: 70px 0 250px 0px;}
-    #f_inner{width: 990px; margin: 0px auto;}
-
-    /* top 버튼 */
-    #back_to_top{
-        display: block;
-        position: fixed;
-        top: 50%;
-        right: 0;
-        margin-top: -22px;
-        background-position: -270px -123px;
-        width: 44px;
-        height: 44px;
-        z-index: 1000;
-        background: skyblue;
-    }
     
     /* inner 공간 분할 */
     #c_inner_top{
@@ -322,6 +294,8 @@
                 	<tr>
                 </table>
                 
+                <br>
+                
                 <span id = "qna_contents">
                 		<%= qna.getBoardQ_contents() %>
         		</span>
@@ -341,8 +315,14 @@
 				<button id="btn2" onclick="delQna();" style="width: 70px; height: 30px; float:right;">삭제</button> 
                 <%} %>
                 
+                <br><br>
+              	<button onclick="list();" style="width: 70px; height: 30px; float:right;">목록</button> 
                 
                 <script>
+                function list(){
+            		location.href="/qnaList.do";
+            	}
+                
                 function delQna(){
             		location.href="/qnaDelete.do?boardQ_no=<%=qna.getBoardQ_no()%>";
             	}
