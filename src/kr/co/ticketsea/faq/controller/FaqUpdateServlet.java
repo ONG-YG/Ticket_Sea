@@ -44,7 +44,7 @@ public class FaqUpdateServlet extends HttpServlet {
 		HttpSession session  = request.getSession(false);
 		
 		try {
-			userId = ((Member)session.getAttribute("member")).getUserId();
+			userId = ((Member)session.getAttribute("member")).getMemberId();
 			if(userId!=null) 
 			{
 			//4. 비즈니스 로직 처리

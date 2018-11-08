@@ -1,0 +1,239 @@
+@charset "UTF-8";
+
+#wrap_reserve{}
+
+#header{}
+
+#container{}
+
+/*---------------------- header ----------------------*/
+.reserve_title{}
+
+.reserve_title h1{}
+
+.reserve_title h2{}
+
+.reserve_step{}
+.reserve_step li{}
+.reserve_step li span{}
+
+    /*--reserve_step li--*/
+    .reserve_step li[class=step3]{
+        background-color: skyblue;
+        color: white;
+    }
+    /*--/reserve_step li--*/
+
+/*---------------------- /header ----------------------*/
+/*---------------------- container ----------------------*/
+
+.reserve_content{}
+.reserve_left{}
+.reserve_right{}
+
+/*--------- reserve_left ---------*/
+  /* step3*/
+
+        .reserve_content3{
+        /*  border: 1px solid; border-color: chartreuse;*/
+            width: 100%; height: 100%;
+            box-sizing: border-box;
+        }
+
+        .reserve_content3 .reserve_left {
+            box-sizing: border-box;
+            overflow-y: auto;
+            float: left;
+            position: relative;
+            width: 70%; height: 100%;
+            padding: 20px;
+            padding-top: 0px;
+            background: #f4f4f4;
+            font-size: 12px;
+        }
+
+        .reserve_left .reserve_step3 .title {
+            display: inline-block;
+            margin-bottom: 5px;
+/*            padding-top:20px;*/
+            font-size: 18px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        /*예매정보 테이블*/
+        .reserve_left .reserve_step3 table {
+/*            border: 3px dashed; border-color: blue;*/
+            width: 100%;  height: 400px;
+            background: #fff;
+            letter-spacing: 0;
+            font-size:15px;
+            padding: 10px;
+            padding-left: 20px;
+            box-sizing: border-box;
+        }
+        .reserve_left .reserve_step3 table th{
+/*            border: 1px solid; border-color: greenyellow;*/
+            font-size: 15px;
+            box-sizing: border-box;
+        }
+        .reserve_left .reserve_step3 table td{
+/*            border: 1px solid; border-color: red;*/
+            font-size: 14px;
+            color: dimgray;
+            box-sizing: border-box;
+        }
+        .reserve_left .reserve_step3 table td[id=showName_td]{
+            font-weight: 900;
+            font-size: 20px;
+            color: black;
+            box-sizing: border-box;
+        }
+       
+/*--------- /reserve_left ---------*/
+/*--------- reserve_right ---------*/
+
+.reserve_result{
+/*    border: 2px dashed; border-color: gainsboro;*/
+    width: 100%; height: 88%;
+    box-sizing: border-box;
+    padding-top: 25px;
+}
+
+.reserve_btn{}
+    
+    /*--- reserve_result ---*/
+    #reserve_res_tit{
+/*        border: 1px solid; border-color: red;*/
+        width: 100%; height: 6%;
+        font-weight: 600;
+        font-size: 15px;
+        padding-left: 20px;
+        padding-top: 0px;
+        box-sizing: border-box;
+    }
+    .reserve_result hr{
+        border: 1px solid; border-color: gainsboro; /*고정*/
+        width: 90%;        
+    }
+    #select_seat_grade{
+      border: 1px solid; border-color: gainsboro; /*고정*/
+        margin: 0; padding: 10px;
+        width: 90%; height: 30%;
+        margin-left: 5%;
+        box-sizing: border-box;
+        list-style: none;
+    }
+    #reserve_info {
+/*        border: 2px solid; border-color: red;*/
+        width: 100%; height: 55%;
+        box-sizing: border-box;
+        padding-top: 20px;
+    }
+
+        /*-- #select_seat_grade --*/
+        #select_seat_grade li {
+/*            border: 2px dashed; border-color: aqua;*/
+            width: 90%; height: 12px;
+            margin-left: 5%;
+            margin-bottom: 5px;
+            box-sizing: border-box;
+            font-size: 12px;
+        }
+        .seat_color,
+        .seat_detail_info{
+/*            border: 3px dashed; border-color: greenyellow;*/
+            box-sizing: border-box;
+            float: left;
+        }
+        .seat_color{
+/*            border: 3px dashed; border-color: greenyellow;*/
+            width: 12px; height: 12px;
+            margin-top: 0px;
+            margin-right: 7px;
+        }
+        .seat_detail_info{
+/*            border: 3px dashed; border-color: blue;*/
+            width: 195px; height: 100%;
+        }
+        .seat_grade{
+/*            border: 1px dotted; border-color: red;*/
+            float: left;
+            margin-right: 15px;
+        }
+        .seat_no{
+            float: right;
+        }
+        /*-- /#select_seat_grade --*/
+        /*-- #reserve_info --*/
+        #reserve_info div {
+/*            border: 1px dashed; border-color: aqua;*/
+            widows: 100%; height: 25px;
+            box-sizing: border-box;
+        }
+        #reserve_info strong {
+/*            background-color: greenyellow;*/
+            float: left;
+            margin: 0px;
+            margin-left: 20px;
+            font-size: 15px;
+        }
+        #reserve_info span {
+/*            background-color: yellow;*/
+            float: right;
+            margin: 0px;
+            margin-right: 20px;
+            font-size: 15px;
+        }
+        #reserve_info hr {
+            border: 0.5px solid; border-color: gainsboro; /*고정*/
+            width: 90%;
+            margin-top: 5px; margin-bottom: 7px;
+            margin-left: 5%;
+        }
+        #reserve_info hr[id=final_hr] {
+            border: 1px solid; border-color: gainsboro; /*고정*/
+            width: 90%;
+            margin-top: 5px; margin-bottom: 7px;
+            margin-left: 5%;
+        }
+        /*-- /#reserve_info --*/
+    
+    
+    /*--- reserve_btn ---*/
+    .reserve_btn>a{}
+    .reserve_btn>a>span{}
+    /*--- /reserve_btn ---*/
+
+#reserve_btn_only{
+/*    border: 5px dashed; border-color: black;*/
+    width: 100%; height: 12%;
+    box-sizing: border-box;
+    font-size: 15px;
+    text-align: center;
+} 
+
+/*--- reserve_btn ---*/
+#reserve_btn_only>a{
+    border: 1px solid; border-color: skyblue; /*고정*/
+    width: 95%; height: 95%;
+    margin-left: 2.5%; margin-right: 2.5%;
+    display: block;
+    float: left;
+    box-sizing: border-box;
+    display: inline-grid;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+    background-color: skyblue;
+    font-weight: 600;
+    border-radius: 5px;
+}
+/*--- /reserve_btn ---*/
+
+/*--------- /reserve_right ---------*/
+
+/*---------------------- /container ----------------------*/
+
+
+
+

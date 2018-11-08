@@ -1,11 +1,19 @@
-<%@page import="kr.co.ticketsea.mypage.model.vo.MyReserveList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ page import="kr.co.ticketsea.member.model.vo.*" %>
     <%@ page import="kr.co.ticketsea.reserve.model.vo.*" %>
     <%@ page import="kr.co.ticketsea.mypage.model.vo.*" %>
     <%@ page import="java.util.ArrayList" %>
-    <% ArrayList<MyReserveList> mrlList = (ArrayList<MyReserveList>)request.getAttribute("mrlList"); %>
+    
+    <%
+	// Controller(Servlet)에서 보내준값 가져오기
+	ReservePageData pd = (ReservePageData)request.getAttribute("pd");
+
+	ArrayList<ReserveList> list = pd.getList(); // 현재 페이지의 글 목록
+	String pageNavi = pd.getPageNavi(); // 현재 navi Bar
+	
+%>
+    
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -139,17 +147,22 @@
     }
     
     .paginate{
-        text-align: center;
+        
         padding-top: 20px;
         border-top: 1px solid #c7c7c7;
     }
-    .pagi_num{
-        border: 1px solid skyblue;
-        color: skyblue;
-        padding: 5px 10px;
-        margin: 2px;
-        
+    #paginate_inner{
+    	margin : 0 auto;
     }
+    
+    #list_btn{
+        background-color: #f0f0f0;
+        border-radius: 5px;
+        color: grey;
+        padding: 2px;
+        font-size: 13px;
+    }
+    
     
     
     /* 하단 회원 약관 */
@@ -176,6 +189,11 @@
     letter-spacing: -1px;
     }
     
+    
+    
+    
+    #btnForm{width: auto; height:auto;}
+    #btnForm2{width: auto; height:auto;}
     
 </style>
 </head>
@@ -206,8 +224,8 @@
                 <li class="has_sub">
                     <span>활동 관리</span>
                     <ul>
-                        <li><a href="/views/mypage/reviewMgr.jsp">후기 관리</a></li>
-                        <li><a href="/views/mypage/faqMgr.jsp">나의 문의 내역</a></li>
+                        <li><a href="/reviewMgr.do">후기 관리</a></li>
+                        <li><a href="/qnaMgr.do">나의 문의 내역</a></li>
                         <li><a href="#">소규모 공연 등록관리</a></li>
                         
                     </ul>
@@ -215,7 +233,7 @@
                 <li class="has_sub">
                     <span>회원정보관리</span>
                     <ul>
-                        <li><a href="/views/mypage/memberUpdate.jsp">회원 정보 수정</a></li>
+                        <li><a href="/myMemberUpdate.do">회원 정보 수정</a></li>
                         <li><a href="/views/mypage/memberDelete.jsp">회원 탈퇴</a></li>
                         
                     </ul>
@@ -230,38 +248,83 @@
                         <thead>
                             <tr>
                                 <th>번호</th>
+                                <th>예매번호</th>
                                 <th>공연명</th>
                                 <th>공연일</th>
-                                <th>매수</th>
-                                <th>상태</th>
+                                <th>예매 상태</th>
+                                <th>상세보기</th>
                             </tr>
                         </thead>
-                        <tbody>
-                        	<%for(MyReserveList mrl: mrlList){ %>
+                        <tbody>        	
+                        	<%	for(ReserveList rl: list){ %>
+
                         	<tr>
-                                <td></td>
-                                <td><%=mrl.getShowName() %></td>
-                                <td><%=mrl.getShowDate() %></td>
-                                <td></td>
-                                <td></td>
+                                <td><%=rl.getNum() %></td>
+                                <td><%=rl.getBkNo() %></td>
+                                <td><%=rl.getmShowName() %></td>
+                                <td><%=rl.getBkDate() %></td>
+                                <td>
+                                <form action="/reserveDelete.do" method="post" id="btnForm2">
+                                <input type="hidden" name="reserveDelete" value="<%=rl.getBkNo()%>"/>
+                                <% if(rl.getBkStatCd().equals("RSV_CNL")){ %>
+                                	취소완료
+                                	
+                                	
+                                <%}else if(rl.getBkStatCd().equals("RSV_CPL")){ %>
+                                	예매완료 <button id="list_btn" class="list_btn">취소</button>
+                                	<!-- <input type="submit" value="취소" class=list_btn id=list_btn /> -->
+                                	
+                                <%}else{ %>
+                                	예매중<button id="list_btn" class="list_btn">취소</button>
+                                	 <!-- <input type="submit" value="취소" class=list_btn id=list_btn /> -->
+                                	
+                                	
+                                <%} %>
+                                </form>
+                                </td>
+                                <td>
+                                <form action="/popupReserveList.do" method="get" id="btnForm" target="popup_detail_reserve">
+                                
+                                	<input type="submit" id=list_btn class=show_btn value="보기"/>
+                                	<input type="hidden" name="show_btn" value="<%=rl.getBkNo()%>" />
+                                
+                                </form>
+                                </td>
                             </tr>
                         	<%} %>
                         </tbody>
-                    </table>
+                    </table>		
+                    <script>
+                    $(document).ready(function(){
+
+                    	// 예매 취소 동작
+                        $('.list_btn').click(function(){
+                        	
+                        	var ck = confirm("예매를 취소하시겠습니까?");
+                        	console.log(ck);
+                        	if(ck){
+                            	$('#btnForm2').submit();
+                            }else{
+                            	location.href="/reserveList.do";
+                            }
+                        	return false;
+                        });
+                        
+                    	// 상세보기 팝업 동작
+                        $('.show_btn').click(function(){
+                        	window.open("","popup_detail_reserve","width=1000, height=500");
+                        	$('#btnForm').submit();
+                        });
+                    })
+                    </script>
+					
                     <div class="paginate">
-                        
-                        <a href="#">처음</a>
-                        
-                        <a class="pagi_num" href="#">
-                            <strong>1</strong>
-                        </a>
-                        
-                        <a class="pagi_num" href="#">
-                            <strong>2</strong>
-                        </a>
-                        
-                        <a href="#">끝</a>
+                    	<div id="paginate_inner" style="width:315px; text-align:center;">
+							<label><%=pageNavi%></label>
+						</div>
                     </div>
+                    
+                    
                 </div>
                 <div class="note">
                     <h6>티켓취소 안내</h6>
@@ -278,7 +341,7 @@
         </div>
     </div>
     
-    <a href="#" id="back_to_top">Top</a>
+    <jsp:include page="/top_btn.jsp"/>
     
     <div id="footer">
         <div id="f_inner">

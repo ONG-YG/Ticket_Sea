@@ -84,4 +84,51 @@ public class MiniShowService {
 		
 	}
 
+	//소규모 공연 승인하는 로직
+	public int miniShowApprove(int msNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result=new MiniShowDao().miniShowApprove(conn,msNo);
+		
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
+
+	public int updateApMiniShow(MiniShow ms) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result=new MiniShowDao().updateApMiniShow(conn,ms);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public MiniShow selectWtShow(int msNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		MiniShow ms= new MiniShowDao().selectWtShow(conn,msNo);
+		
+		JDBCTemplate.close(conn);
+		
+		return ms;
+	}
+
+	public int refuseMiniShow(int msNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new MiniShowDao().refuseMiniShow(conn,msNo);
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
+
+
 }

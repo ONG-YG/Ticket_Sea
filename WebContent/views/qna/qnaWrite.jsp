@@ -269,17 +269,6 @@
                         <td><input type="text" name="title" style="width: 500px;" /></td>
                     </tr>
                     <tr>
-                        <td style="width : 40px; text-align : center;" >분류</td>
-                        <td name="catagory">
-                            <select>
-                                <option>공연</option>
-                                <option>예매</option>
-                                <option>결제</option>
-                                <option>회원</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
                         <td style="width : 70px; text-align : center;" >글 내용</td>
                         <td colspan="2" >
                             <textarea name="contents" rows="17" cols="50" style="width:600px;"></textarea>

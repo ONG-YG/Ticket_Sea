@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import kr.co.ticketsea.common.JDBCTemplate;
 import kr.co.ticketsea.reserve.model.dao.ReserveDao;
 import kr.co.ticketsea.reserve.model.vo.PerformSchedule;
+import kr.co.ticketsea.reserve.model.vo.ReserveProgressing;
 import kr.co.ticketsea.reserve.model.vo.SeatGradeState;
 import kr.co.ticketsea.reserve.model.vo.SelectedSeat;
 import kr.co.ticketsea.reserve.model.vo.ShowInfo;
@@ -111,7 +112,7 @@ public class ReserveService {
 
 	public ArrayList<SeatGradeState> getSeatGradeStatus(int psNo) {
 		Connection conn = JDBCTemplate.getConnection();
-		ArrayList<SeatGradeState> seatGrdStList = new ReserveDao().getSeatGradeAndPrice(conn);
+		ArrayList<SeatGradeState> seatGrdStList = new ReserveDao().getSeatGradeAndPrice(conn, psNo);
 		
 		for (int i=0; i<seatGrdStList.size(); i++) {
 			String grade = seatGrdStList.get(i).getTh1_seat_grd();
@@ -205,5 +206,76 @@ public class ReserveService {
 		
 		return bkNo;
 	}
-	
+
+	public int deleteProgData(int progNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new ReserveDao().deleteProgData(conn, progNo);
+		
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+
+		return result;
+	}
+
+	public String[] getSeatListByProgNo(int progNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		String[] seatList = new ReserveDao().getSeatListByProgNo(conn, progNo);
+		
+		JDBCTemplate.close(conn);
+		
+		return seatList;
+	}
+
+	public int getPerformNoByProgNo(int progNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		int psNo = new ReserveDao().getPerformNoByProgNo(conn, progNo);
+		
+		JDBCTemplate.close(conn);
+		
+		return psNo;
+	}
+
+	public int insertBookInfo(long bkNo, int memberNo, String bkStateCd, int ticketPrice, int totalPrice, String payType, String phone, String email) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new ReserveDao().insertBookInfo(conn, bkNo, memberNo, bkStateCd, ticketPrice, totalPrice, payType, phone, email);
+		
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
+
+	public int insertBookSeatList(long bkNo, int psNo, String[] seatList, String sc_code) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = 0;
+		for(String seat : seatList) {
+			int seatNo = Integer.parseInt(seat);
+			
+			int chk = new ReserveDao().insertBookSeatList (conn, sc_code, bkNo, psNo, seatNo);
+			
+			if(chk>0) {
+				JDBCTemplate.commit(conn);
+				result = 1;
+			}else {
+				JDBCTemplate.rollback(conn);
+				return 0;
+			}
+		}
+		
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
+
 }

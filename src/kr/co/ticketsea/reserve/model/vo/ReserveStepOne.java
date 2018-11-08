@@ -8,23 +8,26 @@ public class ReserveStepOne {
 	private String showTitle;							//공연명
 	private String showPoster;							//공연 포스터 파일명
 	private ArrayList<PerformSchedule> psList;			//공연 일정 목록
-	//private ArrayList<SeatGradeState> seatGrdStList;	//등급별 좌석가격 및 잔여석
-	
-	
+	private String startDate;							//공연 시작일
+	private String endDate;								//공연 종료일
 	
 	
 	public ReserveStepOne() {
 		super();
 	}
-	public ReserveStepOne(int showNo, String showTitle, String showPoster, ArrayList<PerformSchedule> psList) {
+	public ReserveStepOne(int showNo, String showTitle, String showPoster, ArrayList<PerformSchedule> psList,
+			String startDate, String endDate) {
 		super();
 		this.showNo = showNo;
 		this.showTitle = showTitle;
 		this.showPoster = showPoster;
 		this.psList = psList;
+		this.startDate = startDate;
+		this.endDate = endDate;
 	}
-	
-	
+
+
+
 	public int getShowNo() {
 		return showNo;
 	}
@@ -48,10 +51,20 @@ public class ReserveStepOne {
 	}
 	public void setPsList(ArrayList<PerformSchedule> psList) {
 		this.psList = psList;
-	}	
-
+	}
+	public String getStartDate() {
+		return startDate;
+	}
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+	public String getEndDate() {
+		return endDate;
+	}
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
+	}
 	
-		
 	
 	
 }

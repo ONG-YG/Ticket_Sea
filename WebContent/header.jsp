@@ -12,6 +12,13 @@
 
 
 </head>
+
+<script>
+function adminBtn(){
+	window.open("/adShowPlace.do","admin","width=1800, height=1500"); //_blank는 중복 팝업 가능함
+}
+</script>
+
 <body>
    <!--wrap div-->
     <div id="wrap">
@@ -31,10 +38,18 @@
 									}
 								
 							%>
+							
+							<%if(member.getMemberId().equals("admin")){%>
 							<a href="/logout.do" id="logout">로그아웃</a>
+							<a href="" onclick="adminBtn();">관리자페이지</a>
 							<a href="/reserveList.do" id="myPage">마이페이지</a>
 							<a href="/reserveList.do" id="reserve">예매확인/취소</a>
 							
+							<%}else{ %>
+							<a href="/logout.do" id="logout">로그아웃</a>
+							<a href="/reserveList.do" id="myPage">마이페이지</a>
+							<a href="/reserveList.do" id="reserve">예매확인/취소</a><span>|</span>
+							<%} %>
 							<%}else{ %>
 							<a href="#"  class="btn login" 
 							onclick="window.open('/views/member/login.jsp','로그인','width=430,height=440'); return false;"  id="loginBtn">로그인</a>
@@ -42,7 +57,7 @@
                    			 onclick="window.open('/views/member/memberJoin.jsp','회원가입','width=430,height=750'); return false;">회원가입</a> 
 							<% } %>
 							
-							<a href="#" >고객센터</a>
+							<a href="/noticeList.do" >고객센터</a>
 						</div>
                     </div>
                 </div>
@@ -72,11 +87,11 @@
             <div id="menu">
 				<ul>
 					<li><a class="menulink">&nbsp;</a></li>
-					<li><a class="menulink" href="#">뮤지컬</a></li>
-					<li><a class="menulink" href="#">콘서트</a></li>
-					<li><a class="menulink" href="#">소규모공연</a>		</li>
+					<li><a class="menulink" href="/showList.do">뮤지컬</a></li>
+					<li><a class="menulink" href="/showListCnc.do">콘서트</a></li>
+					<li><a class="menulink" href="/promoList.do">소규모공연</a>		</li>
 					<li><a class="menulink" href="#">랭킹</a></li>
-					<li><a class="menulink" href="#">고객센터</a>		</li>
+					<li><a class="menulink" href="/noticeList.do">고객센터</a>		</li>
 					<li><a class="menulink">&nbsp;</a></li>
 				</ul>
 			</div>

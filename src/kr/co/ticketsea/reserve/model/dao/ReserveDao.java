@@ -65,36 +65,6 @@ public class ReserveDao {
 		
 		return psList;
 	}
-
-//	public int selectOnePerformSchedule(Connection conn, int showNo, String date_sel, String cnt_sel) {
-//		PreparedStatement pstmt = null;
-//		ResultSet rset = null;
-//		int performSchNo = 0;
-//		
-//		String query = "SELECT PS_NO FROM PERF_SCH WHERE M_SHOW_NO=? AND PS_DATE=? AND PS_CNT=?";
-////		System.out.println(showNo);
-////		System.out.println(date_sel);
-////		System.out.println(cnt_sel);
-//		try {
-//			pstmt = conn.prepareStatement(query);
-//			pstmt.setInt(1, showNo);
-//			pstmt.setString(2, date_sel);
-//			pstmt.setString(3, cnt_sel);
-//			rset = pstmt.executeQuery();
-//			
-//			if(rset.next()) {
-//				performSchNo = rset.getInt("PS_NO");
-//			}			
-//				
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		} finally {
-//			JDBCTemplate.close(rset);
-//			JDBCTemplate.close(pstmt);
-//		}			
-//			
-//		return performSchNo;
-//	}
 	
 	public PerformSchedule selectOnePerformSchedule(Connection conn, int psNo) {
 		PreparedStatement pstmt = null;
@@ -132,7 +102,8 @@ public class ReserveDao {
 		ResultSet rset = null;
 		ArrayList<Integer> reserved_seats = new ArrayList<Integer>();
 		
-		String query = "SELECT TH1_SEAT_NO FROM BK_S_L WHERE PS_NO=? AND BK_NO IN (SELECT BK_NO FROM BOOK_INF WHERE BK_STAT_CD='RSV_CPL')";
+		String query = "SELECT TH1_SEAT_NO FROM BK_S_L WHERE PS_NO=? "
+						+ "AND BK_NO IN (SELECT BK_NO FROM BOOK_INF WHERE BK_STAT_CD='RSV_CPL')";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -162,7 +133,7 @@ public class ReserveDao {
 		
 		String query = "SELECT TH1_SEAT_NO FROM PROG_S_L "
 				+ "WHERE PS_NO=? AND "
-				+ "(SYSDATE-PROG_TIME)*24*60 < 5";
+				+ "(SYSDATE-PROG_TIME)*24*60 <= 10";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -207,7 +178,7 @@ public class ReserveDao {
 				si.setM_show_ed_date(rset.getDate("M_SHOW_ED_DATE"));
 				si.setBk_comm(rset.getInt("BK_COMM"));
 				si.setM_show_poster(rset.getString("M_SHOW_POSTER"));
-						//System.out.println(si);
+				//System.out.println(si);
 			}			
 				
 		} catch (SQLException e) {
@@ -225,7 +196,8 @@ public class ReserveDao {
 		ResultSet rset = null;
 		int reservedSeat = -1;
 		
-		String query = "SELECT COUNT(*) AS CNT FROM BK_S_L WHERE PS_NO=? AND BK_NO IN (SELECT BK_NO FROM BOOK_INF WHERE BK_STAT_CD='RSV_CPL')";
+		String query = "SELECT COUNT(*) AS CNT FROM BK_S_L WHERE PS_NO=? "
+						+ "AND BK_NO IN (SELECT BK_NO FROM BOOK_INF WHERE BK_STAT_CD='RSV_CPL')";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -251,7 +223,9 @@ public class ReserveDao {
 		ResultSet rset = null;
 		int totalSeat = -1;
 		
-		String query = "SELECT COUNT(*) AS CNT FROM TH1_SEAT_L WHERE TH_NO=(SELECT TH_NO FROM MUSICAL_L WHERE M_SHOW_NO=(SELECT M_SHOW_NO FROM PERF_SCH WHERE PS_NO=?))";
+		String query = "SELECT COUNT(*) AS CNT FROM TH1_SEAT_L WHERE TH_NO="
+						+ "(SELECT TH_NO FROM MUSICAL_L WHERE M_SHOW_NO="
+						+ "(SELECT M_SHOW_NO FROM PERF_SCH WHERE PS_NO=?))";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -324,22 +298,30 @@ public class ReserveDao {
 		return thName;
 	}
 
-	public ArrayList<SeatGradeState> getSeatGradeAndPrice(Connection conn) {
+	public ArrayList<SeatGradeState> getSeatGradeAndPrice(Connection conn, int psNo) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<SeatGradeState> seatGrdStList = new ArrayList<SeatGradeState>();
 		
-		String query = "SELECT * FROM TH1_PRICE";
+//		String query = "SELECT * FROM TH1_PRICE WHERE TH_NO="
+//						+ "(SELECT TH_NO FROM MUSICAL_L WHERE M_SHOW_NO="
+//						+ "(SELECT M_SHOW_NO FROM PERF_SCH WHERE PS_NO=?))";/////
+		
+		String query = "SELECT * FROM TH1_PRICE WHERE M_SHOW_NO="
+						+ "(SELECT M_SHOW_NO FROM PERF_SCH WHERE PS_NO=?)";
+		
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			//pstmt.setInt(1, th_no);
+			pstmt.setInt(1, psNo);
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
 				SeatGradeState seatGrdSt = new SeatGradeState();
-				seatGrdSt.setTh1_seat_grd(rset.getString("th1_seat_grd"));
-				seatGrdSt.setTh1_seat_prc(rset.getInt("th1_seat_prc"));
+				seatGrdSt.setTh1_seat_grd(rset.getString("TH1_SEAT_GRD"));
+				seatGrdSt.setTh1_seat_prc(rset.getInt("TH1_SEAT_PRC"));
+				seatGrdSt.setGrd_color(rset.getString("GRD_COL"));
+				
 				seatGrdStList.add(seatGrdSt);
 			}
 			
@@ -385,9 +367,9 @@ public class ReserveDao {
 		int reservedSeat = -1;
 		
 		String query = "SELECT COUNT(*) AS CNT FROM BK_S_L " + 
-				"WHERE PS_NO=? " + 
-				"AND TH1_SEAT_NO IN (SELECT TH1_SEAT_NO FROM TH1_SEAT_L WHERE TH1_SEAT_GRD=?) " + 
-				"AND BK_NO IN (SELECT BK_NO FROM BOOK_INF WHERE BK_STAT_CD='RSV_CPL')";
+						"WHERE PS_NO=? " + 
+						"AND TH1_SEAT_NO IN (SELECT TH1_SEAT_NO FROM TH1_SEAT_L WHERE TH1_SEAT_GRD=?) " + 
+						"AND BK_NO IN (SELECT BK_NO FROM BOOK_INF WHERE BK_STAT_CD='RSV_CPL')";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -570,6 +552,147 @@ public class ReserveDao {
 		
 		return bkNo;
 	}
+
+	public int deleteProgData(Connection conn, int progNo) {
+
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = "DELETE FROM PROG_S_L WHERE PROG_NO=?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, progNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public String[] getSeatListByProgNo(Connection conn, int progNo) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<String> list = new ArrayList<String>();
+		String[] seatList = null;
+		
+		String query = "SELECT TH1_SEAT_NO FROM PROG_S_L WHERE PROG_NO=?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, progNo);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				String seatNo = rset.getString("TH1_SEAT_NO");
+				list.add(seatNo);
+			}
+			
+			if(!list.isEmpty()) {
+				int size = list.size();
+				seatList = new String[size];
+				for(int i=0; i<size; i++) {
+					seatList[i] = list.get(i);
+				}
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return seatList;
+	}
+
+	public int getPerformNoByProgNo(Connection conn, int progNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int psNo = -1;
+		
+		String query = "SELECT PS_NO FROM PROG_S_L WHERE PROG_NO=?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, progNo);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				psNo = rset.getInt("PS_NO");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return psNo;
+	}
+
+	public int insertBookInfo(Connection conn, long bkNo, int memberNo, String bkStateCd, int ticketPrice,
+			int totalPrice, String payType, String phone, String email) {
+
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = "INSERT INTO BOOK_INF VALUES(?, ?, ?, SYSDATE, ?, ?, ?, ?, ?)";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setLong(1, bkNo);
+			pstmt.setInt(2, memberNo);
+			pstmt.setString(3, bkStateCd);
+			pstmt.setInt(4, ticketPrice);
+			pstmt.setInt(5, totalPrice);
+			pstmt.setString(6, payType);
+			pstmt.setString(7, phone);
+			pstmt.setString(8, email);
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int insertBookSeatList(Connection conn, String sc_code, long bkNo, int psNo, int seatNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = "INSERT INTO BK_S_L VALUES"
+				+ "(?||TO_CHAR( TO_NUMBER(TO_CHAR(SYSDATE, 'YYMMDD'))*100000+TKNO_SEQ.NEXTVAL ), "
+				+ "?, ?, ?)";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, sc_code);
+			pstmt.setLong(2, bkNo);
+			pstmt.setInt(3, psNo);
+			pstmt.setInt(4, seatNo);
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+
+
 
 	
 }

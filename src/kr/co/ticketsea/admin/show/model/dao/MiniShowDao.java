@@ -36,11 +36,11 @@ public class MiniShowDao {
 			while(rset.next()) {
 				MiniShow ms=new MiniShow();
 				ms.setMs_no(rset.getInt("ms_no"));
-				ms.setMs_name(rset.getString("ms_name"));
-				ms.setMs_userId(rset.getString("ms_userId"));
+				ms.setMs_name(rset.getString("ms_title"));
+				ms.setMs_userId(rset.getString("ms_memId"));
 				ms.setMs_ct(rset.getString("ms_ct"));
 				ms.setMs_artists(rset.getString("ms_artists"));
-				ms.setMs_date(rset.getDate("ms_date"));
+				ms.setMs_wrtdate(rset.getDate("ms_wrt_date"));
 				ms.setMs_place(rset.getString("ms_place"));
 				ms.setMs_intd(rset.getString("ms_intd"));
 				ms.setMs_state(rset.getString("state_name"));
@@ -163,11 +163,11 @@ public class MiniShowDao {
 			while(rset.next()) {
 				MiniShow ms=new MiniShow();
 				ms.setMs_no(rset.getInt("ms_no"));
-				ms.setMs_name(rset.getString("ms_name"));
-				ms.setMs_userId(rset.getString("ms_userId"));
+				ms.setMs_name(rset.getString("ms_title"));
+				ms.setMs_userId(rset.getString("ms_memId"));
 				ms.setMs_ct(rset.getString("ms_ct"));
 				ms.setMs_artists(rset.getString("ms_artists"));
-				ms.setMs_date(rset.getDate("ms_date"));
+				ms.setMs_wrtdate(rset.getDate("ms_wrt_date"));
 				ms.setMs_place(rset.getString("ms_place"));
 				ms.setMs_intd(rset.getString("ms_intd"));
 				ms.setMs_state(rset.getString("state_name"));
@@ -271,7 +271,7 @@ public class MiniShowDao {
 		ResultSet rset=null;
 		MiniShow ms = null;
 		
-		String query = "select * from MS_STAT m RIGHT OUTER JOIN (select * from mini_show)S ON m.STATE_CD=S.MS_STATE WHERE MS_NO=?;";
+		String query = "select * from MS_STAT m RIGHT OUTER JOIN (select * from mini_show)S ON m.STATE_CD=S.MS_STATE WHERE MS_NO=?";
 		
 		try {
 			pstmt=conn.prepareStatement(query);
@@ -281,20 +281,131 @@ public class MiniShowDao {
 			if(rset.next()) {
 				ms=new MiniShow();
 				ms.setMs_no(rset.getInt("ms_no"));
-				ms.setMs_name(rset.getString("ms_name"));
-				ms.setMs_userId(rset.getString("ms_userId"));
+				ms.setMs_name(rset.getString("ms_title"));
+				ms.setMs_userId(rset.getString("ms_memId"));
 				ms.setMs_artists(rset.getString("ms_artists"));
 				ms.setMs_place(rset.getString("ms_place"));
+				ms.setMs_st_date(rset.getDate("ms_st_date").toString());
+				ms.setMs_ed_date(rset.getDate("ms_ed_date").toString());
 				ms.setMs_ct(rset.getString("ms_ct"));
-				ms.setMs_date(rset.getDate("ms_date"));
+				ms.setMs_wrtdate(rset.getDate("ms_wrt_date"));
 				ms.setMs_state(rset.getString("ms_state"));
+				ms.setMs_poster(rset.getString("ms_poster"));
 				ms.setMs_intd(rset.getString("ms_intd"));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
 		}
 		return ms;
+	}
+
+	public int miniShowApprove(Connection conn, int msNo) {
+		PreparedStatement pstmt=null;
+		int result = 0;
+		String query = "update mini_show set ms_state='ap_cmt' where ms_no=?";
+		
+		try {
+			pstmt=conn.prepareStatement(query);
+			pstmt.setInt(1, msNo);
+			
+			result= pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+		
+	}
+
+	public int updateApMiniShow(Connection conn, MiniShow ms) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "update mini_show set ms_artists=?, ms_place=?, ms_st_date=?, ms_ed_date=?, ms_poster=?, ms_intd=? where ms_no=?";
+		
+		try {
+			pstmt=conn.prepareStatement(query);
+			pstmt.setString(1, ms.getMs_artists());
+			pstmt.setString(2, ms.getMs_place());
+			pstmt.setString(3, ms.getMs_st_date());
+			pstmt.setString(4, ms.getMs_ed_date());
+			pstmt.setString(5, ms.getMs_poster());
+			pstmt.setString(6, ms.getMs_intd());
+			pstmt.setInt(7, ms.getMs_no());
+			
+			result=pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	public MiniShow selectWtShow(Connection conn, int msNo) {
+		PreparedStatement pstmt=null;
+		ResultSet rset=null;
+		MiniShow ms = null;
+		
+		String query = "select * from MS_STAT m RIGHT OUTER JOIN (select * from mini_show)S ON m.STATE_CD=S.MS_STATE WHERE MS_NO=?";
+		
+		try {
+			pstmt=conn.prepareStatement(query);
+			pstmt.setInt(1, msNo);
+			rset=pstmt.executeQuery();
+			
+			if(rset.next()) {
+				ms=new MiniShow();
+				ms.setMs_no(rset.getInt("ms_no"));
+				ms.setMs_name(rset.getString("ms_title"));
+				ms.setMs_userId(rset.getString("ms_memId"));
+				ms.setMs_artists(rset.getString("ms_artists"));
+				ms.setMs_place(rset.getString("ms_place"));
+				ms.setMs_st_date(rset.getDate("ms_st_date").toString());
+				ms.setMs_ed_date(rset.getDate("ms_ed_date").toString());
+				ms.setMs_ct(rset.getString("ms_ct"));
+				ms.setMs_wrtdate(rset.getDate("ms_wrt_date"));
+				ms.setMs_state(rset.getString("ms_state"));
+				ms.setMs_poster(rset.getString("ms_poster"));
+				ms.setMs_intd(rset.getString("ms_intd"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return ms;
+	}
+
+	public int refuseMiniShow(Connection conn, int msNo) {
+		PreparedStatement pstmt=null;
+		int result =0;
+		
+		String query="update mini_show set ms_state='ap_dec' where ms_no=?";
+		
+		try {
+			pstmt=conn.prepareStatement(query);
+			
+			pstmt.setInt(1, msNo);
+			
+			result=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+		
 	}
 
 }

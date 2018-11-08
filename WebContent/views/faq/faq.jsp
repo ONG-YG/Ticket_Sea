@@ -243,59 +243,27 @@
             text-align: center;
         }
     
-    #board{
-        border:1px solid #dedede;
-        width : 760px;
-        height : 500px;
+   #faq_header{
+    	width : 100%;
     }
     
-    #board_header{
-        border:1px solid #dedede;
-        width : 100%;
-        height : 15%;
+    #faq_header_a{
+    	width : 15%;
+    	text-align: center;
+    	background-color:lightskyblue;
+    	color:white;
     }
     
-    #board_header > #b_h_title{
-        border: 1px solid #dedede;
-        width : 100%;
-        height : 60%;
-        font-size: 25px;
-        float : left;
+    #faq_header_b{
+    	border : 1px solid black;
+    	width : 85%;
     }
     
-    #board_header > #b_h_writer{
-        border: 1px solid #dedede;
-        width : 40%;
-        height : 40%;
-        font-size: 15px;
-        float:left;
+    #faq_contents{
+   		width : 100%;
+   		padding : 10px 10px 10px;
     }
     
-    #board_header > #b_h_blank{
-        border : 1px solid #dedede;
-        width : 30%;
-        height : 40%;
-        font-size: 15px;
-        float:left;
-    }
-    
-    #board_header > #b_h_date{
-        border : 1px solid #dedede;
-        width : 20%;
-        height : 40%;
-        font-size: 15px;
-        text-align: center;
-        float:left;
-    }
-    
-    #board_header > #b_h_hit{
-        border : 1px solid #dedede;
-        width : 10%;
-        height : 40%;
-        font-size: 15px;
-        text-align: center;
-        float:left;
-    }
     #header_inner{width:990px; margin: 0px auto;}
 </style>
 </head>
@@ -330,19 +298,22 @@
                     <h3>자주 묻는 질문</h3>
                 </div>
                 
-                <div id ="board">
-                    <div id="board_header">
-                        <div id="b_h_title" name="boardF_title"> <%= faq.getBoardF_title()  %></div>
-                         <div id="b_h_writer" name="boardF_category"><%= faq.getBoardF_category() %></div>
-                        <div id="b_h_blank""></div>
-                        <div id="b_h_date" name="boardF_date"></div>
-                        <div id="b_h_hit" name="boardQ_hit"></div>
-                    </div>
-                    
-                    <div id="b_h_contents" style="margin:15px;" name="boardQ_contents">
-                        <%= faq.getBoardF_contents() %>
-                    </div>
-                </div>
+                 <table id = "faq_header">
+                	<tr>
+                	<td id = "faq_header_a">제목</td>
+                	<td id = "faq_header_b"><%= faq.getBoardF_title()%></td>
+                	</tr>
+                	
+                	<tr>
+                	<td id = "faq_header_a">카테고리</td>
+                	<td id = "faq_header_b"><%= faq.getBoardF_category() %></td>
+                	</tr>
+                	<tr>
+                </table>
+                
+                <span id = "faq_contents">
+                		<%= faq.getBoardF_contents() %>
+        		</span>
                 
                  <%
 					session = request.getSession(false);
@@ -356,6 +327,8 @@
                 <button id="btn1" onclick="modifyActive();" style="width: 70px; height: 30px; float:right;">수정</button> 
 				<button id="btn2" onclick="delFaq();" style="width: 70px; height: 30px; float:right;">삭제</button> 
                 <%} %>
+                
+                
                 <script>
                 function delFaq(){
             		location.href="/faqDelete.do?boardF_no=<%=faq.getBoardF_no()%>";

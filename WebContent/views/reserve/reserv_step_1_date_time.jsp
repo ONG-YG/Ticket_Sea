@@ -11,10 +11,10 @@
 	int showNo = Integer.parseInt(request.getParameter("showNo"));
 	ReserveStepOne stOne = (ReserveStepOne)request.getAttribute("stepOne");
 	
-	String showTitle = stOne.getShowTitle();
-	String showPoster = stOne.getShowPoster();
+	String showTitle = stOne.getShowTitle(); //공연명
+	String showPoster = stOne.getShowPoster(); //공연 포스터 파일명
+	
 	ArrayList<PerformSchedule> psList = stOne.getPsList();
-	//ArrayList<SeatGradeState> seatGrdStList = stOne.getSeatGrdStList();//////////////////////////////
 %>
 
 <script>
@@ -37,14 +37,28 @@
 	       	seatGrdStList.push(seatGrdSt);
        	<%} %>
 		
-		//var ps = [psNo, psDate, psCnt, psTime];//, availSeat];
 		var ps = [psNo, psDate, psCnt, psTime, seatGrdStList];
 		psList.push(ps);
-		//console.log(ps);////////////////////////////////////////////
 <%
 	}
 %>
-
+	
+	var startDate = psList[0][1];
+	var startDateSp = startDate.split('-');
+	var startDateN = Number(startDateSp[0]+startDateSp[1]+startDateSp[2]);
+	
+	var endDate = psList[psList.length-1][1];
+	var endDateSp = endDate.split('-');
+	var endDateN = Number(endDateSp[0]+endDateSp[1]+endDateSp[2]);
+	//console.log("start : "+startDateN+"\nend : "+endDateN);
+	
+	//오늘 날짜를 Number 형식으로 today에 저장
+	var todayYear = new Date().getFullYear();
+	var todayMonth = new Date().getMonth()+1; //오늘이 속한 달
+	var todayDate = new Date().getDate();
+	var today = todayYear*10000+todayMonth*100+todayDate;
+	//console.log("today : " + today);
+    
 </script>
 
 <head>
@@ -65,45 +79,51 @@
         var date_sel = null;
         var cnt_sel = null;
         var psNo = null;
-        //var availSeat = null;
         
         $(document).ready(function(){
-            
-        	pageInit();
-        	
+			
+			pageInit();
+			
+			$(document).mousemove(function(){
+				viewSelectableDays();
+			});
+			
+
         	// 날력의 날짜 클릭했을 때
         	// date_sel에 선택한 날짜 저장
         	// 날짜와 회차 모두 선택한 상태에서 다른 날짜를 다시 선택했을 경우를 위해 먼저, 선택한 회차정보를 초기화 
-            $('.calendar-date').click(function(){
-            //$('.week .day').click(function(){
-            	//alert("hello");/////////////////////////////////////////
-                date_sel = null;
-                cnt_sel = null;
-                psNo = null;
-                //availSeat = null;
-                
+			$('calendar').click(function(){
+				
+				date_sel = null;
+	            cnt_sel = null;
+	            psNo = null;
+				
+				var chkSel = $('#calSelected').val();
+				
+				if(date_sel!=chkSel) {
+					date_sel = chkSel;
+					//console.log( "date_sel : " + date_sel );
+				}
+				
+				viewSelectableDays();
+				
                 $('#seat_box ul').html("");
                 $('#cnt_box ul').html("");
                 $('#seat_box ul').html("");
                 $('#cnt_box li').removeClass('selected_cnt_li');
-                $('.calendar-date').removeClass('selected_date_td');
-                $(this).addClass('selected_date_td');
+                //$('.calendar-date').removeClass('selected_date_td');
+                //$(this).addClass('selected_date_td');
                 
-                var yearMonth = $('.year-month').text().split('.');
-                var year = yearMonth[0];
-                var month = yearMonth[1];
-                var day = $(this).text();
+                var calSelected = date_sel.split('-');
+                //console.log("date_sel : "+date_sel);
+                //console.log("calSelcected : "+calSelected);
                 
-                /*
-                var calSelected = $('#calSelected').val().split('-');
-                alert(calSelcected);
                 var year = calSelected[0];
                 var month = calSelected[1];
                 var day = calSelected[2];
-                */
                 
-                date_sel = year+"-"+month+"-"+day;
-                $('#date_sel_info span').html(year+"."+month+"."+day);
+                //$('#date_sel_info span').html(year+"."+month+"."+day);
+                $('#date_sel_info span').html("");
                 $('#cnt_sel_info span').html(cnt_sel);
                 //alert(date_sel);
                 
@@ -125,27 +145,13 @@
 		                    +" </li> ";
             	}
             	$('#cnt_box ul').html(list);
-            	
-            })
-            
-            /*
-            // 회차 정보 li를 클릭했을 때
-            // cnt_sel에 선택한 회차 번호 저장
-            // 선택한 날짜와 회차 정보 종합해서 잔여석 표시
-            $('#cnt_box li').click(function(){
-                alert(date_sel);
-            	if(date_sel!=null) {
-                    $('#cnt_box li').removeClass('selected_cnt_li');
-                    $('#cnt_box li[id=]').addClass('selected_cnt_li');
-
-                    cnt_sel = $(this).children('.cnt').html();
-                    $('#cnt_sel_info span').html($(this).text());
-                    //alert(cnt_sel);
-                }
-            })
-            */
-            
-        })
+				
+			});//$('calendar').click END
+        	
+        	
+        });//$(document).ready END
+        
+        
         
         function pageInit() {
         	
@@ -155,11 +161,7 @@
         	var showPosterSrc = "/img/poster/<%=showPoster%>";
         	$('#mini_poster img').attr('src',showPosterSrc);  //포스터 이미지 경로 세팅
         	
-        	
-        	//psList에 담긴 선택가능한 날짜들 달력에 표시해주기
-        	
-        	
-        }
+        }//function pageInit() END
         
      	// 회차 정보 li를 클릭했을 때
         // cnt_sel에 선택한 회차 번호 저장
@@ -170,7 +172,15 @@
         		var selectedLi = '#cnt_box #li_'+cnt;
         		$('#cnt_box li').removeClass('selected_cnt_li');
                 $(selectedLi).addClass('selected_cnt_li');
-
+                
+                ////////////////////////
+                var calSelected = date_sel.split('-');
+                var year = calSelected[0];
+                var month = calSelected[1];
+                var day = calSelected[2];
+                $('#date_sel_info span').html(year+"."+month+"."+day);
+                /////////////////////
+                
                 cnt_sel = $(selectedLi).children('.cnt').html();
                 var cntText = $(selectedLi).text();
                 $('#cnt_sel_info span').html(cntText);
@@ -184,8 +194,8 @@
                 		break;
                 	}
 				}
+                //console.log(seatGrdStList);
                 
-                //console.log(seatGrdStList);/////////////////
                 var list = "";
                 for(var i=0; i<seatGrdStList.length; i++) {
                 	var seatGrdSt = seatGrdStList[i];
@@ -199,7 +209,107 @@
                 $('#seat_box ul').html(list);
                 
             }
-        }
+        }//function listClick(cnt) END
+     	
+		function viewSelectableDays(){
+	    	
+			//스케줄 시작일이 오늘 이후인지 아닌지
+			var diff = today - startDateN;
+			console.log("diff : "+diff);
+			
+			var viewStart = null; //표시 시작일
+			var viewEnd = endDateN; //표시 종료일
+			
+			if(diff>=0) {
+				//양수나 0이면 오늘부터
+				viewStart = today;
+			}
+			else {
+				//음수면 스케줄 시작일부터
+				viewStart = startDateN;
+			}
+			
+			//console.log("viewStart : " + viewStart);
+			//console.log("viewEnd : " + viewEnd);
+			
+			// 현재표시시작일 & 현재표시종료일 세팅
+			var viewStartMonth = Math.floor(viewStart/100); //표시 시작일 달(연도포함)
+			var viewEndMonth = Math.floor(viewEnd/100); //표시 종료일 달(연도포함)
+			//console.log("viewStartMonth : " + viewStartMonth);
+			//console.log("viewEndMonth : " + viewEndMonth);
+			
+			//달력이 표시 중인 월(연도포함)
+			var currMonth = Number($('calendar div.header span.ng-binding').text().split('월,')[1])*100
+							+ Number($('calendar div.header span.ng-binding').text().split('월,')[0]);
+			//console.log("currMonth : " + currMonth);
+			
+			var currStart = null; //현재 표시 시작일
+			var currEnd = null; //현재 표시 종료일
+			
+			if(currMonth == viewStartMonth) {
+				currStart = viewStart;
+				if(currMonth == viewEndMonth) {
+					currEnd = viewEnd;
+					//console.log("1-1");
+				}
+				else if(currMonth > viewEndMonth) {
+					currStart = Math.floor(viewStart/100)*100 + 00;
+					currEnd = Math.floor(viewEnd/100)*100 + 00;
+					//console.log("1-2");
+				}
+				else {
+					currEnd = Math.floor(viewEnd/100)*100 + 50;
+					//console.log("1-3");
+				}
+			}
+			else if(currMonth > viewStartMonth) {
+				
+				if(currMonth == viewEndMonth) {
+					currStart = Math.floor(viewStart/100)*100 + 1;
+					currEnd = viewEnd;
+					//console.log("2-1");
+				}
+				else if(currMonth > viewEndMonth) {
+					currStart = Math.floor(viewStart/100)*100 + 00;
+					currEnd = Math.floor(viewEnd/100)*100 + 00;
+					//console.log("2-2");
+				}
+				else {
+					currStart = Math.floor(viewStart/100)*100 + 1;
+					currEnd = Math.floor(viewEnd/100)*100 + 50;
+					//console.log("2-3");
+				}
+			}
+			else {
+				currStart = Math.floor(viewStart/100)*100 + 00;
+				currEnd = Math.floor(viewEnd/100)*100 + 00;
+				//console.log("3");
+			}
+			
+			//console.log("currStart : " + currStart);
+			//console.log("currEnd : " + currEnd);
+			
+			
+			var days = $('calendar div.week span.day.ng-binding').not('.different-month');
+			
+			
+			$.each( days, function(index, item){
+				
+				var s = currStart%100;
+				var e = currEnd%100;
+				//console.log("s : " + s);
+				//console.log("e : " + e);
+				
+				//console.log("1-"+$('calendar div.week span.day.ng-binding').eq(index).text());
+				//console.log("2-"+item.innerHTML);
+				
+				if(item.innerHTML>=s && item.innerHTML<=e) {
+					//console.log("day-"+item.innerHTML);
+					days.eq(index).addClass('selectable');
+				}
+			});
+	    
+	    }//function viewSelectableDays() END
         
         function next() {
             var stat = false;
@@ -207,14 +317,10 @@
             if(stat==false) {
                 alert("날짜/회차를 선택하세요");
             }else {
-                //console.log("선택한 날짜 : "+date_sel+"  /  선택한 회차 : "+cnt_sel);/////////
-                $('#date_form').val(date_sel);
-                $('#cnt_form').val(cnt_sel);
-                
-                $('#dateCntForm').attr('action',"/reserveSeat.do?psNo="+psNo);
-                document.getElementById("dateCntForm").submit();
+                //console.log("선택한 날짜 : "+date_sel+"  /  선택한 회차 : "+cnt_sel);
+                location.href="/reserveSeat.do?psNo="+psNo;
             }
-        }
+        }//function next() END
         
     </script>
     
@@ -258,85 +364,9 @@
                             <div id="ct_left_date">
                                 <b>날짜선택</b><hr>
                                 <div id="date_box">
-                                	<!--<jsp:include page="/views/reserve/reserveCalendar.html" />-->
                                 	
-                                    <div class="calendar">
-                                        <div class="calendar-header">
-                                            <a class="prev-mon" title="이전달"><span>이전달</span></a>
-                                            <a class="next-mon" title="다음달"><span>다음달</span></a>
-
-                                            <div class="current-mon"><span class="year-month">2018.11</span></div>
-                                        </div>
-                                        <div class="calendar-body">
-                                            <table>
-                                                <thead>
-                                                <tr>
-                                                    <th><span title="일요일">일</span></th>
-                                                    <th><span title="월요일">월</span></th>
-                                                    <th><span title="화요일">화</span></th>
-                                                    <th><span title="수요일">수</span></th>
-                                                    <th><span title="목요일">목</span></th>
-                                                    <th><span title="금요일">금</span></th>
-                                                    <th><span title="토요일">토</span></th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr class="calendar-week"> <!-- 달력의 한 주에 해당하는 엘리먼트 컨테이너 -->
-                                                        <td class="calendar-date calendar-sun">30</td>
-                                                        <!-- 날짜가 표시될 엘리먼트 -->
-                                                        <td class="calendar-date">1</td>
-                                                        <td class="calendar-date">2</td>
-                                                        <td class="calendar-date">3</td>
-                                                        <td class="calendar-date">4</td>
-                                                        <td class="calendar-date">5</td>
-                                                        <td class="calendar-date calendar-sat">6</td>
-                                                    </tr>
-                                                    <tr class="calendar-week"> <!-- 달력의 한 주에 해당하는 엘리먼트 컨테이너 -->
-                                                        <td class="calendar-date calendar-sun">7</td>
-                                                        <!-- 날짜가 표시될 엘리먼트 -->
-                                                        <td class="calendar-date">8</td>
-                                                        <td class="calendar-date">9</td>
-                                                        <td class="calendar-date">10</td>
-                                                        <td class="calendar-date">11</td>
-                                                        <td class="calendar-date">12</td>
-                                                        <td class="calendar-date calendar-sat available">13</td>
-                                                    </tr>
-                                                    <tr class="calendar-week"> <!-- 달력의 한 주에 해당하는 엘리먼트 컨테이너 -->
-                                                        <td class="calendar-date calendar-sun available">14</td>
-                                                        <!-- 날짜가 표시될 엘리먼트 -->
-                                                        <td class="calendar-date available">15</td>
-                                                        <td class="calendar-date calendar-today available">16</td>
-                                                        <td class="calendar-date">17</td>
-                                                        <td class="calendar-date">18</td>
-                                                        <td class="calendar-date">19</td>
-                                                        <td class="calendar-date calendar-sat">20</td>
-                                                    </tr>
-                                                    <tr class="calendar-week"> <!-- 달력의 한 주에 해당하는 엘리먼트 컨테이너 -->
-                                                        <td class="calendar-date calendar-sun">21</td>
-                                                        <!-- 날짜가 표시될 엘리먼트 -->
-                                                        <td class="calendar-date">22</td>
-                                                        <td class="calendar-date">23</td>
-                                                        <td class="calendar-date">24</td>
-                                                        <td class="calendar-date">25</td>
-                                                        <td class="calendar-date">26</td>
-                                                        <td class="calendar-date calendar-sat">27</td>
-                                                    </tr>
-                                                    <tr class="calendar-week"> <!-- 달력의 한 주에 해당하는 엘리먼트 컨테이너 -->
-                                                        <td class="calendar-date calendar-sun">28</td>
-                                                        <!-- 날짜가 표시될 엘리먼트 -->
-                                                        <td class="calendar-date">29</td>
-                                                        <td class="calendar-date">30</td>
-                                                        <td class="calendar-date">31</td>
-                                                        <td class="calendar-date calendar-next-mon">1</td>
-                                                        <td class="calendar-date calendar-next-mon">2</td>
-                                                        <td class="calendar-date calendar-next-mon calendar-sat">3</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                            <span style="color: red; font-size: 10px;">전월 다음달 선택 시 변수에 반영할것</span>
-                                        </div>
-                                    </div>
-                                    
+                                	<jsp:include page="/views/reserve/reserveCalendar.html" />
+                                	
                                 </div>
                             </div>
                             <div id="ct_left_cnt">
@@ -416,13 +446,6 @@
                             <div id="cnt_sel_info">
                                 <h5>공연회차</h5><span></span>
                             </div>
-                            <form action="/reserveSeat.do?psNo=" method="post" id="dateCntForm">
-                            <%--<input type="hidden" name="showNo" value="<%= showNo %>"/>--%>
-                            <!-- 
-                            <input type="hidden" id="date_form" name="date_sel" />
-                            <input type="hidden" id="cnt_form" name="cnt_sel" />
-                             -->
-                            </form>
                         </div>
                     </div>
                     <div id="reserve_btn_only">
@@ -433,6 +456,6 @@
             </div>
         </div>
     </div>
-
+	
 </body>
 </html>

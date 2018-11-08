@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.tomcat.jni.Mmap;
+
+import kr.co.ticketsea.admin.show.model.service.MiniShowService;
 import kr.co.ticketsea.admin.show.model.service.ShowService;
 
 /**
@@ -32,7 +35,7 @@ public class MiniShowApproveServlet extends HttpServlet {
 		
 		int msNo =  Integer.parseInt(request.getParameter("msNo"));
 		System.out.println(msNo);
-		int result = new ShowService().miniShowApprove(msNo);
+		int result = new MiniShowService().miniShowApprove(msNo);
 		
 		
 		if(result>0) {

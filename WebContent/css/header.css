@@ -1,4 +1,4 @@
-@charset "UTF-8";
+﻿@charset "UTF-8";
 
 	#menu ul{padding: 0px; margin: 0px;}
 
@@ -12,7 +12,6 @@
             background: #fafafa;
             border-bottom: 1px solid #f0f0f0;
             height: 25px;
-            
             box-sizing: padding-box;
         }
         #header .search_area {

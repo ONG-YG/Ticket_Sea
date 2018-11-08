@@ -3,6 +3,7 @@
     
     <%@ page import = "kr.co.ticketsea.qna.model.vo.*" %>
     <%@ page import = "java.util.*" %>
+    <%@ page import = "kr.co.ticketsea.member.model.vo.*" %>
     
     <%
 	// Controller(Servlet)에서 보내준값 가져오기
@@ -10,8 +11,12 @@
 
 	ArrayList<Qna> list = pd.getList(); // 현재 페이지의 글 목록
 	String pageNavi = pd.getPageNavi(); // 현재 navi Bar
-	
 %>
+
+     <%
+		Member m = ((Member)request.getSession(false).getAttribute("member"));
+	%>     
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -277,7 +282,7 @@
                 </div>
                 
                      <table border=1px class="questionTable">
-                         <thead style="background-color: gainsboro">
+                         <thead style="background-color: lightskyblue; color:white" >
                              <td width="70%">제목</td>
                              <td width="12%">작성자</td>
                              <td width="12%">작성일</td>
@@ -299,16 +304,24 @@
 		</div>  
             
              <form style="display:inline;" action="/views/qna/qnaWrite.jsp">
-				<input type="submit" value="글쓰기" style="width: 70px; height: 30px; float:right;"/> <br>
+				<input type="submit" value="글쓰기" onclick = "writeOnclick();" style="width: 70px; height: 30px; float:right;"/> <br>
 			</form>
             <br>
             <div class="searchArea"> 
-                    <a href="#"><img src="../../img/btn_search4.png" alt="검색" style="float: right"></a>
+            <form style="display:inline;" action="/qnaSearch.do" method="get">
+                    <a href="#"><input type="submit" style="display: none"><img src="../../img/btn_search4.png" alt="검색" style="float: right"></a>
                 
-					<input type="text" class="textInp" name="searchValue" id="searchValue" style="float: right">
+					<input type="text" class="textInp" name="search" id="search" style="float: right">
 					<a href="javascript:search();"></a>
+					</form>
 				</div>
             
+            <script>
+            	function writeOnclick() {
+            		<% if(m == null) { %>
+            		alert("로그인 상태에서 이용할 수 있습니다.");
+            	<%}%>
+            </script>
             
                 
             </div>

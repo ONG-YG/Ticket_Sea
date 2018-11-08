@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -7,7 +8,7 @@
 <link rel="stylesheet" type="text/css" href="/css/mypageAllSize.css" />
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>나의 문의 내역</title>
+<title>후기 관리</title>
 <script
   src="https://code.jquery.com/jquery-3.3.1.js"
   integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
@@ -81,22 +82,31 @@
         color: darkgrey;
         font-size: 11px;
     }
-    #left_menu .has_sub1 li:nth-child(2n){
+    #left_menu .has_sub1 li:first-child{
         padding: 13px 0 0;
         height: 12px;
         border: none;
         font-size: 13px;
     }
-    #left_menu .has_sub1 li:nth-child(2n) a{
+    #left_menu .has_sub1 li:first-child a{
         color: lightskyblue;
         font-weight: bold;
     }
-    #left_menu .has_sub1 li:nth-child(2n+1){
+    #left_menu .has_sub1 li:nth-child(2n+0){
         padding: 13px 0 0;
         height: 12px;
         border: none;
     }
-    #left_menu .has_sub1 li:nth-child(2n+1) a{
+    #left_menu .has_sub1 li:nth-child(2n+0) a{
+        color: darkgrey;
+        font-size: 11px;
+    }
+    #left_menu .has_sub1 li:last-child{
+        padding: 13px 0 0;
+        height: 12px;
+        border: none;
+    }
+    #left_menu .has_sub1 li:last-child a{
         color: darkgrey;
         font-size: 11px;
     }
@@ -138,9 +148,11 @@
         font-size: 14px;
     }
     .paginate{
-        text-align: center;
         padding-top: 20px;
         border-top: 1px solid #c7c7c7;
+    }
+    #paginate_inner{
+    	margin : 0 auto;
     }
     .pagi_num{
         border: 1px solid skyblue;
@@ -181,8 +193,8 @@
                 <li class="has_sub1">
                     <span>활동 관리</span>
                     <ul>
-                        <li><a href="/views/mypage/reviewMgr.jsp">후기 관리</a></li>
-                        <li><a href="/views/mypage/faqMgr.jsp">나의 문의 내역</a></li>
+                        <li><a href="/reviewMgr.do">후기 관리</a></li>
+                        <li><a href="/qnaMgr.do">나의 문의 내역</a></li>
                         <li><a href="#">소규모 공연 등록관리</a></li>
                         
                     </ul>
@@ -190,7 +202,7 @@
                 <li class="has_sub">
                     <span>회원정보관리</span>
                     <ul>
-                        <li><a href="/views/mypage/memberUpdate.jsp">회원 정보 수정</a></li>
+                        <li><a href="/myMemberUpdate.do">회원 정보 수정</a></li>
                         <li><a href="/views/mypage/memberDelete.jsp">회원 탈퇴</a></li>
                         
                     </ul>
@@ -198,63 +210,46 @@
             </ul>    
             <div id="right_view">
                 <div class="r_line">
-                    <h3>나의 문의 내역</h3>
+                    <h3>후기 관리</h3>
                 </div>
                 <div class="r_top">
-                    고객님께서 남겨주신 문의 내역을 확인하실 수 있습니다.<br>
-                    티켓링크 운영정책에 위반되거나, 문의의 성격에 맞지 않는 글을 고객님께 사전통보 없이 삭제될 수 있습니다.
+                    고객님께서 남겨주신 후기를 확인하실 수 있습니다.<br>
+                    티켓링크 운영정책에 위반되거나, 후기의 성격에 맞지 않는 글을 고객님께 사전통보 없이 삭제될 수 있습니다.
                     
                 </div>
                 <div class="r_table">
                     <table>
                         <thead>
                             <tr>
-                                <th>티켓명</th>
-                                <th>문의내용</th>
+                                <th>번호</th>
+                                <th>공연명</th>
+                                <th>댓글 내용</th>
                                 <th>작성일</th>
-                                <th>답변</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>라이온킹</td>
-                                <td>환불 요청드립니다.</td>
-                                <td>18.10.11</td>
-                                <td>답변완료</td>
-                            </tr>
-                            <tr>
-                                <td>라이온</td>
-                                <td>몇 세 부터 관람가능한가요?</td>
-                                <td>18.11.20</td>
-                                <td>미답변</td>
+                            	<td></td>
+                            	<td></td>
+                            	<td></td>
+                            	<td></td>
                             </tr>
                         </tbody>
                     </table>
-                    <div class="paginate">
-                        
-                        <a href="#">처음</a>
-                        
-                        <a class="pagi_num" href="#">
-                            <strong>1</strong>
-                        </a>
-                        
-                        <a class="pagi_num" href="#">
-                            <strong>2</strong>
-                        </a>
-                        
-                        <a href="#">끝</a>
-                    </div>
+                    
+                    
+                    
+                    
+                    
                 </div>
             </div>
         </div>
     </div>
     
-    <a href="#" id="back_to_top">Top</a>
+    <jsp:include page="/top_btn.jsp"/>
     
     <div id="footer">
-        <div id="f_inner">
-            <jsp:include page="/footer.jsp"/>
-        </div>    
+        <jsp:include page="/footer.jsp"/>    
     </div>
 </div>    
 
