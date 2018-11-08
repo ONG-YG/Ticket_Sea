@@ -201,7 +201,7 @@ public class ShowDao {
 		Show show =null;
 		
 		String query = "select m.m_show_no, s.sc_name, m.M_SHOW_NAME, l.TH_NAME, m.M_ARTISTS, TO_CHAR(m.M_SHOW_ST_DATE,'YYYY.MM.DD') as M_SHOW_ST_DATE, TO_CHAR(m.M_SHOW_ED_DATE,'YYYY.MM.DD') as M_SHOW_ED_DATE, \r\n" + 
-				"m.M_SHOW_GRD, m.M_SHOW_RUN from SHOW_CTG s right join musical_l m on s.SC_CODE = m.SC_CODE left outer join THEATER_L l on m.TH_NO = l.TH_NO where m.m_show_no=?";
+				"m.M_SHOW_GRD, m.M_SHOW_RUN,m.M_SHOW_POSTER,m.M_SHOW_DTINFO from SHOW_CTG s right join musical_l m on s.SC_CODE = m.SC_CODE left outer join THEATER_L l on m.TH_NO = l.TH_NO where m.m_show_no=?";
 		
 		try {
 			pstmt=conn.prepareStatement(query);
@@ -210,6 +210,7 @@ public class ShowDao {
 			rset=pstmt.executeQuery();
 			
 			if(rset.next()) {
+				
 				show = new Show();
 				show.setM_show_no(rset.getInt("m_show_no"));
 				show.setSc_code(rset.getString("sc_name"));
@@ -220,6 +221,9 @@ public class ShowDao {
 				show.setShow_run(rset.getInt("m_show_run"));
 				show.setShow_st_date(rset.getString("m_show_st_date"));
 				show.setShow_ed_date(rset.getString("m_show_ed_date"));
+				show.setShow_poster(rset.getString("m_show_poster"));
+				show.setShow_dtInfo(rset.getString("m_show_dtinfo"));
+				
 				
 			}
 		} catch (SQLException e) {
@@ -308,6 +312,40 @@ public class ShowDao {
 		}
 		
 		return result;
+	}
+	public int updateShow(Connection conn, Show s) {
+		PreparedStatement pstmt= null;
+		int result = 0;
+		
+		String query = "update musical_l set th_no=?,sc_code=?,m_show_name=?,m_show_st_date=TO_DATE(?,'YYYY.MM.DD'),m_show_ed_date=TO_DATE(?,'YYYY.MM.DD'),m_artists=?,m_show_grd=?,m_show_run=?,bk_comm=?,m_show_poster=?,m_show_dtinfo=? where m_show_no=?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+		
+			pstmt.setInt(1, s.getTh_no());
+			pstmt.setString(2, s.getSc_code());
+			pstmt.setString(3, s.getShow_name());
+			pstmt.setString(4, s.getShow_st_date());
+			pstmt.setString(5, s.getShow_ed_date());
+			pstmt.setString(6, s.getArtists());
+			pstmt.setString(7, s.getShow_grd());
+			pstmt.setInt(8, s.getShow_run());
+			pstmt.setInt(9, s.getBk_comm());
+			pstmt.setString(10, s.getShow_poster());
+			pstmt.setString(11, s.getShow_dtInfo());
+			pstmt.setInt(12, s.getM_show_no());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+		
 	}
 	
 	

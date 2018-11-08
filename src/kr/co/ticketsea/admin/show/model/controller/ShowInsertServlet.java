@@ -66,7 +66,7 @@ public class ShowInsertServlet extends HttpServlet {
 		System.out.println("총 경로 : " + fullFilePath1);
 		
 		//공연 입력 정보 
-		request.getParameter("utf-8");
+		request.setCharacterEncoding("utf-8");
 		Show s = new Show();
 		System.out.println(multi.getParameter("show_poster"));
 		s.setShow_name(multi.getParameter("show_name"));
