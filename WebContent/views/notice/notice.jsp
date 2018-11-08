@@ -327,6 +327,14 @@
                 	<%=notice.getBoardN_contents()%></textarea>
 					</td>
 					</tr>
+					
+					<form action="/noticeUpdate.do" method="post" id="updateForm">
+                
+					<input type="hidden" name="boardN_no" value="<%=notice.getBoardN_no() %>"/>
+					<input type="hidden" id="title_form" name="title" />
+					<input type="hidden" id="contents_form" name="contents" />
+					
+					</form>
         			
         			<%
 						session = request.getSession(false);
@@ -336,7 +344,9 @@
                 	<%
 						if(m!=null && m.getMemberId().equals("admin")){
 					%>
-               
+					
+                
+				
 	                <br>
 	                <button id="btn1" name="btn1" onclick="modifyActive();" style="width: 70px; height: 30px; float:right;">수정</button> 
 					<button id="btn2" name="btn2" onclick="delNotice();" style="width: 70px; height: 30px; float:right;">삭제</button> 
@@ -345,11 +355,7 @@
                 	
                 </table>
                 
-                <form action="/noticeUpdate.do" method="post" id="updateForm">
-					<input type="hidden" name="boardN_no" id="boardN_no" value="<%=notice.getBoardN_no()%>"/>
-					<input type="hidden" id="title_form" name="title" />
-					<input type="hidden" id="contents_form" name="contents" />
-				</form>
+               
 					
                 
                 

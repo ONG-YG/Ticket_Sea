@@ -546,10 +546,9 @@
 							<input type="submit" value="삭제" style="background-color: skyblue; color:white;">
 		               	</form>
 		               	
-		               
 		               	</div>
 		                <%}%>
-		               <%}%>
+		              <%}%>
 		            </li>
 		            
 		           </ul>
