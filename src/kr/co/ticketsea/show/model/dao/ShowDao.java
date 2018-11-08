@@ -65,7 +65,7 @@ public class ShowDao {
 		
 		int recordTotalCount = 0; 
 		
-		String query = "select count(*) AS TOTALCOUNT FROM show";
+		String query = "select count(*) AS TOTALCOUNT FROM musical_l";
 		
 		 try {
 			pstmt = conn.prepareStatement(query);
@@ -298,17 +298,18 @@ public class ShowDao {
 			
 			return result;
 		}
-	public int deleteComment(Connection conn, int m_show_no) {
+	public int deleteComment(Connection conn, int m_show_no, int showcomment) {
 		
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
-		String query = "delete from showcomment where m_show_no=?";
+		String query = "delete from showcomment where show_no=? and showcomment=?";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
 			
 			pstmt.setInt(1, m_show_no);
+			pstmt.setInt(2, showcomment);
 			
 			result = pstmt.executeUpdate();
 		

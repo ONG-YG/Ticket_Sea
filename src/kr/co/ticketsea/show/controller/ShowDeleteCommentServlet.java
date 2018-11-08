@@ -35,8 +35,10 @@ public class ShowDeleteCommentServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		
 		//2. view에서 보내준 데이터 변수에 저장 (내용,글번호)
-		String contents = request.getParameter("reviewContent");
 		int m_show_no = Integer.parseInt(request.getParameter("m_show_no"));
+		int showcomment = Integer.parseInt(request.getParameter("showcomment"));
+		
+		System.out.println(m_show_no + showcomment);
 		
 		//3. 작성자
 		HttpSession session = request.getSession(false);
@@ -47,8 +49,7 @@ public class ShowDeleteCommentServlet extends HttpServlet {
 			
 			String userId = ((Member)session.getAttribute("member")).getMemberId();
 			
-			
-		int result = new ShowService().deleteComment(m_show_no);
+		int result = new ShowService().deleteComment(m_show_no,showcomment);
 		
 			if(result>0)
 			{

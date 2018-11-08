@@ -159,6 +159,7 @@
     #infoContent > #i_C_category{
         border : 0px solid #dedede;
         width : 100%;
+        height : 3%;
     }
     
     #i_C_category > #i_C_Category_a {
@@ -169,7 +170,6 @@
         float : left;
         text-align: center;
         font-size: 18px;
-        padding : 20px;
     }
     #i_C_category > #i_C_Category_b {
         border : 1px solid #dedede;
@@ -178,7 +178,6 @@
         float : left;
         text-align: center;
         font-size: 18px;
-        padding : 20px;
     }
     #i_C_category > #i_C_Category_c {
         border : 1px solid #dedede;
@@ -187,7 +186,6 @@
         float : left;
         text-align: center;
         font-size: 18px;
-        padding : 20px;
     }
     
     #infoContent > #i_C_content{
@@ -299,7 +297,6 @@
                     </div>
                     
                     <div id="i_H_pic">
-                       		
                     </div>
                     
                     <div id="i_H_info">
@@ -350,15 +347,15 @@
        			 <div id="infoContent">
                     <div id="i_C_category">
                         <div id="i_C_Category_a" >
-                            <button onclick="cateAclick();">상세정보</button>
+                            <button onclick="cateAclick();" style="width:100%; height:100%; background-color: skyblue; color:white;">상세정보</button>
                         </div>
                         
                         <div id="i_C_Category_b">
-                            <button onclick="cateBclick();">공연장 정보</button>
+                            <button onclick="cateBclick();" style="width:100%; height:100%; background-color: skyblue; color:white;">공연장 정보</button>
                         </div>
                         
                         <div id="i_C_Category_c">
-                            <button onclick="cateCclick();">공연 후기</button>
+                            <button onclick="cateCclick();" style="width:100%; height:100%; background-color: skyblue; color:white;">공연 후기</button>
                         </div>
                     </div>
                     
@@ -519,46 +516,45 @@
 					</form>
             
         <div class="review_list">
-                    
-                    
-        <ul id="reviewUl" style="word-break: break-all;">
-            
-            <%
-			if(list.isEmpty()){ //댓글이 비어 있다면 (없다면!)
-			%>
-				<h3>댓글이 없습니다.</h3>
-			<%	
-			}else{%>
-            <li>
-             <% for(Comment co : list) { %>
-                <div class="review_info">
-                        <dt></dt>
-                        <dd class="grade_star">
-                            <span class="star_gauge" style="width: 100%"></span>
-                        </dd>
-                        <dt><%=co.getUserId()%></dt>
-                        <dd class="review_user"></dd>
-                        <dt><%=co.getRegDate()%></dt><dd class="review_date"></dd>
-                    
-                </div>
-                <div style = "border-bottom : 1px solid #dedede;">
-               	<%=co.getContents()%> 	
-               	<form action="/showDeleteComment.do">
-	               	<input type="hidden" name="m_show_no" value="<%=show.getM_show_no()%>"/>
-	               	<input type="submit" value="삭제">
-	               	
-               	</form>
-               	</div>
-               
-                <%}%>
-               <%}%>
-            </li>
-            
-           </ul>
+                   
+		        <ul id="reviewUl" style="word-break: break-all;">
+		            
+		            <%
+					if(list.isEmpty()){ //댓글이 비어 있다면 (없다면!)
+					%>
+						<h3>댓글이 없습니다.</h3>
+					<%	
+					}else{%>
+		            <li>
+		             <% for(Comment co : list) { %>
+		                <div class="review_info">
+		                        <dt></dt>
+		                        <dd class="grade_star">
+		                            <span class="star_gauge" style="width: 100%"></span>
+		                        </dd>
+		                        <dt><%=co.getUserId()%></dt>
+		                        <dd class="review_user"></dd>
+		                        <dt><%=co.getRegDate()%></dt><dd class="review_date"></dd>
+		                    
+		                </div>
+		                <div style = "border-bottom : 1px solid #dedede;">
+		               	<%=co.getContents()%>
+		               	
+		               	<form action="/showDeleteComment.do">
+			               	<input type="hidden" name="m_show_no" value="<%=show.getM_show_no()%>"/>
+			               	<input type="hidden" name="showcomment" value="<%=co.getCommentNo()%>"/>
+							<input type="submit" value="삭제" style="background-color: skyblue; color:white;">
+		               	</form>
+		               	
+		               
+		               	</div>
+		                <%}%>
+		               <%}%>
+		            </li>
+		            
+		           </ul>
     </div>
             
-            
-
           </div>
 
           </div>

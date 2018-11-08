@@ -304,11 +304,11 @@
    	 
       <div id="prContestDiv2">
             <div style="width:100%; text-align:center;">
-			label><%=pageNavi%></label>
+			<label><%=pageNavi%></label>
 		
 		   <%
-		session = request.getSession(false);
-		Member m = (Member)session.getAttribute("member"); 
+				session = request.getSession(false);
+				Member m = (Member)session.getAttribute("member"); 
 			%>
          </div>
        </div>

@@ -88,10 +88,10 @@ public class ShowService {
 		return result;
 	}
 
-	public int deleteComment(int m_show_no) {
+	public int deleteComment(int m_show_no, int showcomment) {
 		
 		Connection conn = JDBCTemplate.getConnection();
-		int result = new ShowDao().deleteComment(conn,m_show_no);
+		int result = new ShowDao().deleteComment(conn,m_show_no,showcomment);
 		
 		if(result>0)
 		{
