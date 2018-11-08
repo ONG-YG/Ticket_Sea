@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import = "kr.co.ticketsea.admin.reserve.model.vo.*" 
+	import="kr.co.ticketsea.reserve.model.vo.*"
+	import = "java.util.ArrayList"%>
+<% ReserveApInfo rs=(ReserveApInfo)request.getAttribute("ReserveInfo"); 
+	ArrayList<SelectedSeat> seatList = rs.getSeatInfo();
+%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -55,54 +62,84 @@
               <div class="top_area">
                   <h2 class="main_title">예매정보</h2>
                </div>
+               <form action ="/adReserveUpdate.do" method="post" id="updateForm">
                <div class="main_area">
                    <div class="reserveInfo_table">
                     <table>
                         <tbody>
                             <tr>
                                 <th>예매번호</th>
-                                <td>T123456</td>
+                                <td><%=rs.getBk_no() %></td>
+                                <input type="hidden" name="bk_no" value="<%=rs.getBk_no() %>"/>
+                            </tr>
+                            <tr>
+                                <th>공연명</th>
+                                <td><%=rs.getM_show_name() %></td>
                             </tr>
                             <tr>
                                 <th>예매일</th>
-                                <td>2018.10.14</td>
+                                <td><%=rs.getBk_date() %></td>
                             </tr>
                             <tr>
                                 <th>관람일시</th>
-                                <td>2018.12.25(화)</td>
+                                <td><%=rs.getPs_date() %></td>
+                            </tr>
+                            <tr>
+                            	<th>관람회차 /시간</th>
+                            	<td><%=rs.getPs_cnt()%>회차 / <%=rs.getPs_time() %>
                             </tr>
                             <tr>
                                 <th>아이디</th>
-                                <td>test432</td>
+                                <td><%=rs.getMember_id() %></td>
                             </tr>
                             <tr>
                                 <th>예매자명</th>
-                                <td>지창욱</td>
+                                <td><%=rs.getMember_name() %></td>
+                            </tr>
+                            <tr>
+                            	<th>예매좌석</th>
+                            	
+                            	<td><%for(SelectedSeat st : seatList) {%>
+                            	<%=st.getSeatGrd()%>석 <%=st.getSeatTitle()%><br><%}%></td>
                             </tr>
                             <tr>
                                 <th>연락처</th>
-                                <td>010-1234-5678</td>
+                                <td><input type="text" id="bk_phone" name="bk_phone" value="<%=rs.getBk_phone()%>"/></td>
                             </tr>
                             <tr>
-                                <th>주소</th>
-                                <td>서울시 강남구</td>
+                                <th>이메일</th>
+                                <td><input type="text" id="bk_email" name="bk_email" value="<%=rs.getBk_email()%>"/></td>
                             </tr>
                             <tr>
-                                <th>결제정보</th>
-                                <td>157,500원</td>
-                            </tr>
-                            <tr>
-                                <th>예매상태</th>
-                                <td>예매완료</td>
+                                <th>총결제금액</th>
+                                <td><%=rs.getBk_tot_price() %>원</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
                    <div id="reserveCancel">
-                    <button >예매취소</button>
+                    <button id="updateBtn" onclick="return updateSubmit()">예매수정</button>
                    </div>
                </div>
+               </form>
                </div>
+               <script>
+               		function updateSubmit(){
+               			var bk_phone=document.getElementById("bk_phone").value;
+               			var bk_email=document.getElementById("bk_email").value;
+               			
+               			if(!(/^[0-9]+$/g.test(bk_phone))||bk_phone==""){
+               				alert("연락처를 입력하세요");
+               				return false;
+               			}else if(!(/^[a-z0-9]{4,20}@/.test(email))||email==""){
+               				alert("이메일을 입력하세요");
+                    		return false;
+               			}else{
+                    		document.getElementById("updateForm").submit();
+                    		return true;
+                    	}
+               		} 
+               </script>
           </div> 
         </div>
         </div>

@@ -40,31 +40,31 @@ public class ShowInsertServlet extends HttpServlet {
 		 
 		try {
 		//=====파일 사이즈 업로드==========
-		
 		//최대 업로드 파일 사이즈
 		int fileSizeLimit = 5 * 1024 * 1024;
-		
-		
 		//업로드 될 경로
 		
-		String uploadPath = getServletContext().getRealPath("/")+"img"+"\\"+"poster";
+		/*String uploadPath = getServletContext().getRealPath("/")+"img"+"\\"+"poster";*/
+		String uploadPath=getServletContext().getRealPath("/")+"img"+"\\"+"poster";
 		//인코딩 타입 (파일 인코딩 타입)
 		String encType="UTF-8";
 		// MultipartRequest 객체를 생성
 		MultipartRequest multi = new MultipartRequest(request,
 				uploadPath,fileSizeLimit,encType,new DefaultFileRenamePolicy());
 		
+		
 		//getFileNames() : input 태그 중 속성이 파일인 것 
 		//파라미터 이름 모두 반환, 벡터에 넣은 순서대로 생성
 		
-		Enumeration fileNames = multi.getFileNames();
-		while(fileNames.hasMoreElements()) {
-			String parameter = (String)fileNames.nextElement();
-			String fileName = multi.getOriginalFileName(parameter);
-			String fileRealName = multi.getFilesystemName(parameter);
-			
-			if(fileName==null)continue;
-		}
+		String fileName = multi.getFilesystemName("show_poster");
+		System.out.println("파일 이름 : " + fileName);
+		String fullFilePath = uploadPath+"\\"+fileName;
+		System.out.println("총 경로 : " + fullFilePath);
+		String fileName1 = multi.getFilesystemName("showDtInfo");
+		System.out.println("파일 이름 : " + fileName1);
+		String fullFilePath1 = uploadPath+"\\"+fileName;
+		System.out.println("총 경로 : " + fullFilePath1);
+		
 		//공연 입력 정보 
 		request.getParameter("utf-8");
 		Show s = new Show();
@@ -90,7 +90,7 @@ public class ShowInsertServlet extends HttpServlet {
 		}
 		}catch (Exception e) {
 			
-			response.sendRedirect("/views/file/error.jsp");
+			response.sendRedirect("/views/admin/error.jsp");
 		}
 	}
 

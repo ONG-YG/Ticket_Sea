@@ -24,10 +24,13 @@
 	String showTime = rp.getShowTime();								//공연시간
 	ArrayList<Integer> reservedSeatList = rp.getReservedSeatList();	//예매완료 좌석 목록
 	ArrayList<Integer> progSeatList = rp.getProgSeatList();			//예매진행 중 좌석 목록
-	ArrayList<SeatGradeState> seatGrdStList = rp.getSeatGrdSt();	//등급별 좌석가격 및 잔여석	
+	ArrayList<SeatGradeState> seatGrdStList = rp.getSeatGrdStList();	//등급별 좌석가격 및 잔여석	
 	
 	ReserveSession rs = (ReserveSession)session.getAttribute("reserveSession");
 	int progNo = rs.getProgNo();
+	
+	Member m = (Member)session.getAttribute("member");
+	//session.setAttribute("member", m);
 %>
 
 <head>
@@ -206,7 +209,7 @@
         	<%
         	Member member = new Member();
         	member.setMemberNo(rs.getMemberNo());
-        	session.setAttribute("member", member);/////////////////////////////////////////휘명이 페이지와 연결 후 수정 필요
+        	session.setAttribute("member", member);//////////
         	%>
         	var showNo = <%= showNo %>;
             location.href="/dateCntSelect.do?showNo="+showNo;
@@ -221,6 +224,10 @@
             if(stat==false) {
                 alert("좌석을 선택하지 않았습니다. 좌석을 선택해주세요.");
             }else {
+            	<%
+            	//step3_jsp로 넘어갈때 세션 끊기는 문제 있어서 다시 setAttribute
+            	session.setAttribute("member", m);
+            	%>
             	var selected_seat_val = [];
             	for(var i=0; i<selected_seat.length; i++){
             		var v = $('#'+selected_seat[i]).attr('value');
