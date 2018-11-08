@@ -8,8 +8,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>관리자페이지</title>
 <!-- 외부 스타일 시트 불러오기 -->
-    <link href="../../css/admin_common.css" rel="stylesheet" type="text/css">
-    <link href="../../css/ad_miniApInfo.css" rel="stylesheet" type="text/css">
+    <link href="/css/admin_common.css" rel="stylesheet" type="text/css">
+    <link href="/css/ad_miniApInfo.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 		<div id="wrapper">
@@ -54,8 +54,8 @@
            <div class="content_wrap">
               <div class="top_area">
                   <h2 class="main_title">소규모 공연 정보</h2>
-               </div>
-               <form action ="/adMsUpdate.do" method="post" id="updateForm" enctype="multipart/form-data">
+              </div>
+              <form action ="/adMsUpdate.do" method="post" id="updateForm" enctype="multipart/form-data">
                <div class="main_area">
                    <div class="memberInfo_table">
                     <table>
@@ -152,7 +152,6 @@
                 	}
                 }
                </script>
-               
           </div> 
         </div>
         </div>

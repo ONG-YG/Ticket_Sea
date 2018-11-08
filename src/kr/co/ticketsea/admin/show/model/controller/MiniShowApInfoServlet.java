@@ -31,8 +31,7 @@ public class MiniShowApInfoServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getParameter("utf-8");
-		
+		request.setCharacterEncoding("utf-8");
 		int msNo=Integer.parseInt(request.getParameter("msNo"));
 		
 		MiniShow ms = new MiniShowService().selectApShow(msNo);

@@ -1,19 +1,22 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<%@ page import="kr.co.ticketsea.admin.show.model.vo.*"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="kr.co.ticketsea.admin.show.model.vo.*"
+	import = "java.util.ArrayList"%>
 <% 
 	Show show = (Show)request.getAttribute("showData");
+	ArrayList<ShowPlace> spList = (ArrayList<ShowPlace>)request.getAttribute("showPlaceList");
+	ArrayList<ShowCategory> scList = (ArrayList<ShowCategory>)request.getAttribute("showCTGList");
 	
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>°ø¿¬ Á¤º¸ </title>
-<!-- ½ºÅ¸ÀÏ  -->
-<!-- ¿ÜºÎ ½ºÅ¸ÀÏ ½ÃÆ® ºÒ·¯¿À±â -->
-    <link href="../../css/admin_common.css" rel="stylesheet" type="text/css">
-    <link href="../../css/ad_showUpdate.css" rel="stylesheet" type="text/css">
+<title>ê³µì—° ì •ë³´ </title>
+<!-- ìŠ¤íƒ€ì¼  -->
+<!-- ì™¸ë¶€ ìŠ¤íƒ€ì¼ ì‹œíŠ¸ ë¶ˆëŸ¬ì˜¤ê¸° -->
+    <link href="/css/admin_common.css" rel="stylesheet" type="text/css">
+    <link href="/css/ad_showUpdate.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<div id="wrapper">
@@ -30,26 +33,26 @@
             <aside class="main-sidebar">
                 <div id="side-menu">
                  <ul>
-                    <li><a href="#">°ø¿¬°ü¸®</a>
+                    <li><a href="#">ê³µì—°ê´€ë¦¬</a>
                         <ul>
-                             <li><a href="/adShowPlace.do">°ø¿¬µî·Ï</a></li>
-                            <li><a href="/adShowList.do">°ø¿¬¸ñ·Ï</a></li>
+                             <li><a href="/adShowPlace.do">ê³µì—°ë“±ë¡</a></li>
+                            <li><a href="/adShowList.do">ê³µì—°ëª©ë¡</a></li>
                         </ul>
                     </li>    
-                    <li><a href="#">È¸¿ø°ü¸®</a>
+                    <li><a href="#">íšŒì›ê´€ë¦¬</a>
                         <ul>
-                            <li><a href="/adMemberList.do">È¸¿ø¸ñ·Ï</a></li>
+                            <li><a href="/adMemberList.do">íšŒì›ëª©ë¡</a></li>
                         </ul>
                     </li>
-                    <li><a href="#">¿¹¸Å°ü¸®</a>
+                    <li><a href="#">ì˜ˆë§¤ê´€ë¦¬</a>
                         <ul>
-                            <li><a href="/adReserveList.do">¿¹¸Å¸ñ·Ï</a></li>
+                            <li><a href="/adReserveList.do">ì˜ˆë§¤ëª©ë¡</a></li>
                         </ul>
                     </li>
-                    <li><a href="#">¼Ò±Ô¸ğ°ø¿¬</a>
+                    <li><a href="#">ì†Œê·œëª¨ê³µì—°</a>
                         <ul>
-                            <li><a href="/miniShowList.do">½ÂÀÎ´ë±â°ø¿¬</a></li>
-                            <li><a href="/msApproveList.do">½ÂÀÎ¿Ï·á°ø¿¬</a></li>
+                            <li><a href="/miniShowList.do">ìŠ¹ì¸ëŒ€ê¸°ê³µì—°</a></li>
+                            <li><a href="/msApproveList.do">ìŠ¹ì¸ì™„ë£Œê³µì—°</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -59,30 +62,43 @@
               <div id="content">
         <div class="content_wrap">
             <div class="top_area">
-                <h2 class="main_title">°ø¿¬µî·Ï</h2>
+                <h2 class="main_title">ê³µì—°ë“±ë¡</h2>
             </div>
+            <!-- form íƒœê·¸ -->
+       		<form action="/adShowUpdate.do" method="post" enctype="multipart/form-data" id="updateForm">
             <div class="main_area">
                 <div class="left_wrap">
                 <div class="input_area">
-                    <!--ÀÌ¹ÌÁö¿µ¿ª-->
+                    <!--ì´ë¯¸ì§€ì˜ì—­-->
                     <div class="event_img_area">
-                        <img class="show_post" src="../../img/ticketsea_poster.png" data-default-src="../../img/ticketsea_poster.png" alt="°ø¿¬Æ÷½ºÅÍ" style="width:160px; height:160px;">
-                        <!--ÀÌ¹ÌÁö ¾÷·Îµå ¹öÆ°-->
+                        <img class="show_post" src="../../img/ticketsea_poster.png" data-default-src="../../img/ticketsea_poster.png" alt="ê³µì—°í¬ìŠ¤í„°" style="width:160px; height:160px;">
+                        <!--ì´ë¯¸ì§€ ì—…ë¡œë“œ ë²„íŠ¼-->
                         <div class="upload_btn">
-                            <input type="file" class="imgupload" title="°ø¿¬Æ÷½ºÅÍ¾÷·Îµå" value="ÀÌ¹ÌÁö¾÷·Îµå">
-                            <button type="button" class="btn_change_img">»çÁøº¯°æ</button>
-                            <!--ÆÄÀÏ ¾÷·Îµå ÈÄ »çÁø »èÁ¦ÇÏ±â ¹öÆ° »ı±è-->
-                            <!--<button type="button" class="btn_delete_upload">»èÁ¦ÇÏ±â</button>-->
+                            <input type="file" class="imgupload" title="ê³µì—°í¬ìŠ¤í„°ì—…ë¡œë“œ" value="ì´ë¯¸ì§€ì—…ë¡œë“œ">
+                            <button type="button" class="btn_change_img">ì‚¬ì§„ë³€ê²½</button>
+                            <!--íŒŒì¼ ì—…ë¡œë“œ í›„ ì‚¬ì§„ ì‚­ì œí•˜ê¸° ë²„íŠ¼ ìƒê¹€-->
+                            <!--<button type="button" class="btn_delete_upload">ì‚­ì œí•˜ê¸°</button>-->
                         </div>
                     </div>
                 </div>
                 </div>
                 
                 <div class="right_wrap">
-                    <!--Ä«Å×°í¸® / °ø¿¬¸í-->
+                	<fieldset calss="edit_showNo">
+                		<legend>
+                		 	<h3 class="title">ê³µì—°ë²ˆí˜¸</h3>
+                		</legend>
+                		<div class="edit">
+                            <div class="write_wrap">
+                                <%=show.getM_show_no() %>
+                                <input type="hidden" name="m_show_no" value="<%=show.getM_show_no() %>"/>
+                            </div>
+                        </div>
+                	</fieldset>
+                    <!--ì¹´í…Œê³ ë¦¬ / ê³µì—°ëª…-->
                     <fieldset class="edit_title">
                         <legend>
-                            <h3 class="title">Ä«Å×°í¸®/°ø¿¬¸í</h3>
+                            <h3 class="title">ì¹´í…Œê³ ë¦¬/ê³µì—°ëª…</h3>
                         </legend>
                         <div class="edit">
                             <div class="write_wrap">
@@ -91,101 +107,175 @@
                                     <option value="<%=sc.getSc_code()%>"><%=sc.getSc_name()%></option>
                             		<%} %>
                                 </select>
-                                <input id="title" type="text" name="show_name" class="title_input" placeholder="°ø¿¬¸íÀ» ÀÔ·ÂÇØ ÁÖ¼¼¿ä." value="<%=show.getShow_name() %>" maxlength="64" autofocus="autofocus">
+                                <input id="title" type="text" name="show_name" class="title_input" placeholder="ê³µì—°ëª…ì„ ì…ë ¥í•´ ì£¼ì„¸ìš”." value="<%=show.getShow_name() %>" maxlength="64" autofocus="autofocus">
                             </div>
                         </div>
                     </fieldset>
                     <fieldset class="edit_date">
                         <legend>
-                          <h3 class="title">°ø¿¬±â°£</h3>
+                          <h3 class="title">ê³µì—°ê¸°ê°„</h3>
                         </legend>
                         <div class="edit">
-                        <!--½ÃÀÛ ÀÏ½Ã-->
+                        <!--ì‹œì‘ ì¼ì‹œ-->
                         <div class="start_time" id="edit_date_start_time">
                             <div class="write_wrap">
-                                <input type="text" id="startEventDate" name="show_st_date" value="<%=show.getShow_st_date() %>" placeholder="½ÃÀÛÀÏ"> ~ <input type="text" id="endEventDate" name="show_ed_date" value="<%=show.getShow_ed_date() %>" placeholder="Á¾·áÀÏ">
+                                <input type="text" id="startEventDate" name="show_st_date" value="<%=show.getShow_st_date() %>" placeholder="ì‹œì‘ì¼"> ~ <input type="text" id="endEventDate" name="show_ed_date" value="<%=show.getShow_ed_date() %>" placeholder="ì¢…ë£Œì¼">
                             </div>
                         </div>
                         </div>
                     </fieldset>
                     <fieldset class="edit_place">
                         <legend>
-                          <h3 class="title">°ø¿¬Àå¼Ò</h3>
+                          <h3 class="title">ê³µì—°ì¥ì†Œ</h3>
                         </legend>
                         <div class="edit">
-                           <select id="place" class="place_select" name="">
-                                    <option value="1" selected="selected"><%=show.getSc_code() %></option>
-                                    <option value="10000">»ş·Ôµ¥½Ã¾îÆ¼</option>
-                                    <option value="10001"></option>
+                           <select id="place" class="place_select" name="th_no">
+                           <%for(ShowPlace sp : spList) {%>
+                             <option value="<%=sp.getTh_no()%>"><%=sp.getTh_name()%></option>
+                           <%} %>
                           </select>
+                          <input type="button" id="placeSearch" onclick="placeSearch();" value="ì£¼ì†Œê²€ìƒ‰"/> 
                         </div>
                     </fieldset>
                     <fieldset class="edit_artist">
                         <legend>
-                          <h3 class="title">Ãâ¿¬ÀÚ</h3>
+                          <h3 class="title">ì¶œì—°ì</h3>
                         </legend>
                         <div class="edit">
                             <div class="write_wrap">
-                                <input type="text" id="artist" name="artists" value="<%=show.getArtists() %>" placeholder="Ãâ¿¬ÀÚÁ¤º¸ (,·Î ±¸ºĞ)">
+                                <input type="text" id="artist" name="artists" value="<%=show.getArtists() %>" placeholder="ì¶œì—°ìì •ë³´ (,ë¡œ êµ¬ë¶„)">
                             </div>
                         </div>
                     </fieldset>
                     <fieldset class="edit_grade">
                         <legend>
-                          <h3 class="title">°ü¶÷µî±Ş</h3>
+                          <h3 class="title">ê´€ëŒë“±ê¸‰</h3>
                         </legend>
                         <div class="edit">
                             <div class="write_wrap">
-                                <input type="text" id="grade" name="show_grd" value="<%=show.getShow_grd() %>" placeholder="">
+                                <input type="text" id="grade" name="show_grd" value="<%=show.getShow_grd() %>" placeholder="ê´€ëŒ ë“±ê¸‰ì„ ì…ë ¥í•´ì£¼ì„¸ìš”">
                             </div>
                         </div>
                         
                     </fieldset>
                      <fieldset class="edit_time">
                         <legend>
-                          <h3 class="title">°ü¶÷½Ã°£</h3>
+                          <h3 class="title">ê´€ëŒì‹œê°„</h3>
                         </legend>
                         <div class="edit">
                             <div class="write_wrap">
-                                <input type="text" id="runTime" name="show_run" value="<%=show.getShow_run() %>" placeholder="">
+                                <input type="text" id="runTime" name="show_run" value="<%=show.getShow_run() %>" placeholder="ê´€ëŒ ì‹œê°„ì„ ì…ë ¥í•´ì£¼ì„¸ìš”">
                             </div>
                         </div>
                     </fieldset>
-                     <fieldset class="edit_price">
+                    <fieldset class="edit_comm">
                         <legend>
-                          <h3 class="title">°¡°İ</h3>
+                          <h3 class="title">ìˆ˜ìˆ˜ë£Œ</h3>
                         </legend>
                         <div class="edit">
                             <div class="write_wrap">
-                                <input type="text" id="price" name="price" value="" placeholder="">
+                                <input type="text" id="comm" name="comm" value="<%=show.getBk_comm() %>" placeholder="">
+                            </div>
+                        </div>
+                    </fieldset>
+                  <fieldset class="edit_poster">
+                        <legend>
+                          <h3 class="title">ê³µì—°í¬ìŠ¤í„°</h3>
+                        </legend>
+                        <div class="edit">
+                            <div class="write_wrap">
+                           		<input type="file" id="show_poster" value="<%=show.getM_show_no() %>"name="show_poster"/>
                             </div>
                         </div>
                     </fieldset>
                     <fieldset class="edit_detailInfo">
                         <legend>
-                          <h3 class="title">¼¼ºÎÁ¤º¸</h3>
+                          <h3 class="title">ì„¸ë¶€ì •ë³´</h3>
                         </legend>
                         <div class="edit">
                             <div class="write_wrap">
-                            <!-- form ÅÂ±× ¾È¿¡ form   -->
-                                 <!-- <form action="http://localhost/insert.html" method="post" enctype="multipart/form-data">
-                                	<input type="file">
-                                <input type="submit">
-                                </form> -->
+                           		<input type="file" id="showDtInfo" name="showDtInfo"/> 
                             </div>
                         </div>
                     </fieldset>
                 </div>
             </div>
             <div class="submit_area">
-            <input type="submit" value="°ø¿¬¼öÁ¤" style="float:right;" width="70px" height="40">
+            	<input type="submit" onclick = "return showUpdate();" value="ê³µì—°ìˆ˜ì •" style="float:right;" width="70px" height="40">
             </div>
+           </form>
             </div>
-        </div>
-    </div>
+       	 </div>
+   		 </div>
           </div> 
         </div>
         </div>
-	</div>
+        
+        <script>
+    	function showUpdate(){
+    		var category= document.getElementById("category").value;
+    		var title= document.getElementById("title").value;
+    		var startEventDate=document.getElementById("startEventDate").value;
+    		var endEventDate= document.getElementById("endEventDate").value;
+    		var place= document.getElementById("place").value;
+    		var artist= document.getElementById("artist").value;
+    		var grade= document.getElementById("grade").value;
+    		var runTime= document.getElementById("runTime").value;
+    		var price= document.getElementById("price").value;
+    		var comm= document.getElementById("comm").value;
+    		
+    		
+    		if(category==""||category==null)
+            {
+    		     alert("ê³µì—°ì¹´í…Œê³ ë¦¬ë¥¼ ì„ íƒí•˜ì„¸ìš”");
+    				return false;
+    		}else if(title==""||title==null)
+    		{
+    				alert("ê³µì—°ëª…ì„ ì…ë ¥í•˜ì„¸ìš”");
+    				return false;
+            }
+           else if(!(/^(19|20)\d{2}.(0[1-9]|1[012]).(0[1-9]|[12][0-9]|3[0-1])$/.test(startEventDate)))
+                //ë…„,ì›”,ì¼ .ìœ¼ë¡œ êµ¬ë¶„
+                {
+            		alert("ì‹œì‘ì¼ì„ ì…ë ¥í•´ì£¼ì„¸ìš”(yyyy.mm.dd)");
+    				return false;
+                }
+            else if(!(/^(19|20)\d{2}.(0[1-9]|1[012]).(0[1-9]|[12][0-9]|3[0-1])$/.test(endEventDate)))
+            	//ë…„,ì›”,ì¼ .ìœ¼ë¡œ êµ¬ë¶„
+            {
+            	alert("ì¢…ë£Œì¼ì„ ì…ë ¥í•´ì£¼ì„¸ìš”(yyyy.mm.dd)");
+    			return false;
+            } 
+            else if(artist==""){
+                alert("ì¶œì—°ìë¥¼ ì…ë ¥í•˜ì„¸ìš”");
+    			return false;
+            }
+            else if(!(/^[ã„±-ã…|ê°€-í£|0-9|\s]+$/g.test(grade)))
+                {   
+                     alert("ê´€ëŒë“±ê¸‰ì„ ì…ë ¥í•˜ì„¸ìš”");
+                    return false;
+                }
+            else if(!(/^[0-9]+$/g.test(runTime)))
+                {
+                    alert("ê´€ëŒì‹œê°„ì„ ì…ë ¥í•˜ì„¸ìš”(ìˆ«ìë§Œ)");
+                    return false;
+                }
+            else if(!(/^[0-9]+$/g.test(price)))
+    		{
+                   	alert("ê°€ê²©ì„ ì…ë ¥í•˜ì„¸ìš”");
+                    return false;
+            }else if(!(/^[0-9]+$/g.test(comm)))
+    		{
+               	alert("ìˆ˜ìˆ˜ë£Œë¥¼ ì…ë ¥í•˜ì„¸ìš”");
+                return false;
+        	}
+            else//ëª¨ë“  ê²€ì‚¬ ë§Œì¡±ì‹œ true ë°˜í™˜
+            {
+            	document.getElementById("updateForm").submit();
+                return true;
+            }
+    		
+    	}
+        </script>
 </body>
 </html>

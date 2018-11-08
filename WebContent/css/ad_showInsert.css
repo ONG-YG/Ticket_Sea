@@ -181,6 +181,7 @@
         display: inline-block;
         height:50%;
         padding-top:18px;
+        float:left;
     }
     
     .right_wrap .edit{
