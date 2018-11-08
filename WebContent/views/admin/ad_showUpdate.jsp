@@ -71,7 +71,7 @@
                 <div class="input_area">
                     <!--이미지영역-->
                     <div class="event_img_area">
-                        <img class="show_post" src="../../img/ticketsea_poster.png" data-default-src="../../img/ticketsea_poster.png" alt="공연포스터" style="width:160px; height:160px;">
+                        <img class="show_post" src="D:\gyuri_ticket\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Ticket_Sea\img\poster\"+<%=show.getShow_poster()%> data-default-src="../../img/ticketsea_poster.png" alt="공연포스터" style="width:140px; height:160px;">
                         <!--이미지 업로드 버튼-->
                         <div class="upload_btn">
                             <input type="file" class="imgupload" title="공연포스터업로드" value="이미지업로드">
@@ -212,6 +212,8 @@
         </div>
         
         <script>
+        
+        
     	function showUpdate(){
     		var category= document.getElementById("category").value;
     		var title= document.getElementById("title").value;

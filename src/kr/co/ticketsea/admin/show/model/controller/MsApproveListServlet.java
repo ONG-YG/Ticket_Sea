@@ -44,7 +44,7 @@ public class MsApproveListServlet extends HttpServlet {
 			request.setAttribute("miniPgData", mpd);
 			view.forward(request, response);
 		}else {
-			response.sendRedirect("/views/admin/error.jsp");
+			response.sendRedirect("/views/admin/miniApproveListFail.jsp");
 		}
 		
 	}

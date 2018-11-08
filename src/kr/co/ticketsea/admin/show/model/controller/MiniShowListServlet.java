@@ -41,11 +41,13 @@ public class MiniShowListServlet extends HttpServlet {
 		MiniPgData mpd=new MiniShowService().showWaitList(currentPage);
 		
 		//결과값 view로 리턴
-		
+		if(mpd!=null) {
 			RequestDispatcher view = request.getRequestDispatcher("/views/admin/ad_miniShowList.jsp");
 			request.setAttribute("miniPgData", mpd);
 			view.forward(request, response);
-		
+		}else {
+			response.sendRedirect("/views/admin/miniShowListFail.jsp");
+		}
 	}
 
 	/**

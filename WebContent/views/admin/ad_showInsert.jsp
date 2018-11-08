@@ -219,99 +219,97 @@ function LoadImg(value){
 		
 		$(document).ready(function(){
 			$("#show_poster").on("change",handleImgFileSelect);
-		});
-		
-		function handleImgFileSelect(e){
-			var files=e.target.files;
-			var filesArr=Array.prototype.slice.call(files);
-			
-			filesArr.forEach(function(f){
-				if(!f.type.match("image.*")){ //이미지 확장자만 가능
-					alert("이미지 확장자만 가능합니다.");
-					return;
-				}
-				sel_file=f;
-				
-				var reader=new FileReader();
-				reader.onload = function(e){
-					$("#postImg").attr("src",e.target.result);
-				}
-				reader.readAsDataURL(f);
-			});
-		}
-		
-		/* submit */
-
-		function showCheck(){
-			var category= document.getElementById("category").value;
-			var title= document.getElementById("title").value;
-			var startEventDate=document.getElementById("startEventDate").value;
-			var endEventDate= document.getElementById("endEventDate").value;
-			var place= document.getElementById("place").value;
-			var artist= document.getElementById("artist").value;
-			var grade= document.getElementById("grade").value;
-			var runTime= document.getElementById("runTime").value;
-			var price= document.getElementById("price").value;
-			var comm= document.getElementById("comm").value;
-			
-			
-			if(category==""||category==null)
-	        {
-			     alert("공연카테고리를 선택하세요");
-					return false;
-			}else if(title==""||title==null)
-			{
-					alert("공연명을 입력하세요");
-					return false;
-	        }
-	       else if(!(/^(19|20)\d{2}.(0[1-9]|1[012]).(0[1-9]|[12][0-9]|3[0-1])$/.test(startEventDate)))
-	            //년,월,일 .으로 구분
-	            {
-	        		alert("시작일을 입력해주세요(yyyy.mm.dd)");
-					return false;
-	            }
-	        else if(!(/^(19|20)\d{2}.(0[1-9]|1[012]).(0[1-9]|[12][0-9]|3[0-1])$/.test(endEventDate)))
-	        	//년,월,일 .으로 구분
-	        {
-	        	alert("종료일을 입력해주세요(yyyy.mm.dd)");
-				return false;
-	        } 
-	        else if(artist==""){
-	            alert("출연자를 입력하세요");
-				return false;
-	        }
-	        else if(!(/^[ㄱ-ㅎ|가-힣|0-9|\s]+$/g.test(grade)))
-	            {   
-	                 alert("관람등급을 입력하세요");
-	                return false;
-	            }
-	        else if(!(/^[0-9]+$/g.test(runTime)))
-	            {
-	                alert("관람시간을 입력하세요(숫자만)");
-	                return false;
-	            }
-	        else if(!(/^[0-9]+$/g.test(price)))
-			{
-	               	alert("가격을 입력하세요");
-	                return false;
-	        }else if(!(/^[0-9]+$/g.test(comm)))
-			{
-	           	alert("수수료를 입력하세요");
-	            return false;
-	    	}
-	        else//모든 검사 만족시 true 반환
-	        {
-	        	document.getElementById("updateForm").submit();
-	            return true;
-	        }
-		
-	}
-		$(document).ready(function() {
-		    $("#placeSearch").click(function(){
+			$("#placeSearch").click(function(){
 		    	location.href="/views/admin/placeInsert.jsp";
 		    });
+			function handleImgFileSelect(e){
+				var files=e.target.files;
+				var filesArr=Array.prototype.slice.call(files);
+				
+				filesArr.forEach(function(f){
+					if(!f.type.match("image.*")){ //이미지 확장자만 가능
+						alert("이미지 확장자만 가능합니다.");
+						return;
+					}
+					sel_file=f;
+					
+					var reader=new FileReader();
+					reader.onload = function(e){
+						$("#postImg").attr("src",e.target.result);
+					}
+					reader.readAsDataURL(f);
+				});
+			}
+			
+			/* submit */
 
-		}); 
+			function showCheck(){
+				var category= document.getElementById("category").value;
+				var title= document.getElementById("title").value;
+				var startEventDate=document.getElementById("startEventDate").value;
+				var endEventDate= document.getElementById("endEventDate").value;
+				var place= document.getElementById("place").value;
+				var artist= document.getElementById("artist").value;
+				var grade= document.getElementById("grade").value;
+				var runTime= document.getElementById("runTime").value;
+				var price= document.getElementById("price").value;
+				var comm= document.getElementById("comm").value;
+				
+				
+				if(category==""||category==null)
+		        {
+				     alert("공연카테고리를 선택하세요");
+						return false;
+				}else if(title==""||title==null)
+				{
+						alert("공연명을 입력하세요");
+						return false;
+		        }
+		       else if(!(/^(19|20)\d{2}.(0[1-9]|1[012]).(0[1-9]|[12][0-9]|3[0-1])$/.test(startEventDate)))
+		            //년,월,일 .으로 구분
+		            {
+		        		alert("시작일을 입력해주세요(yyyy.mm.dd)");
+						return false;
+		            }
+		        else if(!(/^(19|20)\d{2}.(0[1-9]|1[012]).(0[1-9]|[12][0-9]|3[0-1])$/.test(endEventDate)))
+		        	//년,월,일 .으로 구분
+		        {
+		        	alert("종료일을 입력해주세요(yyyy.mm.dd)");
+					return false;
+		        } 
+		        else if(artist==""){
+		            alert("출연자를 입력하세요");
+					return false;
+		        }
+		        else if(!(/^[ㄱ-ㅎ|가-힣|0-9|\s]+$/g.test(grade)))
+		            {   
+		                 alert("관람등급을 입력하세요");
+		                return false;
+		            }
+		        else if(!(/^[0-9]+$/g.test(runTime)))
+		            {
+		                alert("관람시간을 입력하세요(숫자만)");
+		                return false;
+		            }
+		        else if(!(/^[0-9]+$/g.test(price)))
+				{
+		               	alert("가격을 입력하세요");
+		                return false;
+		        }else if(!(/^[0-9]+$/g.test(comm)))
+				{
+		           	alert("수수료를 입력하세요");
+		            return false;
+		    	}
+		        else//모든 검사 만족시 true 반환
+		        {
+		        	document.getElementById("updateForm").submit();
+		            return true;
+		        }
+			
+		} 
+		});
+		
+
 	</script>
 </body>
 </html>
