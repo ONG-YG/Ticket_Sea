@@ -51,7 +51,7 @@ public class PromoDao {
 				p.setBoardP_date(rset.getDate("boardP_date"));
 				p.setBoardP_no(rset.getInt("boardP_no"));
 				p.setBoardP_active(rset.getString("boardP_active").charAt(0));
-				p.setBoardP_filePath(rset.getString("boardP_filePath"));
+				p.setBoardP_fileName(rset.getString("boardP_fileName"));
 				
 				list.add(p);
 			}		
@@ -188,12 +188,9 @@ public class PromoDao {
 				promo.setBoardP_contents(rset.getString("boardP_contents"));
 				promo.setBoardP_location(rset.getString("boardP_location"));
 				promo.setBoardP_date(rset.getDate("boardP_date"));	
-				promo.setBoardP_hit(rset.getInt("boardP_hit"));
 				promo.setBoardP_active(rset.getString("boardP_active").charAt(0));
 				promo.setBoardP_fileName(rset.getString("boardP_fileName"));
-				promo.setBoardP_filePath(rset.getString("boardP_filePath"));
-				promo.setBoardP_fileSize(rset.getLong("boardP_fileSize"));
-				promo.setBoardP_uploadTime(rset.getTimestamp("boardP_uploadTime"));
+				promo.setBoardP_price(rset.getInt("boardP_price"));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

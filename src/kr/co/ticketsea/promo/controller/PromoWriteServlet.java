@@ -64,8 +64,7 @@ public class PromoWriteServlet extends HttpServlet {
 			String userId = ((Member)session.getAttribute("member")).getMemberId();
 			//userId를 가져오도록 함 (비로그인 사용자 일시 Exception이 발생함)
 			
-			ServletContext scontext = getServletContext();
-			String uploadPath = scontext.getRealPath(fileName);
+			String uploadPath=getServletContext().getRealPath("/")+"img"+"\\"+"promoPoster";
 			
 			////////////////////////
 				int fileSizeLimit = 5 * 1024 * 1024;
@@ -92,6 +91,7 @@ public class PromoWriteServlet extends HttpServlet {
 				System.out.println("파일 이름 : " + fileName);
 				
 				String fullFilePath = uploadPath+"\\"+fileName;
+				System.out.println("업로드패스 : "+uploadPath);
 				System.out.println("총 경로 : " + fullFilePath);
 				
 				File file = new File(fullFilePath); //import java.io.File
