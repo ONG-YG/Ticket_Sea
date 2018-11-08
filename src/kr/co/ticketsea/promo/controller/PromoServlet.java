@@ -9,11 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kr.co.ticketsea.notice.model.service.NoticeService;
-import kr.co.ticketsea.notice.model.vo.Notice;
 import kr.co.ticketsea.promo.model.service.PromoService;
-import kr.co.ticketsea.promo.model.vo.Promo;
-import kr.co.ticketsea.promo.model.vo.PromoData;
+import kr.co.ticketsea.promo.model.vo.*;
 
 /**
  * Servlet implementation class PromoServlet

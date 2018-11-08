@@ -354,9 +354,9 @@
                     
                     <div id="i_C_content_a">
                         <br><br>
-                        
 
-                         <img src="/img/poster/<%=show.getShow_dtInfo() %>" style="width:700px; height:850px; padding : 50px;">
+                         <img src="/img/poster/<%=show.getShow_dtInfo() %>" style="width:700px; padding : 50px;">
+						<%= show.getShow_dtInfo() %>
                         
                         <table class="detail_info_tbl">
                             <colgroup>
