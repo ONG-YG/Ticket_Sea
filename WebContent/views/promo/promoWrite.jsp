@@ -10,20 +10,21 @@
   integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
   crossorigin="anonymous">
 </script>
+
 <style>
-    /* 전체 사이즈 조정 */
+      /* 전체 사이즈 조정 */
     
     ul, li, a{list-style: none; margin: 0px; padding: 0px; text-decoration: none; color: black;}
     
     div{box-sizing: border-box;}
-    #wrapper{overflow: hidden;min-width: 990px;min-height: 100%; border: 1px solid black;}
-    #header{height: 193px; border: 1px solid black;}
-    #container{height: 100%; border: 1px solid black; background: #f4f4f4;}
-    #footer{height: 153px; border: 1px solid black;}
+    #wrapper{overflow: hidden;min-width: 990px;min-height: 100%;}
+    #header{height: 193px;}
+    #container{height: 100%;background: #f4f4f4;}
+    #footer{height: 153px; }
     
     /* 990px 고정 사이즈 */
     #h_inner{width: 990px; height: 100%; margin: 0px auto;}
-    #c_inner{width: 990px; height: 1300px; margin: 0px auto; padding: 70px 0 250px 0px;}
+    #c_inner{width: 990px; height: 3000px; margin: 0px auto; padding: 70px 0 250px 0px;}
     #f_inner{width: 990px; margin: 0px auto;}
 
     /* top 버튼 */
@@ -39,7 +40,6 @@
         z-index: 1000;
         background: skyblue;
     }
-    
     /* inner 공간 분할 */
     #c_inner_top{
         width: 100%;
@@ -256,53 +256,38 @@
                 
                 <form action="/promoWrite.do" method="post" enctype="multipart/form-data">
                      <table id="write-form">
-                    <tr>
-                        <td style="width : 70px;" >공연명</td>
-                        <td><input type="text" name="title" id="title" style="width: 300px;" /></td>
-                    </tr>
-                    
-                     <tr>
-                        <td style="width : 70px; text-align : center;" >아티스트</td>
-                        <td colspan="2" >
-                            <textarea name="artist" id="artist" rows="1" cols="50" style="width:300px;"></textarea>
-                        </td>
-                    </tr>
-                    
-                    <tr>
-                        <td style="width : 70px; text-align : center;" >공연장소</td>
-                        <td colspan="2" >
-                            <textarea name="location" id="location" rows="1" cols="50" style="width:300px;"></textarea>
-                        </td>
-                    </tr>
-                    
-                    <tr>
-                        <td style="width : 40px; text-align : center;" >장르</td>
-                        <td>
+                    <div>공연명
+                      <input type="text" name="title" id="title" style="width: 300px;" placeholder="공연명을 입력하세요" />
+                    </div>
+                    <br>
+                     <div>아티스트
+                            <textarea name="artist" id="artist" rows="1" cols="50" style="width:300px;" placeholder="아티스트명을 입력하세요"></textarea>
+                    </div>
+                    <br>
+                    <div>공연장소
+                         <textarea name="location" id="location" rows="1" cols="30" style="width:300px;" placeholder="공연장소를 입력하세요"></textarea>
+                     </div>
+                    <br>
+                    <div>장르</div>
+                    <div>
                             <select name="category" id="category">
                                 <option>연극</option>
                                 <option>음악</option>
                                 <option>뮤지컬</option>
-                            </select>
-                        </td>
-                    </tr>
-                    
-                    <tr>
-                        <td style="width : 70px; text-align : center;" >공연소개</td>
-                        <td colspan="2" >
-                            <textarea name="contents" id="contents" rows="17" cols="50" style="width:600px;"></textarea>
-                        </td>
-                    </tr>
-                    
-	                    <tr>
-	                        <td>사진첨부</td>
-	                        <td><input type="file" name="upFile" id="upFile" /></td>
-	                    </tr>
-	         
-                    <tr>
-                        <td colspan="2">
-                         <input type="submit" value="작성" style="float:right" width="70px" height="30">
-                        </td>
-                    </tr>
+                          </select>
+                   </div>
+                    <br>
+                    <div>공연소개
+                            <textarea name="contents" id="contents" rows="17" cols="50" style="width:600px;" placeholder="내용을 입력해주세요" ></textarea>
+                        </div>
+                    <br>
+	                    <div>사진첨부
+	                       <input type="file" name="upFile" id="upFile" />
+	                    </div>
+	         		<br>
+                    <div>
+                         <input type="submit" value="작성" style="width=70px; height=30px; background-color:skyblue; color:white;">
+                    </div>
                         
                        
                 </table>

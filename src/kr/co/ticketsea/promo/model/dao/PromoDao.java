@@ -51,6 +51,7 @@ public class PromoDao {
 				p.setBoardP_date(rset.getDate("boardP_date"));
 				p.setBoardP_no(rset.getInt("boardP_no"));
 				p.setBoardP_active(rset.getString("boardP_active").charAt(0));
+				p.setBoardP_filePath(rset.getString("boardP_filePath"));
 				
 				list.add(p);
 			}		
