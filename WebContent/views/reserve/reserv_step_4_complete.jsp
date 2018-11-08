@@ -134,6 +134,7 @@
 		
         function reserveView() {
         	<%
+			// 예매창 벗어나기 전에 예매용 session정보 파기 후 헤더용 session 발급///////////////////////////////
         	session.invalidate();
         	session = request.getSession(true);
         	session.setAttribute("member", member);
