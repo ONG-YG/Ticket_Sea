@@ -7,7 +7,6 @@
     }
     #content{
         overflow: hidden;
-        border:1px solid black;
         border-style: dashed;
         padding: 20px 0;
         width:1000px;
@@ -18,11 +17,8 @@
         width:980px;
         height: 100%;
         margin:0 auto;
-        border:1px solid black;
         box-sizing: border-box;
-        
     }
-    
     .content_wrap form{
     	width:980px;
         height: 80%;
@@ -103,7 +99,7 @@
         border:none;
     }
     .right_wrap legend {
-         margin-right: 0;
+        margin-right: 0;
         padding-left: 5px;
     }
     fieldset legend {
@@ -121,6 +117,7 @@
         display: inline-block;
         height:50%;
         padding-top:18px;
+        float:left;
     }
     
     .right_wrap .edit{

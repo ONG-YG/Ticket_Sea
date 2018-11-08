@@ -110,19 +110,16 @@ public class ReserveCompleteServlet extends HttpServlet {
 											ArrayList<SeatGradeState> seatGrdStList = new ReserveService().getSeatGradeStatus(psNo);
 											if(!seatGrdStList.isEmpty()) {
 												rp.setSeatGrdStList(seatGrdStList);
-												
 											}
 											else {
 												System.out.println("error at ReserveCompleteServlet-14");
 												throw new Exception();
 											}//if(!seatGrdStList.isEmpty()) END
-											
 										}
 										else {
 											System.out.println("error at ReserveCompleteServlet-13");
 											throw new Exception();
 										}//if(si!=null) END
-										
 									}else {
 										System.out.println("error at ReserveCompleteServlet-12");
 										throw new Exception();
@@ -264,7 +261,7 @@ public class ReserveCompleteServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
-		postDone = true;
+		postDone = false;
 	}
 
 }

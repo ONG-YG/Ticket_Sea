@@ -293,8 +293,8 @@
         <% for (Promo p : list) { %>
         <% if(p.getBoardP_active() == 'Y'){ %>
             <div id = "prContestDiv1" ">
-	            <div id="prContestPic"><a href="/promo.do?boardP_no=<%=p.getBoardP_no()%>"><img src="<%= p.getBoardP_filePath()%>" style="width:205px; height:330px; align-content: center;"></a></div> <br>
-	        	<div id="prContestTitle" style="font-size: 10px"><a href="/promo.do?boardP_no=<%=p.getBoardP_no()%>"><%=p.getBoardP_title()%></a><%= p.getBoardP_filePath()%></div>
+	            <div id="prContestPic"><a href="/promo.do?boardP_no=<%=p.getBoardP_no()%>"><img src="<%= p.getBoardP_filePath()%>" style="width:210px; height:300px; align-content: center;"></a></div> <br>
+	        	<div id="prContestTitle" style="font-size: 13px; font-weight: bold;"><a href="/promo.do?boardP_no=<%=p.getBoardP_no()%>"><%=p.getBoardP_title()%></a><%= p.getBoardP_filePath()%></div>
         	</div>
          <% } %>
          <%}  %>

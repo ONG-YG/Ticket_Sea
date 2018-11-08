@@ -18,8 +18,8 @@
 <title>회원정보리스트</title>
 
 <!-- 외부 스타일 시트 불러오기 -->
-    <link href="../../css/admin_common.css" rel="stylesheet" type="text/css">
-    <link href="../../css/ad_memberList.css" rel="stylesheet" type="text/css">
+    <link href="/css/admin_common.css" rel="stylesheet" type="text/css">
+    <link href="/css/ad_memberList.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<div id="wrapper">

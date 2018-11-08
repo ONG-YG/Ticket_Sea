@@ -100,6 +100,21 @@ public class ShowService {
 		
 		return result;
 	}
+
+	public int updateShow(Show s) {
+		Connection conn=JDBCTemplate.getConnection();
+		int result = new ShowDao().updateShow(conn,s);
+
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		
+		return result;
+		
+	}
 	
 
 

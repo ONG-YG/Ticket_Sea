@@ -52,7 +52,7 @@ public class AdMsUpdateServlet extends HttpServlet {
 		String fullFilePath = uploadPath+"\\"+fileName;
 		System.out.println("총 경로 : " + fullFilePath);
 		
-		request.getParameter("utf-8");
+		request.setCharacterEncoding("utf-8");
 		
 		MiniShow ms = new MiniShow();
 		ms.setMs_no(Integer.parseInt(multi.getParameter("msNo")));
