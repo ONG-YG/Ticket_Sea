@@ -14,6 +14,7 @@ import kr.co.ticketsea.mypage.model.vo.PromoMgr;
 import kr.co.ticketsea.mypage.model.vo.QnaMgr;
 import kr.co.ticketsea.mypage.model.vo.ReserveList;
 import kr.co.ticketsea.mypage.model.vo.ReviewMgr;
+import kr.co.ticketsea.reserve.model.vo.ShowInfo;
 
 public class MypageDao {
 
@@ -965,10 +966,15 @@ public class MypageDao {
 			
 			result = pstmt.executeUpdate();
 			
+			
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
 		}
 		
+				
 		return result;
 	}
 
@@ -1180,6 +1186,38 @@ public class MypageDao {
 
 		return sb.toString();
 		
+	}
+
+	public ArrayList<ShowInfo> mainImg(Connection conn) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = "select m_show_no,m_show_poster,m_show_name from musical_l";
+		ArrayList<ShowInfo> list = new ArrayList<ShowInfo>();
+
+		try {
+			pstmt = conn.prepareStatement(query);
+
+			rset = pstmt.executeQuery();
+
+			while(rset.next()) {
+				ShowInfo si = new ShowInfo();
+
+				si.setM_show_no(rset.getInt("m_show_no"));
+				si.setM_show_poster(rset.getString("m_show_poster"));
+				si.setM_show_name(rset.getString("m_show_name"));
+				
+				list.add(si);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+
+		return list;
 	}
 
 }

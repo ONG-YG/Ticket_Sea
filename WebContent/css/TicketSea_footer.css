@@ -2,7 +2,7 @@
 
     
     ul, li{list-style: none; display: block; text-decoration-line: none;}
-    a{text-decoration: none;}
+    a{text-decoration: none; color: black;}
     
     div{box-sizing: border-box;}
     

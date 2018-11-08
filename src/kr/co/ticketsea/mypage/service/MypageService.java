@@ -12,6 +12,7 @@ import kr.co.ticketsea.mypage.model.vo.QnaMgr;
 import kr.co.ticketsea.mypage.model.vo.ReserveList;
 import kr.co.ticketsea.mypage.model.vo.ReservePageData;
 import kr.co.ticketsea.mypage.model.vo.ReviewMgr;
+import kr.co.ticketsea.reserve.model.vo.ShowInfo;
 
 
 public class MypageService {
@@ -213,6 +214,17 @@ public class MypageService {
 		JDBCTemplate.close(conn);
 		
 		return pd;
+	}
+
+	public ArrayList<ShowInfo> mainImg() {
+		
+		Connection conn = JDBCTemplate.getConnection();
+
+		ArrayList<ShowInfo> list = new MypageDao().mainImg(conn);
+
+		JDBCTemplate.close(conn);
+		
+		return list;
 	}
 
 }
