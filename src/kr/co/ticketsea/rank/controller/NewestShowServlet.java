@@ -40,27 +40,30 @@ public class NewestShowServlet extends HttpServlet {
 		
 		
 		ArrayList<Rank> list =new RankService().newestShow();
-		response.setContentType("text/html; charset=utf-8");
-		response.setContentType("application/json");
+	
 		
 		
-		PrintWriter out = response.getWriter();
+		//PrintWriter out = response.getWriter();
 		
-		JSONObject object = null;
+		
 		JSONArray resultList = new JSONArray(); 
-		if(list.isEmpty())
+		if(!list.isEmpty())
 		{
 			for(Rank r : list)
 			{
-				new JSONObject();
+				JSONObject  object=new JSONObject();
 				object.put("poster", r.getPoster());
 				object.put("no", r.getShowNo());
 				object.put("subject", r.getSubject());
 				resultList.add(object);
+				System.out.println(object);
 				
-				out.println(resultList);
 			}
+				//System.out.println(resultList);
 			
+			response.setContentType("application/json");
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().print(resultList);
 			
 		}else {
 			

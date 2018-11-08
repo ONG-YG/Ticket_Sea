@@ -6,7 +6,23 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+        
+ <style>
+ 
+.newRankPoster{ width:178px;
+				height:216px;
+					display:none;
+			}
+#newRankposter1{
+		width:178px;
+		height:216px;
+		display:block;
+		
+}
 
+
+
+ </style>
 <link rel="stylesheet" type="text/css" href="/css/TicketSea_mainPage.css" />
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -60,32 +76,52 @@
 	            </p>
             </div>
         </div>
-        
+
 <script>
 
 $(document).ready(function(){
-			var newSub = new Array(5);
+			
 	
 				$.ajax({
 					url : "/newestShow.do",
 					type : "get",
 					success :function(data){
-						for(var i=0; i<data.length;i++)
-						{
-						newSub[i] = document.getElementId("#newRankSub"+I).html;
-						}
+						var data = data;
+						var newPoster1 = data[0].poster;
+						
+						$("#newRankSub1").html("1. "+data[0].subject);
+						$("#newRankSub2").html("2. "+data[1].subject);
+						$("#newRankSub3").html("3. "+data[2].subject);
+						$("#newRankSub4").html("4. "+data[3].subject);
+						$("#newRankSub5").html("5. "+data[4].subject);
+						
+						$("#newRankPoster1").attr("src","/img/poster/"+data[0].poster);
+						$("#newRankPoster2").attr("src","/img/poster/"+data[1].poster);
+						$("#newRankPoster3").attr("src","/img/poster/"+data[2].poster);
+						$("#newRankPoster4").attr("src","/img/poster/"+data[3].poster);
+						$("#newRankPoster5").attr("src","/img/poster/"+data[4].poster);
+						
+						//178 216
+						$("#newRankNo1").attr("href","/show.do?m_show_no="+data[0].no);
+						$("#newRankNo2").attr("href","/show.do?m_show_no="+data[1].no);
+						$("#newRankNo3").attr("href","/show.do?m_show_no="+data[2].no);
+						$("#newRankNo4").attr("href","/show.do?m_show_no="+data[3].no);
+						$("#newRankNo5").attr("href","/show.do?m_show_no="+data[4].no);
+						
+						
+						
 					},
 					error : function(){
 						console.log("ajax 통신 에러");
-					},
-					complete : function(){
-						console.log("complete");
-					} 
+					}
 					
 					
 				});
-		
+				
 	});
+
+
+
 	</script>
         <div id="list_center">
             <div id="rank_list">
@@ -95,9 +131,22 @@ $(document).ready(function(){
                 <div class="list">
                     <ul>
                         <li class="list_img">
+                            <a href="#" id="">
+                                <img src="" class="rankPoster" id="rankPoster1">
+                                 </a>
                             <a href="#">
-                                <img src="/img/178_216.jpg">
-                            </a>
+                                <img src="" class="rankPoster" id="rankPoster2">
+                             </a>
+                            <a href="#">
+                                <img src="" class="rankPoster" id="rankPoster3">
+                             </a>
+                            <a href="#">
+                                <img src="" class="rankPoster" id="rankPoster4">
+                                </a>
+                             <a href="#">
+                                <img src="" class="rankPoster" id="rankPoster5">
+                                </a>
+                           
                         </li>
                         <!-- 이미지 -->
                         <li class="list_a">
@@ -135,34 +184,46 @@ $(document).ready(function(){
                 <div class="list">
                     <ul>
                         <li class="list_img">
-                            <a href="#">
-                                <img src="/img/178_216.jpg">
-                            </a>
+                             <a href="#" id="newRankNo1">
+                                <img src="" class="newRankPoster" id="newRankPoster1">
+                                 </a>
+                            <a href="#" id="newRankNo2">
+                                <img src="" class="newRankPoster" id="newRankPoster2">
+                             </a>
+                            <a href="#" id="newRankNo3">
+                                <img src="" class="newRankPoster" id="newRankPoster3">
+                             </a>
+                            <a href="#" id="newRankNo4">
+                                <img src="" class="newRankPoster" id="newRankPoster4">
+                                </a>
+                             <a href="#" id="newRankNo5">
+                                <img src="" class="newRankPoster" id="newRankPoster5">
+                                </a>
                         </li>
                         <!-- 이미지 -->
                         <li class="list_a">
-                            <a href="#" id="newRankSub1">
-                                1. 포항 BIG K-POP FESTIVAL
+                            <a href="" id="newRankSub1">
+                                1. 최신 랭킹
                             </a>
                         </li>
                         <li class="list_a">
-                            <a href="#" id="newRankSub2">
-                                2. 포항 BIG K-POP FESTIVAL
+                            <a href="" id="newRankSub2">
+                                2. 최신 랭킹
                             </a>
                         </li>
                         <li class="list_a">
-                            <a href="#" id="newRankSub3">
-                                3. 포항 BIG K-POP FESTIVAL
+                            <a href="" id="newRankSub3">
+                                3. 최신 랭킹
                             </a>
                         </li>
                         <li class="list_a">
-                            <a href="#" id="newRankSub4">
-                                4. 포항 BIG K-POP FESTIVAL
+                            <a href="" id="newRankSub4">
+                                4. 최신 랭킹
                             </a>
                         </li>
                         <li class="list_a">
-                            <a href="#" id="newRankSub5">
-                                5. 포항 BIG K-POP FESTIVAL
+                            <a href="" id="newRankSub5">
+                                5. 최신 랭킹
                             </a>
                         </li>
                     </ul>

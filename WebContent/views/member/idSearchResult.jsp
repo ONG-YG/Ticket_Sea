@@ -5,8 +5,11 @@
 <html>
 <head>
 <style>
-		span {	font-size="15px";
-				 color="#87ceeb";}
+		span {	font-size:"15px";
+				 color:#87ceeb;}
+				 h1{
+				 	color:#87ceeb;
+				 }
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Ticket Sea | ID 찾기</title>
@@ -17,9 +20,10 @@
 
 <center>
 <br><br>
+<h1>Ticket Sea</h1>
 	<h2>아이디 찾기</h2>
-	<br><Br>
-	<h3>회원님의  아이디는 [<span><%= request.getAttribute("id")%></span>] 입니다.</h3><br>
+	<br>
+	<h3>회원님의  아이디는 <br>[<span><%= request.getAttribute("id")%></span>] 입니다.</h3><br>
 	<button onclick="return returnLgn();">닫기</button>
 	
 
