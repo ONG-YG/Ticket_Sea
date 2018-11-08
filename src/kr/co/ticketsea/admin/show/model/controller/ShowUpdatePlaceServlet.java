@@ -9,10 +9,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import kr.co.ticketsea.admin.show.model.service.ShowService;
 import kr.co.ticketsea.admin.show.model.vo.ShowCategory;
 import kr.co.ticketsea.admin.show.model.vo.ShowPlace;
+import kr.co.ticketsea.member.model.vo.Member;
 
 /**
  * Servlet implementation class ShowUpdatePlaceServlet
@@ -33,17 +35,33 @@ public class ShowUpdatePlaceServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getParameter("utf-8");
+		try {
+			request.setCharacterEncoding("utf-8");
+			
+			HttpSession session = request.getSession(false);
+			
+			if(session!=null) {
+				Member m = (Member)session.getAttribute("member");
+					
+				if(m!=null && m.getMemberGrade()=='A') {
+					ArrayList<ShowPlace> splist = new ShowService().showPlaceList();
+					
+					ArrayList<ShowCategory> sclist = new ShowService().showCategoryList();
+					
+					RequestDispatcher view= request.getRequestDispatcher("/views/admin/ad_showInsert.jsp");
+					request.setAttribute("showPlaceList", splist);
+					request.setAttribute("showCTGList", sclist);
+					view.forward(request, response);
+				}else{
+					throw new Exception();
+				}
+			}else {
+				throw new Exception();
+			}
+		}catch (Exception e) {
+			response.sendRedirect("/views/admin/adminError.jsp");
+		}
 		
-		
-		ArrayList<ShowPlace> splist = new ShowService().showPlaceList();
-		
-		ArrayList<ShowCategory> sclist = new ShowService().showCategoryList();
-		
-		RequestDispatcher view= request.getRequestDispatcher("/views/admin/ad_showInsert.jsp");
-		request.setAttribute("showPlaceList", splist);
-		request.setAttribute("showCTGList", sclist);
-		view.forward(request, response);
 	}
 
 	/**

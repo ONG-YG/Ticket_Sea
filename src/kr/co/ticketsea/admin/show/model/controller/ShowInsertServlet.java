@@ -101,11 +101,13 @@ public class ShowInsertServlet extends HttpServlet {
 				}else {
 						throw new Exception();
 				}
+			}else {
+				throw new Exception();
 			}
 		
 		}catch (Exception e) {
 			
-			response.sendRedirect("/views/admin/error.jsp");
+			response.sendRedirect("/views/admin/adminError.jsp");
 		}
 	}
 

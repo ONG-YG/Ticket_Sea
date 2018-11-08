@@ -4,110 +4,104 @@ import java.sql.Date;
 
 public class MiniShow {
 	
-	private int ms_no; //소규모공연번호
-	private String ms_name; //공연명
-	private String ms_userId; //작성자 아이디
-	private String ms_artists; //출연아티스트
-	private String ms_place; //공연장소
-	private Date ms_wrtdate; //작성일
-	private String ms_st_date; //시작일
-	private String ms_ed_date; //종료일
-	private String ms_ct; //공연 장르
-	private String ms_intd; //공연소개
-	private String ms_poster;
-	private String ms_state; //승인상태
+	private int boardp_no; //소규모공연번호
+	private String boardp_title; //공연명
+	private String boardp_writer; //작성자 아이디
+	private String boardp_artist; //출연아티스트
+	private String boardp_location; //공연장소
+	private Date boardp_date; //공연일
+	private int boardp_price; //공연가격
+	private String boardp_category; //공연 장르
+	private String boardp_contents; //공연소개
+	private String boardp_filename; //공연 포스터
+	private char boardp_active; //승인상태
 	public MiniShow() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public MiniShow(int ms_no, String ms_name, String ms_userId, String ms_artists, String ms_place, Date ms_wrtdate,
-			String ms_st_date, String ms_ed_date, String ms_ct, String ms_intd, String ms_poster, String ms_state) {
+	public MiniShow(int boardp_no, String boardp_title, String boardp_writer, String boardp_artist,
+			String boardp_location, Date boardp_date, int boardp_price, String boardp_category, String boardp_contents,
+			String boardp_filename, char boardp_active) {
 		super();
-		this.ms_no = ms_no;
-		this.ms_name = ms_name;
-		this.ms_userId = ms_userId;
-		this.ms_artists = ms_artists;
-		this.ms_place = ms_place;
-		this.ms_wrtdate = ms_wrtdate;
-		this.ms_st_date = ms_st_date;
-		this.ms_ed_date = ms_ed_date;
-		this.ms_ct = ms_ct;
-		this.ms_intd = ms_intd;
-		this.ms_poster = ms_poster;
-		this.ms_state = ms_state;
+		this.boardp_no = boardp_no;
+		this.boardp_title = boardp_title;
+		this.boardp_writer = boardp_writer;
+		this.boardp_artist = boardp_artist;
+		this.boardp_location = boardp_location;
+		this.boardp_date = boardp_date;
+		this.boardp_price = boardp_price;
+		this.boardp_category = boardp_category;
+		this.boardp_contents = boardp_contents;
+		this.boardp_filename = boardp_filename;
+		this.boardp_active = boardp_active;
 	}
-	public int getMs_no() {
-		return ms_no;
+	public int getBoardp_no() {
+		return boardp_no;
 	}
-	public void setMs_no(int ms_no) {
-		this.ms_no = ms_no;
+	public void setBoardp_no(int boardp_no) {
+		this.boardp_no = boardp_no;
 	}
-	public String getMs_name() {
-		return ms_name;
+	public String getBoardp_title() {
+		return boardp_title;
 	}
-	public void setMs_name(String ms_name) {
-		this.ms_name = ms_name;
+	public void setBoardp_title(String boardp_title) {
+		this.boardp_title = boardp_title;
 	}
-	public String getMs_userId() {
-		return ms_userId;
+	public String getBoardp_writer() {
+		return boardp_writer;
 	}
-	public void setMs_userId(String ms_userId) {
-		this.ms_userId = ms_userId;
+	public void setBoardp_writer(String boardp_writer) {
+		this.boardp_writer = boardp_writer;
 	}
-	public String getMs_artists() {
-		return ms_artists;
+	public String getBoardp_artist() {
+		return boardp_artist;
 	}
-	public void setMs_artists(String ms_artists) {
-		this.ms_artists = ms_artists;
+	public void setBoardp_artist(String boardp_artist) {
+		this.boardp_artist = boardp_artist;
 	}
-	public String getMs_place() {
-		return ms_place;
+	public String getBoardp_location() {
+		return boardp_location;
 	}
-	public void setMs_place(String ms_place) {
-		this.ms_place = ms_place;
+	public void setBoardp_location(String boardp_location) {
+		this.boardp_location = boardp_location;
 	}
-	public Date getMs_wrtdate() {
-		return ms_wrtdate;
+	public Date getBoardp_date() {
+		return boardp_date;
 	}
-	public void setMs_wrtdate(Date ms_wrtdate) {
-		this.ms_wrtdate = ms_wrtdate;
+	public void setBoardp_date(Date boardp_date) {
+		this.boardp_date = boardp_date;
 	}
-	public String getMs_st_date() {
-		return ms_st_date;
+	public int getBoardp_price() {
+		return boardp_price;
 	}
-	public void setMs_st_date(String ms_st_date) {
-		this.ms_st_date = ms_st_date;
+	public void setBoardp_price(int boardp_price) {
+		this.boardp_price = boardp_price;
 	}
-	public String getMs_ed_date() {
-		return ms_ed_date;
+	public String getBoardp_category() {
+		return boardp_category;
 	}
-	public void setMs_ed_date(String ms_ed_date) {
-		this.ms_ed_date = ms_ed_date;
+	public void setBoardp_category(String boardp_category) {
+		this.boardp_category = boardp_category;
 	}
-	public String getMs_ct() {
-		return ms_ct;
+	public String getBoardp_contents() {
+		return boardp_contents;
 	}
-	public void setMs_ct(String ms_ct) {
-		this.ms_ct = ms_ct;
+	public void setBoardp_contents(String boardp_contents) {
+		this.boardp_contents = boardp_contents;
 	}
-	public String getMs_intd() {
-		return ms_intd;
+	public String getBoardp_filename() {
+		return boardp_filename;
 	}
-	public void setMs_intd(String ms_intd) {
-		this.ms_intd = ms_intd;
+	public void setBoardp_filename(String boardp_filename) {
+		this.boardp_filename = boardp_filename;
 	}
-	public String getMs_poster() {
-		return ms_poster;
+	public char getBoardp_active() {
+		return boardp_active;
 	}
-	public void setMs_poster(String ms_poster) {
-		this.ms_poster = ms_poster;
+	public void setBoardp_active(char boardp_active) {
+		this.boardp_active = boardp_active;
 	}
-	public String getMs_state() {
-		return ms_state;
-	}
-	public void setMs_state(String ms_state) {
-		this.ms_state = ms_state;
-	}
+	
 	
 	
 	

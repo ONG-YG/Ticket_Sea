@@ -277,7 +277,7 @@
 %>
 
            
-            <div id="right_view">
+            <div id="right_view" >
                 
                 <div id="infoHeader">
                     <div id="i_H_title">
@@ -337,9 +337,9 @@
                     </div>
                 </div>
        			
-       			 <div id="infoContent">
+       			 <div id="infoContent" >
                     <div id="i_C_category">
-                        <div id="i_C_Category_a" >
+                        <div id="i_C_Category_a">
                             <button onclick="cateAclick();" style="width:100%; height:100%; background-color: skyblue; color:white;">상세정보</button>
                         </div>
                         
@@ -354,9 +354,9 @@
                     
                     <div id="i_C_content_a">
                         <br><br>
-                        
 
-                         <img src="/img/poster/<%=show.getShow_dtInfo() %>" style="width:700px; height:850px; padding : 50px;">
+                         <img src="/img/poster/<%=show.getShow_dtInfo() %>" style="width:700px; padding : 50px;">
+						<%= show.getShow_dtInfo() %>
                         
                         <table class="detail_info_tbl">
                             <colgroup>

@@ -22,7 +22,8 @@ public class MiniShowDao {
 		//끝 게시물 계산
 		int end = currentPage* recordCountPerPage;
 		
-		String query = "select * from ms_stat ms right outer join (select * from (select row_number() over(order by ms_no desc) num, mini_show.* from mini_show where ms_state='ap_wt') where num between ? and ?) st on ms.STATE_CD =st.ms_State";
+		String query = "select * from ms_stat ms right outer join (select * from (select row_number() over(order by BOARDP_NO desc) num, board_promo.* from board_promo where BOARDP_ACTIVE='N')"+
+		"where num between ? and ?) st on ms.STATE_CD =st.BOARDP_ACTIVE";
 		
 		ArrayList<MiniShow> list = new ArrayList<MiniShow>();
 		
@@ -35,16 +36,17 @@ public class MiniShowDao {
 			
 			while(rset.next()) {
 				MiniShow ms=new MiniShow();
-				ms.setMs_no(rset.getInt("ms_no"));
-				ms.setMs_name(rset.getString("ms_title"));
-				ms.setMs_userId(rset.getString("ms_memId"));
-				ms.setMs_ct(rset.getString("ms_ct"));
-				ms.setMs_artists(rset.getString("ms_artists"));
-				ms.setMs_wrtdate(rset.getDate("ms_wrt_date"));
-				ms.setMs_place(rset.getString("ms_place"));
-				ms.setMs_intd(rset.getString("ms_intd"));
-				ms.setMs_state(rset.getString("state_name"));
-				
+				ms.setBoardp_no(rset.getInt("boardp_no"));
+				ms.setBoardp_title(rset.getString("boardp_title"));
+				ms.setBoardp_writer(rset.getString("boardp_writer"));
+				ms.setBoardp_artist(rset.getString("boardp_artist"));
+				ms.setBoardp_location(rset.getString("boardp_location"));
+				ms.setBoardp_date(rset.getDate("boardp_date"));
+				ms.setBoardp_price(rset.getInt("boardp_price"));
+				ms.setBoardp_category(rset.getString("boardp_category"));
+				ms.setBoardp_contents(rset.getString("boardp_contents"));
+				ms.setBoardp_filename(rset.getString("boardp_filename"));
+				ms.setBoardp_active(rset.getString("boardp_active").charAt(0));
 				list.add(ms);
 				
 			}
@@ -65,7 +67,7 @@ public class MiniShowDao {
 		//게시물의 토탈 개수를 구해야함
 		int recordTotalCount=0; //초기값은 정보가 없으므로 0으로 세팅
 		
-		String query ="select count(*) as totalcount from mini_show where ms_state='ap_wt'";
+		String query ="select count(*) as totalcount from BOARD_PROMO where BOARDP_ACTIVE='N'";
 		
 		try {
 			pstmt=conn.prepareStatement(query);
@@ -119,7 +121,7 @@ public class MiniShowDao {
 		StringBuilder sb = new StringBuilder();
 		//needPrev는 시작페이지가 1이면 false, 시작페이지가 1이 아니라면 true
 		if(needPrev==true) { //시작페이지가 1페이지가 아니라면
-			sb.append("<a href='/adShowList.do?currentPage="+(startNavi-1)+"'> < </a> ");
+			sb.append("<a href='/miniShowList.do?currentPage="+(startNavi-1)+"'> < </a> ");
 		}
 		//현재 내 위치 (startNavi값)가 2라면? '<' 버튼을 클릭하면 1페이지로 이동함
 		//<a href='/noticeList.do?currentPage=(2-1)> < </a> =>

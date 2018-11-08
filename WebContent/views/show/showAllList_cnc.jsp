@@ -296,7 +296,7 @@
         <% for (Show s : list) { %>
         	<% if(s.getSc_code().equals("CNC")){ %>
             <div id = "prContestDiv1">
-	            <div id="prContestPic"><a href="/show.do?m_show_no=<%=s.getM_show_no()%>"><img src="<%=s.getShow_poster() %>" style="width:210px; height:300px; align-content: center;"></a></div> <br>
+	            <div id="prContestPic"><a href="/show.do?m_show_no=<%=s.getM_show_no()%>"><img src="/img/poster/<%=s.getShow_poster() %>" style="width:210px; height:300px; align-content: center;"></a></div> <br>
 	        	<div id="prContestTitle" style="font-size: 13px; font-weight: bold;"><a href="/show.do?m_show_no=<%=s.getM_show_no()%>"><%=s.getShow_name()%> </a></div>
         	</div>
          <% }}  %> 
