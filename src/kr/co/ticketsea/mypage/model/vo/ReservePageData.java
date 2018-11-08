@@ -9,14 +9,16 @@ public class ReservePageData {
 	private String pageNavi;
 	private ArrayList<ReviewMgr> reviewList;
 	private ArrayList<QnaMgr> qnaList;
+	private ArrayList<PromoMgr> promoList;
 	public ReservePageData(ArrayList<ReserveList> list, ArrayList<PopupReserveList> pList, String pageNavi,
-			ArrayList<ReviewMgr> reviewList, ArrayList<QnaMgr> qnaList) {
+			ArrayList<ReviewMgr> reviewList, ArrayList<QnaMgr> qnaList, ArrayList<PromoMgr> promoList) {
 		super();
 		this.list = list;
 		this.pList = pList;
 		this.pageNavi = pageNavi;
 		this.reviewList = reviewList;
 		this.qnaList = qnaList;
+		this.promoList = promoList;
 	}
 	public ReservePageData() {
 		super();
@@ -52,6 +54,13 @@ public class ReservePageData {
 	public void setQnaList(ArrayList<QnaMgr> qnaList) {
 		this.qnaList = qnaList;
 	}
+	public ArrayList<PromoMgr> getPromoList() {
+		return promoList;
+	}
+	public void setPromoList(ArrayList<PromoMgr> promoList) {
+		this.promoList = promoList;
+	}
 	
-		
+	
+	
 }

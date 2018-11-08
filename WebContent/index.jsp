@@ -31,7 +31,7 @@
 	            <ul> 
                     <li>
                        <a href="#">
-                           <img src="/img/ban2.jpg">
+                           <img src="/img/poster/1p">
                        </a>
                     </li>
                     <li>
@@ -63,13 +63,13 @@
         <div id="list_center">
             <div id="rank_list">
                 <div class="header">
-                    <h2>실시간 랭킹</h2>
+                    <h2>인기 순위</h2>
                 </div>
                 <div class="list">
                     <ul>
                         <li class="list_img">
                             <a href="#">
-                                <img src="/img/178_216.jpg">
+                                <img src="/img/poster/<%= %>">
                             </a>
                         </li>
                         <!-- 이미지 -->
