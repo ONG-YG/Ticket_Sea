@@ -55,15 +55,19 @@ public class ReserveListServlet extends HttpServlet {
 		
 		
 		//2. 비즈니스 로직
-		ReservePageData rpd = new MypageService().reserveAllList(currentPage,memberNo);		
-
+		ReservePageData rpd = new MypageService().reserveAllList(currentPage,memberNo);
+		
+		if(rpd!=null) {
+			//3. jsp 페이지로 넘겨준다
+			RequestDispatcher view = request.getRequestDispatcher("views/mypage/reserveList.jsp");
+			request.setAttribute("pd", rpd);
+			view.forward(request, response);
+			
+		}else {
+			response.sendRedirect("/views/mypage/reserveListNoData.jsp");
+		}
 		
 		
-		
-		//3. jsp 페이지로 넘겨준다
-		RequestDispatcher view = request.getRequestDispatcher("views/mypage/reserveList.jsp");
-		request.setAttribute("pd", rpd);
-		view.forward(request, response);
 		
 	}
 
