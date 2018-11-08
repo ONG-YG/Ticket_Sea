@@ -80,7 +80,7 @@
                        </thead>
                        <%for(Show s : list) {%>
                        <tr>
-                           <td><a href="/adShow.do?m_show_no=<%=s.getM_show_no()%>"><%=s.getM_show_no() %></a></td>
+                           <td><a href="/showUpdatePlace.do?m_show_no=<%=s.getM_show_no()%>"><%=s.getM_show_no() %></a></td>
                            <td><%=s.getShow_name() %></td>
                            <td><%=s.getArtists() %></td>
                            <td><%=s.getShow_run() %></td>
