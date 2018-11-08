@@ -1,26 +1,6 @@
 @charset "UTF-8";
+
     /*회원정보페이지*/
-    #content{
-        overflow: hidden;
-        border:1px solid black;
-        border-style: dashed;
-        padding: 20px 0;
-        width:85%;
-        height:1300px;
-        display: block;
-        position:relative;
-        
-    }
-    .content_wrap{
-        width:980px;
-        height: 100%;
-        margin:0 auto;
-        border:1px solid black;
-        box-sizing: border-box;
-        display: inline-block;
-        position:absolute;
-        left:4%;
-    }
     h2.main_title{
         display: inline-block;
         font-size: 23px;

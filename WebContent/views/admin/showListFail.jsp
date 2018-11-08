@@ -1,26 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import = "kr.co.ticketsea.admin.reserve.model.vo.*" 
-		import = "java.util.ArrayList"%>    
-<% 
-	// Controller(Servlet)에서 보내준 값 가져오기
-	
-	ReservePageData rpg=(ReservePageData)request.getAttribute("reservePgData");
-	
-	//현재 페이지 글 목록
-	ArrayList<Reserve> list = rpg.getList(); 
-	//현재 내비바
-	String pageNavi = rpg.getPageNavi();
-	
-%>
+		
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>공연목록</title>
 <!-- 외부 스타일 시트 불러오기 -->
     <link href="/css/admin_common.css" rel="stylesheet" type="text/css">
-    <link href="/css/ad_reserveList.css" rel="stylesheet" type="text/css">
+    <link href="/css/ad_showList.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 		<div id="wrapper">
@@ -28,6 +16,7 @@
 			<div id="h_inner">
                 <div id="icon">
                     <a href="../admin/admin_page.html"><img width="180" height="50" alt="Ticket Sea" src="../../img/ticket_admin.png"></a>
+
                 </div>
 			</div>
 		</div>
@@ -64,39 +53,33 @@
                 <div id="content">
            <div class="content_wrap">
               <div class="top_area">
-                  <h2 class="main_title">예매관리</h2>
+                  <h2 class="main_title">공연정보</h2>
                </div>
                <div class="main_area">
-                <div id="reserve_table">
-                   <table class="reserveTbl">
+                <div id="show_table">
+                   <table class="showTbl">
                     <thead style="background-color:#E7E7E7">
-                        <td width="20%">예매번호</td>
-                        <td width="15%">회원번호</td>
-                        <td width="15%">아이디</td>
-                        <td width="25%">공연명</td>
-                        <td width="15%">예매일</td>
-                        <td >삭제</td>
+                        <td width="15%">공연번호</td>
+                        <td width="20%">공연명</td>
+                        <td width="25%">츨연자</td>
+                        <td width="15%">관람시간</td>
+                        <td>공연장소</td>
+                        <td>삭제</td>
                        </thead>
-                       <%for(Reserve rs : list) {%>
                        <tr>
-                           <td><a href="/adOneReserve.do?rs_bk_no=<%=rs.getBk_no() %>"><%=rs.getBk_no() %></a></td>
-                           <td><%=rs.getMember_no()%></td>
-                           <td><%=rs.getMember_id()%></td>
-                           <td><%=rs.getShow_name()%></td>
-                           <td><%=rs.getBk_date()%></td>
-                           <td><input type="button" value="삭제" onclick="delActive('<%=rs.getBk_no()%>');"></td>
-                      <script>
-                    	function delActive(bkNo){
-                    		location.href="/adReserveDelete.do?bkNo="+bkNo; //get방식으로 삭제할 회원번호 넘김
-                    	}
-                     </script>
+                       	<td></td>
+                       	<td></td>
+                       	<td></td>
+                       	<td></td>
+                       	<td></td>
+                       	<td></td>
                        </tr>
-                        <%} %>
+                      
                     </table>
                     
                     <!--회원목록 페이지 이동-->
                      <div class="paginate" style="text-align: center">
-                    <label><%=pageNavi%></label>
+                    
                     </div>
                     
                     <!--회원검색-->

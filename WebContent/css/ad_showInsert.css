@@ -1,29 +1,8 @@
 @charset "UTF-8";
-
-
     /*공연등록 페이지*/
     div{
         box-sizing: border-box;
         display: block;
-    }
-    #content{
-        overflow: hidden;
-        border:1px solid black;
-        border-style: dashed;
-        /* padding: 20px 0; */
-        width:1000px;
-        height:1200px;
-        backgound-color:#FFFFFF;
-       display: inline-block;
-    }
-    .content_wrap{
-   		 position:relative;
-        width:980px;
-        height: 100%;
-        margin:0 auto;
-        border:1px solid black;
-        box-sizing: border-box;
-        
     }
     
     .content_wrap form{
@@ -63,7 +42,6 @@
     .left_wrap{
         display: inline-block;
         width:200px;
-        border:1px solid black;
         float:left;
         padding:0px;
     }
@@ -79,6 +57,7 @@
     	position:relative;
 	    width: 160px;
 	    height: 160px;
+	     padding-left:30px;
 	    /* overflow: hidden; */
     }
  
@@ -86,6 +65,7 @@
         width:100%;
         height: auto;
         z-index:-100;
+        border:3px solid #006579;
         
     }
     .event_img_area .btn_area{
@@ -145,7 +125,6 @@
     
     .right_wrap:not(.content-header){
         width:750px;
-        border:1px solid black;
         float:right;
         padding-right: 20px;
     }
@@ -154,7 +133,7 @@
         width: 100%;
         display: block;
         border:none;
-        border-bottom: 1px dashed black;
+        border-bottom: 1px solid #EAEAEA;
     }
     fieldset:first-child {
         padding-top: 0;

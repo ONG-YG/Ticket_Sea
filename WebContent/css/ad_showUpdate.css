@@ -1,33 +1,21 @@
 @charset "UTF-8";
-
-    /*공연 수정 페이지*/
+    /*공연수정 페이지*/
     div{
         box-sizing: border-box;
         display: block;
     }
-    #content{
-        overflow: hidden;
-        border-style: dashed;
-        padding: 20px 0;
-        width:1000px;
-        height:1300px;
-        display: block;
-    }
-    .content_wrap{
-        width:980px;
-        height: 100%;
-        margin:0 auto;
-        box-sizing: border-box;
-    }
+    
     .content_wrap form{
     	width:980px;
-        height: 80%;
+        height: 100%;
          z-index:-10;
     }
-    h2.main_title{
-        display: inline-block;
+    h2.main_title:not(.content-header){
         font-size: 23px;
         font-weight: normal;
+        text-align:left;
+        padding-left:10px;
+        
     }
     #content .main_area{
         padding:30px 10px;
@@ -49,39 +37,95 @@
         padding-right:20px;
         padding-top:5px;
     }
-    .event_img_area{
-        float:left;
-        width:160px;
-        height:160px;
-        padding-right: 30px;
-        overflow: hidden;
-        border:1px solid #d8d8d8;
-        display: block;
-    }
-    .event_img_area .show_post{
-        width:100%;
-        height:160px;
-        height: auto;
-        
-    }
-    .event_img_area .upload_btn{
-        top:50%;
-        left:50%;
-        padding:0;
-        display: none;
-        transform: translate(-50%, -50%);
-    }
+    
+    
     .left_wrap{
         display: inline-block;
         width:200px;
-        border:1px solid black;
         float:left;
         padding:0px;
     }
-    .right_wrap{
-        display: inline-block;
+    .left_wrap .input_area{
+   		 position:relative;
+    	width:100%;
+    	height:160px;
+    }
+    
+        /* 포스터 업로드  */
+    
+    .event_img_area{
+    	position:relative;
+	    width: 160px;
+	    height: 160px;
+	    padding-left:30px;
+	    /* overflow: hidden; */
+	    
+    }
+ 
+    .event_img_area .show_post{
+        width:100%;
+        height: auto;
+        z-index:-100;
+        border:3px solid #006579;
+        
+    }
+    .event_img_area .btn_area{
+    	position:absolute;
+    	top:50%;
+    	left:50%;
+    	padding:0;
+    	display:none;
+    	transform: translate(-50%, -50%);
+    	z-index:1;
+    }
+    .btn_area .postupload{
+    	    position: absolute;
+		    width: 100px;
+		    height: 36px;
+		    overflow: hidden;
+    }
+    .btn_area .change_poster{
+	    padding: 0;
+	    box-sizing: border-box;
+	    display: block;
+	    border-radius: 3px 3px 3px 3px;
+	    background: none;
+	    letter-spacing: -1px;
+	    text-decoration: none;
+	    text-align: center;
+	    cursor: pointer;
+    	width:100px;
+    	height:35px;
+    	line-height :33px;
+    	font-size:12px;
+    	border:1px solid #3187e9;
+    	color:#ffffff;
+    	bakground-color:#4195f5;
+    }
+    .event_img_area .delete_poster{
+    	padding: 0;
+	    box-sizing: border-box;
+	    display: block;
+	    border-radius: 3px 3px 3px 3px;
+	    background: none;
+	    letter-spacing: -1px;
+	    text-decoration: none;
+	    text-align: center;
+	    cursor: pointer;
+    	width: 100px;
+    	height: 36px;
+    	line-height: 34px;
+	    display: none;
+	    margin-top: 6px;
+	    font-size: 12px;
+	    border: 1px solid #b8b8b8;
+    	color: #666666;
+    	background-color: #ffffff;
+    } 
+    
+    
+    .right_wrap:not(.content-header){
         width:750px;
-        border:1px solid black;
         float:right;
         padding-right: 20px;
     }
@@ -90,7 +134,7 @@
         width: 100%;
         display: block;
         border:none;
-        border-bottom: 1px dashed black;
+        border-bottom: 1px solid #EAEAEA;
     }
     fieldset:first-child {
         padding-top: 0;
@@ -99,7 +143,7 @@
         border:none;
     }
     .right_wrap legend {
-        margin-right: 0;
+         margin-right: 0;
         padding-left: 5px;
     }
     fieldset legend {
@@ -124,6 +168,11 @@
         width:590px;
     }
     .edit_title .category_select {
+        width: 120px;
+        margin-right: 4px;
+        height:30px;
+    }
+    .edit_place .place_select {
         width: 120px;
         margin-right: 4px;
         height:30px;
@@ -167,4 +216,7 @@
             font-size: 11px;
             vertical-align: middle;
 
+    }
+    #imgUp{
+    	align-content: center;
     }
