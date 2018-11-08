@@ -2,6 +2,7 @@ package kr.co.ticketsea.promo.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.Savepoint;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -58,6 +59,8 @@ public class PromoWriteServlet extends HttpServlet {
 		String artist = "";
 		String location = "";
 		String fileName = "";
+		int price=0;
+		String date = "";
 		
 		
 		try {
@@ -84,6 +87,8 @@ public class PromoWriteServlet extends HttpServlet {
 				contents = multi.getParameter("contents");
 				artist = multi.getParameter("artist");
 				location = multi.getParameter("location");
+				price=Integer.parseInt(multi.getParameter("price"));
+				date = multi.getParameter("date");
 				
 				Enumeration formNames = multi.getFileNames();
 				String formName = (String)formNames.nextElement();
@@ -108,7 +113,7 @@ public class PromoWriteServlet extends HttpServlet {
 				
 			if(userId != null) {
 			//4. 비즈니스 로직 처리
-				int result = new PromoService().insertPromo(title, category, contents, artist, location, userId, fileName, fullFilePath, fileSize, uploadTime);
+				int result = new PromoService().insertPromo(title,category,contents,price,date,artist,location,userId,fileName);
 				
 				if(result>0)
 				{

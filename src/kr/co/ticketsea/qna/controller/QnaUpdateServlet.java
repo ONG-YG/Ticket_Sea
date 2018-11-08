@@ -37,8 +37,8 @@ public class QnaUpdateServlet extends HttpServlet {
 		
 		//2. view에서 넘겨준 데이터를 변수에 저장
 		int boardQ_no = Integer.parseInt(request.getParameter("boardQ_no"));
-		String boardQ_title = request.getParameter("boardQ_title");
-		String boardQ_contents = request.getParameter("boardQ_contents");
+		String title = request.getParameter("title_form");
+		String contents = request.getParameter("contents_form");
 		String userId = null; // 수정을 요청하는 사람의 ID
 		//3. 해당 글을 수정하기 위하여 작성자를 확인하여 처리 하도록 세션을 이용
 		HttpSession session  = request.getSession(false);
@@ -48,11 +48,11 @@ public class QnaUpdateServlet extends HttpServlet {
 			if(userId!=null) 
 			{
 			//4. 비즈니스 로직 처리
-			int result = new QnaService().qnaUpdate(boardQ_no,boardQ_title,boardQ_contents,userId);
+			int result = new QnaService().qnaUpdate(boardQ_no,title,contents,userId);
 			
 				if(result>0)
 				{
-					response.sendRedirect("/views/notice/updateSuccess.jsp?boardQ_no="+boardQ_no);
+					response.sendRedirect("/views/qna/updateSuccess.jsp?boardQ_no="+boardQ_no);
 					
 					
 					//response.sendRedirect("/views/notice/updateResult.jsp?noticeNo="+noticeNo+"&result=1");

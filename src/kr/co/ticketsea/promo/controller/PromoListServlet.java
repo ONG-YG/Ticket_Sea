@@ -58,7 +58,7 @@ public class PromoListServlet extends HttpServlet {
 				}
 				else
 				{
-					response.sendRedirect("/views/notice/error.jsp");
+					response.sendRedirect("/views/promo/promoNullList.jsp");
 				}
 	}
 

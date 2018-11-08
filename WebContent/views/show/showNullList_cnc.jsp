@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-    <%@ page import = "kr.co.ticketsea.promo.model.vo.*" %>
+    <%@ page import = "kr.co.ticketsea.admin.show.model.vo.Show" %>
+    <%@ page import = "kr.co.ticketsea.show.model.vo.PageData" %>
     <%@ page import = "java.util.*" %>
     <%@ page import = "kr.co.ticketsea.member.model.vo.*" %>
     
@@ -10,7 +11,7 @@
 	// Controller(Servlet)에서 보내준값 가져오기
 	PageData pd = (PageData)request.getAttribute("pageData");
 
-	ArrayList<Promo> list = pd.getList(); // 현재 페이지의 글 목록
+	ArrayList<Show> list = pd.getList(); // 현재 페이지의 글 목록
 	String pageNavi = pd.getPageNavi(); // 현재 navi Bar
 	
 %>
@@ -27,13 +28,14 @@
 </script>
 <style>
     /* 전체 사이즈 조정 */
+    
     ul, li, a{list-style: none; margin: 0px; padding: 0px; text-decoration: none; color: black;}
     
     div{box-sizing: border-box;}
-    #wrapper{overflow: hidden;min-width: 990px;min-height: 100%; }
-    #header{width:990px; height: 193px; }
-    #container{height: 100%; background: #f4f4f4;}
-    #footer{height: 153px; }
+    #wrapper{overflow: hidden;min-width: 990px;min-height: 100%;}
+    #header{height: 193px;}
+    #container{height: 100%;background: #f4f4f4;}
+    #footer{height: 153px;}
     
     /* 990px 고정 사이즈 */
     #h_inner{width: 990px; height: 100%; margin: 0px auto;}
@@ -53,6 +55,7 @@
         z-index: 1000;
         background: skyblue;
     }
+    
     /* inner 공간 분할 */
     #c_inner_top{
         width: 100%;
@@ -281,44 +284,35 @@
         <div id="c_inner">
             <div id="c_inner_top">
                 <div class="title1">
-                    <h2>소규모 공연</h2>
+                    <h2>콘서트</h2>
                 </div>
                 <div class="title2"></div>
             </div>
             
             <div id="container">
         <div id = "right_view">
-        <div id="prContest">
         
-        <% for (Promo p : list) { %>
-        	<% if(p.getBoardP_active() == 'Y'){ %>
-            <div id = "prContestDiv1" ">
-	            <div id="prContestPic"><a href="/promo.do?boardP_no=<%=p.getBoardP_no()%>"><img src="/img/promoPoster/<%=p.getBoardP_fileName() %>" style="width:210px; height:300px; align-content: center;"></a></div> <br>
-	        	<div id="prContestTitle" style="font-size: 13px; font-weight: bold;"><a href="/promo.do?boardP_no=<%=p.getBoardP_no()%>"><%=p.getBoardP_title()%></a></div>
+      <div id="prContest">
+        <% for (Show s : list) { %>
+        	<% if(s.getSc_code().equals("CNC")){ %>
+            <div id = "prContestDiv1">
+	            <div id="prContestPic"><a href="/show.do?m_show_no=<%=s.getM_show_no()%>"><img src="/img/poster/<%=s.getShow_poster() %>" style="width:210px; height:300px; align-content: center;"></a></div> <br>
+	        	<div id="prContestTitle" style="font-size: 13px; font-weight: bold;"><a href="/show.do?m_show_no=<%=s.getM_show_no()%>"><%=s.getShow_name()%> </a></div>
         	</div>
-         <%}}%>
-         
-        
-    </div>
-            <div id="prContestDiv2">
-            	 <div style="width:100%; text-align:center;">
-				<label><%=pageNavi%></label>
-		
+         <% }}  %> 
+   	 </div>
+   	 
+   	 
+      <div id="prContestDiv2">
+            <div style="width:100%; text-align:center;">
+			<label><%=pageNavi%></label>
 		
 		   <%
-		session = request.getSession(false);
-		Member m = (Member)session.getAttribute("member"); 
+				session = request.getSession(false);
+				Member m = (Member)session.getAttribute("member"); 
 			%>
-			
-           <%if(m!=null) {%>
-            <form style="display:inline;" action="/views/promo/promoWrite.jsp">
-				<input type="submit" value="글쓰기" style="width: 70px; height: 30px; float:right;"/> <br>				
-			</form>
-			<%} %>
-   
          </div>
-         
-            </div>
+       </div>
             
             
           </div>  

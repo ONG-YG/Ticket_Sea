@@ -1,6 +1,7 @@
 package kr.co.ticketsea.promo.model.service;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
@@ -73,21 +74,6 @@ public class PromoService {
 		
 	}
 
-	public int insertPromo(String title, String category, String contents, String artist, String location, String userId, String fileName, String fullFilePath, long fileSize, Timestamp uploadTime) {
-		Connection conn = JDBCTemplate.getConnection();
-		int result = new PromoDao().insertPromo(conn,title,category,contents,artist,location,userId,fileName, fullFilePath, fileSize, uploadTime);
-		
-		if(result>0)
-		{
-			JDBCTemplate.commit(conn);
-		}else {
-			JDBCTemplate.rollback(conn);
-		}
-		
-		JDBCTemplate.close(conn);
-			
-		return result;
-	}
 
 	public int insertComment(int promoNo, String contents, String userId) {
 		
@@ -121,5 +107,23 @@ public class PromoService {
 		return result;
 		
 	}
+
+	public int insertPromo(String title, String category, String contents, int price, String date, String artist,
+			String location, String userId, String fileName) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new PromoDao().insertPromo(conn,title,category,contents,price,date,artist,location,userId,fileName);
+		
+		if(result>0)
+		{
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+			
+		return result;
+	}
+	
 
 }

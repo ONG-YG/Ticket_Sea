@@ -102,13 +102,13 @@ public class FaqDao {
 			return result;
 		}
 
-		public int faqUpdate(Connection conn, int boardF_no, String boardF_title, String boardF_contents, String userId) {
+		public int faqUpdate(Connection conn, int boardF_no, String boardF_title, String boardF_contents) {
 			
 			PreparedStatement pstmt = null;
 			int result = 0;
 			
 			String query = "update board_faq set boardF_title=?, boardF_contents=?"
-					+ " where boardF_no=? and user_id = ?";
+					+ " where boardF_no=?";
 			
 			try {
 				pstmt = conn.prepareStatement(query);
@@ -116,7 +116,6 @@ public class FaqDao {
 				pstmt.setString(1, boardF_title);
 				pstmt.setString(2, boardF_contents);
 				pstmt.setInt(3, boardF_no);
-				pstmt.setString(4, userId);
 				
 				result = pstmt.executeUpdate();
 				

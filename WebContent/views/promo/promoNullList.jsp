@@ -10,8 +10,6 @@
 	// Controller(Servlet)에서 보내준값 가져오기
 	PageData pd = (PageData)request.getAttribute("pageData");
 
-	ArrayList<Promo> list = pd.getList(); // 현재 페이지의 글 목록
-	String pageNavi = pd.getPageNavi(); // 현재 navi Bar
 	
 %>
     
@@ -289,20 +287,17 @@
             <div id="container">
         <div id = "right_view">
         <div id="prContest">
-        
-        <% for (Promo p : list) { %>
-        	<% if(p.getBoardP_active() == 'Y'){ %>
-            <div id = "prContestDiv1" ">
-	            <div id="prContestPic"><a href="/promo.do?boardP_no=<%=p.getBoardP_no()%>"><img src="/img/promoPoster/<%=p.getBoardP_fileName() %>" style="width:210px; height:300px; align-content: center;"></a></div> <br>
-	        	<div id="prContestTitle" style="font-size: 13px; font-weight: bold;"><a href="/promo.do?boardP_no=<%=p.getBoardP_no()%>"><%=p.getBoardP_title()%></a></div>
-        	</div>
-         <%}}%>
-         
+        <div style="text-align: center; background-color: #dedede;">
+        <br><br><br><br><br>
+        <h1 style="font-weight: bold;">등록된 소규모 공연이 없습니다.</h1>
+        <h2>로그인 후 우측하단의 글쓰기 버튼을 클릭하여 공연을 등록해 주세요.</h2>
+        <h3>(비로그인 상태에서는 버튼이 보이지 않습니다.)</h3>
+        <br><br><br><br><br>
+         </div>
         
     </div>
             <div id="prContestDiv2">
             	 <div style="width:100%; text-align:center;">
-				<label><%=pageNavi%></label>
 		
 		
 		   <%
