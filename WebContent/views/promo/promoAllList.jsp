@@ -293,7 +293,7 @@
         
         <% for (Promo p : list) { %>
         <% if(p.getBoardP_active() == 'Y'){ %>
-            <div id = "prContestDiv1" ">
+            <div id = "prContestDiv1" >
 	            <div id="prContestPic"><a href="/promo.do?boardP_no=<%=p.getBoardP_no()%>"><img src="../../uploadFile/mslove/<%= p.getBoardP_fileName() %>" style="width:205px; height:330px; align-content: center;"></a></div> <br>
 	        	<div id="prContestTitle" style="font-size: 10px"><a href="/promo.do?boardP_no=<%=p.getBoardP_no()%>"><%=p.getBoardP_title()%></a></div>
         	</div>

@@ -227,7 +227,7 @@
         </div>
     </div>
     
-    <a href="#" id="back_to_top">Top</a>
+    <jsp:include page="/top_btn.jsp"/>
     
     <div id="footer">
         <div id="f_inner">
