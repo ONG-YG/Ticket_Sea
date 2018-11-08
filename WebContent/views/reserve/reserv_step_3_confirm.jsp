@@ -1,3 +1,4 @@
+<%@page import="kr.co.ticketsea.member.model.vo.Member"%>
 <%@page import="java.text.ParseException"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="kr.co.ticketsea.reserve.model.vo.SelectedSeat"%>
@@ -37,7 +38,6 @@
 	ReserveSession rs = (ReserveSession)session.getAttribute("reserveSession");
 	int progNo = rs.getProgNo();
 	String progTime = rs.getProgTime();
-	//System.out.println("progTime" + progTime);
 %>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -51,9 +51,14 @@
       type="text/javascript"
         src="../../resources/jquery-3.3.1.js">
     </script>
+    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
 	</script>
     <script>
+	    var payType = null;/////////////////////////
+		var customerPhone = null;///////////////////
+		var customerEmail = null;///////////////////
+	    
 	    $(document).ready(function(){
 	    	
 	    	pageInit();
@@ -68,7 +73,7 @@
 	    		check();
 	    	});
 	    	
-			
+	    	IMP.init('imp06112513');
 	    });
 	    
 	    function pageInit() {
@@ -189,71 +194,179 @@
 	    		}
         	%>
         	
-        	if(diff>10) {
-        		var progNo_del = <%=progNo%>;
-        		//console.log("progNo_del : "+progNo_del);
-        		
-        		$.ajax({
-    				url : "/reserveExpire.do",
-    				data : {progNo: progNo_del},
-    				type : "post",
-    				success : function(){
-    					//console.log("정상 처리 완료");
-    				},
-    				error : function(){
-    					//console.log("ajax 통신 에러");
-    				},
-    				complete : function(){
-    					alert("예매 진행 가능 시간이 초과되어 예매가 종료됩니다.");
-    					window.close();
-    				}
-    			});
-        		
+        	if(diff>10) {/////////////////////////////////////////////10분으로 바꿀것
+        		deleteProgData('timeover');
         	}
-        	
-        	
-            var phone = document.getElementById("inputPhoneNo").value;
-            var userCheck = document.getElementById("agree_phone").checked;
-            //alert(userCheck);
-            var userInfoAgree = document.getElementById("reserve_agree2").checked;
-            if(phone=="") {
-                alert("휴대폰번호를 입력해주세요");
-            }
-            else if(!userCheck) {
-                alert("주문자 확인 및 휴대폰 번호 수집을 확인하셔야 결제가 가능합니다.");
-            }
-            else if(!userInfoAgree) {
-                alert("개인정보 제 3자 제공에 동의하셔야 결제가 가능합니다.");
-            }
-            else {
-               	var patt1 = new RegExp("^[0-9]+$");
-               	var patt2 = new RegExp("^[0-9]{9,20}$");
-               	var res1 = patt1.test( $("#inputPhoneNo").val());
-               	var res2 = patt2.test( $("#inputPhoneNo").val());
-               	
-               	if( !res1 ){ alert("휴대폰 번호는 숫자만 입력할 수 있습니다."); }
-               	else if( !res2 ){ alert("휴대폰 번호를 9자 이상 입력해주세요."); }
-               	else {
-               		<%
-    	        	//세션에 reserveSession객체 저장
-    	        	rs.setBkNo(bkNo);
-            		session.setAttribute("reserveSession", rs);
-            		%>
-            		
-            		
-            		var bkStateCd = "RSV_CPL";///////////////////일단 임의로 완료상태로 설정
-            		var payType = "CARD";///////////////////일단 임의로 카드결제로 설정
-            		
-            		$('#phone_form').val( $('#inputPhoneNo').val() );
-            		$('#email_form').val( $('#inputEmail').val() );
-            		$('#bkStateCd_form').val( bkStateCd );
-            		$('#payType_form').val( payType );
-            		
-            		document.getElementById("completeSubmitForm").submit();
-               		<%--location.href="/reserveComplete.do?progNo=<%=progNo%>";--%>
-               	}
-            }
-        }
+        	else {
+        		var phone = document.getElementById("inputPhoneNo").value;
+                var userCheck = document.getElementById("agree_phone").checked;
+                //alert(userCheck);
+                var userInfoAgree = document.getElementById("reserve_agree2").checked;
+                if(phone=="") {
+                    alert("휴대폰번호를 입력해주세요");
+                }
+                else if(!userCheck) {
+                    alert("주문자 확인 및 휴대폰 번호 수집을 확인하셔야 결제가 가능합니다.");
+                }
+                else if(!userInfoAgree) {
+                    alert("개인정보 제 3자 제공에 동의하셔야 결제가 가능합니다.");
+                }
+                else {
+                   	var patt1 = new RegExp("^[0-9]+$");
+                   	var patt2 = new RegExp("^[0-9]{9,20}$");
+                   	var res1 = patt1.test( $("#inputPhoneNo").val());
+                   	var res2 = patt2.test( $("#inputPhoneNo").val());
+                   	
+                   	if( !res1 ){ alert("휴대폰 번호는 숫자만 입력할 수 있습니다."); }
+                   	else if( !res2 ){ alert("휴대폰 번호를 9자 이상 입력해주세요."); }
+                   	else {
+                   		customerPhone = $('#inputPhoneNo').val();
+            			customerEmail = $('#inputEmail').val();
+            			
+            			payType = "card";/////////////////////////////////////////// 일단 카드결제로 설정
+                   		payStart();///////////////////////////////////////////////// 임시로 결제 단계 off
+                   		//insertBookInfo();///////////////////////////////////////// 임시로 결제 단계 off 했을 경우 활성화
+                   	}
+                }
+        	}//if(diff>10) END
+            
+        }//function next() END
+        
+		function payStart(){
+			
+			<%-- 
+        	var test = "merchant_uid : "+<%=bkNo%>+",\n"+
+			    "name : "+'<%=showTitle%>'+" 예매,\n"+
+			    "amount : "+<%=totalPrice%>+",\n"+
+			    "buyer_email : "+customerEmail+",\n"+
+			    "buyer_name : "+'<%=memberName%>'+",\n"+
+			    "buyer_tel : "+customerPhone;
+			alert(test);///////////////////////////////////////////////
+			 --%>
+			
+			IMP.request_pay({
+			    //pg : 'html5_inicis', //ActiveX 결제창은 inicis를 사용
+			    pay_method : payType, //card(신용카드), trans(실시간계좌이체), vbank(가상계좌), phone(휴대폰소액결제)
+			    merchant_uid : <%=bkNo%>, //상점에서 관리하시는 고유 주문번호를 전달
+			    name : '<%=showTitle%>'+' 예매',
+			    amount : <%=totalPrice%>,
+			    buyer_email : customerEmail,
+			    buyer_name : '<%=memberName%>',
+			    buyer_tel : customerPhone //누락되면 이니시스 결제창에서 오류
+			    
+			}, function(rsp) {
+				
+			    if ( rsp.success ) {
+			    	
+			    	alert("성공적으로 결제가 완료되었습니다.");
+			    	insertBookInfo();
+			    	
+			    	<%-- 
+			    	//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
+			    	jQuery.ajax({
+			    		url: "/payments/complete", //cross-domain error가 발생하지 않도록 주의해주세요
+			    		type: 'POST',
+			    		dataType: 'json',
+			    		data: {
+				    		imp_uid : rsp.imp_uid
+				    		//기타 필요한 데이터가 있으면 추가 전달
+			    		}
+			    	}).done(function(data) {
+			    		//[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
+			    		if ( everythings_fine ) {
+			    			var msg = '결제가 완료되었습니다.';
+			    			msg += '\n고유ID : ' + rsp.imp_uid;
+			    			msg += '\n상점 거래ID : ' + rsp.merchant_uid;
+			    			msg += '\n결제 금액 : ' + rsp.paid_amount;
+			    			msg += '카드 승인번호 : ' + rsp.apply_num;
+			    			
+			    			alert(msg);
+			    			
+			    			// REST API로 아임포트 서버에서 결제 정상적으로 완료되었는지 확인 후 step4로 넘어가도록 아래 코드 주석 풀기
+		               		//insertBookInfo();
+		               		
+		               		
+			    		} else {
+			    			//[3] 아직 제대로 결제가 되지 않았습니다.
+			    			//[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
+			    		}
+			    	});
+			    	 --%>
+			    	 
+			    } else {
+			    	
+			        var msg = '결제에 실패하였습니다.';/////////////////
+			        msg += '에러내용 : ' + rsp.error_msg;///////////
+			        
+			        alert(msg);//////////////////////////////////
+			        
+			        //결제 실패할 경우 예매진행중 데이터를 삭제
+			        deleteProgData();
+			    }
+			});
+			
+			//console.log("payResult = "+payResult);///////////////////
+			//return payResult;
+		}//function payStart() END
+		
+		function insertBookInfo() {
+			
+			<%
+			//세션에 reserveSession객체 저장
+			rs.setBkNo(bkNo);
+			session.setAttribute("reserveSession", rs);
+			%>
+			
+			var bkStateCd = "RSV_CPL";//////////////////////////////////////일단 임의로 완료상태로 설정
+			
+			//form태그에 예매자가 입력한 휴대폰번호, 이메일주소, 결제상태, 결제방식을 입력해줌
+			$('#phone_form').val( customerPhone );
+			$('#email_form').val( customerEmail );
+			$('#bkStateCd_form').val( bkStateCd );
+			$('#payType_form').val( payType );
+			
+			
+			//위에서 hidden type의 input태그에 값을 채워준 form태그를 reserveComplete서블릿에 submit
+			//ReserveComplete서블릿 안에 예매진행중 데이터 지우는 과정 포함되어 있음 (deleteProgData()함수 호출 안해도됨)
+			document.getElementById("completeSubmitForm").submit();
+    		
+		}//function insertBookInfo() END
+		
+		function deleteProgData(mode) {
+			var progNo_del = <%=progNo%>;
+    		//console.log("progNo_del : "+progNo_del);
+    		
+    		$.ajax({
+				url : "/reserveExpire.do",
+				data : {progNo: progNo_del},
+				type : "post",
+				success : function(){
+					//console.log("정상 처리 완료");
+				},
+				error : function(){
+					//console.log("ajax 통신 에러");
+				},
+				complete : function(){
+					<%
+					// 예매창 벗어나기 전에 예매용 session정보 파기 후 헤더용 session 발급
+					Member member = (Member)session.getAttribute("member");
+		        	session.invalidate();
+		        	session = request.getSession(true);
+		        	session.setAttribute("member", member);
+		        	%>
+					if (mode=='timeover') {
+						alert("예매 진행 가능 시간이 초과되어 예매가 종료됩니다.");
+					}
+					
+					window.close();///////////////////////////////안되면 예매 시작단계(step1)로 이동하도록 수정해둠 >> 메인페이지로 넘어가도록 바꿀것
+					if( !window.closed ) {
+						<%-- location.href="/dateCntSelect.do?showNo=<%=showNo%>"; --%>
+						location.href="/";
+					}
+				}
+			});
+		}//function deleteProgData() END
+		
     </script>
     
 </head>

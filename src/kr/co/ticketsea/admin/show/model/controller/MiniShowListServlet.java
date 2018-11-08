@@ -42,13 +42,9 @@ public class MiniShowListServlet extends HttpServlet {
 		
 		//결과값 view로 리턴
 		
-		if(mpd!=null) {
 			RequestDispatcher view = request.getRequestDispatcher("/views/admin/ad_miniShowList.jsp");
 			request.setAttribute("miniPgData", mpd);
 			view.forward(request, response);
-		}else {
-			response.sendRedirect("/views/admin/error.jsp");
-		}
 		
 	}
 

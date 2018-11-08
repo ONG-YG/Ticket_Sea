@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import kr.co.ticketsea.admin.reserve.model.service.AdReserveService;
 import kr.co.ticketsea.admin.reserve.model.vo.Reserve;
+import kr.co.ticketsea.admin.reserve.model.vo.ReservePageData;
 
 /**
  * Servlet implementation class AdReserveListServlet
@@ -39,7 +40,17 @@ public class AdReserveListServlet extends HttpServlet {
 		}else {
 			currentPage=Integer.parseInt(request.getParameter("currentPage"));
 		}
-		new AdReserveService().reserveAllList(currentPage);
+		
+		//비즈니스 로직 
+		ReservePageData rpg=new AdReserveService().reserveAllList(currentPage);
+		
+		if(rpg!=null) {
+			RequestDispatcher view = request.getRequestDispatcher("views/admin/ad_reserveList.jsp");
+			request.setAttribute("reservePgData", rpg);
+			view.forward(request, response);
+		}else {
+			response.sendRedirect("/views/admin/error.jsp");
+		}
 	}
 
 	/**

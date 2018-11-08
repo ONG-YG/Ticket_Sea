@@ -54,9 +54,7 @@ function adminBtn(){
 							<a href="#"  class="btn login" 
 							onclick="window.open('/views/member/login.jsp','로그인','width=430,height=440'); return false;"  id="loginBtn">로그인</a>
 							 <a href="#" id="joinBtn"
-
                    			 onclick="window.open('/views/member/memberJoin.jsp','회원가입','width=430,height=750'); return false;">회원가입</a> 
-
 							<% } %>
 							
 							<a href="/noticeList.do" >고객센터</a>

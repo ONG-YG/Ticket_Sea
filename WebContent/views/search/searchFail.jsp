@@ -34,11 +34,9 @@
 		padding-top:15px;
 		display:inline;
 		float:left;
-		background-color:white;
+		background-color:#f4f4f4;
 		
-		border-style: none none dotted none;
-		border-color: #f4f4f4;
-		
+	
 		
 	
 	}
@@ -128,7 +126,7 @@
   	 font-size:13px;
    }
    #result_wrap{
-   height:1871px;
+   height:700px;
    }
    #pageNavi{
    margin:0px auto;

@@ -64,11 +64,14 @@ public class ReserveProgressing {
 		this.totalPrice = totalPrice;
 		this.payType = payType;
 	}
-
-
-
-
-
+	
+	
+	
+	
+	
+	
+	
+	
 	public int getPsNo() {
 		return psNo;
 	}
@@ -129,11 +132,11 @@ public class ReserveProgressing {
 	public void setProgSeatList(ArrayList<Integer> progSeatList) {
 		this.progSeatList = progSeatList;
 	}
-	public ArrayList<SeatGradeState> getSeatGrdSt() {
+	public ArrayList<SeatGradeState> getSeatGrdStList() {
 		return seatGrdStList;
 	}
-	public void setSeatGrdSt(ArrayList<SeatGradeState> seatGrdSt) {
-		this.seatGrdStList = seatGrdSt;
+	public void setSeatGrdStList(ArrayList<SeatGradeState> seatGrdStList) {
+		this.seatGrdStList = seatGrdStList;
 	}
 	public String getMemberName() {
 		return memberName;
@@ -150,7 +153,7 @@ public class ReserveProgressing {
 	public ArrayList<SelectedSeat> getSelSeatList() {
 		return selSeatList;
 	}
-	public void setSelecSeatList(ArrayList<SelectedSeat> selSeatList) {
+	public void setSelSeatList(ArrayList<SelectedSeat> selSeatList) {
 		this.selSeatList = selSeatList;
 	}
 	public String getPhone() {
@@ -203,7 +206,7 @@ public class ReserveProgressing {
 	
 	@Override
 	public String toString() {
-
+		
 		String reservProg = "---------reservProg-------\n"
 							+ psNo + "\n"
 							+ showNo + "\n"

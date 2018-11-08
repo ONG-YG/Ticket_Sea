@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="kr.co.ticketsea.admin.show.model.vo.*" %>
-<% MiniShow ms = (MiniShow)request.getAttribute("miniShow"); %>
+<% MiniShow ms = (MiniShow)request.getAttribute("miniShow");%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -55,7 +55,7 @@
               <div class="top_area">
                   <h2 class="main_title">소규모 공연 정보</h2>
                </div>
-               <form action ="/adMsApUpdate.do" method="post" id="updateForm" enctype=”multipart/form-data”>
+               <form action ="/adMsUpdate.do" method="post" id="updateForm" enctype="multipart/form-data">
                <div class="main_area">
                    <div class="memberInfo_table">
                     <table>
@@ -102,8 +102,12 @@
                             	<td><%=ms.getMs_ct() %></td>
                             </tr>
                             <tr>
-                            	<th>공연포스터</th>
-                            	<td><input type="file" name="show_poster" value="<%=ms.getMs_poster() %>"/></td>
+                            	<th>기존공연포스터</th>
+                            	<td><%=ms.getMs_poster()%></td>
+                            </tr>
+                            <tr>
+                            	<th>수정공연포스터</th>
+                            	<td><input type="file" name="show_poster" value="<%=ms.getMs_poster()%>"/></td>
                             </tr>
                             <tr>
                                 <th>공연소개</th>
@@ -120,9 +124,11 @@
                </div>
                <script>
                 function updateSubmit(){
-                	var artists = document.getElementById("artists"); 
-                	var place = document.getElementById("place"); 
-                	var intd = document.getElementById("intd"); 
+                	var artists = document.getElementById("artists").value; 
+                	var place = document.getElementById("place").value; 
+                	var st_date = document.getElementById("st_date").value; 
+                	var ed_date = document.getElementById("ed_date").value; 
+                	var intd = document.getElementById("intd").value; 
                 	
                 	if(artists==""){
                 		alert("아티스트 정보를 입력하세요");
@@ -130,11 +136,18 @@
                 	}else if(place=""){
                 		alert("장소를 입력하세요");
                 		return false;
-                	}else if(intd==""){
+                	}else if(!(/^(19|20)\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$/.test(st_date))){
+                		alert("시작일을 입력해주세요(yyyy-mm-dd)");
+        				return false;
+                	}else if(!(/^(19|20)\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$/.test(ed_date))){
+                		alert("종료일을 입력해주세요(yyyy-mm-dd)");
+            			return false;
+                	}
+                	else if(intd==""){
                 		alert("공연정보를 입력하세요");
                 		return false;
                 	}else{
-                		document.getElementById("updateForm").submit();	
+                		document.getElementById("updateSubmit").submit();
                 		return true;
                 	}
                 }

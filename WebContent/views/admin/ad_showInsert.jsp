@@ -82,18 +82,13 @@ function LoadImg(value){
                 <h2 class="main_title" style="text-align:left">공연등록</h2>
             </div>
              <!-- form 태그 -->
-       		<form action="/showInsert.do" method="post" enctype="multipart/form-data">
+       		<form action="/showInsert.do" method="post" enctype="multipart/form-data" id="updateForm">
             <div class="main_area">
                 <div class="left_wrap">
                 <div class="input_area">
                     <!--이미지영역-->
                     <div class="event_img_area">
                         <img class="show_post" id="postImg" src="/img/ticketsea_poster.png" data-default-src="/img/ticketsea_poster.png" alt="공연포스터" style="width:160px; height:160px;">
-                   
-                       <div class="btn_area">
-                        	<input type="file" class="postupload" id="imgUp" name="upfile" title="공연 포스터 업로드"/><br>
-                        	<button type="button" class="change_poster">포스터 변경</button>
-                        </div> 
                     </div>
                 </div>
                 </div>
@@ -198,12 +193,12 @@ function LoadImg(value){
                         </legend>
                         <div class="edit">
                             <div class="write_wrap">
-                           		<input type="file" id="showDtInfo" name="showDtInfo"/>
+                           		<input type="file" id="showDtInfo" name="showDtInfo"/> 
                             </div>
                         </div>
                     </fieldset>
                     <div class="submit_area">
-	            <input type="submit" value="작성" style="float:right;" onclick="showCheck();" width="70px" height="40px">
+                    <button id="updateBtn" onclick = "return showCheck();">공연등록</button>
 	            </div>
 	            </div>
 	            </div>
@@ -214,46 +209,26 @@ function LoadImg(value){
         	</div>
     	</div>
           </div> 
-        </div>
-        </div>
-	</div>
+      </div>
 	
 	<!-- script -->
 	
 	<script>
-	$(document).ready(function() {
-	   /*  $("#btn").click(function(){
-	    	var  data = $("input[name=showDtInfo]")[0].files[0];
-	    	$.ajax({
-	    		url : '/adPostUpload.do',
-	    		enctype: 'multipart/form-data',
-	    		type:'POST',
-	    		processData:false,
-	    		contentType:false,
-	    		data:data,
-	    		success:function(result){
-	    			alert("업로드 성공!");
-	    		}
-	    	});
-	    }); */
-	    $("#placeSearch").click(function(){
-	    	location.href="/views/admin/placeInsert.jsp";
-	    });
 
-	}); 
-	
-		  
-	function showCheck(){
-		category= document.getElementById("category").value;
-		title= document.getElementById("title").value;
-		startEventDate=document.getElementById("startEventDate").value;
-		endEventDate= document.getElementById("endEventDate").value;
-		place= document.getElementById("place").value;
-		artist= document.getElementById("artist").value;
-		grade= document.getElementById("grade").value;
-		runTime= document.getElementById("runTime").value;
-		price= document.getElementById("price").value;
-		comm= document.getElementById("comm").value;
+		
+		/* submit */
+
+		function showCheck(){
+		var category= document.getElementById("category").value;
+		var title= document.getElementById("title").value;
+		var startEventDate=document.getElementById("startEventDate").value;
+		var endEventDate= document.getElementById("endEventDate").value;
+		var place= document.getElementById("place").value;
+		var artist= document.getElementById("artist").value;
+		var grade= document.getElementById("grade").value;
+		var runTime= document.getElementById("runTime").value;
+		var price= document.getElementById("price").value;
+		var comm= document.getElementById("comm").value;
 		
 		
 		if(category==""||category==null)
@@ -302,10 +277,17 @@ function LoadImg(value){
     	}
         else//모든 검사 만족시 true 반환
         {
+        	document.getElementById("updateForm").submit();
             return true;
         }
 		
 	}
+		$(document).ready(function() {
+		    $("#placeSearch").click(function(){
+		    	location.href="/views/admin/placeInsert.jsp";
+		    });
+
+		}); 
 	</script>
 </body>
 </html>

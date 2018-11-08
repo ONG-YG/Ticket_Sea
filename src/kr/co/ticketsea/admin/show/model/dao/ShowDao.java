@@ -18,7 +18,7 @@ public class ShowDao {
 		PreparedStatement pstmt= null;
 		int result = 0;
 		
-		String query = "insert into musical_l values(SHOW_DB.nextval,?,?,?,?,?,?,?,?,?,?,?)";
+		String query = "insert into musical_l values(SHOW_DB.nextval,?,?,?,TO_DATE(?,'YYYY.MM.DD'),TO_DATE(?,'YYYY.MM.DD'),?,?,?,?,?,?)";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -200,10 +200,8 @@ public class ShowDao {
 		ResultSet rset=null;
 		Show show =null;
 		
-		String query = "select m.m_show_no, s.sc_name, m.M_SHOW_NAME, l.TH_NAME, m.M_ARTISTS, "
-				+ "m.M_SHOW_ST_DATE, m.M_SHOW_ED_DATE, m.M_SHOW_GRD, m.M_SHOW_RUN  "
-				+"from SHOW_CTG s right join musical_l m on s.SC_CODE = m.SC_CODE "
-				+"left outer join THEATER_L l on m.TH_NO = l.TH_NO where m.m_show_no=?";
+		String query = "select m.m_show_no, s.sc_name, m.M_SHOW_NAME, l.TH_NAME, m.M_ARTISTS, TO_CHAR(m.M_SHOW_ST_DATE,'YYYY.MM.DD') as M_SHOW_ST_DATE, TO_CHAR(m.M_SHOW_ED_DATE,'YYYY.MM.DD') as M_SHOW_ED_DATE, \r\n" + 
+				"m.M_SHOW_GRD, m.M_SHOW_RUN from SHOW_CTG s right join musical_l m on s.SC_CODE = m.SC_CODE left outer join THEATER_L l on m.TH_NO = l.TH_NO where m.m_show_no=?";
 		
 		try {
 			pstmt=conn.prepareStatement(query);

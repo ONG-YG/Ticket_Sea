@@ -98,7 +98,7 @@
                     </table>
                 </div>
                    <div id="memUpdate">
-                    <button id="updateBtn" onclick = "return updateSubmit();">회원정보 수정</button>
+                    <button id="updateBtn" onclick = "return updateSubmit();" >회원정보 수정</button>
                    </div>
                </div>
                </form>
