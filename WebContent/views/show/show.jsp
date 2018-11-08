@@ -297,6 +297,7 @@
                     </div>
                     
                     <div id="i_H_pic">
+                    	 <img src="../../img/<%=show.getShow_poster()%>">
                     </div>
                     
                     <div id="i_H_info">
@@ -362,7 +363,7 @@
                     <div id="i_C_content_a">
                         <br><br>
                         
-                         <img src="" style="width:700px; height:850px; padding : 50px;">
+                         <img src="<%=show.getShow_dtInfo() %>" style="width:700px; padding : 50px;">
                         
                         <table class="detail_info_tbl">
                             <colgroup>
