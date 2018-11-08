@@ -19,36 +19,9 @@
   crossorigin="anonymous">
 </script>
 
+<link rel="stylesheet" type="text/css" href="/css/mypageAllSize.css" />
 
 <style>
-    /* 전체 사이즈 조정 */
-    
-    ul, li, a{list-style: none; margin: 0px; padding: 0px; text-decoration: none; color: black;}
-    
-    div{box-sizing: border-box;}
-    #wrapper{overflow: hidden;min-width: 990px;min-height: 100%; border: 1px solid black;}
-    #header{height: 193px; border: 1px solid black;}
-    #container{height: 100%; border: 1px solid black; background: #f4f4f4;}
-    #footer{height: 153px; border: 1px solid black;}
-    
-    /* 990px 고정 사이즈 */
-    #h_inner{width: 990px; height: 100%; margin: 0px auto;}
-    #c_inner{width: 990px; height: 1300px; margin: 0px auto; padding: 70px 0 250px 0px;}
-    #f_inner{width: 990px; margin: 0px auto;}
-
-    /* top 버튼 */
-    #back_to_top{
-        display: block;
-        position: fixed;
-        top: 50%;
-        right: 0;
-        margin-top: -22px;
-        background-position: -270px -123px;
-        width: 44px;
-        height: 44px;
-        z-index: 1000;
-        background: skyblue;
-    }
     
     /* inner 공간 분할 */
     #c_inner_top{
@@ -243,7 +216,7 @@
     }
     
     #notice_header_a{
-    	width : 15%;
+    	width : 100px;
     	text-align: center;
     	background-color:lightskyblue;
     	color:white;
@@ -251,11 +224,11 @@
     
     #notice_header_b{
     	border : 1px solid black;
-    	width : 85%;
+    	width : 800px;
     }
     
     #notice_contents{
-   		width : 100%;
+   		width : 900px;
    		padding : 10px 10px 10px;
     }
     
@@ -320,22 +293,14 @@
                 	<td id = "notice_header_b"><%= notice.getBoardN_hit() %></td>
                 	</tr>
                 	
-                	<tr>
-                	<td>
-                	<span id = "boardN_contents" name="boardN_contents"><%= notice.getBoardN_contents() %></span>
-                	<textarea id="boardN_contents_fd" name="boardN_contents_fd" style="display:none;"rows="5" cols="50">
-                	<%=notice.getBoardN_contents()%></textarea>
-					</td>
-					</tr>
-					
-					<form action="/noticeUpdate.do" method="post" id="updateForm">
+					 </table>
                 
 					<input type="hidden" name="boardN_no" value="<%=notice.getBoardN_no() %>"/>
 					<input type="hidden" id="title_form" name="title" />
 					<input type="hidden" id="contents_form" name="contents" />
+					<br>
+					<div id = "boardN_contents" name="boardN_contents"><%= notice.getBoardN_contents() %></div>
 					
-					</form>
-        			
         			<%
 						session = request.getSession(false);
 						Member m = (Member)session.getAttribute("member"); 
@@ -345,17 +310,15 @@
 						if(m!=null && m.getMemberId().equals("admin")){
 					%>
 					
-                
-				
 	                <br>
 	                <button id="btn1" name="btn1" onclick="modifyActive();" style="width: 70px; height: 30px; float:right;">수정</button> 
 					<button id="btn2" name="btn2" onclick="delNotice();" style="width: 70px; height: 30px; float:right;">삭제</button> 
+					
 	                <%} %>
-	                <button onclick="list();">목록</button> 
+	                
                 	
-                </table>
-                
-               
+              	<br><br>
+              	<button onclick="list();" style="width: 70px; height: 30px; float:right;">목록</button> 
 					
                 
                 
