@@ -254,7 +254,7 @@
                     <h3>공지사항</h3>
                 </div>
                
-                <table border=1px class="noticeCategory">
+                <!-- <table border=1px class="noticeCategory">
                         <tr>
                            <td id = "faqConcert"><a href="#">공연</a></td>
                            <td id = "faqBook"><a href="#">예매 </a></td> 
@@ -262,7 +262,7 @@
                            <td id = "faqID"><a href="#">회원</a></td>
                            <td id=" faqEtc"><a href="#">기타</a></td>
                          </tr>
-                    </table>
+                    </table>  -->
                     
                     <br>
                     

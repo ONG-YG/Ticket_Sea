@@ -35,7 +35,7 @@
     
     /* 990px 고정 사이즈 */
     #h_inner{width: 990px; height: 100%; margin: 0px auto;}
-    #c_inner{width: 990px; height: 3000px; margin: 0px auto; padding: 70px 0 250px 0px;}
+    #c_inner{width: 990px; height:3000px; margin: 0px auto; padding: 70px 0 250px 0px;}
     #f_inner{width: 990px; margin: 0px auto;}
 
     /* top 버튼 */
@@ -356,7 +356,6 @@
                         <br><br>
 
                          <img src="/img/poster/<%=show.getShow_dtInfo() %>" style="width:700px; padding : 50px;">
-						<%= show.getShow_dtInfo() %>
                         
                         <table class="detail_info_tbl">
                             <colgroup>

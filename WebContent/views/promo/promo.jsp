@@ -339,7 +339,7 @@ function delPromo(){
                         </div>
                          <br>
                         <div>
-                        <strong><div id = "info_tit">상세정보</div></strong> <%=promo.getBoardP_contents()%>
+                        <strong><div id = "info_tit">상세정보</div></strong> <%=promo.getBoardP_contents().replace("\r\n", "<br>")%>
                         </div>
                         <br>
                         <br>
