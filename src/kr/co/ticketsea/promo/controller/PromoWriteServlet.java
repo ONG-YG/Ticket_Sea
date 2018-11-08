@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Enumeration;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -58,49 +59,53 @@ public class PromoWriteServlet extends HttpServlet {
 		String location = "";
 		String fileName = "";
 		
-		////////////////////////
-			int fileSizeLimit = 5 * 1024 * 1024;
-			String uploadPath = "C:\\Users\\user1\\Desktop\\workspace_ticketsea\\Ticket_Sea\\WebContent\\upLoad";
-			String encType = "UTF-8";
-			
-			MultipartRequest multi = new MultipartRequest(
-					request,
-					uploadPath,
-					fileSizeLimit,
-					encType,
-					new DefaultFileRenamePolicy());
-			
-			title = multi.getParameter("title");
-			category = multi.getParameter("category");
-			contents = multi.getParameter("contents");
-			artist = multi.getParameter("artist");
-			location = multi.getParameter("location");
-			
-			Enumeration formNames = multi.getFileNames();
-			String formName = (String)formNames.nextElement();
-			fileName = multi.getFilesystemName(formName);
-			System.out.println("파일 이름 : " + fileName);
-			
-			String fullFilePath = uploadPath+"\\"+fileName;
-			System.out.println("총 경로 : " + fullFilePath);
-			
-			File file = new File(fullFilePath); //import java.io.File
-			long fileSize = file.length(); //파일의 사이즈를 가져옴
-			
-			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
-			Timestamp uploadTime = null;
-			
-			uploadTime = Timestamp.valueOf(formatter.format(Calendar.getInstance().getTimeInMillis()));
-			
-			System.out.println("업로드된 시간 : " + uploadTime);
-			
-			////////////////////////////////////////////////
+		
 	
 		
 		try {
 			String userId = ((Member)session.getAttribute("member")).getMemberId();
 			//userId를 가져오도록 함 (비로그인 사용자 일시 Exception이 발생함)
 			
+			ServletContext scontext = getServletContext();
+			String uploadPath = scontext.getRealPath(fileName);
+			
+			////////////////////////
+				int fileSizeLimit = 5 * 1024 * 1024;
+				
+				String encType = "UTF-8";
+				
+				MultipartRequest multi = new MultipartRequest(
+						request,
+						uploadPath,
+						fileSizeLimit,
+						encType,
+						new DefaultFileRenamePolicy());
+				
+				title = multi.getParameter("title");
+				category = multi.getParameter("category");
+				contents = multi.getParameter("contents");
+				artist = multi.getParameter("artist");
+				location = multi.getParameter("location");
+				
+				Enumeration formNames = multi.getFileNames();
+				String formName = (String)formNames.nextElement();
+				fileName = multi.getFilesystemName(formName);
+				System.out.println("파일 이름 : " + fileName);
+				
+				String fullFilePath = uploadPath+"\\"+fileName;
+				System.out.println("총 경로 : " + fullFilePath);
+				
+				File file = new File(fullFilePath); //import java.io.File
+				long fileSize = file.length(); //파일의 사이즈를 가져옴
+				
+				SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
+				Timestamp uploadTime = null;
+				
+				uploadTime = Timestamp.valueOf(formatter.format(Calendar.getInstance().getTimeInMillis()));
+				
+				System.out.println("업로드된 시간 : " + uploadTime);
+				
+				////////////////////////////////////////////////
 				
 			if(userId != null) {
 			//4. 비즈니스 로직 처리

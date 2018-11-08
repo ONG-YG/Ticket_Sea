@@ -51,9 +51,15 @@ public class ReserveListServlet extends HttpServlet {
 			currentPage = Integer.parseInt(request.getParameter("currentPage")); // 게시판에서 페이지를 이동할때에는 값이 있기 때문에 해당 페이지 값을 가져와서 저장
 		}
 		
+		
+		
+		
 		//2. 비즈니스 로직
 		ReservePageData rpd = new MypageService().reserveAllList(currentPage,memberNo);		
 
+		
+		
+		
 		//3. jsp 페이지로 넘겨준다
 		RequestDispatcher view = request.getRequestDispatcher("views/mypage/reserveList.jsp");
 		request.setAttribute("pd", rpd);

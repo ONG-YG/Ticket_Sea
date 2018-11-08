@@ -56,6 +56,10 @@ public class MusicalSearchListServlet extends HttpServlet {
 		try {
 			if(!pd.getList().isEmpty())
 			{
+				if(pd.getList()==null)
+				{
+					throw new Exception();
+				}
 				
 				RequestDispatcher view = request.getRequestDispatcher("views/search/searchList.jsp");
 				request.setAttribute("pageData", pd);

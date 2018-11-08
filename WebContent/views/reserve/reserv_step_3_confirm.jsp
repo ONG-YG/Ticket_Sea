@@ -1,3 +1,4 @@
+<%@page import="kr.co.ticketsea.member.model.vo.Member"%>
 <%@page import="java.text.ParseException"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="kr.co.ticketsea.reserve.model.vo.SelectedSeat"%>
@@ -37,7 +38,6 @@
 	ReserveSession rs = (ReserveSession)session.getAttribute("reserveSession");
 	int progNo = rs.getProgNo();
 	String progTime = rs.getProgTime();
-	//System.out.println("progTime" + progTime);
 %>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -195,7 +195,7 @@
         	%>
         	
         	if(diff>10) {/////////////////////////////////////////////10분으로 바꿀것
-        		deleteProgData();
+        		deleteProgData('timeover');
         	}
         	else {
         		var phone = document.getElementById("inputPhoneNo").value;
@@ -220,31 +220,20 @@
                    	if( !res1 ){ alert("휴대폰 번호는 숫자만 입력할 수 있습니다."); }
                    	else if( !res2 ){ alert("휴대폰 번호를 9자 이상 입력해주세요."); }
                    	else {
-                   		//var payResult = payStart();/////////////////////////// 임시로 결제 단계 off
-                   		var payResult = true;/////////////////////////////////// 임시로 결제 단계 off
-                   		payType = "card";///////// 일단 임의로 카드결제로 설정(결제 function 다시 활성화할 경우 지울것 )
-                   		customerPhone = $('#inputPhoneNo').val();////// 일단 임의로 카드결제로 설정(결제 function 다시 활성화할 경우 지울것 )
-            			customerEmail = $('#inputEmail').val();//////// 일단 임의로 카드결제로 설정(결제 function 다시 활성화할 경우 지울것 )
-                   		if(payResult) {
-                   			//결제 성공할 경우 예매 정보 DB에 등록
-                   			insertBookInfo();
-                   		}
-                   		else {
-                   			//결제 실패할 경우 예매진행중 데이터를 삭제
-        			        deleteProgData();
-                   		}
+                   		customerPhone = $('#inputPhoneNo').val();
+            			customerEmail = $('#inputEmail').val();
+            			
+            			payType = "card";/////////////////////////////////////////// 일단 카드결제로 설정
+                   		payStart();///////////////////////////////////////////////// 임시로 결제 단계 off
+                   		//insertBookInfo();///////////////////////////////////////// 임시로 결제 단계 off 했을 경우 활성화
                    	}
                 }
-        	}//if(diff>1) END
+        	}//if(diff>10) END
             
         }//function next() END
         
 		function payStart(){
-        	
-			payType = "card";///////////////////////////////////////////일단 임의로 카드결제로 설정
-			customerPhone = $('#inputPhoneNo').val();///////////////////
-			customerEmail = $('#inputEmail').val();/////////////////////
-    		
+			
 			<%-- 
         	var test = "merchant_uid : "+<%=bkNo%>+",\n"+
 			    "name : "+'<%=showTitle%>'+" 예매,\n"+
@@ -266,12 +255,11 @@
 			    buyer_tel : customerPhone //누락되면 이니시스 결제창에서 오류
 			    
 			}, function(rsp) {
-				var payResult = null;
+				
 			    if ( rsp.success ) {
 			    	
-			    	alert("성공적으로 결제가 완료되었습니다.");///////////////////////////////////////////
-			    	//insertBookInfo();
-			    	payResult = true;
+			    	alert("성공적으로 결제가 완료되었습니다.");
+			    	insertBookInfo();
 			    	
 			    	<%-- 
 			    	//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
@@ -313,12 +301,12 @@
 			        alert(msg);//////////////////////////////////
 			        
 			        //결제 실패할 경우 예매진행중 데이터를 삭제
-			        //deleteProgData();
-			        payResult = false;
+			        deleteProgData();
 			    }
-			    return payResult;
 			});
 			
+			//console.log("payResult = "+payResult);///////////////////
+			//return payResult;
 		}//function payStart() END
 		
 		function insertBookInfo() {
@@ -329,7 +317,7 @@
 			session.setAttribute("reserveSession", rs);
 			%>
 			
-			var bkStateCd = "RSV_CPL";///////////////////일단 임의로 완료상태로 설정
+			var bkStateCd = "RSV_CPL";//////////////////////////////////////일단 임의로 완료상태로 설정
 			
 			//form태그에 예매자가 입력한 휴대폰번호, 이메일주소, 결제상태, 결제방식을 입력해줌
 			$('#phone_form').val( customerPhone );
@@ -337,7 +325,6 @@
 			$('#bkStateCd_form').val( bkStateCd );
 			$('#payType_form').val( payType );
 			
-			//////////////////////////////////////////////////////////////////////세션 메인페이지 용으로 바꿔줄 것
 			
 			//위에서 hidden type의 input태그에 값을 채워준 form태그를 reserveComplete서블릿에 submit
 			//ReserveComplete서블릿 안에 예매진행중 데이터 지우는 과정 포함되어 있음 (deleteProgData()함수 호출 안해도됨)
@@ -345,7 +332,7 @@
     		
 		}//function insertBookInfo() END
 		
-		function deleteProgData() {
+		function deleteProgData(mode) {
 			var progNo_del = <%=progNo%>;
     		//console.log("progNo_del : "+progNo_del);
     		
@@ -360,13 +347,21 @@
 					//console.log("ajax 통신 에러");
 				},
 				complete : function(){
-					alert("예매 진행 가능 시간이 초과되어 예매가 종료됩니다.");
-					
-					//////////////////////////////////////////////////////////세션 메인페이지용으로 바꿀것
+					<%
+					// 예매창 벗어나기 전에 예매용 session정보 파기 후 헤더용 session 발급
+					Member member = (Member)session.getAttribute("member");
+		        	session.invalidate();
+		        	session = request.getSession(true);
+		        	session.setAttribute("member", member);
+		        	%>
+					if (mode=='timeover') {
+						alert("예매 진행 가능 시간이 초과되어 예매가 종료됩니다.");
+					}
 					
 					window.close();///////////////////////////////안되면 예매 시작단계(step1)로 이동하도록 수정해둠 >> 메인페이지로 넘어가도록 바꿀것
 					if( !window.closed ) {
-						location.href="/dateCntSelect.do?showNo=<%=showNo%>";
+						<%-- location.href="/dateCntSelect.do?showNo=<%=showNo%>"; --%>
+						location.href="/";
 					}
 				}
 			});

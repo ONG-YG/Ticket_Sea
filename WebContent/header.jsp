@@ -57,7 +57,7 @@ function adminBtn(){
                    			 onclick="window.open('/views/member/memberJoin.jsp','회원가입','width=430,height=750'); return false;">회원가입</a> 
 							<% } %>
 							
-							<a href="#" >고객센터</a>
+							<a href="/noticeList.do" >고객센터</a>
 						</div>
                     </div>
                 </div>
@@ -88,7 +88,7 @@ function adminBtn(){
 				<ul>
 					<li><a class="menulink">&nbsp;</a></li>
 					<li><a class="menulink" href="/showList.do">뮤지컬</a></li>
-					<li><a class="menulink" href="#">콘서트</a></li>
+					<li><a class="menulink" href="/showListCnc.do">콘서트</a></li>
 					<li><a class="menulink" href="/promoList.do">소규모공연</a>		</li>
 					<li><a class="menulink" href="#">랭킹</a></li>
 					<li><a class="menulink" href="/noticeList.do">고객센터</a>		</li>

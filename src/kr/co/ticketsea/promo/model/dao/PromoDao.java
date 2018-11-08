@@ -50,6 +50,7 @@ public class PromoDao {
 				p.setBoardP_location(rset.getString("boardP_location"));
 				p.setBoardP_date(rset.getDate("boardP_date"));
 				p.setBoardP_no(rset.getInt("boardP_no"));
+				p.setBoardP_active(rset.getString("boardP_active").charAt(0));
 				
 				list.add(p);
 			}		

@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kr.co.ticketsea.show.model.service.ShowService;
 import kr.co.ticketsea.show.model.vo.PageData;
 import kr.co.ticketsea.show.model.service.ShowService;
 
@@ -52,7 +51,7 @@ public class ShowListServlet extends HttpServlet {
 				//3. 결과값을 view페이지로 리턴
 				if(pd!=null)
 				{
-					RequestDispatcher view = request.getRequestDispatcher("views/show/showAllList.jsp");
+					RequestDispatcher view = request.getRequestDispatcher("views/show/showAllList_msc.jsp");
 					request.setAttribute("pageData", pd);
 					
 					view.forward(request, response);

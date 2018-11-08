@@ -2,7 +2,8 @@
     pageEncoding="UTF-8"%>
     
 <%@ 
-    page import="kr.co.ticketsea.show.model.vo.*" 
+    page import="kr.co.ticketsea.admin.show.model.vo.Show" 
+    import = "kr.co.ticketsea.show.model.vo.*"
 	import ="kr.co.ticketsea.member.model.vo.*"
 	import = "java.util.ArrayList"
 %>
@@ -10,7 +11,6 @@
 <%
 	ShowData pd = (ShowData)request.getAttribute("showData");
 	Show show = pd.getShow(); 
-	
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -159,6 +159,7 @@
     #infoContent > #i_C_category{
         border : 0px solid #dedede;
         width : 100%;
+        height : 3%;
     }
     
     #i_C_category > #i_C_Category_a {
@@ -169,7 +170,6 @@
         float : left;
         text-align: center;
         font-size: 18px;
-        padding : 20px;
     }
     #i_C_category > #i_C_Category_b {
         border : 1px solid #dedede;
@@ -178,7 +178,6 @@
         float : left;
         text-align: center;
         font-size: 18px;
-        padding : 20px;
     }
     #i_C_category > #i_C_Category_c {
         border : 1px solid #dedede;
@@ -187,7 +186,6 @@
         float : left;
         text-align: center;
         font-size: 18px;
-        padding : 20px;
     }
     
     #infoContent > #i_C_content{
@@ -203,7 +201,7 @@
     .detail_info_tbl{
         border:1px solid #dedede; 
         width:100%;
-        height:40%;
+        height:30%;
         background:#f2f2f0;
         font-size:12px;
         letter-spacing:-1px;
@@ -274,91 +272,99 @@
         <div id="c_inner">
             <div id="c_inner_top">
                 <div class="title1">
-                    <h2>소규모 공연</h2>
+                    <h2>뮤지컬</h2>
                 </div>
                 <div class="title2"></div>
             </div>
             
             
-	<%
+<%
 	Member m = ((Member)request.getSession(false).getAttribute("member"));
 	// 로그인한 사용자는 Member 객체가 리턴 되고
 	// 비로그인 사용자는 null이 리턴 됨
 
-	
 	if(m!=null){ //m!=null 의 의미는 비로그인 사용자가 아니라면
 	String user1 =  m.getMemberId(); //로그인 사용자
-	String user2 =  show.getShow_writer(); // 작성자
+	}
 %>
 
-<%
-	if(user1.equals(user2) || user1.equals("admin")){ // 로그인한 사용자와 작성자가 같다면
-%>
-		<button id="btn1" onclick="modifyActive();">수정</button> 
-		<button id="btn2" onclick="delShow();">삭제</button> 
-<%}}%>
-
-<script>
-function delShow(){
-	location.href="/showDelete.do?show_no=<%=show.getShow_no()%>&writer=<%=show.getShow_writer()%>";
-}
-</script>
            
             <div id="right_view">
                 
-                
-                
                 <div id="infoHeader">
                     <div id="i_H_title">
-                        <%= show.getShow_title()%>
+                        <%= show.getShow_name()%>
                     </div>
                     
                     <div id="i_H_pic">
-                       		<img src="../../uploadFile/mslove/<%= show.getShow_fileName() %>" style="width:360px; height:465px;">
                     </div>
                     
                     <div id="i_H_info">
                         <div>
-                        <strong><div id = "info_tit">아티스트</div></strong>  <%=show.getShow_artist() %>
+                        <strong><div id = "info_tit">아티스트</div></strong>  <%= show.getArtists() %>
                         </div>
                         <br>
                         <div>
-                        <strong><div id = "info_tit">장르</div></strong> <%=show.getShow_category() %>
+                        <strong><div id = "info_tit">장르</div></strong> <%= show.getSc_code() %>
                         </div>
                         <br>
                         <div>
-                        <strong><div id = "info_tit">공연장소</div></strong> <%=show.getShow_location()%>
+                        <strong><div id = "info_tit">공연장소</div></strong> <%= show.getTh_no() %>
+                        </div>
+                        <br>
+                        <div>
+                        <strong><div id = "info_tit">시작일</div></strong> <%= show.getShow_st_date() %>
+                        </div>
+                        <br>
+                        <div>
+                        <strong><div id = "info_tit">종료일</div></strong>  <%= show.getShow_ed_date() %>
+                        </div>
+                        <br>
+                        <div>
+                        <strong><div id = "info_tit">공연시간</div></strong> <%= show.getShow_run() +" 분"%> 
+                        </div>
+                        <br>
+                        <div>
+                        <strong><div id = "info_tit">관람등급</div></strong> <%= show.getShow_grd() %>
                         </div>
                         <br>
                         <br>
+                        <br>
+                        <br>
+                        
+                        <input type="button" value="예매하기" onclick = "reserveOnclick();" style="width:250px; height:80px; background-color:skyblue; color:white; float:right;">
+                        
+                        <script>
+                        	function reserveOnclick(){
+                        		<%if(m == null){%>
+                        			alert("로그인한 상태에서 이용 가능합니다.");
+                        		<%}%>
+                        	}
+                        </script>
                     </div>
                 </div>
-        <div id="infoContent">
+       			
+       			 <div id="infoContent">
                     <div id="i_C_category">
-                        
                         <div id="i_C_Category_a" >
-                            <button onclick="cateAclick();">상세정보</button>
+                            <button onclick="cateAclick();" style="width:100%; height:100%; background-color: skyblue; color:white;">상세정보</button>
                         </div>
                         
                         <div id="i_C_Category_b">
-                            <button onclick="cateBclick();">공연장 정보</button>
+                            <button onclick="cateBclick();" style="width:100%; height:100%; background-color: skyblue; color:white;">공연장 정보</button>
                         </div>
                         
                         <div id="i_C_Category_c">
-                            <button onclick="cateCclick();">공연 후기</button>
+                            <button onclick="cateCclick();" style="width:100%; height:100%; background-color: skyblue; color:white;">공연 후기</button>
                         </div>
                     </div>
-                    
                     
                     <div id="i_C_content_a">
                         <br><br>
                         
-                        <div style="width : 500px; height: 300px; " >
-                        <%= show.getShow_contents() %>
-                        </div>
-                         <img src="../../upLoad/" style="width:700px; height:850px; padding : 50px;">
+                         <img src="" style="width:700px; height:850px; padding : 50px;">
+                        
                         <table class="detail_info_tbl">
-                            
                             <colgroup>
                                 <col style="width: 122px">
                                 <col style="width: 225px;">
@@ -367,22 +373,22 @@ function delShow(){
                             </colgroup>
                             <tbody>
                             <tr>
-                                <th scope="row">주최/기획</th>
-                                <td>FAKE VIRGIN ENT</td>
+                                <th scope="row">공연명</th>
+                                <td> <%= show.getShow_name()%></td>
                                 <th scope="row">고객문의</th>
                                 <td></td>
                             </tr>
                             <tr>
                                 <th scope="row">공연시간</th>
-                                <td>110분</td>
+                                <td><%= show.getShow_run() +" 분"%> </td>
                                 <th scope="row">관람등급</th>
-                                <td>만 15세 이상                                    </td>
+                                <td><%= show.getShow_grd() %></td>
                             </tr>
                             <tr>
                                 <th scope="row">작가/출연자</th>
-                                <td> <%= show.getShow_artist() %></td>
+                                <td> <%= show.getArtists() %></td>
                                 <th scope="row">공연장소</th>
-                                <td><%= show.getShow_location() %></td>
+                                <td><%= show.getTh_no() %></td>
                             </tr>
                             <tr>
                                 <th scope="row">예매수수료</th>
@@ -392,7 +398,7 @@ function delShow(){
                             </tr>
                             <tr>
                                 <th scope="row">유효기간/이용조건</th>
-                                <td colspan="3">2018.11.06 ~ 2018.11.06 이용 가능</td>
+                                <td colspan="3"><%= show.getShow_st_date() %> ~ <%= show.getShow_ed_date() %> 이용 가능</td>
                             </tr>
                             <tr>
                                 <th scope="row">예매취소조건</th>
@@ -425,22 +431,9 @@ function delShow(){
                             </tr>
                             </tbody>
                         </table>
-                                    </div>
+                     </div>
+                     
                     <div id="i_C_content_b" style="display:none;">
-                        <div id="map" style="width:500px;height:400px;"></div>
-                        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b8639cd941f4df4218630f1cf5bd7d14"></script>
-                        
-                        <script>
-                            var container = document.getElementById('map');
-                            var options = {
-                                center: new daum.maps.LatLng(33.450701, 126.570667),
-                                level: 3
-                            };
-
-                            var map = new daum.maps.Map(container, options);
-	                   </script>
-            
-                        
                     </div>
             
             <style>
@@ -504,14 +497,14 @@ function delShow(){
                     운영 규정을 지속적으로 어기는 게시글을 게재할 경우 티켓링크 게시판 이용이 제한될 수 있습니다.
                     </div>
                     
-                    <form action="/promoInsertComment.do" method="post">
+                    <form action="/showInsertComment.do" method="post">
                     <%if(session.getAttribute("member")!=null){ %>
                             <div class="write_review">
                             
                                 <textarea title="후기 작성하기" id="reviewContent" name="reviewContent"
                                           style="width:700px; height: 25px; resize:none; margin:0px; 0px; 0px;" maxlength="3000"
                                           placeholder="주민번호, 전화번호, 이메일 등 개인정보를 남기면 타인에 의해 악용될 소지가 있습니다."></textarea>
-                                 <input type="hidden" name="showNo" value="<%=show.getShow_no()%>"/>       
+                                 <input type="hidden" name="m_show_no" value="<%=show.getM_show_no()%>"/>       
                                 <input type="submit" class="write_review_button"  value="후기작성">
                                 
                             </div>
@@ -523,40 +516,45 @@ function delShow(){
 					</form>
             
         <div class="review_list">
-                    
-                    
-        <ul id="reviewUl" style="word-break: break-all;">
-            
-            <%
-				if(list.isEmpty()){ //댓글이 비어 있다면 (없다면!)
-			%>
-				<h3>댓글이 없습니다.</h3>
-			<%	
-				}else{%>
-            <li>
-             <% for(Comment co : list) { %>
-                <div class="review_info">
-                        <dt></dt>
-                        <dd class="grade_star">
-                            <span class="star_gauge" style="width: 100%"></span>
-                        </dd>
-                        <dt><%=co.getUserId()%></dt>
-                        <dd class="review_user"></dd>
-                        <dt><%=co.getRegDate()%></dt><dd class="review_date"></dd>
-                    
-                </div><br>
-                <div style = "border-bottom : 1px solid #dedede;">
-               	<%=co.getContents()%>
-               	</div>
-                <%}%>
-               <%}%>
-            </li>
-            
-           </ul>
+                   
+		        <ul id="reviewUl" style="word-break: break-all;">
+		            
+		            <%
+					if(list.isEmpty()){ //댓글이 비어 있다면 (없다면!)
+					%>
+						<h3>댓글이 없습니다.</h3>
+					<%	
+					}else{%>
+		            <li>
+		             <% for(Comment co : list) { %>
+		                <div class="review_info">
+		                        <dt></dt>
+		                        <dd class="grade_star">
+		                            <span class="star_gauge" style="width: 100%"></span>
+		                        </dd>
+		                        <dt><%=co.getUserId()%></dt>
+		                        <dd class="review_user"></dd>
+		                        <dt><%=co.getRegDate()%></dt><dd class="review_date"></dd>
+		                    
+		                </div>
+		                <div style = "border-bottom : 1px solid #dedede;">
+		               	<%=co.getContents()%>
+		               	
+		               	<form action="/showDeleteComment.do">
+			               	<input type="hidden" name="m_show_no" value="<%=show.getM_show_no()%>"/>
+			               	<input type="hidden" name="showcomment" value="<%=co.getCommentNo()%>"/>
+							<input type="submit" value="삭제" style="background-color: skyblue; color:white;">
+		               	</form>
+		               	
+		               
+		               	</div>
+		                <%}%>
+		               <%}%>
+		            </li>
+		            
+		           </ul>
     </div>
             
-            
-
           </div>
 
           </div>
@@ -587,13 +585,9 @@ function delShow(){
                             return false;
                         }
                     </script>
-
-                            </div>
-
-
-
-                        </div>
-                    </div>
+                </div>
+		</div>
+ </div>
 
     
     <a href="#" id="back_to_top">Top</a>

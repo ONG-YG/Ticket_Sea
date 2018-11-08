@@ -3,7 +3,7 @@ package kr.co.ticketsea.show.model.vo;
 import java.util.ArrayList;
 
 import kr.co.ticketsea.show.model.vo.Comment;
-import kr.co.ticketsea.show.model.vo.Show;
+import kr.co.ticketsea.admin.show.model.vo.Show;
 
 public class ShowData {
 	private ArrayList<Comment> list;

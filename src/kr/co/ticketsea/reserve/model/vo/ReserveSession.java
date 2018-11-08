@@ -10,7 +10,6 @@ public class ReserveSession {
 	private long bkNo;				//예매번호
 	
 	
-	
 	public ReserveSession() {
 		this.progTime = null;
 	}
@@ -22,10 +21,10 @@ public class ReserveSession {
 		this.progTime = progTime;
 		this.bkNo = bkNo;
 	}
-
-
-
-
+	
+	
+	
+	
 	public int getMemberNo() {
 		return memberNo;
 	}
