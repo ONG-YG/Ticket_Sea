@@ -240,7 +240,6 @@
 .review_list li div.reply li .star_average{float:none}
 .review_list li div.reply li p{padding-left:20px}
 
-=======
     
     
     
@@ -250,17 +249,6 @@
 </head>
 
 <body>
-<script>
-	
-    function reserve(){
-        //alert("예매시작");
-        var showNo = 20000; //////////////////////////////////////////////////// showNo 받아오는 코드 추가할 것
-        //location.href="/dateCntSelect.do?showNo="+showNo;  /////////////////// showNo 받아오는 코드 추가할 것
-        window.open("/dateCntSelect.do?showNo="+showNo, "reservePopUp", "width=1010, height=625");
-        
-        return false;
-    }
-</script>
 
 <div id="wrapper">
     <div id="header_inner">
@@ -297,6 +285,7 @@
                     </div>
                     
                     <div id="i_H_pic">
+                    <img src="/img/poster/<%=show.getShow_poster() %>" style="width:205px; height:330px; align-content: center;">
                     </div>
                     
                     <div id="i_H_info">
@@ -338,6 +327,8 @@
                         	function reserveOnclick(){
                         		<%if(m == null){%>
                         			alert("로그인한 상태에서 이용 가능합니다.");
+                        		<%}else {%>
+                        			window.open("/dateCntSelect.do?showNo=<%=show.getM_show_no()%>", "reservePopUp", "width=1010, height=625");
                         		<%}%>
                         	}
                         </script>
@@ -362,7 +353,7 @@
                     <div id="i_C_content_a">
                         <br><br>
                         
-                         <img src="" style="width:700px; height:850px; padding : 50px;">
+                         <img src="/img/poster/<%=show.getShow_dtInfo() %>" style="width:700px; height:850px; padding : 50px;">
                         
                         <table class="detail_info_tbl">
                             <colgroup>
