@@ -10,7 +10,7 @@
 <%
 	PromoData pd = (PromoData)request.getAttribute("promoData");
 	Promo promo = pd.getPromo(); 
-	ArrayList<Comment> list = pd.getList();
+	
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -156,9 +156,10 @@
         margin : 10px 10px 10px;
     }
     
-    #infoContent > #i_C_category{
+     #infoContent > #i_C_category{
         border : 0px solid #dedede;
         width : 100%;
+        height : 3%;
     }
     
     #i_C_category > #i_C_Category_a {
@@ -169,7 +170,6 @@
         float : left;
         text-align: center;
         font-size: 18px;
-        padding : 20px;
     }
     #i_C_category > #i_C_Category_b {
         border : 1px solid #dedede;
@@ -178,7 +178,6 @@
         float : left;
         text-align: center;
         font-size: 18px;
-        padding : 20px;
     }
     #i_C_category > #i_C_Category_c {
         border : 1px solid #dedede;
@@ -187,7 +186,6 @@
         float : left;
         text-align: center;
         font-size: 18px;
-        padding : 20px;
     }
     
     #infoContent > #i_C_content{
@@ -223,20 +221,14 @@
 .review_list li{border-top:1px solid #e1e1e1;padding:22px 0 25px;line-height:18px;}
 .review_list li:first-child{border:0}
 .review_list li.no_data{height:153px;line-height:153px;text-align:center;}
-<<<<<<< HEAD:WebContent/views/promo/promo.jsp
 .review_list li .review_info{margin:-1px 0 7px -2px;overflow:hidden}
-=======
-.review_list li .review_info{margin:-15px 0 7px -40px;overflow:hidden}
->>>>>>> e7df2293a6343e300548246144f599d1fc495dba:WebContent/views/board/board_concertInfo.html
+
 .review_list li .review_info:after{display:block;clear:both;content:''}
 .review_list li .review_info .star_average{float:none}
 .review_list li .review_info .star_average dt{display:block;visibility:hidden;overflow:hidden;position:absolute;top:-1000em;left:0}
 .review_list li .review_info .star_average dd{height:12px;line-height:12px;padding-right:8px;letter-spacing:0;vertical-align:top;}
-<<<<<<< HEAD:WebContent/views/promo/promo.jsp
-.review_list li .review_info .star_average dd.review_user{font-size:12px;font-weight:bold;color:#444}
-=======
+
 .review_list li .review_info .star_average dd.review_user{font-size:12px;font-weight:bold;color:#444;}
->>>>>>> e7df2293a6343e300548246144f599d1fc495dba:WebContent/views/board/board_concertInfo.html
 .review_list li .review_info .star_average dd.review_date{color:#999}
 .review_list li .review_info .star_average dd.review_delete{height:15px;margin-top:-2px;}
 .review_list .review_info a.delete{background-position:-327px -16px;width:16px;height:15px;vertical-align:top;}
@@ -325,7 +317,7 @@ function delPromo(){
                     
                     <div id="i_H_info">
                         <div>
-                        <strong><div id = "info_tit">아티스트</div></strong>  <%=promo.getBoardP_artist() %>
+                        <strong><div id = "info_tit">아티스트</div></strong>  <%=promo.getBoardP_artist() %> 
                         </div>
                         <br>
                         <div>
@@ -343,27 +335,22 @@ function delPromo(){
                     <div id="i_C_category">
                         
                         <div id="i_C_Category_a" >
-                            <button onclick="cateAclick();">상세정보</button>
+                            <button onclick="cateAclick();" style="width:100%; height:100%; background-color: skyblue; color:white;">상세정보</button>
                         </div>
                         
                         <div id="i_C_Category_b">
-                            <button onclick="cateBclick();">공연장 정보</button>
+                            <button onclick="cateBclick();" style="width:100%; height:100%; background-color: skyblue; color:white;">공연장 정보</button>
                         </div>
                         
                         <div id="i_C_Category_c">
-                            <button onclick="cateCclick();">공연 후기</button>
+                            <button onclick="cateCclick();" style="width:100%; height:100%; background-color: skyblue; color:white;">공연 후기</button>
                         </div>
                     </div>
                     
                     
                     <div id="i_C_content_a">
                         <br><br>
-                        
-                        <div style="width : 500px; height: 300px; " >
-                        <%= promo.getBoardP_contents() %>
-                        </div>
-                        
-                         <img src="../../uploadFile/mslove/<%= promo.getBoardP_fileName() %>" style="width:700px; height:850px; padding : 50px;">
+                         <img src="<%= promo.getBoardP_filePath()%>" style="width:700px; height:850px; padding : 50px;">
                          <%=promo.getBoardP_filePath() %>
                         <table class="detail_info_tbl">
                             
@@ -435,18 +422,6 @@ function delPromo(){
                         </table>
                                     </div>
                     <div id="i_C_content_b" style="display:none;">
-                        <div id="map" style="width:500px;height:400px;"></div>
-                        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b8639cd941f4df4218630f1cf5bd7d14"></script>
-                        
-                        <script>
-                            var container = document.getElementById('map');
-                            var options = {
-                                center: new daum.maps.LatLng(33.450701, 126.570667),
-                                level: 3
-                            };
-
-                            var map = new daum.maps.Map(container, options);
-	                   </script>
             
                         
                     </div>
@@ -501,15 +476,17 @@ function delPromo(){
             </style>
             
                 <div id="i_C_content_c" style="display:none;">
+                <% ArrayList<Comment> list = pd.getList(); %>
                     <div id="c_title">
-                    네티즌 후기
+                   		 네티즌 후기
                     </div>
                     
                     <div id="c_guide">
-                    네티즌 후기 게시판에 티켓 양도와 매매성 등 글과 같이 게시판 성격에 벗어난 글을 게재할 경우 사전 통보 없이 삭제될 수 있습니다. <br>
-                    티켓 양도 및 매매의 경우 전화번호, 이메일 등의 개인정보가 악용될 소지가 있으므로 게재를 삼가 주시기 바랍니다. <br>
-                    운영 규정을 지속적으로 어기는 게시글을 게재할 경우 티켓링크 게시판 이용이 제한될 수 있습니다.
+			                    네티즌 후기 게시판에 티켓 양도와 매매성 등 글과 같이 게시판 성격에 벗어난 글을 게재할 경우 사전 통보 없이 삭제될 수 있습니다. <br>
+			                    티켓 양도 및 매매의 경우 전화번호, 이메일 등의 개인정보가 악용될 소지가 있으므로 게재를 삼가 주시기 바랍니다. <br>
+			                    운영 규정을 지속적으로 어기는 게시글을 게재할 경우 티켓링크 게시판 이용이 제한될 수 있습니다.
                     </div>
+                    
                     <form action="/promoInsertComment.do" method="post">
                     <%if(session.getAttribute("member")!=null){ %>
                             <div class="write_review">
@@ -528,42 +505,38 @@ function delPromo(){
                                 </div>
 					</form>
             
-        <div class="review_list">
-                    
-                    
-        <ul id="reviewUl" style="word-break: break-all;">
-            
-            <%
-				if(list.isEmpty()){ //댓글이 비어 있다면 (없다면!)
-			%>
-				<h3>댓글이 없습니다.</h3>
-			<%	
-				}else{%>
-            <li>
-             <% for(Comment co : list) { %>
-                <div class="review_info">
-                        <dt></dt>
-                        <dd class="grade_star">
-                            <span class="star_gauge" style="width: 100%"></span>
-                        </dd>
-                        <dt><%=co.getUserId()%></dt>
-                        <dd class="review_user"></dd>
-                        <dt><%=co.getRegDate()%></dt><dd class="review_date"></dd>
-                    
-                </div><br>
-                <div style = "border-bottom : 1px solid #dedede;">
-               	<%=co.getContents()%>
-               	</div>
-                <%}%>
-               <%}%>
-            </li>
-            
-            </ul>
-    </div>
+		        <div class="review_list">
+		        <ul id="reviewUl" style="word-break: break-all;">
+		            <%
+						if(list.isEmpty()){ //댓글이 비어 있다면 (없다면!)
+					%>
+						<h3>댓글이 없습니다.</h3>
+					<%	
+						}else{%>
+		            <li>
+		             <% for(Comment co : list) { %>
+		                <div class="review_info">
+		                        <dt></dt>
+		                        <dd class="grade_star">
+		                            <span class="star_gauge" style="width: 100%"></span>
+		                        </dd>
+		                        <dt><%=co.getUserId()%></dt>
+		                        <dd class="review_user"></dd>
+		                        <dt><%=co.getRegDate()%></dt><dd class="review_date"></dd>
+		                    
+		                </div><br>
+		                <div style = "border-bottom : 1px solid #dedede;">
+		               	<%=co.getContents()%>
+		               	</div>
+		                <%}%>
+		               <%}%>
+		            </li>
+		          </ul>
+		   	 </div>
             
             
 
-                </div>
+          </div>
 
           </div>
                 
@@ -595,7 +568,6 @@ function delPromo(){
                     </script>
 
                             </div>
-
 
 
                         </div>

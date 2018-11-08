@@ -1,4 +1,4 @@
-package kr.co.ticketsea.promo.controller;
+package kr.co.ticketsea.show.controller;
 
 import java.io.IOException;
 
@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kr.co.ticketsea.promo.model.service.ShowService;
-import kr.co.ticketsea.promo.model.vo.*;
+import kr.co.ticketsea.show.model.service.ShowService;
+import kr.co.ticketsea.show.model.vo.ShowData;
 
 /**
  * Servlet implementation class ShowServlet
@@ -36,15 +36,15 @@ public class ShowServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		
 		//2. view에서 전송한 데이터를 변수에 저장
-		int show_no = Integer.parseInt(request.getParameter("show_no"));
+		int m_show_no = Integer.parseInt(request.getParameter("m_show_no"));
 		
 		//3. 비즈니스 로직 처리 
-		Show show =  new ShowService().selectOneShow(show_no);
+		ShowData pd =  new ShowService().selectOneShow(m_show_no);
 		
 		//4. 결과 리턴
-		if(show !=null) {
+		if(pd !=null) {
 			RequestDispatcher view = request.getRequestDispatcher("views/show/show.jsp");
-			request.setAttribute("show", show);
+			request.setAttribute("showData", pd);
 			view.forward(request, response);
 			
 		}else {

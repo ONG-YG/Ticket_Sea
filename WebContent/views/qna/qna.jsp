@@ -338,7 +338,7 @@
 				%>
                 <br>
                 <button id="btn1" onclick="modifyActive();" style="width: 70px; height: 30px; float:right;">수정</button> 
-				<button id="btn2" onclick="delFaq();" style="width: 70px; height: 30px; float:right;">삭제</button> 
+				<button id="btn2" onclick="delQna();" style="width: 70px; height: 30px; float:right;">삭제</button> 
                 <%} %>
                 
                 

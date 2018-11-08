@@ -4,28 +4,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>글 작성 성공</title>
+<title>Insert title here</title>
 </head>
 <body>
 <script>
-	alert("해당 글은 관리자 승인 후 게시됩니다.");
-	location.href="/promoList.do";
-</script>
-
+	alert("로그인 상태에서만 이용 가능합니다.");
+	location.href="/noticeList.do";
+	</script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
