@@ -71,14 +71,8 @@
                 <div class="input_area">
                     <!--이미지영역-->
                     <div class="event_img_area">
-                        <img class="show_post" src="D:\gyuri_ticket\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Ticket_Sea\img\poster\"+<%=show.getShow_poster()%> data-default-src="../../img/ticketsea_poster.png" alt="공연포스터" style="width:140px; height:160px;">
-                        <!--이미지 업로드 버튼-->
-                        <div class="upload_btn">
-                            <input type="file" class="imgupload" title="공연포스터업로드" value="이미지업로드">
-                            <button type="button" class="btn_change_img">사진변경</button>
-                            <!--파일 업로드 후 사진 삭제하기 버튼 생김-->
-                            <!--<button type="button" class="btn_delete_upload">삭제하기</button>-->
-                        </div>
+                        <img class="show_post" src="/img/poster/<%=show.getShow_poster()%>" data-default-src="../../img/ticketsea_poster.png" alt="공연포스터" style="width:140px; height:160px;">
+                        
                     </div>
                 </div>
                 </div>
@@ -184,7 +178,7 @@
                         </legend>
                         <div class="edit">
                             <div class="write_wrap">
-                           		<input type="file" id="show_poster" value="<%=show.getM_show_no() %>"name="show_poster"/>
+                           		<input type="file" id="show_poster" name="show_poster"/><a href="/img/poster/<%=show.getShow_poster()%>"/>
                             </div>
                         </div>
                     </fieldset>

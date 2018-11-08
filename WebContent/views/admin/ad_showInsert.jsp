@@ -3,10 +3,13 @@
 <%@ page import = "kr.co.ticketsea.admin.show.model.vo.*" 
 	import = "java.util.ArrayList"
 %>
+<%@page import="kr.co.ticketsea.member.model.vo.Member"%>
 
 <%
 	ArrayList<ShowPlace> spList = (ArrayList<ShowPlace>)request.getAttribute("showPlaceList");
 	ArrayList<ShowCategory> scList = (ArrayList<ShowCategory>)request.getAttribute("showCTGList");
+	
+	Member m = (Member)session.getAttribute("member");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -23,18 +26,6 @@
 </head>
 <body>
   
-  
-<!-- <script>
-function LoadImg(value){
-	if(value.files && value.files[0]){
-		var reader = new FileReader();
-		reader.onload = function(e){
-			$('#LoadImg').attr('src',e.target.result);
-		}
-		reader.readAsDataURl(value.files[0]);
-	}
-}
-</script> -->
 
 	<div id="wrapper">
 		<div id="header">
