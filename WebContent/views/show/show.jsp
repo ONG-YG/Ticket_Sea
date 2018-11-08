@@ -357,7 +357,6 @@
                         
 
                          <img src="/img/poster/<%=show.getShow_dtInfo() %>" style="width:700px; height:850px; padding : 50px;">
-
                         
                         <table class="detail_info_tbl">
                             <colgroup>
