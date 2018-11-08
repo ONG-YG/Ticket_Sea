@@ -28,10 +28,10 @@
     ul, li, a{list-style: none; margin: 0px; padding: 0px; text-decoration: none; color: black;}
     
     div{box-sizing: border-box;}
-    #wrapper{overflow: hidden;min-width: 990px;min-height: 100%; border: 1px solid black;}
-    #header{height: 193px; border: 1px solid black;}
-    #container{height: 100%; border: 1px solid black; background: #f4f4f4;}
-    #footer{height: 153px; border: 1px solid black;}
+    #wrapper{overflow: hidden;min-width: 990px;min-height: 100%;}
+    #header{height: 193px;}
+    #container{height: 100%;background: #f4f4f4;}
+    #footer{height: 153px; }
     
     /* 990px 고정 사이즈 */
     #h_inner{width: 990px; height: 100%; margin: 0px auto;}
@@ -312,7 +312,7 @@ function delPromo(){
                     </div>
                     
                     <div id="i_H_pic">
-                       		<img src="../../uploadFile/mslove/<%= promo.getBoardP_fileName() %>" style="width:360px; height:465px;">
+                       		<img src="<%= promo.getBoardP_filePath()%>" style="width:360px; height:465px;">
                     </div>
                     
                     <div id="i_H_info">

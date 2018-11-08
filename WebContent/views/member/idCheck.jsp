@@ -21,13 +21,15 @@
 	<script>
 		var userId = '<%=checkId%>';
 		var checkFlag = 0;
+	
 	<%
 		if(result){
 	%>
+	
 		// 참일때 동작 코드 (참일때 : 해당 ID가 중복일때)
 			window.onload = function(){
 				var msg = document.getElementById('msg');
-				msg.innerHTML = '해당 ID는 사용 불가합니다.';
+				msg.innerHTML = '해당 ID는 중복ID입니다.';
 				msg.style.color='red';
 				userId="";
 			}	
@@ -35,13 +37,22 @@
 		<%}else{ %>
 		// 거짓일때 동작 코드 (참일때 : 해당 ID가 중복이 아닐때)
 			window.onload = function(){
+				if((/^[a-z][a-z0-9]{3,11}$/.test(userId)))
+					{
 				var msg = document.getElementById('msg');
-				msg.innerHTML = '해당 ID는 사용 가능합니다';
+				msg.innerHTML = '해당 ID는 사용가능 ID입니다.';
 				msg.style.color='blue';
 				checkFlag = 1;
+					}else{
+						var msg = document.getElementById('msg');
+						msg.innerHTML = '해당 ID는 사용불가 ID입니다.';
+						msg.style.color='red';
+					}
 			}
-	<%	} %>
-		
+	
+	
+	<%}%>
+
 		function backBtn(){
 			opener.document.getElementById('userId').value = userId;
 			opener.document.getElementById('checkFlag').value = checkFlag;

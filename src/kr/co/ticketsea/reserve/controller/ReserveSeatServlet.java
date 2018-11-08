@@ -151,7 +151,7 @@ public class ReserveSeatServlet extends HttpServlet {
 					}//if(currStat==1) END
 				}else {
 					System.out.println("error at ReserveSeatServlet-3");
-					throw new Exception();
+					response.sendRedirect("/views/reserve/reserveAccessDenied.jsp");
 				}//if(m!=null) END
 			}else {
 				System.out.println("error at ReserveSeatServlet-2");

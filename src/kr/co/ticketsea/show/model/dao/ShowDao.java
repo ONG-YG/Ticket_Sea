@@ -45,6 +45,7 @@ public class ShowDao {
 				s.setShow_name(rset.getString("m_show_name"));
 				s.setShow_poster(rset.getString("m_show_poster"));
 				s.setSc_code(rset.getString("sc_code"));
+				s.setShow_dtInfo(rset.getString("m_show_dtInfo"));
 				
 				list.add(s);
 			}		
