@@ -356,7 +356,6 @@
                         <br><br>
 
                          <img src="/img/poster/<%=show.getShow_dtInfo() %>" style="width:700px; padding : 50px;">
-						<%= show.getShow_dtInfo() %>
                         
                         <table class="detail_info_tbl">
                             <colgroup>
