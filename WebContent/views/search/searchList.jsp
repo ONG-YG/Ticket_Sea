@@ -153,9 +153,10 @@
   
    
    
-   
+   <jsp:include page="/top_btn.jsp"/>
 <div id="header_inner">
 <jsp:include page="/header.jsp"/>
+
 </div>
 
 	
