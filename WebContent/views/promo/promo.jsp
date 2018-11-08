@@ -312,7 +312,7 @@ function delPromo(){
                     </div>
                     
                     <div id="i_H_pic">
-                       		<img src="<%= promo.getBoardP_filePath()%>" style="width:360px; height:465px;">
+                       		<img src="/<%= promo.getBoardP_filePath()%>" style="width:360px; height:465px;">
                     </div>
                     
                     <div id="i_H_info">

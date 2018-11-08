@@ -3,6 +3,7 @@ package kr.co.ticketsea.promo.model.vo;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+
 public class PromoData {
 	private ArrayList<Comment> list;
 	private Promo promo;

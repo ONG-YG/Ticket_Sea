@@ -8,7 +8,7 @@ import kr.co.ticketsea.common.JDBCTemplate;
 import kr.co.ticketsea.notice.model.dao.NoticeDao;
 import kr.co.ticketsea.notice.model.vo.Notice;
 import kr.co.ticketsea.promo.model.dao.PromoDao;
-import kr.co.ticketsea.promo.model.vo.Promo;
+import kr.co.ticketsea.promo.model.vo.*;
 import kr.co.ticketsea.promo.model.vo.PromoData;
 import kr.co.ticketsea.qna.model.dao.QnaDao;
 import kr.co.ticketsea.promo.model.vo.*;

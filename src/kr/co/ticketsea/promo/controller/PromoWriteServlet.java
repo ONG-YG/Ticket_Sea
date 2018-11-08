@@ -21,7 +21,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import kr.co.ticketsea.member.model.vo.Member;
 import kr.co.ticketsea.promo.model.service.PromoService;
-import kr.co.ticketsea.promo.model.vo.Promo;
+import kr.co.ticketsea.promo.model.vo.*;
 
 /**
  * Servlet implementation class PromoWriteServlet
@@ -60,8 +60,6 @@ public class PromoWriteServlet extends HttpServlet {
 		String fileName = "";
 		
 		
-	
-		
 		try {
 			String userId = ((Member)session.getAttribute("member")).getMemberId();
 			//userId를 가져오도록 함 (비로그인 사용자 일시 Exception이 발생함)
@@ -82,6 +80,7 @@ public class PromoWriteServlet extends HttpServlet {
 						new DefaultFileRenamePolicy());
 				
 				title = multi.getParameter("title");
+				
 				category = multi.getParameter("category");
 				contents = multi.getParameter("contents");
 				artist = multi.getParameter("artist");
