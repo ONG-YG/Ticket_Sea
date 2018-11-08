@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ page import="kr.co.ticketsea.member.model.vo.*" %>
+    
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -61,14 +62,18 @@
         </div>
         
 <script>
-window.onload$(function(){
-		
-				
+
+$(document).ready(function(){
+			var newSub = new Array(5);
+	
 				$.ajax({
-					url : "/rank.do",
+					url : "/newestShow.do",
 					type : "get",
-					success :function(){
-						console.log("정상 처리 완료");
+					success :function(data){
+						for(var i=0; i<data.length;i++)
+						{
+						newSub[i] = document.getElementId("#newRankSub"+I).html;
+						}
 					},
 					error : function(){
 						console.log("ajax 통신 에러");
@@ -96,7 +101,7 @@ window.onload$(function(){
                         </li>
                         <!-- 이미지 -->
                         <li class="list_a">
-                            <a href="#">
+                            <a href="#" >
                                 1. 포항 BIG K-POP FESTIVAL
                             </a>
                         </li>
@@ -136,27 +141,27 @@ window.onload$(function(){
                         </li>
                         <!-- 이미지 -->
                         <li class="list_a">
-                            <a href="#">
+                            <a href="#" id="newRankSub1">
                                 1. 포항 BIG K-POP FESTIVAL
                             </a>
                         </li>
                         <li class="list_a">
-                            <a href="#">
+                            <a href="#" id="newRankSub2">
                                 2. 포항 BIG K-POP FESTIVAL
                             </a>
                         </li>
                         <li class="list_a">
-                            <a href="#">
+                            <a href="#" id="newRankSub3">
                                 3. 포항 BIG K-POP FESTIVAL
                             </a>
                         </li>
                         <li class="list_a">
-                            <a href="#">
+                            <a href="#" id="newRankSub4">
                                 4. 포항 BIG K-POP FESTIVAL
                             </a>
                         </li>
                         <li class="list_a">
-                            <a href="#">
+                            <a href="#" id="newRankSub5">
                                 5. 포항 BIG K-POP FESTIVAL
                             </a>
                         </li>
