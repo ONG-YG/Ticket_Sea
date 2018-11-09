@@ -152,3 +152,5 @@
 #bCheck2:checked~.bCheck>label:nth-child(2){background:#666;}
 #bCheck3:checked~.bCheck>label:nth-child(3){background:#666;}
 #bCheck4:checked~.bCheck>label:nth-child(4){background:#666;}
+
+
