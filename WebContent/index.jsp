@@ -19,6 +19,58 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
 </script>
 
+<style>
+
+
+#s_img_1 {
+    position: relative;
+    display: block;
+    content: "";
+    top: 25px;
+    left: 40px;
+    width: 90%;
+    height: 90%;
+    box-shadow:  0px 0px 30px black;
+    border-radius: 10px;
+}
+#s_img_2 {
+    position: relative;
+    display: block;
+    content: "";
+    top: 25px;
+    left: 40px;
+    width: 90%;
+    height: 90%;
+    box-shadow:  0px 0px 30px black;
+    border-radius: 10px;
+}
+#s_img_3 {
+    position: relative;
+    display: block;
+    content: "";
+    top: 25px;
+    left: 40px;
+    width: 90%;
+    height: 90%;
+    box-shadow:  0px 0px 30px black;
+    border-radius: 10px;
+}
+#s_img_4 {
+    position: relative;
+    display: block;
+    content: "";
+    top: 25px;
+    left: 40px;
+    width: 90%;
+    height: 90%;
+    box-shadow:  0px 0px 30px black;
+    border-radius: 10px;
+}
+
+
+
+</style>
+
 <script>
 $(function(){
 	
