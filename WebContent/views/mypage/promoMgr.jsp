@@ -246,11 +246,15 @@
                         	<%} %>
                         </tbody>
                     </table>
+                    
+                    
                     <div class="paginate">
                     	<div id="paginate_inner" style="width:315px; text-align:center;">
 							<label><%=pageNavi%></label>
 						</div>
                     </div>
+                    
+                    
                 </div>
             </div>
         </div>
