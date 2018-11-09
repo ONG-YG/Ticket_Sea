@@ -6,10 +6,10 @@
     
     <%
 	// Controller(Servlet)에서 보내준값 가져오기
-	ReservePageData pd = (ReservePageData)request.getAttribute("reviewPd");
+	ReservePageData promoPd = (ReservePageData)request.getAttribute("promoPd");
 
-	ArrayList<ReviewMgr> list = pd.getReviewList(); // 현재 페이지의 글 목록
-	String pageNavi = pd.getPageNavi(); // 현재 navi Bar
+	ArrayList<PromoMgr> list = promoPd.getPromoList(); // 현재 페이지의 글 목록
+	String pageNavi = promoPd.getPageNavi(); // 현재 navi Bar
 	
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -19,7 +19,7 @@
 <link rel="stylesheet" type="text/css" href="/css/mypageAllSize.css" />
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>후기 관리</title>
+<title>나의 문의 내역</title>
 <script
   src="https://code.jquery.com/jquery-3.3.1.js"
   integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
@@ -93,33 +93,33 @@
         color: darkgrey;
         font-size: 11px;
     }
-    #left_menu .has_sub1 li:first-child{
+    #left_menu .has_sub1 li:nth-child(2n){
+        padding: 13px 0 0;
+        height: 12px;
+        border: none;
+    }
+    #left_menu .has_sub1 li:nth-child(2n) a{
+        color: darkgrey;
+        font-size: 11px;
+    }
+    #left_menu .has_sub1 li:nth-child(2n+1){
+        padding: 13px 0 0;
+        height: 12px;
+        border: none;
+    }
+    #left_menu .has_sub1 li:nth-child(2n+1) a{
+        color: darkgrey;
+        font-size: 11px;
+    }
+    #left_menu .has_sub1 li:nth-child(3n){
         padding: 13px 0 0;
         height: 12px;
         border: none;
         font-size: 13px;
     }
-    #left_menu .has_sub1 li:first-child a{
+    #left_menu .has_sub1 li:nth-child(3n) a{
         color: lightskyblue;
         font-weight: bold;
-    }
-    #left_menu .has_sub1 li:nth-child(2n+0){
-        padding: 13px 0 0;
-        height: 12px;
-        border: none;
-    }
-    #left_menu .has_sub1 li:nth-child(2n+0) a{
-        color: darkgrey;
-        font-size: 11px;
-    }
-    #left_menu .has_sub1 li:last-child{
-        padding: 13px 0 0;
-        height: 12px;
-        border: none;
-    }
-    #left_menu .has_sub1 li:last-child a{
-        color: darkgrey;
-        font-size: 11px;
     }
     #left_menu span{
         color: #444;
@@ -159,18 +159,12 @@
         font-size: 14px;
     }
     .paginate{
+        
         padding-top: 20px;
         border-top: 1px solid #c7c7c7;
     }
     #paginate_inner{
     	margin : 0 auto;
-    }
-    .pagi_num{
-        border: 1px solid skyblue;
-        color: skyblue;
-        padding: 5px 10px;
-        margin: 2px;
-        
     }
     
     
@@ -221,11 +215,11 @@
             </ul>    
             <div id="right_view">
                 <div class="r_line">
-                    <h3>후기 관리</h3>
+                    <h3>나의 소규모 공연 관리</h3>
                 </div>
                 <div class="r_top">
-                    고객님께서 남겨주신 후기를 확인하실 수 있습니다.<br>
-                    티켓링크 운영정책에 위반되거나, 후기의 성격에 맞지 않는 글을 고객님께 사전통보 없이 삭제될 수 있습니다.
+                    소규모 공연 확인 메뉴 입니다.<br>
+          등록하셨을 경우 관리자 검수 후에 등록됩니다. 등록상태가 Y면 등록이 완료됩니다.
                     
                 </div>
                 <div class="r_table">
@@ -233,32 +227,30 @@
                         <thead>
                             <tr>
                                 <th>번호</th>
-                                <th>공연명</th>
-                                <th>댓글 내용</th>
-                                <th>작성일</th>
+                                <th>작성자</th>
+                                <th>제목</th>
+                                <th>장르</th>
+                                <th>등록상태</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <%	for(ReviewMgr rm: list){ %>
+                            <%	for(PromoMgr pm: list){ %>
 
                         	<tr>
-                                <td><%=rm.getNum() %></td>
-                                <td><%=rm.getmShowName() %></td>
-                                <td><%=rm.getShowcommentContents() %></td>
-                                <td><%=rm.getShowcommentDate() %></td>
+                                <td><%=pm.getNum() %></td>
+                                <td><%=pm.getBoardP_writer() %></td>
+                                <td><%=pm.getBoardP_title() %></td>
+                                <td><%=pm.getBoardP_category() %></td>
+                                <td><%=pm.getBoardP_active() %></td>
                             </tr>
                         	<%} %>
                         </tbody>
                     </table>
-                    
-                    
                     <div class="paginate">
                     	<div id="paginate_inner" style="width:315px; text-align:center;">
 							<label><%=pageNavi%></label>
 						</div>
                     </div>
-                    
-                    
                 </div>
             </div>
         </div>
@@ -267,7 +259,9 @@
     <jsp:include page="/top_btn.jsp"/>
     
     <div id="footer">
-        <jsp:include page="/footer.jsp"/>    
+        <div id="f_inner">
+            <jsp:include page="/footer.jsp"/>
+        </div>    
     </div>
 </div>    
 

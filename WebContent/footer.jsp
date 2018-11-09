@@ -16,7 +16,7 @@
         
     <div class="f_menu">
     	<a href="#">사이트 소개</a><span>|</span>
-        <a href="#">고객센터</a><span>|</span>
+        <a href="/noticeList.do">고객센터</a><span>|</span>
         <a href="#">티켓판매안내</a><span></span>
     </div>
         

@@ -226,7 +226,7 @@
                     <ul>
                         <li><a href="/reviewMgr.do">후기 관리</a></li>
                         <li><a href="/qnaMgr.do">나의 문의 내역</a></li>
-                        <li><a href="#">소규모 공연 등록관리</a></li>
+                        <li><a href="/promoMgr.do">소규모 공연 등록관리</a></li>
                         
                     </ul>
                 </li>
@@ -256,32 +256,37 @@
                             </tr>
                         </thead>
                         <tbody>        	
-                        	<%	for(ReserveList rl: list){ %>
-
+                        	<%	for(ReserveList rl: list){%>
+                        	
                         	<tr>
+                        	
                                 <td><%=rl.getNum() %></td>
                                 <td><%=rl.getBkNo() %></td>
                                 <td><%=rl.getmShowName() %></td>
                                 <td><%=rl.getBkDate() %></td>
                                 <td>
-                                <form action="/reserveDelete.do" method="post" id="btnForm2">
-                                <input type="hidden" name="reserveDelete" value="<%=rl.getBkNo()%>"/>
+                                
+                                <form action="/reserveDelete.do" method="get" id="btnForm2">
+                                <input type="hidden" name="reserveDelete" value="<%=rl.getBkNo()%>"/>	
                                 <% if(rl.getBkStatCd().equals("RSV_CNL")){ %>
                                 	취소완료
                                 	
-                                	
+                                
                                 <%}else if(rl.getBkStatCd().equals("RSV_CPL")){ %>
+                                
                                 	예매완료 <button id="list_btn" class="list_btn">취소</button>
                                 	<!-- <input type="submit" value="취소" class=list_btn id=list_btn /> -->
                                 	
-                                <%}else{ %>
+                                <%}else if(rl.getBkStatCd().equals("RSV_ING")){ %>
                                 	예매중<button id="list_btn" class="list_btn">취소</button>
                                 	 <!-- <input type="submit" value="취소" class=list_btn id=list_btn /> -->
                                 	
                                 	
                                 <%} %>
                                 </form>
+                                
                                 </td>
+                                
                                 <td>
                                 <form action="/popupReserveList.do" method="get" id="btnForm" target="popup_detail_reserve">
                                 
@@ -291,6 +296,7 @@
                                 </form>
                                 </td>
                             </tr>
+                            
                         	<%} %>
                         </tbody>
                     </table>		
@@ -299,15 +305,11 @@
 
                     	// 예매 취소 동작
                         $('.list_btn').click(function(){
-                        	
-                        	var ck = confirm("예매를 취소하시겠습니까?");
-                        	console.log(ck);
-                        	if(ck){
+                        	if(confirm("예매를 취소하시겠습니까?")){
                             	$('#btnForm2').submit();
                             }else{
                             	location.href="/reserveList.do";
                             }
-                        	return false;
                         });
                         
                     	// 상세보기 팝업 동작
