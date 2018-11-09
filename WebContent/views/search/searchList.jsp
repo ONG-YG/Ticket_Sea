@@ -10,6 +10,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>TiceketSea || 검색 </title>
 <style>
+#footer{height: 153px;}
 #inner{
 	background-color:#f4f4f4;
 	margin: 0px auto;
@@ -126,7 +127,7 @@
   	 font-size:13px;
    }
    #result_wrap{
-   height:1871px;
+   height:2000px;
    }
    #pageNavi{
    margin:0px auto;
@@ -212,6 +213,10 @@
 		
 			
 	</div>
+	
+	<div id="footer">
+        <jsp:include page="/footer.jsp"/>
+    </div>
 			
 </body>
 </html>
