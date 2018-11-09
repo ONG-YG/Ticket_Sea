@@ -33,9 +33,9 @@
 </center>
 
 <script>
-	function pwdReturn(){
+function pwdReturn(){
 		window.close();
-	}
+}
 </script>
 </body>
 </html>

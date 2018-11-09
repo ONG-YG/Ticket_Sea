@@ -42,4 +42,36 @@ public class RankDao {
 		return list;
 	}
 
+	public ArrayList<Rank> rankShow(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Rank> list = new ArrayList<Rank>();
+		String query = "select * from (select musical_l.*,row_number() over(order by m_show_st_date desc) as num from musical_l) where num between 1 and 20";
+		
+		try {
+			pstmt=conn.prepareStatement(query);
+			rset= pstmt.executeQuery();
+			
+			while(rset.next())
+			{
+				Rank r = new Rank();
+				r.setPoster(rset.getString("m_show_poster"));
+				r.setShowNo(rset.getInt("m_show_no"));
+				r.setSubject(rset.getString("m_show_name"));
+				
+				list.add(r);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+			
+		}
+		return list;
+		
+	}
+
 }
