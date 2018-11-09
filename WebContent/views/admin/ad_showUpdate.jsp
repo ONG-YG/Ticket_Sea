@@ -71,7 +71,7 @@
                 <div class="input_area">
                     <!--이미지영역-->
                     <div class="event_img_area">
-                        <img class="show_post" src="/img/poster/<%=show.getShow_poster()%>" data-default-src="../../img/ticketsea_poster.png" alt="공연포스터" style="width:140px; height:160px;">
+                        <img class="show_post" src="/img/poster/<%=show.getShow_poster()%>" onerror="this.src='/img/ticketsea_poster.png';" alt="공연포스터" style="width:140px; height:160px;">
                         
                     </div>
                 </div>
@@ -215,7 +215,7 @@
                         </div>
                     </fieldset>
                     <div class="submit_area">
-            	<input type="submit" onclick = "return showUpdate();" value="공연수정" style="float:right;" width="70px" height="40">
+            	<button id="upBtn" onclick = "return showUpdate();">공연수정</button>
            			 </div>
                 </div>
             </div>

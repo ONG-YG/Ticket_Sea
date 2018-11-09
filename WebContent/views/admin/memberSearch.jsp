@@ -109,15 +109,15 @@
 					<%} %>
                     </table>
                     <!--회원목록 페이지 이동-->
-                     <div class="paginate" style="text-align: center">
-                    	 <label><%=pageNavi%></label>
+                     <div class="paginate" style="text-align: center;">
+                     	<c:if <%=pageNavi%>!=null><label><%=pageNavi%></label></c:if>
                     </div>
                     
                     <!--회원검색-->
                     <div class="searchArea"> 
                 	<form style="display:inline;" action="/memberSearch.do" method="get">
-						<input type="submit" value="검색"  style="float:right"/>
-						<input type="text" name="search"  value="<%=keyword %>" style="float:right"/>
+						<input type="submit" value="검색"  style="float:right;"/>
+						<input type="text" name="search" value="<%=keyword%>" style="float:right;"/>
 					</form>
 				</div>
                 </div>
