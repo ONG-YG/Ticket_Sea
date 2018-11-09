@@ -145,7 +145,7 @@ public class DateCntSelectServlet extends HttpServlet {
 					}
 				}else {
 					System.out.println("error at DateCntSelectServlet-3");
-					throw new Exception();
+					response.sendRedirect("/views/reserve/reserveAccessDenied.jsp");
 				}
 			}else {
 				System.out.println("error at DateCntSelectServlet-2");

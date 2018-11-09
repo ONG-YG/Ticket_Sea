@@ -4,11 +4,8 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import kr.co.ticketsea.admin.show.model.dao.MiniShowDao;
-import kr.co.ticketsea.admin.show.model.dao.ShowDao;
 import kr.co.ticketsea.admin.show.model.vo.MiniPgData;
 import kr.co.ticketsea.admin.show.model.vo.MiniShow;
-import kr.co.ticketsea.admin.show.model.vo.PageData;
-import kr.co.ticketsea.admin.show.model.vo.Show;
 import kr.co.ticketsea.common.JDBCTemplate;
 
 public class MiniShowService {

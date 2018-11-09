@@ -200,7 +200,7 @@ public class ReserveConfirmServlet extends HttpServlet {
 						}//if(currStat==2) END
 					}else {
 						System.out.println("error at ReserveConfirmServlet-3");
-						throw new Exception();
+						response.sendRedirect("/views/reserve/reserveAccessDenied.jsp");
 					}//if(m!=null) END
 				}else {
 					System.out.println("error at ReserveConfirmServlet-2");

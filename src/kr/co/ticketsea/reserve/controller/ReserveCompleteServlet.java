@@ -232,7 +232,7 @@ public class ReserveCompleteServlet extends HttpServlet {
 							}//if(currStat==2) END
 						}else {
 							System.out.println("error at ReserveCompleteServlet-4");
-							throw new Exception();
+							response.sendRedirect("/views/reserve/reserveAccessDenied.jsp");
 						}//if(m!=null) END
 					}else {
 						System.out.println("error at ReserveCompleteServlet-3");

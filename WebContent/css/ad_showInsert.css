@@ -1,35 +1,15 @@
 @charset "UTF-8";
-
-
     /*공연등록 페이지*/
     div{
         box-sizing: border-box;
         display: block;
-    }
-    #content{
-        overflow: hidden;
-        border:1px solid black;
-        border-style: dashed;
-        /* padding: 20px 0; */
-        width:1000px;
-        height:1200px;
-        backgound-color:#FFFFFF;
-       display: inline-block;
-    }
-    .content_wrap{
-   		 position:relative;
-        width:980px;
-        height: 100%;
-        margin:0 auto;
-        border:1px solid black;
-        box-sizing: border-box;
-        
     }
     
     .content_wrap form{
     	width:980px;
         height: 100%;
          z-index:-10;
+          padding-left:90px;
     }
     h2.main_title:not(.content-header){
         font-size: 23px;
@@ -47,23 +27,21 @@
         height:90%;
         
     }
-    #content .top_area{
+     #content .top_area{
         height:5%;
-        border-bottom: 1px solid #d8d8d8;
+        padding-left:90px;
     }
     #content .submit_area{
-        height:3%;
-        border:1px solid red;
-        display: block;
+        display: inline-block;
         padding-right:20px;
-        padding-top:5px;
+        padding-top:50px;
+        padding-left:200px;
     }
     
     
     .left_wrap{
         display: inline-block;
         width:200px;
-        border:1px solid black;
         float:left;
         padding:0px;
     }
@@ -79,6 +57,7 @@
     	position:relative;
 	    width: 160px;
 	    height: 160px;
+	     padding-left:30px;
 	    /* overflow: hidden; */
     }
  
@@ -86,6 +65,7 @@
         width:100%;
         height: auto;
         z-index:-100;
+        border:3px solid #006579;
         
     }
     .event_img_area .btn_area{
@@ -145,7 +125,6 @@
     
     .right_wrap:not(.content-header){
         width:750px;
-        border:1px solid black;
         float:right;
         padding-right: 20px;
     }
@@ -154,7 +133,7 @@
         width: 100%;
         display: block;
         border:none;
-        border-bottom: 1px dashed black;
+        border-bottom: 1px solid #EAEAEA;
     }
     fieldset:first-child {
         padding-top: 0;
@@ -239,4 +218,42 @@
     }
     #imgUp{
     	align-content: center;
+    }
+    /*버튼 스타일*/
+    button{
+      background:#4ABFD3;
+      color:#fff;
+      border:none;
+      position:relative;
+      height:60px;
+      font-size:1.6em;
+      font-weight: 600;
+      padding:0 2em;
+      cursor:pointer;
+      transition:800ms ease all;
+      outline:none;
+    }
+    button:hover{
+      background:#fff;
+      color:#4ABFD3;
+    }
+    button:before,button:after{
+      content:'';
+      position:absolute;
+      top:0;
+      right:0;
+      height:2px;
+      width:0;
+      background: #4ABFD3;
+      transition:400ms ease all;
+    }
+    button:after{
+      right:inherit;
+      top:inherit;
+      left:0;
+      bottom:0;
+    }
+    button:hover:before,button:hover:after{
+      width:100%;
+      transition:800ms ease all;
     }

@@ -3,7 +3,6 @@
 <%@ page import = "kr.co.ticketsea.admin.show.model.vo.*" 
 	import = "java.util.ArrayList"%>
 <%
-
 	MiniPgData mpd = (MiniPgData)request.getAttribute("miniPgData");
 	ArrayList<MiniShow> list=mpd.getList(); 
 	String pageNavi = mpd.getPageNavi();
@@ -14,8 +13,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <!-- 외부 스타일 시트 불러오기 -->
-    <link href="../../css/admin_common.css" rel="stylesheet" type="text/css">
-    <link href="../../css/ad_miniShowList.css" rel="stylesheet" type="text/css">
+    <link href="/css/admin_common.css" rel="stylesheet" type="text/css">
+    <link href="/css/ad_miniShowList.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 		<div id="wrapper">
@@ -70,17 +69,17 @@
                         <td width="20%">공연명</td>
                         <td width="10%">작성자</td>
                         <td width="20%">공연장소</td>
-                        <td width="15%">작성일</td>
+                        <td width="15%">공연일</td>
                         <td>승인여부</td>
                        </thead>
                        <%for(MiniShow ms : list) {%>
                        <tr>
-                           <td><a href="/miniShowWtInfo.do?msNo=<%=ms.getMs_no() %>"><%=ms.getMs_no() %></a></td>
-                           <td><%=ms.getMs_name() %></td>
-                           <td><%=ms.getMs_userId() %></td>
-                           <td><%=ms.getMs_place() %></td>
-                           <td><%=ms.getMs_wrtdate() %></td>
-                           <td><input type="button" value="승인" onclick="approve('<%=ms.getMs_no()%>');"/>&nbsp;&nbsp;<input type="button" value="거부" onclick="refuse('<%=ms.getMs_no()%>');"/></td>
+                           <td><a href="/miniShowWtInfo.do?msNo=<%=ms.getBoardp_no() %>"><%=ms.getBoardp_no() %></a></td>
+                           <td><%=ms.getBoardp_title() %></td>
+                           <td><%=ms.getBoardp_writer() %></td>
+                           <td><%=ms.getBoardp_location() %></td>
+                           <td><%=ms.getBoardp_date()%></td>
+                           <td><input type="button" value="승인" onclick="approve('<%=ms.getBoardp_no()%>');"/>&nbsp;&nbsp;<input type="button" value="거부" onclick="refuse('<%=ms.getBoardp_no()%>');"/></td>
                        </tr>
                         <%} %>
                     </table>

@@ -62,7 +62,7 @@
               <div id="content">
         <div class="content_wrap">
             <div class="top_area">
-                <h2 class="main_title">공연등록</h2>
+                <h2 class="main_title">공연수정</h2>
             </div>
             <!-- form 태그 -->
        		<form action="/adShowUpdate.do" method="post" enctype="multipart/form-data" id="updateForm">
@@ -71,14 +71,8 @@
                 <div class="input_area">
                     <!--이미지영역-->
                     <div class="event_img_area">
-                        <img class="show_post" src="../../img/ticketsea_poster.png" data-default-src="../../img/ticketsea_poster.png" alt="공연포스터" style="width:160px; height:160px;">
-                        <!--이미지 업로드 버튼-->
-                        <div class="upload_btn">
-                            <input type="file" class="imgupload" title="공연포스터업로드" value="이미지업로드">
-                            <button type="button" class="btn_change_img">사진변경</button>
-                            <!--파일 업로드 후 사진 삭제하기 버튼 생김-->
-                            <!--<button type="button" class="btn_delete_upload">삭제하기</button>-->
-                        </div>
+                        <img class="show_post" src="/img/poster/<%=show.getShow_poster()%>" data-default-src="../../img/ticketsea_poster.png" alt="공연포스터" style="width:140px; height:160px;">
+                        
                     </div>
                 </div>
                 </div>
@@ -102,7 +96,7 @@
                         </legend>
                         <div class="edit">
                             <div class="write_wrap">
-                                <select class="category_select" id="category" name="sc_code">
+                                <select class="category_select" id="category" name="sc_code" value="">
                                     <%for(ShowCategory sc : scList) {%>
                                     <option value="<%=sc.getSc_code()%>"><%=sc.getSc_name()%></option>
                             		<%} %>
@@ -178,13 +172,35 @@
                             </div>
                         </div>
                     </fieldset>
+                    <fieldset class="edit_poster">
+                        <legend>
+                          <h3 class="title">기존 공연 포스터</h3>
+                        </legend>
+                        <div class="edit">
+                            <div class="write_wrap">
+                           		<%=show.getShow_poster()%>
+                           		 <input type="hidden" name="existing_poster" value="<%=show.getShow_poster()%>"/>
+                            </div>
+                        </div>
+                    </fieldset>
                   <fieldset class="edit_poster">
                         <legend>
                           <h3 class="title">공연포스터</h3>
                         </legend>
                         <div class="edit">
                             <div class="write_wrap">
-                           		<input type="file" id="show_poster" value="<%=show.getM_show_no() %>"name="show_poster"/>
+                           		<input type="file" id="show_poster" name="show_poster"/>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="edit_detailInfo">
+                        <legend>
+                          <h3 class="title">기존 세부정보</h3>
+                        </legend>
+                        <div class="edit">
+                            <div class="write_wrap">
+                           		<%=show.getShow_dtInfo()%>
+                           		 <input type="hidden" name="existing_dtInfo" value="<%=show.getShow_dtInfo()%>"/>
                             </div>
                         </div>
                     </fieldset>
@@ -198,11 +214,12 @@
                             </div>
                         </div>
                     </fieldset>
+                    <div class="submit_area">
+            	<input type="submit" onclick = "return showUpdate();" value="공연수정" style="float:right;" width="70px" height="40">
+           			 </div>
                 </div>
             </div>
-            <div class="submit_area">
-            	<input type="submit" onclick = "return showUpdate();" value="공연수정" style="float:right;" width="70px" height="40">
-            </div>
+          
            </form>
             </div>
        	 </div>
@@ -212,6 +229,38 @@
         </div>
         
         <script>
+        /* file onchange */
+		var sel_file;
+		
+		$(document).ready(function(){
+			$("#show_poster").on("change",handleImgFileSelect);
+			$("#placeSearch").click(function(){
+		    	location.href="/views/admin/placeInsert.jsp";
+		    });
+			function handleImgFileSelect(e){
+				var files=e.target.files;
+				var filesArr=Array.prototype.slice.call(files);
+				
+				filesArr.forEach(function(f){
+					if(!f.type.match("image.*")){ //이미지 확장자만 가능
+						alert("이미지 확장자만 가능합니다.");
+						return;
+					}
+					sel_file=f;
+					
+					var reader=new FileReader();
+					reader.onload = function(e){
+						$("#postImg").attr("src",e.target.result);
+					}
+					reader.readAsDataURL(f);
+				});
+			}
+        $(window).load(function() {
+        	  // 로딩 완료되었을때
+        	  $("#category").val(<%=show.getSc_code()%>);
+        	  $("#th_no").val(<%=show.getTh_no()%>);
+        	});
+        	 
     	function showUpdate(){
     		var category= document.getElementById("category").value;
     		var title= document.getElementById("title").value;
