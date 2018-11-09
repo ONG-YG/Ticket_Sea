@@ -91,44 +91,9 @@ $(function(){
 			$('#b_a_12').attr("href","/show.do?m_show_no="+data[12].no+"");
 			$('#b_strong_12').text(data[12].name);
 			
-			//랭킹 리스트
-			$('#r_img_1').attr("src","/img/poster/"+data[13].poster+"");
-			$('#r_a_1').attr("href","/show.do?m_show_no="+data[13].no+"");
 			
-			$('#r_aa_1').text("1. "+data[13].name);
-			$('#r_aa_1').attr("href","/show.do?m_show_no="+data[13].no+"");
 			
-			$('#r_aa_2').text("2. "+data[14].name);
-			$('#r_aa_2').attr("href","/show.do?m_show_no="+data[14].no+"");
 			
-			$('#r_aa_3').text("3. "+data[15].name);
-			$('#r_aa_3').attr("href","/show.do?m_show_no="+data[15].no+"");
-			
-			$('#r_aa_4').text("4. "+data[16].name);
-			$('#r_aa_4').attr("href","/show.do?m_show_no="+data[16].no+"");
-			
-			$('#r_aa_5').text("5. "+data[17].name);
-			$('#r_aa_5').attr("href","/show.do?m_show_no="+data[17].no+"");
-			
-			//최신 공연
-			
-			$('#l_img_1').attr("src","/img/poster/"+data[11].poster+"");
-			$('#l_a_1').attr("href","/show.do?m_show_no="+data[11].no+"");
-			
-			$('#l_aa_1').text("1. "+data[11].name);
-			$('#l_aa_1').attr("href","/show.do?m_show_no="+data[11].no+"");
-			
-			$('#l_aa_2').text("2. "+data[18].name);
-			$('#l_aa_2').attr("href","/show.do?m_show_no="+data[18].no+"");
-			
-			$('#l_aa_3').text("3. "+data[19].name);
-			$('#l_aa_3').attr("href","/show.do?m_show_no="+data[19].no+"");
-			
-			$('#l_aa_4').text("4. "+data[20].name);
-			$('#l_aa_4').attr("href","/show.do?m_show_no="+data[20].no+"");
-			
-			$('#l_aa_5').text("5. "+data[21].name);
-			$('#l_aa_5').attr("href","/show.do?m_show_no="+data[21].no+"");
 			
 			// 윙배너(왼쪽)
 			$('#wl_img_1').attr("src","/img/poster/"+data[22].poster+"");
@@ -149,10 +114,83 @@ $(function(){
 			$('#wr_a_2').attr("href","/show.do?m_show_no="+data[26].no+"");
 			
 			
+
 			
 			
+			//랭킹 리스트
+			$('#r_img').attr("src","/img/poster/"+data[0].poster+"");
+			$('#r_a_1').attr("href","/show.do?m_show_no="+data[0].no+"");
+			
+			$('#r_aa_1').text("1. "+data[0].name);
+			$('#r_aa_2').text("2. "+data[1].name);
+			$('#r_aa_3').text("3. "+data[2].name);
+			$('#r_aa_4').text("4. "+data[3].name);
+			$('#r_aa_5').text("5. "+data[4].name);
 			
 			
+			$("#r_aa_1").hover(function(){
+				$("#r_img").attr("src","/img/poster/"+data[0].poster);
+				$('#r_aa_1').attr("href","/show.do?m_show_no="+data[0].no+"");
+				$('#r_aa_1').text("1. "+data[0].name);
+			});
+			$("#r_aa_2").hover(function(){
+				$("#r_img").attr("src","/img/poster/"+data[1].poster);
+				$('#r_aa_2').attr("href","/show.do?m_show_no="+data[1].no+"");
+				$('#r_aa_2').text("2. "+data[1].name);
+			});
+			$("#r_aa_3").hover(function(){
+				$("#r_img").attr("src","/img/poster/"+data[2].poster);
+				$('#r_aa_3').attr("href","/show.do?m_show_no="+data[2].no+"");
+				$('#r_aa_3').text("3. "+data[2].name);
+			});
+			$("#r_aa_4").hover(function(){
+				$("#r_img").attr("src","/img/poster/"+data[3].poster);
+				$('#r_aa_4').attr("href","/show.do?m_show_no="+data[3].no+"");
+				$('#r_aa_4').text("4. "+data[3].name);
+			});
+			$("#r_aa_5").hover(function(){
+				$("#r_img").attr("src","/img/poster/"+data[4].poster);
+				$('#r_aa_5').attr("href","/show.do?m_show_no="+data[4].no+"");
+				$('#r_aa_5').text("5. "+data[4].name);
+			});
+			
+			//최신 공연
+			
+			$('#l_img').attr("src","/img/poster/"+data[10].poster+"");
+			$('#l_a_1').attr("href","/show.do?m_show_no="+data[10].no+"");
+			
+			$('#l_aa_1').text("1. "+data[10].name);
+			$('#l_aa_2').text("2. "+data[11].name);
+			$('#l_aa_3').text("3. "+data[12].name);
+			$('#l_aa_4').text("4. "+data[13].name);
+			$('#l_aa_5').text("5. "+data[14].name);
+			
+			
+			$("#l_aa_1").hover(function(){
+				$("#l_img").attr("src","/img/poster/"+data[10].poster);
+				$('#l_aa_1').attr("href","/show.do?m_show_no="+data[10].no+"");
+				$('#l_aa_1').text("1. "+data[10].name);
+			});
+			$("#l_aa_2").hover(function(){
+				$("#l_img").attr("src","/img/poster/"+data[11].poster);
+				$('#l_aa_2').attr("href","/show.do?m_show_no="+data[11].no+"");
+				$('#l_aa_2').text("2. "+data[11].name);
+			});
+			$("#l_aa_3").hover(function(){
+				$("#l_img").attr("src","/img/poster/"+data[12].poster);
+				$('#l_aa_3').attr("href","/show.do?m_show_no="+data[12].no+"");
+				$('#l_aa_3').text("3. "+data[12].name);
+			});
+			$("#l_aa_4").hover(function(){
+				$("#l_img").attr("src","/img/poster/"+data[13].poster);
+				$('#l_aa_4').attr("href","/show.do?m_show_no="+data[13].no+"");
+				$('#l_aa_4').text("4. "+data[13].name);
+			});
+			$("#l_aa_5").hover(function(){
+				$("#l_img").attr("src","/img/poster/"+data[14].poster);
+				$('#l_aa_5').attr("href","/show.do?m_show_no="+data[14].no+"");
+				$('#l_aa_5').text("5. "+data[14].name);
+			});
 			
 			
 			
@@ -218,7 +256,7 @@ $(function(){
                     <ul>
                         <li class="list_img">
                             <a id="r_a_1" href="#">
-                                <img id="r_img_1" src="" width="178px" height="216px">
+                                <img id="r_img" src="" width="178px" height="216px">
                             </a>
                         </li>
                         <!-- 이미지 -->
@@ -258,7 +296,7 @@ $(function(){
                     <ul>
                         <li class="list_img">
                             <a id="l_a_1" href="#">
-                                <img id="l_img_1" src="" width="178px" height="216px">
+                                <img id="l_img" src="" width="178px" height="216px">
                             </a>
                         </li>
                         <!-- 이미지 -->
