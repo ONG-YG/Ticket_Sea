@@ -47,8 +47,7 @@ public class ShowInsertServlet extends HttpServlet {
 				
 			if(session!=null) {
 				Member m = (Member)session.getAttribute("member");
-					
-				if(m!=null && m.getMemberGrade()=='A') {
+				if(m.getMemberGrade()=='A' && m!=null ) {
 					//=====파일 사이즈 업로드==========
 					//최대 업로드 파일 사이즈
 					int fileSizeLimit = 5 * 1024 * 1024;
@@ -101,11 +100,13 @@ public class ShowInsertServlet extends HttpServlet {
 				}else {
 						throw new Exception();
 				}
+			}else {
+				throw new Exception();
 			}
 		
 		}catch (Exception e) {
 			
-			response.sendRedirect("/views/admin/error.jsp");
+			response.sendRedirect("/views/admin/adminError.jsp");
 		}
 	}
 

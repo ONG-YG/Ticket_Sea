@@ -35,7 +35,7 @@
     
     /* 990px 고정 사이즈 */
     #h_inner{width: 990px; height: 100%; margin: 0px auto;}
-    #c_inner{width: 990px; height: 3000px; margin: 0px auto; padding: 70px 0 250px 0px;}
+    #c_inner{width: 990px; height:3000px; margin: 0px auto; padding: 70px 0 250px 0px;}
     #f_inner{width: 990px; margin: 0px auto;}
 
     /* top 버튼 */
@@ -277,7 +277,7 @@
 %>
 
            
-            <div id="right_view">
+            <div id="right_view" >
                 
                 <div id="infoHeader">
                     <div id="i_H_title">
@@ -337,9 +337,9 @@
                     </div>
                 </div>
        			
-       			 <div id="infoContent">
+       			 <div id="infoContent" >
                     <div id="i_C_category">
-                        <div id="i_C_Category_a" >
+                        <div id="i_C_Category_a">
                             <button onclick="cateAclick();" style="width:100%; height:100%; background-color: skyblue; color:white;">상세정보</button>
                         </div>
                         

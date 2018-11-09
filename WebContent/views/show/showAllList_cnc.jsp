@@ -20,7 +20,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>소규모 공연 목록</title>
+<title>콘서트 목록</title>
 <script
   src="https://code.jquery.com/jquery-3.3.1.js"
   integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
@@ -296,7 +296,7 @@
         <% for (Show s : list) { %>
         	<% if(s.getSc_code().equals("CNC")){ %>
             <div id = "prContestDiv1">
-	            <div id="prContestPic"><a href="/show.do?m_show_no=<%=s.getM_show_no()%>"><img src="<%=s.getShow_poster() %>" style="width:210px; height:300px; align-content: center;"></a></div> <br>
+	            <div id="prContestPic"><a href="/show.do?m_show_no=<%=s.getM_show_no()%>"><img src="/img/poster/<%=s.getShow_poster() %>" style="width:210px; height:300px; align-content: center;"></a></div> <br>
 	        	<div id="prContestTitle" style="font-size: 13px; font-weight: bold;"><a href="/show.do?m_show_no=<%=s.getM_show_no()%>"><%=s.getShow_name()%> </a></div>
         	</div>
          <% }}  %> 

@@ -10,8 +10,8 @@
 
 
 <script>
-alert("잘못된 접근입니다.");
-window.close();
+alert("로그인에 실패하였습니다.");
+location.href="/views/member/login.jsp";
 </script>
 
 </body>

@@ -312,7 +312,8 @@ function delPromo(){
                     </div>
                     
                     <div id="i_H_pic">
-                       		<img src="/<%= promo.getBoardP_filePath()%>" style="width:360px; height:465px;">
+                       		 <img src="/img/promoPoster/<%=promo.getBoardP_fileName() %>" style="width:365px; height:450px; align-content: center;">
+                       		
                     </div>
                     
                     <div id="i_H_info">
@@ -326,6 +327,19 @@ function delPromo(){
                         <br>
                         <div>
                         <strong><div id = "info_tit">공연장소</div></strong> <%=promo.getBoardP_location()%>
+                        </div>
+                       
+                        <br>
+                        <div>
+                        <strong><div id = "info_tit">공연날짜</div></strong> <%=promo.getBoardP_date()%>
+                        </div>
+                        <br>
+                        <div>
+                        <strong><div id = "info_tit">가격</div></strong> <%=promo.getBoardP_price()%>
+                        </div>
+                         <br>
+                        <div>
+                        <strong><div id = "info_tit">상세정보</div></strong> <%=promo.getBoardP_contents().replace("\r\n", "<br>")%>
                         </div>
                         <br>
                         <br>
@@ -350,8 +364,8 @@ function delPromo(){
                     
                     <div id="i_C_content_a">
                         <br><br>
-                         <img src="<%= promo.getBoardP_filePath()%>" style="width:700px; height:850px; padding : 50px;">
-                         <%=promo.getBoardP_filePath() %>
+                         <img src="/img/promoPoster/<%=promo.getBoardP_fileName() %>" style="width:700px; height:850px; padding : 50px;">
+                        
                         <table class="detail_info_tbl">
                             
                             <colgroup>

@@ -35,8 +35,6 @@ public class ReserveDeleteServlet extends HttpServlet {
 
 		// 파라미터 불러오기(bk_no불러오기)
 		String bkNo = request.getParameter("reserveDelete");
-		
-		
 		// 비즈니스 로직
 		int result = new MypageService().reserveDelete(bkNo);
 		

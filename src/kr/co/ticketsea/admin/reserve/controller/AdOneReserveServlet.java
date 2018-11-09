@@ -9,9 +9,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import kr.co.ticketsea.admin.reserve.model.service.AdReserveService;
 import kr.co.ticketsea.admin.reserve.model.vo.ReserveApInfo;
+import kr.co.ticketsea.member.model.vo.Member;
 import kr.co.ticketsea.reserve.model.service.ReserveService;
 import kr.co.ticketsea.reserve.model.vo.SelectedSeat;
 
@@ -34,23 +36,41 @@ public class AdOneReserveServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
+		try {
+			request.setCharacterEncoding("utf-8");
+			
+			HttpSession session = request.getSession(false);
+				
+			if(session!=null) {
+				Member m = (Member)session.getAttribute("member");
+					
+				if(m!=null && m.getMemberGrade()=='A') {
+					String reserveNo = request.getParameter("rs_bk_no");
+					
+					ReserveApInfo rs= new AdReserveService().selectOneReserve(reserveNo);
+					ArrayList<SelectedSeat> seatList = new AdReserveService().reserveSeat(reserveNo);
+					
+					rs.setSeatInfo(seatList);
+					
+					if(rs!=null) {
+						RequestDispatcher view = request.getRequestDispatcher("views/admin/ad_reserveInfo.jsp");
+						request.setAttribute("ReserveInfo", rs);
+						view.forward(request, response);
+					}else {
+						System.out.println("목록없음");
+						response.sendRedirect("/views/admin/error.jsp");
+					} 
+				}else {
+					throw new Exception();
+				}
+			}else {
+				throw new Exception();
+			}
+			
+		}catch (Exception e) {
+			response.sendRedirect("/views/admin/adminError.jsp");
+		}
 		
-		String reserveNo = request.getParameter("rs_bk_no");
-		
-		ReserveApInfo rs= new AdReserveService().selectOneReserve(reserveNo);
-		ArrayList<SelectedSeat> seatList = new AdReserveService().reserveSeat(reserveNo);
-		
-		rs.setSeatInfo(seatList);
-		
-		if(rs!=null) {
-			RequestDispatcher view = request.getRequestDispatcher("views/admin/ad_reserveInfo.jsp");
-			request.setAttribute("ReserveInfo", rs);
-			view.forward(request, response);
-		}else {
-			System.out.println("목록없음");
-			response.sendRedirect("/views/admin/error.jsp");
-		} 
 	}
 
 	/**

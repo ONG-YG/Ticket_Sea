@@ -273,7 +273,8 @@
                  <table id = "qna_header">
                 	<tr>
                 	<td id = "qna_header_a">제목</td>
-                	<td id = "qna_header_b"><%= qna.getBoardQ_title()%></td>
+                	<td id = "qnae_header_b"><span name="boardQ_title" id="boardQ_title"><%= qna.getBoardQ_title()%></span>
+                	<input type="hidden" name="boardQ_title_fd" id="boardQ_title_fd" style="width:100%; height:100%;"" value="<%=qna.getBoardQ_title()%>"/></td>
                 	</tr>
                 	
                 	<tr>
@@ -296,9 +297,12 @@
                 
                 <br>
                 
-                <span id = "qna_contents">
-                		<%= qna.getBoardQ_contents() %>
-        		</span>
+                <div id = "boardQ_contents" name="boardQ_contents" style="border:1px solid #dedede; width : 100%;">
+					<%= qna.getBoardQ_contents().replace("\r\n", "<br>") %>
+					</div>
+					<textarea id="boardQ_contents_fd" rows="17" cols="50" style="display:none; width:100%;">
+					<%=qna.getBoardQ_contents().replace("\r\n", "<br>") %>
+					</textarea>
                 
                 <br>
                 
@@ -308,24 +312,70 @@
 				%>
                 
                 <%
-					if(m!=null && m.getMemberId().equals("admin")){
+					if(m!=null){
+						if(m.getMemberId().equals("admin") || m.getMemberId().equals(qna.getBoardQ_writer())) {
+					
 				%>
                 <br>
                 <button id="btn1" onclick="modifyActive();" style="width: 70px; height: 30px; float:right;">수정</button> 
 				<button id="btn2" onclick="delQna();" style="width: 70px; height: 30px; float:right;">삭제</button> 
-                <%} %>
+                <%} }%>
                 
                 <br><br>
               	<button onclick="list();" style="width: 70px; height: 30px; float:right;">목록</button> 
                 
-                <script>
-                function list(){
-            		location.href="/qnaList.do";
-            	}
+                 <form action="/qnaUpdate.do" method="post" id="updateForm">
+					<input type="hidden" id ="boardQ_no" name="boardQ_no" value="<%=qna.getBoardQ_no()%>"/>
+					<input type="hidden" id="title_form" name="title_form" />
+					<input type="hidden" id="contents_form" name="contents_form" />
+				</form>
                 
-                function delQna(){
-            		location.href="/qnaDelete.do?boardQ_no=<%=qna.getBoardQ_no()%>";
-            	}
+                 <script>
+	                function list(){
+	            		location.href="/qnaList.do";
+	            	}
+	                
+	            	function modifyActive(){
+	            		document.getElementById("boardQ_title").style.display="none";
+	            		document.getElementById("boardQ_title_fd").type="text";
+	            		
+	            		
+	            		document.getElementById("boardQ_contents").style.display="none";
+	            		document.getElementById("boardQ_contents_fd").style.display="block";
+	            		
+	            		document.getElementById("btn2").innerHTML="취소";	
+	            		document.getElementById("btn2").onclick=function(){cancelQna()};
+	            		
+	            		document.getElementById("btn1").onclick=function(){modifySubmit()};
+	            	}
+	            	function modifySubmit(){
+	            		document.getElementById("title_form").value = 
+	            			document.getElementById("boardQ_title_fd").value;
+	            		
+	            		document.getElementById("contents_form").value = 
+	            			document.getElementById("boardQ_contents_fd").value;
+	            		
+	            		document.getElementById("updateForm").submit();
+	            	}
+	                function delQna(){
+	            		location.href="/qnaDelete.do?boardQ_no=<%=qna.getBoardQ_no()%>";
+	            	}
+	                function cancelQna(){
+	            		document.getElementById("boardQ_title").style.display="inline";
+	            		document.getElementById("boardQ_title_fd").type="hidden";
+	            		document.getElementById("boardQ_title_fd").value=
+	            		document.getElementById("boardQ_title").innerHTML;
+	            		
+	            		document.getElementById("boardQ_contents").style.display="inline";
+	            		document.getElementById("boardQ_contents_fd").style.display="none";
+	            		document.getElementById("boardQ_contents_fd").value=
+	            		document.getElementById("boardQ_contents").innerHTML;
+	            		
+	            		document.getElementById("btn2").innerHTML="삭제";	
+	            		document.getElementById("btn2").onclick=function(){delQna()};
+	            		
+	            		document.getElementById("btn1").onclick=function(){modifyActive()};	
+	            	}
                 </script>
                 
             </div>

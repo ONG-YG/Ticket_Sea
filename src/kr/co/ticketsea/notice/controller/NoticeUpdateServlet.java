@@ -36,7 +36,7 @@ public class NoticeUpdateServlet extends HttpServlet {
 		
 		
 		//2. view에서 넘겨준 데이터를 변수에 저장
-		int noticeNo = Integer.parseInt(request.getParameter("boardN_No"));
+		int noticeNo = Integer.parseInt(request.getParameter("boardN_no"));
 		System.out.println(noticeNo);
 		String title = request.getParameter("title_form");
 		String contents = request.getParameter("contents_form");
