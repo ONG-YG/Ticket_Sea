@@ -746,7 +746,7 @@ public class MypageDao {
 	}
 
 	public ArrayList<QnaMgr> getQnaCurrentPage(Connection conn, int currentPage, int recordCountPerPage,
-			String memberName) {
+			String memberId) {
 		
 
 		PreparedStatement pstmt = null;
@@ -768,10 +768,10 @@ public class MypageDao {
 		// ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 쿼리문 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 		String query = "select * from\r\n" + 
 				"(select a.*,row_number() over (order by boardq_date asc) as num from\r\n" + 
-				"(select boardq_title, boardq_hit, boardq_date, b.member_name from \r\n" + 
+				"(select boardq_title, boardq_hit, boardq_date, b.member_Id from \r\n" + 
 				"board_qna a, member b\r\n" + 
-				"where a.boardq_writer=b.member_name) a\r\n" + 
-				"where member_name = ?)\r\n" + 
+				"where a.boardq_writer=b.member_Id) a\r\n" + 
+				"where member_Id = ?)\r\n" + 
 				"where num between ? and ?\r\n" + 
 				"order by num asc";
 
@@ -780,7 +780,7 @@ public class MypageDao {
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, memberName);
+			pstmt.setString(1, memberId);
 			pstmt.setInt(2, start);
 			pstmt.setInt(3, end);
 			
@@ -809,7 +809,7 @@ public class MypageDao {
 	}
 
 	public String getQnaPageNavi(Connection conn, int currentPage, int recordCountPerPage, int naviCountPerPage,
-			String memberName) {
+			String memberId) {
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -819,15 +819,15 @@ public class MypageDao {
 
 		String query = "select count(*) as totalcount from\r\n" + 
 				"(select a.*,row_number() over (order by boardq_date asc) as num from\r\n" + 
-				"(select boardq_title, boardq_hit, boardq_date, b.member_name from \r\n" + 
+				"(select boardq_title, boardq_hit, boardq_date, b.member_Id from \r\n" + 
 				"board_qna a, member b\r\n" + 
-				"where a.boardq_writer=b.member_name) a\r\n" + 
-				"where member_name = ?)";
+				"where a.boardq_writer=b.member_id) a\r\n" + 
+				"where member_id = ?)";
 
 		try {
 			pstmt = conn.prepareStatement(query);
 
-			pstmt.setString(1, memberName);
+			pstmt.setString(1, memberId);
 
 			rset = pstmt.executeQuery();
 

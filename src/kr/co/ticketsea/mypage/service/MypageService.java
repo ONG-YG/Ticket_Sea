@@ -138,7 +138,7 @@ public class MypageService {
 		
 	}
 
-	public ReservePageData qnaMgrList(int currentPage, String memberName) {
+	public ReservePageData qnaMgrList(int currentPage, String memberId) {
 
 		Connection conn = JDBCTemplate.getConnection();
 		
@@ -147,10 +147,10 @@ public class MypageService {
 		
 		// Service에서 DAO를 호출 (2번의 DAO를 호출)
 		// 1. 현재 페이지의 게시물 리스트 요청
-		ArrayList<QnaMgr> list = new MypageDao().getQnaCurrentPage(conn,currentPage,recordCountPerPage,memberName);
+		ArrayList<QnaMgr> list = new MypageDao().getQnaCurrentPage(conn,currentPage,recordCountPerPage,memberId);
 		
 		// 2. 현재 페이지를 중심으로 만들어지는 navi 리스트 요청
-		String pageNavi = new MypageDao().getQnaPageNavi(conn,currentPage,recordCountPerPage,naviCountPerPage,memberName);
+		String pageNavi = new MypageDao().getQnaPageNavi(conn,currentPage,recordCountPerPage,naviCountPerPage,memberId);
 		
 		// 메소드에 담아서 넣기
 		ReservePageData qpd = null;
