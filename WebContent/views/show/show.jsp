@@ -24,7 +24,6 @@
 </script>
 <style>
     /* 전체 사이즈 조정 */
-    
     ul, li, a{list-style: none; margin: 0px; padding: 0px; text-decoration: none; color: black;}
     
     div{box-sizing: border-box;}
@@ -35,7 +34,7 @@
     
     /* 990px 고정 사이즈 */
     #h_inner{width: 990px; height: 100%; margin: 0px auto;}
-    #c_inner{width: 990px; height:3000px; margin: 0px auto; padding: 70px 0 250px 0px;}
+    #c_inner{width: 990px; height :3000px; margin: 0px auto; padding: 70px 0 250px 0px;}
     #f_inner{width: 990px; margin: 0px auto;}
 
     /* top 버튼 */
@@ -200,7 +199,7 @@
     
     .detail_info_tbl{
         border:1px solid #dedede; 
-        width:100%;
+        width:88%;
         height:30%;
         background:#f2f2f0;
         font-size:12px;
@@ -322,7 +321,8 @@
                         <br>
                         <br>
                         <br>
-                        
+                        <br>
+                        <br>
                         <input type="button" value="예매하기" onclick = "reserveOnclick();" style="width:250px; height:80px; background-color:skyblue; color:white; float:right;">
                         
                         <script>
@@ -336,7 +336,7 @@
                         </script>
                     </div>
                 </div>
-       			
+       			<br>
        			 <div id="infoContent" >
                     <div id="i_C_category">
                         <div id="i_C_Category_a">
@@ -352,7 +352,7 @@
                         </div>
                     </div>
                     
-                    <div id="i_C_content_a">
+                    <div id="i_C_content_a" style="overflow:scroll; width:990px; height:95%;">
                         <br><br>
 
                          <img src="/img/poster/<%=show.getShow_dtInfo() %>" style="width:700px; padding : 50px;">
@@ -427,6 +427,7 @@
                      </div>
                      
                     <div id="i_C_content_b" style="display:none;">
+                    
                     </div>
             
             <style>
@@ -478,16 +479,15 @@
                 
             </style>
             
-                <div id="i_C_content_c" style="display:none;">
-                <% ArrayList<Comment> list = pd.getList(); %>
+              <div id="i_C_content_c" style="display:none;">
+                
                     <div id="c_title">
-                    네티즌 후기
+                    	네티즌 후기
                     </div>
-                    
                     <div id="c_guide">
-                    네티즌 후기 게시판에 티켓 양도와 매매성 등 글과 같이 게시판 성격에 벗어난 글을 게재할 경우 사전 통보 없이 삭제될 수 있습니다. <br>
-                    티켓 양도 및 매매의 경우 전화번호, 이메일 등의 개인정보가 악용될 소지가 있으므로 게재를 삼가 주시기 바랍니다. <br>
-                    운영 규정을 지속적으로 어기는 게시글을 게재할 경우 티켓링크 게시판 이용이 제한될 수 있습니다.
+			                    네티즌 후기 게시판에 티켓 양도와 매매성 등 글과 같이 게시판 성격에 벗어난 글을 게재할 경우 사전 통보 없이 삭제될 수 있습니다. <br>
+			                    티켓 양도 및 매매의 경우 전화번호, 이메일 등의 개인정보가 악용될 소지가 있으므로 게재를 삼가 주시기 바랍니다. <br>
+			                    운영 규정을 지속적으로 어기는 게시글을 게재할 경우 티켓링크 게시판 이용이 제한될 수 있습니다.
                     </div>
                     
                     <form action="/showInsertComment.do" method="post">
@@ -498,20 +498,21 @@
                                           style="width:700px; height: 25px; resize:none; margin:0px; 0px; 0px;" maxlength="3000"
                                           placeholder="주민번호, 전화번호, 이메일 등 개인정보를 남기면 타인에 의해 악용될 소지가 있습니다."></textarea>
                                  <input type="hidden" name="m_show_no" value="<%=show.getM_show_no()%>"/>       
-                                <input type="submit" class="write_review_button"  value="후기작성">
+                                 <input type="submit" class="write_review_button"  value="후기작성">
                                 
-                            </div>
-                            <% }else{ %>
+                           </div>
+                           
+                    <% }else{ %>
                             <div class="write_review">
                                 <span><h3>댓글을 작성하려면 로그인 해주세요.</h3></span>
-                                <%} %>
-                                </div>
+                    <% } %>
+                            </div>
 					</form>
             
         <div class="review_list">
-                   
+        
 		        <ul id="reviewUl" style="word-break: break-all;">
-		            
+		        <% ArrayList<Comment> list = pd.getList(); %>
 		            <%
 					if(list.isEmpty()){ //댓글이 비어 있다면 (없다면!)
 					%>
@@ -533,19 +534,22 @@
 		                <div style = "border-bottom : 1px solid #dedede;">
 		               	<%=co.getContents()%>
 		               	
+		               	
 		               	<form action="/showDeleteComment.do">
 			               	<input type="hidden" name="m_show_no" value="<%=show.getM_show_no()%>"/>
 			               	<input type="hidden" name="showcomment" value="<%=co.getCommentNo()%>"/>
+			               	<% if (m!=null) {
+			               		if (m.getMemberId().equals(co.getUserId()) || m.getMemberId().equals("admin")){%>
 							<input type="submit" value="삭제" style="background-color: skyblue; color:white;">
+							<%}} %>
 		               	</form>
 		               	
 		               	</div>
 		                <%}%>
 		              <%}%>
 		            </li>
-		            
-		           </ul>
-    </div>
+		          </ul>
+    	</div>
             
           </div>
 
