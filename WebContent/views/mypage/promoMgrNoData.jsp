@@ -195,7 +195,7 @@
             </ul>    
             <div id="right_view">
                 <div class="r_line">
-                    <h3>나의 문의 내역</h3>
+                    <h3>나의 소규모 공연 관리</h3>
                 </div>
                 <div class="r_top">
                     소규모 공연 확인 메뉴 입니다.<br>
