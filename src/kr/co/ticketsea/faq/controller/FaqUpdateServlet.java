@@ -37,8 +37,8 @@ public class FaqUpdateServlet extends HttpServlet {
 		
 		//2. view에서 넘겨준 데이터를 변수에 저장
 		int boardF_no = Integer.parseInt(request.getParameter("boardF_no"));
-		String boardF_title = request.getParameter("boardF_title");
-		String boardF_contents = request.getParameter("boardF_contents");
+		String title = request.getParameter("title_form");
+		String contents = request.getParameter("contents_form");
 		String userId = null; // 수정을 요청하는 사람의 ID
 		//3. 해당 글을 수정하기 위하여 작성자를 확인하여 처리 하도록 세션을 이용
 		HttpSession session  = request.getSession(false);
@@ -48,11 +48,11 @@ public class FaqUpdateServlet extends HttpServlet {
 			if(userId!=null) 
 			{
 			//4. 비즈니스 로직 처리
-			int result = new FaqService().faqUpdate(boardF_no,boardF_title,boardF_contents,userId);
+			int result = new FaqService().faqUpdate(boardF_no,title,contents);
 			
 				if(result>0)
 				{
-					response.sendRedirect("/views/notice/updateSuccess.jsp?boardF_no="+boardF_no);
+					response.sendRedirect("/views/faq/updateSuccess.jsp?boardF_no="+boardF_no);
 					
 					
 					//response.sendRedirect("/views/notice/updateResult.jsp?noticeNo="+noticeNo+"&result=1");

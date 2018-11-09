@@ -2,6 +2,7 @@ package kr.co.ticketsea.promo.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.Savepoint;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -21,7 +22,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import kr.co.ticketsea.member.model.vo.Member;
 import kr.co.ticketsea.promo.model.service.PromoService;
-import kr.co.ticketsea.promo.model.vo.Promo;
+import kr.co.ticketsea.promo.model.vo.*;
 
 /**
  * Servlet implementation class PromoWriteServlet
@@ -58,16 +59,15 @@ public class PromoWriteServlet extends HttpServlet {
 		String artist = "";
 		String location = "";
 		String fileName = "";
+		int price=0;
+		String date = "";
 		
-		
-	
 		
 		try {
 			String userId = ((Member)session.getAttribute("member")).getMemberId();
 			//userId를 가져오도록 함 (비로그인 사용자 일시 Exception이 발생함)
 			
-			ServletContext scontext = getServletContext();
-			String uploadPath = scontext.getRealPath(fileName);
+			String uploadPath=getServletContext().getRealPath("/")+"img"+"\\"+"promoPoster";
 			
 			////////////////////////
 				int fileSizeLimit = 5 * 1024 * 1024;
@@ -82,10 +82,13 @@ public class PromoWriteServlet extends HttpServlet {
 						new DefaultFileRenamePolicy());
 				
 				title = multi.getParameter("title");
+				
 				category = multi.getParameter("category");
 				contents = multi.getParameter("contents");
 				artist = multi.getParameter("artist");
 				location = multi.getParameter("location");
+				price=Integer.parseInt(multi.getParameter("price"));
+				date = multi.getParameter("date");
 				
 				Enumeration formNames = multi.getFileNames();
 				String formName = (String)formNames.nextElement();
@@ -93,6 +96,7 @@ public class PromoWriteServlet extends HttpServlet {
 				System.out.println("파일 이름 : " + fileName);
 				
 				String fullFilePath = uploadPath+"\\"+fileName;
+				System.out.println("업로드패스 : "+uploadPath);
 				System.out.println("총 경로 : " + fullFilePath);
 				
 				File file = new File(fullFilePath); //import java.io.File
@@ -109,7 +113,7 @@ public class PromoWriteServlet extends HttpServlet {
 				
 			if(userId != null) {
 			//4. 비즈니스 로직 처리
-				int result = new PromoService().insertPromo(title, category, contents, artist, location, userId, fileName, fullFilePath, fileSize, uploadTime);
+				int result = new PromoService().insertPromo(title,category,contents,price,date,artist,location,userId,fileName);
 				
 				if(result>0)
 				{

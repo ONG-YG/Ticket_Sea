@@ -9,8 +9,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>관리자페이지</title>
 <!-- 외부 스타일 시트 불러오기 -->
-    <link href="../../css/admin_common.css" rel="stylesheet" type="text/css">
-    <link href="../../css/ad_miniApInfo.css" rel="stylesheet" type="text/css">
+    <link href="/css/admin_common.css" rel="stylesheet" type="text/css">
+    <link href="/css/ad_miniApInfo.css" rel="stylesheet" type="text/css">
 </head>
 </head>
 <body>
@@ -58,70 +58,87 @@
               <div class="top_area">
                   <h2 class="main_title">소규모 공연 정보</h2>
                </div>
-               <form action ="/adMsUpdate.do" method="post" id="updateForm" enctype="multipart/form-data">
+               <form action ="/miniShowRefuse.do?msNo=<%=ms.getBoardp_no() %>" method="post" id="updateForm" enctype="multipart/form-data">
                <div class="main_area">
                    <div class="memberInfo_table">
                     <table>
                         <tbody>
                             <tr>
                                 <th>공연번호</th>
-                                <td><%=ms.getMs_no() %></td>
-                                <input type="hidden" name="msNo" value="<%=ms.getMs_no()%>"/>
+                                <td><%=ms.getBoardp_no() %></td>
+                                <input type="hidden" name="msNo" value="<%=ms.getBoardp_no()%>"/>
                             </tr>
                             <tr>
                                 <th>장르</th>
-                                <td><%=ms.getMs_ct()%></td>
+                                <td><%=ms.getBoardp_category()%></td>
                             </tr>
                             <tr>
                                 <th>공연명</th>
-                                <td><%=ms.getMs_name() %></td>
+                                <td><%=ms.getBoardp_title()%></td>
                             </tr>
                             <tr>
                                 <th>작성자</th>
-                                <td><%=ms.getMs_userId()%></td>
+                                <td><%=ms.getBoardp_writer()%></td>
                             </tr>
                             <tr>
                                 <th>아티스트</th>
-                                <td><%=ms.getMs_artists()%></td>
+                                <td><%=ms.getBoardp_artist()%></td>
                             </tr>
                             <tr>
                                 <th>장소</th>
-                                <td><%=ms.getMs_place()%></td>
+                                <td><%=ms.getBoardp_location()%></td>
                             </tr>
                             <tr>
-                                <th>시작일</th>
-                                <td><%=ms.getMs_st_date()%></td>
+                                <th>공연일</th>
+                                <td><%=ms.getBoardp_date()%></td>
                             </tr>
                             <tr>
-                                <th>종료일</th>
-                                <td><%=ms.getMs_ed_date()%></td>
+                                <th>가격</th>
+                                <td><%=ms.getBoardp_price()%></td>
                             </tr>
                             <tr>
-                                <th>작성일</th>
-                                <td><%=ms.getMs_wrtdate()%></td>
-                            </tr>
-                            <tr>
-                            	<th>승인상태</th>
-                            	<td><%=ms.getMs_ct() %></td>
-                            </tr>
-                            <tr>
-                            	<th>기존공연포스터</th>
-                            	<td><%=ms.getMs_poster()%></td>
+                            	<th>공연포스터</th>
+                            	<td><%=ms.getBoardp_filename()%></td>
                             </tr>
                             <tr>
                                 <th>공연소개</th>
-                                <td><%=ms.getMs_intd()%></td>
+                                <td><%=ms.getBoardp_contents()%></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
                    <div id="msUpdate">
-                    <button id="updateBtn" onclick = "return refuseSubmit()">소규모공연 거부</button>
+                    <button id="refuseBtn" onclick = "return refuseSubmit()">소규모공연 거부</button>
                    </div>
                </div>
                </form>
                </div>
-               
+                <script>
+                function refuseSubmit(){
+                	var artists = document.getElementById("artists").value; 
+                	var place = document.getElementById("place").value; 
+                	var price = document.getElementById("price").value; 
+                	var intd = document.getElementById("intd").value; 
+                	
+                	if(artists==""){
+                		alert("아티스트 정보를 입력하세요");
+                		return false;
+                	}else if(place=""){
+                		alert("장소를 입력하세요");
+                		return false;
+                	}else if(!(/^[0-9]+$/.test(price))){
+                		alert("가격을 입력해주세요");
+            			return false;
+                	}
+                	else if(intd==""){
+                		alert("공연정보를 입력하세요");
+                		return false;
+                	}else{
+                		document.getElementById("refuseSubmit").submit();
+                		return true;
+                	}
+                }
+               </script>
           </div> 
         </div>
         </div>

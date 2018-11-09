@@ -84,11 +84,11 @@ public class FaqService {
 		
 	}
 
-	public int faqUpdate(int boardF_no, String boardF_title, String boardF_contents, String userId) {
+	public int faqUpdate(int boardF_no, String boardF_title, String boardF_contents) {
 		
 		Connection conn = JDBCTemplate.getConnection();
 		
-		int result = new FaqDao().faqUpdate(conn,boardF_no,boardF_title,boardF_contents,userId);
+		int result = new FaqDao().faqUpdate(conn,boardF_no,boardF_title,boardF_contents);
 		
 		if(result>0) {
 			JDBCTemplate.commit(conn);

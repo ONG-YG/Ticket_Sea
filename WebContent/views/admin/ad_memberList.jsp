@@ -18,8 +18,8 @@
 <title>회원정보리스트</title>
 
 <!-- 외부 스타일 시트 불러오기 -->
-    <link href="../../css/admin_common.css" rel="stylesheet" type="text/css">
-    <link href="../../css/ad_memberList.css" rel="stylesheet" type="text/css">
+    <link href="/css/admin_common.css" rel="stylesheet" type="text/css">
+    <link href="/css/ad_memberList.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<div id="wrapper">
@@ -105,10 +105,10 @@
                     
                     <!--회원검색-->
                     <div class="searchArea"> 
-                    <a href="#"><img src="../../img/btn_search4.png" alt="검색" style="float: right"></a>
-                
-					<input type="text" class="textInp" name="searchValue" id="searchValue" style="float: right">
-					<a href="javascript:search();"></a>
+                	<form style="display:inline;" action="/memberSearch.do" method="get">
+						<input type="submit" value="검색" style="float:right"/>
+						<input type="text" name="search" style="float:right"/>
+					</form>
 				</div>
                 </div>
                </div>

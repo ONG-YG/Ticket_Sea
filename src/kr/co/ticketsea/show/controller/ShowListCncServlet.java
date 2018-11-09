@@ -58,7 +58,7 @@ public class ShowListCncServlet extends HttpServlet {
 				}
 				else
 				{
-					response.sendRedirect("/views/notice/error.jsp");
+					response.sendRedirect("/views/show/showNullList_cnc.jsp");
 				}
 	}
 

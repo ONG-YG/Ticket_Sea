@@ -8,9 +8,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import kr.co.ticketsea.admin.show.model.service.MiniShowService;
 import kr.co.ticketsea.admin.show.model.vo.MiniShow;
+import kr.co.ticketsea.member.model.vo.Member;
 
 /**
  * Servlet implementation class MiniShowApInfoServlet
@@ -31,15 +33,32 @@ public class MiniShowApInfoServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getParameter("utf-8");
+		try {
+			request.setCharacterEncoding("utf-8");
+			
+			HttpSession session = request.getSession(false);
+			
+			if(session!=null) {
+				Member m = (Member)session.getAttribute("member");
+					
+				if(m!=null && m.getMemberGrade()=='A') {
+					int msNo=Integer.parseInt(request.getParameter("msNo"));
+					
+					MiniShow ms = new MiniShowService().selectApShow(msNo);
+					
+					RequestDispatcher view = request.getRequestDispatcher("/views/admin/ad_miniApInfo.jsp");
+					request.setAttribute("miniShow", ms);
+					view.forward(request, response);
+				}else {
+					throw new Exception();
+				}
+			}else {
+				throw new Exception();
+			}
+		}catch (Exception e) {
+			response.sendRedirect("/views/admin/adminError.jsp");
+		}
 		
-		int msNo=Integer.parseInt(request.getParameter("msNo"));
-		
-		MiniShow ms = new MiniShowService().selectApShow(msNo);
-		
-		RequestDispatcher view = request.getRequestDispatcher("/views/admin/ad_miniApInfo.jsp");
-		request.setAttribute("miniShow", ms);
-		view.forward(request, response);
 		
 	}
 

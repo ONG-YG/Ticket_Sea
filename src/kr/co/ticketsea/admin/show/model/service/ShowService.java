@@ -3,9 +3,11 @@ package kr.co.ticketsea.admin.show.model.service;
 import java.sql.Connection;
 import java.util.ArrayList;
 
-
+import kr.co.ticketsea.admin.member.model.dao.AdMemberDao;
+import kr.co.ticketsea.admin.member.model.vo.MemberPageData;
 import kr.co.ticketsea.admin.show.model.dao.ShowDao;
 import kr.co.ticketsea.common.JDBCTemplate;
+import kr.co.ticketsea.member.model.vo.Member;
 import kr.co.ticketsea.admin.show.model.vo.*;
 
 public class ShowService {
@@ -100,6 +102,50 @@ public class ShowService {
 		
 		return result;
 	}
+
+	public int updateShow(Show s) {
+		Connection conn=JDBCTemplate.getConnection();
+		int result = new ShowDao().updateShow(conn,s);
+
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		
+		return result;
+		
+	}
+
+	public PageData searchList(String keyword, int currentPage) {
+		Connection conn= JDBCTemplate.getConnection();
+		
+		// 2개의 값을 저장하는 변수 생성 (게시물의 개수, navi의 개수)
+		
+		int recordCountPerPage  = 10; //게시물의 개수
+		int naviCountPerPage = 5; //navi의 개수
+		
+		//service에서 DAO를 호출 (2번의 DAO를 호출)
+		
+		//1. 현재 페이지의 게시물 리스트 요청
+		ArrayList<Show> list=new ShowDao().getSearchCurrentPage(conn,currentPage,recordCountPerPage,keyword);
+		
+		//2. 현재 페이지를 중심으로 만들어지는 navi 리스트 요청
+		String pageNavi = new ShowDao().getSearchPageNavi(conn,currentPage,recordCountPerPage,naviCountPerPage,keyword);
+		
+		PageData spd =null;
+		
+		if(!list.isEmpty() && !pageNavi.isEmpty()) {
+			spd= new PageData();
+			spd.setList(list);
+			spd.setPageNavi(pageNavi);
+		}
+		JDBCTemplate.close(conn);
+		
+		return spd;
+	}
+
 	
 
 

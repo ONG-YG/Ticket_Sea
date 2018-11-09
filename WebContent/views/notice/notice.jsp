@@ -269,13 +269,12 @@
                     <h3>공지사항</h3>
                 </div>
                 
-                
-                
+                	
                 <table id = "notice_header">
                 	<tr>
                 	<td id = "notice_header_a">제목</td>
                 	<td id = "notice_header_b"><span name="boardN_title" id="boardN_title"><%= notice.getBoardN_title()%></span>
-                	<input type="hidden" name="boardN_title_fd" id="boardN_title_fd" value="<%=notice.getBoardN_title()%>"/></td>
+                	<input type="hidden" name="boardN_title_fd" id="boardN_title_fd" style="width:100%; height:100%;"" value="<%=notice.getBoardN_title()%>"/></td>
                 	</tr>
                 	
                 	<tr>
@@ -292,36 +291,46 @@
                 	<td id = "notice_header_a">조회수</td>
                 	<td id = "notice_header_b"><%= notice.getBoardN_hit() %></td>
                 	</tr>
-                	
-					 </table>
-                
-					<input type="hidden" name="boardN_no" value="<%=notice.getBoardN_no() %>"/>
-					<input type="hidden" id="title_form" name="title" />
-					<input type="hidden" id="contents_form" name="contents" />
+                </table>
+					 
+				
 					<br>
-					<div id = "boardN_contents" name="boardN_contents"><%= notice.getBoardN_contents() %></div>
 					
-        			<%
+					<div id = "boardN_contents" name="boardN_contents" style="border:1px solid #dedede; width : 100%; ">
+					<%= notice.getBoardN_contents().replace("\r\n", "<br>") %>
+					</div>
+					<textarea id="boardN_contents_fd" rows="17" cols="50" style="display:none; width:100%;">
+					<%=notice.getBoardN_contents().replace("\r\n", "<br>") %>
+					</textarea>
+					
+					<%
 						session = request.getSession(false);
 						Member m = (Member)session.getAttribute("member"); 
 					%>
                 
                 	<%
-						if(m!=null && m.getMemberId().equals("admin")){
+						if(m!=null){
+							if(m.getMemberId().equals("admin")){
 					%>
 					
 	                <br>
 	                <button id="btn1" name="btn1" onclick="modifyActive();" style="width: 70px; height: 30px; float:right;">수정</button> 
 					<button id="btn2" name="btn2" onclick="delNotice();" style="width: 70px; height: 30px; float:right;">삭제</button> 
 					
-	                <%} %>
+					
+					
+	                <% }
+					} %>
 	                
                 	
               	<br><br>
               	<button onclick="list();" style="width: 70px; height: 30px; float:right;">목록</button> 
 					
-                
-                
+                <form action="/noticeUpdate.do" method="post" id="updateForm">
+					<input type="hidden" id ="boardN_no" name="boardN_no" value="<%=notice.getBoardN_no()%>"/>
+					<input type="hidden" id="title_form" name="title_form" />
+					<input type="hidden" id="contents_form" name="contents_form" />
+				</form>
                 
                 <script>
 	                function list(){
@@ -357,20 +366,17 @@
 	            		document.getElementById("boardN_title").style.display="inline";
 	            		document.getElementById("boardN_title_fd").type="hidden";
 	            		document.getElementById("boardN_title_fd").value=
-	            			document.getElementById("boardN_title").innerHTML;
-	            		
-	            		
+	            		document.getElementById("boardN_title").innerHTML;
 	            		
 	            		document.getElementById("boardN_contents").style.display="inline";
 	            		document.getElementById("boardN_contents_fd").style.display="none";
 	            		document.getElementById("boardN_contents_fd").value=
-	            			document.getElementById("boardN_contents").innerHTML;
-	            		
-	            		
+	            		document.getElementById("boardN_contents").innerHTML;
 	            		
 	            		document.getElementById("btn2").innerHTML="삭제";	
 	            		document.getElementById("btn2").onclick=function(){delNotice()};
-	            		document.getElementById("btn1").onclick=function(){modifyActive()};
+	            		
+	            		document.getElementById("btn1").onclick=function(){modifyActive()};	
 	            	}
                 </script>
             </div>

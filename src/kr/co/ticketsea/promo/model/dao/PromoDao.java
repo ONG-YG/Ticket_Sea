@@ -1,6 +1,7 @@
 package kr.co.ticketsea.promo.model.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -51,7 +52,7 @@ public class PromoDao {
 				p.setBoardP_date(rset.getDate("boardP_date"));
 				p.setBoardP_no(rset.getInt("boardP_no"));
 				p.setBoardP_active(rset.getString("boardP_active").charAt(0));
-				p.setBoardP_filePath(rset.getString("boardP_filePath"));
+				p.setBoardP_fileName(rset.getString("boardP_fileName"));
 				
 				list.add(p);
 			}		
@@ -188,12 +189,9 @@ public class PromoDao {
 				promo.setBoardP_contents(rset.getString("boardP_contents"));
 				promo.setBoardP_location(rset.getString("boardP_location"));
 				promo.setBoardP_date(rset.getDate("boardP_date"));	
-				promo.setBoardP_hit(rset.getInt("boardP_hit"));
 				promo.setBoardP_active(rset.getString("boardP_active").charAt(0));
 				promo.setBoardP_fileName(rset.getString("boardP_fileName"));
-				promo.setBoardP_filePath(rset.getString("boardP_filePath"));
-				promo.setBoardP_fileSize(rset.getLong("boardP_fileSize"));
-				promo.setBoardP_uploadTime(rset.getTimestamp("boardP_uploadTime"));
+				promo.setBoardP_price(rset.getInt("boardP_price"));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -206,42 +204,7 @@ public class PromoDao {
 		return promo;	
 	}
 
-	public int insertPromo(Connection conn, String title, String category,String contents, String artist, String location,
-			String userId, String fileName, String fullFilePath, long fileSize, Timestamp uploadTime) {
-		
-		PreparedStatement pstmt = null;
-		int result = 0;
-		
-		String query = "insert into board_promo values(seq_boardp_no.NEXTVAL,?,?,?,?,?,?,SYSDATE,default,default,?,?,?,?)";
-		
-		try {
-			pstmt = conn.prepareStatement(query);
-			
-			pstmt.setString(1, userId);
-			pstmt.setString(2, category);
-			pstmt.setString(3, title);
-			pstmt.setString(4, artist);
-			pstmt.setString(5, contents);
-			pstmt.setString(6, location);
-			
-			pstmt.setString(7, fileName);
-			pstmt.setString(8, fullFilePath);
-			pstmt.setLong(9,  fileSize);
-			pstmt.setTimestamp(10, uploadTime);
-			
-			result = pstmt.executeUpdate();
-		
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			JDBCTemplate.close(pstmt);
-		}
-		
-		return result;
-	}
-
+	
 	public int insertComment(Connection conn, int promoNo, String contents, String userId) {
 		
 		PreparedStatement pstmt = null;
@@ -331,5 +294,42 @@ public class PromoDao {
 		}
 		return result;
 	}
+
+
+	public int insertPromo(Connection conn, String title, String category, String contents, int price, String date,
+			String artist, String location, String userId, String fileName) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = "insert into board_promo values(seq_boardp_no.NEXTVAL,?,?,?,?,?,?,?,?,default,?)";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setString(1, userId);
+			pstmt.setString(2, category);
+			pstmt.setString(3, title);
+			pstmt.setString(4, artist);
+			pstmt.setString(5, contents);
+			pstmt.setInt(6, price);
+			pstmt.setString(7, location);
+			pstmt.setString(8 ,date);
+			
+			pstmt.setString(9, fileName);
+			
+			result = pstmt.executeUpdate();
+		
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+
 	
 }

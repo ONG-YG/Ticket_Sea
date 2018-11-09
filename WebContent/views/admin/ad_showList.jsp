@@ -80,7 +80,7 @@
                        </thead>
                        <%for(Show s : list) {%>
                        <tr>
-                           <td><a href="/adShow.do?m_show_no=<%=s.getM_show_no()%>"><%=s.getM_show_no() %></a></td>
+                           <td><a href="/showUpdatePlace.do?m_show_no=<%=s.getM_show_no()%>"><%=s.getM_show_no() %></a></td>
                            <td><%=s.getShow_name() %></td>
                            <td><%=s.getArtists() %></td>
                            <td><%=s.getShow_run() %></td>
@@ -102,10 +102,10 @@
                     
                     <!--회원검색-->
                     <div class="searchArea"> 
-                    <a href="#"><img src="../../img/btn_search4.png" alt="검색" style="float: right"></a>
-                
-					<input type="text" class="textInp" name="searchValue" id="searchValue" style="float: right">
-					<a href="javascript:search();"></a>
+                    <form style="display:inline;" action="/showSearch.do" method="get">
+						<input type="submit" value="검색" style="float:right;" />
+						<input type="text" name="search" style="float:right;"/>
+					</form>
 				</div>
                 </div>
                </div>

@@ -19,8 +19,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <!-- 외부 스타일 시트 불러오기 -->
-    <link href="../../css/admin_common.css" rel="stylesheet" type="text/css">
-    <link href="../../css/ad_reserveList.css" rel="stylesheet" type="text/css">
+    <link href="/css/admin_common.css" rel="stylesheet" type="text/css">
+    <link href="/css/ad_reserveList.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 		<div id="wrapper">

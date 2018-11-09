@@ -5,10 +5,10 @@
         box-sizing : border-box;
         
     }
-    #wrapper{overflow: hidden;width:1500px; height:1400px; border:1px solid black;}
-    #header{ height:60px; background-color:;}
+    #wrapper{overflow: hidden;width:1600px; height:1600px;}
+    #header{ height:60px; background-color:#E4E4E4;}
     #h_inner{width: 990px; height: 80%; margin: 5px auto; float:left; padding-left:20px;}
-    #content-wrapper{ height:1400px; border:1px solid black;}
+    #content-wrapper{ height:1600px;}
     #c_inner{width: 100%; height: 100%; margin: 0px auto; padding: 0px;}
     .main-sidebar{
         height:100%;
@@ -22,7 +22,7 @@
     ul li:hover>ul{display:block;}
     
     #side-menu ul>li{
-        height:20%; padding-top:15px; padding-left:15px;padding-bottom: 15px;
+        height:20%; padding-top:15px; padding-left:15px; padding-bottom: 15px;
         background-color:#004C63;
     }
     #side-menu ul>li li{
@@ -33,13 +33,27 @@
         color:white;
         font-weight: 600;
     }
+    
+     #content{
+        overflow: hidden;
+        padding: 20px 0;
+        width:85%;
+        height:1300px;
+        display: block;
+    }
+    .content_wrap{
+        width:980px;
+        height: 100%;
+        margin:0 auto;
+        box-sizing: border-box;
+        
+    }
+    
     .content-header{
         width:85%;
         height:100%;
         float:right;
         padding:0px;
-        border:1px solid red;
-      text-align: center;
       background-color:#F6F6F6;
     }
     .content-header>h1{

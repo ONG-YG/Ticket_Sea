@@ -38,6 +38,7 @@
 	ReserveSession rs = (ReserveSession)session.getAttribute("reserveSession");
 	int progNo = rs.getProgNo();
 	String progTime = rs.getProgTime();
+	
 %>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -223,9 +224,9 @@
                    		customerPhone = $('#inputPhoneNo').val();
             			customerEmail = $('#inputEmail').val();
             			
-            			payType = "card";/////////////////////////////////////////// 일단 카드결제로 설정
-                   		payStart();///////////////////////////////////////////////// 임시로 결제 단계 off
-                   		//insertBookInfo();///////////////////////////////////////// 임시로 결제 단계 off 했을 경우 활성화
+            			payType = "card";////////////////////////////////// 일단 카드결제로 설정
+                   		//payStart();//////////////////////////////////////// 임시로 결제 단계 on/off
+                   		insertBookInfo();//////////////////////////////// 임시로 결제 단계 off 했을 경우 활성화
                    	}
                 }
         	}//if(diff>10) END
@@ -314,6 +315,7 @@
 			<%
 			//세션에 reserveSession객체 저장
 			rs.setBkNo(bkNo);
+			rs.setProgTime(progTime);
 			session.setAttribute("reserveSession", rs);
 			%>
 			
@@ -325,7 +327,7 @@
 			$('#bkStateCd_form').val( bkStateCd );
 			$('#payType_form').val( payType );
 			
-			
+        	
 			//위에서 hidden type의 input태그에 값을 채워준 form태그를 reserveComplete서블릿에 submit
 			//ReserveComplete서블릿 안에 예매진행중 데이터 지우는 과정 포함되어 있음 (deleteProgData()함수 호출 안해도됨)
 			document.getElementById("completeSubmitForm").submit();
@@ -347,18 +349,12 @@
 					//console.log("ajax 통신 에러");
 				},
 				complete : function(){
-					<%
-					// 예매창 벗어나기 전에 예매용 session정보 파기 후 헤더용 session 발급
-					Member member = (Member)session.getAttribute("member");
-		        	session.invalidate();
-		        	session = request.getSession(true);
-		        	session.setAttribute("member", member);
-		        	%>
+					
 					if (mode=='timeover') {
 						alert("예매 진행 가능 시간이 초과되어 예매가 종료됩니다.");
 					}
 					
-					window.close();///////////////////////////////안되면 예매 시작단계(step1)로 이동하도록 수정해둠 >> 메인페이지로 넘어가도록 바꿀것
+					window.close();
 					if( !window.closed ) {
 						<%-- location.href="/dateCntSelect.do?showNo=<%=showNo%>"; --%>
 						location.href="/";

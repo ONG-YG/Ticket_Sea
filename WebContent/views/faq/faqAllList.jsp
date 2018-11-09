@@ -260,7 +260,7 @@
                 </div>
                 
                      
-            <table border=1px class="faqCategory">
+          <!--   <table border=1px class="faqCategory">
                          <tr>
                            <td id = "faqConcert"><a href="#">공연</a></td>
                            <td id = "faqBook"><a href="#">예매 </a></td> 
@@ -269,7 +269,7 @@
                            <td id=" faqEtc"><a href="#">기타</a></td>
                          </tr>
                     </table>
-                    
+              -->       
                     <br>
                     
                     <table border 1px class="faqContent">

@@ -594,5 +594,35 @@ public class QnaDao {
 		return sb.toString();	
 	}
 
+	public int qnaUpdate(Connection conn, int boardQ_no, String boardQ_title, String boardQ_contents) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = "update board_qna set boardQ_title=?, boardQ_contents=?"
+				+ " where boardQ_no=?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setString(1, boardQ_title);
+			pstmt.setString(2, boardQ_contents);
+			pstmt.setInt(3, boardQ_no);
+			
+			result = pstmt.executeUpdate();
+			
+
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;	
+		
+}
+
 
 }

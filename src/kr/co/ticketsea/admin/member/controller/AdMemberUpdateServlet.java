@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import kr.co.ticketsea.admin.member.model.service.AdMemberService;
 import kr.co.ticketsea.member.model.vo.Member;
@@ -29,27 +30,43 @@ public class AdMemberUpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
 		
-		int memberNo=Integer.parseInt(request.getParameter("member_no"));
-		String phone = request.getParameter("phone");
-		String email = request.getParameter("email");
-		String address = request.getParameter("address");
-		System.out.println(memberNo);
-		System.out.println(phone);
-		Member m = new Member();
-		m.setMemberNo(memberNo);
-		m.setMemberPhone(phone);
-		m.setMemberEmail(email);
-		m.setMemberAddr(address);
-		
-		//비즈니스 로직
-		int result = new AdMemberService().updateMember(m);
+		try {
+			request.setCharacterEncoding("utf-8");
 			
-		if(result>0) {
-			response.sendRedirect("/views/admin/memberUpdateSuccess.jsp");
-		}else {
-			response.sendRedirect("/views/admin/error.jsp");
+			HttpSession session = request.getSession(false);
+			if(session!=null) {
+				Member m = (Member)session.getAttribute("member");
+					
+				if(m!=null && m.getMemberGrade()=='A') {
+					int memberNo=Integer.parseInt(request.getParameter("member_no"));
+					String phone = request.getParameter("phone");
+					String email = request.getParameter("email");
+					String address = request.getParameter("address");
+					System.out.println(memberNo);
+					System.out.println(phone);
+					Member member = new Member();
+					member.setMemberNo(memberNo);
+					member.setMemberPhone(phone);
+					member.setMemberEmail(email);
+					member.setMemberAddr(address);
+					
+					//비즈니스 로직
+					int result = new AdMemberService().updateMember(member);
+						
+					if(result>0) {
+						response.sendRedirect("/views/admin/memberUpdateSuccess.jsp");
+					}else {
+						response.sendRedirect("/views/admin/error.jsp");
+					}
+				}else {
+					throw new Exception();
+				}
+			}else {
+				throw new Exception();
+			}
+		}catch (Exception e) {
+			response.sendRedirect("/views/admin/adminError.jsp");
 		}
 		
 		

@@ -45,6 +45,7 @@ public class ShowDao {
 				s.setShow_name(rset.getString("m_show_name"));
 				s.setShow_poster(rset.getString("m_show_poster"));
 				s.setSc_code(rset.getString("sc_code"));
+				s.setShow_dtInfo(rset.getString("m_show_dtInfo"));
 				
 				list.add(s);
 			}		
@@ -155,6 +156,8 @@ public class ShowDao {
 		
 	}
 	public Show selectOneShow(Connection conn, int show_no) {
+		
+		//upHitShow(conn, show_no);
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		Show show = null;
@@ -324,4 +327,22 @@ public class ShowDao {
 		return result;
 	}
 
+	/*public void upHitShow(Connection conn, int m_show_no) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = "update musical_l set m_show_hit = m_show_hit+1 where m_show_no = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, m_show_no);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+	}*/
+	
 }

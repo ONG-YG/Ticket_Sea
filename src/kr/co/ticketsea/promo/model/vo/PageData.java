@@ -1,6 +1,7 @@
 package kr.co.ticketsea.promo.model.vo;
 
 import java.util.ArrayList;
+import kr.co.ticketsea.promo.model.vo.*;
 
 public class PageData {
 	private ArrayList<Promo> list;

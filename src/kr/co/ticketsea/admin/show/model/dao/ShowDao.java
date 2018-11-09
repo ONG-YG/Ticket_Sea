@@ -11,6 +11,7 @@ import kr.co.ticketsea.admin.show.model.vo.Show;
 import kr.co.ticketsea.admin.show.model.vo.ShowCategory;
 import kr.co.ticketsea.admin.show.model.vo.ShowPlace;
 import kr.co.ticketsea.common.JDBCTemplate;
+import kr.co.ticketsea.member.model.vo.Member;
 
 public class ShowDao {
 
@@ -201,7 +202,7 @@ public class ShowDao {
 		Show show =null;
 		
 		String query = "select m.m_show_no, s.sc_name, m.M_SHOW_NAME, l.TH_NAME, m.M_ARTISTS, TO_CHAR(m.M_SHOW_ST_DATE,'YYYY.MM.DD') as M_SHOW_ST_DATE, TO_CHAR(m.M_SHOW_ED_DATE,'YYYY.MM.DD') as M_SHOW_ED_DATE, \r\n" + 
-				"m.M_SHOW_GRD, m.M_SHOW_RUN from SHOW_CTG s right join musical_l m on s.SC_CODE = m.SC_CODE left outer join THEATER_L l on m.TH_NO = l.TH_NO where m.m_show_no=?";
+				"m.M_SHOW_GRD, m.M_SHOW_RUN,m.M_SHOW_POSTER,m.M_SHOW_DTINFO,m.BK_COMM from SHOW_CTG s right join musical_l m on s.SC_CODE = m.SC_CODE left outer join THEATER_L l on m.TH_NO = l.TH_NO where m.m_show_no=?";
 		
 		try {
 			pstmt=conn.prepareStatement(query);
@@ -210,6 +211,7 @@ public class ShowDao {
 			rset=pstmt.executeQuery();
 			
 			if(rset.next()) {
+				
 				show = new Show();
 				show.setM_show_no(rset.getInt("m_show_no"));
 				show.setSc_code(rset.getString("sc_name"));
@@ -220,7 +222,9 @@ public class ShowDao {
 				show.setShow_run(rset.getInt("m_show_run"));
 				show.setShow_st_date(rset.getString("m_show_st_date"));
 				show.setShow_ed_date(rset.getString("m_show_ed_date"));
-				
+				show.setBk_comm(rset.getInt("bk_comm"));
+				show.setShow_poster(rset.getString("m_show_poster"));
+				show.setShow_dtInfo(rset.getString("m_show_dtinfo"));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -308,6 +312,187 @@ public class ShowDao {
 		}
 		
 		return result;
+	}
+	public int updateShow(Connection conn, Show s) {
+		PreparedStatement pstmt= null;
+		int result = 0;
+		
+		String query = "update musical_l set th_no=?,sc_code=?,m_show_name=?,m_show_st_date=TO_DATE(?,'YYYY.MM.DD'),m_show_ed_date=TO_DATE(?,'YYYY.MM.DD'),m_artists=?,m_show_grd=?,m_show_run=?,bk_comm=?,m_show_poster=?,m_show_dtinfo=? where m_show_no=?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+		
+			pstmt.setInt(1, s.getTh_no());
+			pstmt.setString(2, s.getSc_code());
+			pstmt.setString(3, s.getShow_name());
+			pstmt.setString(4, s.getShow_st_date());
+			pstmt.setString(5, s.getShow_ed_date());
+			pstmt.setString(6, s.getArtists());
+			pstmt.setString(7, s.getShow_grd());
+			pstmt.setInt(8, s.getShow_run());
+			pstmt.setInt(9, s.getBk_comm());
+			pstmt.setString(10, s.getShow_poster());
+			pstmt.setString(11, s.getShow_dtInfo());
+			pstmt.setInt(12, s.getM_show_no());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+		
+	}
+	public ArrayList<Show> getSearchCurrentPage(Connection conn, int currentPage, int recordCountPerPage,
+			String keyword) {
+		PreparedStatement pstmt=null;
+		ResultSet rset=null;
+		
+		//시작 게시물 계산
+		int start = currentPage*recordCountPerPage-(recordCountPerPage-1);
+		//만약 요청한 페이지가 1페이지라면 ? => 1이 나와야함
+			//1*10-(10-1)=>1
+		//만약 요청한 페이지가 4페이지라면 ? -> 31이 나와야함
+		// ex) currentPage가 3이고 recordCountPerPage가 5라면?
+		
+		//끝 게시물 계산
+		int end = currentPage* recordCountPerPage;
+		
+		//만약 요청한 페이지가 1페이지라면 ? -> 10
+			//1*10 =>10
+		
+		String query = "select * from theater_l t right join(select * from (select row_number() over(order by m_show_no desc) num, musical_l.* from musical_l  where m_show_name like ?)\r\n" + 
+				"where num between ? and ?)m on m.th_no = t.th_no";
+		
+		ArrayList<Show> list = new ArrayList<Show>();
+		
+		try {
+			pstmt= conn.prepareStatement(query);
+			
+			pstmt.setString(1, '%'+keyword+'%');
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Show s = new Show();
+				s.setM_show_no(rset.getInt("m_show_no"));
+				s.setTh_no(rset.getInt("TH_NO"));
+				s.setTh_name(rset.getString("TH_NAME"));
+				s.setSc_code(rset.getString("sc_code"));
+				s.setShow_name(rset.getString("m_show_name"));
+				s.setArtists(rset.getString("m_artists"));
+				s.setShow_run(rset.getInt("m_show_run"));
+				s.setShow_grd(rset.getString("m_show_grd"));
+				s.setShow_st_date(rset.getString("m_show_st_date"));
+				s.setShow_ed_date(rset.getString("m_show_ed_date"));
+				
+				list.add(s);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return list;
+	}
+	public String getSearchPageNavi(Connection conn, int currentPage, int recordCountPerPage, int naviCountPerPage,
+			String keyword) {
+		PreparedStatement pstmt=null;
+		ResultSet rset=null;
+		
+		//게시물의 토탈 개수를 구해야함
+		int recordTotalCount=0; //초기값은 정보가 없으므로 0으로 세팅
+		
+		String query ="select count(*) as totalcount from musical_l where m_show_name like ?";
+		
+		try {
+			pstmt=conn.prepareStatement(query);
+			pstmt.setString(1, '%'+keyword+'%');
+			rset= pstmt.executeQuery();
+			if(rset.next()) {
+				recordTotalCount = rset.getInt("totalcount");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		
+		int pageTotalCount = 0; //정보가 없으므로 초기값은 0 셋팅
+		
+		
+		if(recordTotalCount % recordCountPerPage!=0) { //나머지가 있으면
+			pageTotalCount = recordTotalCount / recordCountPerPage + 1;
+		}else {
+			pageTotalCount = recordTotalCount / recordCountPerPage;
+		}
+		
+		
+		if(currentPage<1) {
+			currentPage = 1;
+		}else if(currentPage>pageTotalCount){
+			currentPage = pageTotalCount;
+		}
+
+		
+		//시작페이지 구하는 공식 대입
+		int startNavi = ((currentPage-1)/naviCountPerPage)*naviCountPerPage+1;
+		
+		//끝페이지를 구하는 공식
+		
+		
+		int endNavi = startNavi + naviCountPerPage -1;
+	
+		// 끝 navi를 구할 때 주의해야할점
+		// 토탈 페이지를 고려하지 않고 만들게 되면 끝 navi가 이상하게구해질 수 있음
+		if(endNavi>pageTotalCount) {
+			endNavi=pageTotalCount;
+		}
+		
+		// 페이지를 표현하는 navi에서 사용할 '<' 모양과 '>'모양을 쓰기위해
+		// 필요한 변수 2개를 생성 (변수의 값에 따라서 시작 부분과 끝 부분은 표현하지 않기위해)
+		
+		boolean needPrev = true;
+		boolean needNext = true;
+		
+		if(startNavi==1) { needPrev = false;}
+		if(endNavi == pageTotalCount){needNext=false;}
+		
+		StringBuilder sb = new StringBuilder();
+
+		if(needPrev==true) { //시작페이지가 1페이지가 아니라면
+			sb.append("<a href='/showSearch.do?search="+keyword+"&currentPage="+(startNavi-1)+"'> < </a> ");
+		}
+		//현재 내 위치 (startNavi값)가 2라면? '<' 버튼을 클릭하면 1페이지로 이동함
+		//<a href='/noticeList.do?currentPage=(2-1)> < </a> =>
+		
+		for(int i=startNavi;i<=endNavi;i++) {
+			if(i==currentPage) { // 현재 페이지가 내가 있는 위치 페이지와 같다면 진하게 표시
+				sb.append("<a href='/showSearch.do?search="+keyword+"&currentPage="+i+"'><B style='font-size:20px'>"+i+"</B></a> ");
+				//<a href='/noticeList.do?currentPage=1'><B>1</B></a>
+			}else { // 현재 페이지가 내가 있는 위치 페이지와 다르다면 일반 표시
+				sb.append("<a href='/showSearch.do?search="+keyword+"&currentPage="+i+"'>"+i+"</a> ");
+			}
+		}
+		
+		if(needNext) {
+			sb.append("<a href='/showSearch.do?search="+keyword+"&currentPage="+(endNavi+1)+"'> > </a> ");
+		}
+		
+		return sb.toString();
 	}
 	
 	

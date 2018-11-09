@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import kr.co.ticketsea.member.model.service.MemberService;
+//import kr.co.ticketsea.member.model.service.MemberService;////////////////////////
 import kr.co.ticketsea.member.model.vo.Member;
 import kr.co.ticketsea.reserve.model.service.ReserveService;
 import kr.co.ticketsea.reserve.model.vo.PerformSchedule;
@@ -145,7 +145,7 @@ public class DateCntSelectServlet extends HttpServlet {
 					}
 				}else {
 					System.out.println("error at DateCntSelectServlet-3");
-					throw new Exception();
+					response.sendRedirect("/views/reserve/reserveAccessDenied.jsp");
 				}
 			}else {
 				System.out.println("error at DateCntSelectServlet-2");
