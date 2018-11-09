@@ -4,11 +4,20 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>공연장소 등록 페이지</title>
+
+<style>
+	input[type=text] {
+	    padding: 12px 20px;
+	    margin: 8px 0;
+	    box-sizing: border-box;
+	    height:30px;
+	} 
+</style>
 </head>
 <body>
 <form action="/placeInsert.do" method="post">
-<input type="text" id="placeName" name="placeName" placeholder="저장할 주소의 이름을 입력하세요"><br>
+<input type="text" id="placeName" name="placeName" style="width:300px" placeholder="저장할 주소의 이름을 입력하세요"><br>
 <input type="text" id="sample5_address" name="placeAddress" style="width:300px" placeholder="주소"><br>
 <input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색">
 <input type="submit" value="저장"><br>

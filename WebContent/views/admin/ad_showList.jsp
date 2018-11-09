@@ -103,8 +103,8 @@
                     <!--회원검색-->
                     <div class="searchArea"> 
                     <form style="display:inline;" action="/showSearch.do" method="get">
-						<input type="text" name="search"/>
-						<input type="submit" value="검색"/>
+						<input type="submit" value="검색" style="float:right;" />
+						<input type="text" name="search" style="float:right;"/>
 					</form>
 				</div>
                 </div>
