@@ -150,7 +150,6 @@
                                 <input type="text" id="grade" name="show_grd" value="<%=show.getShow_grd() %>" placeholder="관람 등급을 입력해주세요">
                             </div>
                         </div>
-                        
                     </fieldset>
                      <fieldset class="edit_time">
                         <legend>
@@ -234,6 +233,9 @@
 		
 		$(document).ready(function(){
 			$("#show_poster").on("change",handleImgFileSelect);
+			show_ct=$('select.category_select').attr('data-type');
+			$('select.category_select option[value='<%=show.getSc_code()%>']').attr('selected','selected');
+			
 			$("#placeSearch").click(function(){
 		    	location.href="/views/admin/placeInsert.jsp";
 		    });
@@ -255,11 +257,7 @@
 					reader.readAsDataURL(f);
 				});
 			}
-        $(window).load(function() {
-        	  // 로딩 완료되었을때
-        	  $("#category").val(<%=show.getSc_code()%>);
-        	  $("#th_no").val(<%=show.getTh_no()%>);
-        	});
+       
         	 
     	function showUpdate(){
     		var category= document.getElementById("category").value;
