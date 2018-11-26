@@ -62,7 +62,9 @@
 
 </script>
 
+
 <center>
+<br>
 <span id="msg"></span> <button onclick="backBtn();">확인</button>
 </center>
 

@@ -269,8 +269,7 @@
                     <h3>공지사항</h3>
                 </div>
                 
-                
-                
+                	
                 <table id = "notice_header">
                 	<tr>
                 	<td id = "notice_header_a">제목</td>
@@ -297,11 +296,11 @@
 				
 					<br>
 					
-					<div id = "boardN_contents" name="boardN_contents" style="border:1px solid black; width : 100%;">
-					<%= notice.getBoardN_contents() %>
+					<div id = "boardN_contents" name="boardN_contents" style="border:1px solid #dedede; width : 100%; ">
+					<%= notice.getBoardN_contents().replace("\r\n", "<br>") %>
 					</div>
 					<textarea id="boardN_contents_fd" rows="17" cols="50" style="display:none; width:100%;">
-					<%=notice.getBoardN_contents() %>
+					<%=notice.getBoardN_contents().replace("\r\n", "<br>") %>
 					</textarea>
 					
 					<%
@@ -355,7 +354,7 @@
 	            		document.getElementById("title_form").value = 
 	            			document.getElementById("boardN_title_fd").value;
 	            		
-	            		document.getElementById("boardN_contents_form").value = 
+	            		document.getElementById("contents_form").value = 
 	            			document.getElementById("boardN_contents_fd").value;
 	            		
 	            		document.getElementById("updateForm").submit();

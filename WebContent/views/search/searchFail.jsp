@@ -12,6 +12,7 @@
 </head>
 <body>
 <style>
+#footer{height: 153px;}
 #inner{
 	background-color:#f4f4f4;
 	margin: 0px auto;
@@ -180,7 +181,12 @@
 				
 		</div>
 		
+		
 			
 	</div>
+</div>
+	<div id="footer">
+        <jsp:include page="/footer.jsp"/>
+    </div>
 </body>
 </html>

@@ -1,5 +1,13 @@
 @charset "UTF-8";
 
+
+/* strong 글자 길어지면 숨기기 */
+strong{
+	overflow: hidden;
+	width:234px;
+	display: block;
+	white-space: nowrap;
+}
 /*--------- 전체 사이즈 조정 ---------*/
     
     ul, li{list-style: none; display: block; text-decoration-line: none;}
@@ -36,7 +44,7 @@
         float: left;
         margin-top: 3px;
         
-        border: 1px solid grey;
+        
         box-sizing: border-box;
     }
     #rank_list .list .list_img a{height: 100%; display: block;}
@@ -47,10 +55,10 @@
         float: left;
         margin: 2px 0 3px 20px;
         
-        border: 1px solid grey;
+        
         box-sizing: border-box;
     }
-    #rank_list .list .list_a a{color: #767676; padding: 8px 0 8px 0; display: block; text-decoration: none;}
+    #rank_list .list .list_a a{color: #767676; padding: 8px 0 8px 0; display: block; text-decoration: none; white-space: nowrap; overflow: hidden;}
     
  /*--------- 최신 리스트 관련 사이즈 ---------*/
     
@@ -67,7 +75,7 @@
         float: left;
         margin-top: 3px;
         
-        border: 1px solid grey;
+        
         box-sizing: border-box;
     }
     #new_list .list .list_img a{height: 100%; display: block;}
@@ -77,10 +85,10 @@
         float: left;
         margin: 2px 0 3px 20px;
         
-        border: 1px solid grey;
+        
         box-sizing: border-box;
     }
-    #new_list .list .list_a a{color: #767676; padding: 8px 0 8px 0; display: block; text-decoration: none;}
+    #new_list .list .list_a a{color: #767676; padding: 8px 0 8px 0; display: block; text-decoration: none; white-space: nowrap;overflow: hidden;}
     
 
 /*--------- Best 공연 및 전시 관련  ---------*/
@@ -152,3 +160,5 @@
 #bCheck2:checked~.bCheck>label:nth-child(2){background:#666;}
 #bCheck3:checked~.bCheck>label:nth-child(3){background:#666;}
 #bCheck4:checked~.bCheck>label:nth-child(4){background:#666;}
+
+

@@ -20,6 +20,16 @@ public class RankService {
 		
 	}
 
+	public ArrayList<Rank> rankShow() {
+		Connection conn= JDBCTemplate.getConnection();
+		
+		ArrayList<Rank> list = new RankDao().rankShow(conn);
+		
+		JDBCTemplate.close(conn);
+		return list;
+		
+		
+	}
 	
 
 }

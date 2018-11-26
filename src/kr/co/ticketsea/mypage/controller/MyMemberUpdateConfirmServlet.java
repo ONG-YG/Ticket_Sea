@@ -35,6 +35,7 @@ public class MyMemberUpdateConfirmServlet extends HttpServlet {
 		
 		String memberId=request.getParameter("member_id");
 		
+		String pwd = request.getParameter("pwd");
 		String phone = request.getParameter("phone");
 		String email = request.getParameter("email");
 		String address = request.getParameter("address");
@@ -42,7 +43,9 @@ public class MyMemberUpdateConfirmServlet extends HttpServlet {
 		
 		Member m = new Member();
 		
+		
 		m.setMemberId(memberId);
+		m.setMemberPwd(pwd);
 		m.setMemberPhone(phone);
 		m.setMemberEmail(email);
 		m.setMemberAddr(address);

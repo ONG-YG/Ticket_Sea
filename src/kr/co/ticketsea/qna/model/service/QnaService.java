@@ -135,8 +135,19 @@ public class QnaService {
 	}
 
 	public int qnaUpdate(int boardQ_no, String boardQ_title, String boardQ_contents, String userId) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new QnaDao().qnaUpdate(conn,boardQ_no,boardQ_title,boardQ_contents);
+		
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		
+		return result;
 	}
 
 }

@@ -139,7 +139,8 @@
         	session = request.getSession(true);
         	session.setAttribute("member", member);
         	%>
-        	location.href="/reserveList.do";
+        	window.opener.location.href="/reserveList.do";
+        	window.close();
         }
     </script>
     

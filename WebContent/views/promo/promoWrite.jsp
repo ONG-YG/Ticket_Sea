@@ -267,6 +267,16 @@
                     <div>공연장소
                          <textarea name="location" id="location" rows="1" cols="30" style="width:300px;" placeholder="공연장소를 입력하세요"></textarea>
                      </div>
+                     
+                     <br>
+                     <div>공연날짜
+                         <textarea name="date" id="date" rows="1" cols="30" style="width:300px;" placeholder="공연날짜를 입력하세요"></textarea>
+                     </div>
+                     
+                     <br>
+                     <div>공연가격
+                         <textarea name="price" id="price" rows="1" cols="30" style="width:300px;" placeholder="공연가격을 입력하세요"></textarea>
+                     </div>
                     <br>
                     <div>장르</div>
                     <div>

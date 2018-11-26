@@ -61,10 +61,11 @@
         font-size:14px;
     }
     
-    #memUpdate{
+    #msUpdate{
         padding-top:40px;
         text-align: center;
     }
+    
     /*버튼 스타일*/
     button{
       background:#4ABFD3;
@@ -78,6 +79,7 @@
       cursor:pointer;
       transition:800ms ease all;
       outline:none;
+      
     }
     button:hover{
       background:#fff;

@@ -37,7 +37,7 @@ public class QnaMgrServlet extends HttpServlet {
 		// 세션 불러오기
 		HttpSession session = request.getSession(false);
 		// 세션 속성 member의 memberNo 속성 가져와서 변수에 저장(다운캐스팅 해줌)
-		String memberName = ((Member) session.getAttribute("member")).getMemberName();
+		String memberId = ((Member) session.getAttribute("member")).getMemberId();
 
 		// ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 페이징 처리 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 		// 1. 현재 페이지 저장을 위해 변수 선언
@@ -51,7 +51,7 @@ public class QnaMgrServlet extends HttpServlet {
 		}
 
 		// 2. 비즈니스 로직
-		ReservePageData qpd = new MypageService().qnaMgrList(currentPage, memberName);
+		ReservePageData qpd = new MypageService().qnaMgrList(currentPage, memberId);
 
 		
 		if(qpd!=null) {

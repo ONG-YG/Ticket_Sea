@@ -212,7 +212,7 @@
                     <ul>
                         <li><a href="/reviewMgr.do">후기 관리</a></li>
                         <li><a href="/qnaMgr.do">나의 문의 내역</a></li>
-                        <li><a href="#">소규모 공연 등록관리</a></li>
+                        <li><a href="/promoMgr.do">소규모 공연 등록관리</a></li>
                         
                     </ul>
                 </li>

@@ -6,7 +6,23 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+        
+ <style>
+ 
+.newRankPoster{ width:178px;
+				height:216px;
+					display:none;
+			}
+#newRankposter1{
+		width:178px;
+		height:216px;
+		display:block;
+		
+}
 
+
+
+ </style>
 <link rel="stylesheet" type="text/css" href="/css/TicketSea_mainPage.css" />
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -60,32 +76,187 @@
 	            </p>
             </div>
         </div>
-        
+
 <script>
 
 $(document).ready(function(){
-			var newSub = new Array(5);
+ 	//실시간 랭킹
+	$.ajax({
+		url : "/rankShow.do",
+		type : "get",
+		success :function(data){
+			var data = data;
+			var newPoster1 = data[0].poster;
+			
+			$("#rankSub1").html("1. "+data[0].subject);
+			$("#rankSub2").html("2. "+data[1].subject);
+			$("#rankSub3").html("3. "+data[2].subject);
+			$("#rankSub4").html("4. "+data[3].subject);
+			$("#rankSub5").html("5. "+data[4].subject);
+			
+			$("#rankPoster").attr("src","/img/poster/"+data[0].poster);
+			
+			
+			//178 216
+			$("#rankNo1").attr("href","/show.do?m_show_no="+data[0].no);
+			$("#rankNo2").attr("href","/show.do?m_show_no="+data[1].no);
+			$("#rankNo3").attr("href","/show.do?m_show_no="+data[2].no);
+			$("#rankNo4").attr("href","/show.do?m_show_no="+data[3].no);
+			$("#rankNo5").attr("href","/show.do?m_show_no="+data[4].no);
+			
+			$("#rankSub1").attr("href","/show.do?m_show_no="+data[0].no);
+			$("#rankSub2").attr("href","/show.do?m_show_no="+data[1].no);
+			$("#rankSub3").attr("href","/show.do?m_show_no="+data[2].no);
+			$("#rankSub4").attr("href","/show.do?m_show_no="+data[3].no);
+			$("#rankSub5").attr("href","/show.do?m_show_no="+data[4].no);
+			
+			
+			
+		},
+		error : function(){
+			console.log("ajax 통신 에러");
+		}
+		
+		
+	});
+ 	
+	$.ajax({
+		url : "/rankShow.do",
+		type : "get",
+		success :function(data){
+			var data = data;
+			var newPoster1 = data[0].poster;
+			$("#rankPoster").attr("width","178px");
+			$("#rankPoster").attr("height","216px");
+			$("#rankSub1").hover(function(){
+				$("#rankPoster").attr("src","/img/poster/"+data[0].poster);
+				
+			},function(){
+				$("#rankPoster").attr("src","/img/poster/"+data[0].poster);
+			});
+			$("#rankSub2").hover(function(){
+				$("#rankPoster").attr("src","/img/poster/"+data[1].poster);
+			},function(){
+				$("#rankPoster").attr("src","/img/poster/"+data[1].poster);	
+			});
+			$("#rankSub3").hover(function(){
+				$("#rankPoster").attr("src","/img/poster/"+data[2].poster);
+			},function(){
+				$("#rankPoster").attr("src","/img/poster/"+data[2].poster);	
+			});
+			$("#rankSub4").hover(function(){
+				$("#rankPoster").attr("src","/img/poster/"+data[3].poster);
+			},function(){
+				$("#rankPoster").attr("src","/img/poster/"+data[3].poster);	
+			});
+			$("#rankSub5").hover(function(){
+				$("#rankPoster").attr("src","/img/poster/"+data[4].poster);
+			},function(){
+				$("#rankPoster").attr("src","/img/poster/"+data[4].poster);	
+			});
+			
+			
+		},
+		error : function(){
+			console.log("ajax 통신 에러");
+		}
+		
+		
+	});
 	
+	
+	
+	
+	
+	// 최신 랭킹
 				$.ajax({
 					url : "/newestShow.do",
 					type : "get",
 					success :function(data){
-						for(var i=0; i<data.length;i++)
-						{
-						newSub[i] = document.getElementId("#newRankSub"+I).html;
-						}
+						var data = data;
+						var newPoster1 = data[0].poster;
+						
+						$("#newRankSub1").html("1. "+data[0].subject);
+						$("#newRankSub2").html("2. "+data[1].subject);
+						$("#newRankSub3").html("3. "+data[2].subject);
+						$("#newRankSub4").html("4. "+data[3].subject);
+						$("#newRankSub5").html("5. "+data[4].subject);
+						
+						$("#newRankPoster").attr("src","/img/poster/"+data[0].poster);
+						
+						
+						//178 216
+						$("#newRankNo1").attr("href","/show.do?m_show_no="+data[0].no);
+						$("#newRankNo2").attr("href","/show.do?m_show_no="+data[1].no);
+						$("#newRankNo3").attr("href","/show.do?m_show_no="+data[2].no);
+						$("#newRankNo4").attr("href","/show.do?m_show_no="+data[3].no);
+						$("#newRankNo5").attr("href","/show.do?m_show_no="+data[4].no);
+						
+						$("#newRankSub1").attr("href","/show.do?m_show_no="+data[0].no);
+						$("#newRankSub2").attr("href","/show.do?m_show_no="+data[1].no);
+						$("#newRankSub3").attr("href","/show.do?m_show_no="+data[2].no);
+						$("#newRankSub4").attr("href","/show.do?m_show_no="+data[3].no);
+						$("#newRankSub5").attr("href","/show.do?m_show_no="+data[4].no);
+						
+						
+						
 					},
 					error : function(){
 						console.log("ajax 통신 에러");
-					},
-					complete : function(){
-						console.log("complete");
-					} 
+					}
 					
 					
 				});
-		
+				
+				$.ajax({
+					url : "/newestShow.do",
+					type : "get",
+					success :function(data){
+						var data = data;
+						var newPoster1 = data[0].poster;
+						
+						$("#newRankPoster").attr("width","178px");
+						$("#newRankPoster").attr("height","216px");
+						$("#newRankSub1").hover(function(){
+							$("#newRankPoster").attr("src","/img/poster/"+data[0].poster);
+						},function(){
+							$("#newRankPoster").attr("src","/img/poster/"+data[0].poster);
+						});
+						$("#newRankSub2").hover(function(){
+							$("#newRankPoster").attr("src","/img/poster/"+data[1].poster);
+						},function(){
+							$("#newRankPoster").attr("src","/img/poster/"+data[1].poster);	
+						});
+						$("#newRankSub3").hover(function(){
+							$("#newRankPoster").attr("src","/img/poster/"+data[2].poster);
+						},function(){
+							$("#newRankPoster").attr("src","/img/poster/"+data[2].poster);	
+						});
+						$("#newRankSub4").hover(function(){
+							$("#newRankPoster").attr("src","/img/poster/"+data[3].poster);
+						},function(){
+							$("#newRankPoster").attr("src","/img/poster/"+data[3].poster);	
+						});
+						$("#newRankSub5").hover(function(){
+							$("#newRankPoster").attr("src","/img/poster/"+data[4].poster);
+						},function(){
+							$("#newRankPoster").attr("src","/img/poster/"+data[4].poster);	
+						});
+						
+						
+						
+					},
+					error : function(){
+						console.log("ajax 통신 에러");
+					}
+					
+					
+				});
+				
 	});
+
+
+
 	</script>
         <div id="list_center">
             <div id="rank_list">
@@ -95,33 +266,35 @@ $(document).ready(function(){
                 <div class="list">
                     <ul>
                         <li class="list_img">
-                            <a href="#">
-                                <img src="/img/178_216.jpg">
-                            </a>
+                            <a href="#" id="rankNo">
+                                <img src="" class="rankPoster" id="rankPoster">
+                                 </a>
+                           
+                           
                         </li>
                         <!-- 이미지 -->
                         <li class="list_a">
-                            <a href="#" >
+                            <a href="" id="rankSub1">
                                 1. 포항 BIG K-POP FESTIVAL
                             </a>
                         </li>
                         <li class="list_a">
-                            <a href="#">
+                            <a href="" id="rankSub2">
                                 2. 포항 BIG K-POP FESTIVAL
                             </a>
                         </li>
                         <li class="list_a">
-                            <a href="#">
+                            <a href="" id="rankSub3">
                                 3. 포항 BIG K-POP FESTIVAL
                             </a>
                         </li>
                         <li class="list_a">
-                            <a href="#">
+                            <a href="" id="rankSub4">
                                 4. 포항 BIG K-POP FESTIVAL
                             </a>
                         </li>
                         <li class="list_a">
-                            <a href="#">
+                            <a href="" id="rankSub5">
                                 5. 포항 BIG K-POP FESTIVAL
                             </a>
                         </li>
@@ -135,34 +308,35 @@ $(document).ready(function(){
                 <div class="list">
                     <ul>
                         <li class="list_img">
-                            <a href="#">
-                                <img src="/img/178_216.jpg">
-                            </a>
+                             <a href="#" id="newRankNo1">
+                                <img src="" class="newRankPoster" id="newRankPoster">
+                                 </a>
+                         
                         </li>
                         <!-- 이미지 -->
                         <li class="list_a">
-                            <a href="#" id="newRankSub1">
-                                1. 포항 BIG K-POP FESTIVAL
+                            <a href="" id="newRankSub1">
+                                1. 최신 랭킹
                             </a>
                         </li>
                         <li class="list_a">
-                            <a href="#" id="newRankSub2">
-                                2. 포항 BIG K-POP FESTIVAL
+                            <a href="" id="newRankSub2">
+                                2. 최신 랭킹
                             </a>
                         </li>
                         <li class="list_a">
-                            <a href="#" id="newRankSub3">
-                                3. 포항 BIG K-POP FESTIVAL
+                            <a href="" id="newRankSub3">
+                                3. 최신 랭킹
                             </a>
                         </li>
                         <li class="list_a">
-                            <a href="#" id="newRankSub4">
-                                4. 포항 BIG K-POP FESTIVAL
+                            <a href="" id="newRankSub4">
+                                4. 최신 랭킹
                             </a>
                         </li>
                         <li class="list_a">
-                            <a href="#" id="newRankSub5">
-                                5. 포항 BIG K-POP FESTIVAL
+                            <a href="" id="newRankSub5">
+                                5. 최신 랭킹
                             </a>
                         </li>
                     </ul>
@@ -175,6 +349,7 @@ $(document).ready(function(){
 	function btn(){
 		window.open("/adShowPlace.do","_blank","width=1800, height=1500");
 	}
+
 
 </script>
 
